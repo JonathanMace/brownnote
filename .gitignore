@@ -1,0 +1,97 @@
+# =============================================================================
+# Python
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Type checking
+.mypy_cache/
+.pytype/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+
+# =============================================================================
+# LaTeX
+# =============================================================================
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+paper/*.pdf
+
+# =============================================================================
+# Simulation outputs (large files tracked via LFS or excluded)
+# =============================================================================
+data/results/**/*.xdmf
+data/results/**/*.h5
+data/results/**/*.vtu
+data/results/**/*.vtk
+data/results/**/*.pvd
+data/results/**/*.msh
+*.xdmf
+*.h5
+
+# Keep directory structure
+!data/results/.gitkeep
+!data/materials/*.json
+
+# =============================================================================
+# Docker
+# =============================================================================
+docker/.env
+
+# =============================================================================
+# OS
+# =============================================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =============================================================================
+# Misc
+# =============================================================================
+*.bak
+*.tmp
+scratch/

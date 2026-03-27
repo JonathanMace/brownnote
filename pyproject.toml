@@ -1,0 +1,145 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "browntone"
+version = "0.1.0"
+description = "Computational investigation of infrasound-induced resonance in the human abdominal cavity"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Jon" },
+]
+keywords = [
+    "biomechanics",
+    "finite-element-analysis",
+    "infrasound",
+    "modal-analysis",
+    "acoustics",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "matplotlib>=3.7",
+    "gmsh>=4.11",
+    "meshio>=5.3",
+    "pyvista>=0.42",
+    "rich>=13.0",
+    "click>=8.1",
+    "pyyaml>=6.0",
+    "pandas>=2.0",
+    "h5py>=3.9",
+]
+
+[project.optional-dependencies]
+fenics = [
+    "fenics-dolfinx>=0.7",
+    "fenics-ufl>=2023.2",
+    "fenics-basix>=0.7",
+    "petsc4py>=3.20",
+    "mpi4py>=3.1",
+]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "pytest-xdist>=3.5",
+    "ruff>=0.1",
+    "mypy>=1.7",
+    "pre-commit>=3.5",
+]
+notebooks = [
+    "jupyterlab>=4.0",
+    "ipywidgets>=8.1",
+    "trame>=3.2",
+    "trame-vuetify>=2.3",
+    "trame-vtk>=2.6",
+]
+docs = [
+    "sphinx>=7.2",
+    "sphinx-rtd-theme>=1.3",
+    "myst-parser>=2.0",
+]
+all = ["browntone[fenics,dev,notebooks,docs]"]
+
+[project.scripts]
+browntone = "browntone.cli:main"
+bt-modal = "browntone.fem.modal_analysis:main"
+bt-mesh = "browntone.mesh.abdominal_cavity:main"
+
+[project.urls]
+Repository = "https://github.com/your-username/browntone"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--tb=short",
+    "-q",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "fenics: requires FEniCSx installation",
+    "gpu: requires GPU acceleration",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning:gmsh.*",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "D",    # pydocstyle
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "NPY",  # numpy-specific
+]
+ignore = [
+    "D100",  # missing module docstring (too noisy for __init__.py)
+    "D104",  # missing package docstring
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
+known-first-party = ["browntone"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "gmsh.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dolfinx.*"
+ignore_missing_imports = true

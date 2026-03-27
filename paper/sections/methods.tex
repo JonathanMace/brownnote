@@ -1,0 +1,64 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Geometry and Material Properties}
+
+The abdominal cavity is modelled as an ellipsoidal shell with semi-major
+axis $a = \SI{0.15}{\metre}$ and semi-minor axis $b = \SI{0.10}{\metre}$,
+corresponding to a typical adult abdomen. The wall thickness is
+$h = \SI{15}{\milli\metre}$.
+
+The abdominal wall is treated as an isotropic, linear elastic solid with
+properties in the ranges summarised in \cref{tab:materials}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Material property ranges for the abdominal wall and cavity fluid.}
+  \label{tab:materials}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Property & Range & Source \\
+    \midrule
+    Young's modulus $E$ & \SIrange{20}{100}{\kilo\pascal} & \citet{Fung1993} \\
+    Poisson's ratio $\nu$ & 0.45--0.49 & Soft tissue \\
+    Density $\rho_s$ & \SIrange{1000}{1100}{\kilogram\per\cubic\metre} & Tissue \\
+    Sound speed $c$ & \SI{1500}{\metre\per\second} & Fluid \\
+    Fluid density $\rho_f$ & \SI{1000}{\kilogram\per\cubic\metre} & Water \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Mesh Generation}
+
+Three-dimensional finite element meshes are generated using Gmsh
+\citep{Geuzaine2009}. The geometry consists of two concentric ellipsoids
+(inner surface for the fluid domain, outer surface for the structural domain).
+
+% TODO: Mesh details, element type, mesh convergence results
+
+\subsection{Structural Modal Analysis}
+
+The structural eigenvalue problem is:
+%
+\begin{equation}
+  \mathbf{K} \boldsymbol{\phi} = \omega^2 \mathbf{M} \boldsymbol{\phi},
+  \label{eq:structural_eigenvalue}
+\end{equation}
+%
+where $\mathbf{K}$ and $\mathbf{M}$ are the assembled stiffness and mass
+matrices. This is solved using FEniCSx \citep{Baratta2023} with the
+Krylov--Schur algorithm in SLEPc \citep{Hernandez2005}.
+
+% TODO: Function space, element type, boundary conditions, solver settings
+
+\subsection{Acoustic Modal Analysis}
+
+% TODO: Helmholtz equation discretisation, rigid-wall BCs
+
+\subsection{Coupled Fluid--Structure Analysis}
+
+% TODO: Mixed formulation, coupling conditions
+
+\subsection{Mesh Convergence Study}
+
+% TODO: Richardson extrapolation, GCI results

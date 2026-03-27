@@ -1,0 +1,92 @@
+\documentclass[preprint,review,12pt]{elsarticle}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% SI units configuration
+\sisetup{
+  per-mode=symbol,
+  group-separator={,},
+}
+
+% =============================================================================
+% Metadata
+% =============================================================================
+\journal{Journal of Sound and Vibration}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Infrasonic Excitation of the Human Abdominal Cavity:\\
+A Finite Element Investigation of the ``Brown Note'' Hypothesis}
+
+\author[inst1]{Jon\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{jon@example.com}
+
+\affiliation[inst1]{
+  organization={Department of Engineering},
+  city={City},
+  country={Country}
+}
+
+\begin{abstract}
+The ``brown note''---a hypothetical infrasonic frequency purported to cause
+involuntary bowel movements---has persisted in popular culture despite a lack
+of rigorous scientific investigation. This study presents the first systematic
+computational analysis of infrasound-induced resonance in the human abdominal
+cavity using finite element methods. The abdomen is modelled as a fluid-filled
+elastic ellipsoidal shell with material properties derived from published
+soft-tissue data. Modal analysis is performed for the structure alone, the
+acoustic cavity alone, and the coupled fluid--structure system using FEniCSx
+with SLEPc eigenvalue solvers. Analytical solutions based on Donnell shell
+theory and Helmholtz cavity modes validate the computational approach.
+A parametric study examines the sensitivity of the fundamental frequency to
+wall stiffness (\SIrange{20}{100}{\kilo\pascal}), thickness
+(\SIrange{10}{20}{\milli\metre}), and cavity geometry. Results show that
+the coupled fundamental frequency lies in the range
+\SIrange{X}{Y}{\hertz}, which [is/is not] within the infrasound regime.
+Harmonic response analysis at physiologically plausible sound pressure
+levels (\SI{120}{\decibel} re \SI{20}{\micro\pascal}) reveals peak
+displacement amplitudes of order \SI{Z}{\micro\metre}, which
+[are/are not] sufficient to produce the claimed physiological effects.
+\end{abstract}
+
+\begin{keyword}
+infrasound \sep abdominal resonance \sep finite element analysis \sep
+modal analysis \sep fluid--structure interaction \sep biomechanics
+\end{keyword}
+
+\end{frontmatter}
+
+% =============================================================================
+% Main body
+% =============================================================================
+
+\input{sections/introduction}
+\input{sections/background}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% =============================================================================
+% References
+% =============================================================================
+\bibliographystyle{elsarticle-num-names}
+\bibliography{references}
+
+\end{document}

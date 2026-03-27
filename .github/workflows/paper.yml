@@ -1,0 +1,33 @@
+name: Build Paper
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "paper/**"
+  pull_request:
+    paths:
+      - "paper/**"
+  workflow_dispatch:
+
+jobs:
+  build-paper:
+    name: Compile LaTeX
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: paper
+          latexmk_use_lualatex: false
+          latexmk_shell_escape: false
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: browntone-paper
+          path: paper/main.pdf
+          retention-days: 30

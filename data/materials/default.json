@@ -1,0 +1,43 @@
+{
+  "soft_tissue_default": {
+    "name": "Generic soft tissue",
+    "youngs_modulus_pa": 50000,
+    "poisson_ratio": 0.47,
+    "density_kg_m3": 1050,
+    "damping_ratio": 0.05,
+    "description": "Representative abdominal wall tissue properties",
+    "source": "Fung (1993), Song et al. (2006)"
+  },
+  "soft_tissue_stiff": {
+    "name": "Stiff soft tissue (contracted)",
+    "youngs_modulus_pa": 100000,
+    "poisson_ratio": 0.48,
+    "density_kg_m3": 1100,
+    "damping_ratio": 0.03,
+    "description": "Upper bound for contracted abdominal muscle",
+    "source": "Estimated from Brown et al. (2003)"
+  },
+  "soft_tissue_compliant": {
+    "name": "Compliant soft tissue (relaxed)",
+    "youngs_modulus_pa": 20000,
+    "poisson_ratio": 0.45,
+    "density_kg_m3": 1000,
+    "damping_ratio": 0.08,
+    "description": "Lower bound for relaxed, fatty abdominal tissue",
+    "source": "Estimated from Fung (1993)"
+  },
+  "abdominal_fluid": {
+    "name": "Intra-abdominal fluid",
+    "type": "fluid",
+    "sound_speed_m_s": 1500,
+    "density_kg_m3": 1000,
+    "description": "Approximate properties of peritoneal fluid"
+  },
+  "geometry_default": {
+    "type": "ellipsoid",
+    "semi_major_m": 0.15,
+    "semi_minor_m": 0.10,
+    "wall_thickness_m": 0.015,
+    "description": "Reference abdominal cavity geometry based on anthropometric data"
+  }
+}
