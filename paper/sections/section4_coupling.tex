@@ -1,0 +1,104 @@
+\section{Airborne vs.\ Mechanical Coupling}\label{sec:coupling}
+
+This section presents the central novel result of this work: a quantitative
+comparison of airborne acoustic and mechanical (whole-body vibration) coupling
+to the abdominal flexural modes derived in \S\ref{sec:formulation}.
+
+\subsection{Airborne Acoustic Pathway}
+
+Table~\ref{tab:airborne} summarises the predicted airborne displacement at
+resonance for the $n=2$ flexural mode across a range of sound pressure levels.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Airborne displacement at $n=2$ resonance ($f_2 = \SI{4.4}{\hertz}$,
+  $Q = 3.3$, $E = \SI{0.1}{\mega\pascal}$).}
+  \label{tab:airborne}
+  \begin{tabular}{rcccc}
+    \hline
+    SPL (dB) & $p_\mathrm{inc}$ (Pa) & $p_\mathrm{eff}$ (Pa) &
+    $\xi$ ($\mu$m) & PIEZO? \\
+    \hline
+    100 & 2.0 & $3.2 \times 10^{-4}$ & 0.014 & No \\
+    110 & 6.3 & $1.0 \times 10^{-3}$ & 0.045 & No \\
+    120 & 20.0 & $3.2 \times 10^{-3}$ & 0.14  & No \\
+    130 & 63.2 & $1.0 \times 10^{-2}$ & 0.45  & No \\
+    140 & 200.0 & $3.2 \times 10^{-2}$ & 1.44  & Marginal \\
+    \hline
+  \end{tabular}
+\end{table}
+
+At \SI{120}{\decibel} SPL (the threshold of pain), the predicted wall
+displacement is \SI{0.14}{\micro\metre}---well below the $0.5$--$\SI{2.0}
+{\micro\metre}$ activation range of mechanosensitive PIEZO channels.  Reaching
+the \SI{1}{\micro\metre} threshold requires approximately \SI{137}{\decibel},
+a level associated with close proximity to jet engines and acoustic weapons.
+
+\subsection{Mechanical (Whole-Body Vibration) Pathway}
+
+In contrast, mechanical vibration transmitted through the skeleton couples
+directly to the shell without the $(ka)^n$ penalty.
+Table~\ref{tab:mechanical} shows the predicted relative displacement for the
+$n=2$ mode under whole-body vibration.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Mechanical coupling at $n=2$ resonance
+  ($f_2 = \SI{4.4}{\hertz}$, $Q = 3.3$).}
+  \label{tab:mechanical}
+  \begin{tabular}{rccc}
+    \hline
+    $a_\mathrm{rms}$ (m/s$^2$) & $x_\mathrm{base}$ ($\mu$m) &
+    $\xi_\mathrm{rel}$ ($\mu$m) & PIEZO? \\
+    \hline
+    0.1 & 187 & 623 & Yes \\
+    0.5 (EU action) & 935 & 3115 & Yes \\
+    1.0 & 1869 & 6230 & Yes \\
+    1.15 (EU limit) & 2150 & 7165 & Yes \\
+    \hline
+  \end{tabular}
+\end{table}
+
+At the EU Whole-Body Vibration Directive action value of
+\SI{0.5}{\metre\per\second\squared}, the predicted displacement is
+\SI{3115}{\micro\metre}---exceeding the PIEZO threshold by more than three
+orders of magnitude.
+
+\subsection{Coupling Ratio}
+
+The ratio of mechanical to airborne displacement defines the coupling
+disparity:
+\begin{equation}
+  \mathcal{R} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}
+  \sim 10^3 \text{--} 10^4.
+\end{equation}
+This ratio depends primarily on $(ka)^{-n}$ and the base-excitation
+amplification $H_\mathrm{rel}$, and is robust to uncertainties in material
+properties because both pathways excite the same modes.
+
+\subsection{Energy Budget}
+
+To verify self-consistency, we compute the absorption cross-section using
+reciprocity:
+\begin{equation}
+  \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
+  \,\frac{\Gamma_\mathrm{rad}}{\Gamma_\mathrm{total}},
+\end{equation}
+where $\Gamma_\mathrm{rad}$ is the radiation damping width and
+$\Gamma_\mathrm{total} = \Gamma_\mathrm{rad} + \Gamma_\mathrm{struct}$.
+For the $n=2$ mode in air, $\zeta_\mathrm{rad} \approx 10^{-15}$ whereas
+$\zeta_\mathrm{struct} = 0.15$, giving an absorption efficiency of order
+$10^{-14}$.  The shell is effectively transparent to airborne infrasound.
+
+\subsection{Comparison with Empirical Evidence}
+
+The model predictions are consistent with two independent bodies of evidence:
+\begin{itemize}
+  \item \textbf{WBV studies}: ISO~2631 documents gastrointestinal symptoms at
+    $4$--$\SI{8}{\hertz}$ under mechanical vibration \cite{iso2631}.
+  \item \textbf{Airborne infrasound studies}: No gastrointestinal effects
+    have been observed at SPL $\leq \SI{150}{\decibel}$ \cite{Leventhall2007}.
+\end{itemize}
+The coupling disparity provides a quantitative explanation for this apparent
+contradiction: the two bodies of literature address different excitation
+mechanisms with fundamentally different coupling efficiencies.

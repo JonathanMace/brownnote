@@ -1,28 +1,48 @@
 \section{Introduction}
 \label{sec:introduction}
 
-The ``brown note'' is a hypothetical infrasonic tone---typically cited in the
-range of \SIrange{5}{9}{\hertz}---that is purported to cause involuntary loss
-of bowel control by inducing resonance in the human abdominal cavity
-\citep{Leventhall2007}. Despite its persistence in popular culture and
-occasional references in acoustics folklore, no rigorous scientific study has
-been published that either confirms or definitively refutes the hypothesis on
-a mechanistic basis.
+Low-frequency acoustic and vibrational exposures are ubiquitous in
+occupational and environmental settings---from wind turbines and heavy
+machinery to transport vehicles and industrial plant.  The human body is known
+to exhibit resonance phenomena in the \SIrange{4}{8}{\hertz} range under
+whole-body vibration, with the abdominal viscera identified as the primary
+resonant subsystem \cite{iso2631,griffin1990handbook}.
 
-% TODO: Expand with literature context
+A persistent claim in popular culture holds that a specific infrasonic
+frequency in the \SIrange{5}{9}{\hertz} range---the so-called ``brown
+note''---can cause involuntary loss of bowel control through resonance of the
+abdominal cavity.  Despite widespread repetition, no rigorous scientific study
+has confirmed this claim, and it has been explicitly debunked in controlled
+experiments \cite{Leventhall2007}.
 
-The present study aims to address this gap by performing the first systematic
-computational investigation of infrasound-induced resonance in the human
-abdominal cavity. Specifically, we seek to answer three questions:
-%
+However, the complete absence of a \emph{quantitative mechanistic analysis}
+leaves the question incompletely resolved.  No study has:
 \begin{enumerate}
-  \item What are the natural frequencies of the human abdominal cavity,
-    modelled as a fluid-filled elastic shell?
-  \item Do any of these natural frequencies fall within the infrasound range
-    (\SIrange{1}{20}{\hertz})?
-  \item At physiologically plausible sound pressure levels, are the resulting
-    displacement amplitudes sufficient to produce mechanical effects on
-    the bowel?
+  \item derived abdominal cavity eigenfrequencies from first-principles
+    shell theory with proper fluid--structure coupling;
+  \item quantified the airborne acoustic coupling coefficient for flexural
+    modes in the long-wavelength limit; or
+  \item compared airborne and mechanical excitation pathways using a common
+    modal framework.
 \end{enumerate}
 
-% TODO: Outline of paper sections
+The present work addresses all three gaps. We model the abdomen as a
+fluid-filled viscoelastic oblate spheroidal shell and derive natural
+frequencies for both breathing ($n=0$) and flexural ($n \geq 2$) mode
+families.  We then compare the efficiency of airborne acoustic coupling
+(subject to a $(ka)^n$ penalty) against mechanical whole-body vibration
+coupling (which bypasses this penalty entirely).
+
+The central finding is that the coupling disparity between these two
+pathways---a factor of $10^3$--$10^4$---quantitatively explains why
+whole-body vibration at \SIrange{4}{8}{\hertz} produces gastrointestinal
+effects while airborne infrasound at comparable frequencies does not.
+
+The remainder of this paper is organised as follows. Section~\ref{sec:formulation}
+develops the mathematical formulation for the fluid-filled viscoelastic shell,
+including both breathing and flexural mode families and the two coupling
+pathways. Section~\ref{sec:results} presents a comprehensive parametric study
+and validates the model against ISO~2631 data. Section~\ref{sec:coupling}
+quantifies the airborne--mechanical coupling disparity.
+Section~\ref{sec:discussion} interprets the results and discusses limitations,
+and Section~\ref{sec:conclusion} summarises the conclusions.

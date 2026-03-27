@@ -1,4 +1,4 @@
-\documentclass[preprint,review,12pt]{elsarticle}
+\documentclass[review]{elsarticle}
 
 % =============================================================================
 % Packages
@@ -10,16 +10,21 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{booktabs}
-\usepackage[capitalise,noabbrev]{cleveref}
-\usepackage{hyperref}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage[pdfencoding=auto,psdextra]{hyperref}
+\usepackage{lineno}
+
+% Fix duplicate page destination warning with elsarticle review mode
+\hypersetup{pageanchor=false}
+\AtBeginDocument{\hypersetup{pageanchor=true}}
 
 % SI units configuration
 \sisetup{
   per-mode=symbol,
   group-separator={,},
 }
+
+% Line numbering (required for JSV review submission)
+\linenumbers
 
 % =============================================================================
 % Metadata
@@ -30,63 +35,117 @@
 
 \begin{frontmatter}
 
-\title{Infrasonic Excitation of the Human Abdominal Cavity:\\
-A Finite Element Investigation of the ``Brown Note'' Hypothesis}
+\title{Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell:
+Implications for Airborne vs.\ Mechanical Low-Frequency Excitation}
 
 \author[inst1]{Jon\corref{cor1}}
 \cortext[cor1]{Corresponding author}
 \ead{jon@example.com}
 
 \affiliation[inst1]{
-  organization={Department of Engineering},
+  organization={Independent Researcher},
   city={City},
   country={Country}
 }
 
+\begin{highlights}
+\item Fluid-filled shell model predicts abdominal resonance at 4--10 Hz
+\item Breathing mode at 2900 Hz; flexural modes match ISO 2631 data
+\item Airborne coupling penalised by $(ka)^n$; negligible at 120 dB SPL
+\item Mechanical vibration couples 1000--10000x more efficiently
+\item Coupling disparity explains WBV effects vs.\ absent airborne effects
+\end{highlights}
+
 \begin{abstract}
-The ``brown note''---a hypothetical infrasonic frequency purported to cause
-involuntary bowel movements---has persisted in popular culture despite a lack
-of rigorous scientific investigation. This study presents the first systematic
-computational analysis of infrasound-induced resonance in the human abdominal
-cavity using finite element methods. The abdomen is modelled as a fluid-filled
-elastic ellipsoidal shell with material properties derived from published
-soft-tissue data. Modal analysis is performed for the structure alone, the
-acoustic cavity alone, and the coupled fluid--structure system using FEniCSx
-with SLEPc eigenvalue solvers. Analytical solutions based on Donnell shell
-theory and Helmholtz cavity modes validate the computational approach.
-A parametric study examines the sensitivity of the fundamental frequency to
-wall stiffness (\SIrange{20}{100}{\kilo\pascal}), thickness
-(\SIrange{10}{20}{\milli\metre}), and cavity geometry. Results show that
-the coupled fundamental frequency lies in the range
-\SIrange{X}{Y}{\hertz}, which [is/is not] within the infrasound regime.
-Harmonic response analysis at physiologically plausible sound pressure
-levels (\SI{120}{\decibel} re \SI{20}{\micro\pascal}) reveals peak
-displacement amplitudes of order \SI{Z}{\micro\metre}, which
-[are/are not] sufficient to produce the claimed physiological effects.
+The human abdomen is modelled as a fluid-filled viscoelastic oblate spheroidal
+shell to investigate its modal response under low-frequency excitation. Using
+Love--Kirchhoff thin-shell theory with Kelvin--Voigt viscoelasticity and proper
+fluid--structure coupling, we derive natural frequencies for both breathing
+($n=0$) and flexural ($n \geq 2$) mode families. The breathing mode, dominated
+by the fluid bulk modulus, occurs at approximately \SI{2900}{\hertz} and is
+irrelevant to infrasonic exposure. In contrast, flexural modes---in which the
+shell deforms without significant volume change and the enclosed fluid acts
+primarily as added mass---fall in the \SIrange{4}{10}{\hertz} range, consistent
+with abdominal resonance data reported under ISO~2631. A comprehensive
+parametric study over elastic modulus (\SIrange{0.05}{2.0}{\mega\pascal}),
+geometry, wall thickness, and intra-abdominal pressure demonstrates that the
+$n=2$ flexural mode robustly occupies this frequency band for relaxed
+musculature, though the precise frequency is sensitive to tissue stiffness and
+boundary conditions.
+
+We then compare two excitation pathways quantitatively. For airborne acoustic
+coupling, the long-wavelength condition ($ka \approx 0.017$ at
+\SI{7}{\hertz}) imposes a $(ka)^n$ penalty on flexural mode excitation,
+yielding displacements of order \SI{0.1}{\micro\metre} at \SI{120}{\decibel}
+SPL---below known mechanotransduction thresholds. For mechanical (whole-body)
+vibration, coupling is direct and produces displacements $10^3$--$10^4$ times
+larger at occupational exposure levels. This disparity explains why whole-body
+vibration at \SIrange{4}{8}{\hertz} is associated with gastrointestinal effects
+in the epidemiological literature, whereas airborne infrasound at comparable
+frequencies is not. The analysis provides the first unified quantitative
+framework bridging these two excitation mechanisms through a common modal
+description.
 \end{abstract}
 
 \begin{keyword}
-infrasound \sep abdominal resonance \sep finite element analysis \sep
-modal analysis \sep fluid--structure interaction \sep biomechanics
+fluid-filled shell vibration \sep viscoelastic oblate spheroid \sep
+infrasound \sep whole-body vibration \sep acoustic--structural coupling \sep
+ISO~2631
 \end{keyword}
 
 \end{frontmatter}
 
 % =============================================================================
-% Main body
+% Section 1: Introduction
 % =============================================================================
-
 \input{sections/introduction}
-\input{sections/background}
-\input{sections/methods}
+
+% =============================================================================
+% Section 2: Mathematical Formulation (the core contribution)
+% =============================================================================
+\input{sections/section2_formulation}
+
+% =============================================================================
+% Section 3: Parametric Study
+% =============================================================================
 \input{sections/results}
+
+% =============================================================================
+% Section 4: Coupling Comparison (key novel result)
+% =============================================================================
+\input{sections/section4_coupling}
+
+% =============================================================================
+% Section 5: Discussion
+% =============================================================================
 \input{sections/discussion}
+
+% =============================================================================
+% Section 6: Conclusions
+% =============================================================================
 \input{sections/conclusion}
 
 % =============================================================================
 % References
 % =============================================================================
-\bibliographystyle{elsarticle-num-names}
+\bibliographystyle{elsarticle-num}
 \bibliography{references}
+
+% =============================================================================
+% Data Availability & CRediT
+% =============================================================================
+\section*{Data availability}
+All analytical models and computational scripts used in this study are
+available in the accompanying repository.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Jon}: Conceptualization, Methodology, Software, Formal analysis,
+Investigation, Writing -- Original Draft, Writing -- Review \& Editing,
+Visualization.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests
+or personal relationships that could have appeared to influence the work
+reported in this paper.
 
 \end{document}

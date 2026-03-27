@@ -1,9 +1,61 @@
 \section{Discussion}
 \label{sec:discussion}
 
-% TODO: Interpret results in context of the brown note hypothesis
-% TODO: Compare frequencies with infrasound range
-% TODO: Discuss displacement amplitudes vs physiological thresholds
-% TODO: Limitations of the model
-% TODO: Comparison with any existing experimental data
-% TODO: Implications for acoustic safety standards
+\subsection{The Coupling Disparity Resolves a Paradox}
+
+The central result of this study is the $10^3$--$10^4$ factor separating
+mechanical from airborne coupling efficiency.  This disparity has a simple
+physical origin: mechanical vibration drives the shell wall directly, while
+airborne sound must couple through the acoustic radiation impedance mismatch.
+In the long-wavelength limit ($ka \ll 1$), this mismatch imposes a $(ka)^n$
+penalty on flexural mode $n$, which at \SI{7}{\hertz} amounts to a factor of
+$2.8 \times 10^{-4}$ for $n = 2$.
+
+This finding resolves an apparent paradox in the literature: whole-body
+vibration at \SIrange{4}{8}{\hertz} is well documented to cause
+gastrointestinal distress (including nausea, abdominal pain, and in extreme
+cases, incontinence) \cite{griffin1990handbook,mansfield2005human}, whereas airborne infrasound studies at levels up to
+\SI{150}{\decibel} report no comparable effects \cite{Leventhall2007}.The modal analysis shows that
+both observations are consistent with the same underlying resonance---but the
+two excitation pathways differ by three to four orders of magnitude in
+coupling efficiency.
+
+\subsection{Implications for the ``Brown Note'' Hypothesis}
+
+The results indicate that abdominal resonance in the \SIrange{4}{10}{\hertz}
+range is physically real and well-supported by ISO~2631 data.  The ``brown
+note'' hypothesis is therefore half-correct: the resonance exists.  However,
+\emph{airborne} excitation of this resonance is energetically negligible at
+any plausible SPL.  The effects attributed to infrasound are instead explained
+by mechanical vibration, which is the actual exposure pathway in the
+occupational scenarios (heavy equipment, transport vehicles) where
+gastrointestinal symptoms are reported.
+
+\subsection{Gas Pocket Mechanism}
+
+We note that bowel gas pockets (radius $R \approx \SI{2}{\centi\metre}$) have
+Minnaert resonance frequencies in the range \SIrange{30}{330}{\hertz}.  At
+infrasonic frequencies, sub-resonant but non-negligible acoustic displacements
+of order \SI{1}{\micro\metre} at \SI{120}{\decibel} may occur within these
+pockets.  This mechanism could potentially explain inter-individual
+variability in infrasound sensitivity, but the present analysis cannot make a
+strong quantitative claim without modelling the gas--tissue interaction in
+detail.
+
+\subsection{Limitations}
+
+\begin{enumerate}
+  \item \textbf{Boundary conditions}: The free-shell model provides a lower
+    bound on mode frequencies. Partial clamping by the spine and pelvis will
+    raise the $n = 2$ frequency, potentially by a factor of 2--3$\times$.
+    Finite element validation is needed to resolve this uncertainty.
+  \item \textbf{Linear theory}: The small-displacement assumption may not hold
+    for large-amplitude mechanical vibration.
+  \item \textbf{Homogeneous wall}: The abdominal wall is a multi-layer
+    composite, though our laminate analysis shows this introduces less than 5\%
+    error in the eigenfrequency.
+  \item \textbf{Thin-shell theory}: The wall-thickness-to-radius ratio
+    ($h/R \approx 0.06$) is near the upper bound of thin-shell validity.
+  \item \textbf{No organ-level model}: Internal organs are treated as fluid;
+    a more realistic model would include solid inclusions.
+\end{enumerate}
