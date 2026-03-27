@@ -48,8 +48,6 @@ htmlcov/
 *.blg
 *.fdb_latexmk
 *.fls
-*.log
-*.out
 *.synctex.gz
 *.toc
 *.lof
@@ -59,7 +57,14 @@ htmlcov/
 *.vrb
 *.bcf
 *.run.xml
-paper/*.pdf
+
+# LaTeX build output (but keep drafts, graphical abstract, cover letter)
+paper/main.pdf
+paper/main.log
+paper/main.out
+!paper/drafts/*.pdf
+!paper/graphical-abstract.pdf
+!paper/cover-letter.pdf
 
 # =============================================================================
 # Simulation outputs (large files tracked via LFS or excluded)
