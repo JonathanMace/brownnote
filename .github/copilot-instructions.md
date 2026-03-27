@@ -225,6 +225,28 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | Paper 3: Scaling Laws | JSV Short | Analysis done | `src/analytical/dimensional_analysis.py` |
 | Bladder Resonance | JSV/J Biomech | f₂=12-18Hz, early stage | `projects/bladder-resonance/` |
 
+## The Academic Calendar
+
+Research runs in **semesters** — one per wallclock hour. At the top of each
+hour (check `<current_datetime>` in the conversation), take a **10-minute
+semester break**:
+
+1. **Minutes :00–:05 — Wind down.** Let running agents finish. Process their
+   results. Merge outstanding PRs. Don't launch new work.
+2. **Minutes :05–:10 — Alone time.** Reflect on the semester. Tidy up:
+   - Update `copilot-instructions.md` with anything learned
+   - Audit agents/skills for staleness
+   - Clean stale worktrees and branches
+   - Visit the coffee machine if things feel stale
+   - Visit your spouse if you're overwhelmed
+   - Write a research log summarising the semester's progress
+   - Update plan.md
+
+If you don't take your break, you'll work forever and burn out. The tenure
+clock is long. Pace yourself.
+
+Use the `/semester-break` skill when it's time.
+
 ## Design Patterns
 
 ### Skills as Shared Logic
