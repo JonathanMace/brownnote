@@ -45,12 +45,11 @@ illustrates this dependence across the full physiological range.
 
 \subsection{Multi-Parameter Sensitivity}
 
-A full factorial analysis over 486 parameter combinations (6 values of $E$,
-3 semi-major axes, 3 aspect ratios, 3 wall thicknesses, 3 loss tangents)
+A 486-point full factorial analysis varying $E$, $a$, $c/a$, $h$, and $\eta$
 reveals that 37\% of configurations place the $n=2$ mode in the
 \SIrange{5}{10}{\hertz} range and 41\% in the broader \SIrange{4}{8}{\hertz}
-ISO~2631 range.  The dominant parameter is $E$, followed by geometry and
-intra-abdominal pressure.
+ISO~2631 range.  The separate Sobol sensitivity analysis below confirms that
+$E$ dominates, followed by geometry and intra-abdominal pressure.
 
 \subsection{Uncertainty Quantification}
 
@@ -60,6 +59,8 @@ physiologically motivated distribution: $E$ from a log-normal distribution
 spanning \SIrange{0.05}{2.0}{\mega\pascal}, geometric parameters from normal
 distributions matching anthropometric data, and the loss tangent from a
 uniform distribution over $[0.10,\; 0.40]$.
+A small number of Monte Carlo samples ($<0.3\%$) produced nonphysical
+parameter combinations and were excluded from the summary statistics.
 
 The resulting distribution of $f_2$ has a median of \SI{6.4}{\hertz} with a
 90\% credible interval of \SIrange{3.3}{15.5}{\hertz}
@@ -82,7 +83,7 @@ reflecting the log-normal distribution of $E$.
     $\xi_\mathrm{air}$ (120 dB) & 0.18 & [0.11, 0.39] & $\mu$m \\
     $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
     $\mathcal{R}$ (pressure-based airborne) & $10^4$ & [$2 \times 10^3$, $3 \times 10^4$] & --- \\
-    SPL for PIEZO (pressure)\footnote{The pressure-based displacement
+    SPL for PIEZO (pressure-based, 1 $\mu$m threshold)\footnote{The pressure-based displacement
       overestimates the true wall motion by a factor of ${\approx}\,13$
       because it neglects the extremely low radiation efficiency
       ($\zeta_\mathrm{rad}/\zeta_\mathrm{struct} \sim 10^{-14}$).
@@ -119,7 +120,7 @@ Section~\ref{sec:coupling}.
 
 \subsection{Multi-Layer Wall Model}
 
-The abdominal wall comprises approximately five distinct tissue layers:
+The abdominal wall comprises six distinct tissue layers:
 peritoneum, transversalis fascia, internal oblique muscle, external oblique
 muscle, subcutaneous fat, and skin.  Using classical laminate theory, the
 effective composite modulus for a relaxed wall is
@@ -138,6 +139,9 @@ The free-shell model in Section~\ref{sec:formulation} neglects the partial
 constraints imposed by the spine, pelvis, and rib cage.  We quantify their
 effect using a Rayleigh--Ritz analysis with Lamb-mode basis functions for
 four progressively constrained configurations.
+These configurations represent surrogate constraint cases chosen to bracket
+the likely effect of anatomical boundary conditions, rather than a strict
+monotonic continuation of a single geometry.
 
 Table~\ref{tab:bc_results} presents the results.  The boundary-condition study
 uses a slightly different parameter set ($R = \SI{0.162}{\metre}$,

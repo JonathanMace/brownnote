@@ -240,7 +240,7 @@ The pressure-based estimate of airborne coupling displacement
 (main text, Section~4) is approximately $13\times$ larger than the
 energy-consistent value because it does not enforce energy conservation.  The
 self-consistent derivation, following the reciprocity formulation of
-Junger \& Feit \cite{Junger1986},
+Junger \& Feit (1986),
 proceeds as follows.
 
 \paragraph{Step 1: Absorption cross-section.}
@@ -508,7 +508,9 @@ Key findings from the 486-combination sweep:
 \begin{itemize}[nosep]
   \item 37\% of configurations place $f_{2}$ in the 5--\SI{10}{\hertz} range.
   \item 41\% of configurations place $f_{2}$ in the ISO~2631 range (4--\SI{8}{\hertz}).
-  \item Dominant factor: $E$, followed by geometry ($a$, $c/a$) and $P_{\mathrm{iap}}$.
+  \item The 486-point factorial sweep varies $E$, $a$, $c/a$, $h$, and $\eta$.
+  \item The separate Sobol sensitivity analysis confirms that $E$ dominates,
+    followed by geometry and $P_{\mathrm{iap}}$.
 \end{itemize}
 
 \begin{table}[htbp]
@@ -522,7 +524,7 @@ Key findings from the 486-combination sweep:
 \midrule
 Lean    & 0.2  & 15 && 6.3 & Yes \\
 Average & 0.1  & 18 && 4.0 & Yes \\
-Large   & 0.08 & 20 && 3.1 & Marginal \\
+Large   & 0.08 & 20 && 3.3 & Marginal \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -550,7 +552,7 @@ $\xi_{\mathrm{mech}}$ (\si{\micro\metre})
   & 2745 & 1818 & 3110 & 296 & 8176 & 17457 \\
 $\mathcal{R}$
   & 12949 & 9820 & 11888 & 1780 & 34169 & 62466 \\
-SPL$_{\mathrm{PIEZO}}$ (pressure)\footnote{Pressure-based displacement
+SPL$_{\mathrm{PIEZO}}$ (pressure-based, 1\,\si{\micro\metre} threshold)\footnote{Pressure-based displacement
   estimate; the energy-consistent threshold is ${\approx}\,\SI{23}{\decibel}$
   higher (see the airborne-displacement table and coupling discussion in the
   main text).} (\si{\decibel})
