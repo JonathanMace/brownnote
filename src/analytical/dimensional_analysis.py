@@ -466,7 +466,7 @@ def plot_scaling_law(save=True):
     a_cm = [scaling[s]["a_cm"] for s in species_order]
     f_hz = [scaling[s]["f_hz"] for s in species_order]
     Pi_0 = [scaling[s]["Pi_0"] for s in species_order]
-    R_vals = [scaling[s]["coupling_ratio_R"] for s in species_order]
+    R_vals = [scaling[s]["R_scat"] for s in species_order]
 
     # ── Left: dimensional frequencies ──
     ax = axes[0]
