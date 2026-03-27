@@ -1,0 +1,111 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Clinical Implications}
+\label{sec:clinical}
+
+The predicted $n = 2$ frequency range (\SIrange{12}{18}{\hertz}) has
+immediate relevance to occupational health.  Vehicle cabins expose operators
+to broadband vibration spanning \SIrange{1}{20}{\hertz}, with dominant energy
+typically concentrated below \SI{10}{\hertz} from engine and road
+excitation~\cite{griffin1990handbook,mansfield2005human}.  The bladder's
+fundamental mode sits at the upper edge of this band.  Two coupling mechanisms
+are therefore relevant:
+
+\paragraph{Sub-resonant forced response.}
+At the ISO~2631 pelvic resonance peak (\SIrange{4}{8}{\hertz}), the bladder
+responds as a forced sub-resonant oscillator.  The pelvic transmissibility is
+at its maximum ($T \approx 2.3$ at \SI{5.5}{\hertz}), and while the bladder
+modal amplification is below unity at these frequencies, the product
+$T \times H$ remains significant.  This is the regime most relevant to
+occupational WBV exposure: the bladder wall undergoes forced cyclic
+deformation driven by amplified pelvic motion, even though the excitation
+frequency is below the bladder's own resonance.
+
+\paragraph{Near-resonant amplification.}
+At the bladder's natural frequency (\SIrange{12}{18}{\hertz}), the modal
+amplification reaches its peak ($Q = 2.5$), but pelvic transmissibility has
+rolled off ($T \approx 0.3$).  This regime may be relevant to certain
+industrial vibration sources (e.g., pneumatic tools, vibratory compactors)
+that produce significant energy above \SI{10}{\hertz}.  The
+fill-volume-dependent nature of the resonance means that the bladder's
+susceptibility to a particular frequency shifts as it fills---a dynamic
+vulnerability window.
+
+\paragraph{Stretch receptor activation.}
+Urgency sensation requires activation of stretch receptors
+(mechanosensitive afferent nerves) in the detrusor muscle and
+suburothelium~\cite{coste2010piezo1}.  The critical question is whether
+vibration-induced cyclic wall displacement reaches the activation threshold
+of these receptors.  Our model provides the wall displacement per unit
+input; coupling this to afferent nerve thresholds---which are not
+well-characterised in the dynamic regime---remains an open problem.
+
+
+\subsection{Comparison with Other Pelvic Organs}
+\label{sec:pelvic}
+
+The bladder is not the only pelvic organ exposed to WBV.  The prostate,
+uterus, and rectum are all fluid-containing or fluid-adjacent structures
+embedded in the pelvic floor.  The present framework could, in principle,
+be adapted to any of these organs by substituting appropriate geometric
+and material parameters.  The bladder is simply the cleanest example: a
+single-chamber, fluid-filled, roughly spherical shell with well-characterised
+mechanical properties.
+
+
+\subsection{Therapeutic Whole-Body Vibration}
+\label{sec:therapeutic}
+
+WBV at \SIrange{20}{40}{\hertz} is increasingly used for pelvic floor
+rehabilitation in post-prostatectomy and postpartum
+patients~\cite{Pelvic2019}.  The bio\-electrical activity of pelvic floor
+muscles increases during synchronous WBV~\cite{Lauper2009}, and clinical
+trials report improvements in continence
+symptoms~\cite{NCT03325660}.  Our model suggests that these therapeutic
+frequencies (\SIrange{20}{40}{\hertz}) lie above the bladder's $n = 2$ mode
+for most fill states, placing the bladder in a supra-resonant regime where
+wall displacement decreases with frequency.  The therapeutic effect is
+therefore more likely mediated by pelvic floor muscle activation than by
+direct bladder wall resonance.
+
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+Several simplifications warrant discussion.
+
+\paragraph{Spherical geometry.}
+The real bladder is slightly oblate and irregularly shaped, particularly at
+low fill states.  A more realistic geometry would modify the mode shapes and
+could split the degenerate frequencies of the spherical model.  However, at
+moderate-to-high fill the spherical approximation is reasonable, and the
+errors are of order $(1 - c/a)^2$ for the eigenfrequencies.
+
+\paragraph{Pelvic constraint.}
+Approximately 40\% of the bladder surface contacts the pelvic bone and
+pelvic floor musculature.  A partial rigid boundary would modify the
+effective mode shapes and could lower the resonant frequency by restricting
+the free surface area.  This effect is not captured in the free-shell model
+and represents the most significant limitation of the present analysis.
+
+\paragraph{Nonlinear elasticity.}
+The exponential strain-stiffening model (equation~\ref{eq:E_fill}) is a
+phenomenological fit to vibrometry data.  A hyperelastic constitutive model
+(Mooney--Rivlin or Ogden) would be more physically appropriate for large
+deformations, though for the small-amplitude vibrations considered here,
+a linearised modulus is adequate.
+
+\paragraph{Layered wall structure.}
+The bladder wall comprises distinct layers (mucosa, submucosa, detrusor
+muscle, serosa) with different mechanical properties.  The present model
+uses a single effective modulus.  A multilayer shell model would capture
+the bending--stretching coupling between layers, potentially modifying
+both frequencies and damping.
+
+\paragraph{Surrounding tissue.}
+The bladder is embedded in the pelvic cavity, surrounded by fat, connective
+tissue, and adjacent organs.  This surrounding medium would add both
+damping and mass loading, likely shifting the resonant frequencies downward
+and broadening the peaks.  The free-shell model therefore represents an
+upper bound on the resonant frequencies.
