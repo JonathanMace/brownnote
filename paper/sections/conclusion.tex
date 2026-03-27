@@ -1,31 +1,39 @@
 \section{Conclusions}
 \label{sec:conclusion}
 
-We have modelled the human abdomen as a fluid-filled viscoelastic oblate
-spheroidal shell and identified two physically distinct mode families.
-The breathing mode ($n = 0$), governed by the fluid bulk modulus, sits at
-approximately \SI{2500}{\hertz}---far above any frequency that could
-reasonably be called infrasonic.  Flexural modes ($n \geq 2$), in which the
-shell changes shape without compressing the fluid, fall in the
-\SIrange{4}{10}{\hertz} range for relaxed musculature and match the abdominal
-resonance band documented in ISO~2631.  The abdomen does, in fact, resonate at
-infrasonic frequencies.
+The central result of this study is a coupling disparity of approximately
+$4.6 \times 10^4$ between mechanical whole-body vibration and airborne
+acoustic excitation of the human abdominal cavity.  This single quantity,
+derived from first-principles shell theory and energy-consistent reciprocity
+analysis, resolves a long-standing empirical asymmetry: occupational
+whole-body vibration at \SIrange{4}{8}{\hertz} causes well-documented
+gastrointestinal effects, while airborne infrasound at comparable frequencies
+and extreme intensities does not.
 
-The catch---and it is a substantial one---lies in the coupling.  Airborne
-sound at these frequencies has a wavelength exceeding \SI{85}{\metre}, making
-the abdomen acoustically negligible.  The $(ka)^n$ coupling penalty reduces
-the effective driving pressure by four orders of magnitude, and the
-energy-consistent analysis shows an absorption efficiency of $\sim 10^{-14}$.
-Reaching the mechanotransduction threshold via airborne infrasound alone
-would require approximately \SI{158}{\decibel}---a level at which structural
-damage to the middle ear, blast lung injury, and building collapse would all
-present more immediate concerns than any intestinal embarrassment.
+The disparity has a clean physical origin.  The abdominal cavity possesses
+two distinct mode families: a breathing mode ($n = 0$) near
+\SI{2500}{\hertz}, governed by the fluid bulk modulus and irrelevant at
+infrasonic frequencies, and flexural modes ($n \geq 2$) in the
+\SIrange{4}{10}{\hertz} range that match ISO~2631 abdominal transmissibility
+data.  Airborne sound at these frequencies has a wavelength exceeding
+\SI{49}{\metre}, placing the abdomen deep in the Rayleigh regime
+($ka \approx 0.01$).  The $(ka)^n$ geometric penalty, compounded by the
+air--tissue impedance mismatch, reduces the effective driving pressure by
+four orders of magnitude.  An energy-consistent analysis confirms an
+absorption efficiency of $\sim 10^{-14}$: the shell is, for practical
+purposes, acoustically transparent.  Reaching the mechanotransduction
+threshold via airborne infrasound alone would require approximately
+\SI{158}{\decibel}---a level at which structural damage to the middle ear,
+blast lung injury, and building collapse would all present more immediate
+concerns than any intestinal embarrassment.
 
-Mechanical whole-body vibration, by contrast, couples directly and produces
-displacements $10^4$ times larger at occupational exposure levels.  This
-disparity---arising from basic physics rather than any exotic biology---provides
-a clean, quantitative explanation for a longstanding asymmetry in the
-empirical literature.
+Mechanical vibration, transmitted through the skeleton and abdominal wall,
+couples directly and produces displacements $10^4$ times larger at
+occupational exposure levels.  This is not a subtle biomechanical effect
+but a straightforward consequence of long-wavelength acoustics and impedance
+physics.  Monte Carlo uncertainty quantification confirms the ratio spans
+$10^3$--$10^5$ across physiologically realistic parameter ranges, with
+elastic modulus accounting for 86\% of total variance.
 
 The brown note, then, is a half-truth.  The resonance it invokes is genuine;
 the mechanism it implies is not.  What popular culture attributes to airborne
