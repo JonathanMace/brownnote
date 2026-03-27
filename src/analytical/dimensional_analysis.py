@@ -2,8 +2,8 @@
 Buckingham Pi dimensional analysis for the fluid-filled viscoelastic shell.
 
 Identifies the minimal set of governing dimensionless groups, collapses the
-parameter space from 10 physical parameters to 6 Π groups for flexural modes,
-and derives scaling laws across body sizes.
+parameter space from 10 physical parameters (+1 output) to 8 Π groups
+(5 governing for flexural modes), and derives scaling laws across body sizes.
 
 Buckingham Pi Theorem
 ---------------------
@@ -36,9 +36,10 @@ Effective relation for flexural mode frequencies:
 
 or equivalently:
 
-    f_n = (1/2π) √(E/ρ_f) (1/a) × Φ_n(h/a, c/a, ρ_w/ρ_f, P_iap/E, ν)
+    f_n = √(E/ρ_f) (1/a) × Φ_n(h/a, c/a, ρ_w/ρ_f, P_iap/E, ν)
 
-where Φ_n has a closed-form expression derived from the spherical shell equations.
+where Φ_n absorbs the 1/(2π) factor and has a closed-form expression
+derived from the spherical shell equations.
 """
 
 import numpy as np
@@ -134,7 +135,7 @@ def parametric_sweep_dimensionless(mode_n=2):
     Parametric study spanning all five governing Π-groups for flexural modes.
 
     Sweeps E, a, c/a, h, ρ_w, and ν over physiological ranges, producing
-    4374 parameter combinations.  The loss tangent η is excluded because it
+    1458 parameter combinations.  The loss tangent η is excluded because it
     does not affect the undamped natural frequency.
     """
     E_values = [0.05, 0.1, 0.2, 0.5, 1.0, 2.0]    # MPa
@@ -225,7 +226,8 @@ def animal_scaling(mode_n=2):
     """
     Compute flexural mode frequencies and coupling ratios across species.
 
-    Returns a dict keyed by species name with f_n, Π₀, ka, and coupling ratio.
+    Returns a dict keyed by species name with f_n, Π₀, kR_eq, and
+    scattering coupling ratio R_scat = 1/(kR_eq)^n.
     """
     c_air = 343.0  # m/s
     out = {}
@@ -238,13 +240,13 @@ def animal_scaling(mode_n=2):
         freqs = flexural_mode_frequencies_v2(model, n_max=mode_n)
         f_n = freqs[mode_n]
 
-        R = model.equivalent_sphere_radius
-        ka = 2 * np.pi * f_n * R / c_air
+        R_eq = model.equivalent_sphere_radius
+        kR_eq = 2 * np.pi * f_n * R_eq / c_air
 
-        # Airborne coupling coefficient for mode n: (ka)^n
-        coupling_air = ka ** mode_n
-        # Mechanical coupling is O(1) — ratio is inverse of airborne coupling
-        coupling_ratio = 1.0 / coupling_air if coupling_air > 0 else np.inf
+        # Scattering coupling coefficient for mode n: (kR_eq)^n
+        coupling_air = kR_eq ** mode_n
+        # Scattering ratio is inverse of airborne coupling coefficient
+        R_scat = 1.0 / coupling_air if coupling_air > 0 else np.inf
 
         Pi_0 = dimensionless_frequency(f_n, p["a"], model.E, model.rho_fluid)
         Pi_0_ana = phi_analytical(
@@ -259,9 +261,11 @@ def animal_scaling(mode_n=2):
             "f_hz": f_n,
             "Pi_0": Pi_0,
             "Pi_0_analytical": float(Pi_0_ana),
-            "ka": ka,
+            "ka": kR_eq,  # kept for backward compat; actually kR_eq
+            "kR_eq": kR_eq,
             "coupling_air": coupling_air,
-            "coupling_ratio_R": coupling_ratio,
+            "coupling_ratio_R": R_scat,
+            "R_scat": R_scat,
             "h_over_a": p["h"] / p["a"],
             "c_over_a": p["c_a"],
             "P_over_E": p["P_iap"] / (p["E_MPa"] * 1e6),
@@ -498,7 +502,7 @@ def plot_scaling_law(save=True):
                     xytext=(8, 8), fontsize=10, fontstyle="italic")
 
     ax.set_xlabel("Semi-major axis $a$ (cm)")
-    ax.set_ylabel(r"Scattering coupling ratio $\mathcal{R}_\mathrm{scat} = 1/(ka)^2$")
+    ax.set_ylabel(r"Scattering coupling ratio $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2$")
     ax.set_title("Scattering coupling ratio vs body size")
     ax.grid(True, alpha=0.3, which="both")
     ax.set_xlim(0, 24)
