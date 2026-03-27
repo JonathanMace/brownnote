@@ -206,6 +206,10 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `git-checkpoint` | Branch→PR→merge→cleanup workflow |
 | `jmace-writing-style` | Jonathan Mace's active, confident style |
 | `mace-writing-style` | Brian Mace's JSV structural conventions |
+| `semester-break` | End-of-hour reflection, tidy-up, and planning |
+| `mesh-convergence` | FEA mesh convergence study workflow |
+| `run-simulation` | Execute FEA simulation pipeline |
+| `submit-paper` | Journal submission checklist and workflow |
 
 ### Path-Specific Instructions (`.github/instructions/`)
 | File | Applies To |

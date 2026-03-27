@@ -48,6 +48,9 @@ htmlcov/
 *.blg
 *.fdb_latexmk
 *.fls
+*.log
+*.out
+*.spl
 *.synctex.gz
 *.toc
 *.lof
@@ -60,8 +63,6 @@ htmlcov/
 
 # LaTeX build output (but keep drafts, graphical abstract, cover letter)
 paper/main.pdf
-paper/main.log
-paper/main.out
 !paper/drafts/*.pdf
 !paper/graphical-abstract.pdf
 !paper/cover-letter.pdf
