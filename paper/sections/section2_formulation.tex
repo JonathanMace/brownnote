@@ -7,7 +7,9 @@ semi-major axes $a$ (equatorial, in the lateral and cranio-caudal directions)
 and semi-minor axis $c$ (antero-posterior), with $c < a$.  The shell has uniform
 wall thickness $h$ and is completely filled with an inviscid, irrotational
 fluid of density $\rho_f$ and bulk modulus $K_f$.  Following standard practice
-in fluid-filled shell analysis \cite{Junger1986,lamb1882}, an
+in fluid-filled shell analysis \cite{Junger1986,lamb1882} and recent
+experimental and analytical studies of pressurised elastic shells
+\cite{Kuo2015,Ghaheri2022}, an
 equivalent-sphere radius is defined via
 \begin{equation}\label{eq:Req}
   R_\mathrm{eq} = (a^2 c)^{1/3},
@@ -21,7 +23,10 @@ parameters with physiological justification.
 The thin-shell assumption ($h/R_\mathrm{eq} \ll 1$) is satisfied: for
 $h = 10$\,mm and $R_\mathrm{eq} \approx 157$\,mm, $h/R \approx 0.06$.  The
 Love--Kirchhoff hypothesis (normals remain straight and normal to the
-deformed mid-surface) is therefore applicable.
+deformed mid-surface) is therefore applicable.  This linear framework remains
+the standard starting point even in modern reviews of nonlinear shell
+vibration, which treat geometric nonlinearities as amplitude corrections to
+the same modal backbone \cite{Alijani2014}.
 
 \begin{table}[htbp]
   \centering
@@ -34,13 +39,13 @@ deformed mid-surface) is therefore applicable.
     Semi-major axis & $a$ & 0.18 & m & Anthropometric mean \\
     Semi-minor axis & $c$ & 0.12 & m & $c/a \approx 0.67$ \\
     Wall thickness & $h$ & 0.010 & m & Composite wall \\
-    Elastic modulus & $E$ & 0.1 & MPa & Relaxed passive tissue \\
-    Poisson's ratio & $\nu$ & 0.45 & --- & Nearly incompressible \\
+    Elastic modulus & $E$ & 0.1 & MPa & Composite wall \cite{Deeken2017} \\
+    Poisson's ratio & $\nu$ & 0.45 & --- & FEM convention \cite{Spadoni2024} \\
     Wall density & $\rho_w$ & 1100 & kg/m$^3$ & Soft tissue \\
     Fluid density & $\rho_f$ & 1020 & kg/m$^3$ & Abdominal fluid \\
     Fluid bulk modulus & $K_f$ & 2.2 & GPa & Water at 37$^\circ$C \\
-    Intra-abdominal pressure & $P_\mathrm{iap}$ & 1000 & Pa & Resting supine \\
-    Loss tangent & $\eta$ & 0.25 & --- & Viscoelastic tissue \\
+    Intra-abdominal pressure & $P_\mathrm{iap}$ & 1000 & Pa & Resting IAP \cite{Novak2021} \\
+    Loss tangent & $\eta$ & 0.25 & --- & Soft-tissue viscoelasticity \cite{Sack2023} \\
     \hline
   \end{tabular}
 \end{table}
@@ -67,10 +72,20 @@ flexural rigidity of the shell is
 \begin{equation}\label{eq:D}
   D = \frac{Eh^3}{12(1 - \nu^2)}.
 \end{equation}
-Published values of $\eta$ for abdominal soft tissue range from 0.15 to 0.40
-at low frequencies \cite{parker2011imaging}, corresponding to
-$Q = 2.5$--$6.7$.  The baseline value $\eta = 0.25$ ($Q = 4.0$,
-$\zeta = 0.125$) represents a central estimate.
+These baseline values are not arbitrary.  The canonical modulus
+$E = \SI{0.1}{\mega\pascal}$ lies within the range reported for composite
+abdominal wall tissue at physiological strains \cite{Deeken2017};
+$\nu = 0.45$ matches the nearly incompressible convention adopted in recent
+abdominal-wall finite-element modelling \cite{Spadoni2024}; resting
+intra-abdominal pressures of 5--12\,mmHg correspond to approximately
+\SIrange{0.67}{1.60}{\kilo\pascal}, placing
+$P_\mathrm{iap} = \SI{1.0}{\kilo\pascal}$ near the physiological centre
+\cite{Novak2021}; and modern elastography reviews place the soft-tissue loss
+tangent broadly in the 0.1--0.4 range, making $\eta = 0.25$ a conservative
+mid-range value \cite{Sack2023}.  Published values of $\eta$ for abdominal
+soft tissue range from 0.15 to 0.40 at low frequencies
+\cite{parker2011imaging}, corresponding to $Q = 2.5$--$6.7$.  The baseline
+value $\eta = 0.25$ ($Q = 4.0$, $\zeta = 0.125$) represents a central estimate.
 
 
 \subsection{Breathing Mode (\texorpdfstring{$n = 0$}{n = 0})}\label{sec:breathing}
@@ -121,7 +136,8 @@ order.  The fluid therefore does \emph{not} act as a volumetric spring; it
 contributes only added mass.
 
 Following Lamb \cite{lamb1882} and Junger \& Feit
-\cite{Junger1986}, the flexural mode of order $n$ has three contributions
+\cite{Junger1986}, with subsequent validation in modern pressurised-shell
+studies \cite{Kuo2015,Ghaheri2022}, the flexural mode of order $n$ has three contributions
 to the restoring force per unit area.  (An analogous modal decomposition
 for fluid-filled elastic tubes in biological contexts was developed by
 Heil~\cite{Heil1996}.)

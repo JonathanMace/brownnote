@@ -19,7 +19,9 @@ $Z_{\mathrm{tissue}} \approx \SI{1.6e6}{\pascal\second\per\metre}$, giving
 a pressure transmission coefficient $T = 2Z_{\mathrm{air}} /
 (Z_{\mathrm{air}} + Z_{\mathrm{tissue}}) \approx 5 \times 10^{-4}$.  At the
 body surface, more than \SI{99.9}{\percent} of the incident acoustic energy is
-reflected.
+reflected.  This general suppression of transmission across large biological
+impedance contrasts is consistent with modern frequency-dependent analyses of
+bone--soft tissue interfaces \cite{Gupta2021}.
 
 Second, even the transmitted pressure must couple to the spatial pattern of
 a flexural mode.  In the long-wavelength (Rayleigh) limit, $ka \ll 1$, the
@@ -50,7 +52,7 @@ equation~\ref{eq:Hrel}).
 This disparity resolves an apparent paradox in the literature.  Whole-body
 vibration at \SIrange{4}{8}{\hertz} is well documented to cause
 gastrointestinal distress---including nausea, abdominal pain, and in
-extreme cases, incontinence \cite{griffin1990handbook,mansfield2005human,Seidel1986,Ishitake2002}---whereas
+extreme cases, incontinence \cite{griffin1990handbook,mansfield2005human,Seidel1986,Ishitake2002,Krajnak2018}---whereas
 airborne infrasound studies at levels up to \SI{150}{\decibel} report no
 comparable effects \cite{Moller2004,Leventhall2007}.  The present modal
 analysis shows that both observations are consistent with the \emph{same}
@@ -65,7 +67,10 @@ of the so-called ``brown note''
 hypothesis.  The hypothesis is \emph{half-correct}: abdominal resonance in the
 \SIrange{4}{10}{\hertz} band is physically real, well-supported by the
 parametric study (\S\ref{sec:results}), and consistent with ISO~2631
-transmissibility data \cite{iso2631,kitazaki1998resonance}.  The flexural
+transmissibility data \cite{iso2631,kitazaki1998resonance}.  Independent
+finite-element studies of the seated human body now recover dominant internal
+and abdominal vibration modes in the \SIrange{4}{8}{\hertz} range
+\cite{Dong2024}.  The flexural
 $n = 2$ mode at \SI{4.0}{\hertz} (for $E = \SI{0.1}{\mega\pascal}$, relaxed
 musculature) falls squarely within the frequency band where occupational
 exposure studies report gastrointestinal symptoms.
@@ -75,8 +80,11 @@ Where the hypothesis fails is in the \emph{excitation pathway}.  At
 environmental or entertainment exposure---the predicted airborne wall
 displacement is \SI{0.014}{\micro\metre} (Table~\ref{tab:airborne}), roughly
 two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\metre} activation
-threshold of mechanosensitive PIEZO1/2 ion channels \cite{coste2010piezo1}.
-Reaching the \SI{1}{\micro\metre} threshold on the energy-consistent basis
+threshold of mechanosensitive PIEZO1/2 ion channels
+\cite{coste2010piezo1,Lewis2015,Xiao2024}.  In the modern mechanotransduction
+literature, the more relevant gastrointestinal transducer is probably PIEZO2:
+somatosensory-neuron PIEZO2 signalling has now been shown to regulate gut
+transit directly \cite{ServinVences2023}.  Reaching the \SI{1}{\micro\metre} threshold on the energy-consistent basis
 requires approximately \SI{158}{\decibel}
 (cf.\ \SI{135}{\decibel} for the pressure-based estimate;
 Table~\ref{tab:uq_summary}),
@@ -112,7 +120,10 @@ The human intestine normally contains \SIrange{100}{200}{\milli\litre} of
 gas distributed in pockets with effective radii ranging from
 \SIrange{1}{10}{\centi\metre}.  Unlike the surrounding tissue, these gas
 volumes are compressible, and they respond to incident pressure by
-expanding and contracting their bounding walls.
+expanding and contracting their bounding walls.  If such local deformation is
+biologically transduced, PIEZO2-dependent gut afferents are the most plausible
+candidate pathway rather than generic abdominal-wall strain sensing
+\cite{ServinVences2023}.
 
 The classical Minnaert frequency of a spherical gas bubble of radius $a$ in
 a fluid of density $\rho_f$ is \cite{lamb1882}
@@ -228,7 +239,9 @@ whole-body vibration, with the highest sensitivity weighting in the
 \SIrange{4}{8}{\hertz} band---precisely the range where our model predicts
 the $n = 2$ flexural resonance \cite{iso2631}, and consistent with
 von~Gierke and Brammer's compilation of organ resonance
-data~\cite{vonGierke2002}.  The EU Physical Agents
+data~\cite{vonGierke2002}.  More recent occupational reviews continue to link
+whole-body vibration exposure with adverse health outcomes across multiple
+organ systems \cite{Krajnak2018}.  The EU Physical Agents
 (Vibration) Directive~2002/44/EC codifies two thresholds: a daily exposure
 action value of \SI{0.5}{\metre\per\second\squared} $A(8)$ and an exposure
 limit value of \SI{1.15}{\metre\per\second\squared} $A(8)$.  At the action
@@ -252,7 +265,7 @@ vibration exposure assessment.  The parametric study (\S\ref{sec:results})
 shows that the $n = 2$ eigenfrequency depends sensitively on body habitus:
 larger abdominal radius (higher BMI) reduces the resonance frequency, while
 greater muscular tone (higher effective $E$) increases it.  In principle,
-imaging-derived geometric parameters \cite{parker2011imaging} combined with
+imaging-derived geometric and viscoelastic parameters \cite{Sack2023} combined with
 the analytical expressions of \S\ref{sec:formulation} could yield
 subject-specific resonance frequency estimates, enabling targeted vibration
 exposure limits for workers whose body habitus places their resonance
@@ -388,7 +401,11 @@ the conclusions.
     the effective bending stiffness.  The isotropic assumption is a
     first-order approximation; anisotropy would split the mode degeneracies
     of the equivalent sphere but would not change the order of magnitude of
-    the eigenfrequencies or the coupling ratio.
+    the eigenfrequencies or the coupling ratio.  Recent abdominal-wall
+    mechanics reviews and elastography surveys place the canonical
+    $E = \SI{0.1}{\mega\pascal}$ and $\eta = 0.25$ values comfortably within
+    contemporary measurement ranges, so the remaining uncertainty is
+    quantitative rather than order-of-magnitude \cite{Deeken2017,Sack2023}.
 
   \item \textbf{Free-shell boundary conditions.}  The abdomen is partially
     constrained by the spine posteriorly, the pelvis inferiorly, and the
@@ -463,12 +480,15 @@ the conclusions.
 
   \item \textbf{Mechanotransduction thresholds.}  The
     \SIrange{0.5}{2.0}{\micro\metre} PIEZO activation range
-    \cite{coste2010piezo1} derives from cell-culture experiments and may
-    not directly translate to tissue-scale effects, where strain
-    concentrations around cells are modulated by the extracellular matrix.
-    This limitation introduces uncertainty in the absolute threshold but
-    does not affect the \emph{relative} comparison between airborne and
-    mechanical coupling.
+    \cite{coste2010piezo1,Lewis2015,Xiao2024} derives from cell-culture and
+    membrane-tension experiments and may not directly translate to
+    tissue-scale effects, where strain concentrations around cells are
+    modulated by the extracellular matrix.  In gastrointestinal tissue the
+    relevant transduction pathway is also likely to involve PIEZO2-expressing
+    afferents rather than PIEZO1 alone \cite{ServinVences2023}.  This
+    limitation introduces uncertainty in the absolute threshold but does not
+    affect the \emph{relative} comparison between airborne and mechanical
+    coupling.
 
 \end{enumerate}
 

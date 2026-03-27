@@ -11,7 +11,10 @@ At \SI{4}{\hertz}, the acoustic wavelength in air exceeds \SI{85}{\metre}---
 some 500 times the abdominal radius.  The abdomen, acoustically speaking,
 is invisible.  Table~\ref{tab:airborne} quantifies this
 invisibility using the energy-consistent reciprocity analysis developed in
-\S\ref{sec:formulation}.
+\S\ref{sec:formulation}.  Modern analyses of scattering by pressurised elastic
+shells reach the same qualitative conclusion: long-wavelength radiation and
+absorption by low-order shell modes are strongly suppressed
+\cite{Godin2023}.
 
 \begin{table}[htbp]
   \centering
@@ -45,16 +48,29 @@ approximately \SI{158}{\decibel} (cf.\ \SI{135}{\decibel} using the
 pressure-based displacement of Table~\ref{tab:uq_summary}, which
 overestimates by ${\approx}\,13\times$),
 a level that would cause immediate structural damage to the ear and is
-available only from explosive blasts and rocket launches.  One might
-reasonably conclude that hearing loss would present a more urgent clinical
-concern than any intestinal disturbance.
+available only from explosive blasts and rocket launches.  Modern
+mechanobiology strengthens rather than weakens that conclusion: Piezo1 gating
+is tuned by membrane tension in the low-\si{\milli\newton\per\metre} range,
+with half-maximal activation near \SI{2}{\milli\newton\per\metre}
+\cite{Lewis2015}; cryo-EM resolved the propeller-like architecture of Piezo1
+\cite{Saotome2018}; and recent reviews summarise an expansive post-2010
+literature on the physiological roles of PIEZO channels following the 2021
+Nobel Prize \cite{Xiao2024}.  Of particular relevance here, PIEZO2-dependent
+gut mechanosensation is now known to regulate gastrointestinal transit
+\cite{ServinVences2023}.  The relevant question is therefore not whether the
+gut can sense deformation---it plainly can---but whether airborne infrasound
+can generate enough deformation.  One might reasonably conclude that hearing
+loss would present a more urgent clinical concern than any intestinal
+disturbance.
 
 \subsection{Mechanical (Whole-Body Vibration) Pathway}
 
 Mechanical vibration, by contrast, does not knock politely at the acoustic
 impedance door---it kicks it open.  Vibration transmitted through the
 skeleton couples directly to the abdominal wall, bypassing the $(ka)^n$
-penalty entirely.  Table~\ref{tab:mechanical} tells a very different story.
+penalty entirely and avoiding the severe transmission losses associated with
+biological impedance discontinuities \cite{Gupta2021}.  Table~\ref{tab:mechanical}
+tells a very different story.
 
 \begin{table}[htbp]
   \centering
@@ -83,7 +99,9 @@ magnitude.  Unlike the airborne case, this is not a theoretical curiosity:
 it is the everyday reality for operators of heavy equipment, long-haul
 drivers, and helicopter pilots---populations in which gastrointestinal
 complaints are, perhaps unsurprisingly, well documented
-\cite{griffin1990handbook}.
+\cite{griffin1990handbook}.  Recent seated-body biodynamic studies likewise
+show strong low-frequency nonlinearity, cross-axis coupling, and identifiable
+abdominally relevant modes in this same band \cite{Zheng2012,Gao2021}.
 
 \subsection{The Coupling Ratio}
 \label{sec:coupling_ratio}
@@ -135,7 +153,7 @@ corresponding to the SDOF idealisation.
 \subsection{Energy Budget}
 
 We verify self-consistency through the absorption cross-section derived from
-reciprocity \cite{Junger1986}:
+reciprocity \cite{Junger1986,Godin2023}:
 \begin{equation}
   \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
   \,\frac{\zeta_\mathrm{rad}}{\zeta_\mathrm{rad} + \zeta_\mathrm{struct}},
@@ -157,8 +175,10 @@ evidence:
     at $4$--$\SI{8}{\hertz}$ under mechanical vibration \cite{iso2631}.
     Our model explains \emph{why} this frequency range is problematic.
   \item \textbf{Airborne infrasound studies}: No gastrointestinal effects
-    have been observed at SPL $\leq \SI{150}{\decibel}$
-    \cite{Leventhall2007}.  Our model explains why they should not be.
+    have been observed at SPL $\leq \SI{150}{\decibel}$, although modern
+    controlled exposure studies do report subtle neural effects without
+    evidence of visceral resonance \cite{Leventhall2007,Ascone2021}.  Our
+    model explains why gastrointestinal effects should not be expected.
 \end{itemize}
 The coupling disparity resolves this apparent contradiction (Figure~\ref{fig:coupling}): both communities
 are studying the same resonance through very different ends of the telescope.
