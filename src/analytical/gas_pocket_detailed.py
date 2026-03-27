@@ -65,6 +65,7 @@ C_TISSUE = 1540.0     # longitudinal speed of sound in tissue [m/s]
 MU_TISSUE = 1.0e-3    # dynamic viscosity (water-like) [Pa·s]
 R_LUMEN = 0.015       # typical small-intestine lumen radius [m]
 P_REF = 20.0e-6       # reference pressure (hearing threshold) [Pa]
+C_AIR = 343.0             # speed of sound in air [m/s]
 
 
 # ---------------------------------------------------------------------------
@@ -364,6 +365,42 @@ def tissue_displacement_field(
     r = np.maximum(r_distances_m, a)
     return (a / r) ** 2 * xi
 
+
+
+
+# ---------------------------------------------------------------------------
+# 5b. Acoustic short-circuit analysis (sealed GI segments)
+# ---------------------------------------------------------------------------
+def helmholtz_sealed_gi(
+    V_gas_mL: float = 200.0,
+    S_constriction_m2: float | None = None,
+    d_constriction_mm: float = 10.0,
+    L_gi_eff_m: float = 5.0,
+) -> dict:
+    """
+    Helmholtz resonator estimate for a sealed GI segment.
+
+    f_H = (c_air / 2*pi) * sqrt(S / (V * L_eff))
+
+    Default params give f_H ~ 15 Hz.
+    """
+    V = V_gas_mL * 1e-6
+    if S_constriction_m2 is not None:
+        S = S_constriction_m2
+    else:
+        d = d_constriction_mm * 1e-3
+        S = np.pi * (d / 2) ** 2
+    L = L_gi_eff_m
+    f_H = (C_AIR / (2.0 * np.pi)) * np.sqrt(S / (V * L))
+    f_drive = 7.0
+    equalization_ratio = 1.0 / (1.0 + (f_drive / f_H) ** 2)
+    return dict(
+        f_helmholtz_hz=f_H,
+        V_gas_m3=V,
+        S_m2=S,
+        L_eff_m=L,
+        short_circuit_ratio_7Hz=equalization_ratio,
+    )
 
 # ---------------------------------------------------------------------------
 # 6. Population variability model

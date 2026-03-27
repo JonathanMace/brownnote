@@ -81,12 +81,13 @@ compliant inclusions in an otherwise stiff medium.  The SPL threshold for
 activating \piezo{} mechanosensitive ion channels ranges from
 \SI{111}{\decibel} (\SI{100}{\milli\litre} pocket) to \SI{120}{\decibel}
 (\SI{5}{\milli\litre}).  A Monte Carlo population model ($N = 10\,000$)
-confirms that 100\% of the simulated population exceeds this threshold at
-\SI{120}{\decibel}.  This pathway is 50--100$\times$ more efficient than
-airborne coupling to abdominal flexural modes, representing the only
-plausible mechanism by which airborne infrasound could induce GI
-mechanotransduction, with enhanced susceptibility in individuals with
-elevated bowel gas.
+predicts that nearly all simulated individuals exceed the \piezo{}
+threshold at \SI{120}{\decibel}, a consequence of the fact that every
+individual harbours at least several millilitres of bowel gas.  This
+pathway is 35--100$\times$ more efficient than airborne coupling to
+abdominal flexural modes and represents the only plausible mechanism by
+which airborne infrasound could induce GI mechanotransduction, with
+enhanced susceptibility in individuals with elevated bowel gas.
 \end{abstract}
 
 \noindent\textbf{Keywords:}
@@ -245,6 +246,12 @@ where
 \end{align}
 The wall stiffness arises from hoop stress in a thin spherical shell; the
 wall mass is the shell inertia per unit area.
+Note that for the soft intestinal wall ($E_w = \SI{10}{\kilo\pascal}$),
+$K_\text{wall}$ contributes only 0.9--2.4\% of the total effective stiffness
+$K_\text{gas} + K_\text{wall}$ across the physiological pocket-size range;
+gas compressibility dominates.  The ``constrained'' label therefore refers to
+the geometric confinement of the gas pocket within the tubular lumen, not to a
+significant elastic restraint by the wall.
 
 \subsubsection{Cylindrical pocket: radial and axial modes}
 
@@ -484,7 +491,7 @@ findings:
         $\sim$\SI{120}{\decibel} at \SI{5}{\milli\litre} to
         $\sim$\SI{111}{\decibel} at \SI{100}{\milli\litre}.
   \item For \textbf{cylindrical} pockets, the threshold is nearly
-        independent of volume ($\sim$\SI{118}{\decibel}), because the
+        independent of volume ($\sim$\SI{114}{\decibel}), because the
         lumen radius~$R$ is fixed.
   \item The 9-dB range across physiological pocket sizes maps directly
         to the range of inter-individual gas content.
@@ -510,10 +517,15 @@ findings:
 
 Figure~\ref{fig:population} presents the Monte Carlo results for
 $N = 10\,000$ simulated individuals at \SI{120}{\decibel}.  The key result
-is that \textbf{100\% of the population exceeds the \piezo{} activation
-threshold} at this SPL, because even the smallest gas pocket
-($\sim$\SI{3}{\milli\litre}) in the least-gassy individual produces
-sufficient wall displacement.
+is that \textbf{nearly all simulated individuals exceed the \piezo{}
+activation threshold} at this SPL.  This high exceedance fraction is
+expected rather than surprising: the model assigns every individual at
+least \SI{30}{\milli\litre} of bowel gas (a physiologically conservative
+lower bound), and even a \SI{3}{\milli\litre} pocket produces $\xi >
+\SI{0.5}{\um}$ at \SI{120}{\decibel}.  The result therefore confirms
+internal consistency of the model rather than constituting an independent
+prediction; experimental validation of the threshold remains necessary
+(see \S\ref{sec:limitations}).
 
 The distribution of maximum pocket-wall displacement spans approximately
 \SIrange{0.6}{3.5}{\um}, with a median of $\sim$\SI{1.2}{\um}.
@@ -544,7 +556,7 @@ robust \piezo{} activation.
 Figure~\ref{fig:comparison} compares the gas-pocket transduction pathway
 with the whole-cavity flexural mode ($n = 2$) pathway from Paper~1.  The
 gas-pocket mechanism produces tissue displacement that is
-\textbf{50--100$\times$ larger} than the whole-cavity pathway at the same
+\textbf{35--100$\times$ larger} than the whole-cavity pathway at the same
 SPL, across the entire range from \SI{80}{\decibel} to \SI{150}{\decibel}.
 
 At \SI{120}{\decibel}, the whole-cavity $n = 2$ mode yields
@@ -591,6 +603,74 @@ fundamentally the same mechanism by which the middle ear's ossicular chain
 provides impedance matching between air and the cochlear fluid
 \citep{Junger1986}, albeit at much lower frequencies and without mechanical
 advantage.
+
+
+% ------------------------------------------------------------------
+\subsection{Acoustic short-circuit via the GI air column}
+\label{sec:short_circuit}
+
+An important caveat concerns the acoustic pathway through luminal air.
+The GI tract is an open tube (mouth to anus, total length
+$\sim$\SI{8}{\metre}).  At infrasound wavelengths
+($\lambda = c_\text{air}/f \approx \SI{49}{\metre}$ at \SI{7}{\hertz}),
+$\lambda \gg L_\text{GI}$, so luminal air could in principle deliver the
+same incident pressure $p_\text{inc}$ to the \emph{interior} of a gas
+pocket as tissue delivers to its \emph{exterior}.  If both paths transmit
+$p_\text{inc}$ faithfully, the net pressure difference across the
+gas--tissue interface vanishes: $\Delta P \to 0$, and no displacement
+results---an \emph{acoustic short circuit}.
+
+We estimate the cross-over frequency by modelling the open GI tract as a
+Helmholtz resonator.  The luminal gas volume $V$ communicates with the
+exterior through a constricted air column of cross-section $S$ and
+effective acoustic length $L_\text{eff}$.  The Helmholtz resonance
+frequency is
+\begin{equation}
+  f_H = \frac{c_\text{air}}{2\pi}\sqrt{\frac{S}{V\,L_\text{eff}}}.
+  \label{eq:helmholtz}
+\end{equation}
+For representative values ($V \approx \SI{200}{\milli\litre}$,
+$S \approx \pi(\SI{5}{\milli\metre})^2$, $L_\text{eff} \approx
+\SI{5}{\metre}$), this gives $f_H \approx \SI{15}{\hertz}$.  Below
+$f_H$, the air column can quasi-statically equalize pressure, partially
+short-circuiting the transduction mechanism; above $f_H$, air-column
+inertia prevents equalization and the constrained-bubble model applies
+without qualification.
+
+Three observations mitigate this concern at typical infrasound
+frequencies ($f \sim$\SIrange{1}{20}{\hertz}):
+\begin{enumerate}
+  \item \textbf{Liquid and fecal plugs seal GI segments.}
+        The intestinal lumen is not a continuous air column.  Chyme,
+        mucus, and fecal matter create liquid plugs that partition the
+        tract into acoustically isolated compartments.  Imaging studies
+        confirm that gas is distributed in discrete, separated pockets
+        rather than a single connected volume
+        \citep{Levitt1971,Serra2001}.  Within each sealed segment, the
+        luminal air path is blocked and the constrained-bubble model is
+        fully valid.
+  \item \textbf{Segmented gas distribution is the norm.}
+        Even in healthy fasting individuals, bowel gas typically occupies
+        5--15 discrete pockets separated by liquid or collapsed lumen
+        \citep{Suarez1997}.  Post-prandially, the degree of segmentation
+        increases further.  Complete continuity from mouth to anus via an
+        uninterrupted air column is physiologically exceptional.
+  \item \textbf{Partial equalization reduces but does not eliminate
+        transduction.}
+        At \SI{7}{\hertz} ($< f_H$), the short-circuit transfer function
+        provides partial equalization (estimated pressure-equalization
+        ratio ${\sim}0.8$ for an open segment).  However, even a factor
+        of five reduction in effective $\Delta P$ still yields
+        sub-micrometre displacements for pockets $> \SI{20}{\milli\litre}$
+        at \SI{120}{\decibel}, keeping the mechanism above the \piezo{}
+        threshold.
+\end{enumerate}
+
+In summary, the acoustic short-circuit effect is real in principle but
+largely negated \emph{in vivo} by the segmented nature of bowel gas
+distribution.  Future work should quantify the acoustic transmission loss
+through liquid plugs of varying length and viscosity.
+
 
 % ------------------------------------------------------------------
 \subsection{Clinical implications}
@@ -645,6 +725,7 @@ response.
 
 % ------------------------------------------------------------------
 \subsection{Limitations}
+\label{sec:limitations}
 
 Several simplifications warrant discussion:
 \begin{enumerate}
@@ -665,6 +746,14 @@ Several simplifications warrant discussion:
         to be tested experimentally.  An \emph{in vitro} setup using a
         gas-filled elastic tube in a water tank with infrasonic excitation
         would provide direct validation.
+  \item \textbf{Acoustic short circuit:} As discussed in
+        \S\ref{sec:short_circuit}, the GI air column can partially
+        equalize pressure across the gas--tissue interface at frequencies
+        below $f_H \approx \SI{15}{\hertz}$.  The model is strictly valid
+        only for gas pockets sealed by liquid or fecal plugs---which
+        imaging evidence suggests is the typical \emph{in vivo}
+        configuration---but the degree of acoustic isolation in any given
+        individual is unknown.
 \end{enumerate}
 
 
@@ -675,7 +764,7 @@ Several simplifications warrant discussion:
 We have shown that intraluminal gas pockets in the gastrointestinal tract
 act as acoustic transducers, converting airborne infrasonic pressure to
 local wall strain via a sub-resonant compliance mechanism.  This
-constrained-bubble pathway is 50--100$\times$ more efficient than whole-cavity
+constrained-bubble pathway is 35--100$\times$ more efficient than whole-cavity
 flexural resonance and is the only plausible mechanism by which airborne
 infrasound at realistic exposure levels ($\leq$\SI{120}{\decibel}) could
 activate mechanosensitive ion channels in the intestinal wall.
