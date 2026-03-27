@@ -81,6 +81,31 @@ wave propagation. Could explain frequency-selective transmission.
 - [ ] Historical/cultural paper for popular science venue
 - [ ] Comparison with Gavreau's original apparatus parameters
 
+## Lab Members
+
+The research programme is supported by a panel of AI agents, each with a
+distinct role and persona. All agents operate in isolated worktrees and push
+to feature branches — only the PI merges.
+
+| Agent | Role | Focus |
+|-------|------|-------|
+| **Paper Writer** | Lead author | Drafts and revises manuscript text for JSV-standard publication |
+| **Simulation Engineer** | FEA specialist | Builds and validates computational models (gmsh, FEniCSx) |
+| **Data Analyst** | Visualisation expert | Produces publication-quality figures and statistical analysis |
+| **Reviewer A** | Senior reviewer | Evaluates scientific significance, novelty, and rigour |
+| **Reviewer B** | Methods reviewer | Scrutinises mathematical derivations and numerical methods |
+| **Reviewer C** | Presentation reviewer | Focuses on clarity, structure, and readability |
+| **Consistency Auditor** | Quality assurance | Checks parameter consistency across code, paper, and tables |
+| **Research Scout** | Idea generator | Explores new research directions and spin-off opportunities |
+| **Lab Meeting** | Facilitator | Runs project health checks and strategic reviews |
+| **Provocateur** | Devil's advocate | Challenges programme direction, constructs counter-arguments |
+| **Communications** | Outreach officer | Prepares accessible summaries for conferences, press, and social media |
+| **Bibliographer** | Literature monitor | Tracks citations, scooping risk, and reference completeness |
+| **Lab Manager** | Infrastructure maintainer | Keeps README, tests, gitignore, and documentation healthy |
+
+Agent definitions live in `.github/agents/`. Each agent's instructions include
+its persona, mandate, output format, and workflow rules.
+
 ## Key Principles
 
 1. **Rigour over novelty**: We'd rather be correct and boring than wrong and exciting
