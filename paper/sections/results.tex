@@ -61,23 +61,25 @@ spanning \SIrange{0.05}{2.0}{\mega\pascal}, geometric parameters from normal
 distributions matching anthropometric data, and the loss tangent from a
 uniform distribution over $[0.10,\; 0.40]$.
 
-The resulting distribution of $f_2$ has a median of \SI{7.5}{\hertz} with a
+The resulting distribution of $f_2$ has a median of \SI{6.4}{\hertz} with a
 90\% credible interval of \SIrange{3.3}{15.5}{\hertz}
 (Table~\ref{tab:uq_summary}).  The distribution is positively skewed,
 reflecting the log-normal distribution of $E$.
 
 \begin{table}[htbp]
   \centering
-  \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).}
+  \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).
+  Airborne displacement $\xi_\mathrm{air}$ is the pressure-based upper bound;
+  the energy-consistent value is ${\sim}13\times$ smaller.}
   \label{tab:uq_summary}
   \begin{tabular}{lccc}
     \hline
     Quantity & Median & 90\% CI & Units \\
     \hline
-    $f_2$ & 7.5 & [3.3, 15.5] & Hz \\
-    $\xi_\mathrm{air}$ (120 dB) & 0.07 & [0.01, 0.4] & $\mu$m \\
-    $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 600 & [100, 3000] & $\mu$m \\
-    $\mathcal{R}$ & $10^4$ & [$10^3$, $10^5$] & --- \\
+    $f_2$ & 6.4 & [3.3, 15.5] & Hz \\
+    $\xi_\mathrm{air}$ (120 dB) & 0.18 & [0.11, 0.39] & $\mu$m \\
+    $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
+    $\mathcal{R}$ & $10^4$ & [$10^3$, $10^4$] & --- \\
     SPL for PIEZO & 135 & [128, 139] & dB \\
     \hline
   \end{tabular}
@@ -200,9 +202,9 @@ resonance data.
     \hline
     Body type & $f_2$ (Hz) & ISO~2631 range? \\
     \hline
-    Lean ($E = 0.2$, $a = 15$ cm) & 6.3 & Yes \\
+    Lean ($E = 0.2$, $a = 15$ cm) & 6.2 & Yes \\
     Average ($E = 0.1$, $a = 18$ cm) & 4.0 & Yes \\
-    Large ($E = 0.08$, $a = 20$ cm) & 3.1 & Marginal \\
+    Large ($E = 0.08$, $a = 20$ cm) & 3.3 & Marginal \\
     \hline
   \end{tabular}
 \end{table}

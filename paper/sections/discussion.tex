@@ -23,9 +23,9 @@ Second, even the transmitted pressure must couple to the spatial pattern of
 a flexural mode.  In the long-wavelength (Rayleigh) limit, $ka \ll 1$, the
 $n$-th order component of the incident plane wave scales as $(ka)^n$
 \cite{junger2012sound}.  At \SI{7}{\hertz} with
-$R_{\mathrm{eq}} = \SI{0.133}{\metre}$, we obtain
-$ka = 2\pi f R / c_{\mathrm{air}} \approx 0.017$ and therefore
-$(ka)^2 \approx 2.8 \times 10^{-4}$ for the $n = 2$ flexural mode
+$R_{\mathrm{eq}} = \SI{0.157}{\metre}$, we obtain
+$ka = 2\pi f R / c_{\mathrm{air}} \approx 0.0114$ and therefore
+$(ka)^2 \approx 1.3 \times 10^{-4}$ for the $n = 2$ flexural mode
 (equation~\ref{eq:peff2}).  Physically, the incident wavelength
 ($\lambda \approx \SI{49}{\metre}$) is nearly 370 times the body diameter;
 the pressure field is almost perfectly uniform over the body surface, and
@@ -35,7 +35,7 @@ oblate--prolate deformation is vanishingly small.
 The energy budget analysis (\S\ref{sec:coupling}) confirms this picture from
 an independent perspective.  The radiation damping ratio in air is
 $\zeta_{\mathrm{rad}} \approx 10^{-15}$, whereas the structural damping
-ratio is $\zeta_{\mathrm{struct}} = 0.15$, so the absorption efficiency
+ratio is $\zeta_{\mathrm{struct}} = 0.125$, so the absorption efficiency
 $\zeta_{\mathrm{rad}} / \zeta_{\mathrm{total}} \sim 10^{-14}$.  The shell
 is, for practical purposes, acoustically transparent at infrasonic
 frequencies.  By contrast, mechanical vibration transmitted through the
@@ -62,19 +62,20 @@ hypothesis.  The hypothesis is \emph{half-correct}: abdominal resonance in the
 \SIrange{4}{10}{\hertz} band is physically real, well-supported by the
 parametric study (\S\ref{sec:results}), and consistent with ISO~2631
 transmissibility data \cite{iso2631,kitazaki1998resonance}.  The flexural
-$n = 2$ mode at \SI{4.4}{\hertz} (for $E = \SI{0.1}{\mega\pascal}$, relaxed
+$n = 2$ mode at \SI{4.0}{\hertz} (for $E = \SI{0.1}{\mega\pascal}$, relaxed
 musculature) falls squarely within the frequency band where occupational
 exposure studies report gastrointestinal symptoms.
 
 Where the hypothesis fails is in the \emph{excitation pathway}.  At
 \SI{120}{\decibel} SPL---the threshold of pain and well above any
 environmental or entertainment exposure---the predicted airborne wall
-displacement is \SI{0.14}{\micro\metre} (Table~\ref{tab:airborne}), a factor
-of 4--14 below the \SIrange{0.5}{2.0}{\micro\metre} activation threshold of
-mechanosensitive PIEZO1/2 ion channels \cite{coste2010piezo1}.  Reaching the
-\SI{1}{\micro\metre} threshold requires approximately \SI{137}{\decibel},
-a level associated only with close proximity to jet engines and directed
-acoustic devices.  Even at this extreme, the displacement remains three
+displacement is \SI{0.014}{\micro\metre} (Table~\ref{tab:airborne}), roughly
+two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\metre} activation
+threshold of mechanosensitive PIEZO1/2 ion channels \cite{coste2010piezo1}.
+Reaching the \SI{1}{\micro\metre} threshold requires approximately
+\SI{158}{\decibel},
+a level associated only with explosive blasts and rocket launches.  Even at
+this extreme, the displacement remains three
 orders of magnitude below what routine whole-body vibration
 ($a_{\mathrm{rms}} = \SI{0.5}{\metre\per\second\squared}$) produces
 (Table~\ref{tab:mechanical}).
@@ -130,7 +131,7 @@ At \SI{120}{\decibel} SPL ($p_{\mathrm{inc}} = \SI{20}{\pascal}$) and
 $a = \SI{2}{\centi\metre}$, this yields
 $\xi_{\mathrm{gas}} \approx \SI{0.94}{\micro\metre}$---within the PIEZO
 activation range and roughly seven times the whole-cavity airborne
-displacement of \SI{0.14}{\micro\metre} at the same SPL.  For larger pockets
+displacement of \SI{0.014}{\micro\metre} at the same SPL.  For larger pockets
 ($a = \SI{5}{\centi\metre}$), the displacement rises to approximately
 \SI{2.4}{\micro\metre}, exceeding the threshold with a modest margin.
 
@@ -162,9 +163,9 @@ viscothermal attenuation.
 
 With the mouth open and esophagus patent, the pressure reaching the gastric
 air bubble is approximately equal to the incident pressure, representing a
-transmission ratio of order unity compared with the $(ka)^2 \approx 2.8
+transmission ratio of order unity compared with the $(ka)^2 \approx 1.3
 \times 10^{-4}$ penalty for body-surface coupling---an enhancement factor
-of roughly $2{,}400\times$.  Compression of the gastric gas bubble then
+of roughly $7{,}700\times$.  Compression of the gastric gas bubble then
 produces wall displacements by the same mechanism described above for
 intestinal pockets.
 
@@ -190,12 +191,12 @@ each coupling mechanism at \SI{120}{\decibel} SPL and \SI{7}{\hertz}.
     \hline
     Mechanism & $\xi$ ($\mu$m) & PIEZO? \\
     \hline
-    Cavity resonance ($n{=}2$, airborne) & 0.14 & No \\
+    Cavity resonance ($n{=}2$, airborne) & 0.014 & No \\
     Gas pocket $a = \SI{2}{\centi\metre}$ (airborne) & 0.94 & Marginal \\
     Gas pocket $a = \SI{5}{\centi\metre}$ (airborne) & 2.4 & Yes \\
     Orifice (open mouth $\to$ stomach) & $\sim$0.5 & Marginal \\
-    WBV at \SI{0.5}{\metre\per\second\squared} (mech.) & 3{,}115 & Yes \\
-    WBV at \SI{1.15}{\metre\per\second\squared} (mech.) & 7{,}165 & Yes \\
+    WBV at \SI{0.5}{\metre\per\second\squared} (mech.) & 4{,}586 & Yes \\
+    WBV at \SI{1.15}{\metre\per\second\squared} (mech.) & 10{,}549 & Yes \\
     \hline
   \end{tabular}
 \end{table}
@@ -224,8 +225,8 @@ the $n = 2$ flexural resonance \cite{iso2631}.  The EU Physical Agents
 action value of \SI{0.5}{\metre\per\second\squared} $A(8)$ and an exposure
 limit value of \SI{1.15}{\metre\per\second\squared} $A(8)$.  At the action
 value, our model predicts a relative abdominal wall displacement of
-\SI{3.1}{\milli\metre} at resonance (Table~\ref{tab:mechanical})---more than
-$1{,}500\times$ the PIEZO activation threshold.  The present analysis
+\SI{4.6}{\milli\metre} at resonance (Table~\ref{tab:mechanical})---more than
+$4{,}000\times$ the PIEZO activation threshold.  The present analysis
 therefore provides a \emph{mechanistic rationale} for why these particular
 frequency bands and amplitude thresholds were empirically selected: they
 correspond to conditions under which flexural resonance of the abdominal
@@ -335,12 +336,12 @@ stretching and fluid volume conservation, yielding a hardening nonlinearity
 coefficient $\alpha = 7.07 \times 10^7$.
 
 The onset of appreciable nonlinearity (\SI{5}{\percent} frequency shift) occurs
-at a wall displacement of \SI{1092}{\micro\metre} ($A/h = 0.109$).  At the EU
+at a wall displacement of \SI{1091}{\micro\metre} ($A/h = 0.109$).  At the EU
 action value of \SI{0.5}{\metre\per\second\squared}, the linear model predicts
-a peak displacement of \SI{3922}{\micro\metre}; the nonlinear correction
-reduces this to \SI{2873}{\micro\metre}, a \SI{27}{\percent} reduction.  The
-forcing exceeds the jump-phenomenon threshold ($\SI{0.6}{\metre\per\second
-\squared} > \SI{0.18}{\metre\per\second\squared}$), so the actual response
+a peak displacement of \SI{4586}{\micro\metre}; the nonlinear correction
+reduces this to \SI{2258}{\micro\metre}, a \SI{51}{\percent} reduction.  The
+forcing exceeds the jump-phenomenon threshold ($\SI{0.5}{\metre\per\second
+\squared} > \SI{0.12}{\metre\per\second\squared}$), so the actual response
 curve exhibits hysteresis and amplitude-dependent frequency shifts.  All modes
 $n = 2$--$6$ cross the nonlinearity threshold within the predicted whole-body
 vibration range.
@@ -349,7 +350,7 @@ Crucially, the hardening behaviour means that the linear model
 \emph{overestimates} peak displacement under mechanical excitation.  For the
 brown note argument, this is a conservative error: the true mechanical coupling
 is somewhat weaker than the linear prediction, while the airborne displacement
-($\sim\SI{0.1}{\micro\metre}$) remains deep in the linear regime.  The
+($\sim\SI{0.014}{\micro\metre}$) remains deep in the linear regime.  The
 $10^3$--$10^4$ coupling disparity therefore represents an upper bound; the true
 ratio is, if anything, smaller but still overwhelming.
 
@@ -366,7 +367,7 @@ the conclusions.
     \S\ref{sec:disc:nonlinear} shows that occupational vibration amplitudes
     exceed the \SI{5}{\percent} nonlinearity threshold ($A/h > 0.109$), with
     the hardening response reducing peak displacement by up to
-    \SI{27}{\percent} relative to the linear prediction.  Because the airborne
+    \SI{51}{\percent} relative to the linear prediction.  Because the airborne
     displacement remains deep in the linear regime, this nonlinearity
     \emph{reduces} the coupling ratio somewhat but does not alter the
     qualitative conclusion.

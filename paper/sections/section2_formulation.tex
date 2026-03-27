@@ -68,8 +68,8 @@ flexural rigidity of the shell is
 \end{equation}
 Published values of $\eta$ for abdominal soft tissue range from 0.15 to 0.40
 at low frequencies \cite{parker2011imaging}, corresponding to
-$Q = 2.5$--$6.7$.  The baseline value $\eta = 0.30$ ($Q = 3.3$) represents a
-central estimate.
+$Q = 2.5$--$6.7$.  The baseline value $\eta = 0.25$ ($Q = 4.0$,
+$\zeta = 0.125$) represents a central estimate.
 
 
 \subsection{Breathing Mode (\texorpdfstring{$n = 0$}{n = 0})}\label{sec:breathing}
@@ -93,7 +93,7 @@ V = 3K_f \xi / R$.  The restoring force per unit displacement per unit area is
 \end{equation}
 With $K_f = 2.2$\,GPa and $R = 0.157$\,m, $k_\mathrm{fluid} = 4.2 \times
 10^{10}$\,Pa/m, which exceeds the membrane stiffness ($k_\mathrm{shell}
-\approx 2.4 \times 10^5$\,Pa/m) by five orders of magnitude.  \emph{The
+\approx 1.5 \times 10^5$\,Pa/m) by five orders of magnitude.  \emph{The
 breathing mode is entirely dominated by the fluid bulk modulus.}
 
 The effective mass per unit area includes the shell wall and the fluid added
@@ -105,7 +105,7 @@ mass for the $n = 0$ mode:
 The breathing mode frequency is therefore
 \begin{equation}\label{eq:f0}
   f_0 = \frac{1}{2\pi}\sqrt{\frac{k_\mathrm{shell} + k_\mathrm{fluid}}
-  {\rho_w h + \rho_f R}} \approx 2900\;\text{Hz},
+  {\rho_w h + \rho_f R}} \approx 2500\;\text{Hz},
 \end{equation}
 which lies in the kilohertz range and is irrelevant to infrasonic exposure.
 This result is robust to material property variations because $k_\mathrm{fluid}
@@ -178,10 +178,10 @@ Mansfield \cite{mansfield2005human}.
 \subsection{Airborne Acoustic Coupling}\label{sec:airborne}
 
 We now quantify the excitation of flexural modes by an incident airborne
-acoustic field.  At 7\,Hz, the acoustic wavelength in air is $\lambda \approx
-49$\,m, so the dimensionless wavenumber is
+acoustic field.  At $f_2 \approx 4$\,Hz, the acoustic wavelength in air is
+$\lambda \approx 87$\,m, so the dimensionless wavenumber is
 \begin{equation}\label{eq:ka}
-  ka = \frac{2\pi f R}{c_\mathrm{air}} \approx 0.017 \ll 1.
+  ka = \frac{2\pi f_2 R_\mathrm{eq}}{c_\mathrm{air}} \approx 0.0114 \ll 1.
 \end{equation}
 The body is deep in the sub-wavelength (Rayleigh scattering) regime.
 
@@ -195,7 +195,7 @@ modes ($n \geq 2$) see only the higher-order spatial gradients, which are
 vanishingly small when $ka \ll 1$.  For $n = 2$:
 \begin{equation}\label{eq:peff2}
   p_\mathrm{eff}^{(2)} = p_\mathrm{inc} \times (ka)^2
-  \approx p_\mathrm{inc} \times 2.8 \times 10^{-4}.
+  \approx p_\mathrm{inc} \times 1.3 \times 10^{-4}.
 \end{equation}
 
 The displacement at resonance ($\omega = \omega_n$) is
@@ -203,10 +203,13 @@ The displacement at resonance ($\omega = \omega_n$) is
   \xi_\mathrm{air} = \frac{p_\mathrm{eff}^{(n)}}{K_\mathrm{total}^{(n)}} Q,
 \end{equation}
 where $K_\mathrm{total}^{(n)} = K_\mathrm{bend} + K_\mathrm{memb} + K_P$.
-At 120\,dB SPL ($p_\mathrm{inc} = 20$\,Pa), equation~\eqref{eq:xi_air}
-gives $\xi_\mathrm{air} \approx 0.14$\,$\mu$m for $n = 2$ --- well below the
+At 120\,dB SPL ($p_\mathrm{inc} = 20$\,Pa), the energy-consistent reciprocity
+analysis (\S\ref{sec:coupling}) gives
+$\xi_\mathrm{air} \approx 0.014$\,$\mu$m for $n = 2$ --- well below the
 0.5--2.0\,$\mu$m activation threshold of mechanosensitive ion channels
-\cite{coste2010piezo1}.
+\cite{coste2010piezo1}.  (The pressure-based estimate of
+equation~\eqref{eq:xi_air} yields $\approx 0.18$\,$\mu$m, an overestimate
+that violates the energy budget; see \S\ref{sec:coupling}.)
 
 
 \subsection{Mechanical (Whole-Body Vibration) Coupling}\label{sec:wbv}
@@ -236,7 +239,7 @@ so that
 At the EU Whole-Body Vibration Directive exposure limit of
 $a_\mathrm{rms} = 1.15$\,m/s$^2$ and at the $n = 2$ resonance frequency:
 \begin{equation}
-  \xi_\mathrm{mech} \approx 7{,}000\;\mu\text{m} = 7\;\text{mm},
+  \xi_\mathrm{mech} \approx 10{,}500\;\mu\text{m} \approx 10\;\text{mm},
 \end{equation}
 which exceeds the mechanotransduction threshold by more than three orders
 of magnitude.
