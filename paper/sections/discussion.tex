@@ -249,6 +249,82 @@ subject-specific resonance frequency estimates, enabling targeted vibration
 exposure limits for workers whose body habitus places their resonance
 frequency in a particularly hazardous band.
 
+\subsection{Broader Applications of the Analytical Framework}
+\label{sec:disc:broader}
+
+The brown note provided the motivation for this work, but the analytical
+framework---a fluid-filled viscoelastic shell, a modal decomposition into
+breathing and flexural families, and a systematic comparison of airborne
+versus mechanical coupling efficiency---is considerably more general.  Any
+biological or engineered structure that can be idealised as a compliant
+enclosure surrounding a dense fluid falls within the scope of the model
+developed in \S\ref{sec:formulation}.  The two key dimensionless groups that
+govern the physics, the Helmholtz number $ka$ and the impedance ratio
+$Z_{\mathrm{wall}}/Z_{\mathrm{fluid}}$, transfer directly; what changes
+between applications is the frequency range, the material properties, and
+the geometric aspect ratio of the shell.
+
+Perhaps the most consequential extension is to \emph{primary blast injury}.
+Explosive detonations generate overpressure pulses with spectral content
+spanning \SIrange{10}{10000}{\hertz} and peak overpressures of
+\SIrange{100}{1000}{\kilo\pascal}---orders of magnitude above the
+\SI{20}{\pascal} of a \SI{120}{\decibel} sound field, but governed by the
+same impedance-mismatch physics
+\cite{Stuhmiller2008,Owers2011}.  Gas-containing abdominal organs (bowel,
+stomach) are clinically the most vulnerable viscera precisely because the
+gas--tissue interface maximises energy transfer from the blast wave into
+flexural wall deformation.  The coupling comparison of
+\S\ref{sec:coupling} translates directly: replacing the air--tissue
+impedance ratio with the blast-wave--tissue ratio and adjusting $ka$ for
+the broadband blast spectrum yields quantitative predictions of wall
+displacement that could inform threshold models for primary blast bowel
+injury.  Unlike the infrasonic brown-note scenario, blast frequencies place
+$ka$ near or above unity, so the geometric filtering penalty that rendered
+airborne coupling negligible at \SI{7}{\hertz} largely disappears---the
+blast wave \emph{can} efficiently excite flexural modes, which is precisely
+why blast bowel injury occurs and the brown note does not.
+
+In \emph{fisheries and marine bioacoustics}, the swim bladder of teleost
+fish is an almost literal instantiation of the present model: a gas-filled
+viscoelastic shell immersed in a dense fluid
+\cite{Feuillade1996,Love1978}.  Fisheries sonar operates at frequencies
+(\SIrange{18}{200}{\kilo\hertz}) chosen to coincide with swim-bladder
+resonance, where the target strength is maximal.  The viscoelastic shell
+formulation of \S\ref{sec:formulation} provides a physics-based alternative
+to the empirical Love equation for predicting resonance frequency as a
+function of bladder volume, wall thickness, and depth-dependent ambient
+pressure.  The same framework is directly relevant to environmental impact
+assessments of naval sonar on marine fauna: organisms possessing gas-filled
+cavities (swim bladders, lungs of diving mammals) experience tissue strains
+that the present coupling analysis can bound quantitatively.
+
+The framework also extends to \emph{therapeutic and diagnostic ultrasound}.
+In high-intensity focused ultrasound (HIFU) and extracorporeal shock-wave
+lithotripsy, acoustic energy must couple efficiently into a tissue target---the
+inverse of our brown-note problem, where coupling is deliberately maximised
+rather than shown to be negligible \cite{terHaar2007}.  The modal
+decomposition clarifies which spatial harmonics of the incident field
+deposit energy into flexural versus breathing deformation of encapsulated
+structures such as kidney stones, gallstones, or tumour capsules.  At
+therapeutic frequencies (\SIrange{0.5}{4}{\mega\hertz}), $ka \gg 1$ for
+organ-scale structures and the long-wavelength penalty vanishes entirely,
+but for millimetre-scale targets (renal calculi, encapsulated lesions) $ka$
+re-enters the order-unity regime where the coupling comparison of
+\S\ref{sec:coupling} again becomes the governing consideration.
+Separately, in obstetric ultrasonography the amniotic sac constitutes a
+fluid-filled cavity of dimensions comparable to the adult abdomen; a
+straightforward reparametrisation of the shell model (thinner wall, lower
+modulus, smaller radius) would yield resonance predictions relevant to fetal
+exposure safety assessment \cite{Duck1999}.
+
+Taken together, these applications illustrate that the coupling-comparison
+methodology---rather than the brown-note conclusion per se---is the
+transferable contribution of this work.  The conclusion that airborne
+infrasound cannot produce involuntary defecation is, we concede, of
+limited industrial utility; the ability to predict \emph{when and why}
+acoustic--structural coupling to a fluid-filled biological cavity is or is
+not effective has considerably broader reach.
+
 \subsection{Nonlinear Amplitude Effects}
 \label{sec:disc:nonlinear}
 
