@@ -80,3 +80,8 @@ Flag ANY discrepancy > 1%.
 ```
 
 Write the report to `docs/research-logs/consistency-audit-[timestamp].md`.
+
+## Git Workflow
+
+After writing the report, commit and follow the `/git-checkpoint` skill to
+create a PR, merge, and clean up the branch.

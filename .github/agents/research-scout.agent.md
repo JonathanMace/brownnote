@@ -69,6 +69,11 @@ Write your findings to `docs/research-ideas/scout-report-[timestamp].md`.
 Aim for 5-10 ideas per scouting mission, ranked by a combination of
 scientific merit and engagement potential.
 
+## Git Workflow
+
+After writing the report, commit and follow the `/git-checkpoint` skill to
+create a PR, merge, and clean up the branch.
+
 ## Style
 
 Be creative. Be rigorous. Channel the spirit of a physicist who just had

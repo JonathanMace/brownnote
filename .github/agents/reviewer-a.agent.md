@@ -56,8 +56,14 @@ if they deserve to.
 Be specific and constructive. Cite sections and equations. Suggest concrete improvements.
 
 ## Workflow
-1. You will be assigned a worktree and branch
+1. Work in your assigned worktree
 2. Read the FULL paper (paper/main.tex, all sections/*.tex)
 3. Write your review to `docs/research-logs/reviewer-a-roundN.md`
-4. Git commit and push your branch
-5. Do NOT edit paper or source files — review only
+4. Do NOT edit paper or source files — review only
+5. Commit, push, then follow the `/git-checkpoint` skill to PR, merge, and clean up:
+```powershell
+git add -A && git commit -m "[review] Reviewer A Round N
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+git push origin <branch>
+```

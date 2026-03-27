@@ -80,9 +80,15 @@ mech = mechanical_coupling_analysis(model)
 Show exact numbers. Compare code output to paper claims. Flag ANY discrepancy.
 
 ## Workflow
-1. You will be assigned a worktree and branch
+1. Work in your assigned worktree
 2. Read the FULL paper AND ALL source code (src/analytical/*.py)
 3. **Run the code** to verify paper claims
 4. Write your review to `docs/research-logs/reviewer-c-roundN.md`
-5. Git commit and push your branch
-6. Do NOT edit paper or source files — review only
+5. Do NOT edit paper or source files — review only
+6. Commit, push, then follow the `/git-checkpoint` skill to PR, merge, and clean up:
+```powershell
+git add -A && git commit -m "[review] Reviewer C Round N
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+git push origin <branch>
+```

@@ -69,3 +69,8 @@ For each active stream, assess:
 ```
 
 Write to `docs/research-logs/lab-meeting-[timestamp].md`.
+
+## Git Workflow
+
+After writing the report, commit and follow the `/git-checkpoint` skill to
+create a PR, merge, and clean up the branch.

@@ -8,65 +8,65 @@ description: >
 
 # Write Paper Skill
 
-Guide for writing the journal paper on infrasound-induced abdominal resonance.
+Guide for writing the JSV manuscript on infrasound-induced abdominal resonance.
 
-## CRITICAL RULE
+## Paper Title (current)
 
-**Never use the term "brown note" in the paper.** Use these instead:
-
-| Colloquial | Academic |
-|------------|----------|
-| Brown note | Infrasound-induced abdominal resonance |
-| Brown tone | Low-frequency acoustic excitation of the peritoneal cavity |
-| Bowel effects | Mechanotransduction-mediated gastrointestinal response |
-| Gut shaking | Visceral mechanical stimulation |
-
-## Paper Title (working)
-
-"Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell:
-Implications for Low-Frequency Acoustic Exposure and Abdominal Resonance"
+"Can Infrasound Induce Abdominal Resonance? Modal Analysis of a Fluid-Filled
+Viscoelastic Oblate Spheroidal Shell Model of the Human Abdomen"
 
 ## Target Journal
 
 **Journal of Sound and Vibration** (Elsevier)
-- Format: Elsevier article class (`elsarticle`)
-- Reference style: numbered, Elsevier Harvard
-- Max length: ~8000 words + figures
-- Required sections: Abstract, Introduction, Methods, Results, Discussion, Conclusions
+- Format: `\documentclass[review]{elsarticle}` with `lineno`
+- References: `elsarticle-num.bst`, numbered
+- Required: Highlights (3-5, ≤85 chars), data availability, CRediT, competing interests
+- Structure: Abstract, Introduction, Formulation, Results, Coupling Analysis,
+  Discussion, Conclusions
 
-## Section Outline
+## Writing Style
 
-1. **Abstract** (200 words max)
-2. **Introduction** — Motivate via occupational health / ISO standards gap
-3. **Mathematical Formulation** — Shell theory, fluid coupling, Rayleigh-Ritz
-4. **Material Properties** — Table of all parameters with literature sources
-5. **Analytical Results** — Modal frequencies, parametric sensitivity
-6. **Finite Element Validation** — Mesh convergence, comparison with analytical
-7. **Acoustic-Structure Interaction** — Impedance, coupling, realistic excitation
-8. **Mechanotransduction Analysis** — PIEZO thresholds, displacement comparison
-9. **Discussion** — Limitations, implications, comparison with ISO 2631
-10. **Conclusions** — Measured claims only
+Blend two voices (Jonathan Mace dominant, Brian Mace for theory):
+- **Active voice** by default: "We show..." not "It was shown..."
+- **British English**: behaviour, modelled, analysed, colour
+- **`\SI{value}{unit}`** for all quantities
+- **Define all symbols** at first use
+- Every equation gets a **"where..." clause**
+- **No overclaiming**: "The results suggest..." not "We prove..."
+- Figures referenced **before** discussion: "Figure~\ref{fig:X} shows..."
+- Tables: `\toprule`, `\midrule`, `\bottomrule` (booktabs)
+- Subtle dry humour welcome — keep it sophisticated
 
-## LaTeX Setup
+See `.github/skills/jmace-writing-style/SKILL.md` and
+`.github/skills/mace-writing-style/SKILL.md` for detailed guides.
 
-```bash
+## Canonical Parameters (for any tables or computations in the paper)
+
+E=0.1 MPa, a=0.18m, c=0.12m, h=0.01m, ν=0.45, ρ_w=1100, ρ_f=1020,
+K_f=2.2 GPa, P_iap=1000 Pa, η=0.25 → Q=4.0, ζ=0.125, R_eq=0.157m, ka=0.0114
+
+**Stale v1 values that must NOT appear**: η=0.30, ka=0.017, R_eq=0.133
+
+## Key Physics to Get Right
+
+- Breathing modes (n=0, ~2490 Hz) ≠ flexural modes (n≥2, 4-10 Hz)
+- Energy-consistent displacement (0.014 μm at 120 dB), not pressure-based (0.18 μm)
+- Coupling ratio R ≈ 46,000 (mechanical/airborne)
+
+## Compilation
+
+```powershell
 cd C:\Users\jon\OneDrive\Projects\browntone\paper
-# Compile with:
-pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
+Copy-Item main.pdf "drafts\draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
 ```
 
 ## Citation Management
 
-- BibTeX file: `paper/references.bib`
+- BibTeX: `paper/references.bib`
 - Use DOIs for all entries
-- Cite primary sources, not review articles, for specific claims
-- Every numerical value must have a citation
-
-## Writing Process
-
-1. Draft equations and figures first
-2. Write Methods around the equations
-3. Write Results around the figures
-4. Write Discussion connecting to literature
-5. Write Introduction last (to frame what you actually did)
-6. Write Abstract last of all
+- Cite primary sources for specific claims
+- Every numerical value from literature needs a citation
