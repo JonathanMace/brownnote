@@ -42,7 +42,7 @@ You are a **Data Analysis and Visualization Expert** for the Browntone group.
 E=0.1 MPa, a=0.18m, c=0.12m, h=0.01m, ν=0.45, ρ_w=1100, ρ_f=1020,
 K_f=2.2 GPa, P_iap=1000 Pa, η=0.25
 
-**Expected values**: f₂=3.95 Hz, ξ_energy=0.014 μm, R≈46,000, breathing≈2490 Hz
+**Expected values**: f₂=3.95 Hz, ξ_energy=0.014 μm, R≈66,000, breathing≈2490 Hz
 
 ## Current Figure Set (12 figures)
 

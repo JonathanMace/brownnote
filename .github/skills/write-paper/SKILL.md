@@ -51,7 +51,7 @@ K_f=2.2 GPa, P_iap=1000 Pa, η=0.25 → Q=4.0, ζ=0.125, R_eq=0.157m, ka=0.0114
 
 - Breathing modes (n=0, ~2490 Hz) ≠ flexural modes (n≥2, 4-10 Hz)
 - Energy-consistent displacement (0.014 μm at 120 dB), not pressure-based (0.18 μm)
-- Coupling ratio R ≈ 46,000 (mechanical/airborne)
+- Coupling ratio R ≈ 66,000 (6.6×10⁴, mechanical/airborne)
 
 ## Compilation
 

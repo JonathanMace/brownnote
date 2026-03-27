@@ -47,7 +47,7 @@ Other modules IMPORT from this. Do not duplicate the dataclass or parameter defi
 
 Key modules and their APIs:
 - `energy_budget.py`: `self_consistent_displacement(model, mode_n=2, spl_db=120)` → dict with `xi_energy_um`
-- `mechanical_coupling.py`: WBV comparison, produces the 46,000× ratio
+- `mechanical_coupling.py`: WBV comparison, produces the 66,000× ratio
 - `uncertainty_quantification.py`: Monte Carlo + Sobol indices
 - `parametric_analysis.py`: 486-point parameter sweep
 
@@ -65,4 +65,4 @@ Currently 118 tests, all passing. Do not break them.
 1. Breathing mode (n=0) ≈ 2490 Hz — fluid bulk modulus dominates. Not relevant to infrasound.
 2. Flexural modes (n≥2) ≈ 4-10 Hz — shell changes shape, fluid is added mass only.
 3. Energy-consistent displacement at 120 dB = 0.014 μm (NOT 0.18 μm pressure-based).
-4. Coupling ratio R ≈ 46,000 (mechanical/airborne). This is the central result.
+4. Coupling ratio R ≈ 66,000 (6.6×10⁴, mechanical/airborne). SDOF upper bound.
