@@ -94,24 +94,30 @@ src/analytical/          — Core analytical models (the main source tree)
   mechanical_coupling.py    — WBV vs airborne comparison
   energy_budget.py          — Reciprocity-based self-consistent analysis
   gas_pocket_resonance.py   — Bowel gas as acoustic transducers
+  gas_pocket_detailed.py    — Constrained bubble model, differential susceptibility
   parametric_analysis.py    — Sensitivity study (486 combinations)
   multilayer_wall.py        — 5-layer composite wall model
   oblate_spheroid_ritz.py   — Rayleigh-Ritz oblate correction
   uncertainty_quantification.py — Monte Carlo UQ + Sobol indices
-src/fem/                 — FEA mesh generation and modal analysis
+  nonlinear_analysis.py     — Duffing oscillator, backbone curves, jump phenomenon
+  viscous_correction.py     — Stokes boundary layer damping validation
+  organ_inclusions.py       — Effective medium theory for organ inclusions
+src/fem/                 — FEA mesh generation and Lamb-mode Rayleigh-Ritz solver
 paper/                   — LaTeX manuscript (elsarticle, JSV format)
   main.tex                  — Master document
   sections/                 — Individual section .tex files
   references.bib            — BibTeX database
   drafts/                   — Timestamped PDF snapshots
+  cover-letter.tex          — JSV cover letter
+  graphical-abstract.py     — Matplotlib graphical abstract generator
 data/figures/            — Publication figures (PNG@300dpi + PDF)
 data/results/            — JSON result files
 data/meshes/             — gmsh .msh files
-docs/research-logs/      — Timestamped research journal entries + PDF snapshots
+docs/research-logs/      — Timestamped research journal + reviewer reports + PDF snapshots
 docs/style-references/   — Brian Mace papers and style analysis
-tests/                   — pytest test suite
+tests/                   — pytest test suite (118 tests, all passing)
 .github/skills/          — Copilot skills (compile-paper, mace-writing-style, etc.)
-.github/agents/          — Copilot agents (reviewer-b, etc.)
+.github/agents/          — Copilot agents (reviewer-a, reviewer-b, reviewer-c, etc.)
 ```
 
 Note: `src/browntone/` also exists (created by an early agent) but is NOT the active
@@ -173,15 +179,42 @@ We blend two voices:
 
 ## Research Iteration Cycle
 
-Every major phase follows: **DO → CRITIQUE → LOG → COMPILE → COMMIT → PLAN NEXT**
+Every major phase follows: **DO → REVIEW → LOG → COMPILE → COMMIT → PLAN NEXT**
 
-- **DO**: Launch parallel agents on independent work streams
-- **CRITIQUE**: Run `reviewer-b` agent on new results (rate: FATAL/MAJOR/MODERATE/MINOR)
+- **DO**: Launch parallel agents on independent work streams. Each agent gets its own
+  worktree and branch (see Git Workflow above). Every agent must commit and push.
+- **REVIEW**: Launch a **3-reviewer panel** (see below). Each reviewer works in a
+  read-only capacity and writes their review to `docs/research-logs/`.
 - **LOG**: Timestamped entry in `docs/research-logs/YYYY-MM-DDTHHMM-topic.md`,
   with a copy of the current compiled PDF as `YYYY-MM-DDTHHMM-paper-snapshot.pdf`
 - **COMPILE**: Build LaTeX, preserve timestamped PDF in `paper/drafts/`
-- **COMMIT**: Git commit with descriptive message + push
-- **PLAN NEXT**: Update SQL todos, identify next parallel batch
+- **COMMIT**: Git commit with descriptive message + push to main
+- **PLAN NEXT**: Update SQL todos, identify next parallel batch, update these instructions
+
+### 3-Reviewer Panel
+
+Each review round launches 3 reviewers in parallel on separate worktrees/branches:
+
+| Reviewer | Role | Focus |
+|----------|------|-------|
+| **Reviewer A** | Domain expert (vibroacoustics) | Novelty, significance, framing, "so what?", missing refs, narrative arc |
+| **Reviewer B** | Cynical gatekeeper | Fatal flaws, technical errors, parameter consistency, logical gaps |
+| **Reviewer C** | Methodologist / reproducer | Code-paper consistency, UQ completeness, reproducibility, runs the code |
+
+Each reviewer:
+1. Gets a worktree + branch (e.g., `review-a-r4`, `review-b-r4`, `review-c-r4`)
+2. Reads the full paper and source code
+3. Writes their review to `docs/research-logs/reviewer-X-roundN.md`
+4. Commits and pushes their branch
+5. Does NOT edit paper or source files — review only
+
+The orchestrator synthesises all 3 reviews into an action plan before the next iteration.
+
+### Keeping These Instructions Current
+
+**After every major iteration**, the orchestrator must review and update this file to
+reflect: new modules added, changed canonical values, new workflow patterns, lessons
+learned. This file is the single source of truth for all agents.
 
 ## Code Conventions
 
