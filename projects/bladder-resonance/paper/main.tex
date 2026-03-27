@@ -1,0 +1,160 @@
+\documentclass[review]{elsarticle}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage[pdfencoding=auto,psdextra]{hyperref}
+\usepackage{lineno}
+\usepackage{xcolor}
+
+% Fix duplicate page destination warning with elsarticle review mode
+\hypersetup{pageanchor=false}
+\AtBeginDocument{\hypersetup{pageanchor=true}}
+
+% SI units configuration
+\sisetup{
+  per-mode=symbol,
+  group-separator={,},
+}
+
+% Line numbering (required for review submission)
+\linenumbers
+
+% =============================================================================
+% Metadata
+% =============================================================================
+\journal{Journal of Sound and Vibration}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Resonant Frequencies of the Human Urinary Bladder:\\ A Fluid-Filled Viscoelastic Shell Model}
+
+\author[msr]{Jonathan Mace\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{jonathanmace@microsoft.com}
+
+\author[auckland]{Brian R.\ Mace}
+\ead{br.mace@auckland.ac.nz}
+
+\author[github]{GitHub Copilot\fnref{fn1}}
+\fntext[fn1]{Large language model. Performed literature review, analytical
+  computation, code development, figure generation, and manuscript drafting
+  under human supervision.}
+
+\affiliation[msr]{
+  organization={Microsoft Research},
+  city={Redmond, WA},
+  country={United States}
+}
+
+\affiliation[auckland]{
+  organization={Acoustics Research Centre, Department of Mechanical and
+    Mechatronics Engineering, University of Auckland},
+  city={Auckland},
+  country={New Zealand}
+}
+
+\affiliation[github]{
+  organization={GitHub, Inc.},
+  city={San Francisco, CA},
+  country={United States}
+}
+
+\begin{highlights}
+\item Bladder $n{=}2$ flexural mode at 12--18~Hz across physiological fill states
+\item Frequency minimum ($\sim$12~Hz) at 150--200~mL due to competing geometry and stiffening
+\item Mechanical (WBV) coupling exceeds airborne acoustic coupling by $\sim$7,600$\times$
+\item Same analytical framework as abdominal cavity model, with fill-dependent parameters
+\item Results consistent with occupational reports of vibration-induced urinary urgency
+\end{highlights}
+
+\begin{abstract}
+Occupational exposure to whole-body vibration (WBV) is associated with
+increased urinary urgency among vehicle operators, yet no first-principles
+model of bladder resonance exists to explain this observation.  We model the
+human urinary bladder as a fluid-filled viscoelastic spherical shell whose
+geometry, wall stiffness, and internal pressure vary with fill volume
+(\SIrange{50}{500}{\milli\litre}).  The framework---an adaptation of an oblate
+spheroidal shell model developed for the abdominal cavity---predicts that the
+fundamental flexural mode ($n = 2$) lies between \SI{12}{\hertz} and
+\SI{18}{\hertz}, with a minimum near \SI{12}{\hertz} at approximately
+\SI{170}{\milli\litre}.  This minimum arises from the competition between
+increasing radius (which lowers frequency) and strain-stiffening of the
+detrusor muscle (which raises it).  Coupling analysis shows that mechanical
+vibration transmitted through the pelvis is approximately $7{,}600$ times
+more effective than airborne sound at exciting bladder wall modes, consistent
+with the dominance of the WBV pathway reported in the epidemiological
+literature.  The predicted frequency range sits above the ISO~2631 peak
+pelvic transmissibility band (\SIrange{4}{8}{\hertz}) but within the broader
+WBV-affected spectrum, suggesting a forced sub-resonant response mechanism
+rather than direct resonance.
+\end{abstract}
+
+\begin{keyword}
+bladder resonance \sep fluid-filled shell \sep whole-body vibration \sep
+viscoelastic shell \sep urinary urgency \sep ISO~2631
+\end{keyword}
+
+\end{frontmatter}
+
+% =============================================================================
+% Section 1: Introduction
+% =============================================================================
+\input{sections/introduction}
+
+% =============================================================================
+% Section 2: Mathematical Formulation
+% =============================================================================
+\input{sections/theory}
+
+% =============================================================================
+% Section 3: Results
+% =============================================================================
+\input{sections/results}
+
+% =============================================================================
+% Section 4: Discussion
+% =============================================================================
+\input{sections/discussion}
+
+% =============================================================================
+% Section 5: Conclusions
+% =============================================================================
+\input{sections/conclusion}
+
+% =============================================================================
+% References
+% =============================================================================
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+% =============================================================================
+% Data Availability & CRediT
+% =============================================================================
+\section*{Data availability}
+All analytical models and computational scripts used in this study are
+available in the accompanying repository at
+\url{https://github.com/jonathan-mace/browntone}.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Jonathan Mace}: Conceptualisation, Methodology, Software, Supervision,
+Writing -- Review \& Editing.
+\textbf{Brian R.\ Mace}: Methodology, Validation, Writing -- Review \& Editing.
+\textbf{GitHub Copilot}: Software, Formal Analysis, Investigation,
+Data Curation, Writing -- Original Draft, Visualisation.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests
+or personal relationships that could have appeared to influence the work
+reported in this paper.
+
+\end{document}
