@@ -27,7 +27,7 @@ mechanical effect misattributed to acoustics.
 ```
 browntone/
 ├── src/
-│   ├── analytical/            # Core analytical models (17 modules)
+│   ├── analytical/            # Core analytical models (19 modules)
 │   │   ├── natural_frequency_v2.py    # Modal analysis (AbdominalModelV2)
 │   │   ├── natural_frequency.py       # Legacy v1 modal model
 │   │   ├── acoustic_coupling.py       # Airborne pressure → shell coupling
@@ -44,6 +44,8 @@ browntone/
 │   │   ├── viscous_correction.py      # Stokes boundary layer damping
 │   │   ├── organ_inclusions.py        # Effective medium theory
 │   │   ├── mechanotransduction.py     # Cellular response thresholds
+│   │   ├── modal_participation.py     # Modal participation factors
+│   │   ├── borborygmi_model.py        # Bowel sound acoustic model
 │   │   └── orifice_coupling.py        # Orifice impedance model
 │   ├── fem/                   # FEA mesh and modal solvers
 │   │   ├── mesh_generation.py         # Gmsh geometry & meshing
@@ -55,6 +57,11 @@ browntone/
 │   ├── sections/              # introduction, methods, results, discussion, …
 │   ├── references.bib
 │   └── drafts/                # Timestamped PDF snapshots
+├── paper2-gas-pockets/        # Paper 2: Gas pocket resonance (JASA)
+├── paper3-scaling-laws/       # Paper 3: Dimensional scaling laws (JSV Short)
+├── projects/                  # Additional research projects
+│   ├── bladder-resonance/     # Bladder resonance study
+│   └── borborygmi/            # Bowel sound modelling
 ├── data/
 │   ├── figures/               # Publication figures (PNG@300dpi + PDF)
 │   ├── results/               # JSON result files
@@ -76,7 +83,8 @@ browntone/
 **Requirements:** Python 3.10+
 
 ```bash
-pip install numpy scipy matplotlib SALib gmsh meshio
+pip install -e .          # core dependencies (numpy, scipy, matplotlib, …)
+pip install -e ".[dev]"   # + pytest, ruff, mypy
 ```
 
 ### Run the model
