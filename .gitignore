@@ -61,28 +61,11 @@ htmlcov/
 *.bcf
 *.run.xml
 
-# LaTeX build output
+# LaTeX build output (but keep drafts, graphical abstract, cover letter)
 paper/main.pdf
-paper2-gas-pockets/main.pdf
-paper3-scaling-laws/main.pdf
-projects/**/paper/main.pdf
-
-# Draft snapshots (regenerable from source — do not commit)
-**/drafts/*.pdf
-
-# Keep cover letters and graphical abstract (small, non-regenerable)
-!paper/cover-letter.pdf
+!paper/drafts/*.pdf
 !paper/graphical-abstract.pdf
-!paper2-gas-pockets/cover-letter.pdf
-
-# Generated figures (regenerable via scripts/generate_figures.py)
-data/figures/*.pdf
-data/figures/*.png
-paper2-gas-pockets/figures/*.pdf
-paper2-gas-pockets/figures/*.png
-paper3-scaling-laws/figures/*.pdf
-projects/**/figures/*.pdf
-projects/**/figures/*.png
+!paper/cover-letter.pdf
 
 # =============================================================================
 # Simulation outputs (large files tracked via LFS or excluded)
