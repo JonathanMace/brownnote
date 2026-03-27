@@ -26,7 +26,7 @@ Two geometries:
   • Cylindrical — fixed lumen radius R_lumen, length L = V/(πR²)
 
 Canonical tissue parameters:
-  ρ_tissue  = 1050  kg/m³
+  ρ_tissue  = 1020  kg/m³
   E_tissue  = 10e3  Pa  (intestinal wall, much softer than abdominal muscle)
   ν_tissue  = 0.45
   c_tissue  = 1540  m/s (longitudinal)

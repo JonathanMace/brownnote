@@ -311,30 +311,23 @@ def fig4_comparison():
     freq = 7.0
     p_ref = 20e-6
 
-    # --- Whole-cavity path (from mechanotransduction.py v2 model) ---
-    # Flexural n=2 mode: f ~ 4.5 Hz, ka coupling
-    # Using simplified model parameters from paper 1
-    R_abd = 0.16          # equivalent abdominal radius [m]
-    E_abd = 0.1e6         # abdominal wall modulus [Pa]
-    h_abd = 0.02          # abdominal wall thickness [m]
-    nu_abd = 0.45
-    Q_abd = 5.0
-    n_mode = 2
-    f_n2 = 4.5            # flexural n=2 frequency [Hz]
-    ka = 2 * np.pi * f_n2 * R_abd / 343.0
-
-    # Modal stiffness (simplified)
-    D = E_abd * h_abd**3 / (12 * (1 - nu_abd**2))
-    K_bend = n_mode * (n_mode - 1) * (n_mode + 2)**2 * D / R_abd**4
-    lam_n = (n_mode**2 + n_mode - 2 + 2*nu_abd) / (n_mode**2 + n_mode + 1 - nu_abd)
-    K_memb = E_abd * h_abd / R_abd**2 * lam_n
-    P_iap = 1500.0  # intra-abdominal pressure [Pa]
-    K_pre = P_iap / R_abd * (n_mode - 1) * (n_mode + 2)
-    K_total = K_bend + K_memb + K_pre
+    # --- Whole-cavity path (Paper 1 canonical, energy-consistent) ---
+    # Paper 1 canonical parameters:
+    #   R_eq = 0.157 m, E = 0.1 MPa, h = 0.01 m, ν = 0.45
+    #   Q = 4.0, f₂ = 3.95 Hz, P_iap = 1000 Pa, η = 0.25
+    #   ka = 0.0114 at resonance
+    #
+    # The energy-consistent displacement (Junger & Feit reciprocity,
+    # Paper 1 energy_budget.py) gives ξ ≈ 0.014 µm at 120 dB for
+    # the n = 2 flexural mode at resonance.  The pressure-based
+    # approach overestimates by ~13× because radiation efficiency is
+    # extremely low at ka ≪ 1.
+    # Displacement scales linearly with p_inc.
+    xi_ref_120dB_um = 0.014   # energy-consistent, Paper 1 canonical [µm]
+    p_120 = p_ref * 10**(120.0 / 20)
 
     p_inc = p_ref * 10**(spl_range / 20)
-    p_eff_cavity = p_inc * ka**n_mode
-    xi_cavity_um = p_eff_cavity / K_total * Q_abd * 1e6
+    xi_cavity_um = xi_ref_120dB_um * (p_inc / p_120)
 
     # --- Gas pocket path: representative pockets ---
     xi_gp_100mL = np.zeros_like(spl_range)

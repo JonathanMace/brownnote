@@ -88,7 +88,7 @@ variability in bowel gas content.  A Monte Carlo population model
 ($N = 10\,000$) incorporating physiological gas-volume distributions shows
 that 100\% of the simulated population exceeds the \piezo{} activation
 threshold at \SI{120}{\decibel}.  This gas-pocket transduction pathway is
-7--10$\times$ more efficient than airborne coupling to abdominal flexural
+50--100$\times$ more efficient than airborne coupling to abdominal flexural
 modes and represents the only plausible mechanism by which airborne
 infrasound could induce GI mechanotransduction.  The model predicts enhanced
 susceptibility in individuals with elevated bowel gas (post-prandial states,
@@ -118,7 +118,7 @@ Our companion paper (Paper~1, submitted to \emph{JSV}) demonstrated that
 airborne infrasound cannot excite abdominal-cavity flexural resonances at
 physiologically meaningful amplitudes.  The breathing mode of the
 abdomen---often invoked in popular accounts---lies at
-$\sim$\SI{2900}{\hertz}, far above the infrasound range.  The relevant
+$\sim$\SI{2490}{\hertz}, far above the infrasound range.  The relevant
 flexural modes ($n \ge 2$) do fall at \SIrange{4}{10}{\hertz}, but the
 $(ka)^n$ coupling penalty renders airborne excitation negligible: the
 required SPL for \SI{1}{\um} tissue displacement exceeds
@@ -193,7 +193,7 @@ Symbol & Description & Value & Source \\
 \midrule
 $\gamma$   & Specific-heat ratio (air) & 1.4 & --- \\
 $P_0$      & Ambient + intra-abdominal pressure & \SI{101325}{\pascal} & --- \\
-$\rho_f$   & Tissue/fluid density & \SI{1050}{\kilo\gram\per\metre\cubed} & \citet{Fung1993} \\
+$\rho_f$   & Tissue/fluid density & \SI{1020}{\kilo\gram\per\metre\cubed} & \citet{Fung1993} \\
 $E_w$      & Intestinal wall Young's modulus & \SI{10}{\kilo\pascal} & \citet{Gregersen2000} \\
 $\nu_w$    & Intestinal wall Poisson's ratio & 0.45 & \citet{Fung1993} \\
 $h_w$      & Intestinal wall thickness & \SI{3}{\milli\metre} & \citet{Higa2007} \\
@@ -280,10 +280,13 @@ The lowest resonance for a cylindrical pocket is
 $f_0 = \min(f_0^\text{(cyl,rad)},\, f_0^\text{(cyl,ax)})$.
 
 For physiological gas pocket volumes (\SIrange{1}{100}{\milli\litre}),
-resonance frequencies range from $\sim$\SI{150}{\hertz} (large spherical
-pockets) to $>\SI{1000}{\hertz}$ (small cylindrical pockets)---well above
-the infrasound range.  This is a critical distinction from earlier analyses
-that sought resonance \emph{at} infrasound frequencies.
+resonance frequencies range from $\sim$\SI{30}{\hertz} (large cylindrical
+pockets, axial mode) to over \SI{5000}{\hertz} (small spherical pockets
+with elastic wall).  While cylindrical axial modes for large pockets can
+fall below \SI{100}{\hertz}, all resonances remain above
+\SI{20}{\hertz}---i.e.\ above the conventional infrasound boundary.  This
+is a critical distinction from earlier analyses that sought resonance
+\emph{at} infrasound frequencies.
 
 
 % ------------------------------------------------------------------
@@ -440,10 +443,15 @@ $\xi_\text{PIEZO}$ is recorded.
 \label{sec:res_freq}
 
 Table~\ref{tab:freq} summarizes the resonance frequencies for
-representative gas pocket sizes.  All frequencies exceed \SI{100}{\hertz},
-confirming that gas pockets do not \emph{resonate} at infrasound
-frequencies.  However, as we show below, the sub-resonant compliance
-mechanism operates efficiently across the entire infrasound band.
+representative gas pocket sizes.  Spherical pocket resonances exceed
+\SI{600}{\hertz} for all volumes studied, and the cylindrical radial
+(breathing) mode lies at $\sim$\SI{1300}{\hertz}.  However, cylindrical
+\emph{axial} (piston) modes fall below \SI{100}{\hertz} for pockets larger
+than $\sim$\SI{10}{\milli\litre}, reaching \SI{31}{\hertz} at
+\SI{100}{\milli\litre}---near, but still above, the conventional infrasound
+boundary (\SI{20}{\hertz}).  None of the pockets resonate \emph{at}
+infrasound frequencies; the sub-resonant compliance mechanism described
+below operates efficiently across the entire infrasound band.
 
 \begin{table}[htb]
 \centering
@@ -453,17 +461,21 @@ mechanism operates efficiently across the entire infrasound band.
 \toprule
 $V$ [mL] & Geometry & $a$ or $R$ [mm] & $f_\text{Minnaert}$ [Hz] & $f_0$ [Hz] \\
 \midrule
-  1  & Spherical    &  6.2 & 524  & 1014 \\
-  5  & Spherical    & 10.6 & 307  &  610 \\
- 10  & Spherical    & 13.4 & 244  &  492 \\
- 20  & Spherical    & 16.8 & 193  &  399 \\
- 50  & Spherical    & 22.9 & 142  &  299 \\
-100  & Spherical    & 28.8 & 113  &  243 \\
- 10  & Cylindrical  & 15.0 &  --- &  443 \\
- 50  & Cylindrical  & 15.0 &  --- &  443 \\
-100  & Cylindrical  & 15.0 &  --- &  443 \\
+  1  & Spherical                   &  6.2 & 524  & 5556 \\
+  5  & Spherical                   & 10.6 & 306  & 2653 \\
+ 10  & Spherical                   & 13.4 & 243  & 1916 \\
+ 20  & Spherical                   & 16.8 & 193  & 1379 \\
+ 50  & Spherical                   & 22.9 & 142  &  889 \\
+100  & Spherical                   & 28.8 & 113  &  635 \\
+ 10  & Cylindrical$^{\dagger}$     & 15.0 &  --- &   99 \\
+ 50  & Cylindrical$^{\dagger}$     & 15.0 &  --- &   44 \\
+100  & Cylindrical$^{\dagger}$     & 15.0 &  --- &   31 \\
 \bottomrule
 \end{tabular}
+\\[4pt]
+{\footnotesize $^{\dagger}$Cylindrical $f_0$ is the axial (piston) mode,
+which is lowest.  The radial (breathing) mode is ${\sim}\SI{1323}{\hertz}$,
+independent of volume.}
 \end{table}
 
 
@@ -539,13 +551,14 @@ robust \piezo{} activation.
 Figure~\ref{fig:comparison} compares the gas-pocket transduction pathway
 with the whole-cavity flexural mode ($n = 2$) pathway from Paper~1.  The
 gas-pocket mechanism produces tissue displacement that is
-\textbf{7--10$\times$ larger} than the whole-cavity pathway at the same
+\textbf{50--100$\times$ larger} than the whole-cavity pathway at the same
 SPL, across the entire range from \SI{80}{\decibel} to \SI{150}{\decibel}.
 
 At \SI{120}{\decibel}, the whole-cavity $n = 2$ mode yields
-$\xi \sim \SI{e-4}{\um}$---four orders of magnitude below the \piezo{}
-threshold.  In contrast, a \SI{100}{\milli\litre} gas pocket yields
-$\xi \sim \SI{1.8}{\um}$, comfortably above threshold.
+$\xi \approx \SI{0.014}{\um}$ (energy-consistent, Paper~1)---more than an
+order of magnitude below the \piezo{} threshold.  In contrast, a
+\SI{100}{\milli\litre} gas pocket yields $\xi \approx \SI{1.3}{\um}$,
+comfortably above threshold.
 
 \begin{figure}[htb]
 \centering
@@ -669,7 +682,7 @@ Several simplifications warrant discussion:
 We have shown that intraluminal gas pockets in the gastrointestinal tract
 act as acoustic transducers, converting airborne infrasonic pressure to
 local wall strain via a sub-resonant compliance mechanism.  This
-constrained-bubble pathway is 7--10$\times$ more efficient than whole-cavity
+constrained-bubble pathway is 50--100$\times$ more efficient than whole-cavity
 flexural resonance and is the only plausible mechanism by which airborne
 infrasound at realistic exposure levels ($\leq$\SI{120}{\decibel}) could
 activate mechanosensitive ion channels in the intestinal wall.
