@@ -36,7 +36,7 @@ Viscoelastic Shells: Predictions Across Mammalian Scales}
 \begin{abstract}
 Fluid-filled viscoelastic shells arise in contexts ranging from abdominal
 biomechanics to underwater acoustics.  Modal frequencies of such shells
-depend on eleven physical parameters, making systematic comparison across
+depend on ten physical parameters, making systematic comparison across
 geometries and species impractical without dimensional reduction.  We apply
 Buckingham Pi analysis to the governing equations of a fluid-filled oblate
 spheroidal shell, identifying eight dimensionless groups of which five
@@ -72,7 +72,7 @@ viscoelastic \sep abdominal resonance \sep Buckingham Pi
 \label{sec:intro}
 
 The modal frequencies of fluid-filled viscoelastic shells depend on at
-least eleven physical parameters: geometric (semi-axes $a$, $c$; wall
+least ten physical parameters: geometric (semi-axes $a$, $c$; wall
 thickness $h$), material (elastic modulus $E$, Poisson's ratio $\nu$,
 wall density $\rho_w$, loss tangent $\eta$), fluid ($\rho_f$, bulk
 modulus $K_f$), and loading (intra-abdominal pressure $P_\mathrm{iap}$)
@@ -203,6 +203,12 @@ constrained by shared developmental biology~\cite{West1997}.
 
 We evaluate~\eqref{eq:scaling_law} over a 1458-point grid spanning
 physiological ranges of all five governing dimensionless groups:
+$h/a \in [0.025,\, 0.100]$,
+$c/a \in [0.50,\, 0.80]$,
+$\rho_w/\rho_f \in [0.98,\, 1.18]$,
+$P_\mathrm{iap}/E \in [5 \times 10^{-4},\, 0.02]$,
+and $\nu \in [0.40,\, 0.49]$.
+In dimensional terms these correspond to
 $E \in [0.05, 2.0]$~MPa (6~values),
 $a \in [0.15, 0.20]$~m (3~values), $c/a \in [0.5, 0.8]$ (3~values),
 $h \in [0.005, 0.015]$~m (3~values), $\rho_w/\rho_f \in [0.98, 1.18]$

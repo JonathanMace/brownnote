@@ -538,12 +538,12 @@ only damping, reducing the effective parameter count to six: a dimensionless
 frequency output $\Pi_0$ governed by five input groups.  The scaling law
 takes the closed form
 \begin{equation}
-  f_n = \frac{1}{2\pi}\sqrt{\frac{E}{\rho_f}}\,\frac{1}{a}\;
+  f_n = \sqrt{\frac{E}{\rho_f}}\,\frac{1}{a}\;
         \Phi_n\!\left(\frac{h}{a},\;\frac{c}{a},\;
         \frac{\rho_w}{\rho_f},\;\frac{P_\mathrm{iap}}{E},\;\nu\right),
   \label{eq:scaling_law}
 \end{equation}
-where $\Phi_n$ admits a closed-form expression from the shell equations
+where $\Phi_n$ absorbs the $1/(2\pi)$ factor and admits a closed-form expression from the shell equations
 (see supplementary material).  All %(n_points)d points of the parametric study
 collapse onto the analytical curves with a maximum relative error of
 %(max_err).1e (Figure~\ref{fig:collapse}), confirming that the ten-parameter
@@ -587,9 +587,9 @@ organisms share similar $\Pi$-group values, their resonant frequencies scale
 as $f \propto (1/a)\sqrt{E/\rho_f}$.  Because smaller animals have both
 smaller $a$ and lower $E$ (softer tissue), the net frequency shift is less
 than a pure $1/a$ law.  Table~\ref{tab:scaling} lists predictions for four
-species.  The airborne coupling coefficient $(ka)^2$ is of order $10^{-4}$
-for all species, making the mechanical-to-airborne coupling ratio
-$\mathcal{R} \sim 10^{3}\text{--}10^{4}$ roughly size-independent.  This
+species.  The airborne coupling coefficient $(kR_\mathrm{eq})^2$ is of order $10^{-4}$
+for all species, making the mechanical-to-airborne scattering ratio
+$\mathcal{R}_\mathrm{scat} \sim 10^{3}\text{--}10^{4}$ roughly size-independent.  This
 validates the use of animal models for abdominal resonance studies, provided
 excitation is delivered mechanically rather than acoustically.  The breathing
 mode ($n=0$), dominated by $K_f$, would require a body radius of order
@@ -602,7 +602,7 @@ the infrasound range for any biological organism.
   \label{tab:scaling}
   \begin{tabular}{lccccc}
     \hline
-    Species & $a$ (cm) & $f_2$ (Hz) & $\Pi_0$ & $ka$ & $\mathcal{R}$ \\
+    Species & $a$ (cm) & $f_2$ (Hz) & $\Pi_0$ & $kR_\mathrm{eq}$ & $\mathcal{R}_\mathrm{scat}$ \\
     \hline""" % {
         "n_points": collapse["n_points"],
         "max_err": collapse["max_relative_error"],
@@ -692,7 +692,7 @@ if __name__ == "__main__":
     print()
 
     # ── 3. Parametric collapse ──
-    print("  3. PARAMETRIC STUDY COLLAPSE (486 points)")
+    print("  3. PARAMETRIC STUDY COLLAPSE (1458 points)")
     print("  " + "-" * 60)
     results = parametric_sweep_dimensionless()
     collapse = verify_collapse(results)
@@ -705,14 +705,14 @@ if __name__ == "__main__":
     print("  4. CROSS-SPECIES SCALING")
     print("  " + "-" * 60)
     print(f"  {'Species':>8} {'a(cm)':>7} {'f₂(Hz)':>8} {'Π₀':>8} "
-          f"{'ka':>10} {'R':>10}")
+          f"{'kR_eq':>10} {'R_scat':>10}")
     print("  " + "-" * 60)
     scaling = animal_scaling()
     for species in ["rat", "cat", "pig", "human"]:
         s = scaling[species]
         print(f"  {species:>8} {s['a_cm']:>7.0f} {s['f_hz']:>8.1f} "
-              f"{s['Pi_0']:>8.4f} {s['ka']:>10.2e} "
-              f"{s['coupling_ratio_R']:>10.1e}")
+              f"{s['Pi_0']:>8.4f} {s['kR_eq']:>10.2e} "
+              f"{s['R_scat']:>10.1e}")
     print()
 
     # ── 5. Breathing mode ──
