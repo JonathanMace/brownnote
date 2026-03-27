@@ -46,7 +46,7 @@ result = mechanical_coupling_analysis(model)
 print(f'  Coupling ratio R = {result[\"coupling_ratio\"]:.0f}')
 "
 ```
-**Verify**: R ≈ 46,000.
+**Verify**: R ≈ 66,000.
 
 ### 4. Run Tests
 ```powershell

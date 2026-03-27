@@ -282,7 +282,7 @@ if __name__ == "__main__":
     print("  " + "-" * 55)
     print(f"  {'f(Hz)':>8} {'ISO T':>8} {'Model H_rel':>12} {'Model T_abs':>12}")
     print("  " + "-" * 55)
-    for f in [2, 3, 4, 4.38, 5, 6, 7, 8, 10, 12, 15, 20]:
+    for f in [2, 3, 4, 5, 6, 7, 8, 10, 12, 15, 20]:
         T_iso = interpolate_transmissibility(f)
         omega = 2 * np.pi * f
         omega_n = 2 * np.pi * f2

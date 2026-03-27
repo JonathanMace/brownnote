@@ -29,7 +29,7 @@ You are writing or editing tests for the browntone analytical suite.
 - f₂ (flexural n=2): ~3.95 Hz
 - Breathing mode (n=0): ~2490 Hz
 - Energy-consistent displacement at 120 dB: ~0.014 μm
-- Coupling ratio R: ~46,000
+- Coupling ratio R: ~66,000
 - Sobol S_T for E: ~0.86
 
 ## Import Pattern

@@ -70,7 +70,7 @@ Every computation must use these values unless explicitly varying a parameter.
 - **Never** confuse breathing modes (n=0, ~2490 Hz) with flexural modes (n≥2, 4-10 Hz).
 - **Always** use energy-consistent displacement (0.014 μm at 120 dB) for airborne claims.
   Pressure-based (0.18 μm) overestimates by 13×. Label it as such if used at all.
-- Coupling ratio R ≈ 46,000× (mechanical/airborne). This is the central result.
+- Coupling ratio R ≈ 66,000× (6.6×10⁴, mechanical/airborne). SDOF upper bound; with Γ₂≈0.48 correction, ~3×10⁴.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
@@ -137,7 +137,7 @@ git push origin --delete <branch-name>
 
 1. **Breathing mode (n=0)**: ~2490 Hz. Fluid bulk modulus dominates. Irrelevant to infrasound.
 2. **Flexural modes (n≥2)**: 4-10 Hz. Shell changes shape; fluid is added mass only.
-3. **Coupling disparity**: R ≈ 46,000× (WBV/airborne). Central novel result.
+3. **Coupling disparity**: R ≈ 66,000× (6.6×10⁴, WBV/airborne). SDOF upper bound; corrected ~3×10⁴.
 4. **Energy budget**: Shell absorbs ~10⁻¹⁴ of incident acoustic energy.
 5. **Modal participation**: Γ₂ = 0.48 for vertical WBV (asymmetric BCs).
 
@@ -155,7 +155,7 @@ model = AbdominalModelV2(
 )
 freqs = flexural_mode_frequencies_v2(model, n_max=5)
 disp = self_consistent_displacement(model, mode_n=2, spl_db=120)  # → dict with xi_energy_um
-mech = mechanical_coupling_analysis(model)  # → coupling ratio ~46,000
+mech = mechanical_coupling_analysis(model)  # → coupling ratio ~66,000
 ```
 
 Note: `src/browntone/` is LEGACY. Use `src/analytical/` for all model code.
