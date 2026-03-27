@@ -1,6 +1,6 @@
 Highlights
 
-- Mechanical-airborne coupling disparity of ~10^4 explains gastrointestinal vibration asymmetry
+- Mechanical-airborne coupling disparity of ~7x10^4 explains gastrointestinal vibration asymmetry
 - Fluid-filled viscoelastic shell model predicts abdominal resonance at 4-10 Hz (matches ISO 2631)
 - Breathing mode at ~2500 Hz; flexural modes at infrasonic frequencies
 - Airborne coupling penalised by (ka)^n; negligible at 120 dB SPL (xi = 0.014 um)
