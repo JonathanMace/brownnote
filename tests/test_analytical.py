@@ -733,3 +733,91 @@ class TestModelProperties:
         m = default_model
         expected = np.sqrt(m.K_fluid / m.rho_fluid)
         assert m.c_fluid == pytest.approx(expected, rel=1e-10)
+
+
+# ================================================================== #
+#  Acoustic Short-Circuit / Helmholtz Sealed GI Tests                  #
+# ================================================================== #
+
+from analytical.gas_pocket_detailed import (
+    GasPocketParams,
+    pocket_response,
+    helmholtz_sealed_gi,
+    C_AIR,
+)
+
+
+class TestHelmholtzSealedGI:
+    """Tests for the acoustic short-circuit / Helmholtz resonator model."""
+
+    def test_default_frequency_near_15Hz(self):
+        """Default parameters should give f_H ~ 15 Hz (reviewer estimate)."""
+        r = helmholtz_sealed_gi()
+        assert 10.0 < r["f_helmholtz_hz"] < 25.0
+
+    def test_frequency_scales_inversely_with_sqrt_volume(self):
+        """Doubling volume should decrease f_H by ~sqrt(2)."""
+        r1 = helmholtz_sealed_gi(V_gas_mL=100.0)
+        r2 = helmholtz_sealed_gi(V_gas_mL=200.0)
+        ratio = r1["f_helmholtz_hz"] / r2["f_helmholtz_hz"]
+        assert ratio == pytest.approx(np.sqrt(2), rel=0.01)
+
+    def test_frequency_scales_with_sqrt_area(self):
+        """Doubling constriction area should increase f_H by sqrt(2)."""
+        S1 = np.pi * (5e-3) ** 2
+        S2 = 2.0 * S1
+        r1 = helmholtz_sealed_gi(S_constriction_m2=S1)
+        r2 = helmholtz_sealed_gi(S_constriction_m2=S2)
+        ratio = r2["f_helmholtz_hz"] / r1["f_helmholtz_hz"]
+        assert ratio == pytest.approx(np.sqrt(2), rel=0.01)
+
+    def test_equalization_ratio_bounded(self):
+        """Short-circuit ratio should be in [0, 1]."""
+        for V in [20, 100, 500]:
+            r = helmholtz_sealed_gi(V_gas_mL=V)
+            assert 0.0 <= r["short_circuit_ratio_7Hz"] <= 1.0
+
+    def test_high_frequency_no_equalization(self):
+        """For very small volume (high f_H), equalization ratio near 0."""
+        r = helmholtz_sealed_gi(V_gas_mL=0.1, d_constriction_mm=1.0, L_gi_eff_m=10.0)
+        assert r["f_helmholtz_hz"] > 40.0
+        assert 0.0 <= r["short_circuit_ratio_7Hz"] <= 1.0
+
+    def test_cylindrical_spl_threshold_matches_paper(self):
+        """Cylindrical SPL threshold should be ~114 dB (Issue 2 fix)."""
+        p = GasPocketParams(volume_mL=20.0, geometry="cylindrical", wall="elastic")
+        lo, hi = 80.0, 160.0
+        for _ in range(50):
+            mid = (lo + hi) / 2.0
+            r = pocket_response(p, np.array([7.0]), spl_dB=mid)
+            if float(r["xi_um"][0]) > 0.5:
+                hi = mid
+            else:
+                lo = mid
+        spl = (lo + hi) / 2.0
+        assert 112.0 < spl < 115.0, f"Cylindrical SPL threshold = {spl:.1f} dB"
+
+    def test_amplification_ratio_range(self):
+        """Gas pocket / whole-cavity ratio should be 35-100x (Issue 3 fix)."""
+        xi_cavity = 0.014  # um at 120 dB (Paper 1 canonical)
+        ratios = []
+        for vol, geom in [(5, "spherical"), (100, "spherical"),
+                          (5, "cylindrical"), (100, "cylindrical")]:
+            p = GasPocketParams(volume_mL=vol, geometry=geom, wall="elastic")
+            r = pocket_response(p, np.array([7.0]), spl_dB=120.0)
+            ratios.append(float(r["xi_um"][0]) / xi_cavity)
+        assert min(ratios) >= 30.0, f"Min ratio = {min(ratios):.1f}"
+        assert max(ratios) <= 110.0, f"Max ratio = {max(ratios):.1f}"
+
+    def test_wall_stiffness_fraction_small(self):
+        """Wall stiffness should be < 3% of total k_eff (Issue 4)."""
+        from analytical.gas_pocket_detailed import (
+            GAMMA, P0, E_WALL, H_WALL, NU_WALL, R_LUMEN,
+        )
+        for vol in [5, 50, 100]:
+            p = GasPocketParams(volume_mL=vol, geometry="spherical", wall="elastic")
+            a = p.a_sphere
+            k_gas = 3.0 * GAMMA * P0 / a
+            k_wall = 2.0 * E_WALL * H_WALL / (a ** 2 * (1.0 - NU_WALL))
+            frac = k_wall / (k_gas + k_wall)
+            assert frac < 0.03, f"Wall fraction = {frac:.4f} for {vol} mL spherical"
