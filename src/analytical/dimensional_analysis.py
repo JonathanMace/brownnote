@@ -531,8 +531,9 @@ def generate_latex_subsection():
 \label{sec:dimensional}
 
 A Buckingham Pi analysis of the fluid-filled viscoelastic shell identifies
-eight independent dimensionless groups from the eleven governing variables
-(Table~\ref{tab:pi_groups}).  For flexural modes ($n \ge 2$), the fluid bulk
+eight independent dimensionless groups from the ten governing parameters
+plus the output frequency (eleven variables in total;
+Table~\ref{tab:pi_groups}).  For flexural modes ($n \ge 2$), the fluid bulk
 modulus $K_f$ contributes no stiffness and the loss tangent $\eta$ affects
 only damping, reducing the effective parameter count to six: a dimensionless
 frequency output $\Pi_0$ governed by five input groups.  The scaling law
@@ -618,8 +619,8 @@ the infrasound range for any biological organism.
                 s["a_cm"],
                 s["f_hz"],
                 s["Pi_0"],
-                s["ka"],
-                s["coupling_ratio_R"],
+                s["kR_eq"],
+                s["R_scat"],
             )
         )
 
