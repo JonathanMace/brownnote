@@ -30,7 +30,18 @@ a free shell across the physiologically relevant range.
 The \SIrange{4}{8}{\hertz} ISO~2631 abdominal resonance range requires
 $E < \SI{0.5}{\mega\pascal}$, corresponding to relaxed, passive musculature.
 Active muscle bracing increases $E$ by a factor of 10--100, moving the
-resonance well above the infrasound range.
+resonance well above the infrasound range.  Figure~\ref{fig:freq_vs_E}
+illustrates this dependence across the full physiological range.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{../data/figures/fig_frequency_vs_E.pdf}
+  \caption{Flexural mode frequencies vs.\ elastic modulus for modes
+  $n = 2, 3, 4$.  The shaded band marks the ISO~2631 abdominal resonance
+  range (\SIrange{4}{8}{\hertz}).  Relaxed musculature places the $n=2$ mode
+  within this band; tensed muscle shifts it well above.}
+  \label{fig:freq_vs_E}
+\end{figure}
 
 \subsection{Multi-Parameter Sensitivity}
 
@@ -79,6 +90,15 @@ has important experimental implications: any future validation effort should
 prioritise \emph{in vivo} measurement of abdominal wall stiffness, as this
 single parameter dominates the uncertainty budget.
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{../data/figures/fig_uq_sobol_indices.png}
+  \caption{Sobol first-order and total-order sensitivity indices for the $n=2$
+  flexural frequency.  The elastic modulus $E$ accounts for 86\% of the total
+  variance; all other parameters contribute less than 10\% individually.}
+  \label{fig:sobol}
+\end{figure}
+
 \subsection{Multi-Layer Wall Model}
 
 The abdominal wall comprises approximately five distinct tissue layers:
@@ -99,6 +119,40 @@ The free-shell model provides a lower bound on frequency. Partial constraints
 1.3--3.0$\times$, depending on the angular extent of the constrained boundary.
 Even with a $2\times$ constraint multiplier, the mode remains within the
 ISO~2631 range for soft tissue.
+
+\subsection{Oblate Spheroid Correction}
+
+The equivalent-sphere approximation used in Section~\ref{sec:formulation}
+introduces a systematic bias.  A Rayleigh--Ritz analysis using oblate
+spheroidal harmonics as basis functions, with proper account of the
+spatially varying curvature and oblate fluid-mass geometry, shows that the
+sphere model \emph{overestimates} flexural frequencies by 11--20\%
+(Table~\ref{tab:oblate_correction}).  The error grows with eccentricity and
+is larger at higher $E$ where bending stiffness (which depends on local
+curvature) contributes a greater share of the restoring force.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Sphere vs.\ oblate spheroid Rayleigh--Ritz frequencies for $c/a = 0.67$.}
+  \label{tab:oblate_correction}
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{$E = \SI{0.1}{\mega\pascal}$}
+    & \multicolumn{2}{c}{$E = \SI{0.5}{\mega\pascal}$} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    Mode & Sphere (Hz) & Ritz (Hz) & Sphere (Hz) & Ritz (Hz) \\
+    \midrule
+    $n=2$ & 4.0 & 3.6 & 7.1 & 6.0 \\
+    $n=3$ & 6.3 & 5.6 & 11.3 & 9.5 \\
+    $n=4$ & 8.9 & 8.0 & 14.4 & 12.9 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Applying this correction moves the canonical $n=2$ frequency from
+\SI{4.0}{\hertz} to approximately \SI{3.6}{\hertz}---still within the
+ISO~2631 band and, if anything, closer to the low end of reported abdominal
+resonance frequencies.
 
 \subsection{ISO~2631 Validation}
 

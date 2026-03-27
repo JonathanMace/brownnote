@@ -36,17 +36,24 @@ deformed mid-surface) is therefore applicable.
     Wall thickness & $h$ & 0.010 & m & Composite wall \\
     Elastic modulus & $E$ & 0.1 & MPa & Relaxed passive tissue \\
     Poisson's ratio & $\nu$ & 0.45 & --- & Nearly incompressible \\
-    Wall density & $\rho_w$ & 1050 & kg/m$^3$ & Soft tissue \\
-    Fluid density & $\rho_f$ & 1040 & kg/m$^3$ & Water-like \\
+    Wall density & $\rho_w$ & 1100 & kg/m$^3$ & Soft tissue \\
+    Fluid density & $\rho_f$ & 1020 & kg/m$^3$ & Abdominal fluid \\
     Fluid bulk modulus & $K_f$ & 2.2 & GPa & Water at 37$^\circ$C \\
     Intra-abdominal pressure & $P_\mathrm{iap}$ & 1000 & Pa & Resting supine \\
-    Loss tangent & $\eta$ & 0.30 & --- & Viscoelastic tissue \\
+    Loss tangent & $\eta$ & 0.25 & --- & Viscoelastic tissue \\
     \hline
   \end{tabular}
 \end{table}
 
-
-\subsection{Shell Constitutive Model}\label{sec:constitutive}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{../data/figures/fig_geometry_schematic.pdf}
+  \caption{Oblate spheroidal shell model of the human abdominal cavity,
+  showing the two excitation pathways: airborne acoustic pressure (left)
+  and mechanical whole-body vibration transmitted through the skeleton (right).
+  Dimensions correspond to the baseline parameters in Table~\ref{tab:params}.}
+  \label{fig:geometry}
+\end{figure}
 
 The abdominal wall is modelled as a Kelvin--Voigt viscoelastic material with
 complex modulus
@@ -150,11 +157,22 @@ The natural frequency of flexural mode $n$ is
   \qquad f_n = \frac{\omega_n}{2\pi}.
 \end{equation}
 
-For the baseline parameters (Table~\ref{tab:params}), $f_2 = 4.4$\,Hz,
-$f_3 = 6.7$\,Hz, and $f_4 = 9.4$\,Hz.  These lie squarely in the 4--10\,Hz
+For the baseline parameters (Table~\ref{tab:params}), $f_2 = 4.0$\,Hz,
+$f_3 = 6.3$\,Hz, and $f_4 = 8.9$\,Hz.  These lie squarely in the 4--10\,Hz
 range reported for abdominal resonance in ISO~2631 \cite{iso2631} and in the
 experimental studies of Kitazaki \& Griffin \cite{kitazaki1998resonance} and
 Mansfield \cite{mansfield2005human}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{../data/figures/fig_mode_shapes.pdf}
+  \caption{Schematic cross-sections of the first three mode families.
+  The breathing mode ($n=0$) involves uniform radial expansion against
+  the fluid bulk modulus.  Flexural modes ($n=2, 3$) deform the shell
+  shape without significant volume change; the enclosed fluid acts as
+  added mass only.}
+  \label{fig:modes}
+\end{figure}
 
 
 \subsection{Airborne Acoustic Coupling}\label{sec:airborne}
