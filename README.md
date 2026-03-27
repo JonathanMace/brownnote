@@ -8,7 +8,7 @@ The n=2 flexural mode of the abdomen sits at ~4 Hz, right in the infrasound
 range — but airborne sound can barely reach it. At 120 dB SPL the
 energy-consistent wall displacement is 0.014 μm, roughly 10,000× below the
 mechanotransduction threshold. Whole-body vibration at a modest 0.5 m/s²
-delivers 3,243 μm — a coupling ratio of ~46,000×. The brown note is a
+delivers 4,586 μm — a coupling ratio of ~66,000× (6.6×10⁴). The brown note is a
 mechanical effect misattributed to acoustics.
 
 ## Key Results
@@ -18,8 +18,8 @@ mechanical effect misattributed to acoustics.
 | n=2 flexural frequency (f₂) | 3.95 Hz |
 | Breathing mode (n=0) | 2,490 Hz |
 | Airborne displacement (ξ_air, 120 dB) | 0.014 μm |
-| Mechanical displacement (ξ_mech, 0.5 m/s²) | 3,243 μm |
-| Coupling ratio R | ≈ 46,000× |
+| Mechanical displacement (ξ_mech, 0.5 m/s²) | 4,586 μm |
+| Coupling ratio R | ≈ 66,000× (6.6×10⁴) |
 | Sobol total-order index S_T(E) | 0.86 |
 
 ## Project Structure
