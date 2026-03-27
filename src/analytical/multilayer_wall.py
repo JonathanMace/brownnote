@@ -147,7 +147,7 @@ def multilayer_to_v2_model(
     layers: List[Layer],
     a: float = 0.18,
     c_over_a: float = 0.67,
-    loss_tangent: float = 0.30,
+    loss_tangent: float = 0.25,
 ) -> AbdominalModelV2:
     """Convert multi-layer wall to equivalent AbdominalModelV2."""
     props = compute_composite_properties(layers)

@@ -349,7 +349,7 @@ def parametric_sweep(
         a=R_cavity, b=R_cavity, c=R_cavity,
         h=0.015, E=WALL_E, nu=0.49,
         rho_fluid=RHO_FLUID, K_fluid=K_FLUID,
-        P_iap=1000.0, loss_tangent=0.3,
+        P_iap=1000.0, loss_tangent=0.25,
     )
     f_baseline = flexural_mode_frequencies_v2(baseline, n_max=4)
     f2_base = f_baseline[2]
@@ -384,7 +384,7 @@ def parametric_sweep(
                 a=R_cavity, b=R_cavity, c=R_cavity,
                 h=0.015, E=WALL_E, nu=0.49,
                 rho_fluid=rho_eff, K_fluid=K_FLUID,
-                P_iap=1000.0, loss_tangent=0.3,
+                P_iap=1000.0, loss_tangent=0.25,
             )
             f_mod = flexural_mode_frequencies_v2(mod, n_max=4)
 
@@ -430,7 +430,7 @@ def compare_with_bc_uncertainty(R_cavity: float = CAVITY_R) -> dict:
         a=R_cavity, b=R_cavity, c=R_cavity,
         h=0.015, E=WALL_E, nu=0.49,
         rho_fluid=RHO_FLUID, K_fluid=K_FLUID,
-        P_iap=1000.0, loss_tangent=0.3,
+        P_iap=1000.0, loss_tangent=0.25,
     )
     f2_ref = flexural_mode_frequencies_v2(ref, n_max=2)[2]
 
@@ -442,7 +442,7 @@ def compare_with_bc_uncertainty(R_cavity: float = CAVITY_R) -> dict:
             a=R_cavity, b=R_cavity, c=R_cavity,
             h=0.015, E=E_val, nu=0.49,
             rho_fluid=RHO_FLUID, K_fluid=K_FLUID,
-            P_iap=1000.0, loss_tangent=0.3,
+            P_iap=1000.0, loss_tangent=0.25,
         )
         f2_E.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
 
@@ -457,7 +457,7 @@ def compare_with_bc_uncertainty(R_cavity: float = CAVITY_R) -> dict:
             a=R_cavity, b=R_cavity, c=R_cavity,
             h=0.015, E=WALL_E, nu=0.49,
             rho_fluid=RHO_FLUID, K_fluid=K_FLUID,
-            P_iap=P_val, loss_tangent=0.3,
+            P_iap=P_val, loss_tangent=0.25,
         )
         f2_P.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
 
@@ -472,7 +472,7 @@ def compare_with_bc_uncertainty(R_cavity: float = CAVITY_R) -> dict:
             a=R_cavity, b=R_cavity, c=R_cavity,
             h=h_val, E=WALL_E, nu=0.49,
             rho_fluid=RHO_FLUID, K_fluid=K_FLUID,
-            P_iap=1000.0, loss_tangent=0.3,
+            P_iap=1000.0, loss_tangent=0.25,
         )
         f2_h.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
 

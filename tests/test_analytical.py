@@ -71,7 +71,7 @@ from analytical.oblate_spheroid_ritz import (
 
 @pytest.fixture
 def default_model():
-    """Canonical default model (a=b=0.15, c=0.10, E=0.5 MPa)."""
+    """Canonical default model (a=b=0.18, c=0.12, E=0.1 MPa)."""
     return AbdominalModelV2()
 
 
@@ -327,17 +327,19 @@ class TestSymmetry:
             )
 
     def test_ritz_error_decreases_with_aspect_ratio(self):
-        """As c/a → 1, the sphere-vs-ritz error should decrease."""
+        """As c/a → 1, the Ritz solution should converge to the sphere model."""
+        # Use explicit stiff parameters where monotonic convergence is clearest
         errors = []
         for cr in [0.6, 0.8, 0.95]:
             a = 0.15
-            m = AbdominalModelV2(a=a, b=a, c=a * cr)
+            m = AbdominalModelV2(a=a, b=a, c=a * cr, E=0.5e6, nu=0.49,
+                                 rho_wall=1050, rho_fluid=1040, h=0.015)
             f_s = flexural_mode_frequencies_v2(m, n_max=2)[2]
             f_r = oblate_ritz_frequency(
                 2, a, a * cr, m.h, m.E, m.nu, m.rho_wall, m.rho_fluid, m.P_iap,
             )
             errors.append(abs(f_s - f_r) / f_s if f_s > 0 else 0)
-        # Errors should generally decrease as we approach sphere
+        # Near-sphere error should be smaller than most-oblate error
         assert errors[-1] < errors[0], (
             f"Error at c/a=0.95 ({errors[-1]:.3f}) >= error at c/a=0.6 ({errors[0]:.3f})"
         )
@@ -370,33 +372,33 @@ class TestRegression:
     """
 
     def test_default_f2(self, default_model):
-        """Default model n=2 frequency."""
+        """Default model n=2 frequency (canonical: 3.95 Hz)."""
         f2 = flexural_mode_frequencies_v2(default_model)[2]
-        assert f2 == pytest.approx(10.78, abs=0.1), f"f2={f2}"
+        assert f2 == pytest.approx(3.95, abs=0.1), f"f2={f2}"
 
     def test_default_breathing(self, default_model):
-        """Default model breathing mode."""
+        """Default model breathing mode (canonical: ~2490 Hz)."""
         f0 = breathing_mode_v2(default_model)
-        assert f0 == pytest.approx(2897, abs=50), f"f0={f0}"
+        assert f0 == pytest.approx(2491, abs=50), f"f0={f0}"
 
     def test_soft_tissue_f2(self, soft_tissue_model):
-        """Soft-tissue model n=2 frequency."""
+        """Soft-tissue model n=2 frequency (canonical: 3.95 Hz)."""
         f2 = flexural_mode_frequencies_v2(soft_tissue_model)[2]
-        assert f2 == pytest.approx(4.38, abs=0.1), f"f2={f2}"
+        assert f2 == pytest.approx(3.95, abs=0.1), f"f2={f2}"
 
     def test_energy_displacement_120dB(self, soft_tissue_model):
-        """Energy-consistent displacement at 120 dB."""
+        """Energy-consistent displacement at 120 dB (canonical: 0.014 μm)."""
         r = self_consistent_displacement(soft_tissue_model, mode_n=2, spl_db=120)
-        assert r['xi_energy_um'] == pytest.approx(0.0107, abs=0.002), (
+        assert r['xi_energy_um'] == pytest.approx(0.0137, abs=0.002), (
             f"xi_energy={r['xi_energy_um']}"
         )
 
     def test_mechanical_displacement_01ms2(self, soft_tissue_model):
-        """Mechanical displacement at 0.1 m/s² base acceleration."""
+        """Mechanical displacement at 0.1 m/s² (canonical: 917 μm)."""
         f2 = flexural_mode_frequencies_v2(soft_tissue_model)[2]
         exp = WBVExposure(acceleration_rms_ms2=0.1, frequency_hz=f2)
         r = mechanical_excitation_response(exp, soft_tissue_model)
-        assert r['relative_displacement_um'] == pytest.approx(623, abs=50), (
+        assert r['relative_displacement_um'] == pytest.approx(917, abs=50), (
             f"xi_mech={r['relative_displacement_um']}"
         )
 
@@ -407,12 +409,12 @@ class TestRegression:
         assert f == pytest.approx(161.0, abs=5.0), f"f_M={f}"
 
     def test_ritz_n2_default(self, default_model):
-        """Ritz n=2 frequency for default model."""
+        """Ritz n=2 frequency for default model (canonical: ~3.8 Hz)."""
         m = default_model
         f = oblate_ritz_frequency(
             2, m.a, m.c, m.h, m.E, m.nu, m.rho_wall, m.rho_fluid, m.P_iap,
         )
-        assert f == pytest.approx(9.05, abs=0.5), f"ritz_f2={f}"
+        assert f == pytest.approx(3.80, abs=0.5), f"ritz_f2={f}"
 
     def test_composite_relaxed_E_eff(self):
         """Relaxed composite wall effective modulus."""

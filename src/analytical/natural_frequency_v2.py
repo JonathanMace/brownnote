@@ -29,19 +29,19 @@ class AbdominalModelV2:
     """Improved abdominal model with pre-stress and layered properties."""
 
     # Geometry
-    a: float = 0.15          # semi-major axis [m]
-    b: float = 0.15          # second semi-major [m]
-    c: float = 0.10          # semi-minor axis [m]
-    h: float = 0.015         # wall thickness [m]
+    a: float = 0.18          # semi-major axis [m]
+    b: float = 0.18          # second semi-major [m]
+    c: float = 0.12          # semi-minor axis [m]
+    h: float = 0.010         # wall thickness [m]
 
     # Wall material
-    E: float = 0.5e6         # Young's modulus [Pa]
-    nu: float = 0.49         # Poisson's ratio
-    rho_wall: float = 1050.0 # wall density [kg/m³]
-    loss_tangent: float = 0.3  # viscoelastic loss tangent
+    E: float = 0.1e6         # Young's modulus [Pa] (0.1 MPa)
+    nu: float = 0.45         # Poisson's ratio
+    rho_wall: float = 1100.0 # wall density [kg/m³]
+    loss_tangent: float = 0.25 # viscoelastic loss tangent
 
     # Fluid
-    rho_fluid: float = 1040.0 # fluid density [kg/m³]
+    rho_fluid: float = 1020.0 # fluid density [kg/m³]
     K_fluid: float = 2.2e9   # bulk modulus [Pa]
 
     # Pre-stress (intra-abdominal pressure)
@@ -204,7 +204,7 @@ def flexural_mode_pressure_response(
         ΔP ≈ p_inc × (ka)² × P₂(cos θ)  [for quadrupole, n=2]
 
     This means the coupling to flexural modes goes as (ka)^n, which is
-    EXTREMELY weak for infrasound (ka ≈ 0.017).
+    EXTREMELY weak for infrasound (ka ≈ 0.0114).
 
     HOWEVER: there are alternative coupling mechanisms:
     1. Body vibration transmitted through skeleton/floor (mechanical coupling)

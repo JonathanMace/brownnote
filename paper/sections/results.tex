@@ -80,7 +80,7 @@ reflecting the log-normal distribution of $E$.
     $\xi_\mathrm{air}$ (120 dB) & 0.18 & [0.11, 0.39] & $\mu$m \\
     $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
     $\mathcal{R}$ & $10^4$ & [$10^3$, $10^4$] & --- \\
-    SPL for PIEZO & 135 & [128, 139] & dB \\
+    SPL for PIEZO (pressure) & 135 & [128, 139] & dB \\
     \hline
   \end{tabular}
 \end{table}
@@ -90,7 +90,7 @@ Sobol sensitivity analysis reveals that the elastic modulus accounts for
 All other parameters contribute less than 10\% individually.  This result
 has important experimental implications: any future validation effort should
 prioritise \emph{in vivo} measurement of abdominal wall stiffness, as this
-single parameter dominates the uncertainty budget.
+single parameter dominates the uncertainty budget (Figure~\ref{fig:sobol}).
 
 \begin{figure}[htbp]
   \centering
@@ -178,8 +178,8 @@ curvature) contributes a greater share of the restoring force.
     Mode & Sphere (Hz) & Ritz (Hz) & Sphere (Hz) & Ritz (Hz) \\
     \midrule
     $n=2$ & 4.0 & 3.6 & 7.1 & 6.0 \\
-    $n=3$ & 6.3 & 5.6 & 11.3 & 9.5 \\
-    $n=4$ & 8.9 & 8.0 & 14.4 & 12.9 \\
+    $n=3$ & 6.3 & 5.6 & 10.0 & 9.5 \\
+    $n=4$ & 8.9 & 8.0 & 12.9 & 12.9 \\
     \bottomrule
   \end{tabular}
 \end{table}

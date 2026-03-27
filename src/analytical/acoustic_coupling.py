@@ -120,7 +120,7 @@ def radiation_damping_ratio(frequency: float, model: AbdominalModel) -> float:
     return 0.0
 
 
-def structural_damping_ratio(loss_tangent: float = 0.3) -> float:
+def structural_damping_ratio(loss_tangent: float = 0.25) -> float:
     """
     Convert tissue loss tangent to damping ratio.
 
@@ -132,7 +132,7 @@ def structural_damping_ratio(loss_tangent: float = 0.3) -> float:
     - Liver: tan(δ) ≈ 0.2 - 0.5 (Klatt et al., 2007)
     - Fat: tan(δ) ≈ 0.1 - 0.3
 
-    Default: 0.3 (mid-range for abdominal wall composite)
+    Default: 0.25 (canonical value for abdominal wall composite)
     """
     return loss_tangent / 2
 
@@ -141,8 +141,7 @@ def shell_response_to_pressure(
     frequency: float,
     spl_db: float,
     model: AbdominalModel,
-    loss_tangent: float = 0.3,
-) -> CouplingResult:
+    loss_tangent: float = 0.25,
     """
     Compute the shell wall displacement response to an incident acoustic
     pressure field, properly accounting for:
@@ -288,7 +287,7 @@ if __name__ == "__main__":
     print(f"  " + "-" * 65)
 
     for spl in [90, 100, 110, 120, 130, 140, 150]:
-        r = shell_response_to_pressure(f, spl, model, loss_tangent=0.3)
+        r = shell_response_to_pressure(f, spl, model, loss_tangent=0.25)
         print(f"  {spl:>8} {r.incident_pressure_pa:>10.2f} "
               f"{r.amplification_factor:>8.2f} {r.shell_displacement_um:>10.4f} "
               f"{r.wall_membrane_strain:>12.2e} {r.wall_bending_strain:>12.2e} "
@@ -309,7 +308,7 @@ if __name__ == "__main__":
 
     for spl in [100, 110, 120, 130, 140]:
         # Corrected
-        r_corr = shell_response_to_pressure(f_res, spl, model_soft, loss_tangent=0.3)
+        r_corr = shell_response_to_pressure(f_res, spl, model_soft, loss_tangent=0.25)
 
         # Old naive: free-field displacement × Q
         p = 20e-6 * 10**(spl/20)
