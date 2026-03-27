@@ -61,11 +61,7 @@ htmlcov/
 *.bcf
 *.run.xml
 
-# LaTeX build output (but keep drafts, graphical abstract, cover letter)
-paper/main.pdf
-!paper/drafts/*.pdf
-!paper/graphical-abstract.pdf
-!paper/cover-letter.pdf
+# Track PDF artefacts; ignore only transient LaTeX build products
 
 # =============================================================================
 # Simulation outputs (large files tracked via LFS or excluded)

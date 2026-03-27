@@ -1,7 +1,7 @@
 # Browntone — Copilot Project Instructions
 
 *This file is loaded on EVERY Copilot interaction. It is the lab's constitution.*
-*Last updated: 2026-03-28.*
+*Last updated: 2026-03-27.*
 
 ## Identity
 
@@ -74,7 +74,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 161+ tests. Do not break them. Add regression tests for any bug fix.
+- Currently 183 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -101,7 +101,7 @@ Every computation must use these values unless explicitly varying a parameter.
 ```powershell
 # 1. Setup (the orchestrator does this before launching the agent)
 cd C:\Users\jon\OneDrive\Projects\browntone
-git checkout main && git pull origin main
+git checkout main && git pull origin main --rebase
 git checkout -b <branch-name>
 git worktree add ..\browntone-worktrees\<branch-name> <branch-name>
 
@@ -204,8 +204,8 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 ### Skills (`.github/skills/`)
 | Skill | Purpose |
 |-------|---------|
-| `research-iteration` | Full DO→REVIEW→LOG→COMPILE→COMMIT cycle |
 | `compile-paper` | LaTeX compilation + PDF snapshot workflow |
+| `research-iteration` | Full DO→REVIEW→LOG→COMPILE→COMMIT cycle |
 | `run-analysis` | Execute analytical pipeline + verify outputs |
 | `generate-figures` | Create publication-quality figures |
 | `critique-results` | Invoke 3-reviewer panel on recent work |
@@ -214,9 +214,9 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `jmace-writing-style` | Jonathan Mace's active, confident style |
 | `mace-writing-style` | Brian Mace's JSV structural conventions |
 | `semester-break` | End-of-hour reflection, tidy-up, and planning |
-| `mesh-convergence` | FEA mesh convergence study workflow |
-| `run-simulation` | Execute FEA simulation pipeline |
-| `submit-paper` | Journal submission checklist and workflow |
+
+Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`,
+`run-simulation.md`, and `submit-paper.md`.
 
 ### Path-Specific Instructions (`.github/instructions/`)
 | File | Applies To |
@@ -231,11 +231,11 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 
 | Paper | Venue | Status | Location |
 |-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | 38pp, ACCEPT, submission-ready (awaiting JSV upload) | `paper/` |
-| Paper 2: Gas Pockets | JASA | 14pp, Round 1 fixes applied, Round 2 review in progress. JASA-EL restructuring plan ready. | `paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | 8pp first draft, 9 references, JSV Short Communication | `src/analytical/dimensional_analysis.py` |
-| Bladder Resonance | JSV/J Biomech | 20pp first draft, Reviewer A MAJOR REV (5 issues), parametrics in progress | `projects/bladder-resonance/` |
-| Borborygmi | JASA / Acta Acustica | Model complete, 135-440 Hz matches clinical, 35 tests | `src/analytical/borborygmi_model.py` |
+| Paper 1: Brown Note | JSV | ~44pp, ref-updated, final-polished, submission-ready | `paper/` |
+| Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `paper2-gas-pockets/` |
+| Paper 3: Scaling Laws | JSV Short | Under revision (8pp), dim error fixed | `paper3-scaling-laws/` |
+| Bladder Resonance | JSV/J Biomech | Under development, all Reviewer A issues addressed | `projects/bladder-resonance/` |
+| Borborygmi | JASA / Acta Acustica | First draft complete (17pp) | `src/analytical/borborygmi_model.py` |
 
 ## The Academic Calendar
 
