@@ -631,11 +631,21 @@ frequency is
 \end{equation}
 For representative values ($V \approx \SI{200}{\milli\litre}$,
 $S \approx \pi(\SI{5}{\milli\metre})^2$, $L_\text{eff} \approx
-\SI{5}{\metre}$), this gives $f_H \approx \SI{15}{\hertz}$.  Below
-$f_H$, the air column can quasi-statically equalize pressure, partially
-short-circuiting the transduction mechanism; above $f_H$, air-column
-inertia prevents equalization and the constrained-bubble model applies
-without qualification.
+\SI{5}{\metre}$), this gives $f_H \approx \SI{15}{\hertz}$.
+Here $L_\text{eff}$ represents the effective acoustic path length from
+mouth to colon ($\sim$\SI{5}{\metre} of GI tract), and
+$d = \SI{10}{\milli\metre}$ is a conservative lower bound for the
+average intestinal lumen diameter (typical range
+\SIrange{10}{25}{\milli\metre}).
+Below $f_H$, the air column can quasi-statically equalize pressure,
+partially short-circuiting the transduction mechanism; above $f_H$,
+air-column inertia prevents equalization and the constrained-bubble model
+applies without qualification.
+We note that Eq.~\eqref{eq:helmholtz} is used here only to estimate
+$f_H$ as a cross-over scale; the implied low-pass attenuation model
+$1/[1+(f/f_H)^2]$ is a simplification.  A true Helmholtz resonator
+exhibits amplification near $f_H$, which would complicate the
+short-circuit picture further and warrants future investigation.
 
 Three observations mitigate this concern at typical infrasound
 frequencies ($f \sim$\SIrange{1}{20}{\hertz}):
@@ -659,11 +669,17 @@ frequencies ($f \sim$\SIrange{1}{20}{\hertz}):
         transduction.}
         At \SI{7}{\hertz} ($< f_H$), the short-circuit transfer function
         provides partial equalization (estimated pressure-equalization
-        ratio ${\sim}0.8$ for an open segment).  However, even a factor
-        of five reduction in effective $\Delta P$ still yields
-        sub-micrometre displacements for pockets $> \SI{20}{\milli\litre}$
-        at \SI{120}{\decibel}, keeping the mechanism above the \piezo{}
-        threshold.
+        ratio ${\sim}0.8$ for an open segment).  Quantitatively, however,
+        the margin above the \piezo{} threshold is modest: even for the
+        largest pocket considered (\SI{100}{\milli\litre}, spherical), the
+        maximum survivable reduction factor is only ${\sim}2.7\times$
+        before the displacement falls below \SI{0.5}{\um}.  A factor-of-three
+        reduction in effective $\Delta P$ would therefore bring all pockets
+        below the mechanotransduction threshold at \SI{120}{\decibel}.
+        This underscores the importance of the sealed-pocket defence
+        (items~1--2 above): for gas pockets isolated by fecal or liquid
+        plugs---the physiologically typical configuration---equalization
+        cannot occur and the constrained-bubble model applies in full.
 \end{enumerate}
 
 In summary, the acoustic short-circuit effect is real in principle but
