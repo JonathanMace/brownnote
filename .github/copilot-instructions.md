@@ -4,8 +4,37 @@
 
 **Browntone** is a computational biomechanics research project investigating whether
 infrasound (very low-frequency sound, typically < 20 Hz) can induce resonance in the
-human abdominal cavity — the so-called "brown note" hypothesis. The name is a playful
-portmanteau of "brown note" and the fundamental *tone* (frequency) being studied.
+human abdominal cavity. The name is a playful portmanteau of "brown note/tone" and
+the fundamental frequency being studied.
+
+**Never refer to this as the "brown note" in publication text, code comments intended
+for the paper, or any formal output.** Use "infrasound-induced abdominal resonance."
+
+## Critical Physics Notes
+
+When working on this codebase, understand these key physics:
+
+1. **Long-wavelength regime**: At 5-10 Hz, λ_air ≈ 35-70m. The body (~0.5m) is
+   1/70th to 1/140th of a wavelength. The pressure field is essentially uniform
+   across the body — the body does NOT see a propagating wave.
+
+2. **Acoustic coupling in the long-wavelength limit**: The full incident pressure
+   acts on the shell exterior. The air-tissue impedance mismatch (Z ratio ~1:4000)
+   determines radiation efficiency and energy absorption, but NOT the driving
+   pressure. The shell responds to pressure, not energy flux.
+
+3. **Quality factor Q**: The most sensitive and uncertain parameter. Soft tissue
+   Q ≈ 2-10. Always present results as Q-dependent and be explicit about this
+   uncertainty. Derive Q from published loss tangent: Q = 1/tan(δ).
+
+4. **PIEZO comparison**: Patch-clamp thresholds (0.5-2 μm) represent localized
+   membrane indentation, not bulk tissue oscillation. Wall bending strain, not
+   displacement, is the correct comparison metric.
+
+## Iterative Workflow
+
+Every work phase must follow: DO WORK → CRITIQUE (reviewer-b agent) → LOG
+(timestamped research-log) → REFINE PLAN → ITERATE.
 
 The project combines:
 - **Analytical models**: closed-form solutions for cylindrical/ellipsoidal shell vibration
