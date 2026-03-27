@@ -63,6 +63,9 @@ from analytical.oblate_spheroid_ritz import (
     oblate_ritz_frequencies,
     sphere_approx_frequencies,
 )
+from analytical.dimensional_analysis import (
+    breathing_mode_infrasound_size,
+)
 
 
 # ------------------------------------------------------------------ #
@@ -821,3 +824,39 @@ class TestHelmholtzSealedGI:
             k_wall = 2.0 * E_WALL * H_WALL / (a ** 2 * (1.0 - NU_WALL))
             frac = k_wall / (k_gas + k_wall)
             assert frac < 0.03, f"Wall fraction = {frac:.4f} for {vol} mL spherical"
+
+
+
+# ================================================================== #
+#  Breathing-mode infrasound size (dimensional analysis)               #
+# ================================================================== #
+
+class TestBreathingModeInfrasoundSize:
+    """Regression tests for breathing_mode_infrasound_size (Paper 3, S5).
+
+    The formula is R = sqrt(3 K_f / (rho_f omega^2)), which gives ~20 m
+    at f=20 Hz with canonical fluid properties.  A previous version was
+    missing the sqrt, yielding ~410 m (units error: m^2 not m).
+    """
+
+    def test_canonical_radius_approx_20m(self):
+        """Canonical: R ~ 20 m at 20 Hz (NOT 410 m -- that was the bug)."""
+        result = breathing_mode_infrasound_size()
+        R = result["R_needed_m"]
+        assert R == pytest.approx(20.24, rel=0.01), (
+            f"Expected R ~ 20.24 m, got {R:.2f} m"
+        )
+
+    def test_radius_has_correct_units(self):
+        """Dimensional check: R must scale as sqrt(K_f), not linearly."""
+        r1 = breathing_mode_infrasound_size(K_f=2.2e9)["R_needed_m"]
+        r4 = breathing_mode_infrasound_size(K_f=4 * 2.2e9)["R_needed_m"]
+        ratio = r4 / r1
+        assert ratio == pytest.approx(2.0, rel=1e-10), (
+            f"R should scale as sqrt(K_f); ratio = {ratio:.6f}, expected 2.0"
+        )
+
+    def test_radius_not_410m(self):
+        """Guard against regression to the m^2 bug."""
+        R = breathing_mode_infrasound_size()["R_needed_m"]
+        assert R < 100, f"R = {R:.0f} m; likely missing sqrt (old bug)"

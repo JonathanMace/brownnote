@@ -271,13 +271,13 @@ def breathing_mode_infrasound_size(rho_f=1020.0, K_f=2.2e9, E_wall=0.1e6,
     Estimate the body size at which the breathing mode enters infrasound (<20 Hz).
 
     The breathing mode frequency is dominated by K_f:
-        f₀ ≈ (1/2π) √(3 K_f / (ρ_f R))  for K_f >> E
-    Setting f₀ = 20 Hz:
-        R = 3 K_f / (ρ_f (2π × 20)²)
+        f₀ ≈ (1/2π) √(3 K_f / (ρ_f R²))  for K_f >> E
+    Setting f₀ = 20 Hz and solving for R:
+        R = √(3 K_f / (ρ_f (2π × 20)²))
     """
     f_target = 20.0  # Hz threshold
     omega_target = 2 * np.pi * f_target
-    R_needed = 3 * K_f / (rho_f * omega_target**2)
+    R_needed = np.sqrt(3 * K_f / (rho_f * omega_target**2))
     a_needed = R_needed / c_over_a ** (1 / 3)
     return {
         "R_needed_m": R_needed,
