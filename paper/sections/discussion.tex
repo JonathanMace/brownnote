@@ -379,3 +379,49 @@ predicted frequencies and displacements---in several cases substantially---but
 none alter the central finding that airborne acoustic coupling to abdominal
 flexural modes is $10^3$--$10^4$ times weaker than mechanical coupling under
 occupationally relevant conditions.
+
+\subsection{Proposed Experimental Validation}
+\label{sec:disc:validation}
+
+We propose a two-stage experimental programme to validate the key
+predictions of the analytical model.  The first stage employs a
+tissue-mimicking phantom: an oblate spheroidal silicone shell
+($a = \SI{0.18}{\metre}$, $c = \SI{0.12}{\metre}$, $h = \SI{10}{\milli\metre}$)
+filled with degassed water, matching the canonical geometry of
+\S\ref{sec:formulation}.  The shell material is platinum-cure silicone
+(Ecoflex~00-30 to Dragon~Skin~10A), whose Young's modulus spans
+\SIrange{0.07}{0.15}{\mega\pascal}---bracketing the relaxed abdominal wall
+estimate of $E = \SI{0.1}{\mega\pascal}$.  By casting phantoms at several
+mixing ratios, the $f_2 \propto \sqrt{E}$ dependence can be tested
+directly.  Modal frequencies are measurable with an instrumented impact
+hammer or a low-frequency shaker sweep, and mode shapes can be
+reconstructed with a scanning laser vibrometer (Polytec PSV-500).
+The predicted $n = 2$ frequency for the recommended Ecoflex~00-30
+formulation is \SI{2.5}{\hertz}; for Dragon~Skin~10A,
+\SI{3.6}{\hertz}; the model predicts \SI{4.0}{\hertz} for the
+canonical human case.
+
+The critical measurement is the coupling-ratio comparison.  By mounting
+the phantom on an electrodynamic shaker (mechanical pathway) and
+separately exposing it to a subwoofer-generated infrasound field at
+\SI{120}{\decibel} (airborne pathway), the displacement ratio
+$\xi_{\mathrm{mech}} / \xi_{\mathrm{air}}$ can be measured in a single
+experimental session.  The model predicts ratios of order $10^3$--$10^4$
+across the silicone formulation range (Table~\ref{tab:pathway_summary}).
+Non-detection of the airborne response at the vibrometer noise floor
+($\sim\SI{0.01}{\micro\metre}$) would itself constitute a positive
+validation of the weak-coupling prediction.  The total cost of consumables
+(silicone, molds, sensors) is estimated at less than US\$\,3\,100, assuming
+access to shared laboratory equipment (shaker, laser vibrometer, DAQ).
+
+The second stage extends to in~vivo human subjects.  Subject-specific
+abdominal wall moduli would be obtained via magnetic resonance elastography
+or shear-wave ultrasound elastography, and whole-body vibration
+transmissibility measured on an ISO~2631-compliant platform at sub-action-value
+amplitudes (\SI{0.3}{\metre\per\second\squared}).  A sample of 15 subjects,
+spanning a range of body habitus, is sufficient (power $= 0.80$,
+$\alpha = 0.05$) to detect a paired-test effect size $d = 1.0$ between
+measured and predicted peak-transmissibility frequencies.  This programme
+requires Institutional Review Board approval and is estimated at
+8--12~months, with the phantom study serving as a prerequisite validation of
+the model physics under controlled conditions.
