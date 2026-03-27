@@ -153,13 +153,15 @@ def pressure_from_displacement(
     # More conservatively: ΔP = ρ * (2πf)² * ξ * Q (from momentum)
 
     xi_m = displacement_um * 1e-6
-    # Dynamic pressure from oscillating fluid
-    delta_p = params.rho_tissue * (2 * np.pi * freq)**2 * xi_m
-    # Amplified at resonance
-    delta_p_resonant = delta_p * Q
+    # Dynamic pressure from oscillating fluid mass
+    # ΔP = ρ_f × ω² × ξ × R (characteristic length)
+    # NOTE: Do NOT multiply by Q here — the caller provides the
+    # already-resonant displacement. Q amplification is in the input.
+    R_char = 0.16  # characteristic abdominal radius [m]
+    delta_p = params.rho_tissue * (2 * np.pi * freq)**2 * xi_m * R_char
 
     # Convert Pa to mmHg (1 mmHg = 133.322 Pa)
-    return delta_p_resonant / 133.322
+    return delta_p / 133.322
 
 
 if __name__ == "__main__":
