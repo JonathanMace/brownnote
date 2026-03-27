@@ -1,26 +1,80 @@
+---
+name: git-checkpoint
+description: >
+  Branch, commit, push, PR, merge, and cleanup workflow. Use when you need
+  to checkpoint your work to main via a pull request.
+---
+
 # Git Checkpoint Skill
 
-## Description
-Create a git checkpoint with a descriptive message. Use between major research iterations.
+The complete workflow for getting changes from a worktree into main.
 
-## Workflow
+## Full Workflow
 
-1. **Stage**: `git add -A` in the repository root
-2. **Status**: Check what's being committed with `git status --short`
-3. **Commit**: Use a descriptive message following the format: `[phase] description`
-   - Phase prefixes: `[analysis]`, `[paper]`, `[fea]`, `[review]`, `[infra]`, `[figures]`
-4. **Verify**: Confirm commit was created
+### From a worktree (agent or orchestrator):
 
-## Commands
+```powershell
+cd C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>
+
+# 1. Commit
+git add -A
+git status --short
+git commit -m "[category] Description
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+
+# 2. Push
+git push origin <branch>
+
+# 3. Create PR
+gh pr create --base main --head <branch> --title "[category] Title" --body "Summary"
+
+# 4. Merge PR (agents merge their own PRs immediately)
+gh pr merge <N> --merge
+
+# 5. Delete remote branch
+git push origin --delete <branch>
+```
+
+### If merge fails (conflict):
+
+```powershell
+git fetch origin main
+git rebase origin/main
+# Resolve conflicts in each file
+git add -A
+git rebase --continue
+git push origin <branch> --force-with-lease
+gh pr merge <N> --merge
+git push origin --delete <branch>
+```
+
+### From the main worktree (orchestrator quick fix):
 
 ```powershell
 cd C:\Users\jon\OneDrive\Projects\browntone
+git checkout -b <short-lived-branch>
+# ... make changes ...
 git add -A
-git status --short
-git commit -m "[phase] description`n`nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+git commit -m "[category] Description
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+git push origin <short-lived-branch>
+gh pr create --base main --head <short-lived-branch> --title "..." --body "..."
+gh pr merge <N> --merge
+git push origin --delete <short-lived-branch>
+git checkout main
+git pull origin main
 ```
 
-## Notes
-- Always include the Co-authored-by trailer
-- Keep messages concise but descriptive
-- Include key findings or changes in the commit body if significant
+## Commit Prefixes
+
+`[analysis]` `[paper]` `[fea]` `[review]` `[infra]` `[figures]` `[tests]`
+`[research]` `[meeting]` `[audit]` `[style]` `[log]`
+
+## Rules
+
+- **Never push directly to main** — it's branch-protected.
+- **Always include the Co-authored-by trailer.**
+- **Always delete remote branches after merging.**
+- **Resolve merge conflicts eagerly** while context is fresh.

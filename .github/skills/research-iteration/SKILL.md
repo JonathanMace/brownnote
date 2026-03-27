@@ -1,39 +1,72 @@
-# Research Iteration Orchestrator
+---
+name: research-iteration
+description: >
+  Full research iteration protocol: DO → REVIEW → LOG → COMPILE → COMMIT → PLAN.
+  Use when starting a new iteration cycle or when you need to remember the
+  correct sequence of steps.
+---
 
-## Description
-Orchestrate a full research iteration cycle: DO → CRITIQUE → LOG → COMPILE → COMMIT → PLAN NEXT.
+# Research Iteration Protocol
 
-## Workflow
+The authoritative workflow for every research cycle.
 
-### 1. DO WORK (parallel subagents)
-Launch multiple background agents for independent work items:
-- **Analysis agents**: Run analytical models, parameter studies, new physics
-- **Paper agents**: Write/improve specific sections
-- **Figure agents**: Generate publication-quality figures
-- **FEA agents**: Mesh generation, modal analysis, validation
+## The Cycle
 
-### 2. CRITIQUE (Reviewer B)
-After work completes, invoke the `reviewer-b` agent on ALL new results:
-- Check physics correctness, dimensional consistency, novelty claims
-- Rate severity: FATAL / MAJOR / MODERATE / MINOR
+```
+DO → REVIEW → LOG → COMPILE → COMMIT → PLAN → MAINTAIN
+```
+
+### 1. DO (Parallel Work)
+Launch ≥6 concurrent background agents, each on its own worktree/branch.
+Mix of: analysis, paper writing, review, infrastructure, scouting.
+
+Each agent MUST:
+- Work only in its assigned worktree
+- Commit with `[category]` prefix and Co-authored-by trailer
+- Push its branch
+- Create a PR: `gh pr create --base main --head <branch> ...`
+- Merge its own PR: `gh pr merge <N> --merge`
+- Delete remote branch: `git push origin --delete <branch>`
+- Resolve merge conflicts eagerly via rebase
+
+### 2. REVIEW (3-Reviewer Panel)
+After major paper updates, launch 3 reviewers in parallel:
+- **Reviewer A**: Domain expert — novelty, significance, narrative, missing refs
+- **Reviewer B**: Cynical gatekeeper — fatal flaws, parameter consistency, logic
+- **Reviewer C**: Methodologist — runs code, checks every number against paper
+
+Each reviewer writes to `docs/research-logs/reviewer-X-roundN.md`.
+Synthesise all 3 into an action plan before next iteration.
 
 ### 3. LOG
-Create timestamped research log entry in `docs/research-logs/`:
-- Filename: `YYYY-MM-DDTHHMM-<topic>.md`
-- Content: What was done, found, critical analysis, plan changes
+Create `docs/research-logs/YYYY-MM-DDTHHMM-topic.md` with:
+- Quantitative results (specific numbers, not vague claims)
+- Changes made (file list)
+- Issues identified (with severity)
+- Next steps
 
-### 4. COMPILE PAPER
-Build current LaTeX draft and preserve timestamped PDF in `paper/drafts/`.
+Include PDF snapshot: `YYYY-MM-DDTHHMM-paper-snapshot.pdf`
 
-### 5. GIT CHECKPOINT
-Commit all changes with descriptive message.
+### 4. COMPILE
+```powershell
+cd paper
+pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
+Copy-Item main.pdf "drafts\draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
+```
 
-### 6. PLAN NEXT
-Update SQL todos and identify the next parallel work batch.
+### 5. COMMIT
+Branch → commit → push → PR → merge → delete remote branch → pull main.
 
-## Parallelism Strategy
-Always maintain 3-5 concurrent background agents:
-- At least 1 analysis agent (new physics or refinement)
-- At least 1 paper-writing agent (section content)
-- At least 1 review/QA agent (critique, verification)
-- Optional: FEA, figures, literature
+### 6. PLAN
+- Update SQL todos
+- Identify next parallel batch
+- Update `.github/copilot-instructions.md` if anything material changed
+
+### 7. MAINTAIN
+- Run lab-meeting agent for docs freshness audit
+- Run consistency-auditor before paper compilation
+- Clean up stale worktrees and branches
+- Visit the coffee machine if things feel stale
