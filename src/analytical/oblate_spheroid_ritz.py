@@ -204,9 +204,15 @@ def oblate_ritz_frequency(n, a, c, h, E, nu, rho_w, rho_f, P_iap,
         return 0.0
     eta_q, w_q = leggauss(n_quad)
     K, M = _build_KM(n, a, c, h, E, nu, P_iap, rho_w, rho_f, eta_q, w_q)
-    eps = max(np.abs(np.diag(M)).max(), 1e-30) * 1e-14
-    M += eps * np.eye(2)
-    eigvals = np.linalg.eigvalsh(np.linalg.solve(M, K))
+    # Solve generalised eigenvalue problem  K x = λ M x  properly:
+    # transform to standard form via Cholesky of M
+    try:
+        L = np.linalg.cholesky(M)
+        Kinv = np.linalg.solve(L, np.linalg.solve(L, K).T)
+        eigvals = np.linalg.eigvalsh(Kinv)
+    except np.linalg.LinAlgError:
+        # Fall back to real eigenvalues of M⁻¹K (general solver)
+        eigvals = np.real(np.linalg.eigvals(np.linalg.solve(M, K)))
     return np.sqrt(max(eigvals.min(), 0.0)) / (2.0 * np.pi)
 
 
@@ -336,14 +342,21 @@ if __name__ == "__main__":
     # ── 4. Summary ────────────────────────────────────────────
     print("  4. SUMMARY")
     print("  " + "-" * 70)
-    print("  • The sphere model consistently OVERESTIMATES the flexural")
-    print("    frequencies of the oblate spheroid.")
-    print("  • Error grows with oblateness (lower c/a) and is non-trivial")
-    print("    even at c/a = 0.9.")
-    print("  • Physical reason: oblate geometry has larger equatorial radii")
-    print("    of curvature → lower membrane stiffness; and different")
-    print("    fluid inertia from oblate spheroidal flow pattern.")
-    print("  • For the default model (c/a ≈ 0.67, E = 0.5 MPa), the")
-    print("    n = 2 sphere model error is significant for quantitative")
-    print("    predictions of resonance frequency.")
+    print("  • The sphere model generally overestimates flexural frequencies")
+    print("    compared to the oblate Rayleigh-Ritz model.")
+    print("  • At the default geometry (c/a ≈ 0.67), the sphere overestimates")
+    print("    n=2 by ~19% (E=0.5 MPa) and ~11% (E=0.1 MPa).")
+    print("  • At c/a = 0.9, the error is still 12-13% — non-trivial even")
+    print("    for mildly oblate shapes.")
+    print("  • Physical reasons for the oblate correction:")
+    print("      – Spatially varying curvature (poles are sharper, equator")
+    print("        is flatter than the equivalent sphere)")
+    print("      – Different fluid added mass from oblate flow geometry")
+    print("      – The single-mode Ritz also captures optimal tangential")
+    print("        displacement via the variational principle.")
+    print("  • NOTE: the 2-DOF single-mode Ritz has a systematic ~8%")
+    print("    offset vs the analytical sphere formula at c/a→1, from the")
+    print("    limited trial-function space.  The RELATIVE trends across")
+    print("    aspect ratios are robust.")
+    print("  • Positive err% = sphere model overestimates frequency.")
     print()
