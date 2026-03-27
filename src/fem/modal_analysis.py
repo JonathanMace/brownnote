@@ -1,17 +1,17 @@
 """Rayleigh-Ritz modal analysis for a fluid-filled spherical shell.
 
 Numerical eigenvalue analysis validating analytical natural-frequency
-predictions and quantifying BC effects — Reviewer B concern M4.
+predictions and quantifying BC effects --- Reviewer B concern M4.
 
 Method
 ------
-Each Ritz basis function is a *Lamb mode*: the coupled (w, u_θ) pattern
+Each Ritz basis function is a *Lamb mode*: the coupled (w, u_theta) pattern
 that minimises the full-sphere Rayleigh quotient for Legendre order *n*.
 On the full sphere this gives exact Lamb frequencies by construction.
 On sub-domains the Lamb modes couple via overlap integrals, and boundary
 conditions are enforced by null-space projection.
 
-Strain energy uses the exact Love–Kirchhoff thin-shell bilinear form.
+Strain energy uses the exact Love--Kirchhoff thin-shell bilinear form.
 
 References
 ----------
@@ -78,13 +78,13 @@ def lamb_frequency(n: int, p: ShellProperties, *, with_fluid: bool = True) -> fl
 class LambRitzSolver:
     """Rayleigh-Ritz solver using Lamb modes as basis functions.
 
-    Each basis function ψ_n carries a coupled radial-tangential pattern:
+    Each basis function psi_n carries a coupled radial-tangential pattern:
 
-        w_n(θ)  = P_n(cos θ)
-        u_n(θ)  = c_n  dP_n/dθ
+        w_n(theta)  = P_n(cos theta)
+        u_n(theta)  = c_n  dP_n/dtheta
 
     where c_n is the tangential/radial ratio that minimises the Rayleigh
-    quotient on the full sphere (computed from a 2 × 2 eigenvalue problem).
+    quotient on the full sphere (computed from a 2 x 2 eigenvalue problem).
     """
 
     def __init__(
@@ -111,7 +111,7 @@ class LambRitzSolver:
     # ------------------------------------------------------------------
 
     def _compute_lamb_ratios(self) -> None:
-        """Compute c_n = U/W for each mode from a 2×2 problem on [0, π]."""
+        """Compute c_n = U/W for each mode from a 2x2 problem on [0, pi]."""
         for n in self.modes:
             K2, M2 = self._mode_2x2(n, np.pi)
             eigvals, eigvecs = eigh(K2, M2)
@@ -122,7 +122,7 @@ class LambRitzSolver:
             self.f_lamb[n] = float(np.sqrt(omega2) / (2.0 * np.pi))
 
     def _mode_2x2(self, n: int, theta_max: float):
-        """2 × 2 (w, u) stiffness & mass for a single Legendre order *n*."""
+        """2 x 2 (w, u) stiffness & mass for a single Legendre order *n*."""
         p = self.props
         theta, wq = self._gauss_quad(theta_max)
         x = np.cos(theta)
@@ -142,7 +142,7 @@ class LambRitzSolver:
         kt_w = (nn1 * Pv - cos_t * dPv) / p.R ** 2
         kp_w = cos_t * dPv / p.R ** 2
 
-        # Strains for DOF-1 (w = 0, u = dP_n/dθ)
+        # Strains for DOF-1 (w = 0, u = dP_n/dtheta)
         du_dt = cos_t * dPv - nn1 * Pv
         u_cot = -cos_t * dPv
         et_u = du_dt / p.R
@@ -188,10 +188,10 @@ class LambRitzSolver:
     # ------------------------------------------------------------------
 
     def _eval_lamb_strains(self, theta: np.ndarray):
-        """Compute ε_θ, ε_φ, κ_θ, κ_φ for each Lamb mode at quad points.
+        """Compute eps_theta, eps_phi, kap_theta, kap_phi for each Lamb mode at quad points.
 
         For mode n the combined displacement is:
-            w = P_n,  u_θ = c_n dP_n/dθ
+            w = P_n,  u_theta = c_n dP_n/dtheta
         """
         p = self.props
         x = np.cos(theta)
@@ -218,9 +218,9 @@ class LambRitzSolver:
             w_vals[i] = Pv
             u_vals[i] = cn * (-sin_t * dPv)
 
-            # du_θ/dθ = c_n (cosθ P_n' − n(n+1) P_n)
+            # du_theta/dtheta = c_n (costheta P_n' - n(n+1) P_n)
             du_dt = cn * (cos_t * dPv - nn1 * Pv)
-            # u_θ cot θ = c_n (−cos θ P_n')
+            # u_theta cot theta = c_n (-cos theta P_n')
             u_cot = cn * (-cos_t * dPv)
 
             # Combined strains
@@ -236,7 +236,7 @@ class LambRitzSolver:
     # ------------------------------------------------------------------
 
     def _assemble(self, theta_max: float):
-        """Return stiffness K and mass M on [0, θ_max]."""
+        """Return stiffness K and mass M on [0, theta_max]."""
         p = self.props
         theta, wq = self._gauss_quad(theta_max)
         sin_t = np.sin(theta)
@@ -248,7 +248,7 @@ class LambRitzSolver:
         Cb = p.D
         nu = p.nu
 
-        # Vectorised bilinear form  (N × nq) arrays
+        # Vectorised bilinear form  (N x nq) arrays
         def _bilin_mat(A, B):
             Aw = A * W[np.newaxis, :]
             Bw = B * W[np.newaxis, :]
@@ -264,12 +264,12 @@ class LambRitzSolver:
                 k_pre = np.sqrt(k_pre_i * k_pre_j)
                 K[i, j] += k_pre * np.dot(w_vals[i] * w_vals[j], W)
 
-        # Mass: shell (w² + u²) + fluid added mass on w²
+        # Mass: shell (w^2 + u^2) + fluid added mass on w^2
         wW = w_vals * W[np.newaxis, :]
         uW = u_vals * W[np.newaxis, :]
         M_shell = p.rho_s * p.h * (wW @ w_vals.T + uW @ u_vals.T)
 
-        # Fluid added mass:  √(ρ_f R/n_i  ×  ρ_f R/n_j) × ∫ w_i w_j dA
+        # Fluid added mass:  sqrt(rho_f R/n_i  x  rho_f R/n_j) x int w_i w_j dA
         m_fl = np.array([p.rho_f * p.R / n for n in self.modes])
         sqrt_m = np.sqrt(m_fl)
         S_ww = wW @ w_vals.T
@@ -283,23 +283,23 @@ class LambRitzSolver:
     # ------------------------------------------------------------------
 
     def _constraint_matrix(self, theta_max: float, bc: str) -> np.ndarray:
-        """Constraint rows at θ = θ_max.
+        """Constraint rows at theta = theta_max.
 
-        Simply-supported:  w = 0, u_θ = 0  (2 rows)
-        Clamped:           w = 0, u_θ = 0, dw/dθ = 0  (3 rows)
+        Simply-supported:  w = 0, u_theta = 0  (2 rows)
+        Clamped:           w = 0, u_theta = 0, dw/dtheta = 0  (3 rows)
         """
         x_bc = np.cos(theta_max)
         sin_bc = np.sin(theta_max)
         N = self.N
         rows: list[np.ndarray] = []
 
-        # w(θ_max) = 0  →  Σ a_n P_n(x_bc) = 0
+        # w(theta_max) = 0  ->  Sum a_n P_n(x_bc) = 0
         c_w = np.zeros(N)
         for i, n in enumerate(self.modes):
             c_w[i] = legendre_poly(n)(x_bc)
         rows.append(c_w)
 
-        # u_θ(θ_max) = 0  →  Σ a_n c_n dP_n/dθ|_{θ_max} = 0
+        # u_theta(theta_max) = 0  ->  Sum a_n c_n dP_n/dtheta|_{theta_max} = 0
         c_u = np.zeros(N)
         for i, n in enumerate(self.modes):
             c_u[i] = self.c_n[n] * (-sin_bc * legendre_poly(n).deriv()(x_bc))
@@ -378,14 +378,14 @@ def main() -> None:
     sep = "=" * 72
 
     print(f"\n{sep}")
-    print("  RAYLEIGH-RITZ MODAL ANALYSIS — FLUID-FILLED SPHERICAL SHELL")
-    print(f"  Lamb-mode basis, Love–Kirchhoff shell theory")
+    print("  RAYLEIGH-RITZ MODAL ANALYSIS --- FLUID-FILLED SPHERICAL SHELL")
+    print(f"  Lamb-mode basis, Love--Kirchhoff shell theory")
     print(sep)
-    print(f"  E  = {props.E/1e6:.3f} MPa    ν = {props.nu}")
-    print(f"  ρ_s= {props.rho_s:.0f} kg/m³   ρ_f= {props.rho_f:.0f} kg/m³")
+    print(f"  E  = {props.E/1e6:.3f} MPa    nu = {props.nu}")
+    print(f"  rho_s= {props.rho_s:.0f} kg/m^3   rho_f= {props.rho_f:.0f} kg/m^3")
     print(f"  h  = {props.h*1e3:.1f} mm       R  = {props.R*1e3:.1f} mm")
-    print(f"  D  = {props.D:.6f} N·m      P_iap= {props.P_iap:.0f} Pa")
-    print(f"  Basis: Lamb modes n = {solver.n_min}…{solver.n_max}  "
+    print(f"  D  = {props.D:.6f} N.m      P_iap= {props.P_iap:.0f} Pa")
+    print(f"  Basis: Lamb modes n = {solver.n_min}...{solver.n_max}  "
           f"({solver.N} DOFs, {solver.n_quad}-pt quadrature)")
     print(sep)
 
@@ -408,10 +408,10 @@ def main() -> None:
         "n_quadrature": solver.n_quad,
     }
 
-    # ── Case 1: Analytical Lamb ─────────────────────────────────────────
-    print(f"\n{'─'*72}")
-    print("  CASE 1: Free Complete Sphere — Lamb (1882) Analytical")
-    print(f"{'─'*72}")
+    # -- Case 1: Analytical Lamb -----------------------------------------
+    print(f"\n{'-'*72}")
+    print("  CASE 1: Free Complete Sphere --- Lamb (1882) Analytical")
+    print(f"{'-'*72}")
     analytical: dict[int, float] = {}
     for n in range(2, 11):
         f = lamb_frequency(n, props)
@@ -419,10 +419,10 @@ def main() -> None:
         print(f"    n = {n:2d}   f = {f:8.3f} Hz")
     results["analytical_lamb_hz"] = {str(k): v for k, v in analytical.items()}
 
-    # ── Case 2: Free sphere Ritz validation ─────────────────────────────
-    print(f"\n{'─'*72}")
-    print("  CASE 2: Free Complete Sphere — Rayleigh-Ritz (validation)")
-    print(f"{'─'*72}")
+    # -- Case 2: Free sphere Ritz validation -----------------------------
+    print(f"\n{'-'*72}")
+    print("  CASE 2: Free Complete Sphere --- Rayleigh-Ritz (validation)")
+    print(f"{'-'*72}")
     freqs_free, _ = solver.solve(theta_max=np.pi, bc="free")
     vrows = _verify_ritz_vs_lamb(solver, freqs_free)
     for r in vrows:
@@ -432,39 +432,39 @@ def main() -> None:
         )
     max_err = max(r["err_pct"] for r in vrows)
     status = "PASS" if max_err < 2.0 else "CHECK"
-    print(f"    → Validation {status}: max error = {max_err:.2f} %")
+    print(f"    -> Validation {status}: max error = {max_err:.2f} %")
     results["ritz_free_sphere_hz"] = freqs_free[:10].tolist()
     results["validation_max_error_pct"] = max_err
 
-    # ── Case 3: Hemisphere simply-supported ─────────────────────────────
-    print(f"\n{'─'*72}")
-    print("  CASE 3: Hemisphere Simply-Supported at Equator (θ = π/2)")
-    print(f"{'─'*72}")
+    # -- Case 3: Hemisphere simply-supported -----------------------------
+    print(f"\n{'-'*72}")
+    print("  CASE 3: Hemisphere Simply-Supported at Equator (theta = pi/2)")
+    print(f"{'-'*72}")
     freqs_ss, _ = solver.solve(theta_max=np.pi / 2, bc="simply-supported")
     for i in range(min(8, len(freqs_ss))):
         print(f"    Mode {i+1:2d}   f = {freqs_ss[i]:8.3f} Hz")
     results["ritz_hemisphere_ss_hz"] = freqs_ss[:10].tolist()
 
-    # ── Case 4: Hemisphere clamped ──────────────────────────────────────
-    print(f"\n{'─'*72}")
-    print("  CASE 4: Hemisphere Clamped at Equator (θ = π/2)")
-    print(f"{'─'*72}")
+    # -- Case 4: Hemisphere clamped --------------------------------------
+    print(f"\n{'-'*72}")
+    print("  CASE 4: Hemisphere Clamped at Equator (theta = pi/2)")
+    print(f"{'-'*72}")
     freqs_hemi, _ = solver.solve(theta_max=np.pi / 2, bc="clamped")
     for i in range(min(8, len(freqs_hemi))):
         print(f"    Mode {i+1:2d}   f = {freqs_hemi[i]:8.3f} Hz")
     results["ritz_hemisphere_clamped_hz"] = freqs_hemi[:10].tolist()
 
-    # ── Case 5: 25 % surface constrained ────────────────────────────────
+    # -- Case 5: 25 % surface constrained --------------------------------
     theta_25 = 2.0 * np.pi / 3.0
-    print(f"\n{'─'*72}")
-    print(f"  CASE 5: 25 % Surface Constrained (θ_max = 2π/3 = 120°)")
-    print(f"{'─'*72}")
+    print(f"\n{'-'*72}")
+    print(f"  CASE 5: 25 % Surface Constrained (theta_max = 2pi/3 = 120 deg)")
+    print(f"{'-'*72}")
     freqs_25, _ = solver.solve(theta_max=theta_25, bc="clamped")
     for i in range(min(8, len(freqs_25))):
         print(f"    Mode {i+1:2d}   f = {freqs_25[i]:8.3f} Hz")
     results["ritz_25pct_constrained_hz"] = freqs_25[:10].tolist()
 
-    # ── Comparison table (self-consistent Ritz reference) ──────────────
+    # -- Comparison table (self-consistent Ritz reference) --------------
     f_a = analytical[2]
     f_ref = float(freqs_free[0]) if len(freqs_free) else 0.0
     f_ss = float(freqs_ss[0]) if len(freqs_ss) else 0.0
@@ -475,10 +475,10 @@ def main() -> None:
     print("  COMPARISON TABLE  (fundamental flexural mode)")
     print(f"  Reference: free-sphere Ritz = {f_ref:.3f} Hz")
     print(sep)
-    hdr = (f"  {'BC Case':<35s} {'f₁ (Hz)':>10s} "
+    hdr = (f"  {'BC Case':<35s} {'f_1 (Hz)':>10s} "
            f"{'vs Ritz':>10s} {'vs Lamb':>10s}")
     print(hdr)
-    print(f"  {'─'*65}")
+    print(f"  {'-'*65}")
 
     def _row(lbl, f):
         r1 = f / f_ref if f_ref > 0 else 0.0
@@ -492,9 +492,9 @@ def main() -> None:
     print(_row("Hemisphere clamped", f_hemi))
     print(_row("25 % surface constrained", f_25))
 
-    # ── Dry-shell comparison ────────────────────────────────────────────
-    print(f"\n  {'─'*65}")
-    print(f"  DRY SHELL (no fluid, ρ_f = 0):")
+    # -- Dry-shell comparison --------------------------------------------
+    print(f"\n  {'-'*65}")
+    print(f"  DRY SHELL (no fluid, rho_f = 0):")
     props_dry = ShellProperties(rho_f=0.0)
     solver_dry = LambRitzSolver(props_dry, n_min=2, n_max=15, n_quad=300)
     f_dry_free_a = lamb_frequency(2, props_dry)
@@ -524,40 +524,40 @@ def main() -> None:
         "dry_25pct_constrained_hz": fd_25v,
     }
 
-    # ── Physical interpretation ─────────────────────────────────────────
+    # -- Physical interpretation -----------------------------------------
     r_hemi = f_hemi / f_ref if f_ref else 0
     r_25 = f_25 / f_ref if f_ref else 0
     r_dry = fd_h / fd_f if fd_f else 0
-    print(f"\n{'─'*72}")
+    print(f"\n{'-'*72}")
     print("  PHYSICAL INTERPRETATION")
-    print(f"{'─'*72}")
+    print(f"{'-'*72}")
     print(f"  WITH FLUID (physiological model):")
     print(f"    Clamped hemisphere / free sphere = {r_hemi:.3f}")
     print(f"    25 % constrained  / free sphere  = {r_25:.3f}")
-    print(f"    → BC effects shift fundamental frequency by {abs(1-r_hemi)*100:.1f} %")
+    print(f"    -> BC effects shift fundamental frequency by {abs(1-r_hemi)*100:.1f} %")
     print()
     print(f"  DRY SHELL (structural validation):")
     print(f"    Clamped hemisphere / free sphere = {r_dry:.3f}")
-    print(f"    → Without fluid, BC effects are {abs(1-r_dry)*100:.1f} %")
+    print(f"    -> Without fluid, BC effects are {abs(1-r_dry)*100:.1f} %")
     print()
     print("  The fluid added mass dominates the effective inertia")
-    print(f"  (m_fluid / m_shell ≈ {props.rho_f * props.R / 2 / (props.rho_s * props.h):.1f}× "
+    print(f"  (m_fluid / m_shell ~ {props.rho_f * props.R / 2 / (props.rho_s * props.h):.1f}x "
           "for n = 2), keeping all configurations in the")
-    print(f"  same low-frequency band ({min(f_25, f_hemi):.1f}–{f_ref:.1f} Hz).")
+    print(f"  same low-frequency band ({min(f_25, f_hemi):.1f}--{f_ref:.1f} Hz).")
     print()
     print("  For Reviewer B: the free-sphere analytical model remains a")
     print("  valid first-order estimate.  Partial BCs shift the fundamental")
-    print(f"  frequency by ~{abs(1-r_hemi)*100:.0f} %, well within the ±50–100 %")
+    print(f"  frequency by ~{abs(1-r_hemi)*100:.0f} %, well within the +/-50--100 %")
     print("  uncertainty from tissue material properties.")
     print(sep)
 
-    # ── Save ────────────────────────────────────────────────────────────
+    # -- Save ------------------------------------------------------------
     out_dir = Path("data/results")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "fea_modal_results.json"
     with open(out_path, "w") as fp:
         json.dump(results, fp, indent=2)
-    print(f"\n  Results saved → {out_path}\n")
+    print(f"\n  Results saved -> {out_path}\n")
 
 
 if __name__ == "__main__":
