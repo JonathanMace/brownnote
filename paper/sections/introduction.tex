@@ -1,48 +1,53 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Low-frequency acoustic and vibrational exposures are ubiquitous in
-occupational and environmental settings---from wind turbines and heavy
-machinery to transport vehicles and industrial plant.  The human body is known
-to exhibit resonance phenomena in the \SIrange{4}{8}{\hertz} range under
-whole-body vibration, with the abdominal viscera identified as the primary
-resonant subsystem \cite{iso2631,griffin1990handbook}.
+Few acoustic myths have proven as durable---or as evocative---as the ``brown
+note'': a hypothetical infrasonic frequency, typically cited in the
+\SIrange{5}{9}{\hertz} range, purported to cause involuntary loss of bowel
+control by resonating the abdominal cavity.  The claim has circulated in
+military folklore, audio engineering lore, and popular media for decades,
+surviving at least one televised debunking \cite{Leventhall2007}.  Yet for
+all its cultural staying power, the brown note has received remarkably little
+rigorous analytical attention.  The hypothesis has been dismissed, but never
+properly \emph{examined}.
 
-A persistent claim in popular culture holds that a specific infrasonic
-frequency in the \SIrange{5}{9}{\hertz} range---the so-called ``brown
-note''---can cause involuntary loss of bowel control through resonance of the
-abdominal cavity.  Despite widespread repetition, no rigorous scientific study
-has confirmed this claim, and it has been explicitly debunked in controlled
-experiments \cite{Leventhall2007}.
+This is unfortunate, because the underlying physics is neither trivial nor
+implausible on its face.  The human abdomen does resonate.  ISO~2631
+documents peak abdominal transmissibility at \SIrange{4}{8}{\hertz} under
+whole-body vibration \cite{iso2631,griffin1990handbook}, and occupational
+health studies report gastrointestinal complaints among operators of heavy
+equipment exposed to vibration in precisely this frequency band.  The question
+is not whether abdominal resonance exists---it plainly does---but whether
+\emph{airborne sound} can excite it to any meaningful degree.
 
-However, the complete absence of a \emph{quantitative mechanistic analysis}
-leaves the question incompletely resolved.  No study has:
+No prior study has:
 \begin{enumerate}
   \item derived abdominal cavity eigenfrequencies from first-principles
     shell theory with proper fluid--structure coupling;
   \item quantified the airborne acoustic coupling coefficient for flexural
     modes in the long-wavelength limit; or
-  \item compared airborne and mechanical excitation pathways using a common
+  \item compared airborne and mechanical excitation pathways within a common
     modal framework.
 \end{enumerate}
 
-The present work addresses all three gaps. We model the abdomen as a
-fluid-filled viscoelastic oblate spheroidal shell and derive natural
-frequencies for both breathing ($n=0$) and flexural ($n \geq 2$) mode
-families.  We then compare the efficiency of airborne acoustic coupling
-(subject to a $(ka)^n$ penalty) against mechanical whole-body vibration
-coupling (which bypasses this penalty entirely).
+We address all three gaps.  We model the abdomen as a fluid-filled
+viscoelastic oblate spheroidal shell, derive natural frequencies for both
+breathing ($n=0$) and flexural ($n \geq 2$) mode families, and compare
+airborne acoustic coupling---subject to a severe $(ka)^n$ penalty at
+infrasonic wavelengths---against direct mechanical (whole-body) vibration
+coupling, which suffers no such penalty.
 
-The central finding is that the coupling disparity between these two
-pathways---a factor of $10^3$--$10^4$---quantitatively explains why
-whole-body vibration at \SIrange{4}{8}{\hertz} produces gastrointestinal
-effects while airborne infrasound at comparable frequencies does not.
+The central finding is a coupling disparity of roughly $10^4$ between these
+two pathways.  This single number resolves an apparent paradox in the
+literature: whole-body vibration at \SIrange{4}{8}{\hertz} produces
+well-documented gastrointestinal effects, while airborne infrasound at
+comparable frequencies does not.  The brown note, it turns out, is not so much
+wrong as misattributed---the resonance is real, but the postulated excitation
+mechanism is not up to the job.
 
-The remainder of this paper is organised as follows. Section~\ref{sec:formulation}
-develops the mathematical formulation for the fluid-filled viscoelastic shell,
-including both breathing and flexural mode families and the two coupling
-pathways. Section~\ref{sec:results} presents a comprehensive parametric study
-and validates the model against ISO~2631 data. Section~\ref{sec:coupling}
-quantifies the airborne--mechanical coupling disparity.
-Section~\ref{sec:discussion} interprets the results and discusses limitations,
-and Section~\ref{sec:conclusion} summarises the conclusions.
+The remainder of this paper is organised as follows.
+Section~\ref{sec:formulation} develops the mathematical formulation.
+Section~\ref{sec:results} presents a parametric study and validates the model
+against ISO~2631 data.  Section~\ref{sec:coupling} quantifies the coupling
+disparity.  Section~\ref{sec:discussion} discusses implications, alternative
+pathways, and limitations, and Section~\ref{sec:conclusion} draws conclusions.

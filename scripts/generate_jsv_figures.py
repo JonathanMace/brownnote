@@ -481,27 +481,28 @@ def fig_coupling_comparison():
 
     # PIEZO threshold
     ax1.axhline(0.5, color=C_RED, ls=':', lw=0.8, zorder=5)
-    ax1.text(19.5, 0.6, 'PIEZO\nthreshold', fontsize=6, color=C_RED,
-             ha='right', va='bottom')
+    ax1.text(19.5, 0.35, 'PIEZO threshold', fontsize=5.5, color=C_RED,
+             ha='right', va='top')
 
     # ISO band
     ax1.axvspan(4, 8, color=C_CYAN, alpha=0.12, zorder=0)
 
-    # Gap annotation
-    # Find peak values
+    # Gap annotation — draw a vertical arrow between curves at resonance
     idx_peak = np.argmin(np.abs(freqs - f2))
     if idx_peak > 0 and disp_mech[idx_peak] > 0 and disp_air[idx_peak] > 0:
         ratio = disp_mech[idx_peak] / disp_air[idx_peak]
-        ax1.annotate(f'~{ratio:.0f}×', xy=(f2, disp_air[idx_peak]),
-                     xytext=(f2 + 2.5, disp_air[idx_peak] * 5),
-                     fontsize=7, color=C_GRAY,
-                     arrowprops=dict(arrowstyle='->', color=C_GRAY, lw=0.6))
+        y_mid = np.sqrt(disp_mech[idx_peak] * disp_air[idx_peak])
+        ax1.annotate('', xy=(f2, disp_mech[idx_peak]),
+                     xytext=(f2, disp_air[idx_peak]),
+                     arrowprops=dict(arrowstyle='<->', color=C_GRAY, lw=0.8))
+        ax1.text(f2 + 0.6, y_mid, f'{ratio:.0f}×',
+                 fontsize=7, color=C_GRAY, va='center', fontweight='bold')
 
     ax1.set_xlabel('Frequency (Hz)')
     ax1.set_ylabel('Displacement (μm)')
     ax1.set_xlim(1, 20)
-    ax1.set_ylim(1e-6, 100)
-    ax1.legend(loc='upper right', fontsize=7, frameon=True)
+    ax1.set_ylim(1e-3, 2e4)
+    ax1.legend(loc='lower left', fontsize=7, frameon=True)
     ax1.text(0.03, 0.95, '(a)', transform=ax1.transAxes, fontsize=9,
              fontweight='bold', va='top')
 
@@ -647,7 +648,7 @@ def fig_energy_budget():
 
     # Annotate with orders of magnitude
     for i, (bar, val) in enumerate(zip(bars, values)):
-        if val > 1e-30:
+        if val > 1e-24:
             exp = int(np.floor(np.log10(val)))
             mantissa = val / 10**exp
             if abs(mantissa - 1.0) < 0.05:
@@ -655,6 +656,10 @@ def fig_energy_budget():
             else:
                 txt = f'{mantissa:.1f}×$10^{{{exp}}}$'
             ax.text(val * 2, i, txt, va='center', fontsize=6)
+        else:
+            # Extremely small value — label at a visible position
+            ax.text(1e-21, i, r'$\approx 0$', va='center', fontsize=6,
+                    color=C_GRAY)
 
     # Efficiency annotation
     eff_str = f'Absorption efficiency: {efficiency:.1e}'
@@ -733,67 +738,89 @@ def fig_iso2631_validation():
 def fig_multilayer_comparison():
     fig, axes = plt.subplots(1, 3, figsize=(DOUBLE_COL, 2.8))
 
-    # Compute properties for relaxed multilayer
+    # Compute CLT composite properties for relaxed multilayer
     layers_r = relaxed_layers()
     props_r = compute_composite_properties(layers_r)
-    model_ml = multilayer_to_v2_model(layers_r)
-    f_ml = flexural_mode_frequencies_v2(model_ml, n_max=2)[2]
 
-    # Equivalent homogeneous model
-    model_homo = AbdominalModelV2(
-        E=props_r['E_eff_Pa'], a=0.18, b=0.18, c=0.12,
-        h=props_r['h_total_m'], nu=props_r['nu_eff'],
-        rho_wall=props_r['rho_eff'],
+    # The key comparison: CLT bending stiffness D_eff (with parallel axis
+    # theorem) vs homogeneous D = E_eff × h³ / 12(1-ν²).
+    # To get frequencies, we create two AbdominalModelV2 instances:
+    #   - "CLT": uses E_bend derived from D_eff so that D = E_bend h³/12(1-ν²)
+    #   - "Homogeneous": uses E_eff (membrane-averaged)
+
+    h_total = props_r['h_total_m']
+    nu_eff = props_r['nu_eff']
+    rho_eff = props_r['rho_eff']
+    D_eff = props_r['D_eff']
+    D_homo = props_r['D_homogeneous']
+    E_eff_membrane = props_r['E_eff_Pa']
+    # Back-compute E that gives D_eff with homogeneous formula
+    E_CLT_bend = D_eff * 12 * (1 - nu_eff**2) / h_total**3
+
+    model_CLT = AbdominalModelV2(
+        E=E_CLT_bend, a=0.18, b=0.18, c=0.12,
+        h=h_total, nu=nu_eff, rho_wall=rho_eff,
     )
+    model_homo = AbdominalModelV2(
+        E=E_eff_membrane, a=0.18, b=0.18, c=0.12,
+        h=h_total, nu=nu_eff, rho_wall=rho_eff,
+    )
+    f_CLT = flexural_mode_frequencies_v2(model_CLT, n_max=2)[2]
     f_homo = flexural_mode_frequencies_v2(model_homo, n_max=2)[2]
 
-    labels = ['Multilayer\n(6-layer)', 'Homogeneous\n(effective)']
+    labels = ['Multilayer\n(CLT)', 'Homogeneous\n(avg)']
     x_pos = np.arange(len(labels))
     w = 0.55
 
     # (a) Frequency comparison
     ax = axes[0]
-    vals = [f_ml, f_homo]
-    b = ax.bar(x_pos, vals, w, color=[C_BLUE, C_ORANGE], edgecolor='k',
-               linewidth=0.5, zorder=3)
+    vals = [f_CLT, f_homo]
+    ax.bar(x_pos, vals, w, color=[C_BLUE, C_ORANGE], edgecolor='k',
+           linewidth=0.5, zorder=3)
     ax.set_ylabel('$f_2$ (Hz)')
     ax.set_xticks(x_pos)
     ax.set_xticklabels(labels, fontsize=7)
-    pct = abs(f_ml - f_homo) / f_ml * 100
+    pct = abs(f_CLT - f_homo) / f_homo * 100
     ax.text(0.5, max(vals)*1.05,
-            f'Δ = {pct:.1f}%', fontsize=7, ha='center', va='bottom')
+            f'$\\Delta$ = {pct:.1f}%', fontsize=7, ha='center', va='bottom')
     for i, v in enumerate(vals):
         ax.text(i, v + 0.05, f'{v:.2f}', ha='center', va='bottom', fontsize=7)
+    ax.set_ylim(0, max(vals)*1.3)
     ax.text(0.05, 0.95, '(a)', transform=ax.transAxes, fontsize=9,
             fontweight='bold', va='top')
 
-    # (b) Effective E comparison
+    # (b) Effective E comparison (bending-derived vs membrane-averaged)
     ax = axes[1]
-    E_ml = model_ml.E / 1e6
-    E_homo = model_homo.E / 1e6
-    vals_e = [E_ml, E_homo]
+    E_CLT_MPa = E_CLT_bend / 1e6
+    E_homo_MPa = E_eff_membrane / 1e6
+    vals_e = [E_CLT_MPa, E_homo_MPa]
     ax.bar(x_pos, vals_e, w, color=[C_BLUE, C_ORANGE], edgecolor='k',
            linewidth=0.5, zorder=3)
-    ax.set_ylabel('$E_\\mathrm{eff}$ (MPa)')
+    ax.set_ylabel('Effective $E$ (MPa)')
     ax.set_xticks(x_pos)
     ax.set_xticklabels(labels, fontsize=7)
     for i, v in enumerate(vals_e):
-        ax.text(i, v + v*0.03, f'{v:.4f}', ha='center', va='bottom', fontsize=7)
+        ax.text(i, v + max(vals_e)*0.02, f'{v:.4f}', ha='center',
+                va='bottom', fontsize=7)
+    ax.set_ylim(0, max(vals_e)*1.25)
     ax.text(0.05, 0.95, '(b)', transform=ax.transAxes, fontsize=9,
             fontweight='bold', va='top')
 
-    # (c) Effective h comparison
+    # (c) Bending stiffness D comparison (the real difference)
     ax = axes[2]
-    h_ml = model_ml.h * 1000
-    h_homo = model_homo.h * 1000
-    vals_h = [h_ml, h_homo]
-    ax.bar(x_pos, vals_h, w, color=[C_BLUE, C_ORANGE], edgecolor='k',
+    vals_d = [D_eff * 1e3, D_homo * 1e3]  # convert to mN·m
+    ax.bar(x_pos, vals_d, w, color=[C_BLUE, C_ORANGE], edgecolor='k',
            linewidth=0.5, zorder=3)
-    ax.set_ylabel('$h_\\mathrm{eff}$ (mm)')
+    ax.set_ylabel('Bending stiffness $D$ (mN·m)')
     ax.set_xticks(x_pos)
     ax.set_xticklabels(labels, fontsize=7)
-    for i, v in enumerate(vals_h):
-        ax.text(i, v + 0.2, f'{v:.1f}', ha='center', va='bottom', fontsize=7)
+    D_pct = abs(D_eff - D_homo) / D_homo * 100
+    ax.text(0.5, max(vals_d)*1.05,
+            f'$\\Delta$ = {D_pct:.0f}%', fontsize=7, ha='center', va='bottom')
+    for i, v in enumerate(vals_d):
+        ax.text(i, v + max(vals_d)*0.02, f'{v:.1f}', ha='center',
+                va='bottom', fontsize=7)
+    ax.set_ylim(0, max(vals_d)*1.3)
     ax.text(0.05, 0.95, '(c)', transform=ax.transAxes, fontsize=9,
             fontweight='bold', va='top')
 

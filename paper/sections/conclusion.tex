@@ -1,25 +1,39 @@
 \section{Conclusions}
 \label{sec:conclusion}
 
-A fluid-filled viscoelastic oblate spheroidal shell model of the human abdomen
-reveals two distinct mode families with fundamentally different physics. The
-breathing mode ($n = 0$), governed by the fluid bulk modulus, occurs at
-approximately \SI{2900}{\hertz} and is irrelevant to infrasonic exposure.
-Flexural modes ($n \geq 2$), in which the fluid acts only as added mass, fall
-in the \SIrange{4}{10}{\hertz} range for relaxed musculature, consistent with
-ISO~2631 whole-body vibration data.
+We have modelled the human abdomen as a fluid-filled viscoelastic oblate
+spheroidal shell and identified two physically distinct mode families.
+The breathing mode ($n = 0$), governed by the fluid bulk modulus, sits at
+approximately \SI{2500}{\hertz}---far above any frequency that could
+reasonably be called infrasonic.  Flexural modes ($n \geq 2$), in which the
+shell changes shape without compressing the fluid, fall in the
+\SIrange{4}{10}{\hertz} range for relaxed musculature and match the abdominal
+resonance band documented in ISO~2631.  The abdomen does, in fact, resonate at
+infrasonic frequencies.
 
-The central finding is a $10^3$--$10^4$ coupling disparity between mechanical
-and airborne excitation of these flexural modes. This disparity, arising from
-the $(ka)^n$ long-wavelength penalty on acoustic coupling, provides a
-quantitative mechanistic explanation for an otherwise puzzling asymmetry in the
-empirical literature: mechanical vibration at \SIrange{4}{8}{\hertz}
-produces gastrointestinal effects, while airborne infrasound at comparable
-frequencies does not. The ``brown note'' hypothesis is thus physically
-grounded---the abdominal resonance is real---but the postulated \emph{airborne}
-excitation pathway is energetically negligible.
+The catch---and it is a substantial one---lies in the coupling.  Airborne
+sound at these frequencies has a wavelength exceeding \SI{85}{\metre}, making
+the abdomen acoustically negligible.  The $(ka)^n$ coupling penalty reduces
+the effective driving pressure by four orders of magnitude, and the
+energy-consistent analysis shows an absorption efficiency of $\sim 10^{-14}$.
+Reaching the mechanotransduction threshold via airborne infrasound alone
+would require approximately \SI{158}{\decibel}---a level at which structural
+damage to the middle ear, blast lung injury, and building collapse would all
+present more immediate concerns than any intestinal embarrassment.
+
+Mechanical whole-body vibration, by contrast, couples directly and produces
+displacements $10^4$ times larger at occupational exposure levels.  This
+disparity---arising from basic physics rather than any exotic biology---provides
+a clean, quantitative explanation for a longstanding asymmetry in the
+empirical literature.
+
+The brown note, then, is a half-truth.  The resonance it invokes is genuine;
+the mechanism it implies is not.  What popular culture attributes to airborne
+sound is, in reality, the province of mechanical vibration---a distinction
+that matters considerably for occupational health standards and rather less
+for horror film screenwriters.
 
 Future work should validate the boundary condition assumptions through finite
-element analysis, extend the model to include gas pocket resonance in the
-bowel, and investigate the non-linear regime relevant to high-amplitude
-mechanical vibration.
+element analysis of anatomically realistic geometries, investigate the role of
+bowel gas pockets as localised acoustic transducers, and extend the model into
+the nonlinear regime relevant to high-amplitude mechanical excitation.

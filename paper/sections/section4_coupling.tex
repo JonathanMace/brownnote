@@ -1,104 +1,128 @@
 \section{Airborne vs.\ Mechanical Coupling}\label{sec:coupling}
 
-This section presents the central novel result of this work: a quantitative
-comparison of airborne acoustic and mechanical (whole-body vibration) coupling
-to the abdominal flexural modes derived in \S\ref{sec:formulation}.
+Having established that the abdomen possesses flexural resonances squarely
+in the infrasonic range, we now confront the more pressing question: can
+airborne sound actually \emph{excite} them?  The short answer is sobering
+for proponents of the brown note.
 
 \subsection{Airborne Acoustic Pathway}
 
-Table~\ref{tab:airborne} summarises the predicted airborne displacement at
-resonance for the $n=2$ flexural mode across a range of sound pressure levels.
+At \SI{4}{\hertz}, the acoustic wavelength in air exceeds \SI{85}{\metre}---
+some 500 times the abdominal radius.  The abdomen, acoustically speaking,
+is invisible.  Table~\ref{tab:airborne} quantifies this
+invisibility using the energy-consistent reciprocity analysis developed in
+\S\ref{sec:formulation}.
 
 \begin{table}[htbp]
   \centering
-  \caption{Airborne displacement at $n=2$ resonance ($f_2 = \SI{4.4}{\hertz}$,
-  $Q = 3.3$, $E = \SI{0.1}{\mega\pascal}$).}
+  \caption{Energy-consistent airborne displacement at $n=2$ resonance
+  ($f_2 = \SI{4.0}{\hertz}$, $Q = 4.0$, canonical parameters).
+  The pressure-based upper bound overestimates by a factor of
+  $\sqrt{2Q/\zeta_\mathrm{rad}} \approx 13.4$.}
   \label{tab:airborne}
   \begin{tabular}{rcccc}
-    \hline
-    SPL (dB) & $p_\mathrm{inc}$ (Pa) & $p_\mathrm{eff}$ (Pa) &
-    $\xi$ ($\mu$m) & PIEZO? \\
-    \hline
-    100 & 2.0 & $3.2 \times 10^{-4}$ & 0.014 & No \\
-    110 & 6.3 & $1.0 \times 10^{-3}$ & 0.045 & No \\
-    120 & 20.0 & $3.2 \times 10^{-3}$ & 0.14  & No \\
-    130 & 63.2 & $1.0 \times 10^{-2}$ & 0.45  & No \\
-    140 & 200.0 & $3.2 \times 10^{-2}$ & 1.44  & Marginal \\
-    \hline
+    \toprule
+    SPL (dB) & $p_\mathrm{inc}$ (Pa) &
+    $\xi_\mathrm{energy}$ ($\mu$m) &
+    $\xi_\mathrm{pressure}$ ($\mu$m) & PIEZO? \\
+    \midrule
+    100 & 2.0  & 0.001 & 0.018 & No \\
+    110 & 6.3  & 0.004 & 0.058 & No \\
+    120 & 20.0 & 0.014 & 0.18  & No \\
+    130 & 63.2 & 0.044 & 0.58  & No \\
+    140 & 200  & 0.14  & 1.84  & No \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
-At \SI{120}{\decibel} SPL (the threshold of pain), the predicted wall
-displacement is \SI{0.14}{\micro\metre}---well below the $0.5$--$\SI{2.0}
-{\micro\metre}$ activation range of mechanosensitive PIEZO channels.  Reaching
-the \SI{1}{\micro\metre} threshold requires approximately \SI{137}{\decibel},
-a level associated with close proximity to jet engines and acoustic weapons.
+At \SI{120}{\decibel} SPL---the threshold of pain, and roughly the level at
+which conversation becomes impossible---the energy-consistent wall
+displacement is \SI{0.014}{\micro\metre}.  This falls two orders of magnitude
+below the $0.5$--$\SI{2.0}{\micro\metre}$ activation range of
+mechanosensitive PIEZO channels \cite{coste2010piezo1}.  Reaching the
+\SI{1}{\micro\metre} threshold demands approximately \SI{158}{\decibel},
+a level that would cause immediate structural damage to the ear and is
+available only from explosive blasts and rocket launches.  One might
+reasonably conclude that hearing loss would present a more urgent clinical
+concern than any intestinal disturbance.
 
 \subsection{Mechanical (Whole-Body Vibration) Pathway}
 
-In contrast, mechanical vibration transmitted through the skeleton couples
-directly to the shell without the $(ka)^n$ penalty.
-Table~\ref{tab:mechanical} shows the predicted relative displacement for the
-$n=2$ mode under whole-body vibration.
+Mechanical vibration, by contrast, does not knock politely at the acoustic
+impedance door---it kicks it open.  Vibration transmitted through the
+skeleton couples directly to the abdominal wall, bypassing the $(ka)^n$
+penalty entirely.  Table~\ref{tab:mechanical} tells a very different story.
 
 \begin{table}[htbp]
   \centering
   \caption{Mechanical coupling at $n=2$ resonance
-  ($f_2 = \SI{4.4}{\hertz}$, $Q = 3.3$).}
+  ($f_2 = \SI{4.0}{\hertz}$, $Q = 4.0$).  The EU Directive 2002/44/EC
+  action value is \SI{0.5}{\metre\per\second\squared}.}
   \label{tab:mechanical}
   \begin{tabular}{rccc}
-    \hline
+    \toprule
     $a_\mathrm{rms}$ (m/s$^2$) & $x_\mathrm{base}$ ($\mu$m) &
     $\xi_\mathrm{rel}$ ($\mu$m) & PIEZO? \\
-    \hline
-    0.1 & 187 & 623 & Yes \\
-    0.5 (EU action) & 935 & 3115 & Yes \\
-    1.0 & 1869 & 6230 & Yes \\
-    1.15 (EU limit) & 2150 & 7165 & Yes \\
-    \hline
+    \midrule
+    0.1 & 162  & 649  & Yes \\
+    0.5 (EU action) & 811  & 3243 & Yes \\
+    1.0 & 1622 & 6486 & Yes \\
+    1.15 (EU limit) & 1865 & 7459 & Yes \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
-At the EU Whole-Body Vibration Directive action value of
-\SI{0.5}{\metre\per\second\squared}, the predicted displacement is
-\SI{3115}{\micro\metre}---exceeding the PIEZO threshold by more than three
-orders of magnitude.
+At the EU action value of \SI{0.5}{\metre\per\second\squared}, the predicted
+displacement exceeds the PIEZO threshold by more than three orders of
+magnitude.  Unlike the airborne case, this is not a theoretical curiosity:
+it is the everyday reality for operators of heavy equipment, long-haul
+drivers, and helicopter pilots---populations in which gastrointestinal
+complaints are, perhaps unsurprisingly, well documented
+\cite{griffin1990handbook}.
 
-\subsection{Coupling Ratio}
+\subsection{The Coupling Ratio}
 
 The ratio of mechanical to airborne displacement defines the coupling
-disparity:
+disparity at its starkest:
 \begin{equation}
   \mathcal{R} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}
-  \sim 10^3 \text{--} 10^4.
+  \approx \frac{649}{0.014} \approx 4.6 \times 10^4.
+  \label{eq:coupling_ratio}
 \end{equation}
-This ratio depends primarily on $(ka)^{-n}$ and the base-excitation
-amplification $H_\mathrm{rel}$, and is robust to uncertainties in material
-properties because both pathways excite the same modes.
+This four-order-of-magnitude gap is robust to parameter uncertainties because
+both pathways excite the \emph{same} modal structure---the ratio depends
+primarily on $(ka)^{-n}$ and the base-excitation transfer function, neither of
+which is sensitive to tissue properties.  One could double the elastic modulus,
+halve the wall thickness, or relocate the subject to Jupiter, and the ratio
+would scarcely budge.
 
 \subsection{Energy Budget}
 
-To verify self-consistency, we compute the absorption cross-section using
-reciprocity:
+We verify self-consistency through the absorption cross-section derived from
+reciprocity \cite{junger2012sound}:
 \begin{equation}
   \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
   \,\frac{\Gamma_\mathrm{rad}}{\Gamma_\mathrm{total}},
 \end{equation}
-where $\Gamma_\mathrm{rad}$ is the radiation damping width and
-$\Gamma_\mathrm{total} = \Gamma_\mathrm{rad} + \Gamma_\mathrm{struct}$.
-For the $n=2$ mode in air, $\zeta_\mathrm{rad} \approx 10^{-15}$ whereas
-$\zeta_\mathrm{struct} = 0.15$, giving an absorption efficiency of order
-$10^{-14}$.  The shell is effectively transparent to airborne infrasound.
+where $\Gamma_\mathrm{rad}$ and $\Gamma_\mathrm{total}$ are the radiation and
+total damping widths, respectively.  For the $n=2$ mode in air,
+$\zeta_\mathrm{rad} \approx 10^{-15}$ whereas
+$\zeta_\mathrm{struct} = 0.125$, giving an absorption efficiency of order
+$10^{-14}$.  The shell absorbs roughly one part in a hundred trillion of
+the incident acoustic energy---a figure that puts the brown note hypothesis
+on rather thin thermodynamic ice.
 
 \subsection{Comparison with Empirical Evidence}
 
-The model predictions are consistent with two independent bodies of evidence:
+The model predictions align with two otherwise contradictory bodies of
+evidence:
 \begin{itemize}
-  \item \textbf{WBV studies}: ISO~2631 documents gastrointestinal symptoms at
-    $4$--$\SI{8}{\hertz}$ under mechanical vibration \cite{iso2631}.
+  \item \textbf{WBV studies}: ISO~2631 documents gastrointestinal symptoms
+    at $4$--$\SI{8}{\hertz}$ under mechanical vibration \cite{iso2631}.
+    Our model explains \emph{why} this frequency range is problematic.
   \item \textbf{Airborne infrasound studies}: No gastrointestinal effects
-    have been observed at SPL $\leq \SI{150}{\decibel}$ \cite{Leventhall2007}.
+    have been observed at SPL $\leq \SI{150}{\decibel}$
+    \cite{Leventhall2007}.  Our model explains why they should not be.
 \end{itemize}
-The coupling disparity provides a quantitative explanation for this apparent
-contradiction: the two bodies of literature address different excitation
-mechanisms with fundamentally different coupling efficiencies.
+The coupling disparity resolves this apparent contradiction: both communities
+are studying the same resonance through very different ends of the telescope.
