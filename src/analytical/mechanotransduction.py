@@ -1,17 +1,15 @@
 """
 Mechanotransduction pathway analysis for infrasound-induced GI effects.
 
+UPDATED TO V2 MODEL — uses corrected flexural mode physics.
+
 Connects:
-  1. Acoustic pressure (SPL) → tissue displacement
+  1. Acoustic pressure (SPL) → tissue displacement (via v2 flexural modes)
   2. Tissue displacement → PIEZO channel activation
   3. PIEZO activation → neural signaling → reflex potential
 
-This script quantifies whether infrasound at abdominal resonance
-frequencies can plausibly activate mechanosensitive ion channels
-in the intestinal wall.
-
 Key thresholds (from literature):
-  - PIEZO1/PIEZO2 activation: 0.5-2.0 μm displacement
+  - PIEZO1/PIEZO2 activation: 0.5-2.0 μm displacement (cell-level)
   - Defecation reflex: 5-15 mmHg rectal distension pressure
   - Vagal afferent activation: ~1-5 μm tissue strain
 
@@ -19,17 +17,18 @@ References:
   - Zeitzschel & Lechner (2024) Channels 18(1):2355123
   - Frontiers Physiol (2024) 15:1356317 — PIEZO in intestinal tract
   - ISO 2631-1:1997 — Whole-body vibration
+  - Coste et al. (2010) Science 330(6000):55-60 — PIEZO1 discovery
 """
 
 import numpy as np
-import json
 from dataclasses import dataclass
 from typing import Optional
 
-# Import our shell model
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from analytical.natural_frequency import AbdominalModel, shell_modal_frequencies, breathing_mode_frequency
+from analytical.natural_frequency_v2 import (
+    AbdominalModelV2, flexural_mode_frequencies_v2, breathing_mode_v2,
+)
 
 
 @dataclass
@@ -110,29 +109,39 @@ def compute_displacement_field(
     }
 
 
-def find_piezo_activation_threshold(
-    resonance_freq: float,
-    Q: float,
+def find_piezo_activation_threshold_v2(
+    model: AbdominalModelV2,
+    mode_n: int = 2,
     piezo_threshold_um: float = 1.0,
-    params: Optional[MechanotransductionParams] = None,
 ) -> float:
     """
-    Find the minimum SPL (dB) at the resonance frequency needed to
-    produce tissue displacement exceeding the PIEZO channel threshold.
+    Find the minimum SPL (dB) at resonance needed to produce tissue
+    displacement exceeding the PIEZO channel threshold, using v2 physics.
 
+    Uses (ka)^n coupling for airborne path.
     Returns SPL in dB.
     """
-    if params is None:
-        params = MechanotransductionParams()
+    freqs = flexural_mode_frequencies_v2(model, n_max=mode_n)
+    f_n = freqs[mode_n]
+    R = model.equivalent_sphere_radius
+    ka = 2 * np.pi * f_n * R / 343.0
+
+    # Modal stiffness
+    D = model.D
+    E, h, nu = model.E, model.h, model.nu
+    n = mode_n
+    K_bend = n*(n-1)*(n+2)**2 * D / R**4
+    lam_n = (n**2+n-2+2*nu)/(n**2+n+1-nu)
+    K_memb = E*h/R**2 * lam_n
+    K_pre = model.P_iap/R * (n-1)*(n+2)
+    K_total = K_bend + K_memb + K_pre
+
+    # At resonance: xi = p_eff / K_total * Q = p_inc * (ka)^n / K_total * Q
+    # Solve for p_inc:
+    target_xi = piezo_threshold_um * 1e-6
+    p_required = target_xi * K_total / (model.Q * ka**n)
 
     p_ref = 20e-6
-    target_xi = piezo_threshold_um * 1e-6  # convert to meters
-
-    # At resonance, H = Q (for underdamped system)
-    # displacement = (p / (rho * c)) / (2*pi*f) * Q
-    # Solve for p:
-    p_required = target_xi * (2 * np.pi * resonance_freq) * params.rho_tissue * params.c_tissue / Q
-
     spl = 20 * np.log10(p_required / p_ref)
     return spl
 
@@ -167,133 +176,104 @@ def pressure_from_displacement(
 if __name__ == "__main__":
     print()
     print("=" * 70)
-    print("  BROWNTONE — Mechanotransduction Pathway Analysis")
+    print("  BROWNTONE — Mechanotransduction Pathway Analysis (v2)")
     print("  Can infrasound activate PIEZO channels in the intestinal wall?")
     print("=" * 70)
     print()
 
     params = MechanotransductionParams()
-    model = AbdominalModel()
 
-    # Compute modal frequencies
-    freqs = shell_modal_frequencies(model, n_max=6)
-    f_breathe = freqs[0]
+    # Use v2 model
+    model = AbdominalModelV2(E=0.1e6, a=0.18, b=0.18, c=0.12)
+    freqs = flexural_mode_frequencies_v2(model, n_max=6)
+    f_breathe = breathing_mode_v2(model)
     f_n2 = freqs[2]
+    R = model.equivalent_sphere_radius
+    Q = model.Q
 
-    print("  ABDOMINAL MODEL RESONANCES")
+    print("  ABDOMINAL MODEL RESONANCES (v2 corrected)")
     print("  " + "-" * 50)
-    print(f"    Breathing mode (n=0):  {f_breathe:.2f} Hz")
-    print(f"    First flexural (n=2):  {f_n2:.2f} Hz")
+    print(f"    Breathing mode (n=0):  {f_breathe:.0f} Hz (KILOHERTZ — not infrasound!)")
+    print(f"    Flexural n=2:          {f_n2:.2f} Hz")
+    print(f"    Flexural n=3:          {freqs[3]:.2f} Hz")
+    print(f"    Flexural n=4:          {freqs[4]:.2f} Hz")
     print()
 
-    # Also compute for physiologically realistic soft tissue
-    model_soft = AbdominalModel(E=0.1e6)  # relaxed muscle
-    f_soft = breathing_mode_frequency(model_soft)
-    print(f"    Soft tissue (E=0.1 MPa) breathing mode: {f_soft:.2f} Hz")
+    # PIEZO activation thresholds with v2 physics
+    print("  AIRBORNE SPL FOR PIEZO ACTIVATION (v2 with (ka)^n coupling)")
+    print("  " + "-" * 65)
+    print(f"  {'Mode':>8} {'f(Hz)':>8} {'ka':>8} {'(ka)^n':>10} {'SPL 0.5μm':>10} {'SPL 1.0μm':>10}")
+    print("  " + "-" * 65)
 
-    model_large = AbdominalModel(a=0.20, b=0.20, c=0.13)
-    f_large = breathing_mode_frequency(model_large)
-    print(f"    Large cavity (a=20cm)  breathing mode: {f_large:.2f} Hz")
+    for n in [2, 3, 4]:
+        f = freqs[n]
+        ka = 2 * np.pi * f * R / 343.0
+        spl_05 = find_piezo_activation_threshold_v2(model, mode_n=n, piezo_threshold_um=0.5)
+        spl_10 = find_piezo_activation_threshold_v2(model, mode_n=n, piezo_threshold_um=1.0)
+        print(f"  {'n='+str(n):>8} {f:>8.2f} {ka:>8.4f} {ka**n:>10.2e} {spl_05:>10.1f} {spl_10:>10.1f}")
 
-    model_target = AbdominalModel(E=0.1e6, a=0.18, b=0.18, c=0.12)
-    f_target = breathing_mode_frequency(model_target)
-    print(f"    Combined soft+large    breathing mode: {f_target:.2f} Hz")
+    print("  " + "-" * 65)
+    print("  For reference: 120 dB = threshold of pain, 140 dB = near jet engine")
     print()
 
-    # Find minimum SPL for PIEZO activation at each resonance
-    print("  MINIMUM SPL FOR PIEZO CHANNEL ACTIVATION")
-    print("  " + "-" * 65)
-    print(f"  {'Scenario':<30} {'f_res(Hz)':>10} {'Q':>5} {'SPL(dB)':>10} {'Feasible?':>10}")
-    print("  " + "-" * 65)
-
-    scenarios = [
-        ("Baseline (E=0.5, a=15)", f_breathe, 5.0),
-        ("Soft tissue (E=0.1)", f_soft, 5.0),
-        ("Large cavity (a=20)", f_large, 5.0),
-        ("Soft+large combo", f_target, 5.0),
-        ("Soft+large, high Q", f_target, 10.0),
-        ("Soft+large, low Q", f_target, 2.0),
-        ("Flexural n=2", f_n2, 5.0),
-    ]
-
-    for name, f_res, Q in scenarios:
-        for thresh in [0.5, 1.0, 2.0]:
-            spl = find_piezo_activation_threshold(f_res, Q, thresh, params)
-            feasible = "YES" if spl <= 140 else "marginal" if spl <= 150 else "no"
-            if thresh == 1.0:  # only print mid threshold
-                print(f"  {name:<30} {f_res:>10.2f} {Q:>5.0f} {spl:>10.1f} {feasible:>10}")
-
-    print("  " + "-" * 65)
+    # Sensitivity to E
+    print("  SENSITIVITY: SPL for 1 μm vs. tissue stiffness")
+    print("  " + "-" * 55)
+    for E_MPa in [0.05, 0.1, 0.2, 0.5, 1.0]:
+        m = AbdominalModelV2(E=E_MPa*1e6, a=0.18, b=0.18, c=0.12)
+        f2 = flexural_mode_frequencies_v2(m, n_max=2)[2]
+        spl = find_piezo_activation_threshold_v2(m, mode_n=2, piezo_threshold_um=1.0)
+        print(f"    E={E_MPa:.2f} MPa: f2={f2:.1f} Hz, SPL(1μm)={spl:.1f} dB")
+    print("  " + "-" * 55)
     print()
 
-    # Detailed threshold table for the most favorable scenario
-    print("  DETAILED: SPL THRESHOLDS FOR SOFT+LARGE MODEL")
-    print("  " + "-" * 60)
-    print(f"  {'PIEZO thresh':>14} {'Q=2':>10} {'Q=5':>10} {'Q=10':>10} {'Q=20':>10}")
-    print("  " + "-" * 60)
-    for thresh in [0.5, 1.0, 1.5, 2.0]:
-        vals = []
-        for Q in [2, 5, 10, 20]:
-            spl = find_piezo_activation_threshold(f_target, Q, thresh, params)
-            vals.append(f"{spl:.1f}")
-        print(f"  {thresh:>10.1f} um  {'':>2}{'':>2}".rstrip() +
-              f"  {vals[0]:>8}  {vals[1]:>8}  {vals[2]:>8}  {vals[3]:>8}")
-    print("  " + "-" * 60)
-    print()
+    # Comparison: airborne displacement at 120 dB for each mode
+    print("  AIRBORNE DISPLACEMENT AT 120 dB SPL")
+    print("  " + "-" * 55)
+    p_120 = 20e-6 * 10**(120/20)
+    for n in [2, 3, 4]:
+        f = freqs[n]
+        ka = 2 * np.pi * f * R / 343.0
+        p_eff = p_120 * ka**n
 
-    # Pressure analysis — can resonant displacement create defecation-relevant pressure?
-    print("  RESONANT INTERNAL PRESSURE AT VARIOUS SPL (f=7 Hz)")
-    print("  " + "-" * 65)
-    print(f"  {'SPL(dB)':>8} {'Disp(um)':>10} {'Q=5 P(mmHg)':>14} {'Q=10 P(mmHg)':>14}")
-    print("  " + "-" * 65)
-    for spl in [100, 110, 120, 130, 140, 150]:
-        for Q_val in [5.0]:
-            # Displacement at resonance
-            p_ref = 20e-6
-            p = p_ref * 10**(spl / 20)
-            v = p / (params.rho_tissue * params.c_tissue)
-            xi_free = v / (2 * np.pi * 7.0)
-            xi_res = xi_free * Q_val * 1e6  # μm
+        D = model.D
+        E_val, h, nu = model.E, model.h, model.nu
+        K_b = n*(n-1)*(n+2)**2 * D / R**4
+        lam = (n**2+n-2+2*nu)/(n**2+n+1-nu)
+        K_m = E_val*h/R**2*lam
+        K_p = model.P_iap/R*(n-1)*(n+2)
+        K_tot = K_b + K_m + K_p
 
-            p5 = pressure_from_displacement(xi_res, 7.0, 5.0, params)
-            p10 = pressure_from_displacement(xi_res, 7.0, 10.0, params)
-            print(f"  {spl:>8} {xi_res:>10.3f} {p5:>14.4f} {p10:>14.4f}")
-    print("  " + "-" * 65)
-    print(f"  Defecation reflex threshold: 5-15 mmHg")
+        xi = p_eff / K_tot * Q * 1e6
+
+        piezo = "✓ YES" if xi > 0.5 else "✗ below"
+        print(f"    n={n}: f={f:.1f} Hz, ξ={xi:.4f} μm  PIEZO: {piezo}")
+
+    print("  " + "-" * 55)
     print()
 
     # Summary
     print("  " + "=" * 65)
-    print("  SUMMARY OF KEY FINDINGS")
+    print("  CONCLUSIONS (v2)")
     print("  " + "=" * 65)
     print()
-    print("  1. RESONANCE OVERLAP: The abdominal cavity (with relaxed")
-    print("     musculature or large body habitus) has natural frequencies")
-    print(f"     of {f_soft:.1f}-{f_target:.1f} Hz — overlapping the 5-10 Hz 'brown note' range.")
+    print("  The v2 model with corrected physics gives dramatically different")
+    print("  results from v1:")
     print()
-
-    spl_best = find_piezo_activation_threshold(f_target, 10.0, 0.5, params)
-    spl_typ = find_piezo_activation_threshold(f_target, 5.0, 1.0, params)
-    print(f"  2. PIEZO ACTIVATION: Minimum SPL for PIEZO channel activation:")
-    print(f"     Best case  (Q=10, 0.5um threshold): {spl_best:.1f} dB")
-    print(f"     Typical    (Q=5,  1.0um threshold): {spl_typ:.1f} dB")
-    print(f"     For reference: 120 dB = threshold of pain")
-    print(f"                    130 dB = jet engine at 30m")
-    print(f"                    140 dB = near jet engine / firearms")
+    print("  1. The breathing mode is at ~2900 Hz, NOT in the infrasound range.")
+    print("     The 'cavity resonance at 7 Hz' idea was based on an error.")
     print()
-    print("  3. MECHANISM CHAIN:")
-    print("     Infrasound (5-10 Hz, >120 dB SPL)")
-    print("       -> Resonant amplification in abdominal cavity")
-    print("       -> Micrometer-scale tissue displacement")
-    print("       -> PIEZO1/PIEZO2 mechanosensitive channel activation")
-    print("       -> Intracellular Ca2+ influx")
-    print("       -> Vagal afferent nerve stimulation")
-    print("       -> Potential GI motility modulation")
+    print("  2. Flexural modes (n≥2) ARE at 4-10 Hz for soft tissue. These")
+    print("     match ISO 2631 data and ARE the relevant modes for vibration.")
     print()
-    print("  4. CONCLUSION: A plausible mechanotransduction pathway EXISTS")
-    print("     but requires extreme SPL (>120 dB). The 'brown note' as")
-    print("     popularly described (causing effects at moderate volumes)")
-    print("     remains unsupported. However, at occupationally-relevant")
-    print("     extreme levels, resonance-mediated PIEZO activation is")
-    print("     quantitatively feasible.")
+    print("  3. Airborne acoustic coupling to flexural modes is NEGLIGIBLE:")
+    spl_target = find_piezo_activation_threshold_v2(model, mode_n=2, piezo_threshold_um=1.0)
+    print(f"     Need {spl_target:.0f} dB SPL for 1 μm displacement via n=2 mode.")
+    print("     This is beyond any realistic acoustic exposure.")
+    print()
+    print("  4. The popularly described 'brown note' via loudspeaker is")
+    print("     IMPLAUSIBLE based on fundamental acoustic physics.")
+    print()
+    print("  5. Whole-body vibration (mechanical pathway) is the REAL mechanism")
+    print("     for GI effects at 5-10 Hz, consistent with epidemiological data.")
     print()

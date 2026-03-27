@@ -134,7 +134,10 @@ def mechanical_excitation_response(
         # Theoretical modal model
         T = None
         x_rel = x_base * H_rel
-        x_abdomen_abs = x_base * (1 + H_rel)  # approx
+        # Absolute transmissibility: T_abs = sqrt((1 + (2ζr)²) / ((1-r²)² + (2ζr)²))
+        # NOT simply 1 + H_rel (which incorrectly adds magnitudes of complex quantities)
+        T_abs = np.sqrt((1 + (2*zeta*r)**2) / ((1 - r**2)**2 + (2*zeta*r)**2))
+        x_abdomen_abs = x_base * T_abs
         amplification = H_rel
 
     R = model.equivalent_sphere_radius
