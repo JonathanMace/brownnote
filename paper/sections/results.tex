@@ -39,6 +39,44 @@ reveals that 37\% of configurations place the $n=2$ mode in the
 ISO~2631 range.  The dominant parameter is $E$, followed by geometry and
 intra-abdominal pressure.
 
+\subsection{Uncertainty Quantification}
+
+A Monte Carlo simulation with $N = 10{,}000$ samples propagates parameter
+uncertainties through the model.  Each parameter is drawn from a
+physiologically motivated distribution: $E$ from a log-normal distribution
+spanning \SIrange{0.05}{2.0}{\mega\pascal}, geometric parameters from normal
+distributions matching anthropometric data, and the loss tangent from a
+uniform distribution over $[0.10,\; 0.40]$.
+
+The resulting distribution of $f_2$ has a median of \SI{7.5}{\hertz} with a
+90\% credible interval of \SIrange{3.3}{15.5}{\hertz}
+(Table~\ref{tab:uq_summary}).  The distribution is positively skewed,
+reflecting the log-normal distribution of $E$.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).}
+  \label{tab:uq_summary}
+  \begin{tabular}{lccc}
+    \hline
+    Quantity & Median & 90\% CI & Units \\
+    \hline
+    $f_2$ & 7.5 & [3.3, 15.5] & Hz \\
+    $\xi_\mathrm{air}$ (120 dB) & 0.07 & [0.01, 0.4] & $\mu$m \\
+    $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 600 & [100, 3000] & $\mu$m \\
+    $\mathcal{R}$ & $10^4$ & [$10^3$, $10^5$] & --- \\
+    SPL for PIEZO & 135 & [128, 139] & dB \\
+    \hline
+  \end{tabular}
+\end{table}
+
+Sobol sensitivity analysis reveals that the elastic modulus accounts for
+86\% of the total output variance (total-order index $S_T = 0.86$).
+All other parameters contribute less than 10\% individually.  This result
+has important experimental implications: any future validation effort should
+prioritise \emph{in vivo} measurement of abdominal wall stiffness, as this
+single parameter dominates the uncertainty budget.
+
 \subsection{Multi-Layer Wall Model}
 
 The abdominal wall comprises approximately five distinct tissue layers:

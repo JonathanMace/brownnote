@@ -386,6 +386,17 @@ def fig_parametric_sensitivity():
 
     base = dict(E=0.1e6, a=0.18, b=0.18, c=0.12, h=0.010, P_iap=1000.0)
 
+    def _setup_sens_ax(ax, label):
+        """Common setup for sensitivity subplots."""
+        ax.axhspan(4, 8, color=C_CYAN, alpha=0.08, zorder=0)
+        ax.set_ylim(2, 10)
+        ax.set_ylabel('$f_2$ (Hz)')
+        ax.text(0.03, 0.95, label, transform=ax.transAxes, fontsize=9,
+                fontweight='bold', va='top')
+        # Light ISO label
+        ax.text(0.97, 0.92, 'ISO\n4–8 Hz', transform=ax.transAxes,
+                fontsize=5.5, color=C_CYAN, alpha=0.7, ha='right', va='top')
+
     # (a) Semi-major axis a
     ax = axes[0, 0]
     a_vals = np.linspace(0.12, 0.25, 50)
@@ -394,11 +405,8 @@ def fig_parametric_sensitivity():
         m = AbdominalModelV2(**{**base, 'a': a_val, 'b': a_val, 'c': a_val*0.67})
         f2_a.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
     ax.plot(a_vals*100, f2_a, color=C_BLUE, lw=1.5)
-    ax.axhspan(4, 8, color=C_CYAN, alpha=0.12, zorder=0)
     ax.set_xlabel('Semi-major axis $a$ (cm)')
-    ax.set_ylabel('$f_2$ (Hz)')
-    ax.text(0.03, 0.95, '(a)', transform=ax.transAxes, fontsize=9,
-            fontweight='bold', va='top')
+    _setup_sens_ax(ax, '(a)')
 
     # (b) Aspect ratio c/a
     ax = axes[0, 1]
@@ -408,11 +416,8 @@ def fig_parametric_sensitivity():
         m = AbdominalModelV2(**{**base, 'c': base['a']*cr})
         f2_cr.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
     ax.plot(cr_vals, f2_cr, color=C_ORANGE, lw=1.5)
-    ax.axhspan(4, 8, color=C_CYAN, alpha=0.12, zorder=0)
     ax.set_xlabel('Aspect ratio $c/a$')
-    ax.set_ylabel('$f_2$ (Hz)')
-    ax.text(0.03, 0.95, '(b)', transform=ax.transAxes, fontsize=9,
-            fontweight='bold', va='top')
+    _setup_sens_ax(ax, '(b)')
 
     # (c) Wall thickness h
     ax = axes[1, 0]
@@ -422,11 +427,8 @@ def fig_parametric_sensitivity():
         m = AbdominalModelV2(**{**base, 'h': h_val})
         f2_h.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
     ax.plot(h_vals*1000, f2_h, color=C_GREEN, lw=1.5)
-    ax.axhspan(4, 8, color=C_CYAN, alpha=0.12, zorder=0)
     ax.set_xlabel('Wall thickness $h$ (mm)')
-    ax.set_ylabel('$f_2$ (Hz)')
-    ax.text(0.03, 0.95, '(c)', transform=ax.transAxes, fontsize=9,
-            fontweight='bold', va='top')
+    _setup_sens_ax(ax, '(c)')
 
     # (d) Intra-abdominal pressure P_iap
     ax = axes[1, 1]
@@ -436,11 +438,8 @@ def fig_parametric_sensitivity():
         m = AbdominalModelV2(**{**base, 'P_iap': p_val})
         f2_p.append(flexural_mode_frequencies_v2(m, n_max=2)[2])
     ax.plot(p_vals/133.322, f2_p, color=C_PURPLE, lw=1.5)
-    ax.axhspan(4, 8, color=C_CYAN, alpha=0.12, zorder=0)
     ax.set_xlabel(r'Intra-abdominal pressure $P_\mathrm{iap}$ (mmHg)')
-    ax.set_ylabel('$f_2$ (Hz)')
-    ax.text(0.03, 0.95, '(d)', transform=ax.transAxes, fontsize=9,
-            fontweight='bold', va='top')
+    _setup_sens_ax(ax, '(d)')
 
     fig.tight_layout()
     _save(fig, 'fig_parametric_sensitivity')
@@ -540,16 +539,24 @@ def fig_coupling_comparison():
 
     # PIEZO threshold line
     ax2.axhline(0.5, color=C_RED, ls=':', lw=0.8, zorder=5)
-    ax2.text(3.6, 0.65, 'PIEZO threshold', fontsize=6, color=C_RED,
-             ha='right', va='bottom')
+    ax2.text(0.5, 0.7, 'PIEZO threshold', fontsize=6, color=C_RED,
+             ha='center', va='bottom', transform=ax2.get_xaxis_transform())
 
-    # Value labels on bars
+    # Value labels on bars — place inside tall bars, above short ones
     for bar, val in zip(bars, values):
-        y_pos = val * 1.5 if val > 0.001 else 0.001
-        ax2.text(bar.get_x() + bar.get_width()/2, y_pos,
-                 f'{val:.2g}', ha='center', va='bottom', fontsize=6.5)
+        xc = bar.get_x() + bar.get_width() / 2
+        if val > 100:
+            # Tall bar: place label inside near top
+            ax2.text(xc, val * 0.4, f'{val:.0f}', ha='center', va='center',
+                     fontsize=6.5, fontweight='bold', color='white')
+        elif val > 0.01:
+            ax2.text(xc, val * 1.6, f'{val:.2g}', ha='center', va='bottom',
+                     fontsize=6.5)
+        else:
+            ax2.text(xc, val * 3, f'{val:.2g}', ha='center', va='bottom',
+                     fontsize=6.5)
 
-    ax2.set_ylim(1e-6, 200)
+    ax2.set_ylim(1e-2, 2e4)
     ax2.text(0.03, 0.95, '(b)', transform=ax2.transAxes, fontsize=9,
              fontweight='bold', va='top')
 
