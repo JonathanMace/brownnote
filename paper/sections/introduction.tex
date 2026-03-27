@@ -67,7 +67,9 @@ abdominal-resonance effects~\cite{Ascone2021}.  Yet none of this work quantified
 mechanical pathways differ so dramatically---the conclusion was empirical,
 not mechanistic.
 
-We provide the mechanistic account.  No prior study has:
+We provide the mechanistic account.  To our knowledge, no prior analytical study
+has combined first-principles cavity--shell modal analysis with an
+energy-consistent comparison of airborne and mechanical coupling pathways:
 \begin{enumerate}
   \item derived abdominal cavity eigenfrequencies from first-principles
     shell theory with proper fluid--structure coupling;
@@ -84,10 +86,15 @@ airborne acoustic coupling---subject to a severe $(ka)^n$ penalty at
 infrasonic wavelengths---against direct mechanical (whole-body) vibration
 coupling, which suffers no such penalty.
 
-The result is a coupling disparity of approximately $6.6 \times 10^4$ between
-mechanical and airborne pathways.  This single number---robust across
-physiologically realistic parameter ranges, as we confirm through Monte Carlo
-uncertainty quantification---resolves the empirical asymmetry cleanly.  It
+The headline result is an upper-bound coupling disparity of approximately
+$6.6 \times 10^4$ between mechanical and airborne pathways for
+\SI{120}{\decibel} SPL airborne excitation and
+$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
+vibration under the SDOF idealisation ($\Gamma_2 = 1$).  Including the
+canonical participation factor $\Gamma_2 \approx 0.48$ reduces this to
+$\sim 3 \times 10^4$.  This single result---robust across physiologically
+realistic parameter ranges, as we confirm through Monte Carlo uncertainty
+quantification---resolves the empirical asymmetry cleanly.  It
 explains why whole-body vibration at \SIrange{4}{8}{\hertz} produces
 well-documented gastrointestinal effects, why airborne infrasound at
 comparable frequencies does not, and why the brown note belongs to acoustics
@@ -95,7 +102,7 @@ folklore rather than acoustics fact.
 
 The remainder of this paper is organised as follows.
 Section~\ref{sec:formulation} develops the mathematical formulation.
-Section~\ref{sec:results} presents a parametric study and validates the model
+Section~\ref{sec:results} presents a parametric study and compares the model
 against ISO~2631 data.  Section~\ref{sec:coupling} quantifies the coupling
 disparity.  Section~\ref{sec:discussion} discusses implications, alternative
 pathways, and limitations, and Section~\ref{sec:conclusion} draws conclusions.

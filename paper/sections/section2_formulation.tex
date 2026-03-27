@@ -39,13 +39,13 @@ the same modal backbone \cite{Alijani2014}.
     Semi-major axis & $a$ & 0.18 & m & Anthropometric mean \\
     Semi-minor axis & $c$ & 0.12 & m & $c/a \approx 0.67$ \\
     Wall thickness & $h$ & 0.010 & m & Composite wall \\
-    Elastic modulus & $E$ & 0.1 & MPa & Composite wall \cite{Deeken2017} \\
-    Poisson's ratio & $\nu$ & 0.45 & --- & FEM convention \cite{Spadoni2024} \\
+    Elastic modulus & $E$ & 0.1 & MPa & Representative of reported measurements \cite{Deeken2017} \\
+    Poisson's ratio & $\nu$ & 0.45 & --- & Near-incompressible modelling convention \cite{Spadoni2024} \\
     Wall density & $\rho_w$ & 1100 & kg/m$^3$ & Soft tissue \\
     Fluid density & $\rho_f$ & 1020 & kg/m$^3$ & Abdominal fluid \\
     Fluid bulk modulus & $K_f$ & 2.2 & GPa & Water at 37$^\circ$C \\
-    Intra-abdominal pressure & $P_\mathrm{iap}$ & 1000 & Pa & Resting IAP \cite{Novak2021} \\
-    Loss tangent & $\eta$ & 0.25 & --- & Soft-tissue viscoelasticity \cite{Sack2023} \\
+    Intra-abdominal pressure & $P_\mathrm{iap}$ & 1000 & Pa & Representative resting clinical measurement \cite{Novak2021} \\
+    Loss tangent & $\eta$ & 0.25 & --- & Representative review value \cite{Sack2023} \\
     \hline
   \end{tabular}
 \end{table}
@@ -73,16 +73,17 @@ flexural rigidity of the shell is
   D = \frac{Eh^3}{12(1 - \nu^2)}.
 \end{equation}
 These baseline values are not arbitrary.  The canonical modulus
-$E = \SI{0.1}{\mega\pascal}$ lies within the range reported for composite
-abdominal wall tissue at physiological strains \cite{Deeken2017};
-$\nu = 0.45$ matches the nearly incompressible convention adopted in recent
-abdominal-wall finite-element modelling \cite{Spadoni2024}; resting
+$E = \SI{0.1}{\mega\pascal}$ is representative of direct abdominal-wall
+measurements compiled by Deeken and Lake \cite{Deeken2017};
+$\nu = 0.45$ follows the nearly incompressible modelling convention adopted in
+recent abdominal-wall finite-element studies \cite{Spadoni2024}; resting
 intra-abdominal pressures of 5--12\,mmHg correspond to approximately
-\SIrange{0.67}{1.60}{\kilo\pascal}, placing
-$P_\mathrm{iap} = \SI{1.0}{\kilo\pascal}$ near the physiological centre
-\cite{Novak2021}; and modern elastography reviews place the soft-tissue loss
-tangent broadly in the 0.1--0.4 range, making $\eta = 0.25$ a conservative
-mid-range value \cite{Sack2023}.  Published values of $\eta$ for abdominal
+\SIrange{0.67}{1.60}{\kilo\pascal}, so
+$P_\mathrm{iap} = \SI{1.0}{\kilo\pascal}$ is representative of direct clinical
+measurements \cite{Novak2021}; and modern elastography reviews place the
+soft-tissue loss tangent broadly in the 0.1--0.4 range, making
+$\eta = 0.25$ consistent with the range reported for soft tissue
+\cite{Sack2023}.  Published values of $\eta$ for abdominal
 soft tissue range from 0.15 to 0.40 at low frequencies
 \cite{parker2011imaging}, corresponding to $Q = 2.5$--$6.7$.  The baseline
 value $\eta = 0.25$ ($Q = 4.0$, $\zeta = 0.125$) represents a central estimate.
@@ -207,9 +208,10 @@ $\lambda \approx 87$\,m, so the dimensionless wavenumber is
 The body is deep in the sub-wavelength (Rayleigh scattering) regime.
 
 In a multipole expansion of the incident plane wave scattered by a sphere, the
-$n$-th order component of the pressure field scales as \cite{Junger1986}:
+$n$-th order component of the pressure field scales, to leading order, as
+\cite{Junger1986}:
 \begin{equation}\label{eq:peff}
-  p_\mathrm{eff}^{(n)} = p_\mathrm{inc} \times (ka)^n.
+  p_\mathrm{eff}^{(n)} \propto p_\mathrm{inc} (ka)^n.
 \end{equation}
 The breathing mode ($n = 0$) sees the full incident pressure, but flexural
 modes ($n \geq 2$) see only the higher-order spatial gradients, which are
@@ -271,7 +273,7 @@ of magnitude.
 The ratio of mechanical to airborne displacement at the same excitation
 conditions provides a dimensionless measure of the coupling disparity:
 \begin{equation}\label{eq:coupling_ratio_def}
-  \mathcal{R} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}} \sim 10^4 \text{--} 10^5.
+  \mathcal{R} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}.
 \end{equation}
 
 This ratio depends primarily on $ka$ and the excitation level, and is
@@ -280,4 +282,9 @@ because both pathways excite the same modal structure.  The coupling ratio is
 the central result of this work: it provides a quantitative explanation for why
 whole-body vibration at 4--8\,Hz is associated with gastrointestinal effects in
 the epidemiological literature \cite{griffin1990handbook}, whereas airborne
-infrasound at comparable frequencies is not.
+infrasound at comparable frequencies is not.  Section~\ref{sec:coupling}
+shows that, for \SI{120}{\decibel} SPL airborne excitation and
+$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
+vibration, the SDOF upper bound is $\mathcal{R} \approx 6.6 \times 10^4$
+($\Gamma_2 = 1$), reducing to $\sim 3 \times 10^4$ when the canonical
+participation factor $\Gamma_2 \approx 0.48$ is included.

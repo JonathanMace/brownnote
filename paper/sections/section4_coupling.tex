@@ -20,7 +20,7 @@ absorption by low-order shell modes are strongly suppressed
   \centering
   \caption{Energy-consistent airborne displacement at $n=2$ resonance
   ($f_2 = \SI{4.0}{\hertz}$, $Q = 4.0$, canonical parameters).
-  The pressure-based estimate overestimates by a factor of ${\approx}\,13.4$
+  The pressure-based estimate overestimates by a factor of ${\approx}\,13$
   (ratio of $\xi_\mathrm{pressure}$ to $\xi_\mathrm{energy}$).}
   \label{tab:airborne}
   \begin{tabular}{rcccc}
@@ -38,24 +38,27 @@ absorption by low-order shell modes are strongly suppressed
   \end{tabular}
 \end{table}
 
-At \SI{120}{\decibel} SPL---the threshold of pain, and roughly the level at
+At \SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
+discomfort, and roughly the level at
 which conversation becomes impossible---the energy-consistent wall
 displacement is \SI{0.014}{\micro\metre}.  This falls two orders of magnitude
 below the $0.5$--$\SI{2.0}{\micro\metre}$ activation range of
-mechanosensitive PIEZO channels \cite{coste2010piezo1}.  Reaching the
+mechanosensitive PIEZO1 and PIEZO2 channels \cite{coste2010piezo1}.  Reaching the
 \SI{1}{\micro\metre} threshold on this energy-consistent basis demands
 approximately \SI{158}{\decibel} (cf.\ \SI{135}{\decibel} using the
 pressure-based displacement of Table~\ref{tab:uq_summary}, which
-overestimates by ${\approx}\,13\times$),
-a level that would cause immediate structural damage to the ear and is
-available only from explosive blasts and rocket launches.  Modern
-mechanobiology strengthens rather than weakens that conclusion: Piezo1 gating
-is tuned by membrane tension in the low-\si{\milli\newton\per\metre} range,
-with half-maximal activation near \SI{2}{\milli\newton\per\metre}
-\cite{Lewis2015}; cryo-EM resolved the propeller-like architecture of Piezo1
-\cite{Saotome2018}; and recent reviews summarise an expansive post-2010
-literature on the physiological roles of PIEZO channels following the 2021
-Nobel Prize \cite{Xiao2024}.  Of particular relevance here, PIEZO2-dependent
+overestimates by ${\approx}\,13\times$), a level associated with severe
+acoustic hazards and available only from explosive blasts and rocket launches.
+Modern mechanobiology strengthens rather than weakens that conclusion:
+PIEZO1 gating is tuned by membrane tension in the low-\si{\milli\newton\per\metre}
+range, with half-maximal activation near \SI{2}{\milli\newton\per\metre}
+\cite{Lewis2015}.  While the membrane-tension thresholds reported in
+cell-culture experiments cannot be directly translated to tissue-scale
+displacements, the order-of-magnitude comparison remains informative.  Recent
+reviews summarise the broader physiological roles of PIEZO channels
+(following the 2021 Nobel Prize, and with structural detail from cryo-EM
+\cite{Saotome2018}) \cite{Xiao2024}.  Of particular relevance here,
+PIEZO2-dependent
 gut mechanosensation is now known to regulate gastrointestinal transit
 \cite{ServinVences2023}.  The relevant question is therefore not whether the
 gut can sense deformation---it plainly can---but whether airborne infrasound
@@ -106,8 +109,10 @@ abdominally relevant modes in this same band \cite{Zheng2012,Gao2021}.
 \subsection{The Coupling Ratio}
 \label{sec:coupling_ratio}
 
-The ratio of mechanical to airborne displacement defines the coupling
-disparity at its starkest:
+The ratio of mechanical to airborne displacement, evaluated for
+\SI{120}{\decibel} SPL airborne excitation and
+$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS mechanical
+excitation, defines the headline SDOF upper bound:
 \begin{equation}
   \mathcal{R} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}
   \approx \frac{917}{0.014} \approx 6.6 \times 10^4.
@@ -144,7 +149,7 @@ Legendre orthogonality; a free sphere therefore has $\Gamma_2 = 0$ exactly.
 Partial skeletal constraint (canonical value $\theta_c = 2\pi/3$, i.e.\ the
 lower third of the shell is fixed) breaks this orthogonality, giving
 $\Gamma_2 \approx 0.48$ for the canonical model.  Including this correction
-reduces the mechanical displacement by roughly a factor of two and the
+reduces the mechanical displacement to about 48\% of the SDOF value and the
 coupling ratio to $\sim 3 \times 10^4$.  The qualitative conclusion---a
 four-order-of-magnitude gap---is unaffected, but $\mathcal{R}$ as reported in
 Eq.~\eqref{eq:coupling_ratio} should be understood as an upper bound

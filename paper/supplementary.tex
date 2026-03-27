@@ -237,9 +237,10 @@ irrelevant to the brown-note hypothesis.
 \label{sec:energy_budget}
 
 The pressure-based estimate of airborne coupling displacement
-(main text, Section~4) overestimates the true value by $\sim$40\%
-because it does not enforce energy conservation.  The self-consistent
-derivation, following the reciprocity formulation of Junger \& Feit (2012),
+(main text, Section~4) is approximately $13\times$ larger than the
+energy-consistent value because it does not enforce energy conservation.  The
+self-consistent derivation, following the reciprocity formulation of
+Junger \& Feit \cite{Junger1986},
 proceeds as follows.
 
 \paragraph{Step 1: Absorption cross-section.}
@@ -302,10 +303,10 @@ At \SI{120}{\decibel} SPL and $n=2$:
   \xi_{\mathrm{energy}} &\approx \SI{0.014}{\micro\metre}, \\
   \xi_{\mathrm{pressure}} &\approx \SI{0.18}{\micro\metre}.
 \end{align*}
-The pressure-based estimate is approximately $12.9\times$ larger because it
+The pressure-based estimate is approximately $13\times$ larger because it
 does not account for the extremely low radiation efficiency
 ($\zeta_{\mathrm{rad}}/\zeta_{\mathrm{struct}} \sim 10^{-14}$).  Both values
-are far below the PIEZO1/2 mechanotransduction threshold
+are far below the PIEZO1 and PIEZO2 mechanotransduction threshold range
 (\SIrange{0.5}{2.0}{\micro\metre}), so the overestimate does not affect any
 conclusions.
 
@@ -551,7 +552,8 @@ $\mathcal{R}$
   & 12949 & 9820 & 11888 & 1780 & 34169 & 62466 \\
 SPL$_{\mathrm{PIEZO}}$ (pressure)\footnote{Pressure-based displacement
   estimate; the energy-consistent threshold is ${\approx}\,\SI{23}{\decibel}$
-  higher (see main text, Table~2 and \S4).} (\si{\decibel})
+  higher (see the airborne-displacement table and coupling discussion in the
+  main text).} (\si{\decibel})
   & 134.4 & 135.0 & 3.5 & 128.1 & 139.4 & 141.1 \\
 \bottomrule
 \end{tabular}
@@ -635,8 +637,7 @@ Skin               & 2.0  & 0.50   & 0.45 & 1100 \\
 \end{tabular}
 \end{table}
 
-Effective composite properties are computed using classical laminate theory
-(Hernández-Gascón et al., 2013):
+Effective composite properties are computed using classical laminate theory:
 \begin{align}
   (Eh)_{\mathrm{eff}} &= \sum_{i} E_{i}\,h_{i} \,,
     \tag{S18} \\
@@ -649,7 +650,8 @@ Effective composite properties are computed using classical laminate theory
 
 \paragraph{Key result.}
 The multilayer relaxed model predicts $f_{2} \approx \SI{4.6}{\hertz}$,
-within 4\% of the homogeneous model at $E = \SI{0.1}{\mega\pascal}$.
+within approximately 16\% of the homogeneous model at
+$E = \SI{0.1}{\mega\pascal}$.
 The tensed muscle configuration ($E_{\mathrm{eff}} \approx \SI{2.7}{\mega\pascal}$)
 raises $f_{2}$ to $\sim$\SI{23}{\hertz}, confirming that the dominant
 variable is muscle tone, not the specific layer arrangement.
@@ -663,8 +665,8 @@ Fluid viscosity introduces a Stokes oscillatory boundary layer of thickness
   \delta = \sqrt{\frac{2\mu}{\rho_{f}\,\omega}}
   \tag{S21}
 \end{equation}
-at the inner wall.  The associated viscous damping ratio addition is
-(Landau \& Lifshitz, \S24)
+at the inner wall.  The associated viscous damping ratio addition is obtained
+from a standard oscillatory boundary-layer calculation:
 \begin{equation}
   \Delta\zeta_{\mathrm{visc}} = \frac{\rho_{f}\,\delta\,(n+1)}{4\,n\,(2n+1)\,m_{\mathrm{eff}}^{(n)}} \,.
   \tag{S22}
@@ -794,7 +796,11 @@ PIEZO threshold).
 \label{sec:bc}
 
 The Rayleigh--Ritz framework also investigated boundary condition sensitivity
-via FEA validation results (\texttt{fea\_modal\_results.json}).
+via FEA validation results (\texttt{fea\_modal\_results.json}).  To match the
+mesh geometry, this study used a slightly different parameter set
+($R = \SI{0.162}{\metre}$, $\rho_f = \SI{1000}{\kilo\gram\per\metre\cubed}$,
+$P_{\mathrm{iap}} = \SI{1500}{\pascal}$); the relative shifts between boundary
+conditions are therefore the parameter of interest.
 
 \begin{table}[htbp]
 \centering
@@ -813,7 +819,9 @@ Hemisphere clamped          & 3.89 & -5.8  \\
 \end{table}
 
 \paragraph{Key result.}
-The maximum frequency shift from boundary conditions is 11\%.  This
+The free-sphere Ritz value $f_{2} = \SI{4.13}{\hertz}$ agrees with the matched
+analytical prediction (\SI{4.26}{\hertz}) to within 3\%.  The maximum
+frequency shift from boundary conditions is 11\%.  This
 insensitivity arises because the fluid added mass dominates
 ($m_{\mathrm{add}}/m_{\mathrm{wall}} \approx 7.3$), so the system dynamics
 are controlled by the fluid inertia rather than the shell boundary.
@@ -834,7 +842,7 @@ modelling simplification.
 Assumption & Error & Dominant factor \\
 \midrule
 Sphere $\to$ oblate spheroid    & 4--17\%       & Curvature distribution \\
-Homogeneous $\to$ multilayer    & $<$4\%        & Muscle tone \\
+Homogeneous $\to$ multilayer    & $\sim$16\%    & Muscle tone \\
 Inviscid $\to$ viscous fluid    & $<$1\%        & Stokes boundary layer \\
 No organs $\to$ with inclusions & $<$2\%        & Density perturbation \\
 Linear $\to$ nonlinear          & 5--15\%$^{*}$ & WBV amplitudes only \\
@@ -920,7 +928,7 @@ Table~\ref{tab:modules} describes each module in the repository.
 \texttt{orifice\_coupling.py} &
   Upper GI tract (mouth-to-stomach) acoustic coupling pathway. \\
 \texttt{mechanotransduction.py} &
-  PIEZO1/2 activation thresholds and SPL required for channel opening. \\
+  PIEZO1 and PIEZO2 activation thresholds and SPL required for channel opening. \\
 \texttt{dimensional\_analysis.py} &
   Buckingham-$\pi$ dimensional analysis of the coupled system. \\
 \midrule
