@@ -11,9 +11,13 @@ shell and compare airborne acoustic vs mechanical (whole-body vibration) couplin
 
 ## Git Workflow: Worktrees and Pull Requests
 
+### Branch Protection
+**`main` is protected.** No direct pushes allowed. ALL changes must go through pull
+requests. This applies to everyone — subagents AND the orchestrator.
+
 ### Branch Structure
 - **`main`** — the canonical branch. Contains the integrated paper, all merged analyses,
-  and the latest compilable LaTeX draft. Only the orchestrator merges to main.
+  and the latest compilable LaTeX draft. Protected; changes only via merged PRs.
 - **Feature branches** — one per research stream (e.g., `nonlinear-analysis`,
   `gas-pocket-paper`, `viscous-correction`). Each has a git worktree at
   `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
@@ -34,8 +38,12 @@ shell and compare airborne acoustic vs mechanical (whole-body vibration) couplin
 
 ### For the Orchestrator: Merging
 - When an agent completes, push its branch and create a PR on GitHub.
-- Review the PR (or have `reviewer-b` agent review it).
-- Merge to main, then pull in the main worktree.
+- Review the PR (or have the 3-reviewer panel review it).
+- Merge to main via `gh pr merge <number> --merge`.
+- Pull in the main worktree: `git pull origin main`.
+- **Never push directly to main** — always branch first, even for small fixes.
+- For orchestrator-level changes (instructions, logs, reviews), create a short-lived
+  branch, commit, push, PR, merge.
 - Remote: `https://github.com/JonathanMace/brownnote`
 
 ### Commit Message Prefixes
