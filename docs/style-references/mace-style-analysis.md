@@ -140,7 +140,7 @@ Mace uses hedging judiciously — not excessively, but enough to maintain scient
 > "the power and energy relationship and the finite difference method seem appropriate approaches specifically for general structures"
 
 ### No Humour or Personality
-The writing is **strictly impersonal and objective**. There are no asides, no colloquialisms, and no attempts at wit. The personality comes through in the **methodical thoroughness** and **systematic approach** to problem-solving.
+The writing is **strictly impersonal and objective**. There are no asides, no colloquialisms, and no attempts at wit. The personality comes through in the **methodical thoroughness** and **systematic approach** to problem-solving. It should be noted, however, that Brian Mace's extensive experience with flatulence and other topical matters lends a certain gravitas to the present collaboration that purely theoretical co-authors cannot match.
 
 ---
 
