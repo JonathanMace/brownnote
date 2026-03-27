@@ -29,7 +29,7 @@ Viscoelastic Shells: Predictions Across Mammalian Scales}
 \item Mammalian abdominal resonance governed by quasi-universal $\Pi_0 \approx 0.07$
 \item 1458-point parametric study confirms algebraic consistency of non-dimensionalisation
 \item Cross-species $f_2$ scales as $(1/a)\sqrt{E/\rho_f}$ when other $\Pi$-groups are approximately constant
-\item Scattering coupling ratio $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is size-independent: animal models are valid proxies under mechanical excitation
+\item Scattering coupling ratio $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is size-independent: animal models exhibit similar scaling under mechanical excitation
 \item Breathing mode never reaches infrasound for any organism
 \end{highlights}
 
@@ -53,7 +53,7 @@ cat, pig, human) reveal a quasi-universal dimensionless frequency
 $\Pi_0 \approx 0.07$, implying that the scattering coupling ratio
 $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2 \sim 10^3$--$10^4$ is
 approximately size-independent and
-that animal models are valid proxies for human abdominal resonance studies,
+that animal models exhibit similar scaling behaviour to the human abdomen,
 provided excitation is delivered mechanically rather than acoustically.
 The breathing mode ($n=0$), dominated by the fluid bulk modulus, would
 require a body radius of order \SI{20}{\metre} to reach \SI{20}{\hertz}
@@ -89,7 +89,8 @@ frequency $\Pi_0 \approx 0.07$, implying that animal models are valid
 proxies for human studies and that the scattering coupling ratio
 $\mathcal{R}_\mathrm{scat}$ is
 approximately size-independent.  These results follow from a Buckingham Pi
-reduction of the eleven-parameter model to five governing dimensionless
+reduction of the ten-parameter model (plus the output frequency,
+giving eleven variables) to five governing dimensionless
 groups for flexural modes.
 
 Three questions motivate this analysis.  First, can animal models (rat, cat,
@@ -163,7 +164,7 @@ with
 \begin{align}
   K_{\mathrm{bend}} &= n(n-1)(n+2)^2\,\frac{D}{R^4}, \\
   K_{\mathrm{memb}} &= \frac{Eh}{R^2}\,\lambda_n, \quad
-  K_{\mathrm{pre}} = \frac{P}{R}(n-1)(n+2), \\
+  K_{\mathrm{pre}} = \frac{P_\mathrm{iap}}{R}(n-1)(n+2), \\
   m_{\mathrm{eff}} &= \rho_w h + \frac{\rho_f R}{n},
 \end{align}
 where $D = Eh^3/[12(1-\nu^2)]$ is the flexural rigidity,
@@ -304,7 +305,7 @@ organism deep in the Rayleigh regime.
 
 This size-independence of $\mathcal{R}_\mathrm{scat}$ has a practical
 implication:
-animal models are valid proxies for human abdominal resonance
+animal models exhibit similar scaling behaviour to the human abdomen in
 studies~\cite{vonGierke1971,ISO2631}, \emph{provided excitation is
 delivered mechanically} (e.g.\ shaker table) rather than acoustically.  Acoustic experiments would require
 compensating for the $(kR_\mathrm{eq})^n$ coupling penalty, which varies with body
@@ -341,15 +342,15 @@ of species.
 \section{Concluding remarks}
 \label{sec:conclusion}
 
-Buckingham Pi analysis reduces the eleven-parameter fluid-filled
-viscoelastic shell model to five governing dimensionless groups for
+Buckingham Pi analysis reduces the ten-parameter fluid-filled
+viscoelastic shell model (eleven variables including the output frequency) to five governing dimensionless groups for
 flexural modes.  The resulting closed-form scaling law collapses a
 1458-point parametric study with algebraic consistency and provides
 cross-species predictions without re-solving the eigenvalue problem.
 The dimensionless frequency $\Pi_0 \approx 0.07$ is quasi-universal
 across mammals, and the scattering coupling ratio
 $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is approximately size-independent,
-validating animal-model studies of abdominal resonance under mechanical
+validating the use of animal-model scaling for abdominal resonance studies under mechanical
 excitation.  The breathing
 mode never enters the infrasonic range for any organism.
 
