@@ -56,7 +56,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 GAMMA = 1.4           # specific-heat ratio (air/gas mix)
 P0 = 101325.0         # atmospheric + mean intra-abdominal pressure [Pa]
-RHO_TISSUE = 1050.0   # surrounding tissue density [kg/m³]
+RHO_TISSUE = 1020.0   # surrounding tissue density [kg/m³]
 E_WALL = 10.0e3       # intestinal wall Young's modulus [Pa]
 NU_WALL = 0.45        # Poisson's ratio
 H_WALL = 3.0e-3       # intestinal wall thickness [m]
