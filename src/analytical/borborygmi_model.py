@@ -437,6 +437,96 @@ def clinical_comparison(volumes_mL: np.ndarray | None = None) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Mode transition map
+# ---------------------------------------------------------------------------
+
+ALL_MODES: list[str] = ["minnaert", "constrained", "helmholtz", "axial", "radial"]
+
+MODE_LABELS: dict[str, str] = {
+    "minnaert": "Minnaert (free bubble)",
+    "constrained": "Constrained bubble",
+    "helmholtz": "Helmholtz resonator",
+    "axial": "Axial standing wave",
+    "radial": "Radial breathing",
+}
+
+
+def mode_transition_map(
+    V_range: tuple[float, float] = (0.1, 100.0),
+    tube_diameter_m: float = 0.03,
+    n_points: int = 500,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Compute all 5 mode frequencies across a volume range and find crossovers.
+
+    Parameters
+    ----------
+    V_range : tuple of float
+        (V_min, V_max) in mL.  Default (0.1, 100).
+    tube_diameter_m : float
+        Internal tube diameter [m].
+    n_points : int
+        Number of logarithmically-spaced volume points.
+    **kwargs
+        Additional keyword arguments passed to :class:`BorborygmiParams`.
+
+    Returns
+    -------
+    dict
+        Keys:
+
+        - ``volumes_mL`` : ndarray of shape (n_points,)
+        - ``frequencies`` : dict mapping mode name → ndarray of Hz
+        - ``dominant_mode`` : ndarray of mode name strings (lowest freq mode at
+          each volume)
+        - ``crossovers`` : list of dicts, each with ``volume_mL``,
+          ``frequency_hz``, ``mode_below`` (dominant before), ``mode_above``
+          (dominant after)
+    """
+    volumes = np.logspace(np.log10(V_range[0]), np.log10(V_range[1]), n_points)
+
+    freq_arrays: dict[str, np.ndarray] = {}
+    for mode in ALL_MODES:
+        freq_arrays[mode] = np.array([
+            borborygmi_frequency(v, tube_diameter_m, mode=mode, **kwargs)
+            for v in volumes
+        ])
+
+    # Dominant mode = the one with the lowest frequency at each volume
+    # (lowest-frequency mode most likely to be excited by broadband peristalsis)
+    freq_matrix = np.column_stack([freq_arrays[m] for m in ALL_MODES])
+    dominant_idx = np.argmin(freq_matrix, axis=1)
+    dominant_mode = np.array([ALL_MODES[i] for i in dominant_idx])
+
+    # Detect crossovers: where dominant mode changes
+    crossovers: list[dict[str, Any]] = []
+    for i in range(1, len(dominant_mode)):
+        if dominant_mode[i] != dominant_mode[i - 1]:
+            # Interpolate crossover volume (geometric mean of bracket)
+            v_cross = np.sqrt(volumes[i - 1] * volumes[i])
+            # Evaluate both modes at crossover to get approximate frequency
+            f_below = borborygmi_frequency(
+                v_cross, tube_diameter_m, mode=dominant_mode[i - 1], **kwargs
+            )
+            f_above = borborygmi_frequency(
+                v_cross, tube_diameter_m, mode=dominant_mode[i], **kwargs
+            )
+            crossovers.append({
+                "volume_mL": float(v_cross),
+                "frequency_hz": float((f_below + f_above) / 2.0),
+                "mode_below": str(dominant_mode[i - 1]),
+                "mode_above": str(dominant_mode[i]),
+            })
+
+    return {
+        "volumes_mL": volumes,
+        "frequencies": freq_arrays,
+        "dominant_mode": dominant_mode,
+        "crossovers": crossovers,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Figure generation
 # ---------------------------------------------------------------------------
 
@@ -563,6 +653,156 @@ def fig_frequency_vs_volume(save: bool = True):
             fig.savefig(FIG_DIR / f"fig_borborygmi_frequency_vs_volume.{ext}",
                         dpi=300, bbox_inches="tight")
         print(f"Saved figure to {FIG_DIR}")
+
+    return fig
+
+
+def plot_mode_transition_map(
+    V_range: tuple[float, float] = (0.1, 100.0),
+    tube_diameter_m: float = 0.03,
+    n_points: int = 500,
+    save: bool = True,
+    save_dir: Path | str | None = None,
+    **kwargs: Any,
+):
+    """Publication-quality mode transition map for the borborygmi paper.
+
+    Single-panel figure with log-log axes showing all 5 resonance modes
+    vs gas pocket volume, with clinical frequency band shading and
+    crossover markers.
+
+    Parameters
+    ----------
+    V_range : tuple of float
+        (V_min, V_max) in mL.
+    tube_diameter_m : float
+        Internal tube diameter [m].
+    n_points : int
+        Volume resolution.
+    save : bool
+        If True, save PNG and PDF.
+    save_dir : Path or str, optional
+        Output directory.  Default: ``paper2-gas-pockets/figures/``.
+    **kwargs
+        Passed to :func:`mode_transition_map`.
+
+    Returns
+    -------
+    matplotlib.figure.Figure
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+
+    plt.rcParams.update({
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "DejaVu Serif", "serif"],
+        "font.size": 10,
+        "axes.labelsize": 11,
+        "xtick.labelsize": 9,
+        "ytick.labelsize": 9,
+        "legend.fontsize": 8,
+        "figure.dpi": 300,
+        "savefig.dpi": 300,
+    })
+
+    data = mode_transition_map(V_range, tube_diameter_m, n_points, **kwargs)
+    volumes = data["volumes_mL"]
+    freqs = data["frequencies"]
+    crossovers = data["crossovers"]
+
+    colours = {
+        "minnaert": "#1f77b4",
+        "constrained": "#ff7f0e",
+        "helmholtz": "#2ca02c",
+        "axial": "#d62728",
+        "radial": "#9467bd",
+    }
+    linestyles = {
+        "minnaert": "-",
+        "constrained": "-",
+        "helmholtz": "--",
+        "axial": "-.",
+        "radial": ":",
+    }
+
+    fig, ax = plt.subplots(figsize=(8, 5.5))
+
+    # Clinical frequency band
+    ax.axhspan(200, 550, alpha=0.10, color="#888888", zorder=0)
+    ax.axhline(200, color="#aaaaaa", linewidth=0.5, linestyle="--", zorder=0)
+    ax.axhline(550, color="#aaaaaa", linewidth=0.5, linestyle="--", zorder=0)
+    ax.text(
+        V_range[0] * 1.3, 360, "Clinical range\n(200–550 Hz)",
+        fontsize=7, color="#666666", fontstyle="italic", va="center",
+    )
+
+    # Mode frequency lines
+    for mode in ALL_MODES:
+        ax.loglog(
+            volumes, freqs[mode],
+            color=colours[mode],
+            linestyle=linestyles[mode],
+            linewidth=1.8,
+            label=MODE_LABELS[mode],
+            zorder=2,
+        )
+
+    # Crossover markers
+    for xo in crossovers:
+        ax.plot(
+            xo["volume_mL"], xo["frequency_hz"],
+            marker="o", markersize=7, color="black",
+            markerfacecolor="white", markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax.annotate(
+            f'{xo["mode_below"]}→{xo["mode_above"]}',
+            xy=(xo["volume_mL"], xo["frequency_hz"]),
+            xytext=(8, 8), textcoords="offset points",
+            fontsize=6, color="#333333",
+            arrowprops=dict(arrowstyle="-", color="#999999", lw=0.5),
+        )
+
+    # Dominant-mode background shading
+    dom = data["dominant_mode"]
+    i = 0
+    while i < len(dom):
+        j = i
+        while j < len(dom) and dom[j] == dom[i]:
+            j += 1
+        mode_name = dom[i]
+        v_lo = volumes[i]
+        v_hi = volumes[min(j, len(volumes) - 1)]
+        ax.axvspan(v_lo, v_hi, alpha=0.04, color=colours[mode_name], zorder=0)
+        i = j
+
+    ax.set_xlabel("Gas pocket volume [mL]")
+    ax.set_ylabel("Frequency [Hz]")
+    ax.set_xlim(V_range)
+    ax.set_ylim(10, 20_000)
+    ax.grid(True, which="both", alpha=0.15, linewidth=0.5)
+    ax.legend(loc="upper right", framealpha=0.9)
+    ax.set_title(
+        "Mode transition map: borborygmi resonance regimes",
+        fontsize=11, fontweight="bold", pad=10,
+    )
+
+    fig.tight_layout()
+
+    if save:
+        if save_dir is None:
+            out = Path(__file__).resolve().parents[2] / "paper2-gas-pockets" / "figures"
+        else:
+            out = Path(save_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        for ext in ("png", "pdf"):
+            fig.savefig(
+                out / f"fig_mode_transition_map.{ext}",
+                dpi=300, bbox_inches="tight",
+            )
+        print(f"Saved mode transition map to {out}")
 
     return fig
 

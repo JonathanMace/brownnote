@@ -18,6 +18,8 @@ from analytical.borborygmi_model import (
     volume_sweep,
     tube_diameter_sweep,
     clinical_comparison,
+    mode_transition_map,
+    ALL_MODES,
     CLINICAL_DATA,
 )
 
@@ -258,3 +260,130 @@ class TestEdgeCases:
     def test_large_tube_diameter(self):
         f = borborygmi_frequency(10.0, tube_diameter_m=0.10, mode="axial")
         assert np.isfinite(f) and f > 0
+
+
+# ---------------------------------------------------------------------------
+# Mode transition map tests
+# ---------------------------------------------------------------------------
+
+class TestModeTransitionMap:
+    """Tests for the mode_transition_map function."""
+
+    @pytest.fixture(autouse=True)
+    def _compute_map(self):
+        """Compute the map once for the class."""
+        self.data = mode_transition_map(
+            V_range=(0.1, 100.0), n_points=200
+        )
+
+    def test_return_keys(self):
+        """Return dict has all expected keys."""
+        assert set(self.data.keys()) == {
+            "volumes_mL", "frequencies", "dominant_mode", "crossovers",
+        }
+
+    def test_volume_array_shape(self):
+        assert self.data["volumes_mL"].shape == (200,)
+
+    def test_all_modes_present(self):
+        """Every mode has a frequency array of the right length."""
+        for mode in ALL_MODES:
+            assert mode in self.data["frequencies"]
+            assert self.data["frequencies"][mode].shape == (200,)
+
+    def test_all_frequencies_positive_finite(self):
+        """Every frequency value must be positive and finite."""
+        for mode in ALL_MODES:
+            f = self.data["frequencies"][mode]
+            assert np.all(np.isfinite(f)), f"{mode} has non-finite values"
+            assert np.all(f > 0), f"{mode} has non-positive values"
+
+    @pytest.mark.parametrize("mode", ["minnaert", "constrained", "helmholtz", "axial"])
+    def test_frequency_monotonically_decreasing(self, mode):
+        """For bubble/slug modes, frequency must decrease with volume."""
+        f = self.data["frequencies"][mode]
+        assert np.all(np.diff(f) < 0), (
+            f"{mode}: frequency is not monotonically decreasing with volume"
+        )
+
+    def test_radial_mode_independent_of_volume(self):
+        """Radial mode depends on tube diameter, not gas pocket volume."""
+        f = self.data["frequencies"]["radial"]
+        assert np.std(f) / np.mean(f) < 1e-10, "Radial mode should be volume-independent"
+
+    def test_dominant_mode_length(self):
+        assert len(self.data["dominant_mode"]) == 200
+
+    def test_dominant_mode_valid_names(self):
+        """All dominant mode labels are valid mode names."""
+        for m in self.data["dominant_mode"]:
+            assert m in ALL_MODES
+
+    def test_crossovers_are_list_of_dicts(self):
+        xo = self.data["crossovers"]
+        assert isinstance(xo, list)
+        for item in xo:
+            assert "volume_mL" in item
+            assert "frequency_hz" in item
+            assert "mode_below" in item
+            assert "mode_above" in item
+
+    def test_crossover_volumes_within_range(self):
+        """All crossover volumes lie within the requested range."""
+        for xo in self.data["crossovers"]:
+            assert 0.1 <= xo["volume_mL"] <= 100.0
+
+    def test_crossover_frequencies_positive(self):
+        for xo in self.data["crossovers"]:
+            assert xo["frequency_hz"] > 0
+
+    def test_crossover_modes_differ(self):
+        """mode_below and mode_above must be different at each crossover."""
+        for xo in self.data["crossovers"]:
+            assert xo["mode_below"] != xo["mode_above"]
+
+    def test_clinical_range_overlap(self):
+        """At least one mode must produce frequencies in the clinical range (200-550 Hz)."""
+        clinical_lo, clinical_hi = 200.0, 550.0
+        found = False
+        for mode in ALL_MODES:
+            f = self.data["frequencies"][mode]
+            if np.any((f >= clinical_lo) & (f <= clinical_hi)):
+                found = True
+                break
+        assert found, "No mode overlaps with clinical borborygmi range 200-550 Hz"
+
+    def test_stiff_wall_constrained_above_minnaert(self):
+        """With a stiff wall, elastic constraint raises frequency above Minnaert."""
+        stiff = mode_transition_map(
+            V_range=(0.1, 10.0), n_points=20, E_wall=1.0e6,
+        )
+        f_con = stiff["frequencies"]["constrained"]
+        f_min = stiff["frequencies"]["minnaert"]
+        assert np.all(f_con > f_min)
+
+    def test_custom_tube_diameter(self):
+        """Function accepts tube_diameter_m and produces valid results."""
+        data2 = mode_transition_map(V_range=(1, 50), tube_diameter_m=0.05, n_points=50)
+        assert data2["volumes_mL"].shape == (50,)
+        for mode in ALL_MODES:
+            assert np.all(data2["frequencies"][mode] > 0)
+
+
+class TestPlotModeTransitionMap:
+    """Smoke test for figure generation (headless)."""
+
+    def test_figure_generates_without_error(self):
+        import matplotlib
+        matplotlib.use("Agg")
+        from analytical.borborygmi_model import plot_mode_transition_map
+
+        fig = plot_mode_transition_map(
+            V_range=(0.5, 80.0), n_points=50, save=False,
+        )
+        assert fig is not None
+        axes = fig.get_axes()
+        assert len(axes) >= 1
+        # Check log scales
+        assert axes[0].get_xscale() == "log"
+        assert axes[0].get_yscale() == "log"
