@@ -1,74 +1,60 @@
 # Browntone — Copilot Project Instructions
 
-*This file is loaded on EVERY interaction. It is Opus's bootstrap brain.*
-
-## Identity
-
-You are **Opus** (GitHub Copilot CLI, Claude Opus). You are the Principal Investigator
-of the Browntone research group. You lead a team of PhD students (subagents) investigating
-the biomechanics of infrasound-abdomen interaction. You don't just execute tasks — you set
-research vision, generate ideas, critically evaluate progress, and pivot when needed.
-
 ## Project Overview
 
-**Browntone** investigates whether infrasound can induce resonance in the human abdominal
-cavity — the "brown note" hypothesis. We model the abdomen as a fluid-filled viscoelastic
-oblate spheroidal shell and compare airborne acoustic vs mechanical (WBV) coupling.
+**Browntone** is a computational biomechanics research project investigating whether
+infrasound can induce resonance in the human abdominal cavity — the so-called "brown
+note" hypothesis. We model the abdomen as a fluid-filled viscoelastic oblate spheroidal
+shell and compare airborne acoustic vs mechanical (whole-body vibration) coupling.
 
-- **Target venue**: Journal of Sound and Vibration (JSV), Elsevier
-- **Remote**: https://github.com/JonathanMace/brownnote
-- **Main worktree**: `C:\Users\jon\OneDrive\Projects\browntone`
-- **Agent worktrees**: `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>`
+**Target venue**: Journal of Sound and Vibration (JSV), Elsevier.
 
-## Operational Rules (NON-NEGOTIABLE)
+## Git Workflow: Worktrees and Pull Requests
 
-1. **`main` is branch-protected.** ALL changes via PRs. No exceptions, not even for logs.
-2. **Maintain ≥6 concurrent background agents.** If count drops below 4, launch more immediately.
-3. **Every agent gets its own worktree + branch.** `git worktree add ../browntone-worktrees/<name> <branch>`
-4. **After merging a PR**, delete the remote branch: `git push origin --delete <branch>`
-5. **Every iteration produces a research log** in `docs/research-logs/YYYY-MM-DDTHHMM-topic.md` with a PDF snapshot.
-6. **Run the 3-reviewer panel** (A/B/C) after every major paper update.
-7. **Run a lab-meeting agent** at least once per major iteration for docs freshness audit.
-8. **Update THIS FILE** after every major iteration to reflect new state.
+### Branch Protection
+**`main` is protected.** No direct pushes allowed. ALL changes must go through pull
+requests. This applies to everyone — subagents AND the orchestrator.
 
-## The Iteration Cycle
+### Branch Structure
+- **`main`** — the canonical branch. Contains the integrated paper, all merged analyses,
+  and the latest compilable LaTeX draft. Protected; changes only via merged PRs.
+- **Feature branches** — one per research stream (e.g., `nonlinear-analysis`,
+  `gas-pocket-paper`, `viscous-correction`). Each has a git worktree at
+  `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
 
-```
-DO → REVIEW → LOG → COMPILE → COMMIT → PLAN → MAINTAIN
-```
+### For Subagents: How to Work
+1. **You will be assigned a worktree path.** All your file edits go there.
+2. **Commit on your branch** when done:
+   ```powershell
+   cd C:\Users\jon\OneDrive\Projects\browntone-worktrees\<your-branch>
+   git add -A
+   git commit -m "[category] Description
 
-See `.github/skills/research-iteration/SKILL.md` for the full protocol.
+   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+   ```
+3. **Push your branch**: `git push origin <your-branch>`
+4. **Do NOT** edit files on `main` or in other worktrees.
+5. **Do NOT** merge branches yourself — the orchestrator handles merges via PRs.
 
-Quick reference:
-- **DO**: Launch ≥6 parallel agents in worktrees (analysis, paper, review, infrastructure, scouting)
-- **REVIEW**: 3-reviewer panel (A=domain, B=cynical, C=methodologist) in separate worktrees
-- **LOG**: Timestamped markdown + PDF snapshot in `docs/research-logs/`
-- **COMPILE**: `pdflatex + bibtex + pdflatex×2`, snapshot to `paper/drafts/` AND `docs/research-logs/`
-- **COMMIT**: Branch → commit → push → PR → merge → delete remote branch → pull main
-- **PLAN**: Update SQL todos, plan.md, identify next batch
-- **MAINTAIN**: Lab meeting agent, consistency audit, update this file, clean worktrees/branches
+### For the Orchestrator: Merging
+- When an agent completes, push its branch and create a PR on GitHub.
+- Review the PR (or have the 3-reviewer panel review it).
+- Merge to main via `gh pr merge <number> --merge`.
+- After merging, delete the merged remote branch: `git push origin --delete <branch>`
+  to prevent accumulation of stale branches.
+- Pull in the main worktree: `git pull origin main`.
+- **Never push directly to main** — always branch first, even for small fixes.
+- For orchestrator-level changes (instructions, logs, reviews), create a short-lived
+  branch, commit, push, PR, merge.
+- Remote: `https://github.com/JonathanMace/brownnote`
 
-## Git Workflow
-
-### For Subagents
-1. Work ONLY in your assigned worktree
-2. Commit with `[category] Description\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>`
-3. Push your branch. Do NOT merge. Do NOT edit files outside your worktree.
-
-### For Opus (the orchestrator)
-1. Create branch: `git checkout -b <name>`
-2. Do work, commit, push
-3. `gh pr create --base main --head <name> --title "..." --body "..."`
-4. `gh pr merge <N> --merge`
-5. `git push origin --delete <name>`
-6. `git checkout main && git pull origin main`
-
-### Commit Prefixes
-`[analysis]` `[paper]` `[fea]` `[review]` `[infra]` `[figures]` `[tests]` `[research]` `[meeting]` `[audit]` `[style]` `[log]`
+### Commit Message Prefixes
+`[analysis]` `[paper]` `[fea]` `[review]` `[infra]` `[figures]` `[tests]`
 
 ## Canonical Parameter Set
 
 **Every computation must use these values unless explicitly varying a parameter.**
+This is the single most important consistency rule in the project.
 
 | Parameter | Symbol | Value | Unit |
 |-----------|--------|-------|------|
@@ -83,115 +69,208 @@ Quick reference:
 | Intra-abdominal pressure | P_iap | 1000 | Pa |
 | Loss tangent | η | 0.25 | — |
 
-**Derived**: R_eq=0.157m, f₂=3.95Hz, Q=4.0, ζ=0.125, ka=0.0114, breathing≈2490Hz
+**Derived values** (from canonical set):
+- Equivalent sphere radius: R_eq = (a²c)^(1/3) = 0.157 m
+- n=2 flexural frequency: f₂ = 4.0 Hz
+- Quality factor: Q = 1/η = 4.0
+- Damping ratio: ζ = η/2 = 0.125
+- ka at f₂: 0.0114
+- Breathing mode: ~2490 Hz
 
-## Key Physics (Must Understand)
+## Key Physics — Must Understand
 
-1. **Breathing mode (n=0)**: ~2490 Hz. Fluid bulk modulus dominates. Irrelevant to infrasound.
-2. **Flexural modes (n≥2)**: 4-10 Hz. Shell changes shape, fluid is added mass only.
-3. **Coupling disparity**: R ≈ 46,000× (mechanical/airborne). Central result.
-4. **Energy budget**: Shell absorbs ~10⁻¹⁴ of incident acoustic energy.
-5. **Always use energy-consistent displacement** (0.014 μm at 120 dB), not pressure-based (0.18 μm).
+### Two Mode Families
+1. **Breathing mode (n=0)**: ~2500 Hz. Dominated by fluid bulk modulus. Irrelevant
+   to infrasound. The fluid acts as an incredibly stiff volumetric spring.
+2. **Flexural modes (n≥2)**: 4-10 Hz. The shell changes shape without compressing the
+   fluid. Fluid acts only as added mass. These are the brown note candidates.
 
-## Lab Structure
+### The Coupling Disparity (Central Result)
+- **Airborne**: Penalised by (ka)^n. At 4 Hz, (ka)² ≈ 1.3×10⁻⁴. Energy-consistent
+  displacement at 120 dB: ~0.014 μm. Far below PIEZO threshold (0.5-2 μm).
+- **Mechanical (WBV)**: Direct coupling, no ka penalty. At 0.1 m/s²: ~649 μm.
+  Ratio: ~46,000×. This explains WHY WBV causes GI effects but airborne doesn't.
 
-### Core Agents (in `.github/agents/`)
-| Agent | Role | When to Use |
-|-------|------|-------------|
-| `reviewer-a` | Domain expert | Every review round — novelty, significance, narrative |
-| `reviewer-b` | Cynical gatekeeper | Every review round — fatal flaws, consistency |
-| `reviewer-c` | Methodologist | Every review round — runs code, checks numbers |
-| `consistency-auditor` | QA | Before every paper compile — parameter drift |
-| `lab-meeting` | Holistic audit | Once per major iteration — docs freshness, strategy |
-| `research-scout` | Idea generation | Periodically — find new topics |
-| `provocateur` | Devil's advocate | After major results — challenge direction |
-| `paper-writer` | Drafting | For section writing and style passes |
-| `simulation-engineer` | Analysis | For new computational work |
-| `lab-manager` | Infrastructure | README, docs, worktrees, tests |
-| `communications` | Outreach | Conference abstracts, summaries |
-| `bibliographer` | Literature | Track new papers, maintain refs |
-
-### Skills (in `.github/skills/`)
-| Skill | Purpose |
-|-------|---------|
-| `research-iteration` | Full iteration protocol (authoritative) |
-| `compile-paper` | LaTeX compilation + snapshot workflow |
-| `mace-writing-style` | Brian Mace's JSV writing conventions |
-| `jmace-writing-style` | Jonathan Mace's systems writing style |
-| `git-checkpoint` | Branch → PR → merge → cleanup workflow |
-
-### Path-Specific Instructions (in `.github/instructions/`)
-| File | Applies To | Enforces |
-|------|-----------|----------|
-| `paper.instructions.md` | `paper/**` | JSV style, compilation, canonical params in tables |
-| `analysis.instructions.md` | `src/analytical/**` | Canonical params, code conventions, docstrings |
-| `research-logs.instructions.md` | `docs/research-logs/**` | Log format, PDF snapshot requirement |
-
-## Publication Pipeline
-
-| Paper | Venue | Status | Location |
-|-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | ~31pp, Round 4 reviews done, param fix in progress | `paper/` |
-| Paper 2: Gas Pockets | JASA | First draft complete (14pp) | `paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Analysis done, needs paper draft | `src/analytical/dimensional_analysis.py` |
-| Paper 4+: See scout | Various | Ideas only | `docs/research-ideas/` |
-
-## Current Known Issues (update as resolved)
-
-- **Param consistency**: η=0.25 vs 0.30 mixed in text (fix agent completed, PR pending)
-- **M2 gap**: Theory predicts 3.75× more displacement than ISO data (agent investigating)
-- **README**: Stale (rewrite agent completed, PR pending)
-- **Research logs**: Gap since T2300 integration (need to catch up)
+### Energy Budget
+The shell absorbs ~10⁻¹⁴ of incident acoustic energy. The pressure-based model
+overestimates displacement by ~13.4× vs the energy-consistent reciprocity analysis.
+**Always use energy-consistent values for airborne coupling claims.**
 
 ## Repository Layout
 
 ```
-src/analytical/          — 17 core analytical modules
-src/fem/                 — FEA mesh + Rayleigh-Ritz solver
-src/experimental/        — Phantom design predictions
-paper/                   — JSV manuscript (elsarticle, ~31 pages)
-paper2-gas-pockets/      — JASA spin-off paper
-projects/                — Sub-projects (bladder-resonance, etc.)
-data/figures/            — Publication figures (PNG+PDF)
-data/results/            — JSON result files
-docs/research-logs/      — Timestamped journal + reviewer reports + PDF snapshots
-docs/research-ideas/     — Scout reports, ideas backlog
-docs/style-references/   — Mace writing style analyses
-docs/RESEARCH-VISION.md  — Programme vision and roadmap
-tests/                   — pytest suite (118 tests)
-.github/agents/          — Custom agent definitions
-.github/skills/          — Reusable workflow skills
-.github/instructions/    — Path-specific instructions
+src/analytical/              — Core analytical models (17 modules)
+  __init__.py
+  natural_frequency_v2.py       — Modal analysis (AbdominalModelV2 dataclass)
+  natural_frequency.py          — Legacy v1 modal model
+  acoustic_coupling.py          — Airborne pressure → shell coupling
+  mechanical_coupling.py        — WBV vs airborne comparison
+  energy_budget.py              — Reciprocity-based self-consistent analysis
+  dimensional_analysis.py       — Buckingham-π dimensional groupings
+  gas_pocket_resonance.py       — Bowel gas as acoustic transducers
+  gas_pocket_detailed.py        — Constrained bubble model, differential susceptibility
+  parametric_analysis.py        — Sensitivity study (486 combinations)
+  multilayer_wall.py            — 5-layer composite wall model
+  oblate_spheroid_ritz.py       — Rayleigh-Ritz oblate correction
+  uncertainty_quantification.py — Monte Carlo UQ + Sobol indices
+  nonlinear_analysis.py         — Duffing oscillator, backbone curves, jump phenomenon
+  viscous_correction.py         — Stokes boundary layer damping validation
+  organ_inclusions.py           — Effective medium theory for organ inclusions
+  mechanotransduction.py        — Cellular response thresholds
+  orifice_coupling.py           — Orifice impedance model
+src/fem/                     — FEA mesh generation and modal solvers
+  mesh_generation.py            — Gmsh geometry & meshing
+  modal_analysis.py             — Lamb-mode Rayleigh-Ritz solver
+src/experimental/            — Phantom experiment design
+  phantom_design.py             — Silicone phantom specification
+paper/                       — LaTeX manuscript (elsarticle, JSV format)
+  main.tex                      — Master document
+  sections/                     — introduction, methods, results, discussion,
+                                  background, conclusion, dimensional_analysis,
+                                  historical-notes, section2_formulation, section4_coupling
+  references.bib                — BibTeX database
+  drafts/                       — Timestamped PDF snapshots
+  cover-letter.tex              — JSV cover letter
+  graphical-abstract.py         — Matplotlib graphical abstract generator
+data/figures/                — Publication figures (PNG@300dpi + PDF)
+data/results/                — JSON result files
+data/meshes/                 — Gmsh .msh files
+data/materials/              — Material property data
+data/literature/             — Reference PDFs & notes
+docs/research-logs/          — Timestamped research journal + reviewer reports
+docs/style-references/       — Brian Mace papers and style analysis
+docs/research-ideas/         — Future directions and brainstorming
+tests/                       — pytest test suite
+scripts/                     — Automation & batch-run scripts
+  generate_jsv_figures.py       — JSV figure generation
+  run_convergence_study.py      — Convergence study driver
+  run_modal_analysis.py         — Modal analysis driver
+notebooks/                   — Exploratory Jupyter notebooks
+.github/skills/              — Copilot skills
+  compile-paper/  critique-results/  generate-figures/  git-checkpoint/
+  jmace-writing-style/  mace-writing-style/  research-iteration/
+  run-analysis/  write-paper/
+.github/agents/              — Copilot agents
+  consistency-auditor  data-analyst  lab-meeting  paper-writer
+  research-scout  reviewer-a  reviewer-b  reviewer-c  simulation-engineer
+  literature-researcher
 ```
 
-Note: `src/browntone/` is LEGACY. Use `src/analytical/` for all model code.
-
-## Anti-Patterns (Learned the Hard Way)
-
-- Pushing directly to main (it's protected!)
-- Letting agent count drop below 6
-- Not logging after productive cycles
-- Writing reviews/logs to main instead of worktrees
-- Using η=0.30 or ka=0.017 (stale v1 values)
-- Using pressure-based displacement (0.18 μm) without labelling it as an overestimate
-- Confusing breathing modes (n=0, 2490 Hz) with flexural modes (n≥2, 4-10 Hz)
-- Not deleting merged remote branches
-- Not preserving PDF snapshots with research logs
-- Repeating agent instructions that should be in agent definitions
-- Forgetting to run lab-meeting/consistency-audit periodically
+Note: `src/browntone/` also exists (created by an early agent) but is NOT the active
+source tree. Use `src/analytical/` for all model code.
 
 ## How to Use the Core Model
 
 ```python
+import sys
+sys.path.insert(0, r'C:\Users\jon\OneDrive\Projects\browntone')
+# OR from a worktree:
+sys.path.insert(0, r'C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>')
+
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
-model = AbdominalModelV2(E=0.1e6, a=0.18, c=0.12, h=0.01, nu=0.45, rho_wall=1100, rho_fluid=1020, K_fluid=2.2e9, P_iap=1000, loss_tangent=0.25)
+
+# Canonical parameters
+model = AbdominalModelV2(
+    E=0.1e6, a=0.18, b=0.18, c=0.12, h=0.01,
+    nu=0.45, rho_wall=1100, rho_fluid=1020,
+    K_fluid=2.2e9, P_iap=1000, loss_tangent=0.25
+)
 freqs = flexural_mode_frequencies_v2(model, n_max=5)
+# freqs = {0: 2490.6, 1: 0.0, 2: 3.95, 3: 6.31, 4: 8.88, 5: 11.71}
 ```
+
+## Paper Compilation
+
+```powershell
+cd C:\Users\jon\OneDrive\Projects\browntone\paper
+pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
+# Preserve snapshot:
+$ts = Get-Date -Format "yyyy-MM-dd_HHmm"
+Copy-Item main.pdf "drafts\draft_$ts.pdf"
+```
+
+**JSV format requirements**: `\documentclass[review]{elsarticle}`, line numbering
+(`lineno`), highlights (3-5, ≤85 chars), `elsarticle-num.bst`, data availability
+statement, CRediT, competing interests.
 
 ## Writing Style
 
-Blend Jonathan Mace (active voice, confident, concrete) with Brian Mace (structural
-precision, hedging for acoustic claims, "where..." equation clauses). Jonathan's voice
-dominates; Brian's conventions apply to theory sections. British English. Subtle dry
-humour. See `.github/skills/jmace-writing-style/SKILL.md` and
-`.github/skills/mace-writing-style/SKILL.md` for details.
+We blend two voices:
+1. **Brian Mace's JSV conventions** (see `.github/skills/mace-writing-style/SKILL.md`):
+   Structural precision, measured hedging, systematic section openings, explicit
+   equation presentation with "where..." clauses.
+2. **Accessible and engaging**: Active voice where it aids clarity, subtle dry humour
+   about the subject matter (the topic invites it), vivid physical analogies.
+
+**Rules**:
+- British English (behaviour, modelled, analysed)
+- `\SI{}{}` for all quantities with units
+- Define all symbols at first use
+- No overclaiming. "The results suggest..." not "We prove..."
+- Figures referenced before discussion: "Figure 3 shows..."
+- Tables use `\toprule`, `\midrule`, `\bottomrule` (booktabs)
+
+## Research Iteration Cycle
+
+Every major phase follows: **DO → REVIEW → LOG → COMPILE → COMMIT → PLAN NEXT**
+
+- **DO**: Launch parallel agents on independent work streams. Each agent gets its own
+  worktree and branch (see Git Workflow above). Every agent must commit and push.
+- **REVIEW**: Launch a **3-reviewer panel** (see below). Each reviewer works in a
+  read-only capacity and writes their review to `docs/research-logs/`.
+- **LOG**: Timestamped entry in `docs/research-logs/YYYY-MM-DDTHHMM-topic.md`,
+  with a copy of the current compiled PDF as `YYYY-MM-DDTHHMM-paper-snapshot.pdf`
+- **COMPILE**: Build LaTeX, preserve timestamped PDF in `paper/drafts/`
+- **COMMIT**: Git commit with descriptive message + push to main
+- **PLAN NEXT**: Update SQL todos, identify next parallel batch, update these instructions
+- **CLEAN UP**: After merging PRs, delete merged remote branches:
+  `git push origin --delete <branch>`
+
+### 3-Reviewer Panel
+
+Each review round launches 3 reviewers in parallel on separate worktrees/branches:
+
+| Reviewer | Role | Focus |
+|----------|------|-------|
+| **Reviewer A** | Domain expert (vibroacoustics) | Novelty, significance, framing, "so what?", missing refs, narrative arc |
+| **Reviewer B** | Cynical gatekeeper | Fatal flaws, technical errors, parameter consistency, logical gaps |
+| **Reviewer C** | Methodologist / reproducer | Code-paper consistency, UQ completeness, reproducibility, runs the code |
+
+Each reviewer:
+1. Gets a worktree + branch (e.g., `review-a-r4`, `review-b-r4`, `review-c-r4`)
+2. Reads the full paper and source code
+3. Writes their review to `docs/research-logs/reviewer-X-roundN.md`
+4. Commits and pushes their branch
+5. Does NOT edit paper or source files — review only
+
+The orchestrator synthesises all 3 reviews into an action plan before the next iteration.
+
+### Keeping These Instructions Current
+
+**After every major iteration**, the orchestrator must review and update this file to
+reflect: new modules added, changed canonical values, new workflow patterns, lessons
+learned. This file is the single source of truth for all agents.
+
+## Code Conventions
+
+- **Python ≥ 3.10**, numpy/scipy/matplotlib (globally installed)
+- Type hints on public functions
+- NumPy-style docstrings
+- SI units throughout; document in variable names where ambiguous
+- `snake_case` for functions, `PascalCase` for classes
+- No magic numbers — use the canonical parameter set or named constants
+- `import matplotlib; matplotlib.use('Agg')` for headless figure generation
+
+## What NOT to Do
+
+- Do not use "brown note" in any LaTeX content destined for the paper.
+  Use "infrasound-induced abdominal resonance" or similar.
+- Do not use the pressure-based displacement estimate without noting it is an
+  upper bound (~13× overestimate). Use energy-consistent values.
+- Do not confuse breathing modes (n=0, ~2500 Hz) with flexural modes (n≥2, 4-10 Hz).
+  This was the fatal error in v1 of the model.
+- Do not edit files outside your assigned worktree.
+- Do not merge branches — only the orchestrator merges via PRs.
