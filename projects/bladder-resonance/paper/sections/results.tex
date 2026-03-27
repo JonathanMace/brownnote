@@ -7,8 +7,8 @@
 Figure~\ref{fig:freq_vs_volume} presents the $n = 2$ and $n = 3$ flexural
 mode frequencies across the physiological fill range
 (\SIrange{50}{500}{\milli\litre}).  The $n = 2$ frequency follows a
-distinctive U-shaped curve, with a minimum of approximately \SI{12}{\hertz}
-near \SI{170}{\milli\litre} and higher values at both extremes of the fill
+distinctive U-shaped curve, with a minimum of approximately \SI{14}{\hertz}
+near \SI{220}{\milli\litre} and higher values at both extremes of the fill
 range.
 
 The physical mechanism behind this non-monotonic behaviour is a competition
@@ -22,14 +22,14 @@ between two opposing effects:
     rigidity ($D \propto h^3$) and membrane stiffness ($\propto h$).
   \item \textbf{Strain-stiffening.}  The elastic modulus of the detrusor
     muscle increases exponentially with fill volume
-    (equation~\ref{eq:E_fill}), from \SI{10}{\kilo\pascal} at
-    \SI{50}{\milli\litre} to \SI{200}{\kilo\pascal} at
-    \SI{500}{\milli\litre}.  This twenty-fold increase eventually dominates
+    (equation~\ref{eq:E_fill}), from \SI{29}{\kilo\pascal} at
+    \SI{50}{\milli\litre} to \SI{145}{\kilo\pascal} at
+    \SI{500}{\milli\litre}.  This five-fold increase eventually dominates
     the geometric effects.
 \end{enumerate}
 At low fill volumes the geometric effect dominates and the frequency
 falls; at high fill volumes the strain-stiffening wins and the frequency
-rises.  The crossover produces the minimum near \SI{170}{\milli\litre}---a
+rises.  The crossover produces the minimum near \SI{220}{\milli\litre}---a
 fill state corresponding to the early ``need to go'' sensation in most
 individuals.
 
@@ -41,35 +41,38 @@ individuals.
   (\SIrange{4}{8}{\hertz}) shown for reference.  (b) Geometry: equivalent
   sphere radius and wall thickness.  (c) Wall elastic modulus showing
   exponential strain-stiffening.  (d) Intravesical pressure following the
-  cystometric curve.  The minimum $f_2 \approx \SI{12}{\hertz}$ occurs near
-  \SI{170}{\milli\litre}, where geometric softening and strain-stiffening
+  cystometric curve.  The minimum $f_2 \approx \SI{14}{\hertz}$ occurs near
+  \SI{220}{\milli\litre}, where geometric softening and strain-stiffening
   are in balance.}
   \label{fig:freq_vs_volume}
 \end{figure}
 
 Table~\ref{tab:frequencies} lists the computed frequencies at key fill states.
-The $n = 2$ mode spans \SIrange{12}{18}{\hertz} and the $n = 3$ mode spans
-\SIrange{20}{31}{\hertz} across the physiological range.  All predicted
+The $n = 2$ mode spans \SIrange{14}{17}{\hertz} and the $n = 3$ mode spans
+\SIrange{23}{31}{\hertz} across the thin-shell-valid range
+($\geq$\SI{150}{\milli\litre}).  All predicted
 frequencies lie above the ISO~2631 peak pelvic transmissibility band
 (\SIrange{4}{8}{\hertz}), though below \SI{20}{\hertz} they remain within
 the broader frequency range affected by whole-body vibration.
 
 \begin{table}[htbp]
   \centering
-  \caption{Flexural mode frequencies at key fill volumes.}
+  \caption{Flexural mode frequencies at key fill volumes.  Entries marked
+  $\dagger$ have $h/R > 0.1$ and violate the thin-shell assumption; these
+  values should be treated with caution.}
   \label{tab:frequencies}
-  \begin{tabular}{rcccccc}
+  \begin{tabular}{rccccccl}
     \toprule
-    Volume & $R$ & $h$ & $E$ & $f_2$ & $f_3$ & $f_4$ \\
-    (mL) & (cm) & (mm) & (kPa) & (Hz) & (Hz) & (Hz) \\
+    Volume & $R$ & $h$ & $E$ & $h/R$ & $f_2$ & $f_3$ & $f_4$ \\
+    (mL) & (cm) & (mm) & (kPa) & & (Hz) & (Hz) & (Hz) \\
     \midrule
-     50 & 2.29 & 5.00 &  10.0 & 16.2 & 27.0 & 39.8 \\
-    100 & 2.88 & 3.46 &  13.9 & 12.9 & 21.5 & 31.1 \\
-    150 & 3.30 & 2.73 &  19.5 & 12.1 & 20.5 & 29.8 \\
-    200 & 3.63 & 2.30 &  27.1 & 12.1 & 20.9 & 30.6 \\
-    300 & 4.15 & 1.79 &  52.8 & 13.4 & 23.5 & 34.8 \\
-    400 & 4.57 & 1.50 & 102.8 & 15.3 & 27.1 & 40.3 \\
-    500 & 4.92 & 1.50 & 200.0 & 17.8 & 31.3 & 46.3 \\
+     50$^\dagger$ & 2.29 & 5.00 &  29.0 & 0.22 & 22.7 & 36.3 & 53.9 \\
+    100$^\dagger$ & 2.88 & 3.46 &  34.7 & 0.12 & 16.2 & 25.4 & 35.9 \\
+    150 & 3.30 & 2.73 &  41.5 & 0.08 & 14.2 & 22.8 & 32.3 \\
+    200 & 3.63 & 2.30 &  49.6 & 0.06 & 13.5 & 22.4 & 32.1 \\
+    300 & 4.15 & 1.79 &  70.9 & 0.04 & 13.9 & 24.1 & 35.3 \\
+    400 & 4.57 & 1.50 & 101.4 & 0.03 & 15.3 & 27.1 & 40.3 \\
+    500 & 4.92 & 1.50 & 145.0 & 0.03 & 17.1 & 30.6 & 45.6 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -80,21 +83,21 @@ the broader frequency range affected by whole-body vibration.
 
 Figure~\ref{fig:coupling} compares the airborne and mechanical coupling
 pathways to the bladder at a representative fill of \SI{300}{\milli\litre}
-($f_2 = \SI{13.4}{\hertz}$).  Three key observations emerge.
+($f_2 = \SI{13.9}{\hertz}$).  Three key observations emerge.
 
 First, the airborne acoustic coupling scales as $(ka)^2$ and is vanishingly
-small across the entire frequency range of interest: at \SI{13.4}{\hertz},
-$(ka)^2 \approx 1.0 \times 10^{-4}$.  The bladder, like the abdominal
+small across the entire frequency range of interest: at \SI{13.9}{\hertz},
+$(ka)^2 \approx 1.1 \times 10^{-4}$.  The bladder, like the abdominal
 cavity, is deep in the Rayleigh regime at all physiologically relevant
 frequencies.
 
 Second, the mechanical coupling---the product of seat-to-pelvis
 transmissibility and bladder modal amplification---peaks near the bladder
 resonance frequency.  Even though pelvic transmissibility is attenuated
-at \SI{13.4}{\hertz} ($T \approx 0.31$), the bladder modal amplification
+at \SI{13.9}{\hertz} ($T \approx 0.29$), the bladder modal amplification
 ($Q = 2.5$) partially compensates.
 
-Third, the coupling ratio $\mathcal{R} \approx 7{,}600$ at $f_2$
+Third, the coupling ratio $\mathcal{R} \approx 6{,}500$ at $f_2$
 (equation~\ref{eq:R_coupling}) confirms that mechanical vibration is the
 dominant excitation pathway by nearly four orders of magnitude.  This is
 quantitatively consistent with---though somewhat smaller than---the
@@ -137,21 +140,21 @@ a severe airborne coupling penalty in the Rayleigh regime.
     \midrule
     Equivalent radius & \SI{4.2}{\centi\metre} & \SI{15.7}{\centi\metre} \\
     Wall thickness & \SI{1.8}{\milli\metre} & \SI{10}{\milli\metre} \\
-    Elastic modulus & \SI{53}{\kilo\pascal} & \SI{100}{\kilo\pascal} \\
+    Elastic modulus & \SI{71}{\kilo\pascal} & \SI{100}{\kilo\pascal} \\
     Poisson's ratio & 0.49 & 0.45 \\
     Loss tangent & 0.40 & 0.25 \\
     Quality factor $Q$ & 2.5 & 4.0 \\
     Breathing mode $f_0$ & $\sim$\SI{9500}{\hertz} & $\sim$\SI{2500}{\hertz} \\
-    Flexural $f_2$ & \SI{13.4}{\hertz} & \SI{4.0}{\hertz} \\
-    $ka$ at $f_2$ & 0.010 & 0.011 \\
-    Coupling ratio $\mathcal{R}$ & $\sim$7,600 & $\sim$66,000 \\
+    Flexural $f_2$ & \SI{13.9}{\hertz} & \SI{4.0}{\hertz} \\
+    $ka$ at $f_2$ & 0.011 & 0.011 \\
+    Coupling ratio $\mathcal{R}$ & $\sim$6,500 & $\sim$66,000 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 The principal quantitative differences are the higher flexural frequency of
-the bladder ($f_2 = \SI{13.4}{\hertz}$ vs \SI{4.0}{\hertz}) and the smaller
-coupling ratio ($\sim$7,600 vs $\sim$66,000).  The higher $f_2$ is a direct
+the bladder ($f_2 = \SI{13.9}{\hertz}$ vs \SI{4.0}{\hertz}) and the smaller
+coupling ratio ($\sim$6,500 vs $\sim$66,000).  The higher $f_2$ is a direct
 consequence of the smaller radius: the stiffness-to-mass ratio scales
 roughly as $1/R^2$, and the bladder is approximately four times smaller
 than the abdomen.  The smaller coupling ratio reflects the fact that the

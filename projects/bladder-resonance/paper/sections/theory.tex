@@ -15,9 +15,15 @@ approximation both simpler and more appropriate.
 The thin-shell assumption requires $h/R \ll 1$.  For the bladder at
 \SI{300}{\milli\litre}, $h \approx \SI{1.8}{\milli\metre}$ and
 $R \approx \SI{42}{\milli\metre}$, giving $h/R \approx 0.04$, which
-satisfies the condition comfortably.  The Love--Kirchhoff hypothesis
-(normals remain straight and normal to the deformed mid-surface) is
-therefore applicable.
+satisfies the condition comfortably.  At low fill volumes, however, the
+ratio increases: $h/R \approx 0.12$ at \SI{100}{\milli\litre} and
+$h/R \approx 0.22$ at \SI{50}{\milli\litre}, exceeding the conventional
+$h/R < 0.1$ threshold.  Results below \SI{150}{\milli\litre} should
+therefore be treated with caution; they are retained in
+Table~\ref{tab:frequencies} for completeness but marked with a dagger.
+The Love--Kirchhoff hypothesis (normals remain straight and normal to
+the deformed mid-surface) is applicable for fill states above
+\SI{150}{\milli\litre}.
 
 The bladder wall is modelled as a Kelvin--Voigt viscoelastic material with
 complex modulus
@@ -67,14 +73,24 @@ to \SI{1.5}{\milli\metre} at \SI{400}{\milli\litre} and above.
 \paragraph{Elastic modulus.}
 Bladder wall stiffness increases dramatically with stretch (strain-stiffening),
 a hallmark of collagenous soft tissue~\cite{Fung1993}.  We model this as a
-log-linear interpolation between vibrometry-derived
-bounds~\cite{Nenadic2013,Barnes2016}:
+log-linear interpolation between vibrometry-derived bounds.
+
+Nenadic et al.~\cite{Nenadic2013} report \emph{shear} moduli
+$\mu = \SIrange{9.6}{48.7}{\kilo\pascal}$ from ultrasound bladder vibrometry.
+For nearly incompressible tissue ($\nu = 0.49$), the Young's modulus is
+\begin{equation}\label{eq:E_mu}
+  E = 2(1 + \nu)\,\mu \approx 2.98\,\mu,
+\end{equation}
+giving $E \approx \SIrange{29}{145}{\kilo\pascal}$.  These converted bounds
+are consistent with the tensile-test data of Barnes~\cite{Barnes2016}, who
+reports $E = \SIrange{10}{800}{\kilo\pascal}$ depending on tissue layer and
+stretch ratio.  We adopt:
 \begin{equation}\label{eq:E_fill}
   E(V) = E_\mathrm{min} \left(\frac{E_\mathrm{max}}{E_\mathrm{min}}\right)^{\phi},
   \qquad \phi = \frac{V - V_\mathrm{min}}{V_\mathrm{max} - V_\mathrm{min}},
 \end{equation}
-where $E_\mathrm{min} = \SI{10}{\kilo\pascal}$ at $V_\mathrm{min} =
-\SI{50}{\milli\litre}$ and $E_\mathrm{max} = \SI{200}{\kilo\pascal}$ at
+where $E_\mathrm{min} = \SI{29}{\kilo\pascal}$ at $V_\mathrm{min} =
+\SI{50}{\milli\litre}$ and $E_\mathrm{max} = \SI{145}{\kilo\pascal}$ at
 $V_\mathrm{max} = \SI{500}{\milli\litre}$, with $\phi$ clipped to $[0, 1]$.
 
 \paragraph{Intravesical pressure.}
@@ -97,7 +113,7 @@ $P_\mathrm{max} = \SI{2940}{\pascal}$ ($\approx \SI{30}{cmH_2O}$).
     \midrule
     Radius & $R$ & 2.29 & 3.30 & 4.15 & 4.92 & cm \\
     Wall thickness & $h$ & 5.00 & 2.73 & 1.79 & 1.50 & mm \\
-    Elastic modulus & $E$ & 10.0 & 19.5 & 52.8 & 200.0 & kPa \\
+    Elastic modulus & $E$ & 29.0 & 41.5 & 70.9 & 145.0 & kPa \\
     Intravesical pressure & $P$ & 5.0 & 6.2 & 12.7 & 30.0 & cmH$_2$O \\
     Poisson's ratio & $\nu$ & \multicolumn{4}{c}{0.49 (all fill states)} & --- \\
     Wall density & $\rho_w$ & \multicolumn{4}{c}{1050} & kg/m$^3$ \\
@@ -172,8 +188,8 @@ added mass:
 \end{equation}
 
 For a bladder at \SI{300}{\milli\litre}, the model predicts
-$f_2 = \SI{13.4}{\hertz}$, $f_3 = \SI{23.5}{\hertz}$, and
-$f_4 = \SI{34.8}{\hertz}$.  The $n = 1$ mode corresponds to rigid-body
+$f_2 = \SI{13.9}{\hertz}$, $f_3 = \SI{24.1}{\hertz}$, and
+$f_4 = \SI{35.3}{\hertz}$.  The $n = 1$ mode corresponds to rigid-body
 translation and has zero natural frequency for a free shell; it is therefore
 excluded from the analysis.
 
@@ -181,10 +197,10 @@ excluded from the analysis.
 \subsection{Airborne Acoustic Coupling}
 \label{sec:airborne}
 
-At $f_2 \approx \SI{13}{\hertz}$ the acoustic wavelength in air is
-$\lambda \approx \SI{26}{\metre}$, so the dimensionless wavenumber is
+At $f_2 \approx \SI{14}{\hertz}$ the acoustic wavelength in air is
+$\lambda \approx \SI{25}{\metre}$, so the dimensionless wavenumber is
 \begin{equation}\label{eq:ka}
-  ka = \frac{2\pi f_2 R}{c_\mathrm{air}} \approx 0.010 \ll 1.
+  ka = \frac{2\pi f_2 R}{c_\mathrm{air}} \approx 0.011 \ll 1.
 \end{equation}
 The bladder lies deep in the Rayleigh regime.  In a multipole expansion
 of the incident plane wave, the $n$-th order component scales
@@ -215,7 +231,7 @@ $f_\mathrm{pelvis} \approx \SI{5.5}{\hertz}$ with $\zeta_\mathrm{pelvis}
   T(f) = \sqrt{\frac{1 + (2\zeta_p r_p)^2}{(1 - r_p^2)^2 + (2\zeta_p r_p)^2}},
   \qquad r_p = \frac{f}{f_\mathrm{pelvis}}.
 \end{equation}
-At $f_2 = \SI{13.4}{\hertz}$, $T \approx 0.31$: the pelvic system
+At $f_2 = \SI{13.9}{\hertz}$, $T \approx 0.29$: the pelvic system
 attenuates the input, as we are above its resonance.
 
 \paragraph{Bladder modal amplification.}
@@ -230,8 +246,8 @@ At resonance ($r = 1$), $H = Q = 2.5$.
 \paragraph{Coupling ratio.}
 The mechanical-to-airborne coupling ratio at the $n = 2$ resonance frequency is
 \begin{equation}\label{eq:R_coupling}
-  \mathcal{R} = \frac{T(f_2) \times H(f_2)}{(ka)^2} \approx \frac{0.31 \times 2.5}{1.0 \times 10^{-4}} \approx 7{,}600.
+  \mathcal{R} = \frac{T(f_2) \times H(f_2)}{(ka)^2} \approx \frac{0.29 \times 2.5}{1.1 \times 10^{-4}} \approx 6{,}500.
 \end{equation}
 Mechanical vibration transmitted through the pelvic skeleton is approximately
-four orders of magnitude more effective at exciting bladder wall modes than
+$3.8$ orders of magnitude more effective at exciting bladder wall modes than
 airborne sound.
