@@ -40,7 +40,10 @@ which conversation becomes impossible---the energy-consistent wall
 displacement is \SI{0.014}{\micro\metre}.  This falls two orders of magnitude
 below the $0.5$--$\SI{2.0}{\micro\metre}$ activation range of
 mechanosensitive PIEZO channels \cite{coste2010piezo1}.  Reaching the
-\SI{1}{\micro\metre} threshold demands approximately \SI{158}{\decibel},
+\SI{1}{\micro\metre} threshold on this energy-consistent basis demands
+approximately \SI{158}{\decibel} (cf.\ \SI{135}{\decibel} using the
+pressure-based displacement of Table~\ref{tab:uq_summary}, which
+overestimates by ${\approx}\,13\times$),
 a level that would cause immediate structural damage to the ear and is
 available only from explosive blasts and rocket launches.  One might
 reasonably conclude that hearing loss would present a more urgent clinical
@@ -101,15 +104,32 @@ would scarcely budge.
 \paragraph{Modal participation.}
 The mechanical displacement in Eq.~\eqref{eq:coupling_ratio} assumes perfect
 coupling of vertical base excitation into the $n=2$ mode (modal participation
-factor $\Gamma_2 = 1$).  For a free sphere, vertical translation is a pure
-$P_1(\cos\theta)$ field, which is orthogonal to $P_2(\cos\theta)$; a free
-sphere therefore has $\Gamma_2 = 0$ exactly.  Partial skeletal constraint
-breaks this orthogonality, giving $\Gamma_2 \approx 0.48$ for the canonical
-model.  Including this correction reduces the mechanical displacement by
-roughly a factor of two and the coupling ratio to $\sim 3 \times 10^4$.
-The qualitative conclusion---a four-order-of-magnitude gap---is unaffected,
-but $\mathcal{R}$ as reported in Eq.~\eqref{eq:coupling_ratio} should be
-understood as an upper bound corresponding to the SDOF idealisation.
+factor $\Gamma_2 = 1$).  The participation factor for mode~$n$ under vertical
+base excitation of the oblate spheroid is
+\begin{equation}
+  \Gamma_n
+  = \frac{a\,\displaystyle\left|\int_{\cos\theta_c}^{1}
+      u\,P_n(u)\,\mathrm{d}u\right|}
+    {\displaystyle\int_{-1}^{1}
+      P_n^{2}(u)\,\sigma(u)\,\mathrm{d}u},
+  \label{eq:participation_factor}
+\end{equation}
+where $u = \cos\theta$, $P_n$ is the Legendre polynomial of degree~$n$,
+$\theta_c$ is the polar angle below which the shell is rigidly constrained
+by the pelvis and spine, and
+$\sigma(u) = \sqrt{c^{2} + (a^{2}-c^{2})\,u^{2}}$
+is the oblate-spheroid surface metric factor.
+For a free sphere ($\theta_c = \pi$), the numerator reduces to
+$\int_{-1}^{1} u\,P_n(u)\,\mathrm{d}u$, which vanishes for $n \neq 1$ by
+Legendre orthogonality; a free sphere therefore has $\Gamma_2 = 0$ exactly.
+Partial skeletal constraint (canonical value $\theta_c = 2\pi/3$, i.e.\ the
+lower third of the shell is fixed) breaks this orthogonality, giving
+$\Gamma_2 \approx 0.48$ for the canonical model.  Including this correction
+reduces the mechanical displacement by roughly a factor of two and the
+coupling ratio to $\sim 3 \times 10^4$.  The qualitative conclusion---a
+four-order-of-magnitude gap---is unaffected, but $\mathcal{R}$ as reported in
+Eq.~\eqref{eq:coupling_ratio} should be understood as an upper bound
+corresponding to the SDOF idealisation.
 
 \subsection{Energy Budget}
 
@@ -117,10 +137,10 @@ We verify self-consistency through the absorption cross-section derived from
 reciprocity \cite{junger2012sound}:
 \begin{equation}
   \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
-  \,\frac{\Gamma_\mathrm{rad}}{\Gamma_\mathrm{total}},
+  \,\frac{\zeta_\mathrm{rad}}{\zeta_\mathrm{rad} + \zeta_\mathrm{struct}},
 \end{equation}
-where $\Gamma_\mathrm{rad}$ and $\Gamma_\mathrm{total}$ are the radiation and
-total damping widths, respectively.  For the $n=2$ mode in air,
+where $\zeta_\mathrm{rad}$ and $\zeta_\mathrm{struct}$ are the radiation and
+structural damping ratios, respectively.  For the $n=2$ mode in air,
 $\zeta_\mathrm{rad} \approx 10^{-15}$ whereas
 $\zeta_\mathrm{struct} = 0.125$, giving an absorption efficiency of order
 $10^{-14}$.  The shell absorbs roughly one part in a hundred trillion of
