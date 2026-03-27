@@ -4,7 +4,7 @@
 \subsection{Clinical Implications}
 \label{sec:clinical}
 
-The predicted $n = 2$ frequency range (\SIrange{12}{18}{\hertz}) has
+The predicted $n = 2$ frequency range (\SIrange{14}{17}{\hertz}) has
 immediate relevance to occupational health.  Vehicle cabins expose operators
 to broadband vibration spanning \SIrange{1}{20}{\hertz}, with dominant energy
 typically concentrated below \SI{10}{\hertz} from engine and road
@@ -23,7 +23,7 @@ deformation driven by amplified pelvic motion, even though the excitation
 frequency is below the bladder's own resonance.
 
 \paragraph{Near-resonant amplification.}
-At the bladder's natural frequency (\SIrange{12}{18}{\hertz}), the modal
+At the bladder's natural frequency (\SIrange{14}{17}{\hertz}), the modal
 amplification reaches its peak ($Q = 2.5$), but pelvic transmissibility has
 rolled off ($T \approx 0.3$).  This regime may be relevant to certain
 industrial vibration sources (e.g., pneumatic tools, vibratory compactors)
@@ -84,10 +84,13 @@ errors are of order $(1 - c/a)^2$ for the eigenfrequencies.
 
 \paragraph{Pelvic constraint.}
 Approximately 40\% of the bladder surface contacts the pelvic bone and
-pelvic floor musculature.  A partial rigid boundary would modify the
-effective mode shapes and could lower the resonant frequency by restricting
-the free surface area.  This effect is not captured in the free-shell model
-and represents the most significant limitation of the present analysis.
+pelvic floor musculature.  By Rayleigh's theorem, imposing a partial rigid
+boundary on a vibrating structure raises its natural frequencies, since the
+constraint eliminates admissible trial functions and increases the Rayleigh
+quotient.  The free-shell model therefore provides a \emph{lower} bound on
+the resonant frequencies; the true $f_2$ with pelvic constraint would be
+higher still.  This effect is not captured in the present analysis and
+represents the most significant geometrical limitation of the model.
 
 \paragraph{Nonlinear elasticity.}
 The exponential strain-stiffening model (equation~\ref{eq:E_fill}) is a
@@ -107,5 +110,8 @@ both frequencies and damping.
 The bladder is embedded in the pelvic cavity, surrounded by fat, connective
 tissue, and adjacent organs.  This surrounding medium would add both
 damping and mass loading, likely shifting the resonant frequencies downward
-and broadening the peaks.  The free-shell model therefore represents an
-upper bound on the resonant frequencies.
+and broadening the peaks.  The free-shell model therefore represents a
+lower bound on frequencies with respect to boundary constraints (pelvic
+contact raises frequencies) but an upper bound with respect to added-mass
+effects from surrounding tissue (which would lower them).  The two effects
+act in opposite directions, partially cancelling.

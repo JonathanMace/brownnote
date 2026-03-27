@@ -9,13 +9,20 @@ shell whose geometry and material properties change with fill volume.
 Key parameters (from literature):
     Radius:         2.3 cm (50 mL) to 4.9 cm (500 mL)
     Wall thickness:  ~5 mm (empty) to ~3 mm (full) — constant tissue volume
-    Young's modulus: 10 kPa (rest) to 200 kPa (distended)
+    Young's modulus: 29 kPa (rest) to 145 kPa (distended)
     Poisson's ratio: 0.49 (nearly incompressible)
     Fluid density:   1020 kg/m³ (urine ≈ water)
     Intravesical pressure: 5–30 cmH₂O (490–2940 Pa)
 
+Note on modulus conversion:
+    Nenadic (2013) reports SHEAR moduli μ = 9.6–48.7 kPa via ultrasound
+    bladder vibrometry. For nearly incompressible tissue (ν = 0.49):
+        E = 2(1 + ν)μ = 2.98μ
+    giving E = 29–145 kPa. Barnes (2016) tensile tests report E = 10–800 kPa
+    depending on layer and stretch ratio, consistent with the converted range.
+
 References:
-    - Ultrasound bladder vibrometry (IOP 2013): μ₁ = 9.6–48.7 kPa
+    - Ultrasound bladder vibrometry (Nenadic 2013): μ = 9.6–48.7 kPa (shear)
     - Barnes (2016) PhD: viscoelastic properties of bladder wall
     - ISO 2631-1:1997: pelvic resonance 4–8 Hz
 """
@@ -70,12 +77,13 @@ def bladder_elastic_modulus(vol_mL: float) -> float:
     Young's modulus [Pa] as a function of fill volume.
 
     Bladder wall stiffens dramatically with stretch.
-    At low fill (~50 mL): E ≈ 10 kPa
-    At high fill (~500 mL): E ≈ 200 kPa
-    Exponential-ish relationship from vibrometry data.
+    Nenadic (2013) reports shear moduli μ = 9.6–48.7 kPa.
+    Converting to Young's modulus for nearly incompressible tissue (ν = 0.49):
+        E = 2(1 + ν)μ ≈ 2.98μ
+    gives E ≈ 29 kPa (rest) to 145 kPa (distended).
     """
-    E_min = 10e3   # 10 kPa at 50 mL
-    E_max = 200e3  # 200 kPa at 500 mL
+    E_min = 29e3   # 2.98 × 9.6 kPa shear → 29 kPa Young's
+    E_max = 145e3  # 2.98 × 48.7 kPa shear → 145 kPa Young's
     frac = np.clip((vol_mL - 50) / 450, 0, 1)
     return E_min * (E_max / E_min) ** frac
 
@@ -369,11 +377,11 @@ def print_report(param_data: dict, coupling_data: dict):
     print(f'    Mechanical advantage:       {mech/airb:.0f}×')
     print()
     print('  CONCLUSION:')
-    print('  The bladder n=2 mode (12–18 Hz) sits above the ISO 2631')
-    print('  peak pelvic resonance (4–8 Hz) but within the broader')
-    print('  WBV-affected band. Mechanical coupling from seat/pelvic')
-    print('  vibration is ~10⁴× more effective than airborne sound.')
-    print('  At sub-resonant WBV frequencies (4–8 Hz), the bladder')
+    print('  The bladder n=2 mode (14–17 Hz in valid thin-shell range) sits')
+    print('  above the ISO 2631 peak pelvic resonance (4–8 Hz) but within')
+    print('  the broader WBV-affected band. Mechanical coupling from')
+    print('  seat/pelvic vibration is ~10³·⁸× more effective than airborne')
+    print('  sound. At sub-resonant WBV frequencies (4–8 Hz), the bladder')
     print('  still responds as a forced oscillator, and pelvic')
     print('  transmissibility amplifies the input — consistent with')
     print('  occupational reports of vibration-induced urgency.')
