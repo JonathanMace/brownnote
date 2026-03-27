@@ -549,7 +549,9 @@ $\xi_{\mathrm{mech}}$ (\si{\micro\metre})
   & 2745 & 1818 & 3110 & 296 & 8176 & 17457 \\
 $\mathcal{R}$
   & 12949 & 9820 & 11888 & 1780 & 34169 & 62466 \\
-SPL$_{\mathrm{PIEZO}}$ (\si{\decibel})
+SPL$_{\mathrm{PIEZO}}$ (pressure)\footnote{Pressure-based displacement
+  estimate; the energy-consistent threshold is ${\approx}\,\SI{23}{\decibel}$
+  higher (see main text, Table~2 and \S4).} (\si{\decibel})
   & 134.4 & 135.0 & 3.5 & 128.1 & 139.4 & 141.1 \\
 \bottomrule
 \end{tabular}
@@ -587,15 +589,15 @@ integrated over the oblate surface via 200-point Gauss--Legendre quadrature.
 {Mode} & {Sphere (\si{\hertz})} & {Ritz (\si{\hertz})}
        & {Sphere (\si{\hertz})} & {Ritz (\si{\hertz})} \\
 \midrule
-$n=2$ & 4.0 & 3.6 & 7.1 & 6.0 \\
-$n=3$ & 6.3 & 5.6 & 11.3 & 9.5 \\
-$n=4$ & 8.9 & 8.0 & 14.4 & 12.9 \\
+$n=2$ & 4.0 & 3.8 & 7.1 & 6.2 \\
+$n=3$ & 6.3 & 5.8 & 10.0 & 8.5 \\
+$n=4$ & 8.9 & 8.1 & 12.9 & 11.3 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Findings.}
-The sphere model overestimates flexural frequencies by 11--20\%.  The error
+The sphere model overestimates flexural frequencies by 4--17\%.  The error
 grows with eccentricity and with $n$.  Physical reasons: (i)~spatially varying
 curvature on the oblate surface (poles sharper, equator flatter), (ii)~different
 fluid added-mass distribution from oblate flow geometry, and
@@ -831,7 +833,7 @@ modelling simplification.
 \toprule
 Assumption & Error & Dominant factor \\
 \midrule
-Sphere $\to$ oblate spheroid    & 11--20\%      & Curvature distribution \\
+Sphere $\to$ oblate spheroid    & 4--17\%       & Curvature distribution \\
 Homogeneous $\to$ multilayer    & $<$4\%        & Muscle tone \\
 Inviscid $\to$ viscous fluid    & $<$1\%        & Stokes boundary layer \\
 No organs $\to$ with inclusions & $<$2\%        & Density perturbation \\
