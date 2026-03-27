@@ -1,0 +1,70 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Whole-body vibration (WBV) at \SIrange{4}{16}{\hertz} is a recognised
+occupational hazard for vehicle operators.  ISO~2631-1~\cite{iso2631}
+documents peak pelvic transmissibility at \SIrange{4}{8}{\hertz}, and
+epidemiological studies report a consistent association between prolonged WBV
+exposure and lower urinary tract symptoms---particularly increased urgency and
+frequency---among truck drivers, bus operators, and forklift
+operators~\cite{Seidel1986,griffin1990handbook}.  Despite this well-established
+empirical record, no first-principles mechanical model of the urinary bladder
+exists to explain \emph{why} whole-body vibration should preferentially excite
+this organ, or to predict the frequency range at which the bladder wall is most
+susceptible to vibratory loading.
+
+The urinary bladder is, from a structural dynamics perspective, a remarkably
+clean example of a fluid-filled viscoelastic shell.  The detrusor muscle forms
+a roughly spherical wall of thickness \SIrange{1.5}{5}{\milli\metre}
+(depending on fill state) enclosing urine---an incompressible fluid with
+density and bulk modulus essentially identical to water.  The geometry, wall
+stiffness, and internal pressure all vary systematically with fill volume,
+making the bladder a natural candidate for parametric analysis across its
+physiological operating range.
+
+In a companion study~\cite{Mace2025browntone}, we developed an oblate
+spheroidal shell model of the human abdominal cavity to investigate the
+coupling between airborne infrasound and gastrointestinal resonance.  That
+analysis revealed a coupling disparity of approximately $6.6 \times 10^4$
+between mechanical and airborne excitation pathways---a result that explains
+why whole-body vibration at \SIrange{4}{8}{\hertz} causes well-documented
+gastrointestinal effects while airborne infrasound at comparable frequencies
+does not.  The present work applies the same analytical framework to the
+bladder, adapting the geometry, material properties, and boundary conditions to
+this smaller, thinner-walled, and more compliant organ.
+
+The mechanical properties of the bladder wall have been characterised by
+several groups.  Ultrasound bladder vibrometry~\cite{Nenadic2013} measured
+shear moduli of \SIrange{9.6}{48.7}{\kilo\pascal} across fill states from
+\SI{187}{\milli\litre} to \SI{267}{\milli\litre}, demonstrating pronounced
+strain-stiffening.  Barnes~\cite{Barnes2016} performed tensile testing of
+excised bladder tissue, reporting Young's moduli from \SI{10}{\kilo\pascal} at
+rest to several hundred kilopascals at high stretch ratios.  The wall exhibits
+significant viscoelastic behaviour: stress relaxation, creep, and a loss
+tangent estimated at 0.3--0.5 from dynamic
+measurements~\cite{VanMastrigt1991}.  Wall thickness decreases from
+approximately \SI{5}{\milli\metre} when empty to \SIrange{1.5}{3}{\milli\metre}
+at capacity~\cite{Akkus2014}, consistent with a constant tissue volume
+assumption.  Intravesical pressure follows the characteristic cystometric
+curve: a compliant phase at low fill (\SIrange{5}{10}{\centi\metre}
+water column) giving way to steep pressure rise above
+\SI{300}{\milli\litre}~\cite{Griffiths1980}.
+
+We apply these data to the fluid-filled shell framework.  The bladder is
+modelled as a spherical shell (the near-spherical approximation is
+appropriate here, unlike the distinctly oblate abdominal cavity) with
+fill-dependent radius, wall thickness, elastic modulus, and internal pressure.
+We compute the flexural mode frequencies across the physiological fill range
+(\SIrange{50}{500}{\milli\litre}), identify the minimum-frequency fill state,
+and compare airborne acoustic coupling with mechanical WBV coupling to the
+bladder wall.
+
+The remainder of this paper is organised as follows.
+Section~\ref{sec:theory} presents the mathematical formulation, including the
+fill-dependent parameter model and the modal analysis.
+Section~\ref{sec:results} reports flexural mode frequencies across fill
+volume, identifies the frequency minimum, and quantifies the coupling
+disparity between mechanical and airborne excitation.
+Section~\ref{sec:discussion} discusses clinical implications, limitations,
+and comparison with the abdominal cavity model.
+Section~\ref{sec:conclusion} draws conclusions.

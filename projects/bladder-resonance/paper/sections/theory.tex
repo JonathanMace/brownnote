@@ -1,0 +1,237 @@
+\section{Mathematical Formulation}
+\label{sec:theory}
+
+\subsection{Model Geometry and Assumptions}
+\label{sec:geometry}
+
+The human urinary bladder is idealised as a thin spherical shell of radius
+$R$, wall thickness $h$, completely filled with an inviscid, irrotational
+fluid of density $\rho_f$ and bulk modulus $K_f$.  Unlike the abdominal
+cavity---which requires an oblate spheroidal geometry with aspect ratio
+$c/a \approx 0.67$~\cite{Mace2025browntone}---the bladder is approximately
+spherical at moderate-to-full fill states, making the spherical shell
+approximation both simpler and more appropriate.
+
+The thin-shell assumption requires $h/R \ll 1$.  For the bladder at
+\SI{300}{\milli\litre}, $h \approx \SI{1.8}{\milli\metre}$ and
+$R \approx \SI{42}{\milli\metre}$, giving $h/R \approx 0.04$, which
+satisfies the condition comfortably.  The Love--Kirchhoff hypothesis
+(normals remain straight and normal to the deformed mid-surface) is
+therefore applicable.
+
+The bladder wall is modelled as a Kelvin--Voigt viscoelastic material with
+complex modulus
+\begin{equation}\label{eq:Estar}
+  E^* = E(1 + i\eta),
+\end{equation}
+where $\eta$ is the loss tangent.  The quality factor is $Q = 1/\eta$ and
+the viscous damping ratio is $\zeta = \eta/2$.  Published values of $\eta$
+for bladder wall tissue range from 0.3 to
+0.5~\cite{VanMastrigt1991,Barnes2016}; we adopt $\eta = 0.4$ ($Q = 2.5$,
+$\zeta = 0.2$) as a central estimate.  The flexural rigidity of the shell is
+\begin{equation}\label{eq:D}
+  D = \frac{Eh^3}{12(1 - \nu^2)}.
+\end{equation}
+
+
+\subsection{Fill-Dependent Parameters}
+\label{sec:fill}
+
+All geometric and material properties vary with fill volume $V$
+(\si{\milli\litre}).  We adopt the following constitutive relationships,
+drawn from the literature reviewed in \S\ref{sec:introduction}.
+
+\paragraph{Radius.}
+The equivalent sphere radius follows directly from the fill volume:
+\begin{equation}\label{eq:radius}
+  R = \left(\frac{3V}{4\pi}\right)^{1/3},
+\end{equation}
+giving $R = \SI{2.3}{\centi\metre}$ at \SI{50}{\milli\litre} and
+$R = \SI{4.9}{\centi\metre}$ at \SI{500}{\milli\litre}.
+
+\paragraph{Wall thickness.}
+We assume approximately constant tissue volume $V_\mathrm{tissue}$,
+calibrated to $h_0 = \SI{5}{\milli\metre}$ at $V_0 = \SI{50}{\milli\litre}$.
+The tissue shell volume is
+\begin{equation}\label{eq:tissue_vol}
+  V_\mathrm{tissue} = \frac{4}{3}\pi\left[(R_0 + h_0)^3 - R_0^3\right],
+\end{equation}
+from which $h(V)$ is obtained by solving
+\begin{equation}\label{eq:h_solve}
+  (R + h)^3 = R^3 + \frac{3 V_\mathrm{tissue}}{4\pi},
+\end{equation}
+subject to a physiological floor of $h_\mathrm{min} = \SI{1.5}{\milli\metre}$.
+This yields $h = \SI{5.0}{\milli\metre}$ at \SI{50}{\milli\litre}, thinning
+to \SI{1.5}{\milli\metre} at \SI{400}{\milli\litre} and above.
+
+\paragraph{Elastic modulus.}
+Bladder wall stiffness increases dramatically with stretch (strain-stiffening),
+a hallmark of collagenous soft tissue~\cite{Fung1993}.  We model this as a
+log-linear interpolation between vibrometry-derived
+bounds~\cite{Nenadic2013,Barnes2016}:
+\begin{equation}\label{eq:E_fill}
+  E(V) = E_\mathrm{min} \left(\frac{E_\mathrm{max}}{E_\mathrm{min}}\right)^{\phi},
+  \qquad \phi = \frac{V - V_\mathrm{min}}{V_\mathrm{max} - V_\mathrm{min}},
+\end{equation}
+where $E_\mathrm{min} = \SI{10}{\kilo\pascal}$ at $V_\mathrm{min} =
+\SI{50}{\milli\litre}$ and $E_\mathrm{max} = \SI{200}{\kilo\pascal}$ at
+$V_\mathrm{max} = \SI{500}{\milli\litre}$, with $\phi$ clipped to $[0, 1]$.
+
+\paragraph{Intravesical pressure.}
+The pressure--volume relationship follows the characteristic cystometric
+curve~\cite{Griffiths1980}: a compliant phase at low fill followed by a
+steep rise.  We model this as a quadratic:
+\begin{equation}\label{eq:P_fill}
+  P(V) = P_\mathrm{min} + (P_\mathrm{max} - P_\mathrm{min})\,\phi^2,
+\end{equation}
+where $P_\mathrm{min} = \SI{490}{\pascal}$ ($\approx \SI{5}{cmH_2O}$) and
+$P_\mathrm{max} = \SI{2940}{\pascal}$ ($\approx \SI{30}{cmH_2O}$).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Bladder model parameters at representative fill states.}
+  \label{tab:params}
+  \begin{tabular}{lcccccc}
+    \toprule
+    Parameter & Symbol & 50~mL & 150~mL & 300~mL & 500~mL & Unit \\
+    \midrule
+    Radius & $R$ & 2.29 & 3.30 & 4.15 & 4.92 & cm \\
+    Wall thickness & $h$ & 5.00 & 2.73 & 1.79 & 1.50 & mm \\
+    Elastic modulus & $E$ & 10.0 & 19.5 & 52.8 & 200.0 & kPa \\
+    Intravesical pressure & $P$ & 5.0 & 6.2 & 12.7 & 30.0 & cmH$_2$O \\
+    Poisson's ratio & $\nu$ & \multicolumn{4}{c}{0.49 (all fill states)} & --- \\
+    Wall density & $\rho_w$ & \multicolumn{4}{c}{1050} & kg/m$^3$ \\
+    Fluid density & $\rho_f$ & \multicolumn{4}{c}{1020} & kg/m$^3$ \\
+    Fluid bulk modulus & $K_f$ & \multicolumn{4}{c}{2.2} & GPa \\
+    Loss tangent & $\eta$ & \multicolumn{4}{c}{0.40} & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:params} summarises the model parameters at four representative
+fill states.  The Poisson's ratio $\nu = 0.49$ reflects the near-incompressibility
+of soft tissue.  The fluid properties correspond to urine at body temperature,
+which is effectively identical to water for acoustic purposes.
+
+
+\subsection{Breathing Mode ($n = 0$)}
+\label{sec:breathing}
+
+The breathing mode is a spatially uniform radial oscillation.  As in the
+abdominal model~\cite{Mace2025browntone}, the restoring force is dominated
+by the fluid bulk modulus:
+\begin{equation}\label{eq:f0}
+  f_0 = \frac{1}{2\pi}\sqrt{\frac{k_\mathrm{shell} + k_\mathrm{fluid}}
+  {\rho_w h + \rho_f R}},
+\end{equation}
+where $k_\mathrm{shell} = 2Eh / [R^2(1-\nu)]$ and
+$k_\mathrm{fluid} = 3K_f/R$.  For the bladder at \SI{300}{\milli\litre},
+$k_\mathrm{fluid} \approx \SI{1.6e11}{\pascal\per\metre}$ while
+$k_\mathrm{shell} \approx \SI{2.2e4}{\pascal\per\metre}$---a ratio
+exceeding $10^6$.  The breathing mode frequency is approximately
+\SI{9500}{\hertz}, firmly in the ultrasonic range and irrelevant to
+WBV exposure.
+
+
+\subsection{Flexural Modes ($n \geq 2$)}
+\label{sec:flexural}
+
+Flexural modes involve shape changes that preserve the enclosed volume to
+leading order.  The fluid contributes only added mass, not volumetric
+stiffness.  Following Lamb~\cite{lamb1882} and Junger \&
+Feit~\cite{junger2012sound}, the natural frequency of flexural mode $n$ is
+\begin{equation}\label{eq:fn}
+  \omega_n^2 = \frac{K_\mathrm{bend} + K_\mathrm{memb} + K_P}
+                    {m_\mathrm{eff}^{(n)}},
+  \qquad f_n = \frac{\omega_n}{2\pi},
+\end{equation}
+where the three stiffness contributions are:
+
+\paragraph{Bending stiffness.}
+\begin{equation}\label{eq:Kbend}
+  K_\mathrm{bend} = \frac{n(n-1)(n+2)^2 D}{R^4}.
+\end{equation}
+
+\paragraph{Membrane stiffness.}
+\begin{equation}\label{eq:Kmemb}
+  K_\mathrm{memb} = \frac{Eh}{R^2}\,\lambda_n,
+  \qquad \lambda_n = \frac{n^2 + n - 2 + 2\nu}{n^2 + n + 1 - \nu}.
+\end{equation}
+
+\paragraph{Pre-stress stiffness.}
+The intravesical pressure $P$ produces a pre-stress in the shell membrane
+that stiffens flexural modes:
+\begin{equation}\label{eq:Kpre}
+  K_P = \frac{P}{R}(n-1)(n+2).
+\end{equation}
+
+The effective mass per unit area includes both the shell wall and the fluid
+added mass:
+\begin{equation}\label{eq:meff}
+  m_\mathrm{eff}^{(n)} = \rho_w h + \frac{\rho_f R}{n}.
+\end{equation}
+
+For a bladder at \SI{300}{\milli\litre}, the model predicts
+$f_2 = \SI{13.4}{\hertz}$, $f_3 = \SI{23.5}{\hertz}$, and
+$f_4 = \SI{34.8}{\hertz}$.  The $n = 1$ mode corresponds to rigid-body
+translation and has zero natural frequency for a free shell; it is therefore
+excluded from the analysis.
+
+
+\subsection{Airborne Acoustic Coupling}
+\label{sec:airborne}
+
+At $f_2 \approx \SI{13}{\hertz}$ the acoustic wavelength in air is
+$\lambda \approx \SI{26}{\metre}$, so the dimensionless wavenumber is
+\begin{equation}\label{eq:ka}
+  ka = \frac{2\pi f_2 R}{c_\mathrm{air}} \approx 0.010 \ll 1.
+\end{equation}
+The bladder lies deep in the Rayleigh regime.  In a multipole expansion
+of the incident plane wave, the $n$-th order component scales
+as~\cite{junger2012sound}
+\begin{equation}\label{eq:peff}
+  p_\mathrm{eff}^{(n)} = p_\mathrm{inc} \times (ka)^n.
+\end{equation}
+For the $n = 2$ mode:
+\begin{equation}\label{eq:peff2}
+  p_\mathrm{eff}^{(2)} = p_\mathrm{inc} \times (ka)^2
+  \approx p_\mathrm{inc} \times 1.0 \times 10^{-4}.
+\end{equation}
+Only 0.01\% of the incident pressure drives the fundamental flexural mode
+via the airborne pathway.
+
+
+\subsection{Mechanical (Whole-Body Vibration) Coupling}
+\label{sec:wbv}
+
+Whole-body vibration transmits through the skeleton and pelvic floor as base
+excitation of the bladder wall.  The coupling chain comprises two stages:
+
+\paragraph{Seat-to-pelvis transmissibility.}
+ISO~2631 data indicate a pelvic resonance near
+$f_\mathrm{pelvis} \approx \SI{5.5}{\hertz}$ with $\zeta_\mathrm{pelvis}
+\approx 0.25$.  The transmissibility at frequency $f$ is
+\begin{equation}\label{eq:T_pelvis}
+  T(f) = \sqrt{\frac{1 + (2\zeta_p r_p)^2}{(1 - r_p^2)^2 + (2\zeta_p r_p)^2}},
+  \qquad r_p = \frac{f}{f_\mathrm{pelvis}}.
+\end{equation}
+At $f_2 = \SI{13.4}{\hertz}$, $T \approx 0.31$: the pelvic system
+attenuates the input, as we are above its resonance.
+
+\paragraph{Bladder modal amplification.}
+The bladder wall response to base excitation is characterised by the
+single-degree-of-freedom frequency response:
+\begin{equation}\label{eq:H_bladder}
+  H(f) = \frac{1}{\sqrt{(1 - r^2)^2 + (2\zeta r)^2}},
+  \qquad r = \frac{f}{f_n}.
+\end{equation}
+At resonance ($r = 1$), $H = Q = 2.5$.
+
+\paragraph{Coupling ratio.}
+The mechanical-to-airborne coupling ratio at the $n = 2$ resonance frequency is
+\begin{equation}\label{eq:R_coupling}
+  \mathcal{R} = \frac{T(f_2) \times H(f_2)}{(ka)^2} \approx \frac{0.31 \times 2.5}{1.0 \times 10^{-4}} \approx 7{,}600.
+\end{equation}
+Mechanical vibration transmitted through the pelvic skeleton is approximately
+four orders of magnitude more effective at exciting bladder wall modes than
+airborne sound.
