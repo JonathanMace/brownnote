@@ -1,0 +1,1008 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{caption}
+
+\geometry{margin=2.5cm}
+
+\sisetup{
+  per-mode=symbol,
+  separate-uncertainty=true,
+}
+
+\newcommand{\sref}[1]{S\ref{#1}}
+
+\title{Supplementary Material for:\\[6pt]
+  \textbf{Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell:
+  Implications for the Existence of the Brown Note}}
+
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+%% =====================================================================
+%%  SECTION S1: DETAILED DERIVATIONS
+%% =====================================================================
+\section{Detailed Derivations}
+\label{sec:derivations}
+
+This section provides the full derivation of all analytical results used in the
+main text.  Equation numbering follows the convention (S\textit{n}) to
+distinguish supplementary equations from those in the main paper.
+
+%% ----- S1.1 Shell flexural rigidity -----
+\subsection{Shell Flexural Rigidity}
+\label{sec:flexural_rigidity}
+
+The abdominal wall is modelled as a thin isotropic shell of thickness~$h$,
+Young's modulus~$E$, and Poisson's ratio~$\nu$.  From classical
+Love--Kirchhoff thin-shell theory, the flexural (bending) rigidity is
+\begin{equation}
+  D = \frac{E\,h^{3}}{12\,(1-\nu^{2})} \,.
+  \label{eq:D}
+  \tag{S1}
+\end{equation}
+For the canonical parameter set ($E = \SI{0.1}{\mega\pascal}$,
+$h = \SI{10}{\milli\metre}$, $\nu = 0.45$):
+\[
+  D = \frac{0.1\times10^{6}\;\times\;(0.01)^{3}}{12\,(1 - 0.45^{2})}
+    = \frac{10^{5}\times10^{-6}}{12\times0.7975}
+    \approx \SI{0.0104}{\newton\metre} \,.
+\]
+The thin-shell condition $h/R \approx 0.06 \ll 1$ is satisfied for the
+equivalent-sphere radius $R_{\mathrm{eq}} = (a^{2}c)^{1/3} \approx \SI{0.157}{\metre}$.
+
+%% ----- S1.2 Added mass coefficient -----
+\subsection{Added Mass Coefficient for Mode~\texorpdfstring{$n$}{n} (Lamb's Result)}
+\label{sec:added_mass}
+
+For flexural mode~$n$ ($n \geq 2$) of a thin spherical shell of radius~$R$
+filled with an incompressible fluid of density~$\rho_{f}$, the interior
+velocity potential is expanded in Legendre polynomials.  The solution to
+Laplace's equation inside a sphere for mode~$n$ gives a radial dependence
+$\phi \propto r^{n}$, so the fluid velocity at the shell wall scales
+as~$r^{n-1}$.
+
+Integrating the kinetic energy of the internal flow, Lamb (1882) showed that
+the fluid added mass per unit shell area is
+\begin{equation}
+  m_{\mathrm{add}}^{(n)} = \frac{\rho_{f}\,R}{n}\,.
+  \tag{S2}
+  \label{eq:m_add}
+\end{equation}
+This result has a transparent physical interpretation: for higher mode
+numbers~$n$, the fluid motion is more localised near the wall (shorter
+``penetration depth'' $\sim R/n$), entraining less fluid mass.
+
+For the $n=2$ oblate--prolate mode with $\rho_{f} = \SI{1020}{\kilo\gram\per\metre\cubed}$
+and $R = \SI{0.157}{\metre}$:
+\[
+  m_{\mathrm{add}}^{(2)} = \frac{1020 \times 0.157}{2}
+    = \SI{80.1}{\kilo\gram\per\metre\squared} \,.
+\]
+Compare this with the shell wall mass per unit area,
+$m_{\mathrm{wall}} = \rho_{w}\,h = 1100 \times 0.01 = \SI{11.0}{\kilo\gram\per\metre\squared}$.
+The fluid added mass exceeds the wall mass by a factor of ${\sim}7.3$, confirming
+that fluid inertia dominates the effective modal mass.
+
+%% ----- S1.3 Flexural frequency formula -----
+\subsection{Flexural Frequency Formula with Intermediate Steps}
+\label{sec:flex_freq}
+
+The flexural modes ($n \geq 2$) involve shell deformation at approximately
+constant enclosed volume; the fluid acts as added mass but does not contribute
+volumetric (bulk) stiffness.  The restoring force per unit shell area
+comprises three terms:
+
+\paragraph{Bending stiffness.}
+From Love--Kirchhoff theory for a spherical shell:
+\begin{equation}
+  K_{\mathrm{bend}}^{(n)} = \frac{n\,(n-1)\,(n+2)^{2}\,D}{R^{4}} \,.
+  \tag{S3}
+  \label{eq:Kbend}
+\end{equation}
+
+\paragraph{Membrane stiffness.}
+Lamb (1882) obtained the membrane contribution:
+\begin{equation}
+  K_{\mathrm{memb}}^{(n)} = \frac{E\,h}{R^{2}}\,\lambda_{n}\,,
+  \qquad
+  \lambda_{n} = \frac{n^{2}+n-2+2\nu}{n^{2}+n+1-\nu} \,.
+  \tag{S4}
+  \label{eq:Kmemb}
+\end{equation}
+
+\paragraph{Pre-stress stiffness.}
+The intra-abdominal pressure~$P_{\mathrm{iap}}$ prestresses the shell in
+biaxial tension, adding a geometric stiffness:
+\begin{equation}
+  K_{P}^{(n)} = \frac{P_{\mathrm{iap}}}{R}\,(n-1)(n+2) \,.
+  \tag{S5}
+  \label{eq:KP}
+\end{equation}
+
+\paragraph{Total stiffness and effective mass.}
+The total stiffness per unit area is
+\begin{equation}
+  K_{\mathrm{total}}^{(n)} = K_{\mathrm{bend}}^{(n)} + K_{\mathrm{memb}}^{(n)} + K_{P}^{(n)} \,,
+  \tag{S6}
+  \label{eq:Ktotal}
+\end{equation}
+and the effective mass per unit area is
+\begin{equation}
+  m_{\mathrm{eff}}^{(n)} = \rho_{w}\,h + \frac{\rho_{f}\,R}{n} \,.
+  \tag{S7}
+  \label{eq:meff}
+\end{equation}
+The natural frequency follows as
+\begin{equation}
+  \boxed{
+    f_{n} = \frac{1}{2\pi}\sqrt{\frac{K_{\mathrm{total}}^{(n)}}{m_{\mathrm{eff}}^{(n)}}}
+  } \,.
+  \tag{S8}
+  \label{eq:fn}
+\end{equation}
+
+\paragraph{Numerical evaluation for $n=2$.}
+With the canonical parameters ($E=\SI{0.1}{\mega\pascal}$, $a=\SI{0.18}{\metre}$,
+$c/a=0.67$, $h=\SI{10}{\milli\metre}$, $\nu=0.45$, $\rho_{w}=\SI{1100}{\kilo\gram\per\metre\cubed}$,
+$\rho_{f}=\SI{1020}{\kilo\gram\per\metre\cubed}$, $P_{\mathrm{iap}}=\SI{1000}{\pascal}$):
+\begin{align*}
+  R_{\mathrm{eq}} &= (0.18^{2}\times 0.12)^{1/3} = \SI{0.157}{\metre}, \\[4pt]
+  D &= \SI{0.0104}{\newton\metre}, \\[4pt]
+  K_{\mathrm{bend}}^{(2)} &= \frac{2 \times 1 \times 16 \times 0.0104}{0.157^{4}}
+    = \SI{547}{\pascal\per\metre}, \\[4pt]
+  \lambda_{2} &= \frac{4+2-2+0.90}{4+2+1-0.45} = \frac{4.90}{6.55} = 0.748, \\[4pt]
+  K_{\mathrm{memb}}^{(2)} &= \frac{10^{5}\times 0.01}{0.157^{2}}\times 0.748
+    = \SI{30\,363}{\pascal\per\metre}, \\[4pt]
+  K_{P}^{(2)} &= \frac{1000}{0.157}\times 1 \times 4 = \SI{25\,478}{\pascal\per\metre}, \\[4pt]
+  K_{\mathrm{total}}^{(2)} &= 547 + 30\,363 + 25\,478 = \SI{56\,388}{\pascal\per\metre}, \\[4pt]
+  m_{\mathrm{eff}}^{(2)} &= 1100\times 0.01 + \frac{1020\times 0.157}{2}
+    = 11.0 + 80.1 = \SI{91.1}{\kilo\gram\per\metre\squared}, \\[4pt]
+  f_{2} &= \frac{1}{2\pi}\sqrt{\frac{56\,388}{91.1}} \approx \SI{4.0}{\hertz} \,.
+\end{align*}
+
+%% ----- S1.4 Breathing mode derivation -----
+\subsection{Breathing Mode Derivation}
+\label{sec:breathing}
+
+The breathing mode ($n=0$) involves a uniform radial expansion/contraction
+of the shell.  Unlike flexural modes, this motion \emph{does} compress the
+enclosed fluid, so the fluid bulk modulus~$K_{f}$ contributes directly to the
+stiffness.
+
+\paragraph{Shell membrane stiffness.}
+For a uniform radial displacement~$\delta R$, the circumferential strain is
+$\varepsilon = \delta R / R$.  Biaxial membrane stress gives a restoring
+pressure:
+\begin{equation}
+  k_{\mathrm{shell}} = \frac{2\,E\,h}{R^{2}\,(1-\nu)} \,.
+  \tag{S9}
+  \label{eq:k_shell_breathing}
+\end{equation}
+
+\paragraph{Fluid volumetric stiffness.}
+The volume change is $\Delta V = 4\pi R^{2}\,\delta R$, and the pressure
+change is $\Delta p = K_{f}\,\Delta V / V = 3\,K_{f}\,\delta R / R$.  The
+restoring force per unit shell area is therefore
+\begin{equation}
+  k_{\mathrm{fluid}} = \frac{3\,K_{f}}{R} \,.
+  \tag{S10}
+  \label{eq:k_fluid_breathing}
+\end{equation}
+
+\paragraph{Comparison of stiffness contributions.}
+\begin{align*}
+  k_{\mathrm{shell}} &= \frac{2 \times 10^{5} \times 0.01}{0.157^{2}\times 0.55}
+    \approx \SI{2.3e5}{\pascal\per\metre}, \\[4pt]
+  k_{\mathrm{fluid}} &= \frac{3 \times 2.2\times10^{9}}{0.157}
+    \approx \SI{4.2e10}{\pascal\per\metre}.
+\end{align*}
+The fluid volumetric stiffness exceeds the shell membrane stiffness by a factor
+of $\sim\!1.8\times10^{5}$; hence $K_{f}$ completely dominates the breathing
+mode stiffness.
+
+\paragraph{Effective mass and frequency.}
+\begin{equation}
+  m_{\mathrm{eff}}^{(0)} = \rho_{w}\,h + \rho_{f}\,R
+    = 11.0 + 160.1 = \SI{171.1}{\kilo\gram\per\metre\squared},
+  \tag{S11}
+\end{equation}
+\begin{equation}
+  f_{0} = \frac{1}{2\pi}\sqrt{\frac{k_{\mathrm{shell}}+k_{\mathrm{fluid}}}{m_{\mathrm{eff}}^{(0)}}}
+  \approx \frac{1}{2\pi}\sqrt{\frac{4.2\times10^{10}}{171.1}}
+  \approx \SI{2900}{\hertz} \,.
+  \tag{S12}
+\end{equation}
+This is far above the infrasonic range ($<\SI{20}{\hertz}$) and is therefore
+irrelevant to the brown-note hypothesis.
+
+%% ----- S1.5 Energy-consistent displacement derivation -----
+\subsection{Energy-Consistent Displacement Derivation}
+\label{sec:energy_budget}
+
+The pressure-based estimate of airborne coupling displacement
+(main text, Section~4) overestimates the true value by $\sim$40\%
+because it does not enforce energy conservation.  The self-consistent
+derivation, following the reciprocity formulation of Junger \& Feit (2012),
+proceeds as follows.
+
+\paragraph{Step 1: Absorption cross-section.}
+By reciprocity, the maximum absorption cross-section at resonance for a mode
+of order~$n$ is
+\begin{equation}
+  \sigma_{\max}^{(n)} = \frac{(2n+1)\,\lambda^{2}}{4\pi} \,,
+  \tag{S13}
+  \label{eq:sigma_max}
+\end{equation}
+where $\lambda = c_{\mathrm{air}}/f_{n}$ is the acoustic wavelength.  The actual
+cross-section is limited by the ratio of radiation damping to total damping:
+\begin{equation}
+  \sigma_{\mathrm{abs}}^{(n)} = \sigma_{\max}^{(n)}
+    \times\frac{\zeta_{\mathrm{rad}}}{\zeta_{\mathrm{rad}} + \zeta_{\mathrm{struct}}} \,.
+  \tag{S14}
+  \label{eq:sigma_abs}
+\end{equation}
+
+\paragraph{Step 2: Radiation damping.}
+The radiation resistance for mode~$n$ of a sphere in the Rayleigh limit
+($ka \ll 1$) is
+\begin{equation}
+  R_{\mathrm{rad}}^{(n)} = \rho_{\mathrm{air}}\,c_{\mathrm{air}}\,4\pi R^{2}
+    \times \frac{(ka)^{2n+2}}{[(2n+1)!!]^{2}} \,,
+  \tag{S15}
+\end{equation}
+where $(2n+1)!! = 1\times3\times5\times\cdots\times(2n+1)$ is the double factorial.
+For $n=2$ at $f = \SI{4}{\hertz}$:
+\begin{align*}
+  ka &= \frac{2\pi \times 4 \times 0.157}{343} \approx 0.012, \\
+  (ka)^{6} &\approx 2.4\times10^{-12}, \qquad 5!! = 15, \\
+  \zeta_{\mathrm{rad}} &\sim 10^{-15} \ll \zeta_{\mathrm{struct}} = 0.125 \,.
+\end{align*}
+
+\paragraph{Step 3: Steady-state energy balance.}
+At steady state, absorbed power equals dissipated power:
+\begin{equation}
+  \sigma_{\mathrm{abs}}\,I = \zeta_{\mathrm{struct}}\,\omega_{n}^{3}\,M_{\mathrm{total}}\,\xi^{2}  \,,
+  \tag{S16}
+  \label{eq:energy_balance}
+\end{equation}
+where $I = p_{\mathrm{inc}}^{2}/(2\rho_{\mathrm{air}}c_{\mathrm{air}})$ is the
+incident intensity, $M_{\mathrm{total}} = m_{\mathrm{eff}}\times 4\pi R^{2}$ is the
+total modal mass, and $\xi$ is the displacement amplitude.
+
+Solving for the energy-consistent displacement:
+\begin{equation}
+  \boxed{
+    \xi_{\mathrm{energy}} = \sqrt{\frac{\sigma_{\mathrm{abs}}\,I}
+      {\zeta_{\mathrm{struct}}\,\omega_{n}^{3}\,M_{\mathrm{total}}}}
+  } \,.
+  \tag{S17}
+  \label{eq:xi_energy}
+\end{equation}
+
+\paragraph{Comparison with the pressure-based estimate.}
+At \SI{120}{\decibel} SPL and $n=2$:
+\begin{align*}
+  \xi_{\mathrm{energy}} &\approx \SI{0.014}{\micro\metre}, \\
+  \xi_{\mathrm{pressure}} &\approx \SI{0.18}{\micro\metre}.
+\end{align*}
+The pressure-based estimate is approximately $12.9\times$ larger because it
+does not account for the extremely low radiation efficiency
+($\zeta_{\mathrm{rad}}/\zeta_{\mathrm{struct}} \sim 10^{-14}$).  Both values
+are far below the PIEZO1/2 mechanotransduction threshold
+(\SIrange{0.5}{2.0}{\micro\metre}), so the overestimate does not affect any
+conclusions.
+
+
+%% =====================================================================
+%%  SECTION S2: COMPLETE PARAMETER TABLES
+%% =====================================================================
+\section{Complete Parameter Tables}
+\label{sec:tables}
+
+\subsection{Canonical Parameter Set}
+\label{sec:canonical_params}
+
+Table~\ref{tab:canonical} lists the baseline parameter values used throughout
+the analysis, together with literature sources.
+
+\begin{table}[htbp]
+\centering
+\caption{Canonical (baseline) parameter set.}
+\label{tab:canonical}
+\begin{tabular}{@{}llllp{4.2cm}@{}}
+\toprule
+Parameter & Symbol & Value & Unit & Source \\
+\midrule
+Semi-major axis & $a$ & 0.18 & \si{\metre} & Anthropometric mean \\
+Semi-minor axis & $c$ & 0.12 & \si{\metre} & $c/a \approx 0.67$ \\
+Wall thickness & $h$ & 0.010 & \si{\metre} & Composite wall \\
+Young's modulus & $E$ & 0.1 & \si{\mega\pascal} & Relaxed passive tissue; Fung (1993) \\
+Poisson's ratio & $\nu$ & 0.45 & --- & Nearly incompressible \\
+Wall density & $\rho_{w}$ & 1100 & \si{\kilo\gram\per\metre\cubed} & Soft tissue \\
+Fluid density & $\rho_{f}$ & 1020 & \si{\kilo\gram\per\metre\cubed} & Abdominal fluid \\
+Fluid bulk modulus & $K_{f}$ & 2.2 & \si{\giga\pascal} & Water at \SI{37}{\celsius} \\
+Intra-abdominal pressure & $P_{\mathrm{iap}}$ & 1000 & \si{\pascal} & Resting supine; ${\sim}\SI{7.5}{\mmHg}$ \\
+Loss tangent & $\eta$ & 0.25 & --- & Viscoelastic tissue \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Derived quantities}} \\
+Equivalent sphere radius & $R_{\mathrm{eq}}$ & 0.157 & \si{\metre} & $(a^{2}c)^{1/3}$ \\
+Flexural rigidity & $D$ & 0.0104 & \si{\newton\metre} & Eq.~(\ref{eq:D}) \\
+Damping ratio & $\zeta$ & 0.125 & --- & $\eta/2$ \\
+Quality factor & $Q$ & 4.0 & --- & $1/(2\zeta)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Monte Carlo Parameter Distributions}
+\label{sec:mc_params}
+
+Table~\ref{tab:mc_params} specifies the probability distributions used in the
+uncertainty quantification ($N = 10{,}000$ Monte Carlo samples, Sobol base
+$N_{\mathrm{Sobol}} = 4096$, seed $= 42$).
+
+\begin{table}[htbp]
+\centering
+\caption{Parameter distributions for Monte Carlo / Sobol analysis.}
+\label{tab:mc_params}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Parameter & Nominal & Distribution & Low & High \\
+\midrule
+$E$ (\si{\pascal}) & $10^{5}$ & Lognormal & $5\times10^{4}$ & $2\times10^{6}$ \\
+$a$ (\si{\metre}) & 0.18 & Normal & 0.15 & 0.22 \\
+$c$ (\si{\metre}) & 0.12 & Normal & 0.08 & 0.15 \\
+$h$ (\si{\metre}) & 0.01 & Normal & 0.005 & 0.02 \\
+$\nu$ & 0.45 & Uniform & 0.40 & 0.499 \\
+$\rho_{w}$ (\si{\kilo\gram\per\metre\cubed}) & 1100 & Normal & 1000 & 1200 \\
+$\rho_{f}$ (\si{\kilo\gram\per\metre\cubed}) & 1020 & Normal & 1000 & 1060 \\
+$P_{\mathrm{iap}}$ (\si{\pascal}) & 1000 & Lognormal & 500 & 3000 \\
+$\eta$ & 0.25 & Uniform & 0.10 & 0.40 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Complete Sobol Sensitivity Indices}
+\label{sec:sobol}
+
+Tables~\ref{tab:sobol_fn2}--\ref{tab:sobol_ratio} present the first-order
+($S_{1}$) and total-order ($S_{T}$) Sobol indices for each output quantity.
+
+\begin{table}[htbp]
+\centering
+\caption{Sobol indices for $n=2$ flexural frequency $f_{2}$.}
+\label{tab:sobol_fn2}
+\begin{tabular}{@{}lSS@{}}
+\toprule
+{Parameter} & {$S_{1}$} & {$S_{T}$} \\
+\midrule
+$E$                & 0.8119    & 0.8613  \\
+$a$                & 0.0353    & 0.0503  \\
+$c$                & 0.0272    & 0.0359  \\
+$h$                & 0.0659    & 0.1163  \\
+$\nu$              & 0.00013   & 0.00024 \\
+$\rho_{w}$         & 0.000079  & 0.000093 \\
+$\rho_{f}$         & 0.000033  & 0.00024 \\
+$P_{\mathrm{iap}}$ & 0.0108    & 0.0125  \\
+$\eta$             & 0.0000    & 0.0000  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Sobol first-order indices for airborne displacement $\xi_{\mathrm{air}}$ at \SI{120}{\decibel}.}
+\label{tab:sobol_air}
+\begin{tabular}{@{}lS@{}}
+\toprule
+{Parameter} & {$S_{1}$} \\
+\midrule
+$E$                & {$<0.001$} \\
+$a$                & 0.041     \\
+$c$                & 0.028     \\
+$h$                & 0.011     \\
+$\nu$              & {$<0.001$} \\
+$\rho_{w}$         & {$<0.001$} \\
+$\rho_{f}$         & 0.001     \\
+$P_{\mathrm{iap}}$ & {$<0.001$} \\
+$\eta$             & \bfseries 0.899 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Sobol indices for mechanical displacement $\xi_{\mathrm{mech}}$
+  at \SI{0.5}{\metre\per\second\squared}.}
+\label{tab:sobol_mech}
+\begin{tabular}{@{}lS@{}}
+\toprule
+{Parameter} & {$S_{1}$} \\
+\midrule
+$E$                & 0.244   \\
+$a$                & 0.015   \\
+$c$                & 0.014   \\
+$h$                & 0.102   \\
+$\nu$              & {$<0.001$} \\
+$\rho_{w}$         & {$<0.001$} \\
+$\rho_{f}$         & {$<0.001$} \\
+$P_{\mathrm{iap}}$ & 0.022   \\
+$\eta$             & 0.089   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Sobol indices for coupling ratio $\mathcal{R} = \xi_{\mathrm{mech}}/\xi_{\mathrm{air}}$.}
+\label{tab:sobol_ratio}
+\begin{tabular}{@{}lS@{}}
+\toprule
+{Parameter} & {$S_{1}$} \\
+\midrule
+$E$                & 0.331   \\
+$a$                & 0.005   \\
+$c$                & 0.006   \\
+$h$                & 0.088   \\
+$\nu$              & {$<0.001$} \\
+$\rho_{w}$         & {$<0.001$} \\
+$\rho_{f}$         & 0.001   \\
+$P_{\mathrm{iap}}$ & 0.027   \\
+$\eta$             & {$<0.001$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Elastic Modulus Sweep}
+\label{sec:E_sweep}
+
+Table~\ref{tab:E_sweep} shows the sensitivity of the fundamental flexural
+frequency to the elastic modulus, the parameter that dominates modal
+uncertainty ($S_{T} = 0.86$).
+
+\begin{table}[htbp]
+\centering
+\caption{$n=2$ frequency vs.\ elastic modulus.}
+\label{tab:E_sweep}
+\begin{tabular}{@{}SSl@{}}
+\toprule
+{$E$ (\si{\mega\pascal})} & {$f_{2}$ (\si{\hertz})} & {ISO 2631 (4--8\,Hz)?} \\
+\midrule
+0.05  & 3.4  & Marginal \\
+0.10  & 4.0  & Yes \\
+0.20  & 4.9  & Yes \\
+0.50  & 7.1  & Yes \\
+1.00  & 9.6  & Marginal \\
+2.00  & 13.3 & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Parametric Study Overview}
+\label{sec:parametric}
+
+A full factorial parametric study explored 486 combinations:
+6~values of~$E$ $\times$ 3~semi-major axes $\times$ 3~aspect ratios $\times$
+3~wall thicknesses $\times$ 3~loss tangents.
+
+Key findings from the 486-combination sweep:
+\begin{itemize}[nosep]
+  \item 37\% of configurations place $f_{2}$ in the 5--\SI{10}{\hertz} range.
+  \item 41\% of configurations place $f_{2}$ in the ISO~2631 range (4--\SI{8}{\hertz}).
+  \item Dominant factor: $E$, followed by geometry ($a$, $c/a$) and $P_{\mathrm{iap}}$.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Representative body-type configurations and ISO~2631 overlap.}
+\label{tab:iso_body}
+\begin{tabular}{@{}llSlSl@{}}
+\toprule
+{Body type} & {$E$ (\si{\mega\pascal})} & {$a$ (\si{\centi\metre})} & {} &
+  {$f_{2}$ (\si{\hertz})} & {In ISO range?} \\
+\midrule
+Lean    & 0.2  & 15 && 6.3 & Yes \\
+Average & 0.1  & 18 && 4.0 & Yes \\
+Large   & 0.08 & 20 && 3.1 & Marginal \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Monte Carlo Summary Statistics}
+\label{sec:mc_summary}
+
+Table~\ref{tab:mc_summary} summarises the full Monte Carlo output distributions
+($N = 10{,}000$ samples).
+
+\begin{table}[htbp]
+\centering
+\caption{Monte Carlo summary statistics ($N = 10{,}000$).}
+\label{tab:mc_summary}
+\begin{tabular}{@{}lSSSSSS@{}}
+\toprule
+{Quantity} & {Mean} & {Median} & {Std Dev} & {P5} & {P95} & {99\% CI upper} \\
+\midrule
+$f_{2}$ (\si{\hertz})
+  & 7.52 & 6.43 & 4.21 & 3.32 & 15.48 & 26.43 \\
+$\xi_{\mathrm{air}}$ (\si{\micro\metre})
+  & 0.206 & 0.178 & 0.090 & 0.107 & 0.394 & 0.490 \\
+$\xi_{\mathrm{mech}}$ (\si{\micro\metre})
+  & 2745 & 1818 & 3110 & 296 & 8176 & 17457 \\
+$\mathcal{R}$
+  & 12949 & 9820 & 11888 & 1780 & 34169 & 62466 \\
+SPL$_{\mathrm{PIEZO}}$ (\si{\decibel})
+  & 134.4 & 135.0 & 3.5 & 128.1 & 139.4 & 141.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+%% =====================================================================
+%%  SECTION S3: SENSITIVITY TO MODELLING ASSUMPTIONS
+%% =====================================================================
+\section{Sensitivity to Modelling Assumptions}
+\label{sec:sensitivity}
+
+This section summarises validation studies that quantify the error introduced
+by each simplifying assumption in the analytical model.
+
+\subsection{Oblate Spheroid vs.\ Equivalent Sphere}
+\label{sec:oblate}
+
+The main-text model uses an equivalent sphere of radius
+$R_{\mathrm{eq}} = (a^{2}c)^{1/3}$.  A Rayleigh--Ritz analysis on the full
+oblate spheroid (Section~\ref{sec:derivations}) was performed using
+\texttt{oblate\_spheroid\_ritz.py} with a 2-DOF trial function per mode
+(normal and tangential displacements expressed as Legendre polynomials),
+integrated over the oblate surface via 200-point Gauss--Legendre quadrature.
+
+\begin{table}[htbp]
+\centering
+\caption{Sphere vs.\ oblate Rayleigh--Ritz frequencies at $c/a = 0.67$.}
+\label{tab:oblate}
+\begin{tabular}{@{}lSSSS@{}}
+\toprule
+& \multicolumn{2}{c}{$E = \SI{0.1}{\mega\pascal}$}
+& \multicolumn{2}{c}{$E = \SI{0.5}{\mega\pascal}$} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+{Mode} & {Sphere (\si{\hertz})} & {Ritz (\si{\hertz})}
+       & {Sphere (\si{\hertz})} & {Ritz (\si{\hertz})} \\
+\midrule
+$n=2$ & 4.0 & 3.6 & 7.1 & 6.0 \\
+$n=3$ & 6.3 & 5.6 & 11.3 & 9.5 \\
+$n=4$ & 8.9 & 8.0 & 14.4 & 12.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Findings.}
+The sphere model overestimates flexural frequencies by 11--20\%.  The error
+grows with eccentricity and with $n$.  Physical reasons: (i)~spatially varying
+curvature on the oblate surface (poles sharper, equator flatter), (ii)~different
+fluid added-mass distribution from oblate flow geometry, and
+(iii)~the Ritz formulation captures optimal tangential displacement via
+the variational principle.  Despite the systematic offset, the conclusion that
+$f_{2}$ lies in the \SIrange{3}{8}{\hertz} range is robust to the choice of
+geometry model.
+
+
+\subsection{Multilayer vs.\ Homogeneous Wall}
+\label{sec:multilayer}
+
+The real abdominal wall comprises $\sim$5--6 distinct layers.
+Table~\ref{tab:layers} shows the layer stack used in
+\texttt{multilayer\_wall.py}.
+
+\begin{table}[htbp]
+\centering
+\caption{Relaxed abdominal wall layer properties.}
+\label{tab:layers}
+\begin{tabular}{@{}lSSSS@{}}
+\toprule
+{Layer} & {$h$ (\si{\milli\metre})} & {$E$ (\si{\mega\pascal})} & {$\nu$} &
+  {$\rho$ (\si{\kilo\gram\per\metre\cubed})} \\
+\midrule
+Peritoneum         & 0.1  & 0.50   & 0.45 & 1050 \\
+Transversalis      & 3.0  & 0.05   & 0.45 & 1050 \\
+Internal oblique   & 5.0  & 0.05   & 0.45 & 1060 \\
+External oblique   & 5.0  & 0.08   & 0.45 & 1060 \\
+Subcutaneous fat   & 10.0 & 0.002  & 0.49 & 950  \\
+Skin               & 2.0  & 0.50   & 0.45 & 1100 \\
+\midrule
+\textbf{Composite} & \textbf{25.1} & \textbf{0.075} & \textbf{0.473} & \textbf{1012} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Effective composite properties are computed using classical laminate theory
+(Hernández-Gascón et al., 2013):
+\begin{align}
+  (Eh)_{\mathrm{eff}} &= \sum_{i} E_{i}\,h_{i} \,,
+    \tag{S18} \\
+  D_{\mathrm{eff}} &= \sum_{i} \frac{E_{i}}{1-\nu_{i}^{2}}
+    \left[\frac{h_{i}^{3}}{12} + h_{i}(z_{i}-\bar{z})^{2}\right] ,
+    \tag{S19} \\
+  \rho_{\mathrm{eff}} &= \frac{\sum_{i}\rho_{i}\,h_{i}}{\sum_{i}h_{i}} \,.
+    \tag{S20}
+\end{align}
+
+\paragraph{Key result.}
+The multilayer relaxed model predicts $f_{2} \approx \SI{4.6}{\hertz}$,
+within 4\% of the homogeneous model at $E = \SI{0.1}{\mega\pascal}$.
+The tensed muscle configuration ($E_{\mathrm{eff}} \approx \SI{2.7}{\mega\pascal}$)
+raises $f_{2}$ to $\sim$\SI{23}{\hertz}, confirming that the dominant
+variable is muscle tone, not the specific layer arrangement.
+
+
+\subsection{Viscous vs.\ Inviscid Fluid}
+\label{sec:viscous}
+
+Fluid viscosity introduces a Stokes oscillatory boundary layer of thickness
+\begin{equation}
+  \delta = \sqrt{\frac{2\mu}{\rho_{f}\,\omega}}
+  \tag{S21}
+\end{equation}
+at the inner wall.  The associated viscous damping ratio addition is
+(Landau \& Lifshitz, \S24)
+\begin{equation}
+  \Delta\zeta_{\mathrm{visc}} = \frac{\rho_{f}\,\delta\,(n+1)}{4\,n\,(2n+1)\,m_{\mathrm{eff}}^{(n)}} \,.
+  \tag{S22}
+\end{equation}
+
+\begin{table}[htbp]
+\centering
+\caption{Viscous correction for physiological fluids ($n=2$, $f=\SI{4}{\hertz}$).}
+\label{tab:viscous}
+\begin{tabular}{@{}lSSSSS@{}}
+\toprule
+{Fluid} & {$\mu$ (\si{\pascal\second})} & {$\delta$ (\si{\milli\metre})}
+  & {$\Delta\zeta_{\mathrm{visc}}$} & {$\Delta\zeta/\zeta_{\mathrm{struct}}$ (\%)}
+  & {$\Delta Q$ (\%)} \\
+\midrule
+Water         & 0.001 & {$\sim$0.2}  & {$\sim 10^{-4}$} & {$<0.1$}  & {$<0.1$} \\
+Bile          & 0.005 & {$\sim$0.4}  & {$\sim 3\times10^{-4}$} & {$<0.3$} & {$<0.3$} \\
+Blood         & 0.004 & {$\sim$0.4}  & {$\sim 2\times10^{-4}$} & {$<0.2$} & {$<0.2$} \\
+Gastric acid  & 0.01  & {$\sim$0.6}  & {$\sim 4\times10^{-4}$} & {$<0.4$} & {$<0.4$} \\
+Mucus         & 0.10  & {$\sim$2.0}  & {$\sim 10^{-3}$} & {$<1.0$}  & {$<1.0$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key result.}
+Even for the most viscous physiological fluid (mucus,
+$\mu = \SI{0.1}{\pascal\second}$), the viscous damping adds
+$<1\%$ to the structural damping.  The crossover viscosity at which
+$\Delta\zeta_{\mathrm{visc}} = \zeta_{\mathrm{struct}}$ is
+$\mu_{\mathrm{cross}} \approx \SI{280}{\pascal\second}$---comparable to
+honey or peanut butter and far beyond any abdominal fluid.  The inviscid
+approximation is therefore well justified.
+
+\paragraph{Non-Newtonian effects.}
+Chyme is shear-thinning (power-law exponent $n_{\mathrm{pl}} \approx 0.5$--$0.8$).
+At the extremely low shear rates characteristic of infrasonic oscillation
+($\dot{\gamma} \sim \SI{0.1}{\per\second}$), the apparent viscosity is
+\emph{higher} than the consistency index, but the viscous damping correction
+remains negligible ($\Delta\zeta/\zeta_{\mathrm{struct}} < 2\%$).
+
+
+\subsection{With and Without Organ Inclusions}
+\label{sec:organs}
+
+Solid organs (liver, spleen, kidneys) occupy $\sim$20--30\% of the cavity
+volume with shear moduli of 1--\SI{10}{\kilo\pascal}.
+
+The analysis (\texttt{organ\_inclusions.py}) uses Hashin--Shtrikman bounds
+for the effective medium.  Key results:
+
+\begin{enumerate}[nosep]
+  \item \textbf{Bulk modulus}: Since both fluid and tissue have
+    $K \approx \SI{2.2}{\giga\pascal}$ (nearly incompressible), the effective
+    bulk modulus changes by $<1$\,ppm---negligible.
+  \item \textbf{Shear modulus}: The HS lower bound gives $G_{\mathrm{eff}} = 0$
+    for the composite because the fluid matrix cannot transmit shear at the
+    macroscale (inclusions are non-percolating, $\phi < 0.29$).
+  \item \textbf{Density}: The effective density is a simple volume average;
+    organ tissue ($\rho \approx \SI{1055}{\kilo\gram\per\metre\cubed}$) vs.\
+    fluid ($\rho = \SI{1020}{\kilo\gram\per\metre\cubed}$) gives
+    $\Delta\rho/\rho \approx 1\%$.
+  \item \textbf{Frequency shift}: The combined stiffness and mass perturbation
+    shifts $f_{2}$ by $<$1\%.  The liver's asymmetric mass ($\SI{1.5}{\kilo\gram}$)
+    lifts the $m$-degeneracy of the $n=2$ mode by $\sim$1--2\%.
+\end{enumerate}
+
+\paragraph{Conclusion.}
+Treating the cavity contents as homogeneous fluid introduces $<2\%$ frequency
+error, well within the uncertainty from the elastic modulus
+($\sigma_{E}/E \sim$ factor of 5).
+
+
+\subsection{Nonlinear vs.\ Linear Analysis}
+\label{sec:nonlinear}
+
+For whole-body vibration at occupational levels, the predicted displacements
+($\xi \sim 650$--\SI{7500}{\micro\metre}) approach $w/h \sim O(1)$,
+suggesting geometric nonlinearity may be relevant.  The analysis
+(\texttt{nonlinear\_analysis.py}) constructs a Duffing oscillator model
+from Donnell--von Kármán nonlinear shell theory.
+
+\paragraph{Cubic stiffness coefficient.}
+The von Kármán mid-surface strains introduce a cubic restoring force with
+coefficient
+\begin{equation}
+  \alpha = \alpha_{\mathrm{shell}} + \alpha_{\mathrm{fluid}}\,,
+  \tag{S23}
+\end{equation}
+where
+\begin{align}
+  \alpha_{\mathrm{shell}} &= \frac{E\,h}{4\,R^{4}}\,n^{2}(n+1)^{2}\,C_{\mathrm{NL}}\,,
+    \quad C_{\mathrm{NL}} = \frac{3-\nu^{2}}{1-\nu^{2}}\,,
+    \tag{S24} \\
+  \alpha_{\mathrm{fluid}} &= \frac{3\,\rho_{f}\,\omega_{0}^{2}}{2\,R^{2}\,n} \,.
+    \tag{S25}
+\end{align}
+The system is \emph{hardening} ($\alpha > 0$): frequency increases with
+amplitude.  For the $n=2$ mode, $\alpha \approx \SI{7.1e7}{}$\,rad$^{2}$s$^{-2}$m$^{-2}$.
+
+\paragraph{Backbone curve.}
+The amplitude-dependent resonance frequency is
+\begin{equation}
+  \omega(A) = \omega_{0}\sqrt{1 + \frac{3\,\alpha\,A^{2}}{4\,\omega_{0}^{2}}} \,.
+  \tag{S26}
+\end{equation}
+A 5\% frequency shift occurs at a critical amplitude of
+$A_{\mathrm{crit}} \approx \SI{1092}{\micro\metre}$ ($A/h \approx 0.11$).
+
+\paragraph{Amplitude-dependent damping.}
+Soft tissue exhibits increased dissipation at large strains, modelled as
+\begin{equation}
+  \eta(A) = \eta_{0}\bigl(1 + \beta|A/h|^{2}\bigr)\,,\quad \beta = 0.5 \,.
+  \tag{S27}
+\end{equation}
+This partially offsets the nonlinear stiffening by reducing peak amplitudes.
+
+\paragraph{Key result.}
+For airborne coupling ($\xi < \SI{0.2}{\micro\metre}$), nonlinearity is
+completely negligible ($A/h \sim 10^{-5}$).  For mechanical coupling at
+occupational WBV levels, the nonlinear frequency shift is 5--15\%, which
+stiffens the response and slightly reduces peak displacement but does not
+change the order-of-magnitude conclusion ($\xi_{\mathrm{mech}} \gg$
+PIEZO threshold).
+
+
+\subsection{Boundary Condition Effects}
+\label{sec:bc}
+
+The Rayleigh--Ritz framework also investigated boundary condition sensitivity
+via FEA validation results (\texttt{fea\_modal\_results.json}).
+
+\begin{table}[htbp]
+\centering
+\caption{Boundary condition effects on $n=2$ frequency (wet shell).}
+\label{tab:bc}
+\begin{tabular}{@{}lSS@{}}
+\toprule
+{Configuration} & {$f_{2}$ (\si{\hertz})} & {Shift from free (\%)} \\
+\midrule
+Free sphere (Ritz)          & 4.13 & 0     \\
+Hemisphere simply-supported & 3.91 & -5.3  \\
+Hemisphere clamped          & 3.89 & -5.8  \\
+25\% surface constrained    & 3.66 & -11.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key result.}
+The maximum frequency shift from boundary conditions is 11\%.  This
+insensitivity arises because the fluid added mass dominates
+($m_{\mathrm{add}}/m_{\mathrm{wall}} \approx 7.3$), so the system dynamics
+are controlled by the fluid inertia rather than the shell boundary.
+
+
+\subsection{Summary of Modelling Assumptions}
+\label{sec:sensitivity_summary}
+
+Table~\ref{tab:assumption_summary} compiles the frequency error from each
+modelling simplification.
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of modelling assumptions on predicted $f_{2}$.}
+\label{tab:assumption_summary}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Assumption & Error & Dominant factor \\
+\midrule
+Sphere $\to$ oblate spheroid    & 11--20\%      & Curvature distribution \\
+Homogeneous $\to$ multilayer    & $<$4\%        & Muscle tone \\
+Inviscid $\to$ viscous fluid    & $<$1\%        & Stokes boundary layer \\
+No organs $\to$ with inclusions & $<$2\%        & Density perturbation \\
+Linear $\to$ nonlinear          & 5--15\%$^{*}$ & WBV amplitudes only \\
+Free $\to$ constrained BC       & $<$11\%       & Fluid dominates \\
+\midrule
+\multicolumn{3}{@{}l}{\footnotesize $^{*}$Only relevant for mechanical coupling ($\xi > \SI{1}{\milli\metre}$).}\\
+\multicolumn{3}{@{}l}{\footnotesize All errors are small compared to the uncertainty in $E$
+  ($S_{T} = 0.86$; factor-of-5 range).} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+%% =====================================================================
+%%  SECTION S4: CODE AVAILABILITY
+%% =====================================================================
+\section{Code Availability}
+\label{sec:code}
+
+\subsection{Repository}
+
+All source code, data, and scripts required to reproduce the results presented
+in the main paper and this supplementary material are available at:
+\begin{center}
+  \url{https://github.com/JonathanMace/brownnote}
+\end{center}
+
+\subsection{Module Listing}
+\label{sec:modules}
+
+Table~\ref{tab:modules} describes each module in the repository.
+
+\begin{longtable}{@{}p{5.5cm}p{9.5cm}@{}}
+\caption{Repository module listing.}\label{tab:modules} \\
+\toprule
+\textbf{Module / Script} & \textbf{Description} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Module / Script} & \textbf{Description} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\multicolumn{2}{@{}l}{\textit{Analytical models} (\texttt{src/analytical/})} \\
+\midrule
+\texttt{natural\_frequency\_v2.py} &
+  Flexural and breathing mode frequencies for a fluid-filled sphere with
+  added mass, pre-stress, and viscoelastic damping. \\
+\texttt{energy\_budget.py} &
+  Self-consistent energy budget via reciprocity (absorption cross-section,
+  radiation damping, energy-consistent displacement). \\
+\texttt{acoustic\_coupling.py} &
+  Airborne acoustic coupling: $(ka)^{n}$ pressure reduction, impedance
+  mismatch, and displacement at specified SPL. \\
+\texttt{mechanical\_coupling.py} &
+  Whole-body vibration base-excitation model: frequency-response function
+  and displacement at specified $a_{\mathrm{rms}}$. \\
+\texttt{oblate\_spheroid\_ritz.py} &
+  Rayleigh--Ritz analysis on the full oblate spheroid with Legendre-polynomial
+  trial functions and Gauss--Legendre quadrature. \\
+\texttt{multilayer\_wall.py} &
+  Classical laminate theory for the multi-layer abdominal wall; effective
+  composite properties and frequency comparison. \\
+\texttt{viscous\_correction.py} &
+  Stokes boundary-layer analysis: viscous damping ratio, Q-factor correction,
+  crossover viscosity, and power-law (non-Newtonian) extension. \\
+\texttt{organ\_inclusions.py} &
+  Hashin--Shtrikman effective medium theory for solid organ inclusions;
+  parametric study of volume fraction and stiffness. \\
+\texttt{nonlinear\_analysis.py} &
+  Donnell--von K\'{a}rm\'{a}n cubic stiffness, Duffing backbone curve, jump
+  phenomenon, and amplitude-dependent damping. \\
+\texttt{parametric\_analysis.py} &
+  Full factorial parametric sweep (486 configurations) over $E$, $a$, $c/a$,
+  $h$, $\eta$. \\
+\texttt{uncertainty\_quantification.py} &
+  Monte Carlo and Sobol sensitivity analysis ($N = 10{,}000$ samples). \\
+\texttt{gas\_pocket\_resonance.py} &
+  Minnaert bubble resonance for intestinal gas pockets. \\
+\texttt{gas\_pocket\_detailed.py} &
+  Detailed sub-resonant gas-pocket response at infrasonic frequencies. \\
+\texttt{orifice\_coupling.py} &
+  Upper GI tract (mouth-to-stomach) acoustic coupling pathway. \\
+\texttt{mechanotransduction.py} &
+  PIEZO1/2 activation thresholds and SPL required for channel opening. \\
+\texttt{dimensional\_analysis.py} &
+  Buckingham-$\pi$ dimensional analysis of the coupled system. \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Core library} (\texttt{src/browntone/})} \\
+\midrule
+\texttt{analytical/} & Shell vibration and acoustic-mode solvers. \\
+\texttt{fem/} & FEA mesh generation and solver wrappers. \\
+\texttt{mesh/} & Mesh utilities for parametric geometries. \\
+\texttt{postprocess/} & Result aggregation and figure generation. \\
+\texttt{utils/} & Shared constants, unit conversions, I/O helpers. \\
+\texttt{cli.py} & Command-line interface entry point. \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Scripts} (\texttt{scripts/})} \\
+\midrule
+\texttt{run\_modal\_analysis.py} &
+  Run the full modal analysis pipeline (all modes, parametric sweep). \\
+\texttt{run\_convergence\_study.py} &
+  Mesh and quadrature convergence study for Rayleigh--Ritz solver. \\
+\texttt{generate\_jsv\_figures.py} &
+  Generate all publication figures for the JSV paper. \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Data} (\texttt{data/})} \\
+\midrule
+\texttt{materials/default.json} & Material property database (tissue, fluid). \\
+\texttt{results/fea\_modal\_results.json} & FEA validation: analytical vs.\ Ritz
+  vs.\ various BC configurations. \\
+\texttt{results/uq\_results.json} & Full Monte Carlo and Sobol analysis output. \\
+\end{longtable}
+
+
+\subsection{Reproducing Figures and Tables}
+\label{sec:reproduce}
+
+All figures and tables in the main paper can be reproduced from the repository
+as follows.
+
+\begin{enumerate}[nosep]
+  \item \textbf{Install the package:}
+\begin{verbatim}
+  pip install -e ".[all]"
+\end{verbatim}
+
+  \item \textbf{Run the full analysis pipeline:}
+\begin{verbatim}
+  python scripts/run_modal_analysis.py
+\end{verbatim}
+    This produces all intermediate results in \texttt{data/results/}.
+
+  \item \textbf{Generate all JSV figures:}
+\begin{verbatim}
+  python scripts/generate_jsv_figures.py
+\end{verbatim}
+    Output appears in \texttt{paper/figures/}.
+
+  \item \textbf{Run individual validation studies:}
+\begin{verbatim}
+  python -m src.analytical.oblate_spheroid_ritz
+  python -m src.analytical.multilayer_wall
+  python -m src.analytical.viscous_correction
+  python -m src.analytical.organ_inclusions
+  python -m src.analytical.nonlinear_analysis
+\end{verbatim}
+
+  \item \textbf{Run uncertainty quantification:}
+\begin{verbatim}
+  python -m src.analytical.uncertainty_quantification
+\end{verbatim}
+
+  \item \textbf{Build the paper:}
+\begin{verbatim}
+  cd paper && pdflatex main.tex && bibtex main
+  pdflatex main.tex && pdflatex main.tex
+\end{verbatim}
+
+  \item \textbf{Run tests:}
+\begin{verbatim}
+  make test
+\end{verbatim}
+\end{enumerate}
+
+\noindent
+A Docker environment is also provided for fully reproducible builds:
+\begin{verbatim}
+  docker compose -f docker/docker-compose.yml run --rm browntone bash
+\end{verbatim}
+
+\end{document}
