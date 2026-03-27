@@ -131,54 +131,59 @@ def phi_analytical(h_a, c_a, rho_ratio, P_E, nu, n=2):
 
 def parametric_sweep_dimensionless(mode_n=2):
     """
-    Re-run the 486-point parametric study and return dimensionless groups.
+    Parametric study spanning all five governing Π-groups for flexural modes.
 
-    Matches the parameter grid in ``parametric_analysis.multi_parameter_sensitivity``.
+    Sweeps E, a, c/a, h, ρ_w, and ν over physiological ranges, producing
+    4374 parameter combinations.  The loss tangent η is excluded because it
+    does not affect the undamped natural frequency.
     """
-    E_values = [0.05, 0.1, 0.2, 0.5, 1.0, 2.0]  # MPa
-    a_values = [0.15, 0.18, 0.20]  # m
-    cr_values = [0.5, 0.67, 0.8]  # c/a
-    h_values = [0.005, 0.010, 0.015]  # m
-    eta_values = [0.15, 0.30, 0.40]
+    E_values = [0.05, 0.1, 0.2, 0.5, 1.0, 2.0]    # MPa
+    a_values = [0.15, 0.18, 0.20]                    # m
+    cr_values = [0.5, 0.67, 0.8]                     # c/a
+    h_values = [0.005, 0.010, 0.015]                 # m
+    rho_w_values = [1000.0, 1100.0, 1200.0]          # kg/m³
+    nu_values = [0.40, 0.45, 0.49]                   # Poisson's ratio
+    rho_f = 1020.0                                    # kg/m³ (fixed)
+    P_iap = 1000.0                                    # Pa (fixed)
 
     results = []
     for E_MPa in E_values:
+        E_pa = E_MPa * 1e6
         for a in a_values:
             for cr in cr_values:
                 for h in h_values:
-                    for eta in eta_values:
-                        c = a * cr
-                        model = AbdominalModelV2(
-                            E=E_MPa * 1e6, a=a, b=a, c=c,
-                            h=h, loss_tangent=eta,
-                        )
-                        freqs = flexural_mode_frequencies_v2(model, n_max=mode_n)
-                        f_n = freqs[mode_n]
+                    for rho_w in rho_w_values:
+                        for nu in nu_values:
+                            c = a * cr
+                            model = AbdominalModelV2(
+                                E=E_pa, a=a, b=a, c=c, h=h,
+                                nu=nu, rho_wall=rho_w,
+                                rho_fluid=rho_f, P_iap=P_iap,
+                            )
+                            freqs = flexural_mode_frequencies_v2(
+                                model, n_max=mode_n,
+                            )
+                            f_n = freqs[mode_n]
 
-                        results.append({
-                            # Π groups
-                            "Pi_0": dimensionless_frequency(
-                                f_n, a, model.E, model.rho_fluid
-                            ),
-                            "h_over_a": h / a,
-                            "c_over_a": cr,
-                            "rho_ratio": model.rho_wall / model.rho_fluid,
-                            "P_over_E": model.P_iap / model.E,
-                            "nu": model.nu,
-                            "eta": eta,
-                            # Analytical Φ prediction
-                            "Pi_0_analytical": phi_analytical(
-                                h / a, cr,
-                                model.rho_wall / model.rho_fluid,
-                                model.P_iap / model.E,
-                                model.nu, n=mode_n,
-                            ),
-                            # Raw values for reference
-                            "f_hz": f_n,
-                            "E_MPa": E_MPa,
-                            "a_m": a,
-                            "h_m": h,
-                        })
+                            results.append({
+                                "Pi_0": dimensionless_frequency(
+                                    f_n, a, E_pa, rho_f,
+                                ),
+                                "h_over_a": h / a,
+                                "c_over_a": cr,
+                                "rho_ratio": rho_w / rho_f,
+                                "P_over_E": P_iap / E_pa,
+                                "nu": nu,
+                                "Pi_0_analytical": phi_analytical(
+                                    h / a, cr, rho_w / rho_f,
+                                    P_iap / E_pa, nu, n=mode_n,
+                                ),
+                                "f_hz": f_n,
+                                "E_MPa": E_MPa,
+                                "a_m": a,
+                                "h_m": h,
+                                "rho_w": rho_w,
+                            })
     return results
 
 
@@ -357,33 +362,38 @@ def plot_dimensional_collapse(results=None, save=True):
 
     ax.set_xlabel("$h$ (mm)")
     ax.set_ylabel("$f_2$ (Hz)")
-    ax.set_title("(a) Dimensional: 486 points, no pattern")
+    n_pts = len(results)
+    ax.set_title(f"(a) Dimensional: {n_pts} points, no pattern")
     ax.legend(fontsize=7, loc="upper left", title="E varies per marker",
               title_fontsize=6)
     ax.grid(True, alpha=0.3)
 
-    # ── Panel (b): dimensionless collapse with P/E bands ──
+    # ── Panel (b): dimensionless collapse with Π-group bands ──
     ax = axes[1]
-    rho_r = results[0]["rho_ratio"]
-    nu_val = results[0]["nu"]
     ha_line = np.linspace(0.015, 0.11, 200)
 
-    # Draw analytical bands (envelope over P/E range)
+    # Envelope over ALL secondary Π-groups (P/E, ρ_w/ρ_f, ν)
     P_E_vals = sorted(set(r["P_over_E"] for r in results))
+    rho_r_vals = sorted(set(r["rho_ratio"] for r in results))
+    nu_vals = sorted(set(r["nu"] for r in results))
+
     for j, ca in enumerate(ca_vals):
         phi_stack = np.array([
-            phi_analytical(ha_line, ca, rho_r, pe, nu_val, n=2)
+            phi_analytical(ha_line, ca, rr, pe, nv, n=2)
             for pe in P_E_vals
+            for rr in rho_r_vals
+            for nv in nu_vals
         ])
         phi_lo = phi_stack.min(axis=0)
         phi_hi = phi_stack.max(axis=0)
         ax.fill_between(ha_line, phi_lo, phi_hi, color=colors[j],
                         alpha=0.18)
-        phi_mid = phi_stack[len(P_E_vals) // 2]
+        # Mid curve at canonical secondary values
+        phi_mid = phi_analytical(ha_line, ca, 1.0784, 0.01, 0.45, n=2)
         ax.plot(ha_line, phi_mid, color=colors[j], linewidth=1.5,
                 alpha=0.7, label=f"$c/a={ca}$")
 
-    # Overlay numerical points (deduplicated: eta doesn't affect frequency)
+    # Overlay numerical points (deduplicated over secondary Π-groups)
     seen = set()
     for j, ca in enumerate(ca_vals):
         for k, E in enumerate(E_vals):
@@ -392,20 +402,18 @@ def plot_dimensional_collapse(results=None, save=True):
             if not subset:
                 continue
             for r in subset:
-                key = (r["h_over_a"], r["c_over_a"], r["E_MPa"])
+                key = (r["h_over_a"], r["c_over_a"], r["E_MPa"],
+                       r["rho_ratio"], r["nu"])
                 if key in seen:
                     continue
                 seen.add(key)
-            ha = list({r["h_over_a"] for r in subset})
-            Pi0 = [next(r["Pi_0"] for r in subset
-                        if r["h_over_a"] == h) for h in ha]
-            ax.scatter(ha, Pi0, c=[colors[j]],
-                       marker=markers[k % len(markers)],
-                       s=25, alpha=0.7, edgecolors="none")
+                ax.scatter(r["h_over_a"], r["Pi_0"], c=[colors[j]],
+                           marker=markers[k % len(markers)],
+                           s=12, alpha=0.4, edgecolors="none")
 
     ax.set_xlabel(r"$\Pi_1 = h/a$")
     ax.set_ylabel(r"$\Pi_0 = f_2 \, a \sqrt{\rho_f / E}$")
-    ax.set_title(r"(b) Collapsed: $\Pi_0$ vs $h/a$  (band = $P/E$ range)")
+    ax.set_title(r"(b) Collapsed: $\Pi_0$ vs $h/a$  (band = all $\Pi$-groups)")
     ax.legend(fontsize=8, loc="upper left")
     ax.grid(True, alpha=0.3)
 
@@ -490,8 +498,8 @@ def plot_scaling_law(save=True):
                     xytext=(8, 8), fontsize=10, fontstyle="italic")
 
     ax.set_xlabel("Semi-major axis $a$ (cm)")
-    ax.set_ylabel(r"Coupling ratio $\mathcal{R} = \xi_\mathrm{mech}/\xi_\mathrm{air}$")
-    ax.set_title("Mechanical vs airborne coupling ratio")
+    ax.set_ylabel(r"Scattering coupling ratio $\mathcal{R}_\mathrm{scat} = 1/(ka)^2$")
+    ax.set_title("Scattering coupling ratio vs body size")
     ax.grid(True, alpha=0.3, which="both")
     ax.set_xlim(0, 24)
 

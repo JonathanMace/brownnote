@@ -22,14 +22,14 @@ Viscoelastic Shells: Predictions Across Mammalian Scales}
 
 \author[msr]{Jonathan Mace\corref{cor1}}
 \cortext[cor1]{Corresponding author}
-\ead{jmace@example.edu}
-\address[msr]{Department of Engineering, University of Example}
+\ead{jonathan.mace@microsoft.com}
+\address[msr]{Microsoft Research}
 
 \begin{highlights}
 \item Mammalian abdominal resonance governed by quasi-universal $\Pi_0 \approx 0.07$
-\item 486-point parametric study confirms algebraic consistency of non-dimensionalisation
+\item 1458-point parametric study confirms algebraic consistency of non-dimensionalisation
 \item Cross-species $f_2$ scales as $(1/a)\sqrt{E/\rho_f}$ when other $\Pi$-groups are approximately constant
-\item Coupling ratio $\mathcal{R} \sim 10^3$--$10^4$ is size-independent: animal models are valid proxies
+\item Scattering coupling ratio $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is size-independent: animal models are valid proxies
 \item Breathing mode never reaches infrasound for any organism
 \end{highlights}
 
@@ -39,18 +39,20 @@ biomechanics to underwater acoustics.  Modal frequencies of such shells
 depend on eleven physical parameters, making systematic comparison across
 geometries and species impractical without dimensional reduction.  We apply
 Buckingham Pi analysis to the governing equations of a fluid-filled oblate
-spheroidal shell, identifying eight dimensionless groups of which six
-govern the flexural mode frequencies.  The resulting scaling law,
-$f_n = \sqrt{E/\rho_f}\,(1/a)\,\Phi_n(\Pi_1,\ldots,\Pi_5)$,
+spheroidal shell, identifying eight dimensionless groups of which five
+govern the undamped flexural mode frequencies.  The resulting scaling law,
+$f_n = \sqrt{E/\rho_f}\,(1/a)\,\Phi_n(\Pi_1,\Pi_2,\Pi_3,\Pi_5,\Pi_6)$,
 where $\Phi_n$ absorbs the $1/(2\pi)$ factor,
 admits a closed-form expression from the shell equations.
-A 486-point parametric study spanning physiological ranges of all parameters
+A 1458-point parametric study spanning physiological ranges of all five
+governing dimensionless groups
 collapses onto the analytical curves to within numerical round-off
-($5.8 \times 10^{-16}$), confirming the algebraic consistency of the
+($7.9 \times 10^{-16}$), confirming the algebraic consistency of the
 non-dimensionalisation.  Cross-species predictions for four mammals (rat,
 cat, pig, human) reveal a quasi-universal dimensionless frequency
-$\Pi_0 \approx 0.07$, implying that the airborne coupling ratio
-$\mathcal{R} \sim 10^3$--$10^4$ is approximately size-independent and
+$\Pi_0 \approx 0.07$, implying that the scattering coupling ratio
+$\mathcal{R}_\mathrm{scat} = 1/(ka)^2 \sim 10^3$--$10^4$ is
+approximately size-independent and
 that animal models are valid proxies for human abdominal resonance studies.
 The breathing mode ($n=0$), dominated by the fluid bulk modulus, would
 require a body radius of order \SI{20}{\metre} to reach \SI{20}{\hertz}
@@ -83,7 +85,8 @@ flexural resonances at \SIrange{4}{10}{\hertz} and a mechanical-to-airborne
 coupling ratio of approximately $6.6 \times 10^4$.  Here we show that
 mammalian abdominal resonance is governed by a quasi-universal dimensionless
 frequency $\Pi_0 \approx 0.07$, implying that animal models are valid
-proxies for human studies and that the coupling ratio $\mathcal{R}$ is
+proxies for human studies and that the scattering coupling ratio
+$\mathcal{R}_\mathrm{scat}$ is
 approximately size-independent.  These results follow from a Buckingham Pi
 reduction of the eleven-parameter model to five governing dimensionless
 groups for flexural modes.
@@ -91,7 +94,7 @@ groups for flexural modes.
 Three questions motivate this analysis.  First, can animal models (rat, cat,
 pig) be used to study abdominal resonance phenomena that manifest in humans?
 The answer depends on whether the governing dimensionless groups---and hence
-$\mathcal{R}$---are approximately conserved across species.  Second, can the
+$\mathcal{R}_\mathrm{scat}$---are approximately conserved across species.  Second, can the
 breathing mode ($n = 0$)---whose frequency is dominated by the fluid bulk
 modulus---ever enter the infrasonic range for any biological organism?
 Third, which dimensionless groups dominate the flexural resonance, and how
@@ -197,20 +200,22 @@ constrained by shared developmental biology~\cite{West1997}.
 \section{Parametric validation}
 \label{sec:results}
 
-We evaluate~\eqref{eq:scaling_law} over a 486-point grid spanning
-physiological ranges: $E \in [0.05, 2.0]$~MPa (6~values),
+We evaluate~\eqref{eq:scaling_law} over a 1458-point grid spanning
+physiological ranges of all five governing dimensionless groups:
+$E \in [0.05, 2.0]$~MPa (6~values),
 $a \in [0.15, 0.20]$~m (3~values), $c/a \in [0.5, 0.8]$ (3~values),
-$h \in [0.005, 0.015]$~m (3~values), and $\eta \in [0.15, 0.40]$
-(3~values), with $\rho_w$, $\rho_f$, $K_f$, $\nu$, and $P_\mathrm{iap}$
-held at canonical values.
+$h \in [0.005, 0.015]$~m (3~values), $\rho_w/\rho_f \in [0.98, 1.18]$
+(3~values), and $\nu \in [0.40, 0.49]$ (3~values), with $K_f$ and
+$P_\mathrm{iap}$ held at canonical values.  The loss tangent $\eta$
+is excluded because it does not affect the undamped natural frequency.
 
 Figure~\ref{fig:collapse} shows the result.  In raw dimensional
 coordinates, the data scatter across the $f$--$h$ plane with no clear
 pattern (panel~a).  Non-dimensionalisation via~\eqref{eq:scaling_law}
-collapses all 486 points onto universal curves $\Pi_0(h/a)$ parameterised
+collapses all 1458 points onto universal curves $\Pi_0(h/a)$ parameterised
 by $c/a$ (panel~b).  The parity plot (panel~c) confirms that the
 analytical $\Phi_n$ reproduces every numerical point to within numerical
-round-off (maximum relative error $5.8 \times 10^{-16}$), confirming
+round-off (maximum relative error $7.9 \times 10^{-16}$), confirming
 the algebraic consistency of the non-dimensionalisation rather than
 providing independent physical validation, which was established in the
 companion paper~\cite{mace2026brown}.
@@ -218,12 +223,12 @@ companion paper~\cite{mace2026brown}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig_dimensional_collapse.pdf}
-  \caption{Dimensional collapse of the 486-point parametric study.
+  \caption{Dimensional collapse of the 1458-point parametric study.
   \emph{(a)}~Raw dimensional data ($f_2$ vs.\ $h$) shows no clear pattern.
   \emph{(b)}~Non-dimensionalising via equation~\eqref{eq:scaling_law}
   collapses all points onto universal curves $\Pi_0(h/a)$ parameterised
-  by $c/a$; shaded bands span the $P_\mathrm{iap}/E$ range, different
-  markers denote different $E$.
+  by $c/a$; shaded bands span the ranges of $P_\mathrm{iap}/E$,
+  $\rho_w/\rho_f$, and $\nu$.
   \emph{(c)}~Parity plot confirms the analytical $\Phi$ reproduces every
   numerical point to within numerical round-off, confirming algebraic
   consistency.}
@@ -249,8 +254,11 @@ for brevity.
   \centering
   \caption{Cross-species scaling of the $n=2$ flexural mode, showing
   all governing $\Pi$-groups.
-  $\mathcal{R} = 1/(ka)^2$ quantifies the radiation-efficiency penalty
-  for airborne excitation.  Allometric estimates of $E$, $h/a$, and
+  $\mathcal{R}_\mathrm{scat} = 1/(ka)^2$ quantifies the Rayleigh-regime
+  scattering penalty for airborne excitation; the full displacement ratio
+  reported in~\cite{mace2026brown} is approximately $8\times$ larger
+  because it additionally includes the acoustic impedance mismatch
+  between air and tissue.  Allometric estimates of $E$, $h/a$, and
   $c/a$ are drawn from tissue-mechanics literature~\cite{Fung1993};
   uncertainties in $E$ propagate to $\sim$20\% uncertainty in $f_2$
   via the $\sqrt{E}$ dependence.}
@@ -258,13 +266,13 @@ for brevity.
   \begin{tabular}{lccccccccc}
     \toprule
     Species & $a$ (cm) & $E$ (MPa) & $h/a$ & $c/a$ & $\rho_w/\rho_f$
-            & $f_2$ (Hz) & $\Pi_0$ & $ka$ & $\mathcal{R}$ \\
+            & $f_2$ (Hz) & $\Pi_0$ & $ka$ & $\mathcal{R}_\mathrm{scat}$ \\
     \midrule
-    Rat   &  3 & 0.07 & 0.047 & 0.63 & 1.06
+    Rat   &  3 & 0.05 & 0.067 & 0.70 & 1.04
           & 15.7 & 0.067 & $7.7 \times 10^{-3}$ & $1.7 \times 10^{4}$ \\
-    Cat   &  8 & 0.08 & 0.050 & 0.65 & 1.07
+    Cat   &  8 & 0.08 & 0.050 & 0.70 & 1.05
           & 7.2  & 0.065 & $9.3 \times 10^{-3}$ & $1.2 \times 10^{4}$ \\
-    Pig   & 15 & 0.09 & 0.053 & 0.67 & 1.08
+    Pig   & 15 & 0.10 & 0.053 & 0.65 & 1.06
           & 4.5  & 0.069 & $1.1 \times 10^{-2}$ & $8.6 \times 10^{3}$ \\
     Human & 18 & 0.10 & 0.056 & 0.67 & 1.08
           & 3.9  & 0.072 & $1.1 \times 10^{-2}$ & $7.7 \times 10^{3}$ \\
@@ -275,14 +283,16 @@ for brevity.
 Three observations emerge.  First, the dimensionless frequency $\Pi_0$
 is approximately constant ($0.065$--$0.072$) across a six-fold range of
 body size, confirming that the governing $\Pi$-groups take similar values
-across mammalian species.  Second, the coupling ratio $\mathcal{R}$ varies
+across mammalian species.  Second, the scattering coupling ratio
+$\mathcal{R}_\mathrm{scat}$ varies
 by only a factor of two (from $7.7 \times 10^3$ for humans to
 $1.7 \times 10^4$ for rats), remaining firmly in the $10^3$--$10^4$ range.
 Airborne coupling is negligible for all species studied.  Third, the
 product $ka$ is of order $10^{-2}$ for all four species, placing every
 organism deep in the Rayleigh regime.
 
-This size-independence of $\mathcal{R}$ has a practical implication:
+This size-independence of $\mathcal{R}_\mathrm{scat}$ has a practical
+implication:
 animal models are valid proxies for human abdominal resonance
 studies~\cite{vonGierke1971,ISO2631}, \emph{provided excitation is
 delivered mechanically} (e.g.\ shaker table) rather than acoustically.  Acoustic experiments would require
@@ -296,7 +306,8 @@ size and frequency.
   \emph{Left:} Flexural mode $f_2$ vs.\ semi-major axis $a$.  The dashed
   line shows pure $1/a$ scaling; deviations arise because smaller animals
   have softer tissue and different $h/a$.
-  \emph{Right:} Coupling ratio $\mathcal{R}$ is approximately
+  \emph{Right:} Scattering coupling ratio $\mathcal{R}_\mathrm{scat} =
+  1/(ka)^2$ is approximately
   size-independent, supporting the validity of animal-model extrapolation.}
   \label{fig:scaling_law}
 \end{figure}
@@ -322,11 +333,11 @@ of species.
 Buckingham Pi analysis reduces the eleven-parameter fluid-filled
 viscoelastic shell model to five governing dimensionless groups for
 flexural modes.  The resulting closed-form scaling law collapses a
-486-point parametric study with algebraic consistency and provides
+1458-point parametric study with algebraic consistency and provides
 cross-species predictions without re-solving the eigenvalue problem.
 The dimensionless frequency $\Pi_0 \approx 0.07$ is quasi-universal
-across mammals, and the coupling ratio
-$\mathcal{R} \sim 10^3$--$10^4$ is approximately size-independent,
+across mammals, and the scattering coupling ratio
+$\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is approximately size-independent,
 validating animal-model studies of abdominal resonance.  The breathing
 mode never enters the infrasonic range for any organism.
 
