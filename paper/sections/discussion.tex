@@ -249,6 +249,34 @@ subject-specific resonance frequency estimates, enabling targeted vibration
 exposure limits for workers whose body habitus places their resonance
 frequency in a particularly hazardous band.
 
+\subsection{Nonlinear Amplitude Effects}
+\label{sec:disc:nonlinear}
+
+The linear model of \S\ref{sec:formulation} is valid only for small
+displacements.  To bound the error at occupational vibration amplitudes, we
+performed a Duffing-type perturbation analysis incorporating membrane
+stretching and fluid volume conservation, yielding a hardening nonlinearity
+coefficient $\alpha = 7.07 \times 10^7$.
+
+The onset of appreciable nonlinearity (\SI{5}{\percent} frequency shift) occurs
+at a wall displacement of \SI{1092}{\micro\metre} ($A/h = 0.109$).  At the EU
+action value of \SI{0.5}{\metre\per\second\squared}, the linear model predicts
+a peak displacement of \SI{3922}{\micro\metre}; the nonlinear correction
+reduces this to \SI{2873}{\micro\metre}, a \SI{27}{\percent} reduction.  The
+forcing exceeds the jump-phenomenon threshold ($\SI{0.6}{\metre\per\second
+\squared} > \SI{0.18}{\metre\per\second\squared}$), so the actual response
+curve exhibits hysteresis and amplitude-dependent frequency shifts.  All modes
+$n = 2$--$6$ cross the nonlinearity threshold within the predicted whole-body
+vibration range.
+
+Crucially, the hardening behaviour means that the linear model
+\emph{overestimates} peak displacement under mechanical excitation.  For the
+brown note argument, this is a conservative error: the true mechanical coupling
+is somewhat weaker than the linear prediction, while the airborne displacement
+($\sim\SI{0.1}{\micro\metre}$) remains deep in the linear regime.  The
+$10^3$--$10^4$ coupling disparity therefore represents an upper bound; the true
+ratio is, if anything, smaller but still overwhelming.
+
 \subsection{Limitations}
 \label{sec:disc:limitations}
 
@@ -258,16 +286,14 @@ the conclusions.
 \begin{enumerate}
 
   \item \textbf{Linear theory.}  The Love--Kirchhoff shell formulation
-    assumes small displacements.  Under mechanical vibration at occupational
-    amplitudes, the predicted displacements (several millimetres) approach
-    the wall thickness ($h \approx \SI{10}{\milli\metre}$), where geometric
-    nonlinearity and strain-stiffening of biological tissue become relevant
-    \cite{Fung1993}.
-    Nonlinear effects would \emph{limit} the actual displacement below the
-    linear prediction, thereby reducing the mechanical coupling estimate
-    somewhat but not the coupling \emph{ratio}, because the airborne
-    displacement is already deep in the linear regime.  The principal
-    conclusion is therefore robust to this limitation.
+    assumes small displacements.  The nonlinear analysis of
+    \S\ref{sec:disc:nonlinear} shows that occupational vibration amplitudes
+    exceed the \SI{5}{\percent} nonlinearity threshold ($A/h > 0.109$), with
+    the hardening response reducing peak displacement by up to
+    \SI{27}{\percent} relative to the linear prediction.  Because the airborne
+    displacement remains deep in the linear regime, this nonlinearity
+    \emph{reduces} the coupling ratio somewhat but does not alter the
+    qualitative conclusion.
 
   \item \textbf{Homogeneous, isotropic wall.}  The abdominal wall is a
     layered anisotropic composite comprising four muscle layers, fascia,
@@ -280,15 +306,14 @@ the conclusions.
 
   \item \textbf{Free-shell boundary conditions.}  The abdomen is partially
     constrained by the spine posteriorly, the pelvis inferiorly, and the
-    rib cage superiorly.  The free-shell model provides a \emph{lower bound}
-    on flexural mode frequencies.  Partial clamping is estimated to raise
-    the $n = 2$ frequency by a factor of $2$--$3\times$, which could shift
-    the predicted resonance above the \SIrange{4}{8}{\hertz} ISO~2631 band
-    for stiffer tissue configurations.  This limitation \emph{weakens}
-    the agreement with ISO~2631 data for stiff-tissue subjects but does not
-    affect the coupling ratio, because both excitation pathways address
-    the same modal structure.  Finite-element validation with realistic
-    anatomical constraints is a priority for future work.
+    rib cage superiorly.  The Rayleigh--Ritz boundary condition study
+    (\S\ref{sec:bc_effects}) shows that even clamping \SI{25}{\percent} of
+    the shell surface shifts $f_2$ by only \SI{11.4}{\percent}, because the
+    fluid added mass ($7.4\times$ the shell mass for $n=2$) dominates the
+    system inertia.  This shift is well within the material property
+    uncertainty band, validating the free-shell approximation.  The coupling
+    ratio is unaffected because both excitation pathways address the same
+    modal structure.
 
   \item \textbf{Thin-shell approximation.}  The wall-thickness-to-radius
     ratio ($h/R \approx 0.06$) lies near the conventional upper bound of
@@ -308,13 +333,24 @@ the conclusions.
     coupling ratio or the qualitative separation between breathing and
     flexural mode families.
 
+  \item \textbf{Inviscid fluid assumption.}  The enclosed fluid is modelled
+    as inviscid.  A viscous correction using the Stokes boundary-layer
+    thickness shows that even at the worst-case mucus viscosity
+    ($\mu = \SI{0.1}{\pascal\second}$), the quality factor decreases by only
+    $\Delta Q = -1.85\%$.  The crossover viscosity at which viscous damping
+    would equal structural damping is \SI{281}{\pascal\second}---the
+    consistency of peanut butter.  The inviscid assumption is therefore
+    well justified for any physiologically realistic abdominal fluid.
+
   \item \textbf{No internal organ structure.}  Visceral organs are
-    homogenised into a single inviscid fluid.  Solid inclusions (liver,
-    spleen) would locally stiffen the enclosed medium and introduce
-    additional scattering, potentially shifting eigenfrequencies.  This
-    limitation is difficult to assess without full three-dimensional
-    modelling, but it is expected to redistribute modal energy rather than
-    fundamentally alter the coupling disparity.
+    homogenised into a single fluid.  An effective-medium analysis with
+    solid inclusions (liver, spleen, kidneys) at a volume fraction
+    $\phi = 0.25$ predicts a frequency shift of only \SI{0.4}{\percent} for
+    the $n=2$ mode.  The organ tissue bulk modulus
+    ($K_\mathrm{tissue} \approx K_\mathrm{water}$) produces zero effective
+    bulk modulus change, and at sub-percolation volume fractions the isolated
+    inclusions cannot transmit shear.  The homogeneous fluid model is
+    therefore adequate for the present purposes.
 
   \item \textbf{Gas pocket model simplifications.}  The gas pocket analysis
     (\S\ref{sec:disc:alternatives}) treats intestinal gas as spherical
