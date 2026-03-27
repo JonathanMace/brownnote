@@ -10,6 +10,8 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
 \usepackage[pdfencoding=auto,psdextra]{hyperref}
 \usepackage{lineno}
 
@@ -45,11 +47,6 @@ Implications for the Existence of the ``Brown Note''}
 \author[auckland]{Brian R.\ Mace}
 \ead{br.mace@auckland.ac.nz}
 
-\author[springbank]{Springbank 10 Year Old\fnref{fn1}}
-\fntext[fn1]{Non-sentient author. Contribution limited to inspiration, courage,
-  and a pleasantly peaty finish. The distillery neither endorses nor is aware of
-  this work.}
-
 \author[github]{GitHub Copilot CLI\fnref{fn2}}
 \fntext[fn2]{Large language model. Performed literature review, analytical
   computation, code development, figure generation, and manuscript drafting
@@ -68,12 +65,6 @@ Implications for the Existence of the ``Brown Note''}
   country={New Zealand}
 }
 
-\affiliation[springbank]{
-  organization={Springbank Distillery},
-  city={Campbeltown, Argyll},
-  country={Scotland}
-}
-
 \affiliation[github]{
   organization={GitHub, Inc.},
   city={San Francisco, CA},
@@ -89,11 +80,14 @@ Implications for the Existence of the ``Brown Note''}
 \end{highlights}
 
 \begin{abstract}
-Whole-body vibration at \SIrange{4}{8}{\hertz} causes well-documented
-gastrointestinal disturbances, yet airborne sound at the same frequencies does
-not---even at extreme intensities.  We resolve this asymmetry by modelling
-the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell and
-quantifying both excitation pathways within a common energy-budget framework.
+Few problems in acoustics carry such grave implications for human dignity as
+the ``brown note''---the hypothetical infrasonic frequency alleged to induce
+involuntary defecation.  Whole-body vibration at \SIrange{4}{8}{\hertz}
+causes well-documented gastrointestinal disturbances, yet airborne sound at
+the same frequencies does not---even at extreme intensities.  We resolve this
+asymmetry by modelling the human abdomen as a fluid-filled viscoelastic oblate
+spheroidal shell and quantifying both excitation pathways within a common
+energy-budget framework.
 
 The model predicts flexural modes ($n \geq 2$) at \SIrange{4}{10}{\hertz},
 consistent with ISO~2631 abdominal resonance data.  At these frequencies the
@@ -167,12 +161,16 @@ available in the accompanying repository.
 \textbf{Jonathan Mace}: Conceptualization, Methodology, Supervision,
 Writing -- Review \& Editing.
 \textbf{Brian R.\ Mace}: Writing -- Review \& Editing, Validation.
-\textbf{Springbank 10 Year Old}: Morale, Inspiration.  (A single-malt
-Scotch whisky from Campbeltown.  Its contribution, while not strictly
-peer-reviewable, was essential to sustaining the authors through the
-less glamorous phases of manuscript preparation.)
 \textbf{GitHub Copilot CLI}: Software, Formal Analysis, Investigation,
 Data Curation, Writing -- Original Draft, Visualization.
+
+\section*{Acknowledgements}
+The authors gratefully acknowledge the contribution of Springbank 10 Year
+Old, a single-malt Scotch whisky from Campbeltown, Argyll.  Its role in this
+investigation, while not strictly peer-reviewable, was essential to sustaining
+the authors through the less glamorous phases of manuscript preparation.
+The distillery neither endorses nor is aware of this work, though we like
+to imagine they would approve.
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests
