@@ -81,37 +81,43 @@ Implications for the Existence of the ``Brown Note''}
 }
 
 \begin{highlights}
-\item Fluid-filled shell model predicts abdominal resonance at 4--10 Hz
-\item Breathing mode at 2500 Hz; flexural modes match ISO 2631 data
-\item Airborne coupling penalised by $(ka)^n$; negligible at 120 dB SPL
-\item Mechanical vibration couples 1000--10000x more efficiently
-\item Coupling disparity explains WBV effects vs.\ absent airborne effects
+\item Mechanical--airborne coupling disparity of $\sim$$10^4$ explains gastrointestinal vibration asymmetry
+\item Fluid-filled viscoelastic shell model predicts abdominal resonance at 4--10 Hz (matches ISO~2631)
+\item Breathing mode at $\sim$2500 Hz; flexural modes at infrasonic frequencies
+\item Airborne coupling penalised by $(ka)^n$; negligible at 120 dB SPL ($\xi = \SI{0.014}{\micro\metre}$)
+\item Monte Carlo UQ confirms robustness; Sobol $S_T = 0.86$ for elastic modulus
 \end{highlights}
 
 \begin{abstract}
-The ``brown note''---a hypothetical infrasonic tone said to cause involuntary
-bowel movements---has persisted in popular culture without a proper mechanistic
-examination.  We model the human abdomen as a fluid-filled viscoelastic oblate
-spheroidal shell and show that it possesses two distinct families of vibration
-modes.  The breathing mode ($n=0$), dominated by the fluid bulk modulus, sits
-near \SI{2500}{\hertz} and plays no role at infrasonic frequencies.  Flexural
-modes ($n \geq 2$), in which the shell deforms without compressing the
-enclosed fluid, fall squarely in the \SIrange{4}{10}{\hertz} range for relaxed
-musculature---consistent with abdominal resonance data from ISO~2631.
+Whole-body vibration at \SIrange{4}{8}{\hertz} causes well-documented
+gastrointestinal disturbances, yet airborne sound at the same frequencies does
+not---even at extreme intensities.  We resolve this long-standing asymmetry
+by modelling the human abdomen as a fluid-filled viscoelastic oblate
+spheroidal shell and quantifying the coupling efficiency of both excitation
+pathways within a common energy-budget framework.
 
-We then ask the critical question: can airborne sound actually excite these
-modes?  At \SI{4}{\hertz} the acoustic wavelength exceeds \SI{85}{\metre},
-imposing a $(ka)^n$ coupling penalty that reduces the effective driving
-pressure by four orders of magnitude.  Energy-consistent reciprocity analysis
-yields wall displacements of order \SI{0.01}{\micro\metre} at
-\SI{120}{\decibel} SPL---two orders of magnitude below known
-mechanotransduction thresholds.  Mechanical whole-body vibration, by contrast,
-couples directly to the shell and produces displacements roughly $10^4$ times
-larger at occupational exposure levels.  This coupling disparity, arising from
-elementary long-wavelength acoustics, explains why whole-body vibration causes
-documented gastrointestinal effects while airborne infrasound does not.  Monte
-Carlo uncertainty quantification over physiologically realistic parameter
-ranges confirms the robustness of these conclusions.
+The model reveals two distinct mode families.  The breathing mode ($n=0$),
+dominated by the fluid bulk modulus, sits near \SI{2500}{\hertz} and is
+irrelevant at infrasonic frequencies.  Flexural modes ($n \geq 2$), in which
+the shell deforms without compressing the enclosed fluid, fall in the
+\SIrange{4}{10}{\hertz} range for relaxed musculature---consistent with
+abdominal resonance data from ISO~2631.  At these frequencies, however, the
+acoustic wavelength exceeds \SI{49}{\metre}, placing the abdomen deep in the
+Rayleigh regime ($ka \approx 0.01$).  The resulting $(ka)^n$ geometric
+penalty, compounded by the air--tissue impedance mismatch, reduces airborne
+coupling by approximately four orders of magnitude.  Energy-consistent
+analysis yields wall displacements of \SI{0.014}{\micro\metre} at
+\SI{120}{\decibel} SPL---far below known mechanotransduction thresholds.
+Mechanical vibration, transmitted through the skeleton, suffers neither penalty
+and produces displacements roughly $4.6 \times 10^4$ times larger at
+occupational exposure levels.  Monte Carlo uncertainty quantification confirms
+this coupling disparity across physiologically realistic parameter ranges
+(Sobol $S_T = 0.86$ for elastic modulus).
+
+The result explains the empirical record quantitatively and, incidentally,
+settles the ``brown note'' question: the abdominal resonance invoked by the
+myth is genuine, but airborne sound is the wrong mechanism by four orders of
+magnitude.
 \end{abstract}
 
 \begin{keyword}
