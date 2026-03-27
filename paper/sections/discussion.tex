@@ -6,8 +6,13 @@
 
 \input{figures/stick_figure}
 
-The central result of this study is the $10^4$--$10^5$ factor separating
-mechanical from airborne coupling efficiency
+The central result of this study is the upper-bound coupling ratio
+$6.6 \times 10^4$ separating mechanical from airborne coupling efficiency for
+\SI{120}{\decibel} SPL airborne excitation and
+$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
+vibration under the SDOF idealisation ($\Gamma_2 = 1$).  Including the
+canonical participation factor $\Gamma_2 \approx 0.48$ reduces this to
+$\sim 3 \times 10^4$
 (Tables~\ref{tab:airborne}--\ref{tab:mechanical}).  The physical origin of
 this disparity lies in two compounding effects: an impedance mismatch and a
 geometric filtering penalty.
@@ -76,11 +81,12 @@ musculature) falls squarely within the frequency band where occupational
 exposure studies report gastrointestinal symptoms.
 
 Where the hypothesis fails is in the \emph{excitation pathway}.  At
-\SI{120}{\decibel} SPL---the threshold of pain and well above any
+\SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
+discomfort and well above any
 environmental or entertainment exposure---the predicted airborne wall
 displacement is \SI{0.014}{\micro\metre} (Table~\ref{tab:airborne}), roughly
 two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\metre} activation
-threshold of mechanosensitive PIEZO1/2 ion channels
+threshold of mechanosensitive PIEZO1 and PIEZO2 ion channels
 \cite{coste2010piezo1,Lewis2015,Xiao2024}.  In the modern mechanotransduction
 literature, the more relevant gastrointestinal transducer is probably PIEZO2:
 somatosensory-neuron PIEZO2 signalling has now been shown to regulate gut
@@ -88,7 +94,8 @@ transit directly \cite{ServinVences2023}.  Reaching the \SI{1}{\micro\metre} thr
 requires approximately \SI{158}{\decibel}
 (cf.\ \SI{135}{\decibel} for the pressure-based estimate;
 Table~\ref{tab:uq_summary}),
-a level associated only with explosive blasts and rocket launches.  Even at
+a level associated with severe acoustic hazards and encountered only in
+explosive blasts and rocket launches.  Even at
 this extreme, the displacement remains three
 orders of magnitude below what routine whole-body vibration
 ($a_{\mathrm{rms}} = \SI{0.5}{\metre\per\second\squared}$) produces
@@ -373,8 +380,9 @@ Crucially, the hardening behaviour means that the linear model
 brown note argument, this is a conservative error: the true mechanical coupling
 is somewhat weaker than the linear prediction, while the airborne displacement
 ($\sim\SI{0.014}{\micro\metre}$) remains deep in the linear regime.  The
-$10^3$--$10^4$ coupling disparity therefore represents an upper bound; the true
-ratio is, if anything, smaller but still overwhelming.
+$6.6 \times 10^4$ coupling disparity therefore represents an upper bound;
+including the canonical participation correction gives a still-overwhelming
+ratio of $\sim 3 \times 10^4$.
 
 \subsection{Limitations}
 \label{sec:disc:limitations}
@@ -403,7 +411,7 @@ the conclusions.
     of the equivalent sphere but would not change the order of magnitude of
     the eigenfrequencies or the coupling ratio.  Recent abdominal-wall
     mechanics reviews and elastography surveys place the canonical
-    $E = \SI{0.1}{\mega\pascal}$ and $\eta = 0.25$ values comfortably within
+    $E = \SI{0.1}{\mega\pascal}$ and $\eta = 0.25$ values as representative of
     contemporary measurement ranges, so the remaining uncertainty is
     quantitative rather than order-of-magnitude \cite{Deeken2017,Sack2023}.
 
@@ -414,7 +422,7 @@ the conclusions.
     the shell surface shifts $f_2$ by only \SI{11.4}{\percent}, because the
     fluid added mass ($7.4\times$ the shell mass for $n=2$) dominates the
     system inertia.  This shift is well within the material property
-    uncertainty band, validating the free-shell approximation.  The coupling
+    uncertainty band, supporting the free-shell approximation.  The coupling
     ratio is unaffected because both excitation pathways address the same
     modal structure.
 
@@ -496,7 +504,7 @@ the conclusions.
 In summary, the identified limitations affect the absolute values of
 predicted frequencies and displacements---in several cases substantially---but
 none alter the central finding that airborne acoustic coupling to abdominal
-flexural modes is $10^3$--$10^4$ times weaker than mechanical coupling under
+flexural modes is $10^4$--$10^5$ times weaker than mechanical coupling under
 occupationally relevant conditions.
 
 \subsection{Proposed Experimental Validation}
@@ -525,7 +533,7 @@ the phantom on an electrodynamic shaker (mechanical pathway) and
 separately exposing it to a subwoofer-generated infrasound field at
 \SI{120}{\decibel} (airborne pathway), the displacement ratio
 $\xi_{\mathrm{mech}} / \xi_{\mathrm{air}}$ can be measured in a single
-experimental session.  The model predicts ratios of order $10^3$--$10^4$
+experimental session.  The model predicts ratios of order $10^4$--$10^5$
 across the silicone formulation range (Table~\ref{tab:pathway_summary}).
 Non-detection of the airborne response at the vibrometer noise floor
 ($\sim\SI{0.01}{\micro\metre}$) would itself constitute a positive

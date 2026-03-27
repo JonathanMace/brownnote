@@ -45,12 +45,11 @@ illustrates this dependence across the full physiological range.
 
 \subsection{Multi-Parameter Sensitivity}
 
-A full factorial analysis over 486 parameter combinations (6 values of $E$,
-3 semi-major axes, 3 aspect ratios, 3 wall thicknesses, 3 loss tangents)
+A 486-point full factorial analysis varying $E$, $a$, $c/a$, $h$, and $\eta$
 reveals that 37\% of configurations place the $n=2$ mode in the
 \SIrange{5}{10}{\hertz} range and 41\% in the broader \SIrange{4}{8}{\hertz}
-ISO~2631 range.  The dominant parameter is $E$, followed by geometry and
-intra-abdominal pressure.
+ISO~2631 range.  The separate Sobol sensitivity analysis below confirms that
+$E$ dominates, followed by geometry and intra-abdominal pressure.
 
 \subsection{Uncertainty Quantification}
 
@@ -60,6 +59,8 @@ physiologically motivated distribution: $E$ from a log-normal distribution
 spanning \SIrange{0.05}{2.0}{\mega\pascal}, geometric parameters from normal
 distributions matching anthropometric data, and the loss tangent from a
 uniform distribution over $[0.10,\; 0.40]$.
+A small number of Monte Carlo samples ($<0.3\%$) produced nonphysical
+parameter combinations and were excluded from the summary statistics.
 
 The resulting distribution of $f_2$ has a median of \SI{6.4}{\hertz} with a
 90\% credible interval of \SIrange{3.3}{15.5}{\hertz}
@@ -69,8 +70,10 @@ reflecting the log-normal distribution of $E$.
 \begin{table}[htbp]
   \centering
   \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).
-  Airborne displacement $\xi_\mathrm{air}$ is the pressure-based upper bound;
-  the energy-consistent value is ${\sim}13\times$ smaller.}
+  Airborne displacement $\xi_\mathrm{air}$ and the ratio $\mathcal{R}$ use the
+  pressure-based airborne upper bound at \SI{120}{\decibel}; the
+  energy-consistent airborne displacement is ${\sim}13\times$ smaller, so the
+  corresponding ratio at fixed mechanical loading is ${\sim}13\times$ larger.}
   \label{tab:uq_summary}
   \begin{tabular}{lccc}
     \hline
@@ -79,8 +82,8 @@ reflecting the log-normal distribution of $E$.
     $f_2$ & 6.4 & [3.3, 15.5] & Hz \\
     $\xi_\mathrm{air}$ (120 dB) & 0.18 & [0.11, 0.39] & $\mu$m \\
     $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
-    $\mathcal{R}$ & $10^4$ & [$10^3$, $10^4$] & --- \\
-    SPL for PIEZO (pressure)\footnote{The pressure-based displacement
+    $\mathcal{R}$ (pressure-based airborne) & $10^4$ & [$2 \times 10^3$, $3 \times 10^4$] & --- \\
+    SPL for PIEZO (pressure-based, 1 $\mu$m threshold)\footnote{The pressure-based displacement
       overestimates the true wall motion by a factor of ${\approx}\,13$
       because it neglects the extremely low radiation efficiency
       ($\zeta_\mathrm{rad}/\zeta_\mathrm{struct} \sim 10^{-14}$).
@@ -100,6 +103,11 @@ All other parameters contribute less than 10\% individually.  This result
 has important experimental implications: any future validation effort should
 prioritise \emph{in vivo} measurement of abdominal wall stiffness, as this
 single parameter dominates the uncertainty budget (Figure~\ref{fig:sobol}).
+Because Table~\ref{tab:uq_summary} uses the pressure-based airborne upper bound
+and $a_\mathrm{rms} = \SI{0.5}{\metre\per\second\squared}$ for the mechanical
+loading, its $\mathcal{R}$ row should not be confused with the headline
+energy-consistent SDOF upper bound of $6.6 \times 10^4$ quoted in
+Section~\ref{sec:coupling}.
 
 \begin{figure}[htbp]
   \centering
@@ -112,13 +120,14 @@ single parameter dominates the uncertainty budget (Figure~\ref{fig:sobol}).
 
 \subsection{Multi-Layer Wall Model}
 
-The abdominal wall comprises approximately five distinct tissue layers:
+The abdominal wall comprises six distinct tissue layers:
 peritoneum, transversalis fascia, internal oblique muscle, external oblique
 muscle, subcutaneous fat, and skin.  Using classical laminate theory, the
 effective composite modulus for a relaxed wall is
 $E_\mathrm{eff} \approx \SI{0.075}{\mega\pascal}$
 ($h_\mathrm{total} = \SI{25.1}{\milli\metre}$), giving
-$f_2 = \SI{4.6}{\hertz}$---within 4\% of the homogeneous model prediction.
+$f_2 = \SI{4.6}{\hertz}$---within approximately 16\% of the homogeneous model
+prediction.
 Muscle tension is confirmed as the dominant factor: tensed muscle
 ($E_\mathrm{eff} = \SI{2.7}{\mega\pascal}$) shifts $f_2$ to
 \SI{23.1}{\hertz}.
@@ -130,11 +139,19 @@ The free-shell model in Section~\ref{sec:formulation} neglects the partial
 constraints imposed by the spine, pelvis, and rib cage.  We quantify their
 effect using a Rayleigh--Ritz analysis with Lamb-mode basis functions for
 four progressively constrained configurations.
+These configurations represent surrogate constraint cases chosen to bracket
+the likely effect of anatomical boundary conditions, rather than a strict
+monotonic continuation of a single geometry.
 
-Table~\ref{tab:bc_results} presents the results.  The free-sphere Ritz
-frequency ($f_1 = \SI{4.13}{\hertz}$) reproduces the analytical solution
-exactly, validating the numerical framework.  The most constrained case---25\%
-of the shell surface clamped---reduces $f_1$ by only \SI{11.4}{\percent}.  Even
+Table~\ref{tab:bc_results} presents the results.  The boundary-condition study
+uses a slightly different parameter set ($R = \SI{0.162}{\metre}$,
+$\rho_f = \SI{1000}{\kilo\gram\per\metre\cubed}$,
+$P_\mathrm{iap} = \SI{1500}{\pascal}$) to match the mesh geometry; however, the
+relative frequency shifts between boundary conditions are the parameter of
+interest.  The free-sphere Ritz frequency ($f_2 = \SI{4.13}{\hertz}$) agrees
+with the analytical prediction (\SI{4.26}{\hertz}) to within 3\%, providing a
+useful numerical check.  The most constrained case---25\%
+of the shell surface clamped---reduces $f_2$ by only \SI{11.4}{\percent}.  Even
 the hemisphere-clamped case shifts the frequency by a mere \SI{5.8}{\percent}.
 
 \begin{table}[htbp]
@@ -144,7 +161,7 @@ the hemisphere-clamped case shifts the frequency by a mere \SI{5.8}{\percent}.
   \label{tab:bc_results}
   \begin{tabular}{lcc}
     \toprule
-    Configuration & $f_1$ (Hz) & Shift from free \\
+    Configuration & $f_2$ (Hz) & Shift from free \\
     \midrule
     Free sphere (Ritz) & 4.13 & 0\% (validates analytical) \\
     Hemisphere simply-supported & 3.91 & $-5.3\%$ \\
@@ -217,4 +234,3 @@ resonance data.
     \hline
   \end{tabular}
 \end{table}
-
