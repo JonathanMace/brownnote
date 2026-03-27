@@ -1,8 +1,6 @@
 # Browntone
 
-**Can sound make you soil yourself? Probably not — but it makes for remarkably good vibroacoustics.**
-
-Browntone is a paper-first research repository about a silly question treated with straight-faced seriousness: whether infrasound can drive resonant motion in the human abdomen strongly enough to matter. The short answer is “not through air”. The longer answer currently spans five connected papers, a large analytical codebase, and an unreasonable number of PDF drafts.
+Browntone investigates whether infrasound can induce resonance in the human abdominal cavity — the so-called “brown note” hypothesis. We model the abdomen as a fluid-filled viscoelastic oblate spheroidal shell and compare airborne acoustic coupling with whole-body mechanical vibration. The flexural mode sits comfortably in the infrasonic band; the airborne forcing does not come close to driving it meaningfully. Five connected papers, a validated analytical codebase, and a comprehensive parameter study explore why.
 
 ## Papers
 
