@@ -1,0 +1,102 @@
+\documentclass[11pt]{letter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{siunitx}
+
+\signature{Jon\\Independent Researcher}
+\address{Jon\\Independent Researcher\\jon@example.com}
+
+\begin{document}
+
+\begin{letter}{%
+  The Editor\\
+  \textit{Journal of Sound and Vibration}\\
+  Elsevier}
+
+\opening{Dear Editor,}
+
+We respectfully submit the enclosed manuscript, ``Modal Analysis of a
+Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the
+Existence of the `Brown Note','' for consideration in the \textit{Journal of
+Sound and Vibration}.
+
+The ``brown note''---a hypothetical infrasonic tone said to cause involuntary
+bowel movements---has circulated for decades in popular culture, military
+folklore, and even the occasional engineering discussion.  Despite its
+notoriety, no prior study has subjected this claim to a rigorous,
+first-principles mechanistic analysis.  We present, to our knowledge, the
+first quantitative comparison of airborne acoustic versus mechanical
+whole-body vibration (WBV) excitation of abdominal cavity resonance within a
+unified modal framework.  The result is decisive: airborne coupling is
+approximately $10^4$ times weaker than mechanical coupling, resolving a
+long-standing paradox in the vibration and infrasound literature.
+
+The paper makes the following key contributions:
+
+\begin{itemize}
+  \item \textbf{Fluid-filled viscoelastic shell model.}  We derive the
+    eigenfrequencies of a fluid-filled oblate spheroidal shell representing
+    the human abdomen, identifying two distinct mode families: a breathing
+    mode near \SI{2900}{\hertz} (governed by the fluid bulk modulus and
+    irrelevant at infrasonic frequencies) and flexural modes at
+    \SIrange{4}{10}{\hertz} for relaxed musculature---in excellent agreement
+    with ISO~2631 abdominal transmissibility data.
+
+  \item \textbf{Coupling disparity quantification.}  An energy-consistent
+    reciprocity analysis shows that airborne sound at \SI{120}{\decibel} SPL
+    produces wall displacements of order \SI{0.014}{\micro\metre}---two
+    orders of magnitude below known mechanotransduction (PIEZO1/2) thresholds.
+    Mechanical WBV at routine occupational levels produces displacements
+    roughly $10^4$ times larger.  This disparity arises from elementary
+    long-wavelength acoustics and impedance mismatch, and is robust to
+    material and geometric uncertainties.
+
+  \item \textbf{Monte Carlo uncertainty quantification.}  A 10{,}000-sample
+    Monte Carlo study over physiologically realistic parameter ranges confirms
+    that the coupling ratio spans $10^3$--$10^5$, with elastic modulus
+    accounting for 86\% of total variance (Sobol $S_T = 0.86$).
+
+  \item \textbf{Novel inter-individual variability mechanism.}  Analysis of
+    intestinal gas pocket dynamics reveals that large pockets
+    (\SIrange{2}{5}{\centi\metre}) can experience the full incident pressure
+    without the $(ka)^n$ penalty, offering a plausible explanation for
+    sporadic individual sensitivity reports at extreme SPL.
+\end{itemize}
+
+We believe this work is well suited to \textit{JSV} for several reasons.  At
+its core, the paper is a fluid--structure interaction and acoustic scattering
+problem---shell vibration theory, Rayleigh-regime multipole coupling, and
+energy-budget verification---squarely within the journal's scope.  Yet it
+also bridges to biomechanics and occupational health: the results provide a
+mechanistic rationale for the frequency weightings in ISO~2631-1 and for the
+exposure limits codified in EU~Directive~2002/44/EC.  We are mindful that the
+subject matter has a colorful reputation, but the analysis is conducted with
+the same rigor one would apply to any acoustic--structural coupling problem;
+if anything, the topic's visibility makes a careful quantitative treatment
+overdue.
+
+We suggest that reviewers with expertise in the following areas would be
+well positioned to evaluate the manuscript:
+%
+\begin{itemize}
+  \item Structural acoustics and fluid--structure interaction (shell
+    vibration, scattering theory);
+  \item Whole-body vibration and occupational biomechanics;
+  \item Soft-tissue mechanics and viscoelastic constitutive modelling.
+\end{itemize}
+
+The authors declare no competing financial interests or personal
+relationships that could have appeared to influence the work.  The manuscript
+has not been published previously and is not under consideration elsewhere.
+All analytical models and computational scripts are available in the
+accompanying repository for reproducibility.
+
+Thank you for your consideration.  We look forward to your response.
+
+\closing{Sincerely,}
+
+\end{letter}
+\end{document}
