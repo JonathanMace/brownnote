@@ -4,9 +4,9 @@
 \subsection{Geometry and Material Properties}
 
 The abdominal cavity is modelled as an ellipsoidal shell with semi-major
-axis $a = \SI{0.15}{\metre}$ and semi-minor axis $b = \SI{0.10}{\metre}$,
+axis $a = \SI{0.18}{\metre}$ and semi-minor axis $c = \SI{0.12}{\metre}$,
 corresponding to a typical adult abdomen. The wall thickness is
-$h = \SI{15}{\milli\metre}$.
+$h = \SI{10}{\milli\metre}$.
 
 The abdominal wall is treated as an isotropic, linear elastic solid with
 properties in the ranges summarised in \cref{tab:materials}.
@@ -19,11 +19,11 @@ properties in the ranges summarised in \cref{tab:materials}.
     \toprule
     Property & Range & Source \\
     \midrule
-    Young's modulus $E$ & \SIrange{20}{100}{\kilo\pascal} & \citet{Fung1993} \\
-    Poisson's ratio $\nu$ & 0.45--0.49 & Soft tissue \\
-    Density $\rho_s$ & \SIrange{1000}{1100}{\kilogram\per\cubic\metre} & Tissue \\
-    Sound speed $c$ & \SI{1500}{\metre\per\second} & Fluid \\
-    Fluid density $\rho_f$ & \SI{1000}{\kilogram\per\cubic\metre} & Water \\
+    Young's modulus $E$ & \SIrange{50}{2000}{\kilo\pascal} & \citet{Fung1993} \\
+    Poisson's ratio $\nu$ & 0.40--0.499 & Soft tissue \\
+    Density $\rho_w$ & \SIrange{1000}{1200}{\kilogram\per\cubic\metre} & Tissue \\
+    Sound speed $c_f$ & \SI{1470}{\metre\per\second} & Fluid \\
+    Fluid density $\rho_f$ & \SI{1020}{\kilogram\per\cubic\metre} & Abdominal fluid \\
     \bottomrule
   \end{tabular}
 \end{table}
