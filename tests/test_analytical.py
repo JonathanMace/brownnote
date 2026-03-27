@@ -977,17 +977,17 @@ class TestAnimalScaling:
             )
 
     def test_coupling_ratio_range(self):
-        """ℛ_scat = 1/(ka)² should be in 10³–10⁵ for all species."""
+        """ℛ_scat = 1/(kR_eq)² should be in 10³–10⁵ for all species."""
         s = animal_scaling()
         for name in ["rat", "cat", "pig", "human"]:
-            R = s[name]["coupling_ratio_R"]
+            R = s[name]["R_scat"]
             assert 1e3 < R < 1e5, f"{name}: R = {R:.0f}"
 
-    def test_ka_rayleigh_regime(self):
-        """All species should have ka ≪ 1."""
+    def test_kR_eq_rayleigh_regime(self):
+        """All species should have kR_eq ≪ 1."""
         s = animal_scaling()
         for name in ["rat", "cat", "pig", "human"]:
-            assert s[name]["ka"] < 0.1
+            assert s[name]["kR_eq"] < 0.1
 
     def test_f2_decreases_with_body_size(self):
         """Larger body → lower frequency."""

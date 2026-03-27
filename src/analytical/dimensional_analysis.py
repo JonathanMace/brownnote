@@ -78,7 +78,7 @@ def phi_analytical(h_a, c_a, rho_ratio, P_E, nu, n=2):
 
         K_bend = n(n−1)(n+2)² D / R⁴,      D = Eh³/[12(1−ν²)]
         K_memb = Eh/R² × λ_n,               λ_n = (n²+n−2+2ν)/(n²+n+1−ν)
-        K_pre  = (P/R)(n−1)(n+2)
+        K_pre  = (P_iap/R)(n−1)(n+2)
         m_eff  = ρ_w h + ρ_f R/n
 
     with R = a(c/a)^{1/3}.  Nondimensionalising with K̃ = K·a/E and
@@ -261,10 +261,8 @@ def animal_scaling(mode_n=2):
             "f_hz": f_n,
             "Pi_0": Pi_0,
             "Pi_0_analytical": float(Pi_0_ana),
-            "ka": kR_eq,  # kept for backward compat; actually kR_eq
             "kR_eq": kR_eq,
             "coupling_air": coupling_air,
-            "coupling_ratio_R": R_scat,
             "R_scat": R_scat,
             "h_over_a": p["h"] / p["a"],
             "c_over_a": p["c_a"],
@@ -591,7 +589,7 @@ than a pure $1/a$ law.  Table~\ref{tab:scaling} lists predictions for four
 species.  The airborne coupling coefficient $(kR_\mathrm{eq})^2$ is of order $10^{-4}$
 for all species, making the mechanical-to-airborne scattering ratio
 $\mathcal{R}_\mathrm{scat} \sim 10^{3}\text{--}10^{4}$ roughly size-independent.  This
-validates the use of animal models for abdominal resonance studies, provided
+implies that animal models exhibit similar scaling behaviour, provided
 excitation is delivered mechanically rather than acoustically.  The breathing
 mode ($n=0$), dominated by $K_f$, would require a body radius of order
 \SI{%(R_breathing).0f}{\metre} to reach \SI{20}{\hertz}; it never enters
@@ -636,8 +634,8 @@ the infrasound range for any biological organism.
   \emph{Left:} Flexural mode $f_2$ vs.\ semi-major axis $a$.  The dashed
   line shows pure $1/a$ scaling; deviations arise because smaller animals
   have softer tissue and different $h/a$.
-  \emph{Right:} Coupling ratio $\mathcal{R}$ is approximately
-  size-independent, supporting the validity of animal-model extrapolation.}
+  \emph{Right:} Scattering coupling ratio $\mathcal{R}_\mathrm{scat}$ is approximately
+  size-independent, suggesting similar scaling behaviour across species.}
   \label{fig:scaling_law}
 \end{figure}
 """
