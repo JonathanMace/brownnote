@@ -80,7 +80,16 @@ reflecting the log-normal distribution of $E$.
     $\xi_\mathrm{air}$ (120 dB) & 0.18 & [0.11, 0.39] & $\mu$m \\
     $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
     $\mathcal{R}$ & $10^4$ & [$10^3$, $10^4$] & --- \\
-    SPL for PIEZO (pressure) & 135 & [128, 139] & dB \\
+    SPL for PIEZO (pressure)\footnote{The pressure-based displacement
+      overestimates the true wall motion by a factor of ${\approx}\,13$
+      because it neglects the extremely low radiation efficiency
+      ($\zeta_\mathrm{rad}/\zeta_\mathrm{struct} \sim 10^{-14}$).
+      Using the energy-consistent displacement
+      (\S\ref{sec:coupling}), the PIEZO threshold rises to
+      ${\approx}\,\SI{158}{\decibel}$---a \SI{23}{\decibel} correction
+      that represents the physically realisable SPL.}
+      & 135 & [128, 139] & dB \\
+    SPL for PIEZO (energy) & ${\approx}\,158$ & --- & dB \\
     \hline
   \end{tabular}
 \end{table}
@@ -161,7 +170,7 @@ The equivalent-sphere approximation used in Section~\ref{sec:formulation}
 introduces a systematic bias.  A Rayleigh--Ritz analysis using oblate
 spheroidal harmonics as basis functions, with proper account of the
 spatially varying curvature and oblate fluid-mass geometry, shows that the
-sphere model \emph{overestimates} flexural frequencies by 11--20\%
+sphere model \emph{overestimates} flexural frequencies by 4--17\%
 (Table~\ref{tab:oblate_correction}).  The error grows with eccentricity and
 is larger at higher $E$ where bending stiffness (which depends on local
 curvature) contributes a greater share of the restoring force.
@@ -177,15 +186,15 @@ curvature) contributes a greater share of the restoring force.
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
     Mode & Sphere (Hz) & Ritz (Hz) & Sphere (Hz) & Ritz (Hz) \\
     \midrule
-    $n=2$ & 4.0 & 3.6 & 7.1 & 6.0 \\
-    $n=3$ & 6.3 & 5.6 & 10.0 & 9.5 \\
-    $n=4$ & 8.9 & 8.0 & 12.9 & 12.9 \\
+    $n=2$ & 4.0 & 3.8 & 7.1 & 6.2 \\
+    $n=3$ & 6.3 & 5.8 & 10.0 & 8.5 \\
+    $n=4$ & 8.9 & 8.1 & 12.9 & 11.3 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 Applying this correction moves the canonical $n=2$ frequency from
-\SI{4.0}{\hertz} to approximately \SI{3.6}{\hertz}---still within the
+\SI{4.0}{\hertz} to approximately \SI{3.8}{\hertz}---still within the
 ISO~2631 band and, if anything, closer to the low end of reported abdominal
 resonance frequencies.
 
