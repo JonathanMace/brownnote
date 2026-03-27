@@ -55,9 +55,14 @@
 }
 
 \author{%
-  [Authors]\\
-  \small [Affiliations]\\
-  \small Correspondence: [email]%
+  Jonathan Mace\textsuperscript{1},
+  Brian R.\ Mace\textsuperscript{2},
+  GitHub Copilot CLI\textsuperscript{3}\\[4pt]
+  \small \textsuperscript{1}Microsoft Research, Redmond, WA, USA\\
+  \small \textsuperscript{2}Department of Mechanical and Mechatronics Engineering,
+         University of Auckland, New Zealand\\
+  \small \textsuperscript{3}GitHub, Inc.\\[2pt]
+  \small Correspondence: jonathanmace@microsoft.com%
 }
 
 \date{Working draft — \today}
@@ -109,7 +114,7 @@ subjects exposed to high-intensity infrasound (\SI{>140}{\decibel}), but
 attributed these effects primarily to whole-body vibration rather than
 airborne acoustic coupling \citep{Mohr1965,vonGierke1974}.
 
-Our companion paper (Paper~1, submitted to \emph{JSV}) demonstrated that
+Our companion study \citep{Mace2026browntone} demonstrated that
 airborne infrasound cannot excite abdominal-cavity flexural resonances at
 physiologically meaningful amplitudes.  The breathing mode of the
 abdomen---often invoked in popular accounts---lies at
@@ -555,13 +560,13 @@ robust \piezo{} activation.
 \label{sec:res_comparison}
 
 Figure~\ref{fig:comparison} compares the gas-pocket transduction pathway
-with the whole-cavity flexural mode ($n = 2$) pathway from Paper~1.  The
+with the whole-cavity flexural mode ($n = 2$) pathway from \citet{Mace2026browntone}.  The
 gas-pocket mechanism produces tissue displacement that is
 \textbf{35--100$\times$ larger} than the whole-cavity pathway at the same
 SPL, across the entire range from \SI{80}{\decibel} to \SI{150}{\decibel}.
 
 At \SI{120}{\decibel}, the whole-cavity $n = 2$ mode yields
-$\xi \approx \SI{0.014}{\um}$ (energy-consistent, Paper~1)---more than an
+$\xi \approx \SI{0.014}{\um}$ (energy-consistent; \citealp{Mace2026browntone})---more than an
 order of magnitude below the \piezo{} threshold.  In contrast, a
 \SI{100}{\milli\litre} gas pocket yields $\xi \approx \SI{1.3}{\um}$,
 comfortably above threshold.
@@ -815,7 +820,7 @@ infrasound.
 [To be added.]
 
 \section*{Data availability}
-All computational code is available at [repository URL].
+All computational code is available at \url{https://github.com/JonathanMace/brownnote}.
 
 \section*{Declaration of competing interest}
 The authors declare no competing interests.
