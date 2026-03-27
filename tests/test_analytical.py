@@ -65,6 +65,11 @@ from analytical.oblate_spheroid_ritz import (
 )
 from analytical.dimensional_analysis import (
     breathing_mode_infrasound_size,
+    dimensionless_frequency,
+    phi_analytical,
+    parametric_sweep_dimensionless,
+    verify_collapse,
+    animal_scaling,
 )
 
 
@@ -860,3 +865,132 @@ class TestBreathingModeInfrasoundSize:
         """Guard against regression to the m^2 bug."""
         R = breathing_mode_infrasound_size()["R_needed_m"]
         assert R < 100, f"R = {R:.0f} m; likely missing sqrt (old bug)"
+
+
+# ================================================================== #
+#  Dimensionless frequency and Phi analytical (dimensional analysis)  #
+# ================================================================== #
+
+class TestDimensionlessFrequency:
+    """Tests for the Π₀ = f·a·√(ρ_f/E) definition."""
+
+    def test_canonical_human(self):
+        """Canonical human: f₂=3.95 Hz → Π₀ ≈ 0.072."""
+        Pi0 = dimensionless_frequency(3.95, 0.18, 0.1e6, 1020.0)
+        assert Pi0 == pytest.approx(0.072, rel=0.02)
+
+    def test_scales_linearly_with_f(self):
+        Pi0_a = dimensionless_frequency(4.0, 0.18, 0.1e6, 1020.0)
+        Pi0_b = dimensionless_frequency(8.0, 0.18, 0.1e6, 1020.0)
+        assert Pi0_b == pytest.approx(2 * Pi0_a, rel=1e-10)
+
+    def test_scales_linearly_with_a(self):
+        Pi0_a = dimensionless_frequency(4.0, 0.10, 0.1e6, 1020.0)
+        Pi0_b = dimensionless_frequency(4.0, 0.20, 0.1e6, 1020.0)
+        assert Pi0_b == pytest.approx(2 * Pi0_a, rel=1e-10)
+
+
+class TestPhiAnalytical:
+    """Tests for the closed-form dimensionless function Φ_n."""
+
+    def test_canonical_n2(self):
+        """Canonical human: Φ₂ ≈ 0.072."""
+        phi = phi_analytical(
+            h_a=0.056, c_a=0.67, rho_ratio=1.078,
+            P_E=0.01, nu=0.45, n=2,
+        )
+        assert phi == pytest.approx(0.072, rel=0.02)
+
+    def test_positive_for_physical_params(self):
+        phi = phi_analytical(0.05, 0.67, 1.08, 0.01, 0.45, n=2)
+        assert phi > 0
+
+    def test_increases_with_h_a(self):
+        """Thicker walls → stiffer → higher Π₀."""
+        phi_thin = phi_analytical(0.03, 0.67, 1.08, 0.01, 0.45, n=2)
+        phi_thick = phi_analytical(0.10, 0.67, 1.08, 0.01, 0.45, n=2)
+        assert phi_thick > phi_thin
+
+    def test_matches_numerical_model(self):
+        """Φ must reproduce the numerical frequency exactly."""
+        model = AbdominalModelV2()
+        freqs = flexural_mode_frequencies_v2(model, n_max=2)
+        f2 = freqs[2]
+        Pi0_num = dimensionless_frequency(
+            f2, model.a, model.E, model.rho_fluid,
+        )
+        Pi0_ana = phi_analytical(
+            model.h / model.a,
+            model.c / model.a,
+            model.rho_wall / model.rho_fluid,
+            model.P_iap / model.E,
+            model.nu,
+            n=2,
+        )
+        assert Pi0_num == pytest.approx(Pi0_ana, rel=1e-12)
+
+
+# ================================================================== #
+#  Parametric sweep and collapse verification                          #
+# ================================================================== #
+
+class TestParametricSweep:
+    """Tests for the extended 1458-point parametric sweep."""
+
+    def test_point_count(self):
+        results = parametric_sweep_dimensionless()
+        assert len(results) == 1458
+
+    def test_all_pi_groups_varied(self):
+        """All five governing Π-groups must have multiple unique values."""
+        results = parametric_sweep_dimensionless()
+        assert len(set(r["h_over_a"] for r in results)) >= 3
+        assert len(set(r["c_over_a"] for r in results)) >= 3
+        assert len(set(r["rho_ratio"] for r in results)) >= 3
+        assert len(set(r["P_over_E"] for r in results)) >= 3
+        assert len(set(r["nu"] for r in results)) >= 3
+
+    def test_collapse_to_machine_precision(self):
+        """Numerical Π₀ must match analytical Φ to machine precision."""
+        results = parametric_sweep_dimensionless()
+        v = verify_collapse(results)
+        assert v["max_relative_error"] < 1e-12
+
+
+# ================================================================== #
+#  Cross-species animal scaling                                        #
+# ================================================================== #
+
+class TestAnimalScaling:
+    """Tests for the cross-species scaling predictions."""
+
+    def test_human_f2_near_4hz(self):
+        s = animal_scaling()
+        assert s["human"]["f_hz"] == pytest.approx(3.95, rel=0.02)
+
+    def test_pi0_quasi_universal(self):
+        """Π₀ should be ≈ 0.07 ± 15% for all species."""
+        s = animal_scaling()
+        for name in ["rat", "cat", "pig", "human"]:
+            assert 0.05 < s[name]["Pi_0"] < 0.09, (
+                f"{name}: Pi0 = {s[name]['Pi_0']:.4f} outside [0.05, 0.09]"
+            )
+
+    def test_coupling_ratio_range(self):
+        """ℛ_scat = 1/(ka)² should be in 10³–10⁵ for all species."""
+        s = animal_scaling()
+        for name in ["rat", "cat", "pig", "human"]:
+            R = s[name]["coupling_ratio_R"]
+            assert 1e3 < R < 1e5, f"{name}: R = {R:.0f}"
+
+    def test_ka_rayleigh_regime(self):
+        """All species should have ka ≪ 1."""
+        s = animal_scaling()
+        for name in ["rat", "cat", "pig", "human"]:
+            assert s[name]["ka"] < 0.1
+
+    def test_f2_decreases_with_body_size(self):
+        """Larger body → lower frequency."""
+        s = animal_scaling()
+        assert s["rat"]["f_hz"] > s["cat"]["f_hz"] > s["pig"]["f_hz"]
+        assert s["pig"]["f_hz"] > s["human"]["f_hz"]
