@@ -456,7 +456,7 @@ def plot_scaling_law(save=True):
     Plot f₂ scaling across body sizes (rat → human).
 
     Left panel:  f₂ (Hz) vs semi-major axis a (cm)
-    Right panel: Π₀ vs a showing approximate constancy of the dimensionless group.
+    Right panel: R_scat vs a showing approximate size-independence of the scattering ratio.
     """
     scaling = animal_scaling()
 
