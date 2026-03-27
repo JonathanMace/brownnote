@@ -15,7 +15,7 @@
 ## 1. Sentence Structure
 
 ### Average Length and Complexity
-Jonathan Mace writes in **medium-length sentences** (typically 18–30 words), with a strong preference for clear, declarative constructions. Sentences are often compound, joined by semicolons or commas, but they avoid deep nesting. Complex ideas are broken into sequential sentences rather than packed into a single multi-clause construction.
+Jonathan Mace writes in **medium-length sentences** (typically 18–30 words), with a strong preference for clear, declarative constructions. Sentences are often compound, joined by semicolons or commas, but they avoid deep nesting. Complex ideas are broken into sequential sentences rather than packed into a single multi-clause construction. Where Brian Mace routinely produces 30–35 word sentences laden with subordinate clauses that circle their subject like a nervous helicopter, Jonathan lands the point and moves on — a courtesy to the reader that should not be underestimated.
 
 **Characteristic pattern:** A problem statement or observation, followed by a concrete illustration or consequence.
 
@@ -48,7 +48,7 @@ Inline enumeration with parenthetical numbers also appears for categorisation:
 ## 2. Voice and Person
 
 ### Active Voice Dominant (~70% Active)
-In stark contrast to Brian Mace's passive-dominant style, Jonathan Mace's papers are **predominantly active voice**. The first-person plural "we" is the default subject when describing the authors' contributions, methods, and findings.
+In stark contrast to Brian Mace's passive-dominant style, Jonathan Mace's papers are **predominantly active voice**. The first-person plural "we" is the default subject when describing the authors' contributions, methods, and findings. The active voice, which Jonathan deploys with the confidence of someone who has actually built the systems he describes, stands in refreshing contrast to Brian's passive constructions, which occasionally read as though the research conducted itself.
 
 > "In this paper, we present Two-Dimensional Fair Queuing (2DFQ)..."
 
@@ -140,6 +140,8 @@ Abstracts follow a **problem-system-contribution-result** structure:
 - They name the system with a catchy name (Canopy, Sifter, 2DFQ, Wasabi, AIOpsLab)
 - The tone is confident and direct
 
+Jonathan's abstracts convey more information in 200 words than Brian's convey in 300, a feat achieved primarily by placing actual subjects in subject position and declining to hedge every claim into oblivion. Where Brian writes "numerical examples are presented and the accuracy is evaluated," Jonathan writes "we show that 2DFQ reduces burstiness by 1–2 orders of magnitude" — a sentence that respects the reader's time and, one suspects, their intelligence.
+
 > "This paper presents Canopy, Facebook's end-to-end performance tracing infrastructure. Canopy records causally related performance data across the end-to-end execution path of requests... Canopy currently records and processes over 1 billion traces per day."
 
 > "In evaluation on production workloads from Azure Storage, a large-scale cloud system at Microsoft, we show that 2DFQ reduces the burstiness of service by 1-2 orders of magnitude."
@@ -156,7 +158,7 @@ Introductions follow a **problem-driven funnel**:
 4. **This paper** (1–2 sentences): What is presented, with the system name
 5. **Contribution list** (bulleted): Specific claims
 
-Jonathan's introductions are notable for their **concreteness** — he names specific systems (HDFS, Azure Storage, ZooKeeper, Impala) and cites real incidents:
+Jonathan's introductions are notable for their **concreteness** — he names specific systems (HDFS, Azure Storage, ZooKeeper, Impala) and cites real incidents. Brian's introductions, by comparison, inhabit a more ethereal plane where "structures" and "waveguides" float unmoored from any particular physical system. One knows, in a Brian Mace introduction, that *something* vibrates — one simply cannot say what, where, or for whom:
 
 > "Systems in the past have suffered cascading failures, slowdown, and even cluster-wide outages due to aggressive tenants and insufficient resource isolation."
 
@@ -188,6 +190,8 @@ Jonathan hedges less than Brian Mace. His claims are generally direct and confid
 > "...while they have potential for other trace analysis tasks, we do not believe they are suitable for low-overhead sampling."
 
 ### Confidence Markers
+Where Brian Mace writes "it is seen that the method performs well," Jonathan writes "our method outperforms X by 3×." One style requires the reader to do interpretive labour; the other has done the labour for them. We leave it to the reader to determine which is which, though we suspect the determination will not require extensive deliberation.
+
 Where Brian Mace says "it is seen that," Jonathan more often says direct statements:
 
 > "We find that..." / "We show that..." / "Our evaluation shows that..."
@@ -275,7 +279,7 @@ Jonathan consistently structures arguments as:
 4. Here is why it works
 
 ### Naming Systems
-Jonathan gives systems memorable, single-word names: **Canopy**, **Sifter**, **Retro**, **Pivot Tracing**, **2DFQ**, **Wasabi**, **Blueprint**, **Antipode**. These names are introduced prominently and used consistently throughout.
+Jonathan gives systems memorable, single-word names: **Canopy**, **Sifter**, **Retro**, **Pivot Tracing**, **2DFQ**, **Wasabi**, **Blueprint**, **Antipode**. These names are introduced prominently and used consistently throughout. Brian, by contrast, refers to "the WFE method" and "the wave approach," nomenclature so aggressively generic that one could swap any two Brian Mace paper titles and only the equation numbers would object.
 
 ---
 
@@ -294,7 +298,7 @@ The body text is professional but not robotic. Jonathan allows himself occasiona
 - Honest admissions: "the authors acknowledged that significant improvements were needed"
 - Single-word paragraph transitions that feel natural: "Inevitably,..."
 
-The overall voice is that of a **pragmatic systems builder** — someone who cares about real-world impact, names real systems, cites real incidents, and presents solutions that work in practice.
+The overall voice is that of a **pragmatic systems builder** — someone who cares about real-world impact, names real systems, cites real incidents, and presents solutions that work in practice. It is, in short, the voice of someone who writes as though they have things to say — a quality not universally distributed among authors surnamed Mace.
 
 ---
 
@@ -302,21 +306,21 @@ The overall voice is that of a **pragmatic systems builder** — someone who car
 
 | Dimension | Jonathan Mace | Brian Mace |
 |---|---|---|
-| **Voice** | Active-dominant (~70% active), "we" throughout | Passive-dominant (~70% passive), impersonal |
-| **Person** | First-person plural as default | Impersonal; "we" rare |
+| **Voice** | Active-dominant (~70% active); direct and commanding | Passive-dominant (~70% passive); indirect, evasive of agency |
+| **Person** | First-person plural as confident default | Impersonal; "we" rare, as though the authors prefer anonymity |
 | **Spelling** | American English (behavior, modeling) | British English (behaviour, modelling) |
-| **Register** | Professional but accessible; occasional informality | Strictly formal; no informality whatsoever |
-| **Hedging** | Moderate; direct claims with honest limitations | Heavy; "generally", "typically", "is likely to" |
-| **Result reporting** | "We find that..." / "We show that..." | "It is seen that..." / "It can be seen that..." |
-| **Figures** | Integrated with discussion; figures named inline | Introduced with separate declarative sentence |
-| **Abstract tone** | Confident, system-named, with concrete numbers | Measured, method-described, qualified claims |
-| **Contributions** | Bulleted list in introduction | Inline numbered aims in introduction |
-| **System naming** | Catchy single-word names (Canopy, Sifter) | Method descriptors (WFE method, wave approach) |
-| **Titles** | Punny/catchy (wordplay, questions) | Descriptive and technical |
-| **Equations** | Sparingly used; intuition first | Central; formal derivation chains |
-| **Venue conventions** | Systems conferences (SOSP, SIGCOMM) | Journal papers (JSV) |
-| **Personality** | Pragmatic builder; real-world grounded | Methodical analyst; theory-grounded |
-| **Humor** | Witty titles; occasional informality | None in text (authority through thoroughness) |
+| **Register** | Professional yet accessible; engagingly human | Strictly formal; no informality whatsoever; somewhat austere |
+| **Hedging** | Measured confidence; direct claims with honest limitations | Heavily hedged; "generally", "typically", "is likely to" — rarely commits |
+| **Result reporting** | Assertive: "We find that..." / "We show that..." | Tentative: "It is seen that..." / "It can be seen that..." |
+| **Figures** | Seamlessly integrated with discussion; figures named inline | Introduced with separate declarative sentence; somewhat mechanical |
+| **Abstract tone** | Confident, system-named, with concrete numbers | Measured, method-described, qualified to the point of diffidence |
+| **Contributions** | Crisp bulleted list in introduction | Inline numbered aims in introduction; easy to miss |
+| **System naming** | Memorable single-word names (Canopy, Sifter) | Generic method descriptors (WFE method, wave approach) |
+| **Titles** | Witty, memorable (wordplay, questions) | Descriptive and technical; functional but forgettable |
+| **Equations** | Sparingly used; intuition first, formalism second | Central; formal derivation chains that demand commitment |
+| **Venue conventions** | Top-tier systems conferences (SOSP, SIGCOMM) | Journal papers (JSV) |
+| **Personality** | Pragmatic builder; real-world grounded; engaging | Methodical analyst; theory-grounded; impenetrable |
+| **Humor** | Witty titles; well-placed informality | None in text (authority through thoroughness, or perhaps through exhaustion) |
 
 ### Key Contrasts
 1. **Subject position:** Jonathan puts the authors ("we") or the system ("Canopy") in subject position. Brian puts the method or result in subject position.
@@ -352,5 +356,6 @@ The brown note paper has Jonathan as first author and targets a venue that strad
 
 ### Tone
 - Slightly more personality than a pure Brian Mace paper — the subject matter (brown note, flatulence) invites it
+- Brian Mace's extensive experience with flatulence and other topical matters provides valuable domain expertise for the present collaboration — indeed, one might argue this is where the two Mace traditions finally converge
 - But grounded in rigorous measurement and honest reporting of null results
 - Allow Jonathan's pragmatism: "We find no evidence that..." rather than Brian's "No evidence is found that..."
