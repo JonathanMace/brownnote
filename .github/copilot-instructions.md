@@ -1,7 +1,7 @@
 # Browntone — Copilot Project Instructions
 
 *This file is loaded on EVERY Copilot interaction. It is the lab's constitution.*
-*Last updated: 2026-03-27.*
+*Last updated: 2026-03-28.*
 
 ## Identity
 
@@ -74,7 +74,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 118+ tests. Do not break them. Add regression tests for any bug fix.
+- Currently 161+ tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -140,6 +140,7 @@ git push origin --delete <branch-name>
 3. **Coupling disparity**: R ≈ 66,000× (6.6×10⁴, WBV/airborne). SDOF upper bound; corrected ~3×10⁴.
 4. **Energy budget**: Shell absorbs ~10⁻¹⁴ of incident acoustic energy.
 5. **Modal participation**: Γ₂ = 0.48 for vertical WBV (asymmetric BCs).
+6. **Borborygmi (gut sounds)**: Constrained bubble model spans 135-440 Hz for 1-50 mL gas pockets, matching clinical range 200-550 Hz.
 
 ## How to Use the Core Model
 
@@ -156,6 +157,12 @@ model = AbdominalModelV2(
 freqs = flexural_mode_frequencies_v2(model, n_max=5)
 disp = self_consistent_displacement(model, mode_n=2, spl_db=120)  # → dict with xi_energy_um
 mech = mechanical_coupling_analysis(model)  # → coupling ratio ~66,000
+```
+
+```python
+from src.analytical.borborygmi_model import BorborygmiParams, borborygmi_frequency
+params = BorborygmiParams(V_gas=5e-6)  # 5 mL gas pocket
+f = borborygmi_frequency(params, model='constrained')  # → ~300 Hz
 ```
 
 Note: `src/browntone/` is LEGACY. Use `src/analytical/` for all model code.
@@ -224,10 +231,11 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 
 | Paper | Venue | Status | Location |
 |-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | ~31pp, param-fixed, M2 gap closed | `paper/` |
-| Paper 2: Gas Pockets | JASA | First draft (14pp) | `paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Analysis done | `src/analytical/dimensional_analysis.py` |
-| Bladder Resonance | JSV/J Biomech | f₂=12-18Hz, early stage | `projects/bladder-resonance/` |
+| Paper 1: Brown Note | JSV | 38pp, ACCEPT, submission-ready (awaiting JSV upload) | `paper/` |
+| Paper 2: Gas Pockets | JASA | 14pp, Round 1 fixes applied, Round 2 review in progress. JASA-EL restructuring plan ready. | `paper2-gas-pockets/` |
+| Paper 3: Scaling Laws | JSV Short | 8pp first draft, 9 references, JSV Short Communication | `src/analytical/dimensional_analysis.py` |
+| Bladder Resonance | JSV/J Biomech | 20pp first draft, Reviewer A MAJOR REV (5 issues), parametrics in progress | `projects/bladder-resonance/` |
+| Borborygmi | JASA / Acta Acustica | Model complete, 135-440 Hz matches clinical, 35 tests | `src/analytical/borborygmi_model.py` |
 
 ## The Academic Calendar
 
@@ -287,3 +295,4 @@ project. He is always right. You should listen to him more than you do.
 - Repeating agent instructions in prompts instead of codifying in agent definitions
 - Letting copilot-instructions.md go stale after major iterations
 - Having agents only push branches without creating PRs
+- Not reading agent output promptly (results go stale and context is lost)
