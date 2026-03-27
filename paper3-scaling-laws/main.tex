@@ -51,7 +51,7 @@ collapses onto the analytical curves to within numerical round-off
 non-dimensionalisation.  Cross-species predictions for four mammals (rat,
 cat, pig, human) reveal a quasi-universal dimensionless frequency
 $\Pi_0 \approx 0.07$, implying that the scattering coupling ratio
-$\mathcal{R}_\mathrm{scat} = 1/(ka)^2 \sim 10^3$--$10^4$ is
+$\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2 \sim 10^3$--$10^4$ is
 approximately size-independent and
 that animal models are valid proxies for human abdominal resonance studies.
 The breathing mode ($n=0$), dominated by the fluid bulk modulus, would
@@ -106,7 +106,8 @@ sensitive is $f_2$ to each?
 
 \subsection{Governing variables}
 
-The natural frequency $f_n$ of mode $n$ depends on eleven variables:
+The natural frequency $f_n$ of mode $n$ and its ten governing parameters
+form a set of eleven variables:
 $f_n = f(E, a, c, h, \nu, \rho_w, \rho_f, K_f, P_\mathrm{iap}, \eta)$.
 With three fundamental dimensions ($M$, $L$, $T$), the Buckingham Pi
 theorem~\cite{Buckingham1914} yields $11 - 3 = 8$ independent
@@ -175,25 +176,24 @@ the membrane mode-shape factor is
 \subsection{Sensitivity: which $\Pi$-group dominates?}
 
 For the $n=2$ mode at canonical parameters ($h/a = 0.056$, $c/a = 0.67$,
-$\nu = 0.45$), the stiffness budget is dominated by the membrane term
-$K_\mathrm{memb}$, which contributes approximately 78\% of the total
-restoring force, with bending ($K_\mathrm{bend}$, $\sim$14\%) and prestress
-($K_\mathrm{pre}$, $\sim$8\%) playing secondary roles.  The transition from
-membrane-dominated to bending-dominated behaviour occurs near $h/a \approx
-0.15$, well above the physiological range.
+$\nu = 0.45$, $P_\mathrm{iap}/E = 0.01$), the stiffness budget is shared
+between the membrane term $K_\mathrm{memb}$ ($\sim$54\%) and the prestress
+term $K_\mathrm{pre}$ ($\sim$45\%), with bending contributing less than 2\%.
+The transition to bending-dominated behaviour occurs near $h/a \approx
+0.42$, well above the physiological range.
 
 Consequently, $f_2$ is most sensitive to the thickness ratio $\Pi_1 = h/a$,
 which enters both the membrane stiffness (linearly through $h$) and the
-effective mass (linearly through $\rho_w h$).  The density ratio $\Pi_3 =
+effective mass (linearly through $\rho_w h$).  The prestress ratio $\Pi_5 =
+P_\mathrm{iap}/E$ contributes substantially at canonical values but is
+approximately constant across mammals ($P/E \approx 0.006$--$0.01$),
+so it does not drive inter-species variation.  The density ratio $\Pi_3 =
 \rho_w/\rho_f$ has a more modest effect: because soft tissue and
-peritoneal fluid have similar densities ($\Pi_3 \approx 1.08$), the
+peritoneal fluid have similar densities ($\Pi_3 \approx 1.04$--$1.08$), the
 fluid added mass $\rho_f R / n$ dominates the denominator of
-$m_\mathrm{eff}$.  The prestress ratio $\Pi_5 = P_\mathrm{iap}/E$
-contributes less than 10\% to the total stiffness at canonical values
-but becomes important for very soft tissue ($E < \SI{0.05}{\mega\pascal}$),
-where intra-abdominal pressure provides the dominant restoring force.
+$m_\mathrm{eff}$.
 This sensitivity structure explains why $\Pi_0$ is quasi-universal
-across mammals: the governing ratios $h/a$ and $\rho_w/\rho_f$ are
+across mammals: the governing ratios $h/a$, $\rho_w/\rho_f$, and $P/E$ are
 constrained by shared developmental biology~\cite{West1997}.
 
 %% ===================================================================
@@ -243,18 +243,20 @@ The scaling law~\eqref{eq:scaling_law} predicts modal frequencies for any
 organism given its body dimensions and tissue properties.
 Table~\ref{tab:scaling} lists predictions for four mammals, using
 allometric estimates from published biomechanical
-data~\cite{Fung1993,West1997}.  All dimensionless groups are shown
-explicitly so the reader can verify the quasi-constancy of the
-$\Pi$-groups across species.  Poisson's ratio ($\nu = 0.45$) and
-the prestress ratio ($P_\mathrm{iap}/E \approx 0.01$) are
-approximately constant across mammals and are omitted from the table
-for brevity.
+data~\cite{Fung1993,West1997}.  Three of the five governing dimensionless
+groups ($h/a$, $c/a$, $\rho_w/\rho_f$) are shown explicitly; Poisson's
+ratio ($\nu = 0.45$) and the prestress ratio ($P_\mathrm{iap}/E$, ranging
+from 0.006 for the rat to 0.01 for the human) are approximately constant
+across mammals and are omitted from the table for brevity.  The quantity
+$kR_\mathrm{eq} = 2\pi f_2 R_\mathrm{eq}/c_\mathrm{air}$, where
+$R_\mathrm{eq} = (a^2 c)^{1/3}$ is the equivalent-sphere radius, is
+the Helmholtz number governing airborne coupling.
 
 \begin{table}[htbp]
   \centering
   \caption{Cross-species scaling of the $n=2$ flexural mode, showing
   all governing $\Pi$-groups.
-  $\mathcal{R}_\mathrm{scat} = 1/(ka)^2$ quantifies the Rayleigh-regime
+  $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2$ quantifies the Rayleigh-regime
   scattering penalty for airborne excitation; the full displacement ratio
   reported in~\cite{mace2026brown} is approximately $8\times$ larger
   because it additionally includes the acoustic impedance mismatch
@@ -266,7 +268,7 @@ for brevity.
   \begin{tabular}{lccccccccc}
     \toprule
     Species & $a$ (cm) & $E$ (MPa) & $h/a$ & $c/a$ & $\rho_w/\rho_f$
-            & $f_2$ (Hz) & $\Pi_0$ & $ka$ & $\mathcal{R}_\mathrm{scat}$ \\
+            & $f_2$ (Hz) & $\Pi_0$ & $kR_\mathrm{eq}$ & $\mathcal{R}_\mathrm{scat}$ \\
     \midrule
     Rat   &  3 & 0.05 & 0.067 & 0.70 & 1.04
           & 15.7 & 0.067 & $7.7 \times 10^{-3}$ & $1.7 \times 10^{4}$ \\
@@ -288,7 +290,7 @@ $\mathcal{R}_\mathrm{scat}$ varies
 by only a factor of two (from $7.7 \times 10^3$ for humans to
 $1.7 \times 10^4$ for rats), remaining firmly in the $10^3$--$10^4$ range.
 Airborne coupling is negligible for all species studied.  Third, the
-product $ka$ is of order $10^{-2}$ for all four species, placing every
+product $kR_\mathrm{eq}$ is of order $10^{-2}$ for all four species, placing every
 organism deep in the Rayleigh regime.
 
 This size-independence of $\mathcal{R}_\mathrm{scat}$ has a practical
@@ -296,7 +298,7 @@ implication:
 animal models are valid proxies for human abdominal resonance
 studies~\cite{vonGierke1971,ISO2631}, \emph{provided excitation is
 delivered mechanically} (e.g.\ shaker table) rather than acoustically.  Acoustic experiments would require
-compensating for the $(ka)^n$ coupling penalty, which varies with body
+compensating for the $(kR_\mathrm{eq})^n$ coupling penalty, which varies with body
 size and frequency.
 
 \begin{figure}[htbp]
@@ -307,7 +309,7 @@ size and frequency.
   line shows pure $1/a$ scaling; deviations arise because smaller animals
   have softer tissue and different $h/a$.
   \emph{Right:} Scattering coupling ratio $\mathcal{R}_\mathrm{scat} =
-  1/(ka)^2$ is approximately
+  1/(kR_\mathrm{eq})^2$ is approximately
   size-independent, supporting the validity of animal-model extrapolation.}
   \label{fig:scaling_law}
 \end{figure}
