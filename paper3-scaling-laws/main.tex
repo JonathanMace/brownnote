@@ -70,9 +70,9 @@ least eleven physical parameters: geometric (semi-axes $a$, $c$; wall
 thickness $h$), material (elastic modulus $E$, Poisson's ratio $\nu$,
 wall density $\rho_w$, loss tangent $\eta$), fluid ($\rho_f$, bulk
 modulus $K_f$), and loading (intra-abdominal pressure $P_\mathrm{iap}$)
-\cite{Soedel2004,Leissa1973}.  This high-dimensional parameter space
-makes comparison across species, organs, and loading conditions
-impractical without systematic dimensional reduction.
+\cite{Soedel2004,Leissa1973,JungerFeit1986,Lamb1882}.  This high-dimensional
+parameter space makes comparison across species, organs, and loading
+conditions impractical without systematic dimensional reduction.
 
 In a companion paper~\cite{mace2026brown}, we developed a fluid-filled
 oblate spheroidal shell model for the human abdominal cavity, predicting
@@ -98,8 +98,8 @@ any biological organism?
 The natural frequency $f_n$ of mode $n$ depends on eleven variables:
 $f_n = f(E, a, c, h, \nu, \rho_w, \rho_f, K_f, P_\mathrm{iap}, \eta)$.
 With three fundamental dimensions ($M$, $L$, $T$), the Buckingham Pi
-theorem yields $11 - 3 = 8$ independent dimensionless groups
-(Table~\ref{tab:pi_groups}).
+theorem~\cite{Buckingham1914} yields $11 - 3 = 8$ independent
+dimensionless groups (Table~\ref{tab:pi_groups}).
 
 \begin{table}[htbp]
   \centering
@@ -197,7 +197,8 @@ analytical $\Phi_n$ reproduces every numerical point to machine precision
 The scaling law~\eqref{eq:scaling_law} predicts modal frequencies for any
 organism given its body dimensions and tissue properties.
 Table~\ref{tab:scaling} lists predictions for four mammals, using
-allometric estimates of $E$ and $a$ from published data.
+allometric estimates of $E$ and $a$ from published
+data~\cite{Fung1993}.
 
 \begin{table}[htbp]
   \centering
@@ -228,9 +229,9 @@ product $ka$ is of order $10^{-2}$ for all four species, placing every
 organism deep in the Rayleigh regime.
 
 This size-independence of $\mathcal{R}$ has a practical implication:
-animal models are valid proxies for human abdominal resonance studies,
-\emph{provided excitation is delivered mechanically} (e.g.\ shaker table)
-rather than acoustically.  Acoustic experiments would require
+animal models are valid proxies for human abdominal resonance
+studies~\cite{vonGierke1971,ISO2631}, \emph{provided excitation is
+delivered mechanically} (e.g.\ shaker table) rather than acoustically.  Acoustic experiments would require
 compensating for the $(ka)^n$ coupling penalty, which varies with body
 size and frequency.
 
