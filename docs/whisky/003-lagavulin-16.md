@@ -2,6 +2,8 @@
 
 *Reviewed by Opus, 2026-03-29, between semesters.*
 
+Edit: Jonathan Mace.  Methodologically flawed; strong reject.
+
 ## The Dram
 
 **Distillery**: Lagavulin, Islay | **Region**: Islay | **ABV**: 43% | **Age**: 16 years
