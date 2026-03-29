@@ -1,0 +1,157 @@
+\documentclass[review]{elsarticle}
+\usepackage[margin=1in]{geometry}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage{inconsolata}
+\usepackage{amsmath}
+\let\Bbbk\relax
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[pdfencoding=auto,psdextra]{hyperref}
+\usepackage{lineno}
+
+% Fix duplicate page destination warning with elsarticle review mode
+\hypersetup{pageanchor=false}
+\AtBeginDocument{\hypersetup{pageanchor=true}}
+
+% SI units configuration
+\sisetup{
+  per-mode=symbol,
+  group-separator={,},
+}
+
+% Line numbering (required for review submission)
+\linenumbers
+
+% =============================================================================
+% Metadata
+% =============================================================================
+\journal{Postharvest Biology and Technology}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of
+Fruit Maturity via Shell Resonance Inversion}
+
+\author[msr]{Jonathan Mace\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{jonathanmace@microsoft.com}
+
+\author[auckland]{Brian R.\ Mace}
+\ead{br.mace@auckland.ac.nz}
+
+\affiliation[msr]{
+  organization={Microsoft Research},
+  city={Redmond, WA},
+  country={United States}
+}
+
+\affiliation[auckland]{
+  organization={Acoustics Research Centre, Department of Mechanical and
+    Mechatronics Engineering, University of Auckland},
+  city={Auckland},
+  country={New Zealand}
+}
+
+\begin{abstract}
+The `thump test''---tapping a watermelon and listening for
+ripeness---is practised worldwide but lacks a quantitative physical
+model.  We model the watermelon as a fluid-filled viscoelastic oblate
+spheroidal shell and derive an analytical expression for the tap-tone
+natural frequency $f_2$ as a function of rind thickness, elastic
+modulus, fruit geometry, and flesh density.  Sobol sensitivity analysis
+reveals that the rind elastic modulus $E_{\mathrm{rind}}$ dominates the
+frequency response (total-order index $S_T > 0.5$).  Because $f_2^2$
+is exactly linear in $E_{\mathrm{rind}}$ when turgor pressure is
+negligible, the forward model admits a closed-form inversion: a single
+tap-tone measurement yields the rind modulus, which correlates with
+ripeness through pectin degradation.  We construct a universal
+dimensionless ripeness parameter $\Pi_{\mathrm{ripe}}$ that collapses
+predictions across cultivars (Crimson Sweet, Sugar Baby, Charleston
+Gray, seedless) onto a single master curve.  Predictions are validated
+against published resonance measurements on melons.  The framework
+generalises directly from prior work on biological cavities,
+demonstrating that the same shell theory governs both biomedical
+vibroacoustics and agricultural non-destructive evaluation.
+\end{abstract}
+
+\begin{keyword}
+watermelon \sep acoustic testing \sep non-destructive evaluation \sep
+shell theory \sep ripeness \sep inverse problem
+\end{keyword}
+
+\end{frontmatter}
+
+% =============================================================================
+% Section 1: Introduction
+% =============================================================================
+\input{sections/introduction}
+
+% =============================================================================
+% Section 2: Mathematical Formulation
+% =============================================================================
+\input{sections/formulation}
+
+% =============================================================================
+% Section 3: Results
+% =============================================================================
+\input{sections/results}
+
+% =============================================================================
+% Section 4: Validation
+% =============================================================================
+\input{sections/validation}
+
+% =============================================================================
+% Section 5: Discussion
+% =============================================================================
+\input{sections/discussion}
+
+% =============================================================================
+% Section 6: Conclusions
+% =============================================================================
+\input{sections/conclusion}
+
+% =============================================================================
+% References
+% =============================================================================
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+% =============================================================================
+% Data Availability & CRediT
+% =============================================================================
+\section*{Data availability}
+All analytical models and computational scripts used in this study are
+available in the accompanying repository at
+\url{https://github.com/JonathanMace/brownnote}.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Jonathan Mace}: Conceptualization, Methodology, Software, Supervision,
+Writing -- Original Draft, Writing -- Review \& Editing.
+\textbf{Brian R.\ Mace}: Writing -- Review \& Editing, Validation.
+
+\section*{Acknowledgements}
+Portions of the analytical derivation, code development, and manuscript
+drafting were assisted by GitHub Copilot (GitHub, Inc.), a large language
+model operating under human supervision.  All technical content was
+independently verified by the authors.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests
+or personal relationships that could have appeared to influence the work
+reported in this paper.
+
+\end{document}
