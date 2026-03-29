@@ -73,16 +73,22 @@ model.  We model the watermelon as a fluid-filled viscoelastic oblate
 spheroidal shell and derive an analytical expression for the tap-tone
 natural frequency $f_2$ as a function of rind thickness, elastic
 modulus, fruit geometry, and flesh density.  Sobol sensitivity analysis
-reveals that the rind elastic modulus $E_{\mathrm{rind}}$ dominates the
-frequency response (total-order index $S_T > 0.5$).  Because $f_2^2$
+($N_{\mathrm{base}}(D{+}2) = 5{,}632$ evaluations) reveals that the
+rind elastic modulus $E_{\mathrm{rind}}$ dominates the
+frequency response (total-order index $S_T = 0.54 \pm 0.05$).  Because $f_2^2$
 is exactly linear in $E_{\mathrm{rind}}$ when turgor pressure is
 negligible, the forward model admits a closed-form inversion: a single
 tap-tone measurement yields the rind modulus, which correlates with
-ripeness through pectin degradation.  We construct a universal
-dimensionless ripeness parameter $\Pi_{\mathrm{ripe}}$ that collapses
+ripeness through pectin degradation.  The condition number of this
+inversion is unity with respect to $f^2$ and approximately~2 with
+respect to measured frequency~$f$.  We construct a dimensionless
+geometric invariant $\Pi_{\mathrm{ripe}}$ that collapses
 predictions across cultivars (Crimson Sweet, Sugar Baby, Charleston
-Gray, seedless) onto a single master curve.  Predictions are validated
-against published resonance measurements on melons.  The framework
+Gray, seedless) onto a single calibration constant; because $E_{\mathrm{rind}}$
+cancels by construction, $\Pi_{\mathrm{ripe}}$ characterises the
+shell--fluid geometry rather than ripeness \emph{per se}.  Predictions
+are benchmarked against published resonance frequency ranges for
+watermelons.  The framework
 generalises directly from prior work on biological cavities,
 demonstrating that the same shell theory governs both biomedical
 vibroacoustics and agricultural non-destructive evaluation.

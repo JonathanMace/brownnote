@@ -34,9 +34,11 @@ from analytical.watermelon_model import (
     universal_ripeness_curve,
     parametric_ripening_sweep,
     validate_against_debelie,
+    validate_against_yamamoto,
     sobol_sensitivity_watermelon,
     multi_cultivar_comparison,
     _build_model,
+    _yamamoto_reference_data,
 )
 from analytical.natural_frequency_v2 import AbdominalModelV2
 
@@ -351,22 +353,49 @@ class TestParametricSweep:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  7. Validation against De Belie
+#  7. Validation against Yamamoto (1980)
 # ═══════════════════════════════════════════════════════════════════════════
 
-class TestDeBelieValidation:
-    """Tests for validate_against_debelie."""
-
-    def test_returns_metrics(self):
-        sweep = parametric_ripening_sweep(n_stages=10)
-        result = validate_against_debelie(sweep)
-        for key in ("R2", "RMSE", "bias"):
+class TestYamamotoValidation:
+    def test_returns_expected_keys(self):
+        result = validate_against_yamamoto()
+        for key in ("n_cases", "n_within_range", "fraction_within", "mean_abs_deviation", "cases"):
             assert key in result
 
-    def test_rmse_positive(self):
-        sweep = parametric_ripening_sweep(n_stages=10)
-        result = validate_against_debelie(sweep)
-        assert result["RMSE"] >= 0
+    def test_six_benchmark_cases(self):
+        assert validate_against_yamamoto()["n_cases"] == 6
+
+    def test_majority_within_range(self):
+        assert validate_against_yamamoto()["fraction_within"] >= 0.5
+
+    def test_mean_deviation_bounded(self):
+        assert validate_against_yamamoto()["mean_abs_deviation"] < 50.0
+
+    def test_ripe_predictions_reasonable(self):
+        for case in validate_against_yamamoto()["cases"]:
+            desc = case["description"].lower()
+            if "ripe" in desc and "unripe" not in desc:
+                assert 50 < case["f_predicted"] < 200
+
+    def test_unripe_higher_than_ripe(self):
+        result = validate_against_yamamoto()
+        ripe_fs = [c["f_predicted"] for c in result["cases"]
+                   if "ripe" in c["description"].lower() and "unripe" not in c["description"].lower()]
+        unripe_fs = [c["f_predicted"] for c in result["cases"] if "unripe" in c["description"].lower()]
+        assert np.mean(unripe_fs) > np.mean(ripe_fs)
+
+    def test_yamamoto_reference_data_consistency(self):
+        data = _yamamoto_reference_data()
+        assert len(data) == 6
+        for entry in data:
+            assert entry["f_lo"] < entry["f_hi"]
+
+
+class TestDeBelieDeprecation:
+    def test_deprecated_alias_returns_result(self):
+        with pytest.warns(DeprecationWarning, match="validate_against_yamamoto"):
+            result = validate_against_debelie()
+        assert "n_cases" in result
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -514,16 +543,33 @@ class TestSobol:
     @pytest.mark.slow
     def test_sobol_E_dominates(self):
         """E_rind should dominate (S_T > 0.5) even with small N."""
-        result = sobol_sensitivity_watermelon(N_base=256)
+        result = sobol_sensitivity_watermelon(N_base=256, seed=42)
         ST_E = result["ST"]["E"]
         assert ST_E > 0.3, f"S_T(E) = {ST_E:.3f}, expected > 0.3"
 
     @pytest.mark.slow
     def test_sobol_returns_all_params(self):
-        result = sobol_sensitivity_watermelon(N_base=256)
+        result = sobol_sensitivity_watermelon(N_base=256, seed=42)
         assert "S1" in result
         assert "ST" in result
         assert len(result["S1"]) == 9
+
+    @pytest.mark.slow
+    def test_sobol_returns_confidence_intervals(self):
+        result = sobol_sensitivity_watermelon(N_base=256, seed=42)
+        assert "S1_conf" in result and "ST_conf" in result
+
+    @pytest.mark.slow
+    def test_sobol_seed_reproducibility(self):
+        r1 = sobol_sensitivity_watermelon(N_base=128, seed=12345)
+        r2 = sobol_sensitivity_watermelon(N_base=128, seed=12345)
+        for name in r1["ST"]:
+            assert r1["ST"][name] == pytest.approx(r2["ST"][name])
+
+    @pytest.mark.slow
+    def test_sobol_n_evaluations(self):
+        result = sobol_sensitivity_watermelon(N_base=128, seed=42)
+        assert result["n_evaluations"] == 128 * (9 + 2)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -549,3 +595,28 @@ class TestDimensionalConsistency:
     def test_Q_dimensionless(self, ripe_params):
         Q = predict_tap_tone(ripe_params)["Q"]
         assert 1 < Q < 100
+
+
+class TestAspectRatioSensitivity:
+    def test_aspect_ratio_changes_frequency(self, ripe_params):
+        f_vals = [predict_tap_tone(dict(ripe_params, c=cv), mode=2)["f_n"] for cv in [0.08, 0.123, 0.15]]
+        assert (max(f_vals) - min(f_vals)) / np.mean(f_vals) > 0.20
+
+    def test_more_oblate_gives_higher_frequency(self, ripe_params):
+        f_ob = predict_tap_tone(dict(ripe_params, c=0.08), mode=2)["f_n"]
+        f_rd = predict_tap_tone(dict(ripe_params, c=0.15), mode=2)["f_n"]
+        assert f_ob > f_rd
+
+
+class TestConditionNumber:
+    def test_noise_amplification_factor(self, ripe_params):
+        f_true = predict_tap_tone(ripe_params)["f_n"]
+        E_true = ripe_params["E"]
+        E_inv = invert_frequency_to_modulus(
+            f_measured=f_true * 1.01,
+            a=ripe_params["a"], c=ripe_params["c"], h=ripe_params["h"],
+            rho_rind=ripe_params["rho_rind"], rho_flesh=ripe_params["rho_flesh"],
+            nu=ripe_params["nu"], P_int=ripe_params["P_int"],
+        )
+        amplification = ((E_inv - E_true) / E_true) / 0.01
+        assert 1.8 < amplification < 2.3

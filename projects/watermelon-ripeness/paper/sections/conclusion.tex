@@ -14,20 +14,24 @@ used to assess watermelon ripeness.  The principal findings are:
     elastic modulus $E_{\mathrm{rind}}$ when turgor pressure is
     negligible.  This linearity enables a closed-form inversion
     (Eq.~\ref{eq:inversion}) from a single tap-tone measurement to the
-    rind modulus.
+    rind modulus.  The condition number of this inversion is unity with
+    respect to~$f^2$ and approximately~2 with respect to~$f$.
 
   \item Sobol sensitivity analysis confirms that
     $E_{\mathrm{rind}}$ dominates the frequency response
-    ($S_T > 0.5$), with fruit size as the second most influential
+    ($S_T = 0.54 \pm 0.05$), with fruit size as the second most influential
     parameter.
 
-  \item The dimensionless ripeness parameter $\Pi_{\mathrm{ripe}}$
-    (Eq.~\ref{eq:Pi_ripe}) collapses predictions across cultivars onto
-    a universal master curve, providing a cultivar-independent ripeness
-    metric.
+  \item The dimensionless group $\Pi_{\mathrm{ripe}}$
+    (Eq.~\ref{eq:Pi_ripe}) is a geometric invariant: $E_{\mathrm{rind}}$
+    cancels by construction, making it independent of ripeness state.
+    Its practical value lies in collapsing different cultivar geometries
+    onto a single calibration constant
+    ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ across four cultivars).
 
-  \item Model predictions agree with published resonance measurements
-    on watermelons \cite{Yamamoto1980} and other fruits
+  \item Model predictions are benchmarked against published resonance
+    measurements on watermelons \cite{Yamamoto1980} and are consistent
+    with frequency--stiffness correlations reported for other fruits
     \cite{DeBelieetal2000, ChenDeBaerdemaeker1993}.
 \end{enumerate}
 
