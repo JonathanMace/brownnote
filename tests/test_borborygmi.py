@@ -126,6 +126,32 @@ class TestDimensionalSanity:
         f_min = minnaert_frequency(p)
         assert f_con == pytest.approx(f_min, rel=1e-4)
 
+    def test_radial_canonical_regression(self, default_params):
+        """Regression: corrected radial mode with per-displacement stiffness.
+
+        k_gas = 2γP₀/R, k_wall = Eh/[R²(1-ν²)] gives f_r ≈ 163 Hz
+        for a 30 mm tube (not the erroneous 1329 Hz from old total-stiffness
+        formulation that was missing the /R factor).
+        """
+        f = cylindrical_radial_frequency(default_params)
+        assert f == pytest.approx(163.0, abs=1.0), (
+            f"Radial = {f:.1f} Hz; expected ~163 Hz"
+        )
+
+    def test_axial_scaling_v_minus_half(self):
+        """Axial piston mode scales as V^{-1/2}: f(1 mL)/f(10 mL) = sqrt(10)."""
+        f1 = borborygmi_frequency(1.0, mode="axial")
+        f10 = borborygmi_frequency(10.0, mode="axial")
+        ratio = f1 / f10
+        assert ratio == pytest.approx(np.sqrt(10), rel=0.01)
+
+    def test_axial_subaudible_threshold_10mL(self):
+        """Axial mode drops below 100 Hz at ~10 mL, not 1 mL."""
+        f_10 = borborygmi_frequency(10.0, mode="axial")
+        f_1 = borborygmi_frequency(1.0, mode="axial")
+        assert f_10 < 100, f"At 10 mL, f_ax = {f_10:.1f} should be < 100"
+        assert f_1 > 100, f"At 1 mL, f_ax = {f_1:.1f} should be > 100"
+
     def test_all_modes_finite(self, default_params):
         for mode in ["minnaert", "constrained", "helmholtz", "axial", "radial"]:
             f = borborygmi_frequency(default_params.volume_mL, mode=mode)

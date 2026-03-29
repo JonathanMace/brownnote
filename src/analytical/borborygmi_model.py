@@ -258,6 +258,14 @@ def cylindrical_axial_frequency(p: BorborygmiParams) -> float:
 def cylindrical_radial_frequency(p: BorborygmiParams) -> float:
     """Radial breathing mode of a cylindrical gas column in an elastic tube.
 
+    Per-displacement stiffness (analogous to spherical k_gas = 3γP₀/R):
+      k_gas  = 2γP₀/R       [Pa/m] cylindrical gas compressibility
+      k_wall = Eh/[R²(1-ν²)] [Pa/m] cylindrical thin-shell hoop stiffness
+
+    Effective mass per unit area:
+      m_fluid = ρ_f R        [kg/m²] radiation added mass
+      m_wall  = ρ_w h        [kg/m²] shell inertia
+
     Parameters
     ----------
     p : BorborygmiParams
@@ -268,11 +276,11 @@ def cylindrical_radial_frequency(p: BorborygmiParams) -> float:
         Radial resonant frequency [Hz].
     """
     R = p.R_lumen
-    K_gas = 2.0 * p.gamma * p.P0  # factor 2 for cylinder (vs 3 for sphere)
-    K_wall = p.E_wall * p.h_wall / (R * (1.0 - p.nu_wall ** 2))
-    M_fluid = p.rho_fluid * R
-    M_wall = p.rho_wall * p.h_wall
-    omega2 = (K_gas + K_wall) / (R ** 2 * (M_fluid + M_wall))
+    k_gas = 2.0 * p.gamma * p.P0 / R
+    k_wall = p.E_wall * p.h_wall / (R ** 2 * (1.0 - p.nu_wall ** 2))
+    m_fluid = p.rho_fluid * R
+    m_wall = p.rho_wall * p.h_wall
+    omega2 = (k_gas + k_wall) / (m_fluid + m_wall)
     return np.sqrt(max(omega2, 0.0)) / (2.0 * np.pi)
 
 
@@ -464,13 +472,13 @@ def mode_transition_map(
 
     The "dominant" mode at each volume is defined as the one with the lowest
     frequency (most readily excited by broadband peristalsis).  For canonical
-    parameters the crossover near 0.22 mL is constrained → axial: the
-    constrained bubble is lowest-frequency below ~0.22 mL, and the axial
-    piston mode takes over above that volume because its frequency drops faster
-    with increasing slug length.  Note that the axial mode becomes sub-audible
-    at physiological volumes (< 100 Hz above ~1 mL), so the constrained bubble
-    mode dominates the *clinically audible* band despite not being the overall
-    lowest-frequency mode.
+    parameters the radial breathing mode (163 Hz, volume-independent) is the
+    lowest-frequency mode below ~3.5 mL; above that volume the axial piston
+    mode takes over because its frequency drops as V^{-1/2}.  Both are
+    predominantly sub-audible (f_ax < 100 Hz for V > ~10 mL), so the
+    constrained bubble mode dominates the *clinically audible* band.  For
+    small pockets (V < ~2.5 mL), the axial mode enters the clinical band
+    and competes with the constrained bubble mode.
 
     Parameters
     ----------
