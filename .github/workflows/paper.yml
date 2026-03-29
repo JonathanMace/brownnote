@@ -1,19 +1,21 @@
-name: Build Paper
+name: Build Papers (Manual)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "paper/**"
-  pull_request:
-    paths:
-      - "paper/**"
   workflow_dispatch:
 
 jobs:
-  build-paper:
-    name: Compile LaTeX
+  build-papers:
+    name: "Compile ${{ matrix.paper.name }}"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        paper:
+          - { name: "Paper 1 - Brown Note",       dir: "paper",                           artifact: "paper-1-browntone" }
+          - { name: "Paper 2 - Gas Pockets",       dir: "paper2-gas-pockets",              artifact: "paper-2-gas-pockets" }
+          - { name: "Paper 3 - Scaling Laws",      dir: "paper3-scaling-laws",              artifact: "paper-3-scaling-laws" }
+          - { name: "Paper 4 - Bladder Resonance", dir: "projects/bladder-resonance/paper", artifact: "paper-4-bladder" }
+          - { name: "Paper 5 - Borborygmi",        dir: "projects/borborygmi/paper",        artifact: "paper-5-borborygmi" }
     steps:
       - uses: actions/checkout@v4
 
@@ -21,13 +23,11 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
-          working_directory: paper
-          latexmk_use_lualatex: false
-          latexmk_shell_escape: false
+          working_directory: ${{ matrix.paper.dir }}
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: browntone-paper
-          path: paper/main.pdf
+          name: ${{ matrix.paper.artifact }}
+          path: ${{ matrix.paper.dir }}/main.pdf
           retention-days: 30

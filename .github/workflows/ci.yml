@@ -7,8 +7,9 @@ on:
     branches: [main]
 
 jobs:
+  # -- Tests -----------------------------------------------------------------
   test-core:
-    name: Tests (no FEniCSx)
+    name: Tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,4 +25,78 @@ jobs:
         run: pip install -e ".[dev]"
 
       - name: Run tests
-        run: pytest -m "not fenics and not slow" --tb=short -q
+        run: python -m pytest tests/ -v -m "not fenics and not slow"
+
+  # -- Paper compilation -----------------------------------------------------
+  compile-papers:
+    name: "Compile ${{ matrix.paper.name }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        paper:
+          - { name: "Paper 1 - Brown Note",       dir: "paper",                           artifact: "paper-1-browntone" }
+          - { name: "Paper 2 - Gas Pockets",       dir: "paper2-gas-pockets",              artifact: "paper-2-gas-pockets" }
+          - { name: "Paper 3 - Scaling Laws",      dir: "paper3-scaling-laws",              artifact: "paper-3-scaling-laws" }
+          - { name: "Paper 4 - Bladder Resonance", dir: "projects/bladder-resonance/paper", artifact: "paper-4-bladder" }
+          - { name: "Paper 5 - Borborygmi",        dir: "projects/borborygmi/paper",        artifact: "paper-5-borborygmi" }
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: ${{ matrix.paper.dir }}
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.paper.artifact }}
+          path: ${{ matrix.paper.dir }}/main.pdf
+          retention-days: 30
+
+  # -- Consistency checks (PRs only) ----------------------------------------
+  consistency-check:
+    name: Consistency Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package
+        run: pip install -e ".[dev]"
+
+      - name: Run consistency checks
+        run: python scripts/check_consistency.py
+
+  # -- Figure generation (push to main only) ---------------------------------
+  generate-figures:
+    name: Generate Figures
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Generate figures
+        env:
+          MPLBACKEND: Agg
+        run: python scripts/generate_all_figures.py
+
+      - name: Upload figures
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-figures
+          path: data/figures/*.pdf
+          retention-days: 30
