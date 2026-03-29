@@ -1,0 +1,86 @@
+% =============================================================================
+% Section 1 — Introduction
+% =============================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+Anyone who has attended a rock concert, stood near a pipe organ in full
+voice, or visited an electronic dance music (EDM) event will recognise
+the sensation: a deep, visceral awareness of the bass that seems to
+bypass the ears and arrive directly in the gut.  Music fans describe
+this as ``feeling the bass,'' and sound engineers deliberately design
+sub-woofer arrays to maximise it~\cite{Leventhall2007, Moller2004}.
+But what, physically, is being felt?
+
+Two plausible pathways exist.  First, \emph{airborne acoustic coupling}:
+sound pressure waves impinge on the body wall, deform it, and excite
+internal resonances.  Second, \emph{structural (whole-body) vibration}:
+sound transmitted through the floor, seats, and skeleton shakes the
+torso directly.  For infrasound below \SI{20}{\hertz}, our companion
+study~\cite{Mace2026browntone} showed that airborne coupling to the
+abdominal cavity is negligibly weak: the Helmholtz number
+$ka \approx 0.011$ at the $n = 2$ flexural resonance
+(${\sim}\SI{4}{\hertz}$) imposes a $(ka)^n$ penalty that reduces
+effective driving pressure by four orders of magnitude.  Whole-body
+vibration, by contrast, couples directly at full amplitude, explaining
+the well-documented gastrointestinal disturbances reported under ISO~2631
+exposure conditions~\cite{iso2631, Griffin1990}.
+
+The sub-bass band (\SIrange{20}{80}{\hertz}), however, has not been
+examined in this framework.  This frequency range is of particular
+interest for three reasons:
+%
+\begin{enumerate}
+  \item \textbf{Concert relevance.}  The dominant spectral content of
+    modern amplified music---kick drums, bass guitars, synthesised
+    sub-bass---lies in the \SIrange{30}{80}{\hertz}
+    band~\cite{Gunderson2016, Opperman2006}.
+
+  \item \textbf{Coupling transition.}  At \SI{20}{\hertz},
+    $ka \approx 0.06$; at \SI{80}{\hertz}, $ka \approx 0.23$.  The
+    acoustic coupling coefficient $(ka)^n$ is therefore
+    \numrange{30}{400} times larger than at the \SI{4}{\hertz} flexural
+    resonance.  It is not \emph{a priori} obvious that the coupling
+    remains negligible.
+
+  \item \textbf{Psychoacoustic bridge.}  Sub-bass frequencies straddle
+    the boundary between hearing and whole-body vibration
+    perception~\cite{Todd2000, iso226}.  Understanding whether airborne
+    sound can produce visceral sensation at these frequencies connects
+    structural acoustics to psychoacoustics in a way that has not been
+    attempted quantitatively.
+\end{enumerate}
+
+Pipe organs provide an extreme case.  The 32-foot rank of a large organ
+produces a fundamental at \SI{16}{\hertz} with harmonics extending
+through the sub-bass band at sound pressure levels approaching
+\SI{105}{\decibel} in the nave~\cite{Bickerdike1966}.  Congregants have
+long reported physical sensations during full-organ passages, and these
+reports predate electrical amplification by centuries.
+
+In the electronic music domain, purpose-built sub-woofer arrays routinely
+produce \SIrange{110}{120}{\decibel} in the \SIrange{30}{60}{\hertz}
+band~\cite{Opperman2006}.  The ``drop''---a sudden onset of heavy
+sub-bass after a quiet passage---is a central aesthetic element of EDM,
+and its visceral impact is a deliberate design goal.
+
+Despite widespread anecdotal evidence and significant cultural
+importance, no study has quantitatively assessed whether airborne
+sub-bass at concert levels can produce physiologically meaningful tissue
+displacement in the human abdomen.  Existing work on whole-body vibration
+perception~\cite{Griffin1990, Mansfield2005} focuses on the mechanical
+pathway (floor and seat vibration), while studies of concert sound
+exposure~\cite{Gunderson2016, Opperman2006} focus on hearing damage
+rather than visceral perception.
+
+The present study addresses this gap.  We extend the fluid-filled
+viscoelastic oblate spheroidal shell model of Mace and
+Mace~\cite{Mace2026browntone} to the \SIrange{20}{80}{\hertz} band,
+compute energy-consistent tissue displacements at literature-derived
+concert sound pressure levels, and compare these with whole-body
+vibration perception thresholds from ISO~2631-1~\cite{iso2631}.  Our
+aim is to determine whether there exists a ``coupling transition band''
+in which airborne acoustic excitation becomes non-negligible---or
+whether the ``feel it in your gut'' experience at concerts is, like the
+brown note itself, a phenomenon that cannot be explained by airborne
+sound alone.

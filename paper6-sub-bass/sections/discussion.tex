@@ -1,0 +1,124 @@
+% =============================================================================
+% Section 4 — Discussion
+% =============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why bass ``feels'' different from treble}
+\label{sec:why-bass-feels}
+
+Our results demonstrate that airborne acoustic coupling to the abdominal
+cavity cannot explain the visceral sensation of concert sub-bass, even
+at the extreme sound pressure levels produced by modern sub-woofer
+arrays.  The improved $ka$-coupling at \SIrange{20}{80}{\hertz} is
+entirely offset by the off-resonance penalty: the abdomen's flexural
+resonance lies at ${\sim}\SI{4}{\hertz}$, and the $1/r^2$ roll-off of
+the SDOF transfer function dominates.
+
+The ``feel it in your gut'' experience must therefore arise through
+alternative pathways:
+%
+\begin{enumerate}
+  \item \textbf{Structural transmission.}  At concert venues, sub-bass
+    sound excites the floor, seats, and building structure.  This
+    mechanical vibration transmits through the skeleton and soft tissue
+    to the abdomen with transmissibility factors of
+    \numrange{1.5}{2.5}~\cite{Kitazaki1998, Griffin1990}.  At
+    \SI{40}{\hertz}, the displacement from floor vibration can easily
+    exceed perception thresholds.
+
+  \item \textbf{Chest-wall coupling.}  The large surface area of the
+    chest wall acts as a more efficient acoustic receiver than the
+    abdomen.  Chest-wall motion at sub-bass frequencies can produce
+    thoracic pressure fluctuations that are transmitted to the
+    abdominal cavity.
+
+  \item \textbf{Somatosensory stimulation.}  High-SPL sub-bass produces
+    measurable skin displacement.  Mechanoreceptors in the skin
+    (particularly Pacinian corpuscles, which are most sensitive at
+    \SIrange{200}{300}{\hertz} but respond down to
+    ${\sim}\SI{20}{\hertz}$) contribute to the tactile sensation of
+    bass~\cite{Todd2000}.
+
+  \item \textbf{Bone conduction.}  Sub-bass can excite the skull and
+    skeleton directly, stimulating the vestibular system and producing
+    a sensation that is perceived as ``visceral'' even though it does
+    not involve abdominal resonance.
+\end{enumerate}
+
+\subsection{Implications for concert sound design}
+\label{sec:concert-design}
+
+Sound engineers have long known empirically that sub-bass ``impact''
+requires physical coupling---hence the prevalence of tactile
+transducers (``butt-kickers'') in cinema seats and the careful
+placement of sub-woofer arrays to maximise floor
+vibration~\cite{Leventhall2007}.  Our results provide quantitative
+support for this practice: airborne sub-bass alone, no matter how loud,
+cannot produce the desired visceral sensation.  Effective bass
+reproduction at concert levels is fundamentally a \emph{structural
+vibration} problem, not an acoustics problem.
+
+This has practical implications for venue design.  Venues with
+vibration-isolating floors (e.g., floating concrete slabs) may
+inadvertently reduce the perceived ``punch'' of sub-bass, even if the
+acoustic field is unchanged.  Conversely, lightweight floors that
+transmit vibration efficiently will enhance the visceral experience.
+
+\subsection{Pipe-organ acoustics}
+\label{sec:pipe-organ}
+
+The pipe organ is a unique case because it produces extreme sub-bass
+levels (\SI{90}{\decibel} to \SI{105}{\decibel} at
+\SIrange{16}{50}{\hertz}) in enclosed stone buildings where floor
+vibration is minimal.  If the visceral sensation reported by
+congregants cannot be explained by airborne coupling (as our model
+predicts), then either (a)~the stone floor and pews do transmit
+sufficient vibration, (b)~the sensation arises from chest-wall or
+somatosensory pathways, or (c)~the reported sensation is primarily
+psychological---a learned association between low-frequency sound and
+physical presence.
+
+Distinguishing between these hypotheses would require in-situ
+measurements of seat and floor vibration in churches during organ
+performance, which we identify as a valuable direction for future
+experimental work.
+
+\subsection{Occupational exposure considerations}
+\label{sec:occupational}
+
+For occupational exposure (sound engineers, musicians, nightclub staff),
+the relevant regulatory framework is ISO~2631-1, which addresses
+whole-body vibration.  Our results confirm that the \emph{acoustic}
+component of sub-bass exposure does not contribute to vibration-induced
+health effects.  However, the structural vibration component---floor
+and seat vibration excited by the same sub-woofers---is a legitimate
+occupational health concern and should be assessed separately.
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+Several simplifications constrain the present analysis:
+%
+\begin{enumerate}
+  \item The spheroidal shell model assumes a uniform, isotropic wall.
+    The real abdominal wall is layered and anisotropic; however, these
+    refinements primarily affect the resonance frequency and quality
+    factor, not the fundamental coupling physics.
+
+  \item We consider only flexural modes.  The breathing mode
+    ($n = 0$, $f \approx \SI{2490}{\hertz}$) is driven efficiently by
+    uniform pressure but lies far above the sub-bass band.
+
+  \item Concert SPL spectra are taken from published measurements that
+    vary significantly between venues and events.  We use representative
+    values; actual exposure will differ.
+
+  \item The ISO~2631-1 perception thresholds are conservative for our
+    comparison because they describe whole-body perception via the
+    mechanical pathway.  True perception thresholds for airborne-induced
+    abdominal displacement may be even higher.
+
+  \item We do not model the chest wall, skin, or vestibular system,
+    which may contribute significantly to bass perception.
+\end{enumerate}
