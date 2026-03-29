@@ -66,12 +66,12 @@ The target venues reflect the programme's ambition: the \emph{Journal of Sound a
 
 \section{Accomplishments to Date}
 
-The programme has produced five papers in a single extended research campaign, each building on its predecessors to form a coherent narrative arc: from whole-cavity analysis, through local inclusions and cross-species scaling, to organ-level extension and clinical acoustics.
+The programme has produced eight papers in a single extended research campaign, each building on its predecessors to form a coherent narrative arc: from whole-cavity analysis, through local inclusions and cross-species scaling, to organ-level extension, clinical acoustics, applied sub-bass perception, agricultural diagnostics, and inverse-problem identifiability.
 
 \subsection{Paper 1 --- Modal Analysis of the Abdominal Cavity}
 
 \emph{Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the ``Brown Note''}\\
-Target: \emph{Journal of Sound and Vibration} ($\sim$44 pages)
+Target: \emph{Journal of Sound and Vibration} ($\sim$30 pages)
 
 The foundational paper models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$, $E = \SI{0.1}{\MPa}$). The analysis predicts a lowest flexural resonance at $f_2 \approx \SI{4.0}{\Hz}$, with higher modes at $f_3 \approx \SI{6.3}{\Hz}$ and $f_4 \approx \SI{8.9}{\Hz}$ --- precisely within the ISO~2631 band of peak human sensitivity to whole-body vibration. The breathing mode lies at approximately \SI{2500}{\Hz}, dominated by fluid bulk modulus and irrelevant to infrasound.
 
@@ -82,14 +82,14 @@ A 10{,}000-sample Monte Carlo uncertainty quantification identifies elastic modu
 \subsection{Paper 2 --- Gas Pockets as Acoustic Transducers}
 
 \emph{Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract}\\
-Target: \emph{JASA} ($\sim$16 pages)
+Target: \emph{JASA} ($\sim$18 pages)
 
 Where Paper~1 demonstrated that whole-cavity resonance cannot be driven acoustically, Paper~2 identifies the most plausible alternative pathway: intraluminal gas pockets acting as local acoustic transducers. Using a Church~(1995) encapsulated-bubble formulation adapted for intestinal wall properties, the model predicts that gas pockets of \SIrange{5}{100}{\mL} produce tissue-wall displacements \textbf{35--100 times} larger than the whole-cavity flexural mode at the same incident SPL. A \SI{100}{\mL} pocket reaches the PIEZO activation threshold at approximately \SI{111}{\dB}; the whole-cavity pathway requires over \SI{180}{\dB}. A 10{,}000-sample Monte Carlo population model shows that at \SI{120}{\dB}, nearly all simulated individuals exceed the mechanotransduction threshold, with median peak displacement of approximately \SI{1.2}{\micro\m}.
 
 \subsection{Paper 3 --- Cross-Species Scaling Laws}
 
 \emph{Scaling Laws for the Flexural Resonance of Fluid-Filled Viscoelastic Shells: Predictions Across Mammalian Scales}\\
-Target: \emph{Journal of Sound and Vibration --- Short Communication} ($\sim$11 pages)
+Target: \emph{Journal of Sound and Vibration --- Short Communication} ($\sim$8 pages)
 
 Paper~3 applies Buckingham Pi dimensional analysis to the 10-parameter shell model, reducing the flexural eigenfrequency problem to five governing dimensionless groups. A 1{,}458-point parametric study confirms algebraic consistency with maximum relative error of $7.9 \times 10^{-16}$. Cross-species predictions for rat ($f_2 = \SI{15.7}{\Hz}$), cat (\SI{7.2}{\Hz}), pig (\SI{4.5}{\Hz}), and human (\SI{3.9}{\Hz}) reveal a quasi-universal dimensionless frequency $\boldsymbol{\Pi_0 \approx 0.07}$ across a six-fold range in body size. The airborne scattering penalty $\mathcal{R}_\mathrm{scat}$ remains in the $10^3$--$10^4$ range regardless of species, validating the use of animal models for mechanical but not acoustic excitation studies.
 
@@ -106,6 +106,27 @@ Paper~4 extends the analytical framework to the urinary bladder, a smaller, thin
 Target: \emph{JASA} ($\sim$20 pages)
 
 Paper~5 completes the arc by turning from vibration response to sound \emph{generation}. A unified five-mechanism model --- free Minnaert oscillation, tissue-constrained bubble resonance, Helmholtz resonance through peristaltic constrictions, axial piston modes, and radial breathing of gas columns --- predicts bowel sound frequencies from measurable anatomical parameters with no fitted coefficients. The tissue-constrained bubble model predicts \SIrange{135}{440}{\Hz} for gas pockets of \SIrange{1}{50}{\mL}, substantially overlapping the clinically observed healthy band of \SIrange{200}{550}{\Hz}. Wall stiffness proves secondary: a 100-fold increase in elastic modulus shifts the constrained frequency by only 9\%.
+
+\subsection{Paper 6 --- Sub-Bass Perception at Concerts}
+
+\emph{Can You Feel the Bass? Quantitative Partition of Airborne and Structure-Borne Pathways for Sub-Bass Perception at Concert Sound Pressure Levels}\\
+Target: \emph{JASA} ($\sim$18 pages)
+
+Paper~6 extends the abdomen shell model into the \SIrange{20}{80}{\Hz} sub-bass band to ask whether the ``feel it in your gut'' experience at concerts can be caused by airborne sub-bass alone. The analysis combines acoustic coupling, off-resonance response, and whole-body-vibration perception thresholds into a quantitative pathway partition. At \SI{40}{\Hz} and \SI{115}{\dB}~SPL (typical EDM levels), airborne displacement reaches only 0.35\% of the perception threshold, while structure-borne vibration through floors and seats is approximately $2{,}600\times$ larger and reaches $9\times$ threshold. Uncertainty quantification gives a floor-to-airborne ratio of 2{,}040--3{,}060 (90\% CI). Across \SIrange{1}{100}{\Hz}, airborne displacement \emph{never} exceeds 1\% of the perception threshold, despite the Helmholtz number rising from 0.011 at \SI{3.95}{\Hz} to 0.23 at \SI{80}{\Hz}. The paper reframes the question from ``can bass be felt?'' to ``which pathway is actually doing the work?''
+
+\subsection{Paper 7 --- Watermelon Ripeness}
+
+\emph{Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Equivalent-Sphere Shell Resonance Inversion}\\
+Target: \emph{Postharvest Biology and Technology} ($\sim$19 pages)
+
+Paper~7 demonstrates that the fluid-filled shell framework generalises beyond human organs to agricultural applications. The traditional watermelon ``thump test'' is reformulated as a physics-based inverse problem: the fruit is modelled as a fluid-filled viscoelastic shell whose dominant tap-tone frequency can be inverted in closed form to recover rind elastic modulus, which tracks ripeness through pectin degradation. The predicted tap-tone drops from \SI{203}{\Hz} (unripe) to \SI{46}{\Hz} (overripe), a $4.4\times$ reduction as rind modulus falls from \SI{200}{\MPa} to \SI{15}{\MPa}. The key insight is that $f_2^2$ is effectively linear in rind modulus ($R^2 > 0.9999$), making the inversion simple and well-conditioned. Sobol sensitivity analysis confirms rind modulus as the dominant parameter ($S_T = 0.54$), and a geometric invariant $\Pi_\mathrm{ripe} = 0.062 \pm 0.002$ holds across four cultivars.
+
+\subsection{Paper 8 --- Kac Identifiability}
+
+\emph{Can You Hear the Shape of an Organ? Practical Identifiability of Viscoelastic Shell Parameters from Resonant Frequencies}\\
+Target: \emph{Inverse Problems} ($\sim$15 pages)
+
+Paper~8 reframes the programme's inverse problem as a Kac-style question: given measured low-order resonant frequencies, can one recover the geometry and stiffness of an unknown organ? The paper provides a two-layer analytical answer. \textbf{Layer~1} (chain-rule rank deficiency) proves that if frequencies depend on geometry only through the equivalent radius $R_\mathrm{eq} = (a^2 c)^{1/3}$, then the Jacobian columns for semi-major and semi-minor axes are proportional and the system is rank-deficient. \textbf{Layer~2} (mode-dependent curvature sampling) shows that oblate eccentricity introduces mode-dependent $O(\varepsilon^2)$ corrections that break this proportionality, restoring full rank. The scaled condition number drops from $\kappa = 1.1 \times 10^{10}$ (spherical) to $\kappa = 73$ (canonical oblate), an improvement of $1.5 \times 10^8$. Round-trip inversion recovers $(a, c, E)$ to relative errors below $10^{-12}$, while at 1\% frequency noise the Cram\'{e}r--Rao lower bounds are approximately $\pm 37\%$ for $a$, $\pm 13\%$ for $c$, and $\pm 36\%$ for $E$.
 
 \section{Methodological Contributions}
 
@@ -133,7 +154,9 @@ The programme itself constitutes a methodological experiment. Twenty specialised
 
 \subsection{Near-Term: Submission and Peer Review}
 
-The immediate priority is external peer review. Papers~1 and~2 are submission-ready and will be submitted first. Paper~3 follows as a short communication. Papers~4 and~5, in active development, will be submitted as the earlier papers progress through review.
+The immediate priority is external peer review. Papers~1 and~2 are submission-ready with cover letters completed and will be submitted first to JSV and JASA respectively. Paper~3 is under revision as a JSV short communication. Paper~4 has addressed minor revisions. Papers~5 and~6 have been accepted internally under the three-reviewer panel protocol. Paper~7 has addressed Reviewer~B's minor-revision verdict. Paper~8 is in active development, with Layer~1 and Layer~2 analytical proofs being added to establish the chain-rule rank deficiency and mode-dependent curvature sampling results on rigorous footing.
+
+A mathematical framework consultation --- in which Dietrich (emeritus vibroacoustics collaborator), the Provocateur (adversarial strategist), and the Coffee Machine Guru (metacognitive mentor) were consulted independently --- produced \textbf{unanimous advice}: complete Layers~1 and~2, publish with those results, and pose the full spectral characterisation (Layer~3) as an open problem for the inverse-problems community. This consensus has been adopted as the programme's submission strategy for Paper~8.
 
 \subsection{Medium-Term: Experimental Validation}
 
@@ -157,7 +180,7 @@ Three experimental programmes would test the predictions directly:
 
 \subsection{From Folklore to Framework}
 
-The programme demonstrates that folklore can be a legitimate starting point for rigorous science. The brown note hypothesis, dismissed by most acousticians as a joke, led to the first systematic analysis of abdominal vibroacoustic resonance --- and thence to a five-paper portfolio spanning cavity mechanics, bubble dynamics, scaling laws, organ extension, and clinical acoustics. The lesson is not that folklore is reliable, but that the effort required to \emph{disprove} it rigorously often produces frameworks of independent value.
+The programme demonstrates that folklore can be a legitimate starting point for rigorous science. The brown note hypothesis, dismissed by most acousticians as a joke, led to the first systematic analysis of abdominal vibroacoustic resonance --- and thence to an eight-paper portfolio spanning cavity mechanics, bubble dynamics, scaling laws, organ extension, clinical acoustics, sub-bass perception, agricultural diagnostics, and inverse-problem identifiability. The lesson is not that folklore is reliable, but that the effort required to \emph{disprove} it rigorously often produces frameworks of independent value.
 
 \subsection{Generalisable Framework}
 
@@ -170,15 +193,21 @@ The programme is, to our knowledge, among the first to employ a structured multi
 \section{Selected Publications}
 
 \begin{enumerate}[leftmargin=*]
-  \item J.~Mace and B.\,R.~Mace, ``Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the `Brown Note','' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$44\,pp.)
+  \item J.~Mace and B.\,R.~Mace, ``Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the `Brown Note','' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$30\,pp.)
 
-  \item J.~Mace and B.\,R.~Mace, ``Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$16\,pp.)
+  \item J.~Mace and B.\,R.~Mace, ``Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$18\,pp.)
 
-  \item J.~Mace and B.\,R.~Mace, ``Scaling Laws for the Flexural Resonance of Fluid-Filled Viscoelastic Shells: Predictions Across Mammalian Scales,'' \emph{Journal of Sound and Vibration --- Short Communication}, in preparation, 2026. ($\sim$11\,pp.)
+  \item J.~Mace and B.\,R.~Mace, ``Scaling Laws for the Flexural Resonance of Fluid-Filled Viscoelastic Shells: Predictions Across Mammalian Scales,'' \emph{Journal of Sound and Vibration --- Short Communication}, in preparation, 2026. ($\sim$8\,pp.)
 
   \item J.~Mace and B.\,R.~Mace, ``Resonant Frequencies of the Human Urinary Bladder: A Fluid-Filled Viscoelastic Shell Model,'' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$27\,pp.)
 
   \item J.~Mace and B.\,R.~Mace, ``What Pitch Is a Growling Stomach? A Unified Multi-Mode Acoustic Model of Borborygmi,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$20\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``Can You Feel the Bass? Quantitative Partition of Airborne and Structure-Borne Pathways for Sub-Bass Perception at Concert Sound Pressure Levels,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$18\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Equivalent-Sphere Shell Resonance Inversion,'' \emph{Postharvest Biology and Technology}, in preparation, 2026. ($\sim$19\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``Can You Hear the Shape of an Organ? Practical Identifiability of Viscoelastic Shell Parameters from Resonant Frequencies,'' \emph{Inverse Problems}, in preparation, 2026. ($\sim$15\,pp.)
 \end{enumerate}
 
 \section{Current Status}
