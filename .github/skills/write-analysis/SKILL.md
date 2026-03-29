@@ -60,7 +60,7 @@ All new functions need corresponding tests in `tests/`. Run with:
 cd C:\Users\jon\OneDrive\Projects\browntone
 python -m pytest tests/ -v
 ```
-Currently 198 tests, all passing. Do not break them.
+Currently 203 tests, all passing. Do not break them.
 
 ## Key Physics Reminders
 

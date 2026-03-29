@@ -28,7 +28,7 @@ cd C:\Users\jon\OneDrive\Projects\browntone
 python scripts/generate_all_figures.py
 ```
 
-## Current Figure Set (12 figures)
+## Core Figure Set
 
 | # | File | Content |
 |---|------|---------|
