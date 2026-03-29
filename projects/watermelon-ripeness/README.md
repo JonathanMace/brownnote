@@ -38,7 +38,7 @@ Key contributions:
 | Semi-major axis *a* | 0.158 | m | Typical ~31.5 cm |
 | Semi-minor axis *c* | 0.123 | m | Typical ~24.6 cm |
 | Rind thickness *h* | 0.015 | m | 12–20 mm |
-| Rind E | 2.0 | MPa | Decreases with ripening |
+| Rind E | 50 | MPa | Decreases with ripening |
 | Flesh density | 950 | kg/m³ | 928–974 from literature |
 | Loss tangent η | 0.15 | — | More damping when ripe |
 
