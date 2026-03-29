@@ -21,6 +21,7 @@ from analytical.borborygmi_model import (
     mode_transition_map,
     ALL_MODES,
     CLINICAL_DATA,
+    FIG_DIR,
 )
 
 
@@ -387,3 +388,8 @@ class TestPlotModeTransitionMap:
         # Check log scales
         assert axes[0].get_xscale() == "log"
         assert axes[0].get_yscale() == "log"
+
+
+def test_borborygmi_paper_figure_directory_points_to_manuscript_folder():
+    """Publication figures should save beside the borborygmi manuscript."""
+    assert FIG_DIR.parts[-3:] == ("borborygmi", "paper", "figures")
