@@ -55,6 +55,10 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
 
+
+### Research Statement
+**[Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)** — Research vision, accomplishments, and trajectory for the Browntone programme.
+
 ## The Punchline
 
 The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intuition is not completely mad. What fails is the coupling: even at 120 dB SPL, the energy-consistent airborne displacement is only about 0.014 μm, around four orders of magnitude below mechanotransduction thresholds. Whole-body vibration, by contrast, produces millimetre-scale effective excitation of the relevant mode. In short: the “brown note” is a mechanical story misremembered as an acoustic one.
