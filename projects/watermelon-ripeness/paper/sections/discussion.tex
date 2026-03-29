@@ -1,0 +1,96 @@
+\section{Discussion}
+\label{sec:discussion}
+
+% =============================================================================
+% 5.1  Physical interpretation: why frequency drops with ripening
+% =============================================================================
+\subsection{Why the tap-tone drops with ripening}
+\label{sec:physical_interp}
+
+The monotonic decrease in tap-tone frequency during ripening
+(Fig.~\ref{fig:ripening_sweep}) has a straightforward physical
+explanation.  As the fruit ripens, enzymatic degradation of pectin in the
+rind cell walls reduces the effective Young's modulus
+$E_{\mathrm{rind}}$.  Since $f_2 \propto \sqrt{E_{\mathrm{rind}}}$
+(Eq.~\ref{eq:f2_squared}), the frequency falls.  This is precisely the
+information that experienced shoppers extract unconsciously: a lower pitch
+signals a softer, riper melon.
+
+The frequency shift is not driven by changes in fluid density or fruit
+geometry, both of which vary by less than $\SI{5}{\percent}$ over the
+ripening window.  The Sobol analysis (\S\ref{sec:sobol}) confirms that
+$E_{\mathrm{rind}}$ is the dominant parameter, contributing more than
+half the total variance.
+
+% =============================================================================
+% 5.2  Connection to biomedical FSI
+% =============================================================================
+\subsection{Connection to biomedical vibroacoustics}
+\label{sec:biomedical}
+
+The shell model employed here is structurally identical to the one
+developed in our companion papers for the human abdomen.  Both systems
+are fluid-filled, viscoelastic, oblate spheroidal shells; only the
+material parameters differ.  The watermelon rind
+($E \sim \SIrange{2}{20}{\mega\pascal}$) is considerably stiffer than
+the abdominal wall ($E \sim \SI{0.1}{\mega\pascal}$), which shifts the
+eigenfrequencies upward by roughly an order of magnitude---from
+$\sim\SI{4}{\hertz}$ for the abdomen to $\sim\SIrange{80}{200}{\hertz}$
+for watermelons.
+
+This connection is more than a mathematical curiosity.  It demonstrates
+that a single theoretical framework, rooted in Lamb's classical shell
+theory~\cite{lamb1882} and the Junger--Feit fluid-loading
+formulation~\cite{Junger1986}, can span applications from clinical
+diagnostics to agricultural quality assessment.
+
+% =============================================================================
+% 5.3  Limitations
+% =============================================================================
+\subsection{Limitations}
+\label{sec:limitations}
+
+Several simplifications deserve acknowledgement:
+
+\begin{itemize}
+  \item \textbf{Isotropic rind.}  The watermelon rind is a biological
+    composite with fibre orientation that may induce anisotropy.  We
+    treat it as isotropic; orthotropic extensions are straightforward
+    but require additional material characterisation.
+
+  \item \textbf{Uniform thickness.}  Real rinds are thicker near the
+    blossom end.  Thickness variation could be incorporated via
+    perturbation methods but is unlikely to shift $f_2$ by more than
+    $\sim\SI{10}{\percent}$.
+
+  \item \textbf{Flesh as inviscid fluid.}  Watermelon flesh has finite
+    shear strength.  At the frequencies of interest
+    ($\sim\SI{100}{\hertz}$), the flesh is well within the
+    fluid-like regime ($\omega \tau \ll 1$, where $\tau$ is the
+    viscoelastic relaxation time), so this approximation is reasonable.
+
+  \item \textbf{Turgor pressure.}  We neglect internal turgor pressure,
+    which stiffens the shell.  For ripe fruit with degraded cell
+    walls, this is appropriate; for very unripe fruit, turgor may
+    contribute a correction of order $\SI{10}{\percent}$.
+\end{itemize}
+
+% =============================================================================
+% 5.4  Practical implications
+% =============================================================================
+\subsection{Practical implications}
+\label{sec:practical}
+
+The closed-form inversion (Eq.~\ref{eq:inversion}) is computationally
+trivial and could be implemented in a smartphone application.  A
+microphone records the tap-tone, a fast Fourier transform extracts
+$f_2$, and the inversion formula returns $E_{\mathrm{rind}}$ given
+approximate fruit dimensions (obtainable from a photograph).  The
+dimensionless ripeness parameter $\Pi_{\mathrm{ripe}}$ then maps the
+result onto a cultivar-independent ripeness scale.
+
+This approach offers several advantages over existing non-destructive
+methods (near-infrared spectroscopy, impact testing with accelerometers):
+it requires no specialised hardware, is non-contact (or nearly so---one
+need only tap), and provides a physics-based rather than purely
+statistical estimate of internal quality.

@@ -1,0 +1,78 @@
+\section{Introduction}
+\label{sec:introduction}
+
+% --- The thump test as universal folklore ------------------------------------
+
+Every summer, shoppers worldwide perform an instinctive acoustic
+experiment: they tap a watermelon with their knuckles and listen.  A
+deep, resonant thump signals ripeness; a dull thud suggests an
+under-ripe fruit; a hollow ring warns that the flesh has turned mealy.
+This `thump test'' is remarkably consistent across cultures, yet it has
+never been given a quantitative physical model that connects the tap-tone
+frequency to the measurable mechanical properties of the fruit.
+
+% --- Existing empirical work -------------------------------------------------
+
+Yamamoto et al.~\cite{Yamamoto1980} pioneered the acoustic impulse
+response method, demonstrating that the natural frequencies of intact
+fruits correlate with texture parameters.  De Belie et
+al.~\cite{DeBelieetal2000} extended the approach to pears, and Abbott et
+al.~\cite{Abbott1997} surveyed the broader landscape of non-destructive
+evaluation technologies for horticultural produce.  Chen and De
+Baerdemaeker~\cite{ChenDeBaerdemaeker1993} applied modal analysis to
+pineapples, linking resonant behaviour to firmness.  These studies
+established empirical correlations but relied on statistical regression
+rather than a mechanics-based forward model.
+
+% --- The gap: no physics-based shell model -----------------------------------
+
+What is missing is a first-principles model that treats the fruit as what
+it physically is: a fluid-filled viscoelastic shell.  Such a model would
+not merely correlate frequency with firmness but would \emph{explain} the
+relationship through shell eigenfrequency theory, and---crucially---would
+admit an \emph{inversion} from a single measured frequency to the elastic
+modulus of the rind.
+
+% --- Connection to prior work on biological cavities -------------------------
+
+The mathematical framework for this problem already exists.  In our
+companion papers, we modelled the human abdomen as a fluid-filled oblate
+spheroidal shell and derived closed-form expressions for its modal
+frequencies~\cite{Junger1986, lamb1882, Leissa1973}.  The watermelon
+presents a structurally analogous problem---an oblate spheroid with a
+thin elastic rind enclosing a near-incompressible fluid---albeit with
+different material parameters and a far more appetising motivation.
+
+% --- Mark Kac and the inverse problem ----------------------------------------
+
+The title of this paper echoes Kac's celebrated question, `Can one hear
+the shape of a drum?''~\cite{Kac1966}.  We pose a related but distinct
+inverse problem: \emph{Can one hear the ripeness of a watermelon?}  We
+show that the answer is yes, at least for the dominant flexural mode
+$n = 2$, and that the inversion admits a closed-form solution.
+
+% --- Contribution and paper outline ------------------------------------------
+
+In this paper, we:
+\begin{enumerate}
+  \item derive the tap-tone eigenfrequency $f_2$ for a fluid-filled
+    oblate spheroidal shell parameterised by rind thickness, elastic
+    modulus, geometry, and flesh density;
+  \item perform Sobol sensitivity analysis to identify the dominant
+    parameter (the rind elastic modulus $E_{\mathrm{rind}}$);
+  \item exploit the linearity of $f_2^2$ in $E_{\mathrm{rind}}$ to
+    construct a closed-form inversion from a single tap-tone measurement;
+  \item introduce a dimensionless ripeness parameter
+    $\Pi_{\mathrm{ripe}}$ that collapses cultivar-dependent predictions
+    onto a universal master curve; and
+  \item validate the model against published resonance measurements on
+    watermelons and other fruits.
+\end{enumerate}
+
+The remainder of the paper is organised as follows.
+Section~\ref{sec:formulation} presents the mathematical formulation.
+Section~\ref{sec:results} gives the forward model predictions, Sobol
+analysis, and universal curve.  Section~\ref{sec:validation} compares
+predictions with published data.  Section~\ref{sec:discussion}
+discusses the physical interpretation and practical implications.
+Section~\ref{sec:conclusion} concludes.

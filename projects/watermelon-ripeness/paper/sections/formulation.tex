@@ -1,0 +1,120 @@
+\section{Mathematical Formulation}
+\label{sec:formulation}
+
+% =============================================================================
+% 2.1  Geometry and coordinate system
+% =============================================================================
+\subsection{Oblate spheroidal shell model}
+\label{sec:geometry}
+
+We model the watermelon as an oblate spheroid with semi-major axis $a$
+(equatorial radius), semi-minor axis $c$ (polar radius), and uniform
+rind thickness $h$.  The aspect ratio is defined as
+$\zeta = c/a$,
+where $\zeta < 1$ corresponds to the characteristic oblate shape of most
+commercial watermelon cultivars ($\zeta \approx 0.5$--$0.7$ for
+elongated varieties; $\zeta \approx 0.8$--$0.9$ for round cultivars).
+The equivalent-volume sphere has radius
+\begin{equation}
+  R_{\mathrm{eq}} = \left( a^2 c \right)^{1/3}.
+  \label{eq:Req}
+\end{equation}
+
+The rind is treated as a thin, isotropic, viscoelastic shell with Young's
+modulus $E_{\mathrm{rind}}$, Poisson's ratio $\nu$, density
+$\rho_w$, and structural loss factor $\eta$.  The enclosed flesh is
+modelled as an inviscid, nearly incompressible fluid with density
+$\rho_f$ and bulk modulus $K_f$.
+
+% TODO: Add schematic figure
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=0.6\textwidth]{figures/fig_watermelon_schematic}
+%   \caption{Geometry of the oblate spheroidal shell model.  The
+%     watermelon is characterised by semi-major axis~$a$, semi-minor
+%     axis~$c$, rind thickness~$h$, and flesh properties
+%     ($\rho_f$, $K_f$).  The coordinate system and modal
+%     decomposition are indicated.}
+%   \label{fig:schematic}
+% \end{figure}
+
+% =============================================================================
+% 2.2  Eigenfrequency derivation
+% =============================================================================
+\subsection{Eigenfrequency of the flexural mode}
+\label{sec:eigenfreq}
+
+For a thin spheroidal shell filled with fluid, the natural frequency of
+the $n$	h flexural mode may be written in the general form
+\begin{equation}
+  f_n = \frac{1}{2\pi}
+  \sqrt{
+    \frac{E_{\mathrm{rind}}\, h}{\rho_{\mathrm{eff}}\, R_{\mathrm{eq}}^3}
+    \, \mathcal{G}_n(\nu, \zeta)
+  },
+  \label{eq:fn_general}
+\end{equation}
+where $\mathcal{G}_n(\nu, \zeta)$ is a dimensionless geometric factor
+that depends on the mode number~$n$, Poisson's ratio~$\nu$, and the
+aspect ratio~$\zeta$, and $\rho_{\mathrm{eff}}$ is an effective
+density incorporating the fluid loading,
+\begin{equation}
+  \rho_{\mathrm{eff}} = \rho_w h + \rho_f\, R_{\mathrm{eq}}\,
+    \mathcal{F}_n(\zeta),
+  \label{eq:rho_eff}
+\end{equation}
+where $\mathcal{F}_n(\zeta)$ is the fluid-loading shape factor for
+mode~$n$ \cite{Junger1986, lamb1882}.
+
+The dominant tap-tone mode is the lowest flexural mode, $n = 2$.  For
+this mode, the squared frequency is
+\begin{equation}
+  f_2^2 = \frac{E_{\mathrm{rind}}\, h\, \mathcal{G}_2(\nu, \zeta)}
+    {4\pi^2\, \rho_{\mathrm{eff}}\, R_{\mathrm{eq}}^3}.
+  \label{eq:f2_squared}
+\end{equation}
+
+\noindent A key observation: $f_2^2$ is \emph{exactly linear} in
+$E_{\mathrm{rind}}$ when turgor pressure is negligible.  This linearity
+is the foundation of the closed-form inversion developed in
+\S\ref{sec:inversion}.
+
+% TODO: Derive explicit G_2 for oblate spheroid from Rayleigh-Ritz
+
+% =============================================================================
+% 2.3  Closed-form inversion
+% =============================================================================
+\subsection{Inversion: from tap-tone to rind modulus}
+\label{sec:inversion}
+
+Rearranging Eq.~\eqref{eq:f2_squared} for $E_{\mathrm{rind}}$ gives
+\begin{equation}
+  \boxed{
+    E_{\mathrm{rind}} = \frac{4\pi^2\, \rho_{\mathrm{eff}}\,
+      R_{\mathrm{eq}}^3}{h\, \mathcal{G}_2(\nu, \zeta)}\, f_2^2.
+  }
+  \label{eq:inversion}
+\end{equation}
+Thus a single measurement of the tap-tone frequency~$f_2$, combined
+with knowledge (or estimation) of the fruit geometry and flesh density,
+yields the rind elastic modulus directly.
+
+% =============================================================================
+% 2.4  Dimensional analysis and the ripeness parameter
+% =============================================================================
+\subsection{Dimensionless ripeness parameter}
+\label{sec:Pi_ripe}
+
+To collapse predictions across cultivars, we define the dimensionless
+ripeness parameter
+\begin{equation}
+  \Pi_{\mathrm{ripe}} = \frac{f_2^2\, \rho_f\, R_{\mathrm{eq}}^3}
+    {E_{\mathrm{rind}}\, h},
+  \label{eq:Pi_ripe}
+\end{equation}
+which, from Eq.~\eqref{eq:f2_squared}, should equal a universal constant
+$\mathcal{G}_2(\nu, \zeta) / (4\pi^2)$ for geometrically similar
+fruits.  Deviations from the master curve indicate cultivar-specific
+geometry or constitutive effects.
+
+% TODO: Tabulate canonical parameters for each cultivar
