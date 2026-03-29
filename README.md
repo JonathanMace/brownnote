@@ -1,4 +1,10 @@
-Among the many questions that humanity has posed to the universe — the nature of consciousness, the origin of dark matter, the thermodynamic arrow of time — one has proven uniquely resistant to serious academic inquiry: can sound make you soil yourself? The hypothesis, known colloquially as the “brown note,” posits that infrasound at some critical frequency might induce involuntary gastrointestinal distress. Despite decades of anecdote, no rigorous analytical treatment existed. We found this oversight unacceptable. This repository models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derives its modal characteristics from first principles, and determines — with what we believe is an unprecedented level of analytical formality — that the answer is almost certainly no. The flexural resonance sits comfortably in the infrasonic band, but the airborne acoustic energy required to drive it meaningfully exceeds anything achievable outside of a Saturn V launch. Whole-body vibration is another matter entirely, which is why we wrote five papers instead of one.
+Among the many questions that humanity has posed to the universe — the nature of consciousness, the origin of dark matter, the thermodynamic arrow of time — one has proven uniquely resistant to serious academic inquiry: can sound make you soil yourself? 
+
+The hypothesis, known colloquially as the “brown note,” posits that infrasound at some critical frequency might induce involuntary gastrointestinal distress. Despite decades of anecdote, no rigorous analytical treatment existed. We found this oversight unacceptable. 
+
+This repository models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derives its modal characteristics from first principles, and determines — with what we believe is an unprecedented level of analytical formality — that the answer is almost certainly no. The flexural resonance sits comfortably in the infrasonic band, but the airborne acoustic energy required to drive it meaningfully exceeds anything achievable outside of a Saturn V launch. 
+
+Whole-body vibration is another matter entirely, which is why we wrote five papers instead of one.
 
 ## Papers
 
