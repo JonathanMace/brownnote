@@ -6,7 +6,7 @@ The hypothesis, known colloquially as the “brown note,” posits that infrasou
 
 This repository models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derives its modal characteristics from first principles, and determines — with what we believe is an unprecedented level of analytical formality — that the answer is almost certainly no. The flexural resonance sits comfortably in the infrasonic band, but the airborne acoustic energy required to drive it meaningfully exceeds anything achievable outside of a Saturn V launch. 
 
-Whole-body vibration is another matter entirely, which is why we wrote five papers instead of one.
+Whole-body vibration is another matter entirely, which is why we wrote six papers instead of one.
 
 ## Papers
 
@@ -55,6 +55,15 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
 
+### Paper 6 — *Can You Feel the Bass?*
+**Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
+**Status:** Early draft (scaffolded)  
+**Target venue:** *JSV or JASA*  
+**Location:** `paper6-sub-bass/`  
+**Key finding (preliminary):** Airborne acoustic coupling produces tissue displacement ~4 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway.
+
+If concert bass feels visceral, is the abdomen actually being driven by airborne sound? This early draft compares predicted sub-bass-induced tissue motion against perception thresholds and finds the airborne pathway falls roughly four orders of magnitude short even at concert SPL. The dominant pathway is structure-borne vibration transmitted through floors and seating, not direct acoustic coupling.
+
 
 ### Research Statement
 **[Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)** — Research vision, accomplishments, and trajectory for the Browntone programme.
@@ -76,7 +85,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **340 commits**, **167 pull requests merged**, **206 tests passing**, **20 custom agents**, **16 reusable skills**, **72+ research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **340 commits**, **167 pull requests merged**, **235 tests passing**, **20 custom agents**, **16 reusable skills**, **72+ research logs**, and about **24 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
@@ -130,6 +139,7 @@ browntone/
 ├── projects/
 │   ├── bladder-resonance/       # Paper 4
 │   └── borborygmi/              # Paper 5
+├── paper6-sub-bass/             # Paper 6: sub-bass coupling
 ├── src/analytical/              # Core analytical models
 ├── tests/                       # Pytest regression suite
 ├── docs/research-logs/          # Quantitative research logs
@@ -138,7 +148,7 @@ browntone/
 
 ## Tests
 
-The analytical suite currently has **206 passing tests**. From the repository root:
+The analytical suite currently has **235 passing tests**. From the repository root:
 
 ```bash
 python -m pytest tests/ -v
