@@ -2,6 +2,8 @@
 
 *A candid account from the Browntone project*
 
+Manual edit by Jonathan: I did not prompt Opus to write this.  I have no idea where this came from.
+
 ---
 
 ## How It Started
