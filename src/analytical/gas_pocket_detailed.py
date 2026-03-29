@@ -55,7 +55,7 @@ from pathlib import Path
 # Physical constants
 # ---------------------------------------------------------------------------
 GAMMA = 1.4           # specific-heat ratio (air/gas mix)
-P0 = 101325.0         # atmospheric + mean intra-abdominal pressure [Pa]
+P0 = 101325.0         # atmospheric pressure [Pa]
 RHO_TISSUE = 1020.0   # surrounding tissue density [kg/m³]
 E_WALL = 10.0e3       # intestinal wall Young's modulus [Pa]
 NU_WALL = 0.45        # Poisson's ratio
@@ -434,7 +434,7 @@ def population_gas_model(
 
     # Total bowel gas — log-normal, median ~200 mL, heavy right tail
     log_mu = np.log(200.0)
-    log_sigma = 0.65  # gives 95% CI ≈ [70, 570] mL, tail to ~1500
+    log_sigma = 0.65  # gives 95% CI ≈ [56, 715] mL, tail to ~1500
     total_gas_mL = rng.lognormal(log_mu, log_sigma, n_individuals)
     total_gas_mL = np.clip(total_gas_mL, 30.0, 2000.0)
 

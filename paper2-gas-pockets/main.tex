@@ -79,7 +79,7 @@ converting pressure oscillations to local wall strain far more efficiently
 than whole-cavity resonance.  A constrained-bubble model---Minnaert dynamics
 modified for the elastic intestinal wall and cylindrical lumen geometry---shows
 that gas pockets of \SIrange{5}{100}{\milli\litre} have resonant frequencies
-in the hundreds of hertz but sub-resonantly amplify tissue displacement as
+from tens to hundreds of hertz, depending on geometry, but sub-resonantly amplify tissue displacement as
 compliant inclusions in an otherwise stiff medium.  The SPL threshold for
 activating \piezo{} mechanosensitive ion channels ranges from
 \SI{111}{\decibel} (\SI{100}{\milli\litre} pocket) to \SI{120}{\decibel}
@@ -190,7 +190,7 @@ Canonical parameter values are listed in Table~\ref{tab:params}.
 Symbol & Description & Value & Source \\
 \midrule
 $\gamma$   & Specific-heat ratio (air) & 1.4 & --- \\
-$P_0$      & Ambient + intra-abdominal pressure & \SI{101325}{\pascal} & --- \\
+$P_0$      & Ambient (atmospheric) pressure & \SI{101325}{\pascal} & --- \\
 $\rho_f$   & Tissue/fluid density & \SI{1020}{\kilo\gram\per\metre\cubed} & \citet{Fung1993} \\
 $E_w$      & Intestinal wall Young's modulus & \SI{10}{\kilo\pascal} & \citet{Gregersen2000} \\
 $\nu_w$    & Intestinal wall Poisson's ratio & 0.45 & \citet{Fung1993} \\
@@ -301,7 +301,8 @@ resonance frequencies range from $\sim$\SI{30}{\hertz} (large cylindrical
 pockets, axial mode) to $\sim$\SI{440}{\hertz} (small spherical pockets
 with elastic wall).  Because wall stiffness adds little and wall mass
 lowers $f_0$ below the free-bubble Minnaert value, the constrained
-spherical frequencies are roughly 80--90\% of~$f_M$
+spherical frequencies are roughly 89--96\% of~$f_M$ for clinically
+relevant volumes of \SIrange{5}{100}{\milli\litre}
 (Table~\ref{tab:freq}).  All resonances remain well above
 \SI{20}{\hertz}---i.e.\ above the conventional infrasound boundary.  This
 is a critical distinction from earlier analyses that sought resonance
@@ -439,7 +440,7 @@ $N = 10\,000$ individuals with:
 \begin{itemize}
   \item Total bowel gas volume drawn from a log-normal distribution with
         median \SI{200}{\milli\litre} and $\sigma_{\ln} = 0.65$, giving a
-        95\% CI of approximately \SIrange{70}{570}{\milli\litre} and a
+        95\% CI of approximately \SIrange{56}{715}{\milli\litre} and a
         heavy right tail extending to $\sim$\SI{1500}{\milli\litre};
   \item Number of discrete pockets $N_p \sim \text{Poisson}(\lambda=10)$,
         clipped to $[2,\,40]$;
@@ -462,9 +463,10 @@ $\xi_\text{PIEZO}$ is recorded.
 \label{sec:res_freq}
 
 Table~\ref{tab:freq} summarizes the resonance frequencies for
-representative gas pocket sizes.  Spherical pocket resonances exceed
-\SI{600}{\hertz} for all volumes studied, and the cylindrical radial
-(breathing) mode lies at $\sim$\SI{1300}{\hertz}.  However, cylindrical
+representative gas pocket sizes.  Spherical pocket resonances range from
+approximately \SI{108}{\hertz} at \SI{100}{\milli\litre} to
+\SI{438}{\hertz} at \SI{1}{\milli\litre}, and the cylindrical radial
+(breathing) mode lies at $\sim$\SI{162}{\hertz}.  However, cylindrical
 \emph{axial} (piston) modes fall below \SI{100}{\hertz} for pockets larger
 than $\sim$\SI{10}{\milli\litre}, reaching \SI{31}{\hertz} at
 \SI{100}{\milli\litre}---near, but still above, the conventional infrasound
@@ -547,7 +549,7 @@ prediction; experimental validation of the threshold remains necessary
 (see \S\ref{sec:limitations}).
 
 The distribution of maximum pocket-wall displacement spans approximately
-\SIrange{0.6}{3.5}{\um}, with a median of $\sim$\SI{1.2}{\um}.
+\SIrange{1.03}{2.70}{\um}, with a median of $\sim$\SI{1.08}{\um}.
 Individuals in the upper tail ($>$\SI{500}{\milli\litre} total gas)
 experience displacements exceeding \SI{2}{\um}, well into the range of
 robust \piezo{} activation.
@@ -608,8 +610,9 @@ comfortably above threshold.
 The central finding of this paper is that intraluminal gas pockets serve as
 \emph{impedance-matching acoustic transducers} between the airborne
 pressure field and the intestinal wall.  The mechanism is not resonance
-enhancement---the gas-pocket resonances lie hundreds of hertz above the
-driving frequency---but rather the \emph{compliance mismatch} between the
+enhancement---the gas-pocket resonances still lie well above the
+\SI{7}{\hertz} driving frequency, at roughly \SIrange{31}{438}{\hertz}
+across the cases studied---but rather the \emph{compliance mismatch} between the
 compressible gas and the surrounding incompressible tissue.
 
 At infrasound wavelengths ($\lambda \gg$ body size), the incident pressure
