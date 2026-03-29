@@ -122,11 +122,11 @@ The programme's primary methodological contribution is a \textbf{modular analyti
 
 \subsection{Computational Infrastructure}
 
-The research programme operates through bespoke infrastructure designed for reproducibility and self-consistency: \textbf{203 passing tests} covering analytical modules, figure generation, and parameter consistency; \textbf{130+ merged pull requests}, each reviewed before integration; \textbf{automated three-reviewer panels} (domain significance, adversarial rigour, computational reproducibility), with papers undergoing up to eight review rounds; and \textbf{cross-paper consistency auditing} to keep canonical parameters synchronised across all five manuscripts.
+The research programme operates through bespoke infrastructure designed for reproducibility and self-consistency: \textbf{203 passing tests} covering analytical modules, figure generation, and parameter consistency; \textbf{136+ merged pull requests}, each reviewed before integration; \textbf{automated three-reviewer panels} (domain significance, adversarial rigour, computational reproducibility), with papers undergoing up to eight review rounds; and \textbf{cross-paper consistency auditing} to keep canonical parameters synchronised across all five manuscripts.
 
 \subsection{AI-Assisted Research Methodology}
 
-The programme itself constitutes a methodological experiment. Sixteen specialised AI agents --- spanning paper writing, data analysis, simulation engineering, literature monitoring, and adversarial review --- operate within a structured workflow. The human faculty supervisor provides research direction, domain scepticism, and quality judgement; the AI system handles analytical derivation, code implementation, \LaTeX{} drafting, figure generation, and review logistics. This division of labour is not a replacement for expertise but a \textbf{compression of research overhead}, enabling a five-paper portfolio to emerge from approximately 48 hours of wall-clock interaction.
+The programme itself constitutes a methodological experiment. Twenty specialised AI agents --- spanning paper writing, data analysis, simulation engineering, literature monitoring, and adversarial review --- operate within a structured workflow. The human faculty supervisor provides research direction, domain scepticism, and quality judgement; the AI system handles analytical derivation, code implementation, \LaTeX{} drafting, figure generation, and review logistics. This division of labour is not a replacement for expertise but a \textbf{compression of research overhead}, enabling a five-paper portfolio to emerge from approximately 52 hours of wall-clock interaction.
 
 \section{Research Trajectory}
 
@@ -179,6 +179,58 @@ The programme is, to our knowledge, among the first to employ a structured multi
 
   \item J.~Mace and B.\,R.~Mace, ``What Pitch Is a Growling Stomach? A Unified Multi-Mode Acoustic Model of Borborygmi,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$20\,pp.)
 \end{enumerate}
+
+\section{Current Status}
+
+As of late March 2026, all five papers have completed at least one full internal review cycle under the three-reviewer panel protocol (Reviewer~A: domain significance; Reviewer~B: adversarial rigour; Reviewer~C: computational reproducibility). The programme's computational suite comprises 203 passing tests, and the repository has accumulated 136+ merged pull requests across 20 specialised AI agents. Prof.\ Brian Mace (University of Auckland) is confirmed as active collaborator and co-author on all five manuscripts.
+
+\subsection{Paper 1 --- Submission-Ready}
+
+All three internal reviewers returned \textbf{ACCEPT}. A submission-readiness audit identified minor tone issues in the abstract and acknowledgements, which are being addressed. The paper is ready for upload to the JSV editorial portal once final polish is complete.
+
+\subsection{Paper 2 --- Minor Revision (Post-Fix)}
+
+A fatal equation flaw was discovered during the latest review round: the constrained-bubble formulation did not recover the Minnaert free-bubble limit when tissue constraint was removed. The fix corrected the \SI{10}{\mL} pocket frequency from \SI{1916}{\Hz} to \SI{222}{\Hz} and restored physical consistency. Four Minnaert-recovery regression tests were added to the suite (now 203 tests total). Post-fix Reviewer~C assessment: \textbf{MINOR REVISION}, with residual stale prose from the rewrite being corrected.
+
+\subsection{Paper 3 --- Minor Revision}
+
+First review (Reviewer~A): \textbf{MINOR REVISION}. The allometric data sourcing requires greater transparency, and the quasi-universal $\Pi_0$ claim needs quantification of inter-species variability (coefficient of variation $\approx 4.5\%$). All issues are tractable.
+
+\subsection{Paper 4 --- Minor Revision (Post-Fix)}
+
+Post-fix Reviewer~C assessment: \textbf{MINOR REVISION}. Three corrections were applied: the $k_\mathrm{shell}$ exponent in the stiffness formulation, the displacement reference level, and the strain ratio calculation. Twenty-seven bladder-specific tests are passing.
+
+\subsection{Paper 5 --- Major Revision (Post-Fix)}
+
+Post-fix Reviewer~B assessment: \textbf{MAJOR REVISION}. The radial breathing mode equation was found to be dimensionally incorrect, and the axial mode volume threshold was wrong by an order of magnitude. The core constrained-bubble physics is confirmed sound; corrections to the secondary mechanisms are underway.
+
+\section{Reflections on Process}
+
+The Browntone programme is, among other things, an experiment in AI-assisted research methodology. A detailed session event log (documented in the repository at \texttt{docs/\allowbreak ai-assisted-research-event-log.md}) provides unusually granular data on how the collaboration actually functioned. Some observations are worth recording in a tenure context.
+
+\subsection{The Numbers}
+
+The research campaign spanned \textbf{52.1 hours} of wall-clock time and involved \textbf{123 human prompts}, \textbf{246 subagent launches}, and approximately \textbf{316 million tokens} of language-model processing. The read-to-write ratio across the system was 1.15:1 --- the agents spent nearly as much time inspecting and reviewing their own output as they did generating it. This is not an artefact; it was designed in.
+
+\subsection{The Human Role}
+
+Of 123 human messages, only three were encouragement. The remainder consisted of research direction, process feedback, and course correction. The human supervisor functioned as an institutional chairman rather than a content generator: setting standards, enforcing quality gates, overruling poor judgement, and deciding when work was done. This division --- human as governor, AI as executor --- proved more productive than either could have been alone.
+
+\subsection{Institutional Innovation}
+
+The most transformative decisions in the programme were not technical but institutional. Enabling branch protection on the repository forced every change through review. Introducing three-reviewer panels subjected each paper to structured adversarial scrutiny. The ``coffee-machine guru'' agent --- modelled on the wise emeritus professor one encounters in the corridor --- provided metacognitive interventions that no formal review process could replicate. The semester-break ritual, pausing computation at the top of each hour for reflection and tidying, prevented the drift that accumulates in long autonomous sessions.
+
+Reviewer~B, the adversarial critic, became the conscience of the project: 22 launches, the highest of any specialist agent. Its role was not to improve prose but to find fatal flaws --- and it found them, including the constrained-bubble equation error in Paper~2 and the dimensional inconsistency in Paper~5.
+
+\subsection{Self-Historicisation}
+
+An unanticipated emergent behaviour: the project began documenting itself before being asked to. Research logs, event timelines, and the session event log itself were generated not as afterthoughts but as integral outputs. The programme became self-historicising --- producing its own archival record alongside its scientific contributions. This reflexivity, while not a research result per se, speaks to the maturity of the workflow.
+
+\subsection{What It Shows}
+
+The event log does not show a human outsourcing a paper to an AI. It shows a human progressively teaching an AI to behave like a research organisation. The lab metaphor --- with its agents, reviewers, logs, and rituals --- stopped being a metaphor partway through the campaign. It became durable workflow with real institutional memory, genuine adversarial review, and a capacity for self-correction that improved over time.
+
+This is not a claim of autonomy. The system cannot set its own research questions, judge the significance of its results, or decide when a paper is good enough. Those remain irreducibly human functions. But between the question and the judgement lies an enormous volume of skilled labour --- derivation, implementation, drafting, checking, revising --- and it is there that the compression is real.
 
 \vfill
 \begin{center}
