@@ -215,6 +215,7 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `reviewer-a` | Domain expert reviewer — novelty, significance, narrative |
 | `reviewer-b` | Cynical gatekeeper — fatal flaws, parameter consistency |
 | `reviewer-c` | Methodologist — runs code, checks numbers |
+| `journal-editor` | Editorial triage — desk-rejection filter, journal fit, reviewer assignability |
 | `consistency-auditor` | QA — parameter drift, code-paper agreement |
 | `lab-meeting` | Holistic audit — docs freshness, strategy, blockers |
 | `research-scout` | Idea generation — find new publishable topics |
