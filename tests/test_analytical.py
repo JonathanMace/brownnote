@@ -752,6 +752,9 @@ from analytical.gas_pocket_detailed import (
     pocket_response,
     helmholtz_sealed_gi,
     C_AIR,
+    minnaert_frequency as gp_minnaert_frequency,
+    constrained_sphere_frequency,
+    cylindrical_radial_frequency,
 )
 
 
@@ -830,6 +833,49 @@ class TestHelmholtzSealedGI:
             frac = k_wall / (k_gas + k_wall)
             assert frac < 0.03, f"Wall fraction = {frac:.4f} for {vol} mL spherical"
 
+
+
+class TestMinnaertRecovery:
+    """Constrained-bubble must recover Minnaert when wall terms vanish."""
+
+    def test_sphere_free_equals_minnaert(self):
+        """Free spherical bubble via constrained func = Minnaert."""
+        for vol in [1, 5, 10, 50, 100]:
+            p = GasPocketParams(volume_mL=vol, geometry="spherical", wall="free")
+            f_con = constrained_sphere_frequency(p)
+            f_min = gp_minnaert_frequency(p)
+            assert f_con == pytest.approx(f_min, rel=1e-10), (
+                f"{vol} mL: constrained(free)={f_con:.4f}, Minnaert={f_min:.4f}"
+            )
+
+    def test_sphere_zero_wall_params_equals_minnaert(self):
+        """Setting E=0, h→0, rho_w=0 recovers Minnaert."""
+        for vol in [5, 20, 100]:
+            p = GasPocketParams(
+                volume_mL=vol, geometry="spherical", wall="elastic",
+                E_w=0.0, h_w=1e-15, rho_w=0.0,
+            )
+            f_con = constrained_sphere_frequency(p)
+            f_min = gp_minnaert_frequency(p)
+            assert f_con == pytest.approx(f_min, rel=1e-6), (
+                f"{vol} mL: constrained(E=0)={f_con:.4f}, Minnaert={f_min:.4f}"
+            )
+
+    def test_constrained_below_minnaert(self):
+        """Wall mass lowers frequency; constrained f0 < Minnaert."""
+        for vol in [5, 10, 50]:
+            p = GasPocketParams(volume_mL=vol, geometry="spherical", wall="elastic")
+            f_con = constrained_sphere_frequency(p)
+            f_min = gp_minnaert_frequency(p)
+            assert f_con < f_min, (
+                f"{vol} mL: constrained={f_con:.1f} should be < Minnaert={f_min:.1f}"
+            )
+
+    def test_cylindrical_radial_regression(self):
+        """Cylindrical radial mode ~162 Hz for default lumen radius."""
+        p = GasPocketParams(volume_mL=10.0, geometry="cylindrical", wall="elastic")
+        f_rad = cylindrical_radial_frequency(p)
+        assert f_rad == pytest.approx(162, abs=5), f"f_rad={f_rad:.1f} Hz"
 
 
 # ================================================================== #

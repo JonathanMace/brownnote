@@ -234,28 +234,41 @@ radius~$a$ in an infinite liquid is \citep{Minnaert1933}:
 For a pocket enclosed by an elastic shell (the intestinal wall), both the
 gas stiffness and the wall stiffness contribute, while the inertia includes
 both the radiation added mass of the surrounding fluid and the shell mass
-\citep{Church1995,Hoff2000}:
+\citep{Church1995,Hoff2000}.  Expressing all quantities as stiffness and
+inertia per unit radial displacement:
 \begin{equation}
   f_0^\text{(sph)} = \frac{1}{2\pi}\sqrt{
-    \frac{K_\text{gas} + K_\text{wall}}{a^2\bigl(M_\text{fluid} + M_\text{wall}\bigr)}
+    \frac{k_\text{gas} + k_\text{wall}}{m_\text{fluid} + m_\text{wall}}
   },
   \label{eq:f0_sphere}
 \end{equation}
 where
 \begin{align}
-  K_\text{gas}  &= 3\gamma P_0, &
-  K_\text{wall} &= \frac{2\,E_w\,h_w}{a\,(1-\nu_w)}, \label{eq:stiffness_sphere}\\
-  M_\text{fluid} &= \rho_f\,a, &
-  M_\text{wall}  &= \rho_w\,h_w. \label{eq:mass_sphere}
+  k_\text{gas}  &= \frac{3\gamma P_0}{a}, &
+  k_\text{wall} &= \frac{2\,E_w\,h_w}{a^2\,(1-\nu_w)}, \label{eq:stiffness_sphere}\\
+  m_\text{fluid} &= \rho_f\,a, &
+  m_\text{wall}  &= \rho_w\,h_w. \label{eq:mass_sphere}
 \end{align}
-The wall stiffness arises from hoop stress in a thin spherical shell; the
-wall mass is the shell inertia per unit area.
-Note that for the soft intestinal wall ($E_w = \SI{10}{\kilo\pascal}$),
-$K_\text{wall}$ contributes only 0.9--2.4\% of the total effective stiffness
-$K_\text{gas} + K_\text{wall}$ across the physiological pocket-size range;
-gas compressibility dominates.  The ``constrained'' label therefore refers to
-the geometric confinement of the gas pocket within the tubular lumen, not to a
-significant elastic restraint by the wall.
+The gas stiffness arises from adiabatic compression of the enclosed gas
+(Boyle's law linearised about equilibrium radius~$a$); the wall stiffness
+from hoop stress in a thin spherical shell; and the inertia terms from
+radiation loading and shell mass per unit area, respectively.
+In the limit $h_w \to 0$ (free bubble), $k_\text{wall}$ and
+$m_\text{wall}$ vanish and Eq.~\eqref{eq:f0_sphere} reduces exactly to
+the Minnaert result, Eq.~\eqref{eq:minnaert}:
+\begin{equation*}
+  f_0 \to \frac{1}{2\pi}\sqrt{\frac{3\gamma P_0 / a}{\rho_f\,a}}
+       = \frac{1}{2\pi a}\sqrt{\frac{3\gamma P_0}{\rho_f}}
+       = f_M.
+\end{equation*}
+For the soft intestinal wall ($E_w = \SI{10}{\kilo\pascal}$),
+$k_\text{wall}$ contributes only 0.9--2.4\% of the total effective stiffness
+$k_\text{gas} + k_\text{wall}$ across the physiological pocket-size range;
+gas compressibility dominates.  The wall mass $m_\text{wall} = \rho_w h_w$
+adds ${\sim}20\%$ to the fluid inertia, which lowers $f_0$ slightly below
+$f_M$.  The ``constrained'' label therefore refers to the geometric
+confinement of the gas pocket within the tubular lumen, not to a significant
+elastic restraint by the wall.
 
 \subsubsection{Cylindrical pocket: radial and axial modes}
 
@@ -263,7 +276,7 @@ For an elongated gas column in an elastic tube of radius~$R$, the lowest
 \emph{radial} (breathing) mode has frequency:
 \begin{equation}
   f_0^\text{(cyl,rad)} = \frac{1}{2\pi}\sqrt{
-    \frac{2\gamma P_0 + E_w h_w / [R(1-\nu_w^2)]}{R^2(\rho_f R + \rho_w h_w)}
+    \frac{2\gamma P_0 / R + E_w h_w / [R^2(1-\nu_w^2)]}{\rho_f R + \rho_w h_w}
   }.
   \label{eq:f0_cyl_rad}
 \end{equation}
@@ -285,9 +298,11 @@ $f_0 = \min(f_0^\text{(cyl,rad)},\, f_0^\text{(cyl,ax)})$.
 
 For physiological gas pocket volumes (\SIrange{1}{100}{\milli\litre}),
 resonance frequencies range from $\sim$\SI{30}{\hertz} (large cylindrical
-pockets, axial mode) to over \SI{5000}{\hertz} (small spherical pockets
-with elastic wall).  While cylindrical axial modes for large pockets can
-fall below \SI{100}{\hertz}, all resonances remain above
+pockets, axial mode) to $\sim$\SI{440}{\hertz} (small spherical pockets
+with elastic wall).  Because wall stiffness adds little and wall mass
+lowers $f_0$ below the free-bubble Minnaert value, the constrained
+spherical frequencies are roughly 80--90\% of~$f_M$
+(Table~\ref{tab:freq}).  All resonances remain well above
 \SI{20}{\hertz}---i.e.\ above the conventional infrasound boundary.  This
 is a critical distinction from earlier analyses that sought resonance
 \emph{at} infrasound frequencies.
@@ -465,12 +480,12 @@ below operates efficiently across the entire infrasound band.
 \toprule
 $V$ [mL] & Geometry & $a$ or $R$ [mm] & $f_\text{Minnaert}$ [Hz] & $f_0$ [Hz] \\
 \midrule
-  1  & Spherical                   &  6.2 & 524  & 5556 \\
-  5  & Spherical                   & 10.6 & 306  & 2653 \\
- 10  & Spherical                   & 13.4 & 243  & 1916 \\
- 20  & Spherical                   & 16.8 & 193  & 1379 \\
- 50  & Spherical                   & 22.9 & 142  &  889 \\
-100  & Spherical                   & 28.8 & 113  &  635 \\
+  1  & Spherical                   &  6.2 & 524  &  438 \\
+  5  & Spherical                   & 10.6 & 306  &  273 \\
+ 10  & Spherical                   & 13.4 & 243  &  222 \\
+ 20  & Spherical                   & 16.8 & 193  &  179 \\
+ 50  & Spherical                   & 22.9 & 142  &  134 \\
+100  & Spherical                   & 28.8 & 113  &  108 \\
  10  & Cylindrical$^{\dagger}$     & 15.0 &  --- &   99 \\
  50  & Cylindrical$^{\dagger}$     & 15.0 &  --- &   44 \\
 100  & Cylindrical$^{\dagger}$     & 15.0 &  --- &   31 \\
@@ -478,7 +493,7 @@ $V$ [mL] & Geometry & $a$ or $R$ [mm] & $f_\text{Minnaert}$ [Hz] & $f_0$ [Hz] \\
 \end{tabular}
 \\[4pt]
 {\footnotesize $^{\dagger}$Cylindrical $f_0$ is the axial (piston) mode,
-which is lowest.  The radial (breathing) mode is ${\sim}\SI{1323}{\hertz}$,
+which is lowest.  The radial (breathing) mode is ${\sim}\SI{162}{\hertz}$,
 independent of volume.}
 \end{table}
 
