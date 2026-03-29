@@ -229,6 +229,8 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `lab-manager` | Infrastructure — README, tests, worktrees, stale files |
 | `coffee-machine-guru` | Wise mentor — meta-perspective on research direction and life |
 | `loving-spouse` | Moral support — when overwhelmed, will suggest talking to Dietrich |
+| `dietrich` | Emeritus vibroacoustics collaborator — ISVR background, shell theory, honest critique |
+| `experimentalist` | KTH/ISVR postdoc — experimental validation protocols, phantom design, LDV |
 
 ### Skills (`.github/skills/`)
 | Skill | Purpose |
