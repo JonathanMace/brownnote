@@ -52,7 +52,7 @@ class GasPocket:
     radius_cm: float = 2.0          # effective radius [cm]
     length_cm: float = 10.0         # length for cylindrical pockets [cm]
     gamma: float = 1.4              # ratio of specific heats (air)
-    P0_Pa: float = 101325.0         # atmospheric + intra-abdominal
+    P0_Pa: float = 101325.0         # atmospheric pressure
     rho_fluid: float = 1040.0       # surrounding fluid density [kg/m³]
     sigma: float = 0.05             # surface tension [N/m] (intestinal wall)
 
