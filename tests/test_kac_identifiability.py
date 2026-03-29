@@ -10,12 +10,15 @@ Covers:
   g. Sphere vs oblate comparison — summary flags correct
   h. Condition number map — runs without error, returns correct shape
   i. Edge cases — degenerate inputs handled gracefully
+  j. Robustness — poor initial guesses, sphere warnings, mode count
 """
 
 from __future__ import annotations
 
 import sys
 import os
+import warnings
+
 import numpy as np
 import pytest
 
@@ -25,7 +28,9 @@ from analytical.kac_identifiability import (
     CANONICAL_ABDOMEN,
     DEFAULT_MODES,
     INVERSION_PARAMS,
+    _PARAM_BOUNDS,
     compute_jacobian,
+    condition_number_from_params,
     condition_number_map,
     identifiability_analysis,
     invert_frequencies,
@@ -173,7 +178,7 @@ class TestRoundTripInversion:
         result = invert_frequencies(
             abdomen_frequencies, initial_guess=guess, model="ritz"
         )
-        assert result["success"], f"Inversion failed: cost={result['cost']:.2e}"
+        assert result["success"], f"Inversion failed: cost={result['cost_hz']:.2e}"
 
         for pname in INVERSION_PARAMS:
             recovered = result["params"][pname]

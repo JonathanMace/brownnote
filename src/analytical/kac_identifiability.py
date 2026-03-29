@@ -16,6 +16,8 @@ different modes sample curvature differently.
 
 from __future__ import annotations
 
+import warnings
+
 import numpy as np
 from numpy.linalg import cond, inv, svd
 from scipy.optimize import least_squares
@@ -43,8 +45,10 @@ CANONICAL_ABDOMEN = dict(
 # Parameters we invert for (the identifiable triple)
 INVERSION_PARAMS = ("a", "c", "E")
 
-# Default modes used for inversion
-DEFAULT_MODES = (2, 3, 4)
+# Default modes used for inversion — 5+ modes recommended for robust
+# global inversion.  With only 3 modes the problem is exactly determined
+# and spurious zero-residual solutions can exist for poor initial guesses.
+DEFAULT_MODES = (2, 3, 4, 5, 6)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -269,6 +273,15 @@ def condition_number_map(
 #  Newton–Raphson inverse solver
 # ═══════════════════════════════════════════════════════════════════════════
 
+# Physically motivated bounds for the inversion parameters.
+# Independent of initial guess to avoid artificially restricted search.
+_PARAM_BOUNDS = {
+    "a": (0.05, 0.40),   # m  — covers small organs to large fruits
+    "c": (0.03, 0.40),   # m
+    "E": (1e3, 1e9),      # Pa — soft tissue to hard shell
+}
+
+
 def invert_frequencies(
     f_observed: np.ndarray | list[float],
     initial_guess: dict,
@@ -277,11 +290,28 @@ def invert_frequencies(
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     tol: float = 1e-10,
     max_iter: int = 200,
+    validation_rtol: float = 1e-3,
 ) -> dict:
     """Recover physical parameters from observed resonant frequencies.
 
     Uses ``scipy.optimize.least_squares`` (trust-region reflective) to
     minimise the residual between observed and predicted frequencies.
+
+    .. note::
+
+       Using 5 or more modes is strongly recommended for robust global
+       inversion.  With only 3 modes the system is exactly determined
+       (3 equations, 3 unknowns) and spurious zero-residual solutions
+       can exist, especially when the initial guess is far from the true
+       values.  The default ``modes=(2, 3, 4, 5, 6)`` provides a healthy
+       overdetermined system.
+
+    .. warning::
+
+       Sphere model inversion (``model='sphere'``) is ill-posed because
+       the sphere Jacobian is rank-deficient — all modes scale identically
+       with geometry, so multiple parameter combinations produce identical
+       frequencies.  Results from sphere inversion should not be trusted.
 
     Parameters
     ----------
@@ -300,6 +330,9 @@ def invert_frequencies(
         Convergence tolerance on the cost function.
     max_iter : int
         Maximum number of iterations.
+    validation_rtol : float
+        Relative tolerance for post-inversion validation (default 0.1 %).
+        Recovered parameters are checked against this threshold.
 
     Returns
     -------
@@ -308,26 +341,61 @@ def invert_frequencies(
             dict of recovered parameter values.
         ``'residual_hz'``
             np.ndarray of frequency residuals [Hz].
-        ``'cost'``
-            Final cost (sum of squared residuals).
+        ``'cost_hz'``
+            float, 0.5 × Σ(residual_hz²) — cost in raw Hz.
+        ``'cost_normalized'``
+            float, 0.5 × Σ((residual/f_obs)²) — the normalised cost
+            that the optimiser actually minimised.
         ``'success'``
-            bool, whether the solver converged.
+            bool, True only if the optimiser converged **and**
+            post-inversion validation passes (residuals below
+            *validation_rtol* and recovered parameters physically
+            reasonable and within bounds).
         ``'n_iter'``
             Number of function evaluations.
     """
     f_obs = np.asarray(f_observed, dtype=float)
     forward = _get_forward(model)
 
+    # Warn on sphere inversion
+    if model == "sphere":
+        warnings.warn(
+            "Sphere model inversion is ill-posed: the sphere Jacobian is "
+            "rank-deficient and multiple parameter combinations produce "
+            "identical frequencies. Use model='ritz' for reliable inversion.",
+            UserWarning,
+            stacklevel=2,
+        )
+
+    # Warn if fewer than 4 modes
+    if len(modes) < 4:
+        warnings.warn(
+            f"Only {len(modes)} modes requested for inversion of "
+            f"{len(inversion_params)} parameters. With fewer than 4 modes "
+            f"the system is (near-)exactly determined and spurious solutions "
+            f"can exist. Use 5+ modes for robust inversion.",
+            UserWarning,
+            stacklevel=2,
+        )
+
     # Build working parameter set
     working = dict(initial_guess)
+
+    # Physically motivated bounds — independent of initial guess
+    lower_raw = np.array([
+        _PARAM_BOUNDS.get(k, (1e-12, np.inf))[0] for k in inversion_params
+    ])
+    upper_raw = np.array([
+        _PARAM_BOUNDS.get(k, (1e-12, np.inf))[1] for k in inversion_params
+    ])
 
     # Scale factors: optimise in normalised space x_s = x / x_scale
     x0_raw = np.array([working[k] for k in inversion_params])
     x_scale = x0_raw.copy()
 
-    # Bounds in normalised space: all positive
-    lower = np.full_like(x0_raw, 1e-6)
-    upper = np.full_like(x0_raw, 100.0)
+    # Bounds in normalised space
+    lower_norm = lower_raw / x_scale
+    upper_norm = upper_raw / x_scale
     x0_norm = np.ones_like(x0_raw)  # starts at 1.0
 
     def residuals(x_norm):
@@ -336,11 +404,10 @@ def invert_frequencies(
         for k, v in zip(inversion_params, x_raw):
             p[k] = v
         f_pred = forward(p, modes)
-        # Normalise residuals by observed frequencies for unit-free conditioning
         return (f_pred - f_obs) / f_obs
 
     result = least_squares(
-        residuals, x0_norm, bounds=(lower, upper),
+        residuals, x0_norm, bounds=(lower_norm, upper_norm),
         ftol=tol, xtol=tol, gtol=tol, max_nfev=max_iter * len(x0_raw),
     )
 
@@ -349,15 +416,32 @@ def invert_frequencies(
     for k, v in zip(inversion_params, x_final):
         recovered[k] = float(v)
 
-    # Compute raw residuals in Hz for reporting
+    # Compute residuals for reporting
     f_pred_final = forward(recovered, modes)
     residual_hz = f_pred_final - f_obs
+    residual_norm = residual_hz / f_obs
+
+    cost_hz = float(0.5 * np.sum(residual_hz**2))
+    cost_normalized = float(0.5 * np.sum(residual_norm**2))
+
+    # Post-inversion validation
+    optimizer_ok = bool(result.success)
+    residuals_ok = bool(np.all(np.abs(residual_norm) < validation_rtol))
+    bounds_ok = True
+    for k, v in zip(inversion_params, x_final):
+        lo, hi = _PARAM_BOUNDS.get(k, (0.0, np.inf))
+        if v <= 0 or v < lo or v > hi:
+            bounds_ok = False
+            break
+
+    success = optimizer_ok and residuals_ok and bounds_ok
 
     return {
         "params": recovered,
         "residual_hz": residual_hz,
-        "cost": float(0.5 * np.sum(residual_hz**2)),
-        "success": bool(result.success),
+        "cost_hz": cost_hz,
+        "cost_normalized": cost_normalized,
+        "success": success,
         "n_iter": int(result.nfev),
     }
 
@@ -518,3 +602,55 @@ def sphere_vs_oblate_comparison(
         "sphere_rank_deficient": kappa_s > 1e6,
         "oblate_well_conditioned": kappa_o < 1000,
     }
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Cross-model convenience helpers
+# ═══════════════════════════════════════════════════════════════════════════
+
+def condition_number_from_params(
+    params_dict: dict,
+    model: str = "ritz",
+    modes: tuple[int, ...] = DEFAULT_MODES,
+    inversion_params: tuple[str, ...] = INVERSION_PARAMS,
+) -> float:
+    """Compute Jacobian condition number from a parameter dict.
+
+    This is a convenience wrapper around :func:`jacobian_condition_number`
+    that accepts parameter dicts produced by external model helpers such as
+    ``watermelon_canonical_params()``.  The dict keys are mapped
+    automatically — for example, ``rho_rind`` → ``rho_w``,
+    ``rho_flesh`` → ``rho_f``, etc.
+
+    Parameters
+    ----------
+    params_dict : dict
+        Parameter dictionary.  May use either the internal naming
+        convention (``rho_w``, ``rho_f``, ``K_f``, ``P_iap``) or
+        external naming (``rho_rind``, ``rho_flesh``, ``K_flesh``,
+        ``P_int``).
+    model : str
+        ``'ritz'`` or ``'sphere'``.
+    modes : tuple of int
+        Mode numbers for the Jacobian.
+    inversion_params : tuple of str
+        Parameters to differentiate w.r.t.
+
+    Returns
+    -------
+    float
+        Condition number κ(J_scaled).
+    """
+    # Map external watermelon-style keys to internal names
+    _KEY_MAP = {
+        "rho_rind": "rho_w",
+        "rho_flesh": "rho_f",
+        "K_flesh": "K_f",
+        "P_int": "P_iap",
+    }
+    p = {}
+    for k, v in params_dict.items():
+        p[_KEY_MAP.get(k, k)] = v
+
+    return jacobian_condition_number(p, model=model, modes=modes,
+                                     inversion_params=inversion_params)
