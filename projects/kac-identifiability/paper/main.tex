@@ -1,0 +1,149 @@
+\documentclass[review]{elsarticle}
+\usepackage[margin=1in]{geometry}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage{inconsolata}
+\usepackage{amsmath}
+\let\Bbbk\relax
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[pdfencoding=auto,psdextra]{hyperref}
+\usepackage{lineno}
+
+% Fix duplicate page destination warning with elsarticle review mode
+\hypersetup{pageanchor=false}
+\AtBeginDocument{\hypersetup{pageanchor=true}}
+
+% SI units configuration
+\sisetup{
+  per-mode=symbol,
+  group-separator={,},
+}
+
+% Line numbering (required for review submission)
+\linenumbers
+
+% =============================================================================
+% Metadata
+% =============================================================================
+\journal{Inverse Problems}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Can You Hear the Shape of an Organ? Practical Identifiability of
+Viscoelastic Shell Parameters from Resonant Frequencies}
+
+\author[msr]{Jonathan Mace\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{jonathanmace@microsoft.com}
+
+\author[auckland]{Brian R.\ Mace}
+\ead{br.mace@auckland.ac.nz}
+
+\affiliation[msr]{
+  organization={Microsoft Research},
+  city={Redmond, WA},
+  country={United States}
+}
+
+\affiliation[auckland]{
+  organization={Acoustics Research Centre, Department of Mechanical and
+    Mechatronics Engineering, University of Auckland},
+  city={Auckland},
+  country={New Zealand}
+}
+
+\begin{abstract}
+We investigate the practical identifiability of material and geometric
+parameters of a fluid-filled viscoelastic oblate spheroidal shell from its
+resonant frequencies --- the inverse counterpart of Kac's celebrated question
+``Can one hear the shape of a drum?'' applied to vibroacoustic organ models.
+Using a Rayleigh--Ritz forward model for flexural vibrations, we compute the
+Jacobian of the frequency--parameter map, its condition number, and the Fisher
+information matrix.  For a sphere, the Jacobian is rank-deficient (condition
+number $\sim 10^{10}$) because all flexural modes scale identically with the
+equivalent radius: geometry and stiffness are confounded.  For an oblate
+spheroid, different modes sample the anisotropic curvature differently,
+yielding a full-rank Jacobian (condition number $\approx 83.5$) and
+finite Cram\'er--Rao bounds.  We demonstrate sub-percent parameter recovery
+via Newton--Raphson inversion from three modal frequencies under realistic
+noise.  The result has implications for non-invasive tissue characterisation:
+one can ``hear the shape'' of an oblate organ, but not a spherical one.
+\end{abstract}
+
+\begin{keyword}
+inverse problem \sep identifiability \sep viscoelastic shell \sep
+resonant frequency \sep condition number \sep Cram\'er--Rao bound \sep
+oblate spheroid \sep Kac problem
+\end{keyword}
+
+\end{frontmatter}
+
+% =============================================================================
+% Graphics path
+% =============================================================================
+\graphicspath{{../figures/}}
+
+% =============================================================================
+% Body
+% =============================================================================
+
+% --- Introduction ---
+\input{sections/introduction}
+
+% --- Theory ---
+\input{sections/theory}
+
+% --- Methodology ---
+\input{sections/methodology}
+
+% --- Results ---
+\input{sections/results}
+
+% --- Discussion ---
+\input{sections/discussion}
+
+% --- Conclusion ---
+\input{sections/conclusion}
+
+% =============================================================================
+% References
+% =============================================================================
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+% =============================================================================
+% Back matter
+% =============================================================================
+
+\section*{Data availability}
+All code and data required to reproduce the results are available in the
+accompanying repository at \url{https://github.com/JonathanMace/brownnote}.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Jonathan Mace}: Conceptualisation, Methodology, Software,
+Writing -- Original Draft.
+\textbf{Brian R.\ Mace}: Supervision, Writing -- Review \& Editing.
+
+\section*{Acknowledgements}
+The authors gratefully acknowledge the support of Microsoft Research
+and the University of Auckland Acoustics Research Centre.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests
+or personal relationships that could have appeared to influence the work
+reported in this paper.
+
+\end{document}

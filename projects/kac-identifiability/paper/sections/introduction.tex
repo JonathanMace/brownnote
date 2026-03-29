@@ -1,0 +1,56 @@
+% =============================================================================
+% Introduction
+% =============================================================================
+\section{Introduction}\label{sec:introduction}
+
+In 1966, Kac posed the question ``Can one hear the shape of a drum?''
+\cite{Kac1966}, asking whether the eigenfrequencies of the Laplacian on a
+planar domain uniquely determine its geometry.  Gordon, Webb, and Wolpert
+\cite{Gordon1992} famously answered in the negative by constructing pairs of
+non-isometric planar domains with identical Dirichlet spectra.  Yet the
+question has continued to inspire inverse spectral problems across
+mathematics, physics, and engineering.
+
+In the present work we transpose Kac's question to the vibroacoustic setting:
+given the measured resonant frequencies of a fluid-filled viscoelastic shell,
+can one uniquely recover its geometric and material parameters?  This is not
+merely an academic curiosity.  Non-invasive assessment of soft-tissue
+mechanical properties underpins clinical elastography
+\cite{Sarvazyan1998,Doyley2012}, and emerging vibroacoustic techniques seek
+to characterise organs \emph{in vivo} from their spectral response.
+
+We consider a class of models motivated by the human abdomen: a thin-walled,
+pre-stressed, fluid-filled oblate spheroidal shell.  The forward problem ---
+predicting modal frequencies from parameters --- is addressed in a companion
+paper using a Rayleigh--Ritz variational formulation
+\cite{BrowntoneCompanion}.  Here we study the \emph{inverse}: given $N$
+measured flexural frequencies $f_2, f_3, \dots, f_{N+1}$, can we recover the
+semi-major axis~$a$, semi-minor axis~$c$, and Young's modulus~$E$?
+
+Our central finding is that identifiability depends critically on the
+\emph{geometry} of the forward model:
+\begin{itemize}
+  \item For the \textbf{equivalent-sphere} approximation, the Jacobian of
+    the frequency--parameter map is rank-deficient (condition number
+    $\sim 10^{10}$), because all flexural modes scale identically with the
+    effective radius.
+  \item For the \textbf{oblate spheroid} (Ritz) model, the Jacobian has full
+    rank (condition number $\approx 83.5$), enabling sub-percent parameter
+    recovery under realistic noise.
+\end{itemize}
+One can, in a practical sense, ``hear the shape'' of an oblate organ --- but
+not a spherical one.
+
+We frame this as a problem of \emph{practical identifiability}
+\cite{Raue2009,Wieland2021}, characterised by the condition number of the
+Jacobian and the Cram\'er--Rao lower bounds on parameter uncertainty, rather
+than claiming a uniqueness theorem that would require rigorous proof of global
+injectivity.
+
+The paper is organised as follows.  Section~\ref{sec:theory} summarises the
+forward model.  Section~\ref{sec:methodology} develops the inverse
+framework: Jacobian computation, Fisher information, and Cram\'er--Rao
+bounds.  Section~\ref{sec:results} presents the sphere--oblate comparison,
+parameter-space condition maps, and noise-sensitivity analysis.
+Section~\ref{sec:discussion} discusses implications for tissue
+characterisation, and Section~\ref{sec:conclusion} concludes.

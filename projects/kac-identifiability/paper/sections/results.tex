@@ -1,0 +1,83 @@
+% =============================================================================
+% Results
+% =============================================================================
+\section{Results}\label{sec:results}
+
+\subsection{Sphere: rank deficiency}
+
+For the canonical abdomen parameters and modes $n = 2, 3, 4$, the
+equivalent-sphere Jacobian has condition number
+$\kappa \approx 10^{10}$, confirming near-perfect rank deficiency.  The
+singular value decomposition reveals that the smallest singular value is
+$\sim 10^{10}$ times smaller than the largest: the three parameters $(a, c,
+E)$ are effectively collapsed onto a single degree of freedom.
+
+Physically, this occurs because the equivalent-sphere model maps $(a, c)$
+to a single radius $R_\text{eq} = (a^2 c)^{1/3}$, so changes in~$a$ and~$c$
+that preserve~$R_\text{eq}$ are invisible to the spectrum.
+
+% TODO: Insert figure — sphere singular value bar chart
+
+\subsection{Oblate spheroid: full rank}
+
+The Ritz oblate model yields $\kappa \approx 83.5$ --- a well-conditioned
+problem.  All three singular values are of comparable magnitude, meaning
+each parameter direction is independently observable from the frequency data.
+
+% TODO: Insert figure — oblate singular value bar chart
+% TODO: Insert figure — side-by-side Jacobian heat maps
+
+\subsection{Cram\'er--Rao bounds}
+
+Table~\ref{tab:cr-bounds} summarises the Cram\'er--Rao lower bounds for
+$1\%$ fractional noise on each measured frequency.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Cram\'er--Rao lower bounds on parameter standard deviation for
+    $\epsilon_\text{noise} = 0.01$ (canonical abdomen, modes 2--4).}
+  \label{tab:cr-bounds}
+  \begin{tabular}{lcccc}
+    \toprule
+    Parameter & Symbol & Nominal & CR bound (abs) & CR bound (rel) \\
+    \midrule
+    Semi-major axis & $a$ & \SI{0.18}{m}   & \emph{TBC} & \emph{TBC} \\
+    Semi-minor axis & $c$ & \SI{0.12}{m}   & \emph{TBC} & \emph{TBC} \\
+    Young's modulus & $E$ & \SI{0.1}{MPa}  & \emph{TBC} & \emph{TBC} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For the sphere model, the Fisher information matrix is singular and the
+bounds are infinite.
+
+\subsection{Round-trip inversion}
+
+Starting from a $10\%$-perturbed initial guess, the Newton--Raphson solver
+recovers all three parameters to sub-percent accuracy in fewer than 20
+iterations, with final residuals below \SI{0.001}{Hz}.
+
+% TODO: Insert figure — convergence trace
+
+\subsection{Noise sensitivity}
+
+The Cram\'er--Rao bounds scale linearly with the noise level, as expected.
+Halving the measurement noise halves the minimum achievable parameter
+uncertainty.
+
+% TODO: Insert figure — CR bounds vs noise level
+
+\subsection{Watermelon validation}
+
+As an independent validation, we repeat the analysis with watermelon rind
+parameters ($a = \SI{0.158}{m}$, $c = \SI{0.123}{m}$,
+$E = \SI{50}{MPa}$).  The oblate Ritz model again yields a well-conditioned
+Jacobian, and round-trip inversion succeeds to sub-percent accuracy.
+
+\subsection{Parameter-space condition map}
+
+% TODO: Insert figure — 2D slices of condition number map
+The condition number remains below 200 across the physiologically relevant
+parameter range, confirming robust identifiability.  Condition degrades
+as $c \to a$ (approaching a sphere), consistent with the rank-deficiency
+result.

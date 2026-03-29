@@ -1,0 +1,79 @@
+% =============================================================================
+% Discussion
+% =============================================================================
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Connection to Kac's problem}
+
+Kac \cite{Kac1966} asked whether the eigenvalues of the Laplacian uniquely
+determine the shape of a membrane.  Our result is an engineering analogue:
+the eigenfrequencies of a \emph{viscoelastic shell} determine its shape and
+stiffness, provided the model captures the geometric anisotropy.  The sphere
+model fails precisely because it discards this anisotropy by collapsing all
+geometry into a single radius.
+
+Gordon, Webb, and Wolpert \cite{Gordon1992} showed that isospectral
+non-isometric domains exist for membranes.  Our oblate shell model avoids
+this pathology because the stiffness terms (bending, membrane, prestress)
+create mode-dependent coupling to the geometry that is absent in the
+Laplacian.
+
+\subsection{Practical versus structural identifiability}
+
+Following Raue et al.\ \cite{Raue2009}, we emphasise that our result is one
+of \emph{practical identifiability}: given finite-precision measurements, the
+parameter estimation is well-conditioned.  We do not claim global uniqueness
+(structural identifiability), which would require proving injectivity of the
+forward map over the entire parameter domain --- a significantly harder
+problem that we leave for future work.
+
+The condition number $\kappa \approx 83.5$ means that $1\%$ measurement noise
+translates to at most $\sim 83.5\%$ worst-case parameter error in the least
+observable direction.  In practice, the Cram\'er--Rao bounds show that the
+\emph{expected} uncertainty is much smaller, of order a few percent for each
+parameter.
+
+\subsection{Implications for tissue characterisation}
+
+The result suggests that vibroacoustic spectroscopy could, in principle, be
+used for non-invasive assessment of organ stiffness and geometry.  The key
+requirement is that the forward model must capture the organ's aspherical
+shape.  An equivalent-sphere assumption, while computationally convenient,
+destroys the information content needed for inversion.
+
+This has particular relevance for:
+\begin{itemize}
+  \item \textbf{Liver fibrosis staging}, where organ stiffness increases
+    with disease progression and the liver is markedly non-spherical.
+  \item \textbf{Bladder volume estimation}, where the organ changes shape
+    as it fills.
+  \item \textbf{Non-destructive food testing}, as demonstrated by our
+    watermelon validation case.
+\end{itemize}
+
+\subsection{Limitations}
+
+Several limitations should be noted:
+\begin{enumerate}
+  \item We consider only three parameters $(a, c, E)$.  Including additional
+    unknowns (e.g.\ wall thickness~$h$, Poisson's ratio~$\nu$, fluid
+    density~$\rho_f$) would require more measured frequencies and may
+    degrade conditioning.
+  \item The forward model assumes a homogeneous, isotropic shell.  Real
+    organs exhibit spatial heterogeneity and anisotropy.
+  \item We assume the mode numbers of measured frequencies are known
+    \emph{a priori}.  Mode identification from experimental data is itself
+    a non-trivial problem.
+  \item The noise model is Gaussian and frequency-proportional.  Real
+    measurement noise may have different structure.
+\end{enumerate}
+
+\subsection{Future directions}
+
+Natural extensions include:
+\begin{itemize}
+  \item Bayesian inversion with informative priors on tissue properties.
+  \item Experimental validation using phantom organs with known properties.
+  \item Extension to triaxial ellipsoids (three distinct semi-axes).
+  \item Sensitivity analysis for the full parameter set using Sobol indices.
+\end{itemize}

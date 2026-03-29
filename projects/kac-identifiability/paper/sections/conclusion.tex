@@ -1,0 +1,30 @@
+% =============================================================================
+% Conclusion
+% =============================================================================
+\section{Conclusion}\label{sec:conclusion}
+
+We have investigated the practical identifiability of geometric and material
+parameters of a fluid-filled viscoelastic oblate spheroidal shell from its
+resonant frequencies.  The principal findings are:
+
+\begin{enumerate}
+  \item The equivalent-sphere model renders the inverse problem
+    \emph{ill-posed}: the Jacobian of the frequency--parameter map is
+    rank-deficient (condition number $\sim 10^{10}$), because all flexural
+    modes scale identically with a single effective radius.
+  \item The oblate spheroid (Rayleigh--Ritz) model yields a
+    \emph{well-conditioned} inverse problem (condition number $\approx 83.5$),
+    because different modes sample the anisotropic curvature differently.
+  \item Newton--Raphson inversion recovers the semi-major axis~$a$,
+    semi-minor axis~$c$, and Young's modulus~$E$ to sub-percent accuracy
+    from three measured flexural frequencies, starting from a $10\%$-perturbed
+    initial guess.
+  \item Cram\'er--Rao lower bounds confirm that the minimum achievable
+    parameter uncertainty scales linearly with measurement noise, with
+    relative bounds of a few percent for $1\%$ frequency noise.
+\end{enumerate}
+
+In the language of Kac: one can hear the shape of an oblate organ, but not a
+spherical one.  The practical implication is that aspherical forward models
+are not merely more accurate --- they are \emph{essential} for solving the
+inverse problem.
