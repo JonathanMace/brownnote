@@ -14,7 +14,7 @@ Whole-body vibration is another matter entirely, which is why we wrote five pape
 **Modal analysis of a fluid-filled viscoelastic oblate spheroidal shell**  
 **Status:** Submission-ready (~44 pages, 52 references)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](paper/drafts/draft_2026-03-27_1455.pdf)  
+**Latest draft:** [PDF](paper/drafts/draft_2026-03-29_libertine.pdf)  
 **Key result:** coupling ratio R ≈ 6.6 × 10⁴
 
 Can a sufficiently powerful subwoofer ruin your afternoon? We model the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derive its modal spectrum from first principles, and compare airborne acoustic coupling with whole-body mechanical vibration. The resonance is real; the acoustic pathway to it is not.
@@ -23,7 +23,7 @@ Can a sufficiently powerful subwoofer ruin your afternoon? We model the human ab
 **Gas pocket resonance as an alternative acoustic coupling mechanism**  
 **Status:** ACCEPT after internal review; submission-ready (~16 pages)  
 **Target venue:** *JASA Express Letters*  
-**Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-27_1023.pdf)  
+**Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-29_libertine.pdf)  
 **Key result:** 35-100× more efficient than whole-cavity coupling
 
 If the whole abdomen will not cooperate, perhaps the gas trapped inside it will. We model intestinal gas pockets as tissue-constrained bubbles and show they couple to airborne sound 35–100× more efficiently than the cavity itself — enough, at extreme SPL, to activate mechanosensitive ion channels in nearby tissue.
@@ -32,7 +32,7 @@ If the whole abdomen will not cooperate, perhaps the gas trapped inside it will.
 **Dimensional analysis predictions across mammalian scales**  
 **Status:** Under revision (8 pages)  
 **Target venue:** *JSV Short Communication*  
-**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_0017.pdf)  
+**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_libertine.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
 Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
@@ -41,7 +41,7 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 **Resonance of the human urinary bladder**  
 **Status:** Under development (20+ pages)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_0030.pdf)  
+**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_libertine.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
 Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
@@ -50,7 +50,7 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 **Multi-mode acoustic model of bowel sounds**  
 **Status:** First draft complete (17 pages)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](projects/borborygmi/paper/drafts/draft_2026-03-29_0004.pdf)  
+**Latest draft:** [PDF](projects/borborygmi/paper/drafts/draft_2026-03-29_libertine.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
