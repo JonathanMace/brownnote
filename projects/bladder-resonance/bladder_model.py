@@ -479,9 +479,9 @@ def sub_resonant_analysis(volumes=None, f_wbv=6.0, a_seat=0.5):
         f2_vals.append(f2)
         zeta = model.damping_ratio
 
-        # Sub-resonant forced response at f_wbv
+        # Sub-resonant forced response at f_wbv (relative displacement)
         r_b = f_wbv / f2
-        H_wbv = 1 / np.sqrt((1 - r_b ** 2) ** 2 + (2 * zeta * r_b) ** 2)
+        H_wbv = r_b ** 2 / np.sqrt((1 - r_b ** 2) ** 2 + (2 * zeta * r_b) ** 2)
         y_wbv = y_seat_wbv * T_wbv * H_wbv
         y_wall_wbv.append(y_wbv)
         TH_wbv_vals.append(T_wbv * H_wbv)
