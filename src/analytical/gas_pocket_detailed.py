@@ -116,29 +116,33 @@ def constrained_sphere_frequency(p: GasPocketParams) -> float:
     """
     Resonance of a spherical gas pocket enclosed by an elastic shell.
 
-    Effective stiffness per unit volume change:
-        K_gas  = 3γP₀
-        K_wall = 2 E_w h / (a (1 - ν))       [hoop-stress thin-shell]
+    Church (1995) / Hoff (2001) encapsulated-bubble model, expressed as
+    stiffness and inertia per unit radial displacement:
 
-    Effective inertia per unit volume change:
-        M_gas  = ρ_f a      (radiation added mass of surrounding fluid)
-        M_wall = ρ_w h      (shell inertia per unit area)
+        k_gas  = 3γP₀ / a                      [gas compressibility]
+        k_wall = 2 E_w h / (a² (1 - ν))        [hoop-stress thin-shell]
 
-    ω² = (K_gas + K_wall) / (a² (M_gas + M_wall))
+        m_fluid = ρ_f a      (radiation added mass of surrounding fluid)
+        m_wall  = ρ_w h      (shell inertia per unit area)
+
+        ω² = (k_gas + k_wall) / (m_fluid + m_wall)
+
+    Recovers Minnaert exactly when h → 0 (wall terms vanish):
+        ω² = 3γP₀ / (ρ_f a²)  ⟹  f = (1/2πa)√(3γP₀/ρ_f)
     """
     a = p.a_sphere
-    K_gas = 3.0 * p.gamma * p.P0
-    K_wall = 2.0 * p.E_w * p.h_w / (a * (1.0 - p.nu_w))
-    M_gas = p.rho_f * a
-    M_wall = p.rho_w * p.h_w
+    k_gas = 3.0 * p.gamma * p.P0 / a
+    k_wall = 2.0 * p.E_w * p.h_w / (a ** 2 * (1.0 - p.nu_w))
+    m_fluid = p.rho_f * a
+    m_wall = p.rho_w * p.h_w
 
     if p.wall == "free":
-        K_wall = 0.0
-        M_wall = 0.0
+        k_wall = 0.0
+        m_wall = 0.0
     elif p.wall == "rigid":
         return np.inf  # no oscillation
 
-    omega2 = (K_gas + K_wall) / (a ** 2 * (M_gas + M_wall))
+    omega2 = (k_gas + k_wall) / (m_fluid + m_wall)
     return np.sqrt(max(omega2, 0.0)) / (2.0 * np.pi)
 
 
@@ -147,23 +151,29 @@ def cylindrical_radial_frequency(p: GasPocketParams) -> float:
     Breathing (radial) mode of a long cylindrical gas column in an
     elastic tube.
 
-    ω² = (2γP₀ + E_w h / (R(1-ν²))) / (R² (ρ_f + ρ_w h / R))
+    Per-displacement stiffness and inertia:
+        k_gas  = 2γP₀ / R
+        k_wall = E_w h / (R² (1-ν²))
+        m_fluid = ρ_f R
+        m_wall  = ρ_w h
+
+        ω² = (k_gas + k_wall) / (m_fluid + m_wall)
 
     The factor 2 (vs 3 for sphere) comes from cylindrical geometry.
     """
     R = p.R_lumen
-    K_gas = 2.0 * p.gamma * p.P0
-    K_wall = p.E_w * p.h_w / (R * (1.0 - p.nu_w ** 2))
-    M_fluid = p.rho_f * R
-    M_wall = p.rho_w * p.h_w
+    k_gas = 2.0 * p.gamma * p.P0 / R
+    k_wall = p.E_w * p.h_w / (R ** 2 * (1.0 - p.nu_w ** 2))
+    m_fluid = p.rho_f * R
+    m_wall = p.rho_w * p.h_w
 
     if p.wall == "free":
-        K_wall = 0.0
-        M_wall = 0.0
+        k_wall = 0.0
+        m_wall = 0.0
     elif p.wall == "rigid":
         return np.inf
 
-    omega2 = (K_gas + K_wall) / (R ** 2 * (M_fluid + M_wall))
+    omega2 = (k_gas + k_wall) / (m_fluid + m_wall)
     return np.sqrt(max(omega2, 0.0)) / (2.0 * np.pi)
 
 
