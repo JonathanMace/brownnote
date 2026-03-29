@@ -183,7 +183,7 @@ python -m pytest tests/ -v
 | Who | Affiliation | Role |
 |-----|-------------|------|
 | **Jonathan Mace** | MSR | Lead author, concept, writing, supervision |
-| **Brian R. Mace** | University of Auckland | Vibroacoustics expertise, theory, supervision |
+| **Brian R. Mace** | University of Auckland; Visiting Professor, Browntone Lab | Vibroacoustics expertise, theory, supervision |
 | **GitHub Copilot CLI (Opus)** | GitHub, Inc. | Analysis, drafting, review orchestration, code |
 | **Springbank 10 Year Old** | Campbeltown, Scotland | Moral support, tonal calibration, occasional strategic clarity |
 
