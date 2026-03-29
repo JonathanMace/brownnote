@@ -43,8 +43,8 @@ with the subjective experience of a `mushy' sound.
 
 The shell model employed here is structurally identical to the one
 developed in our companion papers for the human abdomen.  Both systems
-are fluid-filled, viscoelastic, oblate spheroidal shells; only the
-material parameters differ.  The watermelon rind
+are fluid-filled, viscoelastic shells analysed via the equivalent-sphere
+approximation; only the material parameters differ.  The watermelon rind
 ($E \sim \SIrange{15}{200}{\mega\pascal}$) is two to three orders of
 magnitude stiffer than the abdominal wall
 ($E \sim \SI{0.1}{\mega\pascal}$), which shifts the eigenfrequencies
@@ -79,6 +79,23 @@ scales.
 Several simplifications deserve acknowledgement:
 
 \begin{itemize}
+  \item \textbf{Equivalent-sphere approximation.}  The present model
+    captures geometry through the equivalent-volume sphere
+    radius~$R_{\mathrm{eq}} = (a^2 c)^{1/3}$ and does not include
+    explicit curvature corrections for oblate deformation.  All
+    stiffness and inertia expressions
+    (Eqs.~\ref{eq:K_bend}--\ref{eq:K_prestress},~\ref{eq:rho_eff})
+    are those of a spherical shell.  Two watermelons with the same
+    $R_{\mathrm{eq}}$ but different aspect ratios~$\zeta$ are therefore
+    assigned identical frequencies.  For watermelons with moderate
+    aspect ratios ($\zeta \approx 0.7$--$0.9$), this approximation
+    introduces negligible error in the predicted tap-tone frequency,
+    since the dominant physics is controlled by the shell's average
+    radius rather than its local curvature.  A Ritz variational model
+    with explicit $\zeta$-dependent basis functions (e.g.\ Legendre
+    polynomials in oblate spheroidal coordinates) would be needed to
+    capture genuine shape effects and is identified as future work.
+
   \item \textbf{Isotropic rind.}  The watermelon rind is a biological
     composite with fibre orientation that may induce anisotropy.  We
     treat it as isotropic; orthotropic extensions are straightforward
@@ -156,7 +173,7 @@ makes the method practically robust.
 \label{sec:generality}
 
 The model is not fruit-specific.  Any fluid-filled biological structure
-that can be approximated as an oblate spheroidal shell falls within its
+that can be approximated as a thin shell falls within its
 scope.  Candidate applications include other cucurbits (cantaloupe,
 honeydew, pumpkin), drupes (coconut), and even non-biological systems
 such as pressurised tanks and sporting goods.  The multi-cultivar
@@ -169,6 +186,6 @@ The collapse of $\Pi_{\mathrm{ripe}}$ to within
 \SI{3.3}{\percent} across four geometrically distinct watermelon
 cultivars (Table~\ref{tab:Pi_ripe}) suggests that extension to other
 fruit species requires only measurement of the species-specific
-$\mathcal{G}_2(\nu, \zeta)$, which is determined entirely by the
-geometry and Poisson's ratio.  This positions the framework as a
+shell geometry ($a$, $c$, $h$), which determines~$R_{\mathrm{eq}}$
+and thereby the frequency scaling.  This positions the framework as a
 \emph{unified theory of percussive produce assessment}.

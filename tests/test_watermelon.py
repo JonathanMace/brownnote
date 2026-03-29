@@ -597,15 +597,41 @@ class TestDimensionalConsistency:
         assert 1 < Q < 100
 
 
-class TestAspectRatioSensitivity:
-    def test_aspect_ratio_changes_frequency(self, ripe_params):
-        f_vals = [predict_tap_tone(dict(ripe_params, c=cv), mode=2)["f_n"] for cv in [0.08, 0.123, 0.15]]
-        assert (max(f_vals) - min(f_vals)) / np.mean(f_vals) > 0.20
+class TestEquivalentSphereBehaviour:
+    """Document that the forward model is an equivalent-sphere model:
+    same R_eq with different aspect ratios gives the same f₂."""
 
-    def test_more_oblate_gives_higher_frequency(self, ripe_params):
+    def test_constant_Req_different_zeta_gives_same_f2(self, ripe_params):
+        """At constant R_eq, varying ζ = c/a produces identical f₂.
+        This documents the equivalent-sphere nature of the model."""
+        R_eq_target = (ripe_params["a"] ** 2 * ripe_params["c"]) ** (1.0 / 3.0)
+
+        zeta_values = [0.5, 0.7, 0.8, 1.0]
+        f_vals = []
+        for zeta in zeta_values:
+            a = (R_eq_target ** 3 / zeta) ** (1.0 / 3.0)
+            c = zeta * a
+            p = dict(ripe_params, a=a, c=c)
+            f_vals.append(predict_tap_tone(p, mode=2)["f_n"])
+
+        # All frequencies should be identical (within floating point)
+        for f in f_vals:
+            assert f == pytest.approx(f_vals[0], rel=1e-10), \
+                f"Expected identical f₂ at constant R_eq, got spread: {f_vals}"
+
+    def test_varying_c_at_fixed_a_is_size_effect(self, ripe_params):
+        """Varying c at fixed a changes R_eq, producing a SIZE effect.
+        More oblate (smaller c) → smaller R_eq → higher f₂."""
         f_ob = predict_tap_tone(dict(ripe_params, c=0.08), mode=2)["f_n"]
         f_rd = predict_tap_tone(dict(ripe_params, c=0.15), mode=2)["f_n"]
         assert f_ob > f_rd
+
+    def test_size_effect_magnitude(self, ripe_params):
+        """At fixed a, varying c from 0.08 to 0.15 changes R_eq and shifts
+        f₂ by >20% — this is a size effect through R_eq, not a shape effect."""
+        f_vals = [predict_tap_tone(dict(ripe_params, c=cv), mode=2)["f_n"]
+                  for cv in [0.08, 0.123, 0.15]]
+        assert (max(f_vals) - min(f_vals)) / np.mean(f_vals) > 0.20
 
 
 class TestConditionNumber:

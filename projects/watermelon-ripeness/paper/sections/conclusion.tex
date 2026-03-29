@@ -5,10 +5,12 @@ We have developed a physics-based model for the acoustic `thump test''
 used to assess watermelon ripeness.  The principal findings are:
 
 \begin{enumerate}
-  \item The watermelon is well described as a fluid-filled viscoelastic
-    oblate spheroidal shell.  The dominant tap-tone corresponds to the
-    $n = 2$ flexural mode, with frequency~$f_2$ given by
-    Eq.~\eqref{eq:fn_general}.
+  \item The watermelon is modelled as a fluid-filled viscoelastic shell
+    using an equivalent-sphere approximation: the oblate geometry is
+    captured through $R_{\mathrm{eq}} = (a^2 c)^{1/3}$, and the
+    eigenfrequency is derived from classical thin-shell theory for a
+    sphere of that radius.  The dominant tap-tone corresponds to the
+    $n = 2$ flexural mode.
 
   \item The squared frequency $f_2^2$ is exactly linear in the rind
     elastic modulus $E_{\mathrm{rind}}$ when turgor pressure is
@@ -24,7 +26,8 @@ used to assess watermelon ripeness.  The principal findings are:
 
   \item The dimensionless group $\Pi_{\mathrm{ripe}}$
     (Eq.~\ref{eq:Pi_ripe}) is a geometric invariant: $E_{\mathrm{rind}}$
-    cancels by construction, making it independent of ripeness state.
+    cancels by construction at fixed geometry, making it independent of
+    the elastic modulus.
     Its practical value lies in collapsing different cultivar geometries
     onto a single calibration constant
     ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ across four cultivars).
@@ -35,11 +38,24 @@ used to assess watermelon ripeness.  The principal findings are:
     \cite{DeBelieetal2000, ChenDeBaerdemaeker1993}.
 \end{enumerate}
 
+The equivalent-sphere approximation is adequate for the inversion
+application because the goal is to recover~$E_{\mathrm{rind}}$ from
+$f_2$ at known geometry; since $a$, $c$, and~$h$ are measured
+independently, $R_{\mathrm{eq}}$ is determined and the inversion is
+well-posed.  However, the model has zero sensitivity to aspect ratio at
+constant~$R_{\mathrm{eq}}$: it cannot distinguish a sphere from an
+oblate spheroid of equal volume.  A Ritz variational model with explicit
+$\zeta$-dependent basis functions would be needed to capture genuine
+curvature effects and could improve accuracy for strongly oblate
+cultivars ($\zeta < 0.6$).
+
 The framework generalises directly from prior work on biological
 cavities, confirming that classical shell theory provides a unified
 language for fluid-filled biological structures---whether the application
 is clinical diagnostics or selecting the perfect watermelon.
 
 Future work will pursue experimental validation on instrumented
-watermelons, extension to other fruits (cantaloupe, coconut, pumpkin),
-and development of a smartphone-based measurement tool.
+watermelons, extension of the model to include explicit oblate curvature
+corrections via a Ritz variational formulation, application to other
+fruits (cantaloupe, coconut, pumpkin), and development of a
+smartphone-based measurement tool.
