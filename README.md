@@ -6,7 +6,7 @@ The hypothesis, known colloquially as the “brown note,” posits that infrasou
 
 This repository models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derives its modal characteristics from first principles, and determines — with what we believe is an unprecedented level of analytical formality — that the answer is almost certainly no. The flexural resonance sits comfortably in the infrasonic band, but the airborne acoustic energy required to drive it meaningfully exceeds anything achievable outside of a Saturn V launch. 
 
-Whole-body vibration is another matter entirely, which is why we wrote six papers instead of one.
+Whole-body vibration is another matter entirely, which is why we wrote seven papers instead of one.
 
 ## Papers
 
@@ -65,6 +65,16 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 
 If concert bass feels visceral, is the abdomen actually being driven by airborne sound? This early draft compares predicted sub-bass-induced tissue motion against perception thresholds and finds the airborne pathway falls roughly four orders of magnitude short even at concert SPL. The dominant pathway is structure-borne vibration transmitted through floors and seating, not direct acoustic coupling.
 
+### Paper 7 — *Can You Hear the Ripeness?*
+**Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Shell Resonance Inversion**  
+**Authors:** J. Mace and B.R. Mace  
+**Status:** In preparation  
+**Venue:** *Postharvest Biology and Technology* / *PNAS*  
+**Location:** `projects/watermelon-ripeness/`  
+**Key result:** tap-tone inversion maps measured resonance frequency to rind stiffness and ripeness stage.
+
+If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.
+
 
 ### Research Statement
 **[Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)** — Research vision, accomplishments, and trajectory for the Browntone programme.
@@ -86,7 +96,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **340 commits**, **167 pull requests merged**, **235 tests passing**, **20 custom agents**, **16 reusable skills**, **72+ research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **340 commits**, **167 pull requests merged**, **333 tests passing**, **20 custom agents**, **16 reusable skills**, **72+ research logs**, and about **24 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
@@ -139,9 +149,10 @@ browntone/
 ├── paper3-scaling-laws/         # Paper 3: dimensional analysis note
 ├── projects/
 │   ├── bladder-resonance/       # Paper 4
-│   └── borborygmi/              # Paper 5
+│   ├── borborygmi/              # Paper 5
+│   └── watermelon-ripeness/     # Paper 7
 ├── paper6-sub-bass/             # Paper 6: sub-bass coupling
-├── src/analytical/              # Core analytical models
+├── src/analytical/              # Core analytical models, including watermelon_model.py
 ├── tests/                       # Pytest regression suite
 ├── docs/research-logs/          # Quantitative research logs
 └── .github/                     # Agents, skills, workflows, instructions
@@ -149,7 +160,7 @@ browntone/
 
 ## Tests
 
-The analytical suite currently has **235 passing tests**. From the repository root:
+The analytical suite currently has **333 passing tests**. From the repository root:
 
 ```bash
 python -m pytest tests/ -v
