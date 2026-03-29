@@ -80,13 +80,13 @@ Using an equivalent-sphere flexural forward model, we compute the scaled
 Jacobian of the frequency--parameter map, its singular values, its condition
 number, and the associated Fisher information matrix for the parameter triple
 $(a,c,E)$.  At the spherical operating point the scaled Jacobian is
-effectively rank deficient (condition number $\kappa = 1.1 \times 10^{10}$);
+effectively rank deficient (condition number $\kappa = 1.37 \times 10^{10}$);
 at the canonical oblate operating point the same analysis gives
-$\kappa = 73.0$, an improvement by a factor of $1.5 \times 10^{8}$.  A
+$\kappa = 69.4$, an improvement by a factor of $2.0 \times 10^{8}$.  A
 Newton-type inverse solver recovers $(a,c,E)$ to relative errors below
 $10^{-12}$ in round-trip tests, while Cram\'er--Rao bounds at $1\%$ frequency
-noise yield uncertainties of $\pm 37\%$ in $a$, $\pm 13\%$ in $c$, and
-$\pm 36\%$ in $E$.  Five-mode inversion is robust; three-mode inversion is
+noise yield uncertainties of $\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and
+$\pm 30.8\%$ in $E$.  Five-mode inversion is robust; three-mode inversion is
 vulnerable to local minima.  The result has implications for non-invasive
 tissue characterisation and fruit quality assessment: one can ``hear the
 shape'' of an oblate organ, but not a spherical one.
