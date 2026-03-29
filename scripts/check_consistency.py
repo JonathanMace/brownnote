@@ -9,7 +9,6 @@ Verifies:
 
 from __future__ import annotations
 
-import os
 import re
 import sys
 from pathlib import Path
@@ -21,17 +20,16 @@ ROOT = Path(__file__).resolve().parent.parent
 def error(msg: str) -> None:
     global FAIL
     FAIL = True
-    # GitHub Actions annotation format
     print(f"::error::{msg}")
 
 
 def ok(msg: str) -> None:
-    print(f"  ✓ {msg}")
+    print(f"  OK: {msg}")
 
 
-# ── 1. Canonical parameter verification ─────────────────────────────────
+# -- 1. Canonical parameter verification --
 
-print("\n══ Canonical Parameter Check ══")
+print("\n== Canonical Parameter Check ==")
 
 sys.path.insert(0, str(ROOT / "src"))
 try:
@@ -65,9 +63,9 @@ except ImportError as exc:
     error(f"Could not import AbdominalModelV2: {exc}")
 
 
-# ── 2. Stale v1 value scan ──────────────────────────────────────────────
+# -- 2. Stale v1 value scan --
 
-print("\n══ Stale Value Check ══")
+print("\n== Stale Value Check ==")
 
 STALE_PATTERNS = [
     (r"loss_tangent\s*=\s*0\.30\b", "loss_tangent = 0.30 (should be 0.25)"),
@@ -88,15 +86,15 @@ for pattern_str, description in STALE_PATTERNS:
             for i, line in enumerate(content.splitlines(), 1):
                 if pattern.search(line):
                     rel = py_file.relative_to(ROOT)
-                    error(f"Stale value in {rel}:{i} — {description}")
+                    error(f"Stale value in {rel}:{i} -- {description}")
                     found = True
     if not found:
         ok(f"No stale: {description}")
 
 
-# ── 3. Citation key check ───────────────────────────────────────────────
+# -- 3. Citation key check --
 
-print("\n══ Citation Key Check ══")
+print("\n== Citation Key Check ==")
 
 PAPERS = [
     "paper",
@@ -146,12 +144,12 @@ for paper_dir_str in PAPERS:
         ok(f"[{paper_dir_str}] All {len(cite_keys)} citation keys found in .bib")
 
 
-# ── Summary ─────────────────────────────────────────────────────────────
+# -- Summary --
 
 print()
 if FAIL:
-    print("✗ Consistency checks FAILED")
+    print("FAIL: Consistency checks failed")
     sys.exit(1)
 else:
-    print("✓ All consistency checks passed")
+    print("PASS: All consistency checks passed")
     sys.exit(0)
