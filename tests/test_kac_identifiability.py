@@ -32,10 +32,13 @@ from analytical.kac_identifiability import (
     compute_jacobian,
     condition_number_from_params,
     condition_number_map,
+    equivalent_sphere_jacobian_ratio,
     identifiability_analysis,
     invert_frequencies,
     jacobian_condition_number,
+    kappa_vs_eccentricity,
     sphere_vs_oblate_comparison,
+    verify_sphere_jacobian_proportionality,
     _forward_ritz,
     _forward_sphere,
 )
@@ -400,3 +403,112 @@ class TestEdgeCases:
         guess["E"] *= 1.05
         result = invert_frequencies(f_obs, initial_guess=guess, model="ritz")
         assert result["success"]
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  10. Chain-Rule Proportionality (Proposition 1)
+# ═══════════════════════════════════════════════════════════════════════════
+
+class TestChainRuleProportionality:
+    """Equivalent-sphere Jacobian columns for a and c must be proportional."""
+
+    def test_analytical_ratio_formula(self):
+        """Ratio should be 2c/a by the chain rule."""
+        a, c = 0.18, 0.12
+        assert equivalent_sphere_jacobian_ratio(a, c) == pytest.approx(
+            2 * c / a, rel=1e-14
+        )
+
+    def test_sphere_columns_proportional(self, abdomen_params):
+        """Numerical sphere Jacobian should have ∂f_n/∂a / ∂f_n/∂c = 2c/a."""
+        result = verify_sphere_jacobian_proportionality(abdomen_params)
+        assert result["proportional"], (
+            f"Sphere Jacobian columns not proportional; "
+            f"max relative error = {result['max_relative_error']:.2e}"
+        )
+
+    def test_proportionality_ratio_exact(self, abdomen_params):
+        """Ratio should be 2c/a = 4/3 at canonical parameters."""
+        a, c = abdomen_params["a"], abdomen_params["c"]
+        expected = 2 * c / a
+        result = verify_sphere_jacobian_proportionality(abdomen_params)
+        np.testing.assert_allclose(
+            result["numerical_ratios"], expected, rtol=1e-3,
+            err_msg="Numerical ratio deviates from analytical 2c/a"
+        )
+
+    def test_proportionality_all_modes(self, abdomen_params):
+        """Ratio should be constant across all mode numbers."""
+        J = compute_jacobian(abdomen_params, model="sphere",
+                             modes=(2, 3, 4, 5, 6),
+                             inversion_params=("a", "c"))
+        ratios = J[:, 0] / J[:, 1]
+        # All ratios should be identical (within FD noise)
+        np.testing.assert_allclose(
+            ratios, ratios[0], rtol=1e-3,
+            err_msg="Sphere Jacobian ratio is not constant across modes"
+        )
+
+    def test_scaled_columns_proportional(self, abdomen_params):
+        """Scaled Jacobian columns J_s[:,a] = 2·J_s[:,c] exactly."""
+        J_s = compute_jacobian(abdomen_params, model="sphere",
+                               modes=DEFAULT_MODES,
+                               inversion_params=("a", "c"), scaled=True)
+        # Scaled ratio: (∂f/∂a)(a/f) / (∂f/∂c)(c/f) = (∂f/∂a)/(∂f/∂c) × a/c
+        # = (2c/a) × (a/c) = 2
+        np.testing.assert_allclose(
+            J_s[:, 0], 2.0 * J_s[:, 1], rtol=1e-3,
+            err_msg="Scaled sphere Jacobian columns not proportional by factor 2"
+        )
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  11. Eccentricity Sweep (Proposition 2)
+# ═══════════════════════════════════════════════════════════════════════════
+
+class TestEccentricitySweep:
+    """κ should increase monotonically as ζ → 1 (sphere), with power-law fit."""
+
+    def test_kappa_monotonic_towards_sphere(self):
+        """κ should increase as ζ = c/a → 1 (eccentricity → 0)."""
+        zeta_values = np.array([0.3, 0.5, 0.7, 0.85, 0.95])
+        result = kappa_vs_eccentricity(zeta_values=zeta_values)
+        kappa = result["kappa"]
+        # κ should increase monotonically (lower ε → higher κ)
+        valid = np.isfinite(kappa)
+        assert np.sum(valid) >= 3, "Not enough valid κ values"
+        # Check that κ at ζ=0.95 > κ at ζ=0.3
+        k_oblate = kappa[0]  # ζ=0.3, most oblate
+        k_sphere = kappa[-1]  # ζ=0.95, most spherical
+        assert k_sphere > k_oblate, (
+            f"κ at ζ=0.95 ({k_sphere:.1f}) should exceed κ at ζ=0.3 "
+            f"({k_oblate:.1f})"
+        )
+
+    def test_power_law_exponent_positive(self):
+        """Fitted exponent α should be positive (κ diverges as ε → 0)."""
+        zeta_values = np.linspace(0.1, 0.95, 15)
+        result = kappa_vs_eccentricity(zeta_values=zeta_values)
+        assert result["fit_alpha"] > 0, (
+            f"Power-law exponent α = {result['fit_alpha']:.3f} should be > 0"
+        )
+
+    def test_power_law_fit_quality(self):
+        """Power-law fit R² should be reasonable (> 0.5)."""
+        zeta_values = np.linspace(0.1, 0.95, 15)
+        result = kappa_vs_eccentricity(zeta_values=zeta_values)
+        assert result["fit_r_squared"] > 0.5, (
+            f"Power-law fit R² = {result['fit_r_squared']:.3f} too poor"
+        )
+
+    def test_canonical_kappa_in_sweep(self):
+        """Canonical ζ = 2/3 should produce κ consistent with direct computation."""
+        zeta_values = np.array([0.667])
+        result = kappa_vs_eccentricity(zeta_values=zeta_values)
+        kappa_sweep = result["kappa"][0]
+        params = dict(CANONICAL_ABDOMEN)
+        kappa_direct = jacobian_condition_number(params, model="ritz")
+        np.testing.assert_allclose(
+            kappa_sweep, kappa_direct, rtol=0.05,
+            err_msg="Sweep κ doesn't match direct computation"
+        )

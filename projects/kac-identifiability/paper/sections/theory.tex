@@ -152,3 +152,141 @@ This framework does not prove global uniqueness.  It answers a more practical
 question: at a chosen operating point, do the measured resonances contain enough
 independent information to recover $(a,c,E)$ with tolerable sensitivity to
 noise?  That is the question addressed in the next sections.
+
+\subsection{Analytical rank deficiency of the equivalent-sphere Jacobian}
+
+Before computing any Jacobian numerically, it is useful to understand the
+spherical rank deficiency from first principles.  The following result makes the
+mechanism explicit.
+
+\begin{proposition}[Chain-rule rank deficiency]\label{prop:chain_rule}
+For any forward model in which all frequencies $f_n$ depend on the geometric
+pair $(a,c)$ only through the equivalent radius
+$R_\mathrm{eq} = (a^2 c)^{1/3}$, the scaled Jacobian $\mathbf{J}_s$ has rank
+at most $p-1$, where $p$ is the number of geometric parameters.
+\end{proposition}
+
+\begin{pf}
+By the chain rule, the partial derivatives of any frequency $f_n$ with respect
+to $a$ and $c$ factor through $R_\mathrm{eq}$:
+\begin{equation}\label{eq:dreq_da}
+  \frac{\partial R_\mathrm{eq}}{\partial a}
+  = \frac{2}{3}\,\frac{R_\mathrm{eq}}{a},
+  \qquad
+  \frac{\partial R_\mathrm{eq}}{\partial c}
+  = \frac{1}{3}\,\frac{R_\mathrm{eq}}{c}.
+\end{equation}
+Hence
+\begin{equation}\label{eq:dfn_chain}
+  \frac{\partial f_n}{\partial a}
+  = \frac{\mathrm{d} f_n}{\mathrm{d} R_\mathrm{eq}}
+    \cdot \frac{2\,R_\mathrm{eq}}{3a},
+  \qquad
+  \frac{\partial f_n}{\partial c}
+  = \frac{\mathrm{d} f_n}{\mathrm{d} R_\mathrm{eq}}
+    \cdot \frac{R_\mathrm{eq}}{3c}.
+\end{equation}
+The ratio of the two partial derivatives is therefore
+\begin{equation}\label{eq:ratio_chain}
+  \frac{\partial f_n / \partial a}
+       {\partial f_n / \partial c}
+  = \frac{2c}{a}
+  \qquad \text{for all } n,
+\end{equation}
+independently of the functional form of $f_n(R_\mathrm{eq})$.  The
+corresponding scaled-Jacobian columns satisfy
+\begin{equation}
+  J_s[i,a] \;=\; \frac{\partial f_i}{\partial a}\,\frac{a}{f_i}
+  \;=\; 2\,\frac{\partial f_i}{\partial c}\,\frac{c}{f_i}
+  \;=\; 2\,J_s[i,c].
+\end{equation}
+Two columns of $\mathbf{J}_s$ are therefore proportional (with constant of
+proportionality $2$, independent of mode index $i$), and the matrix has rank at
+most $p-1$.
+\end{pf}
+
+\begin{remark}
+The ratio~\eqref{eq:ratio_chain} is purely geometric: it reflects the exponents
+$(2,1)$ in $R_\mathrm{eq} = (a^2 c)^{1/3}$ and holds regardless of whether the
+forward model includes bending, membrane, prestress, or added-mass terms.  Any
+model built on $R_\mathrm{eq}$ alone inherits this rank deficiency.
+\end{remark}
+
+\subsection{Eccentricity perturbation and identifiability restoration}\label{sec:perturbation}
+
+Proposition~\ref{prop:chain_rule} identifies the root cause of
+non-identifiability at the spherical limit.  The natural follow-up is:
+\emph{how} does oblate geometry restore full rank?  The answer lies in
+mode-dependent curvature sampling.
+
+For an oblate spheroid with semi-axes $(a,c)$, define the eccentricity
+\begin{equation}\label{eq:eccentricity}
+  \varepsilon = \sqrt{1 - c^2/a^2}.
+\end{equation}
+At $\varepsilon = 0$ the shell is a sphere; as $\varepsilon \to 1$ it becomes a
+thin disc.
+
+\begin{proposition}[Mode-dependent curvature sampling]\label{prop:eccentricity}
+In the Ritz variational model, the geometric factor
+\begin{equation}\label{eq:Geta}
+  G(\eta) = a^2 \eta^2 + c^2 (1 - \eta^2)
+\end{equation}
+(where $\eta = \cos\theta$) enters the stiffness and mass integrals
+nonlinearly.  Expanding around the spherical limit $\varepsilon = 0$:
+\begin{enumerate}
+  \item The stiffness integral for mode $n$,
+  \begin{equation}\label{eq:Ink}
+    I_n^{(k)} = \int_0^1 P_n^2(\eta)\, G^{-k}(\eta)\,\mathrm{d}\eta,
+  \end{equation}
+  admits an expansion
+  \begin{equation}\label{eq:Ink_expand}
+    I_n^{(k)} = I_n^{(k)}\big|_{\varepsilon=0}
+    + \varepsilon^2\,\Delta I_n^{(k)} + O(\varepsilon^4),
+  \end{equation}
+  where
+  \begin{equation}\label{eq:Delta_Ink}
+    \Delta I_n^{(k)}
+    = k\,a^{2}\!\int_0^1 P_n^2(\eta)\,
+      \frac{\eta^2 - \tfrac{1}{2}}{a^{2k+2}}\,\mathrm{d}\eta.
+  \end{equation}
+  The key observation is that
+  $\int_0^1 P_n^2(\eta)\,(\eta^2 - \tfrac{1}{2})\,\mathrm{d}\eta$ depends on
+  $n$, since $P_n^2(\eta)$ samples the interval $[0,1]$ differently for each
+  mode number.
+
+  \item Consequently, the partial derivatives $\partial f_n / \partial a$ and
+  $\partial f_n / \partial c$ acquire $n$-dependent corrections at order
+  $\varepsilon^2$:
+  \begin{equation}\label{eq:ratio_corrected}
+    \frac{\partial f_n / \partial a}
+         {\partial f_n / \partial c}
+    = \frac{2c}{a} + \varepsilon^2\,\delta_n + O(\varepsilon^4),
+  \end{equation}
+  where $\delta_n$ depends on the mode number through the curvature-weighted
+  integral of $P_n^2$.
+
+  \item Since the ratio is no longer constant across modes, the columns for $a$
+  and $c$ in the Jacobian are no longer proportional, and
+  $\mathbf{J}_s$ acquires full rank for $\varepsilon > 0$.
+\end{enumerate}
+\end{proposition}
+
+The physical mechanism is \emph{mode-dependent curvature sampling}: different
+Legendre modes $P_n(\eta)$ weight the meridional curvature gradient
+$\partial G / \partial \eta$ differently.  Near the poles ($\eta \to 1$) the
+oblate shell is flatter; near the equator ($\eta \to 0$) it is more curved.
+Low-order modes ($n=2$) sample both regions broadly, while higher-order modes
+($n \geq 4$) concentrate energy near the equator.  This differential sampling
+breaks the proportionality of the $a$- and $c$-columns and lifts the rank
+deficiency.
+
+The result leads to a quantitative design rule.  Because the rank-restoring
+correction enters at order $\varepsilon^2$, the condition number diverges as
+$\varepsilon \to 0$ according to a power law:
+\begin{equation}\label{eq:kappa_powerlaw}
+  \kappa \sim C\,\varepsilon^{-\alpha}
+  \qquad \text{as } \varepsilon \to 0,
+\end{equation}
+where $C$ and $\alpha > 0$ are constants that depend on the mode set and
+remaining parameters.  Section~\ref{sec:results} confirms this scaling
+numerically and determines the exponent $\alpha$.

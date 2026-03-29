@@ -654,3 +654,231 @@ def condition_number_from_params(
 
     return jacobian_condition_number(p, model=model, modes=modes,
                                      inversion_params=inversion_params)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Analytical chain-rule proof helpers
+# ═══════════════════════════════════════════════════════════════════════════
+
+def equivalent_sphere_jacobian_ratio(a: float, c: float) -> float:
+    """Analytical ratio (df_n/da) / (df_n/dc) for the equivalent-sphere model.
+
+    By the chain rule through R_eq = (a^2 c)^{1/3}, this ratio equals 2c/a
+    for ALL mode numbers n, proving that the Jacobian columns for a and c
+    are proportional (Proposition 1 in the paper).
+
+    Parameters
+    ----------
+    a : float
+        Semi-major axis.
+    c : float
+        Semi-minor axis.
+
+    Returns
+    -------
+    float
+        The constant ratio 2c/a.
+    """
+    return 2.0 * c / a
+
+
+def verify_sphere_jacobian_proportionality(
+    params: dict,
+    modes: tuple[int, ...] = DEFAULT_MODES,
+    rtol: float = 1e-4,
+) -> dict:
+    """Numerically verify that sphere-model Jacobian columns are proportional.
+
+    Computes the numerical Jacobian for the sphere model and checks that
+    the ratio (df_n/da)/(df_n/dc) = 2c/a for every mode n.
+
+    Parameters
+    ----------
+    params : dict
+        Full parameter set.
+    modes : tuple of int
+        Mode numbers to check.
+    rtol : float
+        Relative tolerance for the proportionality check.
+
+    Returns
+    -------
+    dict with keys:
+        'analytical_ratio' : float
+            The predicted ratio 2c/a.
+        'numerical_ratios' : np.ndarray
+            Ratio (df_n/da)/(df_n/dc) for each mode.
+        'max_relative_error' : float
+            Maximum relative deviation from the analytical ratio.
+        'proportional' : bool
+            True if all ratios match to within rtol.
+    """
+    J = compute_jacobian(params, model="sphere", modes=modes,
+                         inversion_params=("a", "c"))
+    ratios = J[:, 0] / J[:, 1]
+    analytical = equivalent_sphere_jacobian_ratio(params["a"], params["c"])
+    rel_errors = np.abs(ratios - analytical) / abs(analytical)
+
+    return {
+        "analytical_ratio": analytical,
+        "numerical_ratios": ratios,
+        "max_relative_error": float(np.max(rel_errors)),
+        "proportional": bool(np.all(rel_errors < rtol)),
+    }
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Eccentricity sweep — kappa vs epsilon analysis
+# ═══════════════════════════════════════════════════════════════════════════
+
+def kappa_vs_eccentricity(
+    zeta_values: np.ndarray | None = None,
+    base_params: dict | None = None,
+    model: str = "ritz",
+    modes: tuple[int, ...] = DEFAULT_MODES,
+) -> dict:
+    """Compute condition number kappa as a function of eccentricity epsilon.
+
+    Sweeps the aspect ratio zeta = c/a from near-spherical to highly oblate,
+    computing the scaled Jacobian condition number at each point.
+
+    Parameters
+    ----------
+    zeta_values : np.ndarray or None
+        Array of zeta = c/a values.  Defaults to 30 points from 0.01 to 0.99.
+    base_params : dict or None
+        Baseline parameters.  Defaults to CANONICAL_ABDOMEN.
+        The value of c is overridden during the sweep; a is kept fixed.
+    model : str
+        'ritz' or 'sphere'.
+    modes : tuple of int
+        Mode numbers for the Jacobian.
+
+    Returns
+    -------
+    dict with keys:
+        'zeta' : np.ndarray
+            Aspect ratio values c/a.
+        'eccentricity' : np.ndarray
+            Eccentricity epsilon = sqrt(1 - zeta^2).
+        'kappa' : np.ndarray
+            Condition numbers at each zeta.
+        'fit_C' : float
+            Fitted prefactor in kappa ~ C * epsilon^{-alpha}.
+        'fit_alpha' : float
+            Fitted exponent alpha.
+        'fit_r_squared' : float
+            R^2 of the log-linear fit.
+    """
+    if zeta_values is None:
+        zeta_values = np.linspace(0.01, 0.99, 30)
+    if base_params is None:
+        base_params = dict(CANONICAL_ABDOMEN)
+
+    a = base_params["a"]
+    kappas = np.full_like(zeta_values, np.nan)
+
+    for i, zeta in enumerate(zeta_values):
+        p = dict(base_params)
+        p["c"] = a * zeta
+        try:
+            kappas[i] = jacobian_condition_number(p, model=model, modes=modes)
+        except Exception:
+            kappas[i] = np.inf
+
+    # Eccentricity
+    eps = np.sqrt(1.0 - zeta_values**2)
+
+    # Power-law fit: log(kappa) = log(C) - alpha * log(epsilon)
+    valid = np.isfinite(kappas) & (eps > 0) & (kappas > 0)
+    if np.sum(valid) >= 3:
+        log_eps = np.log(eps[valid])
+        log_kappa = np.log(kappas[valid])
+        coeffs = np.polyfit(log_eps, log_kappa, 1)
+        alpha = -coeffs[0]
+        C = np.exp(coeffs[1])
+        # R-squared
+        ss_res = np.sum((log_kappa - np.polyval(coeffs, log_eps))**2)
+        ss_tot = np.sum((log_kappa - np.mean(log_kappa))**2)
+        r_squared = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
+    else:
+        C, alpha, r_squared = np.nan, np.nan, 0.0
+
+    return {
+        "zeta": zeta_values,
+        "eccentricity": eps,
+        "kappa": kappas,
+        "fit_C": float(C),
+        "fit_alpha": float(alpha),
+        "fit_r_squared": float(r_squared),
+    }
+
+
+def plot_kappa_vs_eccentricity(
+    result: dict | None = None,
+    output_path: str | None = None,
+    **kwargs,
+) -> None:
+    """Generate publication-quality figure of kappa vs eccentricity.
+
+    Parameters
+    ----------
+    result : dict or None
+        Output of kappa_vs_eccentricity().  If None, computes it
+        using default parameters and any extra **kwargs.
+    output_path : str or None
+        If given, saves the figure to this path (PDF recommended).
+    **kwargs
+        Passed to kappa_vs_eccentricity() if result is None.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    if result is None:
+        result = kappa_vs_eccentricity(**kwargs)
+
+    eps = result["eccentricity"]
+    kappa = result["kappa"]
+    C = result["fit_C"]
+    alpha = result["fit_alpha"]
+    r2 = result["fit_r_squared"]
+
+    valid = np.isfinite(kappa) & (kappa > 0)
+
+    fig, ax = plt.subplots(figsize=(5.5, 4))
+    ax.semilogy(eps[valid], kappa[valid], "o-", color="#2c3e50",
+                markersize=5, linewidth=1.5, label="Ritz model")
+
+    # Overlay fitted power law
+    if np.isfinite(C) and np.isfinite(alpha):
+        eps_fit = np.linspace(eps[valid].min(), eps[valid].max(), 200)
+        kappa_fit = C * eps_fit**(-alpha)
+        ax.semilogy(eps_fit, kappa_fit, "--", color="#e74c3c", linewidth=1.2,
+                     label=(r"$\kappa \sim {:.1f}\,\varepsilon^{{-{:.2f}}}$"
+                            r" ($R^2={:.3f}$)").format(C, alpha, r2))
+
+    # Mark canonical operating point
+    canonical_eps = np.sqrt(1.0 - (0.12 / 0.18)**2)
+    canonical_kappa = result["kappa"][
+        np.argmin(np.abs(result["eccentricity"] - canonical_eps))
+    ]
+    if np.isfinite(canonical_kappa):
+        ax.plot(canonical_eps, canonical_kappa, "s", color="#27ae60",
+                markersize=8, zorder=5,
+                label=r"Canonical ($\zeta=0.667$)")
+
+    ax.set_xlabel(r"Eccentricity $\varepsilon = \sqrt{1 - c^2/a^2}$",
+                  fontsize=11)
+    ax.set_ylabel(r"Condition number $\kappa(\mathbf{J}_s)$", fontsize=11)
+    ax.legend(fontsize=9, loc="upper right")
+    ax.set_xlim(0, 1.05)
+    ax.grid(True, alpha=0.3, which="both")
+    fig.tight_layout()
+
+    if output_path is not None:
+        import os
+        os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
+        fig.savefig(output_path, dpi=300, bbox_inches="tight")
+
+    plt.close(fig)
