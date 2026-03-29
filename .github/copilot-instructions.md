@@ -103,6 +103,15 @@ Every computation must use these values unless explicitly varying a parameter.
 - `\SI{value}{unit}` for all quantities. Define all symbols at first use.
 - No overclaiming. "The results suggest..." not "We prove..."
 
+### R9. Non-Scientific Citations
+- Pop-culture references (TV shows, films, podcasts, news articles, urban legends)
+  must cite the specific source with full detail: season/episode/title/air date for
+  TV; director/year for films; URL/access date for web sources.
+- Use the `pop-culture-verifier` agent to audit all non-scientific citations before
+  paper submission.
+- Vague references ("as seen on South Park") are unacceptable. Specific references
+  ("Parker and Stone, 'The Brown Noise', South Park S3E17, 1999") are required.
+
 ---
 
 ## Agent Git Workflow (copy-paste into every agent prompt)
@@ -206,6 +215,7 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `data-analyst` | Figures — publication-quality visualization |
 | `communications` | Outreach — abstracts, summaries, blog posts |
 | `bibliographer` | Literature — track citations, scooping risk, refs |
+| `pop-culture-verifier` | Non-scientific citation auditor — TV, film, media, folklore, and web-source verification |
 | `lab-manager` | Infrastructure — README, tests, worktrees, stale files |
 | `coffee-machine-guru` | Wise mentor — meta-perspective on research direction and life |
 | `loving-spouse` | Moral support — when overwhelmed, will suggest talking to Dietrich |
