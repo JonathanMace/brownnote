@@ -89,12 +89,14 @@ Several simplifications deserve acknowledgement:
     $R_{\mathrm{eq}}$ but different aspect ratios~$\zeta$ are therefore
     assigned identical frequencies.  For watermelons with moderate
     aspect ratios ($\zeta \approx 0.7$--$0.9$), this approximation
-    introduces negligible error in the predicted tap-tone frequency,
-    since the dominant physics is controlled by the shell's average
-    radius rather than its local curvature.  A Ritz variational model
+    introduces an error of unquantified magnitude in the predicted
+    tap-tone frequency.  The dominant physics is expected to be
+    controlled by the shell's average radius rather than its local
+    curvature, but bounding this error rigorously would require
+    comparison to a Ritz variational model
     with explicit $\zeta$-dependent basis functions (e.g.\ Legendre
-    polynomials in oblate spheroidal coordinates) would be needed to
-    capture genuine shape effects and is identified as future work.
+    polynomials in oblate spheroidal coordinates), which is identified
+    as future work.
 
   \item \textbf{Isotropic rind.}  The watermelon rind is a biological
     composite with fibre orientation that may induce anisotropy.  We
@@ -142,9 +144,10 @@ microphone records the tap-tone, a fast Fourier transform extracts
 $f_2$, and the inversion formula returns $E_{\mathrm{rind}}$ given
 approximate fruit dimensions (obtainable from a photograph).  The
 dimensionless geometric invariant $\Pi_{\mathrm{ripe}}$ then provides
-a cultivar-independent calibration constant that maps the
-result onto a ripeness scale without requiring detailed material
-characterisation.
+an approximate cultivar-independent calibration constant that maps the
+result onto a ripeness scale, although the \SI{5.4}{\percent} spread
+across cultivars (Table~\ref{tab:Pi_ripe}) means that cultivar-specific
+calibration may still be preferable in practice.
 
 The Monte Carlo uncertainty analysis (\S\ref{sec:geom_uncertainty})
 demonstrates that even with $\pm\SI{10}{\percent}$ geometric
