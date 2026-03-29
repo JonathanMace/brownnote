@@ -72,7 +72,7 @@ reflecting the log-normal distribution of $E$.
 \begin{table}[htbp]
   \centering
   \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).
-  Airborne displacement $\xi_\mathrm{air}$ and the ratio $\mathcal{R}$ use the
+  Airborne displacement $\xi_\mathrm{air}$ and the ratio $\mathcal{R}_\mathrm{full}$ use the
   pressure-based airborne upper bound at \SI{120}{\decibel}; the
   energy-consistent airborne displacement is ${\sim}13\times$ smaller, so the
   corresponding ratio at fixed mechanical loading is ${\sim}13\times$ larger.}
@@ -84,7 +84,7 @@ reflecting the log-normal distribution of $E$.
     $f_2$ & 6.4 & [3.3, 15.5] & Hz \\
     $\xi_\mathrm{air}$ (120 dB) & 0.18 & [0.11, 0.39] & $\mu$m \\
     $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
-    $\mathcal{R}$ (pressure-based airborne) & $10^4$ & [$2 \times 10^3$, $3 \times 10^4$] & --- \\
+    $\mathcal{R}_\mathrm{full}$ (pressure-based airborne) & $10^4$ & [$2 \times 10^3$, $3 \times 10^4$] & --- \\
     SPL for PIEZO (pressure-based, 1 $\mu$m threshold)\footnote{The pressure-based displacement
       overestimates the true wall motion by a factor of ${\approx}\,13$
       because it neglects the extremely low radiation efficiency
@@ -107,7 +107,7 @@ prioritise \emph{in vivo} measurement of abdominal wall stiffness, as this
 single parameter dominates the uncertainty budget (Figure~\ref{fig:sobol}).
 Because Table~\ref{tab:uq_summary} uses the pressure-based airborne upper bound
 and $a_\mathrm{rms} = \SI{0.5}{\metre\per\second\squared}$ for the mechanical
-loading, its $\mathcal{R}$ row should not be confused with the headline
+loading, its $\mathcal{R}_\mathrm{full}$ row should not be confused with the headline
 energy-consistent SDOF upper bound of $6.6 \times 10^4$ quoted in
 Section~\ref{sec:coupling}.
 

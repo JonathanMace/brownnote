@@ -235,12 +235,17 @@ resonance frequency.  Even though pelvic transmissibility is attenuated
 at \SI{13.9}{\hertz} ($T \approx 0.29$), the bladder modal amplification
 ($Q = 2.5$) partially compensates.
 
-Third, the coupling ratio $\mathcal{R} \approx 6{,}400$ at $f_2$
+Third, the bladder-specific coupling ratio
+$\mathcal{R}_\mathrm{bladder} \approx 6{,}400$ at $f_2$
 (equation~\ref{eq:R_coupling}) confirms that mechanical vibration is the
 dominant excitation pathway by nearly four orders of magnitude.  This is
 quantitatively consistent with---though somewhat smaller than---the
-$6.6 \times 10^4$ ratio found for the abdominal
-cavity~\cite{Mace2025browntone}, the difference arising primarily from
+$6.6 \times 10^4$ abdominal full-displacement ratio
+$\mathcal{R}_\mathrm{full}$ reported in~\cite{Mace2026browntone}.  The two
+metrics are related but not identical: $\mathcal{R}_\mathrm{bladder}$
+describes the bladder pathway, whereas $\mathcal{R}_\mathrm{full}$ describes
+the abdominal cavity pathway under the Paper~1 loading assumptions.  The
+difference arises primarily from
 the higher $f_2$ (and hence smaller $Q$ contribution from pelvic
 transmissibility) of the bladder.
 
@@ -285,14 +290,15 @@ a severe airborne coupling penalty in the Rayleigh regime.
     Breathing mode $f_0$ & $\sim$\SI{9500}{\hertz} & $\sim$\SI{2500}{\hertz} \\
     Flexural $f_2$ & \SI{13.9}{\hertz} & \SI{4.0}{\hertz} \\
     $ka$ at $f_2$ & 0.011 & 0.011 \\
-    Coupling ratio $\mathcal{R}$ & $\sim$6,400 & $\sim$66,000 \\
+    Coupling ratio & $\mathcal{R}_\mathrm{bladder} \sim$6,400 & $\mathcal{R}_\mathrm{full} \sim$66,000 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 The principal quantitative differences are the higher flexural frequency of
 the bladder ($f_2 = \SI{13.9}{\hertz}$ vs \SI{4.0}{\hertz}) and the smaller
-coupling ratio ($\sim$6,400 vs $\sim$66,000).  The higher $f_2$ is a direct
+bladder coupling ratio ($\mathcal{R}_\mathrm{bladder} \sim 6{,}400$ vs
+$\mathcal{R}_\mathrm{full} \sim 66{,}000$).  The higher $f_2$ is a direct
 consequence of the smaller radius: the stiffness-to-mass ratio scales
 roughly as $1/R^2$, and the bladder is approximately four times smaller
 than the abdomen.  The smaller coupling ratio reflects the fact that the
