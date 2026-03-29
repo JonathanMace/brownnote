@@ -68,9 +68,10 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 ### Paper 7 — *Can You Hear the Ripeness?*
 **Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Shell Resonance Inversion**  
 **Authors:** J. Mace and B.R. Mace  
-**Status:** In preparation  
+**Status:** First complete draft (19 pp) — submission-ready  
 **Venue:** *Postharvest Biology and Technology* / *PNAS*  
 **Location:** `projects/watermelon-ripeness/`  
+**Latest draft:** [`draft_2026-03-29_1451_submission-ready.pdf`](projects/watermelon-ripeness/paper/drafts/draft_2026-03-29_1451_submission-ready.pdf)  
 **Key result:** tap-tone inversion maps measured resonance frequency to rind stiffness and ripeness stage.
 
 If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.
