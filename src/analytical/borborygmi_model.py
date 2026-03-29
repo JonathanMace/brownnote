@@ -9,7 +9,10 @@ Physics
 -------
 1. **Free Minnaert bubble**: f = (1/2piR) sqrt(3 gamma P0 / rho_f)
 2. **Elastic-wall constraint**: wall stiffness adds K_wall = 2 E_w h_w / [R (1-nu_w)]
-   raising the frequency above the free-bubble value.
+   while wall inertia adds mass rho_w h_w.  The net effect on frequency depends
+   on the relative magnitudes: for the soft, dense intestinal wall the inertia
+   term dominates and the constrained frequency is *lower* than the free-bubble
+   value; for stiffer walls the frequency rises above Minnaert.
 3. **Helmholtz resonator**: gas pocket + constriction neck gives
    f_H = (c_gas / 2pi) sqrt(A_neck / (L_eff V))
 4. **Cylindrical slug**: axial piston mode of an elongated gas column trapped
@@ -44,7 +47,7 @@ GAMMA = 1.4               # polytropic exponent (air, adiabatic)
 P_ATM = 101_325.0         # atmospheric pressure [Pa]
 P_IAP = 1_000.0           # intra-abdominal pressure [Pa]
 RHO_FLUID = 1_020.0       # intestinal fluid density [kg/m^3]
-C_GAS = 343.0             # speed of sound in gas (air at 37 deg C) [m/s]
+C_GAS = 343.0             # speed of sound in gas (air, room-temperature approximation) [m/s]
 
 # Intestinal wall defaults
 E_WALL = 10.0e3           # Young's modulus of intestinal wall [Pa]
@@ -459,6 +462,16 @@ def mode_transition_map(
 ) -> dict[str, Any]:
     """Compute all 5 mode frequencies across a volume range and find crossovers.
 
+    The "dominant" mode at each volume is defined as the one with the lowest
+    frequency (most readily excited by broadband peristalsis).  For canonical
+    parameters the crossover near 0.22 mL is constrained → axial: the
+    constrained bubble is lowest-frequency below ~0.22 mL, and the axial
+    piston mode takes over above that volume because its frequency drops faster
+    with increasing slug length.  Note that the axial mode becomes sub-audible
+    at physiological volumes (< 100 Hz above ~1 mL), so the constrained bubble
+    mode dominates the *clinically audible* band despite not being the overall
+    lowest-frequency mode.
+
     Parameters
     ----------
     V_range : tuple of float
@@ -577,20 +590,20 @@ def fig_frequency_vs_volume(save: bool = True, save_dir: Path | str | None = Non
     ax.set_xlim(1, 50)
     ax.grid(True, alpha=0.3)
 
-    # --- (b) Constrained bubble -- tube diameter ---------------------------
+    # --- (b) Constrained bubble -- wall stiffness ----------------------------
     ax = axes[0, 1]
-    diameters = [0.02, 0.03, 0.04, 0.05]
-    for d in diameters:
+    E_values = [1e3, 5e3, 10e3, 50e3, 100e3]
+    for E in E_values:
         freqs = np.array([
-            borborygmi_frequency(v, tube_diameter_m=d, mode="constrained")
+            borborygmi_frequency(v, mode="constrained", E_wall=E)
             for v in vols
         ])
         ax.plot(vols, freqs, linewidth=1.2,
-                label=f"d = {d*100:.0f} cm")
+                label=f"E = {E/1e3:.0f} kPa")
     ax.axhspan(200, 550, alpha=0.12, color="grey")
     ax.set_xlabel("Gas pocket volume [mL]")
     ax.set_ylabel("Frequency [Hz]")
-    ax.set_title("(b) Constrained bubble: tube diameter effect")
+    ax.set_title("(b) Constrained bubble: wall stiffness effect")
     ax.legend(fontsize=7)
     ax.set_xlim(1, 50)
     ax.grid(True, alpha=0.3)
