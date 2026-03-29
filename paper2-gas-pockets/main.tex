@@ -53,9 +53,9 @@
 
 % ====================================================================
 \title{%
-  Bowel Gas as an Acoustic Transducer:\\
-  A Constrained Bubble Model for Infrasound-Induced\\
-  Mechanotransduction in the Gastrointestinal Tract%
+  A Helmholtz Resonator Model for Gas-Pocket\\
+  Mechanotransduction in the Human Abdomen:\\
+  Theoretical Framework and Sensitivity Analysis%
 }
 
 \author{%
@@ -77,30 +77,36 @@
 \begin{abstract}
 Whole-body acoustic models predict negligible tissue displacement from
 airborne infrasound, yet gastrointestinal (GI) discomfort is anecdotally
-reported at high sound pressure levels (SPL).  We propose that
-\emph{intraluminal gas pockets} act as impedance-matching transducers,
-converting pressure oscillations to local wall strain far more efficiently
-than whole-cavity resonance.  A constrained-bubble model---Minnaert dynamics
-modified for the elastic intestinal wall and cylindrical lumen geometry---shows
-that gas pockets of \SIrange{5}{100}{\milli\litre} have resonant frequencies
-from tens to hundreds of hertz, depending on geometry, but sub-resonantly amplify tissue displacement as
-compliant inclusions in an otherwise stiff medium.  The SPL threshold for
-activating \piezo{} mechanosensitive ion channels ranges from
+reported at high sound pressure levels (SPL).  We develop a first-principles
+model to investigate whether \emph{intraluminal gas pockets} could act as
+impedance-matching transducers, converting pressure oscillations to local
+wall strain more efficiently than whole-cavity resonance.  A
+constrained-bubble model---Minnaert dynamics modified for the elastic
+intestinal wall and cylindrical lumen geometry---predicts that gas pockets of
+\SIrange{5}{100}{\milli\litre} have resonant frequencies from tens to
+hundreds of hertz, depending on geometry, but sub-resonantly amplify tissue
+displacement as compliant inclusions in an otherwise stiff medium.  Under
+idealised sealed-pocket conditions, the model predicts SPL thresholds for
+illustrative mechanotransduction activation ranging from
 \SI{111}{\decibel} (\SI{100}{\milli\litre} pocket) to \SI{120}{\decibel}
-(\SI{5}{\milli\litre}).  A Monte Carlo population model ($N = 10\,000$)
-predicts that nearly all simulated individuals exceed the \piezo{}
-threshold at \SI{120}{\decibel}, a consequence of the fact that every
-individual harbours at least several millilitres of bowel gas.  This
-pathway is 35--100$\times$ more efficient than airborne coupling to
-abdominal flexural modes and represents the most plausible acoustic
-mechanism identified to date for airborne-infrasound-induced GI
-mechanotransduction, with
-enhanced susceptibility in individuals with elevated bowel gas.
+(\SI{5}{\milli\litre}).  However, the analysis identifies acoustic
+short-circuiting via the GI air column as a critical limitation: at
+\SI{7}{\hertz}, pressure equalisation attenuates the effective driving
+pressure by up to 83\%, potentially reducing all displacements below
+activation thresholds.  Whether this short circuit is suppressed
+\emph{in~vivo}---by mucosal folds, liquid plugs, or luminal
+collapse---remains the key unknown.  A sensitivity analysis
+($N = 10\,000$ Monte Carlo samples) identifies gas pocket volume and
+acoustic sealing as the dominant parameters.  We define the experimental
+measurements needed to test this hypothesis, including \emph{in~vivo}
+pocket impedance characterisation and tissue-level mechanotransduction
+thresholds.
 \end{abstract}
 
 \noindent\textbf{Keywords:}
 infrasound, bowel gas, constrained bubble, mechanotransduction,
-\piezo{} channels, gastrointestinal acoustics, Minnaert resonance
+\piezo{} channels, gastrointestinal acoustics, Minnaert resonance,
+hypothesis, acoustic short circuit
 
 
 % ====================================================================
@@ -116,7 +122,7 @@ subjects exposed to high-intensity infrasound (\SI{>140}{\decibel}), but
 attributed these effects primarily to whole-body vibration rather than
 airborne acoustic coupling \citep{Mohr1965,vonGierke1974}.
 
-Our companion study \citep{Mace2026browntone} demonstrated that
+Our companion study \citep{Mace2026browntone} showed that
 airborne infrasound cannot excite abdominal-cavity flexural resonances at
 physiologically meaningful amplitudes.  The breathing mode of the
 abdomen---often conflated with the brown-note myth in popular accounts---lies at
@@ -137,11 +143,12 @@ values reaching \SIrange{500}{1500}{\milli\litre}
 medium, creating local impedance mismatches of $\sim 3600{:}1$ at each
 gas--tissue interface.
 
-We propose that bowel gas pockets function as \emph{acoustic transducers}:
-the spatially uniform infrasonic pressure field drives radial oscillation of
-each gas--tissue interface, converting acoustic pressure to local wall
-strain.  This mechanism is fundamentally different from---and far more
-efficient than---whole-cavity resonance, because:
+We hypothesise that bowel gas pockets could function as \emph{acoustic
+transducers}: the spatially uniform infrasonic pressure field would drive
+radial oscillation of each gas--tissue interface, converting acoustic
+pressure to local wall strain.  This mechanism would be fundamentally
+different from---and potentially far more efficient than---whole-cavity
+resonance, because:
 \begin{enumerate}
   \item Gas compressibility provides a compliance that tissue lacks;
   \item The transduction is broadband (not limited to a single resonance);
@@ -152,9 +159,13 @@ efficient than---whole-cavity resonance, because:
 \end{enumerate}
 
 In this paper we develop a constrained-bubble model for intraluminal gas
-pockets, compute SPL thresholds for \piezo{} channel activation, quantify
-the dependence on pocket volume and geometry, and use Monte Carlo simulation
-to predict population-level variability.
+pockets, estimate the conditions under which \piezo{} channel activation
+thresholds could potentially be reached, identify the acoustic
+short-circuit as the critical limiting factor, and use sensitivity analysis
+to determine which parameters most affect the outcome.  The aim is not to
+demonstrate that this mechanism operates \emph{in~vivo}, but to establish a
+theoretical framework, identify the key unknowns, and define the
+experimental measurements that would resolve the question.
 
 
 % ====================================================================
@@ -415,17 +426,27 @@ precisely where \piezo{} channels are located in the intestinal wall
 
 
 % ------------------------------------------------------------------
-\subsection{PIEZO activation criterion}
+\subsection{Illustrative mechanotransduction comparison}
 \label{sec:piezo}
 
-We adopt a displacement threshold of $\xi_\text{PIEZO} = \SI{0.5}{\um}$
-for activation of \piezo2 mechanosensitive ion channels, based on
-patch-clamp measurements of membrane indentation required for channel
-gating \citep{Coste2010}.  This is a conservative (most sensitive) value;
-typical activation requires \SIrange{0.5}{2.0}{\um}.
+To place the predicted displacements in a biological context, we compare
+them against the activation threshold of \piezo2 mechanosensitive ion
+channels.  \citet{Coste2010} reported membrane indentation thresholds of
+\SIrange{0.5}{2.0}{\um} in patch-clamp experiments on isolated cells;
+we adopt $\xi_\text{PIEZO} = \SI{0.5}{\um}$ as an illustrative lower
+bound.
 
-The minimum SPL for \piezo{} activation is found by solving
-$\xi(\text{SPL}) = \xi_\text{PIEZO}$:
+We emphasise that this comparison is presented to establish
+\emph{order-of-magnitude plausibility}, not quantitative equivalence.
+The patch-clamp threshold reflects membrane deformation of individual cells
+under controlled conditions; the bulk tissue wall displacement computed by
+the constrained-bubble model involves a fundamentally different strain
+field.  Resolving whether gas-pocket wall displacement can activate
+\piezo{} channels \emph{in~situ} requires tissue-level mechanotransduction
+measurements that do not currently exist (see \S\ref{sec:experiments}).
+
+Subject to this caveat, the minimum SPL for which the model predicts
+$\xi = \xi_\text{PIEZO}$ is:
 \begin{equation}
   \text{SPL}_\text{thresh} = 20\log_{10}\!\left(
     \frac{\xi_\text{PIEZO}\,k_\text{eff}}{p_\text{ref}\,H(\omega)}
@@ -435,12 +456,14 @@ $\xi(\text{SPL}) = \xi_\text{PIEZO}$:
 
 
 % ------------------------------------------------------------------
-\subsection{Population variability: Monte Carlo model}
+\subsection{Sensitivity analysis: population variability}
 \label{sec:montecarlo}
 
 Inter-individual variability in bowel gas content is substantial
-\citep{Levitt1971,Bedell1956,Serra2001}.  We model a population of
-$N = 10\,000$ individuals with:
+\citep{Levitt1971,Bedell1956,Serra2001}.  To identify which parameters
+most affect the predicted displacement, we perform a Monte Carlo
+sensitivity analysis with $N = 10\,000$ sampled individuals, each
+characterised by:
 \begin{itemize}
   \item Total bowel gas volume drawn from a log-normal distribution with
         median \SI{200}{\milli\litre} and $\sigma_{\ln} = 0.65$, giving a
@@ -453,9 +476,11 @@ $N = 10\,000$ individuals with:
   \item Geometry randomly assigned (70\% cylindrical, 30\% spherical).
 \end{itemize}
 
-For each individual, the maximum pocket-wall displacement at \SI{7}{\hertz}
-and \SI{120}{\decibel} is computed, and the fraction exceeding
-$\xi_\text{PIEZO}$ is recorded.
+For each sampled individual, the maximum pocket-wall displacement at
+\SI{7}{\hertz} and \SI{120}{\decibel} is computed under the idealised
+sealed-pocket assumption.  This analysis identifies the sensitivity of the
+outcome to the assumed input distributions; it does not constitute
+independent validation of the mechanism (see \S\ref{sec:res_sensitivity}).
 
 
 % ====================================================================
@@ -505,29 +530,38 @@ independent of volume.}
 
 
 % ------------------------------------------------------------------
-\subsection{SPL thresholds for PIEZO activation}
+\subsection{SPL thresholds under idealised conditions}
 \label{sec:res_spl}
 
-Figure~\ref{fig:spl_threshold} shows the SPL required to produce
-\SI{0.5}{\um} wall displacement as a function of gas pocket volume.  Key
-findings:
+Figure~\ref{fig:spl_threshold} shows the SPL predicted by the model to
+produce \SI{0.5}{\um} wall displacement as a function of gas pocket volume,
+\emph{assuming acoustically sealed pockets} (i.e.\ no pressure
+equalisation via the luminal air column; see \S\ref{sec:short_circuit}
+for the effect of relaxing this assumption).  Under these idealised
+conditions:
 \begin{itemize}
-  \item For \textbf{spherical} pockets, the threshold decreases from
-        $\sim$\SI{120}{\decibel} at \SI{5}{\milli\litre} to
+  \item For \textbf{spherical} pockets, the predicted threshold decreases
+        from $\sim$\SI{120}{\decibel} at \SI{5}{\milli\litre} to
         $\sim$\SI{111}{\decibel} at \SI{100}{\milli\litre}.
-  \item For \textbf{cylindrical} pockets, the threshold is nearly
+  \item For \textbf{cylindrical} pockets, the predicted threshold is nearly
         independent of volume ($\sim$\SI{114}{\decibel}), because the
         lumen radius~$R$ is fixed.
   \item The 9-dB range across physiological pocket sizes maps directly
         to the range of inter-individual gas content.
 \end{itemize}
+These values represent an \emph{upper bound} on the mechanism's
+efficiency.  As discussed in \S\ref{sec:short_circuit}, acoustic
+short-circuiting can substantially reduce the effective driving pressure,
+raising the true thresholds above these sealed-pocket estimates.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/fig2_spl_threshold_vs_volume.pdf}
 \caption{%
-  SPL threshold for \piezo{} activation (\SI{0.5}{\um} wall displacement)
-  as a function of gas pocket volume at \SI{7}{\hertz}.
+  Predicted SPL for \SI{0.5}{\um} wall displacement (illustrative
+  \piezo{} threshold) as a function of gas pocket volume at
+  \SI{7}{\hertz}, assuming acoustically sealed pockets (upper-bound
+  estimate; see text).
   The shaded region indicates the typical physiological pocket size range.
   Horizontal lines mark 120~dB (threshold of pain) and 140~dB (near jet
   engine).%
@@ -537,38 +571,52 @@ findings:
 
 
 % ------------------------------------------------------------------
-\subsection{Population variability}
-\label{sec:res_pop}
+\subsection{Sensitivity analysis results}
+\label{sec:res_sensitivity}
 
-Figure~\ref{fig:population} presents the Monte Carlo results for
-$N = 10\,000$ simulated individuals at \SI{120}{\decibel}.  The key result
-is that \textbf{nearly all simulated individuals exceed the \piezo{}
-activation threshold} at this SPL.  This high exceedance fraction is
-expected rather than surprising: the model assigns every individual at
+Figure~\ref{fig:population} presents the Monte Carlo sensitivity analysis
+for $N = 10\,000$ sampled individuals at \SI{120}{\decibel}, under the
+sealed-pocket assumption.  Under these idealised conditions, the model
+predicts that nearly all sampled individuals would exceed the illustrative
+\SI{0.5}{\um} displacement threshold.  This high exceedance fraction is
+a direct consequence of the input assumptions rather than an independent
+prediction: the model assigns every individual at
 least \SI{30}{\milli\litre} of bowel gas (a physiologically conservative
 lower bound), and even a \SI{3}{\milli\litre} cylindrical pocket produces $\xi >
-\SI{0.5}{\um}$ at \SI{120}{\decibel}.  The result therefore confirms
-internal consistency of the model rather than constituting an independent
-prediction; experimental validation of the threshold remains necessary
-(see \S\ref{sec:limitations}).
+\SI{0.5}{\um}$ at \SI{120}{\decibel} in the sealed-pocket limit.
 
-The distribution of maximum pocket-wall displacement spans approximately
-\SIrange{1.03}{2.70}{\um}, with a median of $\sim$\SI{1.08}{\um}.
+The value of this analysis lies not in the exceedance fraction itself---which
+is tautological given the assumed distributions---but in identifying the
+\emph{sensitivity} of the outcome to individual parameters.  Gas pocket
+volume emerges as the dominant factor: the distribution of maximum
+pocket-wall displacement spans approximately
+\SIrange{1.03}{2.70}{\um}, with a median of $\sim$\SI{1.08}{\um},
+tracking the log-normal gas volume distribution closely.
 Individuals in the upper tail ($>$\SI{500}{\milli\litre} total gas)
-experience displacements exceeding \SI{2}{\um}, well into the range of
-robust \piezo{} activation.
+have predicted displacements exceeding \SI{2}{\um}.
+Crucially, however, these values assume perfect acoustic sealing.
+If the short-circuit attenuation factor of ${\sim}0.17$ (see
+\S\ref{sec:short_circuit}) is applied, the median displacement falls
+to $\sim$\SI{0.18}{\um}---well below the illustrative \piezo{}
+threshold.  The mechanism therefore operates only if gas pockets
+are acoustically sealed, making pocket sealing the single most
+important parameter in the model.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=\textwidth]{figures/fig3_population_variability.pdf}
 \caption{%
-  Population variability in gas-pocket acoustic response (\SI{7}{\hertz},
-  \SI{120}{\decibel}, $N = 10\,000$).
+  Sensitivity analysis: population variability in gas-pocket acoustic
+  response (\SI{7}{\hertz}, \SI{120}{\decibel}, $N = 10\,000$,
+  sealed-pocket assumption).
   (a)~Log-normal distribution of total bowel gas.
   (b)~Histogram of maximum pocket-wall displacement.
   (c)~Scatter plot showing the correlation between gas volume and
   displacement.
-  (d)~Cumulative distribution function with the \piezo{} threshold marked.%
+  (d)~Cumulative distribution function with the illustrative \piezo{}
+  threshold marked.  These values represent the sealed-pocket upper bound;
+  acoustic short-circuit attenuation would reduce all displacements
+  (see text).%
 }
 \label{fig:population}
 \end{figure}
@@ -579,26 +627,38 @@ robust \piezo{} activation.
 \label{sec:res_comparison}
 
 Figure~\ref{fig:comparison} compares the gas-pocket transduction pathway
-with the whole-cavity flexural mode ($n = 2$) pathway from \citet{Mace2026browntone}.  The
-gas-pocket mechanism produces tissue displacement that is
-\textbf{35--100$\times$ larger} than the whole-cavity pathway at the same
-SPL, across the entire range from \SI{80}{\decibel} to \SI{150}{\decibel}.
+with the whole-cavity flexural mode ($n = 2$) pathway from
+\citet{Mace2026browntone}, both evaluated under their respective idealised
+assumptions.  Under the sealed-pocket assumption, the gas-pocket mechanism
+predicts tissue displacement that is \textbf{35--100$\times$ larger} than
+the whole-cavity pathway at the same SPL, across the entire range from
+\SI{80}{\decibel} to \SI{150}{\decibel}.
 
 At \SI{120}{\decibel}, the whole-cavity $n = 2$ mode yields
-$\xi \approx \SI{0.014}{\um}$ (energy-consistent; \citealp{Mace2026browntone})---more than an
-order of magnitude below the \piezo{} threshold.  In contrast, a
-\SI{100}{\milli\litre} gas pocket yields $\xi \approx \SI{1.3}{\um}$,
-comfortably above threshold.
+$\xi \approx \SI{0.014}{\um}$ (energy-consistent;
+\citealp{Mace2026browntone})---more than an order of magnitude below the
+illustrative \piezo{} threshold.  In contrast, a \SI{100}{\milli\litre}
+sealed gas pocket yields $\xi \approx \SI{1.3}{\um}$.  If acoustic
+short-circuit attenuation is applied (factor ${\sim}0.17$ at
+\SI{7}{\hertz}), this drops to $\sim$\SI{0.22}{\um}---below the
+illustrative threshold, but still an order of magnitude above the
+whole-cavity pathway.  The gas-pocket mechanism thus remains the more
+efficient of the two pathways regardless of the sealing assumption, but
+whether either pathway reaches biologically relevant amplitudes is an
+open question.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.78\textwidth]{figures/fig4_pathway_comparison.pdf}
 \caption{%
-  Tissue displacement vs.\ SPL at \SI{7}{\hertz}: gas-pocket transduction
-  (solid lines) vs.\ whole-cavity flexural resonance (dashed).
-  Gas pockets achieve the \piezo{} threshold (dotted red line) at
+  Predicted tissue displacement vs.\ SPL at \SI{7}{\hertz}: gas-pocket
+  transduction under sealed-pocket assumption (solid lines) vs.\
+  whole-cavity flexural resonance (dashed).
+  Under idealised conditions, gas pockets reach the illustrative \piezo{}
+  threshold (dotted red line) at
   $\sim$\SIrange{111}{120}{\decibel}, while the whole-cavity path requires
-  $>\SI{180}{\decibel}$.%
+  $>\SI{180}{\decibel}$.  Acoustic short-circuit attenuation would shift the
+  solid lines downward (see text).%
 }
 \label{fig:comparison}
 \end{figure}
@@ -609,11 +669,11 @@ comfortably above threshold.
 \label{sec:discussion}
 
 % ------------------------------------------------------------------
-\subsection{Gas pockets as impedance-matching transducers}
+\subsection{Gas pockets as candidate impedance-matching transducers}
 
-The central finding of this paper is that intraluminal gas pockets serve as
-\emph{impedance-matching acoustic transducers} between the airborne
-pressure field and the intestinal wall.  The mechanism is not resonance
+The central hypothesis of this paper is that intraluminal gas pockets could
+serve as \emph{impedance-matching acoustic transducers} between the airborne
+pressure field and the intestinal wall.  The proposed mechanism is not resonance
 enhancement---the gas-pocket resonances still lie well above the
 \SI{7}{\hertz} driving frequency, at roughly \SIrange{31}{438}{\hertz}
 across the cases studied---but rather the \emph{compliance mismatch} between the
@@ -632,10 +692,13 @@ advantage.
 
 
 % ------------------------------------------------------------------
-\subsection{Acoustic short-circuit via the GI air column}
+\subsection{Acoustic short-circuit: the critical limitation}
 \label{sec:short_circuit}
 
-An important caveat concerns the acoustic pathway through luminal air.
+The most important finding of this analysis is the identification of the
+\emph{acoustic short-circuit} as the critical factor that determines
+whether the proposed mechanism can operate.
+
 The GI tract is an open tube (mouth to anus, total length
 $\sim$\SI{8}{\metre}).  At infrasound wavelengths
 ($\lambda = c_\text{air}/f \approx \SI{49}{\metre}$ at \SI{7}{\hertz}),
@@ -658,68 +721,80 @@ frequency is
 For representative values ($V \approx \SI{200}{\milli\litre}$,
 $S \approx \pi(\SI{5}{\milli\metre})^2$, $L_\text{eff} \approx
 \SI{5}{\metre}$), this gives $f_H \approx \SI{15}{\hertz}$.
-Here $L_\text{eff}$ represents the effective acoustic path length from
-mouth to colon ($\sim$\SI{5}{\metre} of GI tract), and
-$d = \SI{10}{\milli\metre}$ is a conservative lower bound for the
-average intestinal lumen diameter (typical range
-\SIrange{10}{25}{\milli\metre}).
-Below $f_H$, the air column can quasi-statically equalize pressure,
+Below $f_H$, the air column can quasi-statically equalise pressure,
 partially short-circuiting the transduction mechanism; above $f_H$,
-air-column inertia prevents equalization and the constrained-bubble model
+air-column inertia prevents equalisation and the constrained-bubble model
 applies without qualification.
+
+At \SI{7}{\hertz} ($r = f/f_H \approx 0.47$), the equalisation parameter
+$E = 1/[1 + (f/f_H)^2] \approx 0.83$, indicating that ${\sim}83\%$ of the
+exterior pressure is transmitted to the pocket interior, leaving only
+${\sim}17\%$ of $p_\text{inc}$ as the effective driving pressure.  This
+attenuation is devastating for the mechanism: the strongest pocket
+considered (\SI{100}{\milli\litre}, spherical, $\xi = \SI{1.35}{\um}$
+under sealed conditions) drops to $\xi \approx \SI{0.23}{\um}$---below the
+illustrative \piezo{} threshold of \SI{0.5}{\um}.
+
 We note that Eq.~\eqref{eq:helmholtz} is used here only to estimate
 $f_H$ as a cross-over scale; the implied low-pass attenuation model
 $1/[1+(f/f_H)^2]$ is a simplification.  A true Helmholtz resonator
 exhibits amplification near $f_H$, which would complicate the
 short-circuit picture further and warrants future investigation.
 
-Three observations mitigate this concern at typical infrasound
-frequencies ($f \sim$\SIrange{1}{20}{\hertz}):
-\begin{enumerate}
-  \item \textbf{Liquid and fecal plugs seal GI segments.}
-        The intestinal lumen is not a continuous air column.  Chyme,
-        mucus, and fecal matter create liquid plugs that partition the
-        tract into acoustically isolated compartments.  Imaging studies
-        confirm that gas is distributed in discrete, separated pockets
-        rather than a single connected volume
-        \citep{Levitt1971,Serra2001}.  Within each sealed segment, the
-        luminal air path is blocked and the constrained-bubble model is
-        fully valid.
-  \item \textbf{Segmented gas distribution is the norm.}
-        Even in healthy fasting individuals, bowel gas typically occupies
-        5--15 discrete pockets separated by liquid or collapsed lumen
-        \citep{Suarez1997}.  Post-prandially, the degree of segmentation
-        increases further.  Complete continuity from mouth to anus via an
-        uninterrupted air column is physiologically exceptional.
-  \item \textbf{Partial equalization reduces but does not eliminate
-        transduction.}
-        At \SI{7}{\hertz} ($< f_H$), the short-circuit transfer function
-        provides partial equalization (estimated pressure-equalization
-        ratio ${\sim}0.8$ for an open segment).  Quantitatively, however,
-        the margin above the \piezo{} threshold is modest: even for the
-        largest pocket considered (\SI{100}{\milli\litre}, spherical), the
-        maximum survivable reduction factor is only ${\sim}2.7\times$
-        before the displacement falls below \SI{0.5}{\um}.  A factor-of-three
-        reduction in effective $\Delta P$ would therefore bring all pockets
-        below the mechanotransduction threshold at \SI{120}{\decibel}.
-        This underscores the importance of the sealed-pocket defence
-        (items~1--2 above): for gas pockets isolated by fecal or liquid
-        plugs---the physiologically typical configuration---equalization
-        cannot occur and the constrained-bubble model applies in full.
-\end{enumerate}
+\subsubsection{Bounded analysis: sealed vs.\ open pockets}
 
-In summary, the acoustic short-circuit effect is real in principle but
-largely negated \emph{in vivo} by the segmented nature of bowel gas
-distribution.  Future work should quantify the acoustic transmission loss
-through liquid plugs of varying length and viscosity.
+The results presented in \S\ref{sec:results} assume acoustically sealed
+pockets (no interior pressure equalisation).  This represents an
+\emph{upper bound} on the mechanism's efficiency.  The short-circuit
+analysis above provides an approximate \emph{lower bound} for open
+pockets.  The true situation lies between these extremes, and
+depends critically on the degree of acoustic sealing \emph{in~vivo}.
+
+We acknowledge a tension in the boundary conditions employed in this paper.
+The cylindrical axial (piston) resonance mode
+(Eq.~\ref{eq:f0_cyl_ax}) assumes open tube ends (pressure-release
+boundaries), which is appropriate for computing resonance frequencies of a
+gas slug communicating with adjacent fluid.  However, the defence against
+the acoustic short-circuit relies on pockets being sealed by liquid
+or fecal plugs.  These are mutually contradictory assumptions applied in
+different parts of the analysis to obtain favourable results in each case.
+We present both cases transparently as bounds rather than claiming one
+is correct:
+
+\begin{itemize}
+  \item \textbf{Sealed pocket (upper bound):} The luminal air path is
+        blocked by chyme, mucus, or fecal plugs.  The constrained-bubble
+        model applies in full.  Imaging studies confirm that gas is
+        typically distributed in discrete, separated pockets rather than a
+        single connected volume \citep{Levitt1971,Serra2001}, and healthy
+        fasting individuals harbour 5--15 discrete pockets separated by
+        liquid or collapsed lumen \citep{Suarez1997}.  Under this
+        assumption, the maximum displacement for a \SI{100}{\milli\litre}
+        pocket at \SI{120}{\decibel} is $\xi \approx \SI{1.35}{\um}$.
+
+  \item \textbf{Open pocket (lower bound):} The pocket communicates
+        freely with the GI air column.  The short-circuit transfer
+        function attenuates the effective driving pressure by
+        ${\sim}83\%$ at \SI{7}{\hertz}, reducing the displacement to
+        $\xi \approx \SI{0.23}{\um}$, below the illustrative \piezo{}
+        threshold.
+\end{itemize}
+
+The acoustic sealing of gas pockets \emph{in~vivo} is therefore the single
+most important parameter in determining whether this mechanism operates.
+No published measurements of \emph{in~vivo} pocket impedance or acoustic
+transmission through intestinal liquid plugs exist.  Obtaining such
+measurements is the highest-priority experimental requirement identified by
+this analysis (see \S\ref{sec:experiments}).
 
 
 % ------------------------------------------------------------------
-\subsection{Clinical implications}
+\subsection{Clinical implications (conditional)}
 
-The model predicts that individuals with elevated bowel gas are more
-susceptible to infrasound-induced GI effects.  Several clinical populations
-have chronically elevated intestinal gas:
+If the gas-pocket mechanism operates \emph{in~vivo} (i.e.\ if pockets are
+sufficiently sealed), the model predicts that individuals with elevated
+bowel gas would be more susceptible to infrasound-induced GI effects.
+Several clinical populations have chronically elevated intestinal gas:
 \begin{itemize}
   \item \textbf{Irritable bowel syndrome (IBS):} Patients with IBS
         exhibit altered gas handling and increased gas retention
@@ -735,11 +810,13 @@ have chronically elevated intestinal gas:
         Excess fermentation produces elevated luminal gas.
 \end{itemize}
 
-This framework naturally explains the sporadic and individually variable
-nature of reported infrasound effects: susceptibility depends on a
-physiological parameter (gas content) that varies by up to 15$\times$
-across the population and fluctuates within individuals on hourly
-timescales.
+This framework would naturally explain the sporadic and individually variable
+nature of reported infrasound effects: susceptibility would depend on a
+physiological parameter (gas content and pocket sealing) that varies by up
+to 15$\times$ across the population and fluctuates within individuals on
+hourly timescales.  We stress, however, that these clinical implications
+remain contingent on the mechanism operating at all, which requires
+experimental resolution of the acoustic sealing question.
 
 % ------------------------------------------------------------------
 \subsection{Comparison with established bubble dynamics}
@@ -766,15 +843,16 @@ resonance-amplified response with a quasi-static compliance-dominated
 response.
 
 % ------------------------------------------------------------------
-\subsection{Limitations}
+\subsection{Limitations and key unknowns}
 \label{sec:limitations}
 
-Several simplifications warrant discussion:
+Beyond the acoustic short-circuit discussed in \S\ref{sec:short_circuit},
+several additional simplifications warrant discussion:
 \begin{enumerate}
   \item \textbf{Linear model:} We assume small-amplitude oscillations.
         At very high SPL ($>\SI{140}{\decibel}$), nonlinear effects
         (rectified diffusion, microstreaming) may become relevant.
-  \item \textbf{Idealized geometries:} Real gas pockets have irregular
+  \item \textbf{Idealised geometries:} Real gas pockets have irregular
         shapes.  Our spherical and cylindrical models bracket the
         physiological range but do not capture complex topologies.
         The cylindrical breathing-mode model assumes $L/R \geq 1$;
@@ -784,38 +862,132 @@ Several simplifications warrant discussion:
   \item \textbf{Quasi-static tissue response:} The monopole coupling
         model (Eq.~\ref{eq:monopole}) neglects viscoelastic relaxation,
         which would reduce the displacement at longer distances.
-  \item \textbf{Threshold uncertainty:} The \piezo{} activation
-        threshold of \SI{0.5}{\um} is based on \emph{in vitro} patch-clamp
-        data; the \emph{in vivo} threshold in the intestinal wall may
-        differ due to cell morphology and mechanical pre-stress.
+  \item \textbf{Threshold category error:} As discussed in
+        \S\ref{sec:piezo}, the \piezo{} activation threshold of
+        \SI{0.5}{\um} derives from \emph{in~vitro} patch-clamp experiments
+        on isolated cells and measures membrane indentation, not bulk tissue
+        wall displacement.  These are fundamentally different strain fields,
+        and the comparison is presented as illustrative only.  The
+        \emph{in~vivo} threshold for \piezo{} activation by gas-pocket
+        wall oscillation is unknown.
   \item \textbf{No experimental validation:} The model predictions remain
-        to be tested experimentally.  An \emph{in vitro} setup using a
-        gas-filled elastic tube in a water tank with infrasonic excitation
-        would provide direct validation.
-  \item \textbf{Acoustic short circuit:} As discussed in
-        \S\ref{sec:short_circuit}, the GI air column can partially
-        equalize pressure across the gas--tissue interface at frequencies
-        below $f_H \approx \SI{15}{\hertz}$.  The model is strictly valid
-        only for gas pockets sealed by liquid or fecal plugs---which
-        imaging evidence suggests is the typical \emph{in vivo}
-        configuration---but the degree of acoustic isolation in any given
-        individual is unknown.
+        entirely untested.  The theoretical framework identifies what
+        measurements are needed (\S\ref{sec:experiments}), but until those
+        measurements are performed, the mechanism remains a hypothesis.
+  \item \textbf{Boundary condition inconsistency:} As noted in
+        \S\ref{sec:short_circuit}, the axial resonance mode assumes open
+        ends while the short-circuit defence assumes sealed pockets.  We
+        present both cases as bounds rather than resolving this tension,
+        which requires experimental data.
 \end{enumerate}
+
+
+% ====================================================================
+\section{Experimental requirements}
+\label{sec:experiments}
+
+The theoretical framework developed above identifies three critical
+measurements that would resolve whether the gas-pocket mechanism operates
+\emph{in~vivo}.  We present these in order of priority.
+
+\subsection{In-vivo pocket impedance and acoustic sealing}
+\label{sec:exp_impedance}
+
+The analysis identifies pocket acoustic sealing as the single most
+important determinant of whether the mechanism can operate.  The required
+measurement is the acoustic transmission coefficient through the liquid
+or fecal plugs that separate gas pockets from the continuous GI air
+column.
+
+\textbf{Proposed approach:} Simultaneous manometry (intraluminal pressure)
+at two locations flanking a liquid plug, with controlled acoustic
+excitation at infrasound frequencies (\SIrange{1}{20}{\hertz}).  The
+ratio of transmitted to incident pressure amplitude as a function of
+frequency would directly determine the equalisation parameter~$E$ and
+hence the effective short-circuit attenuation.
+
+\textbf{Minimum requirement:} If the measured attenuation through a
+typical liquid plug exceeds \SI{15}{\decibel} at \SI{7}{\hertz}
+(i.e.\ $<18\%$ pressure transmission), the sealed-pocket assumption
+is justified and the constrained-bubble model applies in full.  If
+the attenuation is less than \SI{5}{\decibel}, the short circuit is
+dominant and the mechanism is effectively suppressed.
+
+\subsection{Tissue-level mechanotransduction thresholds}
+\label{sec:exp_threshold}
+
+The \SI{0.5}{\um} threshold used in this paper derives from single-cell
+patch-clamp experiments and is not directly comparable to bulk tissue
+wall displacement.  Resolving this requires \emph{in~vitro} experiments
+on intestinal tissue explants (not isolated cells) subjected to
+controlled oscillatory strain at infrasound frequencies.
+
+\textbf{Proposed approach:} Excised intestinal wall segments mounted in a
+perfusion chamber with piezoelectric actuators delivering controlled
+sinusoidal displacement at \SIrange{1}{20}{\hertz}.  Readout via
+calcium imaging or electrophysiology of the enteric nervous system
+response.  The threshold displacement for detectable neural activation
+would provide the tissue-level equivalent of the single-cell
+\piezo{} threshold.
+
+\subsection{Pocket geometry under acoustic excitation}
+\label{sec:exp_geometry}
+
+Real-time imaging of gas pocket geometry during infrasound exposure would
+validate the assumed spherical/cylindrical models and measure actual wall
+displacements.
+
+\textbf{Proposed approach:} Dynamic MRI or high-frame-rate ultrasound
+imaging of abdominal gas pockets during controlled infrasound exposure at
+\SIrange{100}{120}{\decibel}.  The imaging would need temporal resolution
+$\leq \SI{50}{\milli\second}$ (at least 3 frames per cycle at
+\SI{7}{\hertz}) and spatial resolution $\leq \SI{0.5}{\milli\metre}$ to
+detect the predicted sub-micrometre wall displacements---a significant
+technical challenge that may require phase-sensitive ultrasound techniques.
 
 
 % ====================================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have shown that intraluminal gas pockets in the gastrointestinal tract
-act as acoustic transducers, converting airborne infrasonic pressure to
-local wall strain via a sub-resonant compliance mechanism.  This
-constrained-bubble pathway is 35--100$\times$ more efficient than whole-cavity
-flexural resonance and is the most plausible acoustic mechanism
-identified to date by which airborne infrasound at realistic exposure levels ($\leq$\SI{120}{\decibel}) could
-activate mechanosensitive ion channels in the intestinal wall.
+This work establishes a theoretical framework for evaluating the hypothesis
+that intraluminal gas pockets in the gastrointestinal tract could act as
+acoustic transducers, converting airborne infrasonic pressure to local wall
+strain via a sub-resonant compliance mechanism.
 
-The model makes several testable predictions:
+Under idealised sealed-pocket conditions, the constrained-bubble model
+predicts tissue displacements 35--100$\times$ larger than the whole-cavity
+flexural resonance pathway, with SPL thresholds for reaching an illustrative
+mechanotransduction level ranging from \SI{111}{\decibel} to
+\SI{120}{\decibel}.  However, the analysis identifies two critical
+limitations that prevent these predictions from being presented as
+established findings:
+
+\begin{enumerate}
+  \item \textbf{Acoustic short-circuiting} via the GI air column
+        attenuates the effective driving pressure by up to 83\% at
+        \SI{7}{\hertz} for open pockets, reducing all predicted
+        displacements below the illustrative threshold.  The mechanism
+        operates only if gas pockets are acoustically sealed by mucosal
+        folds, liquid plugs, or luminal collapse---a condition that is
+        physiologically plausible but experimentally uncharacterised.
+  \item \textbf{The mechanotransduction comparison} between bulk tissue
+        wall displacement and single-cell patch-clamp thresholds involves
+        fundamentally different strain fields and is presented as
+        illustrative only.
+\end{enumerate}
+
+The analysis identifies pocket acoustic sealing as the critical determinant
+and defines three experimental measurements---\emph{in~vivo} pocket
+impedance, tissue-level mechanotransduction thresholds, and pocket geometry
+imaging under acoustic excitation---that would resolve whether this
+mechanism operates.  Pending these measurements, the gas-pocket
+transduction hypothesis remains the most physically plausible candidate
+mechanism for airborne-infrasound-induced GI effects, but it has not been
+validated.
+
+If the mechanism is confirmed experimentally, the model makes several
+testable predictions:
 \begin{enumerate}
   \item SPL thresholds for GI effects should correlate with bowel gas
         content (measurable by abdominal X-ray or CT);
@@ -826,10 +998,6 @@ The model makes several testable predictions:
   \item The effect should be broadband (not frequency-specific), with
         magnitude scaling as $p_\text{inc}/k_\text{eff}$.
 \end{enumerate}
-
-These predictions are amenable to experimental testing and may inform
-occupational exposure guidelines for environments with high-intensity
-infrasound.
 
 
 % ====================================================================
