@@ -12,6 +12,12 @@
 \usepackage{amsmath}
 \let\Bbbk\relax
 \usepackage{amssymb}
+
+% Theorem-like environments (elsarticle blocks amsthm, use LaTeX kernel)
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}[proposition]{Remark}
+\newproof{pf}{Proof}
+
 \usepackage{siunitx}
 \usepackage{graphicx}
 \usepackage{subcaption}

@@ -184,3 +184,39 @@ The watermelon case also helps separate geometry from scale.  The stiffness is
 orders of magnitude larger than in soft tissue, yet the inverse problem remains
 tractable.  The conditioning therefore reflects the structure of the
 frequency--parameter map rather than a peculiarity of one very soft shell.
+
+\subsection{Eccentricity dependence and power-law scaling}
+
+The analytical predictions of Propositions~\ref{prop:chain_rule}
+and~\ref{prop:eccentricity} are confirmed numerically.
+Figure~\ref{fig:kappa_vs_eccentricity} shows the condition number
+$\kappa(\mathbf{J}_s)$ as a function of eccentricity
+$\varepsilon = \sqrt{1 - c^2/a^2}$, computed by sweeping the aspect ratio
+$\zeta = c/a$ while holding all other parameters at their canonical values.
+
+As $\varepsilon \to 0$ (spherical limit), $\kappa$ diverges, consistent with
+the rank-deficiency result of Proposition~\ref{prop:chain_rule}.  As
+$\varepsilon$ increases (more oblate), $\kappa$ drops rapidly as the
+mode-dependent curvature sampling of Proposition~\ref{prop:eccentricity}
+restores full rank.  The data are well described by the power law
+\begin{equation}
+  \kappa \sim C\,\varepsilon^{-\alpha},
+\end{equation}
+as predicted in~\eqref{eq:kappa_powerlaw}.  The fitted exponent provides a
+quantitative design rule: for a given target condition number, the required
+minimum eccentricity (and hence minimum asphericity) can be read directly from
+the curve.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig_kappa_vs_eccentricity}
+  \caption{Condition number $\kappa(\mathbf{J}_s)$ as a function of
+  eccentricity $\varepsilon = \sqrt{1 - c^2/a^2}$.  The condition number
+  diverges as $\varepsilon \to 0$ (spherical limit) and is well described by a
+  power law $\kappa \sim C\,\varepsilon^{-\alpha}$.  The green square marks the
+  canonical operating point ($\zeta = 0.667$).  The result confirms the
+  analytical predictions of Propositions~\ref{prop:chain_rule}
+  and~\ref{prop:eccentricity}: oblate geometry restores identifiability through
+  mode-dependent curvature sampling.}
+  \label{fig:kappa_vs_eccentricity}
+\end{figure}

@@ -20,6 +20,33 @@ possibility of remote isospectral parameter sets.  Our claim is about
 measurement and inversion.  That is a less grand claim, but also the one an
 experimentalist can actually use.
 
+\subsection{Mechanism: mode-dependent curvature sampling}
+
+The analytical results in Section~\ref{sec:theory} clarify why oblate geometry
+restores identifiability.  Proposition~\ref{prop:chain_rule} shows that \emph{any}
+model built on $R_\mathrm{eq} = (a^2 c)^{1/3}$ alone has a rank-deficient
+Jacobian, because the chain rule forces the $a$- and $c$-columns to be exactly
+proportional for all modes.  Proposition~\ref{prop:eccentricity} then shows
+that the Ritz model, which integrates strain energy over the actual spheroidal
+surface, introduces mode-dependent corrections at order $\varepsilon^2$.
+
+The mechanism is \emph{mode-dependent curvature sampling}.  Different Legendre
+modes $P_n(\eta)$ weight the meridional curvature gradient differently: low-order
+modes sample both poles and equator broadly, while higher-order modes
+concentrate energy near the equator where the curvature gradient is steepest.
+This differential sampling breaks the proportionality of the $a$- and $c$-columns
+and restores full rank.  The condition number diverges as
+$\kappa \sim C\,\varepsilon^{-\alpha}$ as $\varepsilon \to 0$, with the
+exponent $\alpha$ confirmed numerically in Section~\ref{sec:results}.
+
+This interpretation is straightforward and does not invoke group-theoretic
+symmetry breaking.  The identifiability transition is not a consequence of
+reducing the symmetry group from $\mathrm{SO}(3)$ to $\mathrm{SO}(2)$; it is a
+consequence of mode-dependent curvature weighting in the variational
+integrals.  The distinction matters because the curvature-sampling explanation
+is constructive --- it identifies the specific integrals responsible --- whereas
+a symmetry-based framing would be descriptive at best and misleading at worst.
+
 \subsection{Implications for vibroacoustic elastography}
 
 The results are encouraging for vibroacoustic elastography and related spectral
@@ -76,6 +103,16 @@ small residual does not necessarily imply the correct parameter set when the
 search is started far away.  This is why the five-mode result matters more for
 practice than the machine-precision local recovery.
 
+Whether the spectral map is globally injective --- that is, whether the oblate
+shell inverse problem admits a unique solution over the full parameter domain
+--- remains an open question connecting to the spectral geometry programme
+initiated by Kac~\cite{Kac1966} and the perturbation theory of
+Kato~\cite{Kato1966}.  The eigenvalue perturbation results of
+Hald~\cite{Hald1984} and the shape optimisation framework of
+Henrot~\cite{Henrot2006} provide relevant tools, but a proof of global
+uniqueness for the present coupled fluid--shell system would require substantial
+additional analysis.
+
 Our recommendation is therefore not based on elegance but on behaviour:
 \begin{itemize}
   \item use three modes only for local studies or controlled round-trip tests;
@@ -111,3 +148,8 @@ priority is experimental validation, ideally first on phantoms of known
 geometry and stiffness and then on biological specimens.  A Bayesian treatment,
 with priors on tissue properties and uncertainty in mode identification, would
 also be a useful extension.
+
+The results suggest that geometric asymmetry plays a fundamental role in
+practical identifiability of coupled fluid--shell systems, a connection that
+merits further investigation using the tools of shape calculus and spectral
+perturbation theory~\cite{Kato1966,Henrot2006}.
