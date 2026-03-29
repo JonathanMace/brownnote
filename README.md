@@ -32,7 +32,7 @@ If the whole abdomen will not cooperate, perhaps the gas trapped inside it will.
 **Dimensional analysis predictions across mammalian scales**  
 **Status:** Under revision (8 pages)  
 **Target venue:** *JSV Short Communication*  
-**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_1700_r2fixed.pdf)  
+**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_1556.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
 Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
@@ -41,7 +41,7 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 **Resonance of the human urinary bladder**  
 **Status:** Under development (20+ pages)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_1700_r2fixed.pdf)  
+**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_1556.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
 Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
@@ -50,7 +50,7 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 **Multi-mode acoustic model of bowel sounds**  
 **Status:** First draft complete (17 pages)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](projects/borborygmi/paper/drafts/draft_2026-03-29_1700_accepted.pdf)  
+**Latest draft:** [PDF](projects/borborygmi/paper/drafts/draft_2026-03-29_1556.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
@@ -59,7 +59,7 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
 **Status:** Minor revision (R2 fixes applied)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1730_pathway.pdf)  
+**Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1556.pdf)  
 **Location:** `paper6-sub-bass/`  
 **Key finding:** Airborne acoustic coupling produces tissue displacement ~2.5 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway, with floor displacement reaching 904% of the perception threshold.
 
@@ -71,7 +71,7 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 **Status:** First complete draft (19 pp) — submission-ready  
 **Venue:** *Postharvest Biology and Technology* / *PNAS*  
 **Location:** `projects/watermelon-ripeness/`  
-**Latest draft:** [`draft_2026-03-29_1451_submission-ready.pdf`](projects/watermelon-ripeness/paper/drafts/draft_2026-03-29_1451_submission-ready.pdf)  
+**Latest draft:** [`draft_2026-03-29_1556_post-reviewer-b-r4.pdf`](projects/watermelon-ripeness/paper/drafts/draft_2026-03-29_1556_post-reviewer-b-r4.pdf)  
 **Key result:** tap-tone inversion maps measured resonance frequency to rind stiffness and ripeness stage.
 
 If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.
