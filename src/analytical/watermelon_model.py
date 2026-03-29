@@ -465,7 +465,7 @@ def validate_against_debelie(model_predictions=None) -> dict:
     return validate_against_yamamoto()
 
 
-def sobol_sensitivity_watermelon(N_base: int = 2048, seed: int | None = None) -> dict:
+def sobol_sensitivity_watermelon(N_base: int = 512, seed: int | None = None) -> dict:
     """Sobol sensitivity analysis for watermelon f2.
 
     Uses calc_second_order=False: total evaluations = N_base*(D+2).
