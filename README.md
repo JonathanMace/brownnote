@@ -17,7 +17,7 @@ Whole-body vibration is another matter entirely, which is why we wrote five pape
 **Latest draft:** [PDF](paper/drafts/draft_2026-03-27_1455.pdf)  
 **Key result:** coupling ratio R ≈ 6.6 × 10⁴
 
-This is the main paper: the abdomen model, the modal analysis, the coupling estimates, and the central negative result. The flexural mode does sit in the infrasonic band; the airborne forcing does not come close to driving it meaningfully.
+Can a sufficiently powerful subwoofer ruin your afternoon? We model the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derive its modal spectrum from first principles, and compare airborne acoustic coupling with whole-body mechanical vibration. The resonance is real; the acoustic pathway to it is not.
 
 ### Paper 2 — *Gas Pockets*
 **Gas pocket resonance as an alternative acoustic coupling mechanism**  
@@ -26,7 +26,7 @@ This is the main paper: the abdomen model, the modal analysis, the coupling esti
 **Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-27_1023.pdf)  
 **Key result:** 35-100× more efficient than whole-cavity coupling
 
-If the whole abdomen is a poor acoustic receiver, local gas pockets are the obvious suspects. This paper shows that constrained bubbles are much better candidates for audible and sub-audible acoustic effects than the entire cavity sloshing about like a well-behaved shell.
+If the whole abdomen will not cooperate, perhaps the gas trapped inside it will. We model intestinal gas pockets as tissue-constrained bubbles and show they couple to airborne sound 35–100× more efficiently than the cavity itself — enough, at extreme SPL, to activate mechanosensitive ion channels in nearby tissue.
 
 ### Paper 3 — *Scaling Laws*
 **Dimensional analysis predictions across mammalian scales**  
@@ -35,7 +35,7 @@ If the whole abdomen is a poor acoustic receiver, local gas pockets are the obvi
 **Latest draft:** [PDF](paper3-scaling-laws/main.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
-This is the compact Buckingham-Π paper. It asks what happens if you scale the idea across mammals and, in the process, makes the breathing-mode story even less plausible for anything roughly human-sized.
+Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
 
 ### Paper 4 — *Bladder Resonance*
 **Resonance of the human urinary bladder**  
@@ -44,7 +44,7 @@ This is the compact Buckingham-Π paper. It asks what happens if you scale the i
 **Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-27_0910.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
-Same modelling philosophy, smaller organ, different loading problem. The bladder turns out to be a cleaner resonance problem than the bowel, and a more believable one.
+Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
 
 ### Paper 5 — *Borborygmi*
 **Multi-mode acoustic model of bowel sounds**  
@@ -53,7 +53,7 @@ Same modelling philosophy, smaller organ, different loading problem. The bladder
 **Latest draft:** [PDF](projects/borborygmi/paper/main.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
 
-This is the bowel-sounds spinout: less mythology, more acoustics. It connects the gas-pocket work to something clinicians and acousticians might actually want to measure.
+Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
 
 ## The Punchline
 
