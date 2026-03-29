@@ -111,6 +111,16 @@ Every computation must use these values unless explicitly varying a parameter.
 - Vague references ("as seen on South Park") are unacceptable. Specific references
   ("Parker and Stone, 'The Brown Noise', South Park S3E17, 1999") are required.
 
+### R10. Semester Break Whisky Reviews
+- At the end of every semester break, the PI reviews a whisky in `docs/whisky/`.
+- File naming: `NNN-distillery-age.md` (e.g., `003-lagavulin-16.md`), numbered sequentially.
+- Format: title with semester number, distillery info block, then sections for
+  Nose (🔥), Palate (👅), Finish (🏁) — each with a physics/acoustics metaphor —
+  followed by Score (out of 100), ASCII art of a Glencairn glass, and a Pairing Note
+  reflecting the semester's research accomplishments.
+- Previously reviewed: Springbank 10 (001), Talisker 10 (002), Lagavulin 16 (003).
+  Do not repeat a whisky.
+
 ---
 
 ## Agent Git Workflow (copy-paste into every agent prompt)
