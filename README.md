@@ -41,7 +41,7 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 **Resonance of the human urinary bladder**  
 **Status:** Under development (20+ pages)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_1556.pdf)  
+**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_1626.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
 Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
@@ -59,7 +59,7 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
 **Status:** Minor revision (R2 fixes applied)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1556.pdf)  
+**Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1626.pdf)  
 **Location:** `paper6-sub-bass/`  
 **Key finding:** Airborne acoustic coupling produces tissue displacement ~2.5 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway, with floor displacement reaching 904% of the perception threshold.
 
