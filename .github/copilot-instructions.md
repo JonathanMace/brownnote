@@ -1,7 +1,7 @@
 # Browntone — Copilot Project Instructions
 
 *This file is loaded on EVERY Copilot interaction. It is the lab's constitution.*
-*Last updated: 2026-03-27.*
+*Last updated: 2026-03-29.*
 
 ## Identity
 
@@ -25,6 +25,15 @@ vs mechanical (whole-body vibration) coupling.
 ## THE LAB RULES
 
 **These are non-negotiable. Violation = termination and replacement.**
+
+### R0. Subagent Model Requirement
+- **Every** `task` tool call that launches a subagent **MUST** include an explicit
+  `model` parameter set to either `claude-opus-4.6` or `gpt-5.4`.
+- Never leave `model` blank, omitted, or defaulted. Haiku and other lightweight
+  models produce unacceptable quality for this project.
+- This rule applies **recursively**: if a subagent itself launches further
+  subagents (e.g., via the `task` tool), it must also specify the model.
+- When in doubt, use `gpt-5.4`.
 
 ### R1. Git Workflow
 - `main` is branch-protected. No direct pushes. ALL changes via PRs.
