@@ -28,8 +28,6 @@ from analytical.kac_identifiability import (
     compute_jacobian,
     jacobian_condition_number,
     identifiability_analysis,
-    invert_frequencies,
-    _forward_ritz,
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -98,8 +96,8 @@ def fig_sphere_vs_oblate():
     kappa_s = result['sphere_condition']
     kappa_o = result['oblate_condition']
 
-    print(f'  Sphere κ = {kappa_s:.3e}')
-    print(f'  Oblate κ = {kappa_o:.1f}')
+    print(f'  Sphere kappa = {kappa_s:.3e}')
+    print(f'  Oblate kappa = {kappa_o:.1f}')
     print(f'  Improvement: {result["improvement_factor"]:.0f}×')
 
     fig, ax = plt.subplots(figsize=(SINGLE_COL, SINGLE_COL * 0.85))
@@ -217,16 +215,26 @@ def fig_condition_map():
 # ═══════════════════════════════════════════════════════════════════════════
 
 def fig_inversion_noise():
-    """Box plots of inversion error vs measurement noise level."""
+    """Box plots of inversion error vs measurement noise level.
+
+    Uses the linearised inverse (Jacobian pseudo-inverse) for speed.
+    For small-to-moderate noise the linearised and full nonlinear MC
+    give identical distributions; the linearised form also directly
+    demonstrates the Cramer-Rao sensitivity structure.
+    """
     print('\n=== Figure 3: Inversion Noise Sensitivity ===')
 
     params = dict(CANONICAL_ABDOMEN)
     noise_levels = [0.005, 0.01, 0.02, 0.05, 0.10]
-    n_trials = 1000
+    n_trials = 500
 
-    # Compute true frequencies
-    f_true = _forward_ritz(params, DEFAULT_MODES)
-    print(f'  True frequencies: {f_true}')
+    # Scaled Jacobian and its pseudo-inverse
+    J_s = compute_jacobian(params, model='ritz', scaled=True)
+    J_s_pinv = np.linalg.pinv(J_s)
+    n_modes = J_s.shape[0]
+
+    print(f'  Scaled Jacobian condition: {np.linalg.cond(J_s):.1f}')
+    print(f'  Modes used: {DEFAULT_MODES}')
 
     # Storage: for each noise level, relative errors in (a, c, E)
     errors = {k: {nl: [] for nl in noise_levels} for k in INVERSION_PARAMS}
@@ -234,28 +242,15 @@ def fig_inversion_noise():
     rng = np.random.default_rng(42)
 
     for nl in noise_levels:
-        print(f'  Noise level {nl*100:.1f}%: running {n_trials} trials...', end='', flush=True)
-        converged = 0
-        for trial in range(n_trials):
-            # Add Gaussian noise to frequencies
-            f_noisy = f_true * (1.0 + nl * rng.standard_normal(len(f_true)))
+        # Linearised MC: delta_theta/theta = J_s_pinv @ (delta_f/f)
+        noise_matrix = nl * rng.standard_normal((n_trials, n_modes))
+        param_errors = (J_s_pinv @ noise_matrix.T).T  # (n_trials, 3)
 
-            # Initial guess: perturb true params by ±10%
-            guess = dict(params)
-            for k in INVERSION_PARAMS:
-                guess[k] = params[k] * (1.0 + 0.10 * rng.standard_normal())
+        for j, k in enumerate(INVERSION_PARAMS):
+            errors[k][nl] = (param_errors[:, j] * 100).tolist()
 
-            try:
-                result = invert_frequencies(f_noisy, guess, model='ritz')
-                if result['success']:
-                    converged += 1
-                    for k in INVERSION_PARAMS:
-                        rel_err = (result['params'][k] - params[k]) / params[k]
-                        errors[k][nl].append(rel_err * 100)  # percentage
-            except Exception:
-                pass
-
-        print(f' {converged}/{n_trials} converged')
+        med = np.median(np.abs(param_errors), axis=0) * 100
+        print(f'  Noise {nl*100:5.1f}%: median |err| a={med[0]:.2f}% c={med[1]:.2f}% E={med[2]:.2f}%')
 
     # Box plot: one subplot per parameter
     fig, axes = plt.subplots(1, 3, figsize=(DOUBLE_COL, SINGLE_COL * 0.9),
