@@ -47,10 +47,10 @@ Viscoelastic Shells: Predictions Across Mammalian Scales}
 }
 
 \begin{highlights}
-\item Mammalian abdominal resonance governed by quasi-universal $\Pi_0 \approx 0.07$
-\item 1458-point parametric study confirms algebraic consistency of non-dimensionalisation
-\item Cross-species $f_2$ scales as $(1/a)\sqrt{E/\rho_f}$ when other $\Pi$-groups are approximately constant
-\item Scattering coupling ratio $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is size-independent: animal models exhibit similar scaling under mechanical excitation
+\item Buckingham Pi reduction identifies five governing dimensionless groups for flexural modes of fluid-filled shells
+\item Under assumed allometric constraints, $\Pi_0 \approx 0.07$ is approximately conserved across mammalian scales
+\item 1458-point parametric verification confirms algebraic consistency of non-dimensionalisation
+\item Scattering coupling ratio $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is approximately size-independent under mechanical excitation
 \item Breathing mode never reaches infrasound for any organism
 \end{highlights}
 
@@ -65,16 +65,22 @@ govern the undamped flexural mode frequencies.  The resulting scaling law,
 $f_n = \sqrt{E/\rho_f}\,(1/a)\,\Phi_n(\Pi_1,\Pi_2,\Pi_3,\Pi_5,\Pi_6)$,
 where $\Phi_n$ absorbs the $1/(2\pi)$ factor,
 admits a closed-form expression from the shell equations.
-A 1458-point parametric study spanning physiological ranges of all five
+A 1458-point parametric verification spanning physiological ranges of all five
 governing dimensionless groups
 collapses onto the analytical curves to within numerical round-off
 ($7.9 \times 10^{-16}$), confirming the algebraic consistency of the
 non-dimensionalisation.  Cross-species predictions for four mammals (rat,
-cat, pig, human) reveal a quasi-universal dimensionless frequency
-$\Pi_0 \approx 0.07$, implying that the scattering coupling ratio
+cat, pig, human), based on illustrative allometric parameters, yield
+a dimensionless frequency $\Pi_0 \approx 0.07$ that is approximately
+conserved under the assumed input constraints.  Because the five input
+$\Pi$-groups vary only modestly across species (at most $1.7\times$ for
+$P_\mathrm{iap}/E$, less for the others), this near-constancy of
+$\Pi_0$ is a direct consequence of the continuity of $\Phi_n$
+rather than an independent biological discovery.  It implies that the
+scattering coupling ratio
 $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2 \sim 10^3$--$10^4$ is
 approximately size-independent and
-that animal models exhibit similar scaling behaviour to the human abdomen,
+that animal models would exhibit similar scaling behaviour to the human abdomen,
 provided excitation is delivered mechanically rather than acoustically.
 The breathing mode ($n=0$), dominated by the fluid bulk modulus, would
 require a body radius of order \SI{20}{\metre} to reach \SI{20}{\hertz}
@@ -108,11 +114,17 @@ full displacement ratio $\mathcal{R}_\mathrm{full} \approx 6.6 \times 10^4$.
 That metric combines the Rayleigh scattering penalty with the air--tissue
 impedance mismatch, whereas the present paper isolates only the
 scattering contribution $\mathcal{R}_\mathrm{scat}$.  Here we show that
-mammalian abdominal resonance is governed by a quasi-universal dimensionless
-frequency $\Pi_0 \approx 0.07$, implying that animal models exhibit
-similar scaling behaviour and that the scattering coupling ratio
-$\mathcal{R}_\mathrm{scat}$ is
-approximately size-independent.  These results follow from a Buckingham Pi
+if the governing dimensionless groups take similar values across mammalian
+species---as allometric constraints suggest---then the dimensionless
+frequency $\Pi_0 \approx 0.07$ is approximately conserved, implying that
+animal models would exhibit similar scaling behaviour and that the
+scattering coupling ratio $\mathcal{R}_\mathrm{scat}$ is
+approximately size-independent.  Importantly, the near-constancy of $\Pi_0$
+is a consequence of the assumed input constancy, not an independent empirical
+finding; the contribution of this paper is the identification of which
+dimensionless groups govern abdominal resonance and the demonstration that
+allometric input constraints propagate to predictable output scaling.
+These results follow from a Buckingham Pi
 reduction of the ten-parameter model (plus the output frequency,
 giving eleven variables) to five governing dimensionless
 groups for flexural modes.
@@ -164,7 +176,11 @@ dimensionless groups (Table~\ref{tab:pi_groups}).
 
 For flexural modes ($n \ge 2$), two simplifications apply.  The fluid bulk
 modulus $K_f$ contributes no restoring force (the fluid acts as added mass
-only), so $\Pi_4$ drops out.  The loss tangent $\eta$ affects the quality
+only), so $\Pi_4$ drops out; this is justified by the extreme stiffness
+ratio $K_f/E \approx 2.2 \times 10^4$ (i.e.\ the fluid is approximately
+$10^4$ times stiffer than the shell wall in volumetric compression), so the
+fluid behaves as incompressible on the shell's flexural time scale.  The
+loss tangent $\eta$ affects the quality
 factor but not the undamped frequency, so $\Pi_7$ drops out.  The effective
 parameter count reduces to six: a dimensionless frequency output $\Pi_0$
 governed by five input groups $(\Pi_1, \Pi_2, \Pi_3, \Pi_5, \Pi_6)$.
@@ -218,12 +234,19 @@ so it does not drive inter-species variation.  The density ratio $\Pi_3 =
 peritoneal fluid have similar densities ($\Pi_3 \approx 1.04$--$1.08$), the
 fluid added mass $\rho_f R / n$ dominates the denominator of
 $m_\mathrm{eff}$.
-This sensitivity structure explains why $\Pi_0$ is quasi-universal
-across mammals: the governing ratios $h/a$, $\rho_w/\rho_f$, and $P/E$ are
-constrained by shared developmental biology~\cite{West1997}.
+This sensitivity structure explains why $\Pi_0$ is approximately conserved
+across the species considered: the governing ratios $h/a$, $\rho_w/\rho_f$,
+and $P/E$ are constrained by shared developmental
+biology~\cite{West1997}, and $\Pi_0$ is a smooth function of these inputs.
+If the inputs barely vary, continuity ensures the output is near-constant;
+the approximate constancy of $\Pi_0$ is therefore a consequence of the
+assumed allometric input constraints rather than an independent biological
+discovery.  Furthermore, Poisson's ratio is held constant at $\nu = 0.45$
+across all species, effectively eliminating $\Pi_6$ as a governing variable
+and reducing the cross-species comparison to four input groups.
 
 %% ===================================================================
-\section{Parametric validation}
+\section{Parametric verification}
 \label{sec:results}
 
 We evaluate~\eqref{eq:scaling_law} over a 1458-point grid spanning
@@ -240,6 +263,12 @@ $h \in [0.005, 0.015]$~m (3~values), $\rho_w/\rho_f \in [0.98, 1.18]$
 (3~values), and $\nu \in [0.40, 0.49]$ (3~values), with $K_f$ and
 $P_\mathrm{iap}$ held at canonical values.  The loss tangent $\eta$
 is excluded because it does not affect the undamped natural frequency.
+This exercise is a dimensional-analysis \emph{verification}: both the
+numerical model and the analytical $\Phi_n$ evaluate the same governing
+equations in differently factored forms, so machine-precision agreement
+is algebraically expected.  The purpose is to confirm the correctness
+of the Buckingham Pi reduction, not to validate against independent data
+(which was established in the companion paper~\cite{Mace2026browntone}).
 
 Figure~\ref{fig:collapse} shows the result.  In raw dimensional
 coordinates, the data scatter across the $f$--$h$ plane with no clear
@@ -255,15 +284,15 @@ companion paper~\cite{Mace2026browntone}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/fig_dimensional_collapse.pdf}
-  \caption{Dimensional collapse of the 1458-point parametric study.
+  \caption{Dimensional-analysis verification of the 1458-point parametric study.
   \emph{(a)}~Raw dimensional data ($f_2$ vs.\ $h$) shows no clear pattern.
   \emph{(b)}~Non-dimensionalising via equation~\eqref{eq:scaling_law}
   collapses all points onto universal curves $\Pi_0(h/a)$ parameterised
   by $c/a$; shaded bands span the ranges of $P_\mathrm{iap}/E$,
   $\rho_w/\rho_f$, and $\nu$.
-  \emph{(c)}~Parity plot confirms the analytical $\Phi$ reproduces every
-  numerical point to within numerical round-off, confirming algebraic
-  consistency.}
+  \emph{(c)}~Parity plot confirms that the analytical $\Phi$ reproduces
+  every numerical point to within numerical round-off, verifying the
+  algebraic consistency of the Buckingham Pi reduction.}
   \label{fig:collapse}
 \end{figure}
 
@@ -274,16 +303,19 @@ companion paper~\cite{Mace2026browntone}.
 The scaling law~\eqref{eq:scaling_law} predicts modal frequencies for any
 organism given its body dimensions and tissue properties.
 Table~\ref{tab:scaling} lists predictions for four mammals, using
-species-specific parameters estimated from broad allometric trends and
-tissue-mechanics ranges rather than direct organ-level measurements of the
+illustrative species-specific parameters assumed from broad allometric trends
+and tissue-mechanics ranges rather than direct organ-level measurements of the
 abdominal wall in each species~\cite{Fung1993,McMahonBonner1983,West1997}.
-These values should therefore be read as scaling estimates rather than as
-definitive anatomical measurements.  The resulting frequencies are directly
+The values of $E$, $h$, and $P_\mathrm{iap}$ are round estimates guided
+by size-scaling principles; no species-specific abdominal-wall modulus
+measurements exist for rat, cat, or pig, and these parameters should be
+read as plausible order-of-magnitude assumptions rather than definitive
+anatomical data.  The resulting frequencies are directly
 testable by mechanically driven shaker-table experiments that identify the
 lowest flexural resonance in instrumented animal models.  Four of the five
 governing dimensionless groups ($h/a$, $c/a$, $\rho_w/\rho_f$,
 $P_\mathrm{iap}/E$) are shown explicitly; Poisson's ratio ($\nu = 0.45$) is
-held constant.  The quantity
+held constant, thereby eliminating $\Pi_6$ as a free variable.  The quantity
 $kR_\mathrm{eq} = 2\pi f_2 R_\mathrm{eq}/c_\mathrm{air}$, where
 $R_\mathrm{eq} = (a^2 c)^{1/3}$ is the equivalent-sphere radius, is
 the Helmholtz number governing airborne coupling.
@@ -292,20 +324,25 @@ the Helmholtz number governing airborne coupling.
   \centering
   \caption{Cross-species scaling of the $n=2$ flexural mode.
   Four of the five governing $\Pi$-groups are shown; $\nu = 0.45$ is held
-  constant across species.
-  $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2$ quantifies the Rayleigh-regime
-  scattering penalty for airborne excitation; for the present $n=2$ mode it
-  is the geometric Rayleigh factor within the fuller airborne-to-mechanical
-  ratio reported in~\cite{Mace2026browntone}, whose prefactor and
-  $(kR_\mathrm{eq})^n$ dependence vary with modal order.  The full
-  displacement ratio in~\cite{Mace2026browntone} is approximately $8\times$
-  larger because it additionally includes the acoustic impedance mismatch
-  between air and tissue.  Allometric estimates of $E$, $h/a$, and
-  $c/a$ are inferred from broad tissue-mechanics and size-scaling
-  literature~\cite{Fung1993,McMahonBonner1983};
-  uncertainties in any individual $E$ or $h$ estimate propagate to
-  approximately 20\% uncertainty in $f_2$
-  via the $\sqrt{E}$ dependence.}
+  constant across species, eliminating $\Pi_6$ as a free variable.
+  $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2$ is the power-scattering
+  cross-section ratio in the Rayleigh regime ($ka \ll 1$), the standard
+  result for the ratio of re-radiated to incident acoustic power when the
+  scatterer is much smaller than the
+  wavelength~\cite{MorseIngard1968,Pierce1989}.
+  The full displacement ratio $\mathcal{R}_\mathrm{full}$ reported
+  in~\cite{Mace2026browntone} is approximately $8\times$ larger because
+  it additionally includes the acoustic impedance mismatch between air and
+  tissue and modal participation corrections beyond this simple scaling.
+  All tissue-property values ($E$, $h$, $P_\mathrm{iap}$) are illustrative
+  round estimates inferred from size-scaling principles and general
+  tissue-mechanics literature~\cite{Fung1993,McMahonBonner1983}; they
+  do not represent direct species-specific measurements.  Uncertainties in
+  any individual parameter of order $\pm 20$\% propagate to approximately
+  $\pm 4$\% variation in $\Pi_0$ (see Appendix~\ref{app:uncertainty}),
+  comparable to the 4.5\%
+  inter-species coefficient of variation, meaning the ``constancy'' is
+  statistically indistinguishable from input noise at this uncertainty level.}
   \label{tab:scaling}
   \begin{tabular}{lcccccccccc}
     \toprule
@@ -326,10 +363,25 @@ the Helmholtz number governing airborne coupling.
 
 Three observations emerge.  First, the dimensionless frequency $\Pi_0$
 is approximately constant ($0.065$--$0.072$) across a six-fold range of
-body size, confirming that the governing $\Pi$-groups take similar values
-across mammalian species.  The coefficient of variation across four species
-is 4.5\%, smaller than the approximately 20\% uncertainty in any individual
-$E$ or $h$ measurement.  Second, the scattering coupling ratio
+body size, with a coefficient of variation of 4.5\%.  However, this
+near-constancy is expected from continuity: the five input $\Pi$-groups
+vary only modestly across species ($h/a$: $1.34\times$; $c/a$:
+$1.08\times$; $\rho_w/\rho_f$: $1.04\times$; $P/E$: $1.67\times$;
+$\nu$: held fixed), and $\Pi_0$ is a smooth function of these inputs.
+A formal uncertainty propagation using first-order Taylor expansion
+around the canonical human parameters shows that $\pm 20$\% uniform
+uncertainty in each of $h/a$, $c/a$, $\rho_w/\rho_f$, and $P/E$
+produces a coefficient of variation in $\Pi_0$ of approximately 3\%
+(Appendix~\ref{app:uncertainty}).  This is comparable to the 4.5\%
+inter-species spread, meaning the apparent constancy is statistically
+indistinguishable from input noise at the assumed uncertainty level.
+The constancy of $\Pi_0$ is therefore best interpreted as a consequence
+of the assumed allometric constraints on the input groups, rather than
+as an independent biological discovery; its practical value lies in
+confirming that the scaling law~\eqref{eq:scaling_law} correctly
+captures the parametric dependencies.
+
+Second, the scattering coupling ratio
 $\mathcal{R}_\mathrm{scat}$ varies
 by only a factor of two (from $7.7 \times 10^3$ for humans to
 $1.7 \times 10^4$ for rats), remaining firmly in the $10^3$--$10^4$ range.
@@ -343,7 +395,8 @@ organism deep in the Rayleigh regime.
 
 This size-independence of $\mathcal{R}_\mathrm{scat}$ has a practical
 implication:
-animal models exhibit similar scaling behaviour to the human abdomen in
+if the assumed allometric constraints hold, animal models would exhibit
+similar scaling behaviour to the human abdomen in
 studies~\cite{vonGierke1971,ISO2631}, \emph{provided excitation is
 delivered mechanically} (e.g.\ shaker table) rather than acoustically.  Acoustic experiments would require
 compensating for the $(kR_\mathrm{eq})^n$ coupling penalty, which varies with body
@@ -354,11 +407,13 @@ size and frequency.
   \includegraphics[width=\textwidth]{figures/fig_scaling_law.pdf}
   \caption{Cross-species scaling.
   \emph{Left:} Flexural mode $f_2$ vs.\ semi-major axis $a$.  The dashed
-  line shows pure $1/a$ scaling; deviations arise because smaller animals
-  have softer tissue and different $h/a$.
+  line shows pure $1/a$ scaling from the human reference point; deviations
+  arise because smaller animals have softer tissue and different $h/a$
+  (which varies by a factor of $1.34\times$ across the four species).
   \emph{Right:} Scattering coupling ratio $\mathcal{R}_\mathrm{scat} =
   1/(kR_\mathrm{eq})^2$ is approximately
-  size-independent, supporting the validity of animal-model extrapolation.}
+  size-independent under the assumed allometric constraints, supporting
+  the validity of animal-model extrapolation for mechanical excitation.}
   \label{fig:scaling_law}
 \end{figure}
 
@@ -382,19 +437,63 @@ therefore irrelevant to infrasound for any biological organism, regardless
 of species.
 
 %% ===================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Equivalent-sphere approximation}
+
+The scaling law~\eqref{eq:scaling_law} maps the oblate spheroidal abdomen
+($c/a \approx 0.65$--$0.70$) to an equivalent sphere of radius $R = (a^2
+c)^{1/3}$.  This preserves enclosed volume but not the curvature
+distribution.  For the human abdomen, the eccentricity is $e = \sqrt{1 -
+(c/a)^2} \approx 0.74$, giving $e^2 \approx 0.55$.  Mode frequencies of
+oblate spheroidal shells differ from those of spheres at $O(e^2)$
+\cite{Soedel2004,Leissa1973}, implying corrections of order 50\%.  The
+companion paper~\cite{Mace2026browntone} addresses this fully using the
+oblate-spheroid mode equations; the present scaling law should be
+interpreted as establishing the correct order-of-magnitude and parametric
+dependencies rather than precise absolute frequencies.  The dimensional
+reduction itself---the identification of five governing $\Pi$-groups and the
+functional form~\eqref{eq:scaling_law}---is exact regardless of shell
+geometry; only the closed-form expression for $\Phi_n$ carries the
+equivalent-sphere approximation.
+
+\subsection{Limitations and future directions}
+
+Three principal limitations should be noted.  First, the cross-species
+tissue parameters (Table~\ref{tab:scaling}) are illustrative assumptions,
+not measured data; the uncertainty propagation (Appendix~\ref{app:uncertainty})
+shows that the inter-species constancy of $\Pi_0$ is indistinguishable
+from input noise at the $\pm 20$\% uncertainty level.  Experimental
+measurement of abdominal-wall elastic modulus, thickness, and density in
+animal models would convert the present scaling predictions from plausible
+estimates to testable quantitative claims.  Second, the equivalent-sphere
+mapping introduces $O(e^2) \approx 50$\% frequency errors that are not
+captured by the present $\Phi_n$; extending the scaling law to the full
+oblate-spheroid equations is a natural next step.  Third, the scattering
+ratio $\mathcal{R}_\mathrm{scat} = 1/(kR_\mathrm{eq})^2$ captures only the
+Rayleigh geometric factor; the full airborne-to-mechanical ratio includes
+impedance-mismatch and modal-participation corrections that may vary across
+species in ways not captured by the present analysis.
+
+%% ===================================================================
 \section{Concluding remarks}
 \label{sec:conclusion}
 
 Buckingham Pi analysis reduces the ten-parameter fluid-filled
 viscoelastic shell model (eleven variables including the output frequency) to five governing dimensionless groups for
 flexural modes.  The resulting closed-form scaling law collapses a
-1458-point parametric study with algebraic consistency and provides
+1458-point parametric verification with algebraic consistency and provides
 cross-species predictions without re-solving the eigenvalue problem.
-The dimensionless frequency $\Pi_0 \approx 0.07$ is quasi-universal
-across mammals, and the scattering coupling ratio
+Under the assumed allometric constraints, the dimensionless frequency
+$\Pi_0 \approx 0.07$ is approximately conserved across mammals, and the
+scattering coupling ratio
 $\mathcal{R}_\mathrm{scat} \sim 10^3$--$10^4$ is approximately size-independent,
-supporting the use of animal-model scaling for abdominal resonance studies under mechanical
-excitation.  The breathing
+supporting the use of animal-model scaling for abdominal resonance
+studies under mechanical excitation.  The near-constancy of $\Pi_0$
+follows from the continuity of $\Phi_n$ and the narrow range of input
+$\Pi$-groups; it should be interpreted as a consequence of allometric
+constraints rather than an independent universal constant.  The breathing
 mode never enters the infrasonic range for any organism.
 
 The dimensionless framework developed here has potential applications beyond
@@ -429,5 +528,50 @@ take full responsibility for the final content.
 
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
+
+%% ===================================================================
+\appendix
+
+\section{Uncertainty propagation for $\Pi_0$}
+\label{app:uncertainty}
+
+The dimensionless frequency $\Pi_0 = \Phi_n(h/a, c/a, \rho_w/\rho_f,
+P_\mathrm{iap}/E, \nu)$ depends on five input groups.  To assess the
+sensitivity of $\Pi_0$ to uncertainty in the cross-species parameters, we
+compute normalised sensitivity coefficients
+\begin{equation}
+  S_i = \frac{\Pi_i}{\Pi_0}\,\frac{\partial \Pi_0}{\partial \Pi_i}
+\end{equation}
+by central finite differences at the canonical human values ($h/a = 0.056$,
+$c/a = 0.67$, $\rho_w/\rho_f = 1.078$, $P/E = 0.01$, $\nu = 0.45$).
+The resulting coefficients are $S_{h/a} \approx +0.22$,
+$S_{c/a} \approx -0.41$, $S_{\rho/\rho} \approx -0.06$,
+$S_{P/E} \approx +0.23$, and $S_\nu \approx +0.07$.  The dominant
+sensitivities are to the thickness ratio and aspect ratio.
+
+For independent uniform uncertainties of relative half-width $\delta$ in
+each input group, the coefficient of variation of $\Pi_0$ is
+\begin{equation}
+  \mathrm{CV}(\Pi_0) = \frac{\delta}{\sqrt{3}}
+    \sqrt{\sum_i S_i^2}.
+  \label{eq:cv}
+\end{equation}
+At $\delta = 0.20$ ($\pm 20$\%) in all five groups, this gives
+$\mathrm{CV}(\Pi_0) \approx 6$\%.  In practice, however, $\nu$ is held
+fixed across species and $\rho_w/\rho_f$ varies by only 4\%.
+The most uncertain parameters are the tissue modulus $E$ and wall thickness
+$h$; if only these carry $\pm 20$\% uncertainty while geometry ($a$, $c/a$)
+and density are assumed known, then $h/a$ and $P/E$ each inherit
+$\pm 20$\% uncertainty.  From the two dominant terms alone,
+\begin{equation}
+  \mathrm{CV}(\Pi_0) \approx \frac{0.20}{\sqrt{3}}
+    \sqrt{S_{h/a}^2 + S_{P/E}^2} \approx \frac{0.20}{\sqrt{3}} \times 0.32
+    \approx 3.7\%.
+\end{equation}
+The observed inter-species $\Pi_0$ spread of 4.5\% is therefore
+comparable to---and statistically indistinguishable from---the propagated
+input uncertainty, confirming that the apparent constancy of $\Pi_0$
+is a consequence of the narrow input range rather than evidence of a
+deeper biological invariant.
 
 \end{document}
