@@ -126,8 +126,93 @@ For each genre, the SPL at each frequency is interpolated from published
 third-octave measurements and used as the input to
 equation~\eqref{eq:displacement}.
 
-\subsection{Perception thresholds}
-\label{sec:perception}
+\subsection{Energy-consistent displacement}
+\label{sec:energy-consistent}
+
+The displacement in equation~\eqref{eq:displacement} uses the
+pressure-based coupling $p_\mathrm{eff} = p_\mathrm{inc}(ka)^n$, which
+overestimates the true displacement by a factor of ${\sim}13$ because it
+does not account for the radiation efficiency of the
+mode~\cite{Junger2012}.  We therefore adopt the energy-consistent
+(Junger \& Feit reciprocity) formulation developed in our companion
+paper~\cite{Mace2026browntone}:
+%
+\begin{equation}
+  \xi_\mathrm{on\text{-}res}^2 =
+    \frac{\sigma_\mathrm{abs}\,I_\mathrm{inc}}
+         {\zeta_\mathrm{struct}\,\omega_n^3\,M_\mathrm{total}},
+  \label{eq:energy-consistent}
+\end{equation}
+%
+where $\sigma_\mathrm{abs} = (2n+1)\lambda^2/(4\pi) \times
+\Gamma_\mathrm{rad}/\Gamma_\mathrm{total}$ is the absorption
+cross-section from reciprocity, $I_\mathrm{inc} = p_\mathrm{inc}^2 /
+(2\rho_\mathrm{air}c_\mathrm{air})$ is the incident intensity,
+$\zeta_\mathrm{struct}$ is the structural damping ratio, and
+$M_\mathrm{total}$ is the total effective modal mass.
+
+For off-resonance excitation at frequency $f$, the displacement is
+scaled from the on-resonance value by the SDOF transfer function
+(equation~\ref{eq:sdof}) and the $ka$-coupling improvement:
+%
+\begin{equation}
+  \xi(f) = \xi_\mathrm{on\text{-}res} \,
+    \frac{H(r,\zeta)}{Q} \,
+    \left(\frac{ka(f)}{ka(f_n)}\right)^n.
+  \label{eq:off-resonance}
+\end{equation}
+
+At the canonical parameters ($n = 2$, $\SI{120}{\decibel}$), the
+energy-consistent on-resonance displacement is
+$\xi \approx \SI{0.014}{\micro\metre}$, compared with the
+pressure-based value of $\SI{0.18}{\micro\metre}$---a factor of
+${\sim}\num{13.4}$ smaller.
+
+\subsection{Structure-borne pathway model}
+\label{sec:floor-pathway}
+
+To provide quantitative context, we estimate the structure-borne
+(floor/seat) vibration pathway.  Sub-woofer arrays at concert venues
+couple acoustic energy into the floor structure.  The resulting floor
+vibration propagates through the body via the skeleton and soft tissue.
+
+We model this pathway as:
+%
+\begin{equation}
+  \xi_\mathrm{body} = T_\mathrm{body} \times \xi_\mathrm{floor},
+  \quad
+  \xi_\mathrm{floor} = \frac{v_\mathrm{floor}}{\omega},
+  \quad
+  v_\mathrm{floor} = \sqrt{\frac{\eta_f I A_f}{m_f \omega^2}},
+  \label{eq:floor-pathway}
+\end{equation}
+%
+where $T_\mathrm{body} \approx 1.8$ is the seat-to-abdomen
+transmissibility from ISO~2631~\cite{Kitazaki1998, Griffin1990},
+$\eta_f \sim 0.01$ is the floor--acoustic coupling efficiency,
+$A_f$ is the excited floor area, and $m_f$ is the floor mass per unit
+area.  This is a simplified order-of-magnitude estimate; actual floor
+vibration depends strongly on venue construction.
+
+\subsection{Near-field pressure enhancement}
+\label{sec:near-field}
+
+Within ${\sim}\lambda/(2\pi)$ of a subwoofer stack, evanescent
+near-field components enhance the pressure above the far-field value.
+At \SI{40}{\hertz} ($\lambda = \SI{8.6}{\metre}$), the near-field
+distance is $\lambda/(2\pi) \approx \SI{1.4}{\metre}$.  We model the
+enhancement as~\cite{Junger2012}:
+%
+\begin{equation}
+  \Delta L_\mathrm{NF} = 10\log_{10}\!\left(1 +
+    \left(\frac{\lambda}{2\pi d}\right)^2\right),
+  \label{eq:near-field}
+\end{equation}
+%
+which gives $+\SI{9}{\decibel}$ at \SI{0.5}{\metre} and
+$+\SI{5}{\decibel}$ at \SI{1}{\metre}.
+
+
 
 We compare computed tissue displacements against whole-body vibration
 perception thresholds from ISO~2631-1:1997~\cite{iso2631}.  The standard

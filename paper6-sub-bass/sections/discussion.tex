@@ -4,29 +4,39 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Why bass ``feels'' different from treble}
+\subsection{Pathway partition: why bass ``feels'' different from treble}
 \label{sec:why-bass-feels}
 
-Our results demonstrate that airborne acoustic coupling to the abdominal
-cavity cannot explain the visceral sensation of concert sub-bass, even
-at the extreme sound pressure levels produced by modern sub-woofer
-arrays.  The improved $ka$-coupling at \SIrange{20}{80}{\hertz} is
-entirely offset by the off-resonance penalty: the abdomen's flexural
-resonance lies at ${\sim}\SI{4}{\hertz}$, and the $1/r^2$ roll-off of
-the SDOF transfer function dominates.
+Our results partition the ``feel it in your gut'' experience into its
+constituent pathways.  The airborne acoustic contribution, computed using
+the energy-consistent Junger \& Feit reciprocity formulation, reaches
+$\sim$\SI{0.35}{\percent} of the ISO~2631 perception threshold at peak
+EDM levels ($\SI{115}{\decibel}$ at \SI{40}{\hertz}).  This is a
+``near-miss''---\num{2.5}~orders of magnitude below threshold, not the
+four orders suggested by the pressure-based approach---but it remains
+insufficient for airborne perception alone.
 
-The ``feel it in your gut'' experience must therefore arise through
-alternative pathways:
+The structure-borne pathway (floor and seat vibration) dominates by a
+factor of ${\sim}40$ under conservative assumptions.  With realistic
+venue floors (lightweight timber, resonant panels), the structure-borne
+displacement can readily exceed the perception threshold, explaining the
+well-documented visceral sensation at concerts.
+
+The key insight is that the airborne pathway is not negligibly weak---it
+is a significant fraction of the overall budget, particularly in
+near-field conditions or at extreme SPLs.  The ``feel it in your gut''
+experience is best understood as a \emph{pathway partition problem}: the
+structure-borne pathway carries ${\sim}\SI{97}{\percent}$ of the
+perceptible energy, with the airborne component contributing a small
+but non-zero remainder.
+
+\subsection{Additional coupling pathways}
+\label{sec:additional-pathways}
+
+Beyond the two quantified pathways, several additional mechanisms
+contribute to bass perception:
 %
 \begin{enumerate}
-  \item \textbf{Structural transmission.}  At concert venues, sub-bass
-    sound excites the floor, seats, and building structure.  This
-    mechanical vibration transmits through the skeleton and soft tissue
-    to the abdomen with transmissibility factors of
-    \numrange{1.5}{2.5}~\cite{Kitazaki1998, Griffin1990}.  At
-    \SI{40}{\hertz}, the displacement from floor vibration can easily
-    exceed perception thresholds.
-
   \item \textbf{Chest-wall coupling.}  The large surface area of the
     chest wall acts as a more efficient acoustic receiver than the
     abdomen.  Chest-wall motion at sub-bass frequencies can produce
@@ -54,10 +64,11 @@ requires physical coupling---hence the prevalence of tactile
 transducers (``butt-kickers'') in cinema seats and the careful
 placement of sub-woofer arrays to maximise floor
 vibration~\cite{Leventhall2007}.  Our results provide quantitative
-support for this practice: airborne sub-bass alone, no matter how loud,
-cannot produce the desired visceral sensation.  Effective bass
-reproduction at concert levels is fundamentally a \emph{structural
-vibration} problem, not an acoustics problem.
+support for this practice: airborne sub-bass alone, even at the
+extreme SPLs produced by modern systems, can only produce
+$\sim$\SI{0.35}{\percent} of the perception threshold.  Effective
+bass reproduction is fundamentally a \emph{structural vibration}
+problem.
 
 This has practical implications for venue design.  Venues with
 vibration-isolating floors (e.g., floating concrete slabs) may
@@ -65,24 +76,49 @@ inadvertently reduce the perceived ``punch'' of sub-bass, even if the
 acoustic field is unchanged.  Conversely, lightweight floors that
 transmit vibration efficiently will enhance the visceral experience.
 
-\subsection{Pipe-organ acoustics}
+\subsection{Pipe-organ acoustics and pew resonance}
 \label{sec:pipe-organ}
 
 The pipe organ is a unique case because it produces extreme sub-bass
 levels (\SI{90}{\decibel} to \SI{105}{\decibel} at
 \SIrange{16}{50}{\hertz}) in enclosed stone buildings where floor
-vibration is minimal.  If the visceral sensation reported by
-congregants cannot be explained by airborne coupling (as our model
-predicts), then either (a)~the stone floor and pews do transmit
-sufficient vibration, (b)~the sensation arises from chest-wall or
-somatosensory pathways, or (c)~the reported sensation is primarily
-psychological---a learned association between low-frequency sound and
-physical presence.
+vibration might be expected to be minimal.  However, the wooden pews
+typical of churches provide a potential mechanical coupling path.
 
-Distinguishing between these hypotheses would require in-situ
-measurements of seat and floor vibration in churches during organ
-performance, which we identify as a valuable direction for future
-experimental work.
+Using Euler--Bernoulli beam theory for a simply supported oak pew seat
+(\SI{2.5}{\metre} span, \SI{40}{\milli\metre} thickness,
+$E = \SI{11}{\giga\pascal}$, $\rho = \SI{600}{\kilogram\per\metre\cubed}$),
+the first bending resonance is $f_1 \approx \SI{12}{\hertz}$, with
+$f_2 \approx \SI{50}{\hertz}$.  Shorter pews (\SI{2.0}{\metre}) have
+$f_1 \approx \SI{19}{\hertz}$, placing the first mode directly in the
+sub-bass band.
+
+A 32-foot organ pipe's fundamental at \SI{16}{\hertz} with harmonics at
+\SI{32}{\hertz} and \SI{48}{\hertz} can therefore excite pew bending
+modes, converting the airborne sound field into mechanical vibration of
+the seat.  This provides a structure-borne pathway even in stone
+buildings with rigid floors, potentially explaining the visceral
+sensation reported by congregants during full-organ passages.
+
+Quantitative validation would require in-situ measurements of pew
+vibration during organ performance, which we identify as a valuable
+direction for future experimental work.
+
+\subsection{Near-field considerations}
+\label{sec:near-field-discussion}
+
+The near-field pressure enhancement of $+\SI{6}{}$--\SI{10}{\decibel}$
+at distances of \SIrange{0.5}{1.5}{\metre} from a subwoofer stack is
+significant for front-row concert audiences.  At \SI{0.5}{\metre}, the
+effective SPL can reach \SI{124}{\decibel} at \SI{40}{\hertz},
+increasing the airborne displacement to ${\sim}\SI{1}{\percent}$ of the
+perception threshold.  Combined with the structure-borne pathway, the
+total displacement in the near field may approach or exceed
+perceptibility.
+
+This has implications for concert safety: audience members standing
+directly in front of subwoofer stacks experience substantially higher
+effective pressures than the far-field SPL would suggest.
 
 \subsection{Occupational exposure considerations}
 \label{sec:occupational}
@@ -90,10 +126,11 @@ experimental work.
 For occupational exposure (sound engineers, musicians, nightclub staff),
 the relevant regulatory framework is ISO~2631-1, which addresses
 whole-body vibration.  Our results confirm that the \emph{acoustic}
-component of sub-bass exposure does not contribute to vibration-induced
-health effects.  However, the structural vibration component---floor
-and seat vibration excited by the same sub-woofers---is a legitimate
-occupational health concern and should be assessed separately.
+component of sub-bass exposure does not contribute meaningfully to
+vibration-induced health effects.  However, the structural vibration
+component---floor and seat vibration excited by the same
+sub-woofers---is a legitimate occupational health concern and should be
+assessed separately.
 
 \subsection{Limitations}
 \label{sec:limitations}
@@ -106,6 +143,10 @@ Several simplifications constrain the present analysis:
     refinements primarily affect the resonance frequency and quality
     factor, not the fundamental coupling physics.
 
+  \item The energy-consistent displacement formulation assumes
+    steady-state conditions.  Transient effects (e.g., the EDM ``drop'')
+    may briefly exceed steady-state predictions by up to $Q = 4$ times.
+
   \item We consider only flexural modes.  The breathing mode
     ($n = 0$, $f \approx \SI{2490}{\hertz}$) is driven efficiently by
     uniform pressure but lies far above the sub-bass band.
@@ -113,6 +154,10 @@ Several simplifications constrain the present analysis:
   \item Concert SPL spectra are taken from published measurements that
     vary significantly between venues and events.  We use representative
     values; actual exposure will differ.
+
+  \item The floor vibration model is a simplified order-of-magnitude
+    estimate.  Actual floor response depends on construction type,
+    sub-woofer placement, and room modes.
 
   \item The ISO~2631-1 perception thresholds are conservative for our
     comparison because they describe whole-body perception via the

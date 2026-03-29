@@ -21,6 +21,10 @@ from analytical.sub_bass_coupling import (
     concert_displacement_spectrum,
     coupling_transition_band,
     _sum_modal_displacement,
+    floor_vibration_displacement,
+    pathway_comparison,
+    near_field_enhancement,
+    pew_bending_resonance,
     RHO_AIR,
     C_AIR,
     P_REF,
@@ -130,11 +134,11 @@ class TestTissueDisplacement:
         assert abs(ratio - 10.0) < 1.0  # within 10% of 10×
 
     def test_on_resonance_matches_paper1(self, default_model):
-        """At n=2 resonance and 120 dB, displacement ≈ 0.18 μm (pressure-based)."""
+        """At n=2 resonance and 120 dB, displacement ≈ 0.014 μm (energy-consistent)."""
         f2 = flexural_mode_frequencies_v2(default_model)[2]
         result = tissue_displacement(f2, 120.0, model=default_model, mode_n=2)
-        # Paper 1 pressure-based: ~0.18 μm.  This should be of similar order.
-        assert 0.01 < result['xi_um'][0] < 5.0
+        # Paper 1 energy-consistent: ~0.014 μm.
+        assert 0.001 < result['xi_um'][0] < 0.5
 
     def test_displacement_at_subbass_is_small(self, default_model):
         """At 40 Hz / 110 dB, displacement should be very small (sub-μm)."""
@@ -266,3 +270,172 @@ class TestPhysicalConsistency:
         """At 0 dB SPL (20 μPa), displacement should be negligible."""
         result = tissue_displacement(40.0, 0.0, model=default_model)
         assert result['xi_um'][0] < 1e-6  # well below any threshold
+
+
+# ── 10. Floor vibration pathway ────────────────────────────────────────────
+
+class TestFloorVibrationDisplacement:
+
+    def test_positive_displacement(self):
+        """Floor pathway should give positive displacement."""
+        result = floor_vibration_displacement(40.0, 115.0)
+        assert result['body_displacement_um'][0] > 0
+
+    def test_increases_with_spl(self):
+        """Higher SPL should produce larger floor displacement."""
+        r100 = floor_vibration_displacement(40.0, 100.0)
+        r120 = floor_vibration_displacement(40.0, 120.0)
+        assert r120['body_displacement_um'][0] > r100['body_displacement_um'][0]
+
+    def test_array_input(self):
+        """Should accept array frequencies."""
+        f = np.array([20, 40, 60, 80])
+        result = floor_vibration_displacement(f, 115.0)
+        assert result['body_displacement_um'].shape == (4,)
+
+    def test_floor_dominates_airborne(self):
+        """Floor pathway should give much larger displacement than airborne."""
+        f = np.array([40.0])
+        floor = floor_vibration_displacement(f, 115.0)
+        air = tissue_displacement(f, 115.0)
+        assert floor['body_displacement_um'][0] > air['xi_um'][0] * 5
+
+    def test_transmissibility_scaling(self):
+        """Displacement should scale with transmissibility."""
+        r1 = floor_vibration_displacement(40.0, 115.0, body_transmissibility=1.0)
+        r2 = floor_vibration_displacement(40.0, 115.0, body_transmissibility=2.0)
+        ratio = r2['body_displacement_um'][0] / r1['body_displacement_um'][0]
+        assert abs(ratio - 2.0) < 0.01
+
+
+# ── 11. Pathway comparison ─────────────────────────────────────────────────
+
+class TestPathwayComparison:
+
+    def test_returns_all_keys(self, default_model):
+        """Should return all expected pathway keys."""
+        result = pathway_comparison(np.array([40.0]), 115.0, default_model)
+        for key in ['airborne_um', 'floor_um', 'threshold_um',
+                     'airborne_ratio', 'floor_ratio', 'floor_to_airborne_ratio']:
+            assert key in result
+
+    def test_floor_exceeds_airborne(self, default_model):
+        """Floor pathway should dominate airborne at 40 Hz."""
+        result = pathway_comparison(np.array([40.0]), 115.0, default_model)
+        assert result['floor_um'][0] > result['airborne_um'][0]
+
+    def test_airborne_below_threshold(self, default_model):
+        """Airborne ratio should be well below 1 at concert SPLs."""
+        result = pathway_comparison(np.array([40.0]), 115.0, default_model)
+        assert result['airborne_ratio'][0] < 0.1
+
+    def test_array_frequencies(self, default_model):
+        """Should work with array of frequencies."""
+        f = np.array([20, 40, 60, 80])
+        result = pathway_comparison(f, 115.0, default_model)
+        assert result['airborne_um'].shape == (4,)
+        assert result['floor_um'].shape == (4,)
+
+
+# ── 12. Near-field enhancement ─────────────────────────────────────────────
+
+class TestNearFieldEnhancement:
+
+    def test_enhancement_positive(self):
+        """Near-field enhancement should be positive."""
+        result = near_field_enhancement(np.array([40.0]), 1.0)
+        assert result['enhancement_dB'][0] > 0
+
+    def test_decreases_with_distance(self):
+        """Enhancement should decrease with distance."""
+        r_near = near_field_enhancement(np.array([40.0]), 0.5)
+        r_far = near_field_enhancement(np.array([40.0]), 5.0)
+        assert r_near['enhancement_dB'][0] > r_far['enhancement_dB'][0]
+
+    def test_far_field_negligible(self):
+        """At large distances, enhancement should be negligible."""
+        result = near_field_enhancement(np.array([40.0]), 50.0)
+        assert result['enhancement_dB'][0] < 0.1
+
+    def test_significant_at_half_lambda_over_2pi(self):
+        """At λ/(2π), enhancement should be ~3 dB."""
+        f = np.array([40.0])
+        d = 343.0 / (40.0 * 2 * np.pi)  # λ/(2π) at 40 Hz
+        result = near_field_enhancement(f, d)
+        assert 2.5 < result['enhancement_dB'][0] < 3.5
+
+    def test_array_input(self):
+        """Should accept array frequencies."""
+        f = np.array([20, 40, 60, 80])
+        result = near_field_enhancement(f, 1.0)
+        assert result['enhancement_dB'].shape == (4,)
+
+    def test_low_freq_stronger(self):
+        """Near-field enhancement should be stronger at lower frequencies."""
+        r20 = near_field_enhancement(np.array([20.0]), 1.0)
+        r80 = near_field_enhancement(np.array([80.0]), 1.0)
+        assert r20['enhancement_dB'][0] > r80['enhancement_dB'][0]
+
+
+# ── 13. Pew bending resonance ──────────────────────────────────────────────
+
+class TestPewBendingResonance:
+
+    def test_resonance_in_expected_range(self):
+        """First mode of a 2.5m pew should be ~10–20 Hz."""
+        result = pew_bending_resonance(length_m=2.5)
+        assert 5 < result['f1_hz'] < 30
+
+    def test_shorter_pew_higher_frequency(self):
+        """Shorter pew should have higher resonance."""
+        r_short = pew_bending_resonance(length_m=2.0)
+        r_long = pew_bending_resonance(length_m=3.0)
+        assert r_short['f1_hz'] > r_long['f1_hz']
+
+    def test_modes_ascending(self):
+        """Higher modes should have higher frequencies."""
+        result = pew_bending_resonance(length_m=2.5)
+        assert result['f1_hz'] < result['f2_hz'] < result['f3_hz']
+
+    def test_clamped_higher_than_simply_supported(self):
+        """Clamped boundary should give higher frequencies."""
+        r_ss = pew_bending_resonance(length_m=2.5, boundary='simply_supported')
+        r_cl = pew_bending_resonance(length_m=2.5, boundary='clamped')
+        assert r_cl['f1_hz'] > r_ss['f1_hz']
+
+    def test_invalid_boundary_raises(self):
+        """Invalid boundary should raise ValueError."""
+        with pytest.raises(ValueError, match="Unknown boundary"):
+            pew_bending_resonance(boundary='free')
+
+    def test_description_string(self):
+        """Should include a human-readable description."""
+        result = pew_bending_resonance(length_m=2.5)
+        assert 'Hz' in result['description']
+        assert '2.5' in result['description']
+
+
+# ── 14. Energy-consistent displacement regression ──────────────────────────
+
+class TestEnergyConsistentRegression:
+    """Regression tests for the corrected energy-consistent displacement."""
+
+    def test_displacement_order_of_magnitude(self, default_model):
+        """At 115 dB and 40 Hz, displacement ~0.002 μm (energy-consistent)."""
+        result = tissue_displacement(40.0, 115.0, model=default_model)
+        assert 1e-4 < result['xi_um'][0] < 0.1
+
+    def test_ratio_to_threshold_at_40hz(self, default_model):
+        """At 40 Hz / 115 dB, ratio ~0.35% of threshold."""
+        result = tissue_displacement(np.array([40.0]), 115.0, model=default_model)
+        thresh = perception_threshold_model(np.array([40.0]))
+        ratio = result['xi_um'][0] / thresh['xi_threshold_um'][0]
+        assert 0.001 < ratio < 0.05  # ~0.35%, not the old ~0.003%
+
+    def test_not_pressure_based(self, default_model):
+        """Energy-consistent values should be ~13× smaller than old pressure-based."""
+        # The old pressure-based on-resonance at 120 dB was ~0.18 μm
+        # Energy-consistent should be ~0.014 μm
+        f2 = flexural_mode_frequencies_v2(default_model)[2]
+        result = tissue_displacement(f2, 120.0, model=default_model)
+        assert result['xi_um'][0] < 0.05  # well below old 0.18 μm
