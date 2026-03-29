@@ -23,7 +23,7 @@ changes with fill state. We reuse `AbdominalModelV2` from
 | Radius | 2.3 cm | 4.2 cm | 4.9 cm | Geometry |
 | Wall thickness | 5.0 mm | 1.8 mm | 1.5 mm | Const. tissue vol. |
 | E (Young's mod) | 29 kPa | 71 kPa | 145 kPa | Vibrometry (E≈3μ) |
-| Intravesical P | 5 cmH₂O | 16 cmH₂O | 30 cmH₂O | Cystometry |
+| Intravesical P | 5 cmH₂O | 12.7 cmH₂O | 30 cmH₂O | Cystometry |
 | ρ_fluid (urine) | 1020 kg/m³ | 1020 kg/m³ | 1020 kg/m³ | ≈ water |
 
 ## Key Results
@@ -41,7 +41,7 @@ The n=2 (oblate–prolate) flexural mode frequency varies with fill volume:
 
 † h/R > 0.1; thin-shell approximation violated — treat with caution.
 
-The **minimum f₂ ≈ 14 Hz** occurs near 220 mL due to competing effects:
+The **minimum f₂ = 13.5 Hz** occurs at 222 mL due to competing effects:
 - Larger radius → lower frequency (geometry)
 - Stiffer wall at higher fill → higher frequency (strain-stiffening)
 
@@ -51,13 +51,13 @@ The **minimum f₂ ≈ 14 Hz** occurs near 220 mL due to competing effects:
 |---------|----------|-----------|
 | Airborne acoustic | (ka)² ≈ 1.1 × 10⁻⁴ | Pressure gradient across body |
 | Mechanical (WBV) | ~0.7 | Seat → pelvis → bladder wall |
-| **Mechanical advantage** | **~6,500×** | |
+| **Mechanical advantage** | **~6,400×** | |
 
 Whole-body vibration bypasses the (ka)^n acoustic penalty entirely.
 
 ### Interpretation
 
-- The bladder n=2 mode (14–17 Hz) sits **above** the ISO 2631 peak pelvic
+- The bladder n=2 mode (13.5–17.1 Hz) sits **above** the ISO 2631 peak pelvic
   resonance (4–8 Hz) but within the broader WBV-affected frequency range.
 - At sub-resonant frequencies (4–8 Hz), the bladder still responds as a
   forced oscillator while pelvic transmissibility amplifies the input.

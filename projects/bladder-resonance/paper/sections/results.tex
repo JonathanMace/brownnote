@@ -7,8 +7,8 @@
 Figure~\ref{fig:freq_vs_volume} presents the $n = 2$ and $n = 3$ flexural
 mode frequencies across the physiological fill range
 (\SIrange{50}{500}{\milli\litre}).  The $n = 2$ frequency follows a
-distinctive U-shaped curve, with a minimum of approximately \SI{12}{\hertz}
-near \SI{170}{\milli\litre} and higher values at both extremes of the fill
+distinctive U-shaped curve, with a minimum of \SI{13.5}{\hertz}
+at \SI{222}{\milli\litre} and higher values at both extremes of the fill
 range.
 
 The physical mechanism behind this non-monotonic behaviour is a competition
@@ -22,14 +22,14 @@ between two opposing effects:
     rigidity ($D \propto h^3$) and membrane stiffness ($\propto h$).
   \item \textbf{Strain-stiffening.}  The elastic modulus of the detrusor
     muscle increases exponentially with fill volume
-    (equation~\ref{eq:E_fill}), from \SI{10}{\kilo\pascal} at
-    \SI{50}{\milli\litre} to \SI{200}{\kilo\pascal} at
-    \SI{500}{\milli\litre}.  This twenty-fold increase eventually dominates
+    (equation~\ref{eq:E_fill}), from \SI{29}{\kilo\pascal} at
+    \SI{50}{\milli\litre} to \SI{145}{\kilo\pascal} at
+    \SI{500}{\milli\litre}.  This five-fold increase eventually dominates
     the geometric effects.
 \end{enumerate}
 At low fill volumes the geometric effect dominates and the frequency
 falls; at high fill volumes the strain-stiffening wins and the frequency
-rises.  The crossover produces the minimum near \SI{170}{\milli\litre}---a
+rises.  The crossover produces the minimum near \SI{222}{\milli\litre}---a
 fill state corresponding to the early ``need to go'' sensation in most
 individuals.
 
@@ -41,15 +41,17 @@ individuals.
   (\SIrange{4}{8}{\hertz}) shown for reference.  (b)~Geometry: equivalent
   sphere radius and wall thickness.  (c)~Wall elastic modulus showing
   exponential strain-stiffening.  (d)~Intravesical pressure following the
-  cystometric curve.  The minimum $f_2 \approx \SI{12}{\hertz}$ occurs near
-  \SI{170}{\milli\litre}, where geometric softening and strain-stiffening
+  cystometric curve.  The minimum $f_2 = \SI{13.5}{\hertz}$ occurs at
+  \SI{222}{\milli\litre}, where geometric softening and strain-stiffening
   are in balance.}
   \label{fig:freq_vs_volume}
 \end{figure}
 
 Table~\ref{tab:frequencies} lists the computed frequencies at key fill states.
-The $n = 2$ mode spans \SIrange{12}{18}{\hertz} and the $n = 3$ mode spans
-\SIrange{20}{31}{\hertz} across the physiological range.  All predicted
+For fill states where the thin-shell approximation is valid
+(\SIrange{150}{500}{\milli\litre}), the $n = 2$ mode spans
+\SIrange{13.5}{17.1}{\hertz} and the $n = 3$ mode spans
+\SIrange{22.4}{30.6}{\hertz}.  All predicted
 frequencies lie above the ISO~2631 peak pelvic transmissibility band
 (\SIrange{4}{8}{\hertz}), though below \SI{20}{\hertz} they remain within
 the broader frequency range affected by whole-body vibration.
@@ -63,13 +65,13 @@ the broader frequency range affected by whole-body vibration.
     Volume & $R$ & $h$ & $E$ & $f_2$ & $f_3$ & $f_4$ \\
     (mL) & (cm) & (mm) & (kPa) & (Hz) & (Hz) & (Hz) \\
     \midrule
-     50 & 2.29 & 5.00 &  10.0 & 16.2 & 27.0 & 39.8 \\
-    100 & 2.88 & 3.46 &  13.9 & 12.9 & 21.5 & 31.1 \\
-    150 & 3.30 & 2.73 &  19.5 & 12.1 & 20.5 & 29.8 \\
-    200 & 3.63 & 2.30 &  27.1 & 12.1 & 20.9 & 30.6 \\
-    300 & 4.15 & 1.79 &  52.8 & 13.4 & 23.5 & 34.8 \\
-    400 & 4.57 & 1.50 & 102.8 & 15.3 & 27.1 & 40.3 \\
-    500 & 4.92 & 1.50 & 200.0 & 17.8 & 31.3 & 46.3 \\
+     50 & 2.29 & 5.00 &  29.0 & 22.7 & 36.3 & 53.9 \\
+    100 & 2.88 & 3.46 &  34.7 & 16.2 & 25.4 & 35.9 \\
+    150 & 3.30 & 2.73 &  41.5 & 14.2 & 22.8 & 32.3 \\
+    200 & 3.63 & 2.30 &  49.6 & 13.5 & 22.4 & 32.1 \\
+    300 & 4.15 & 1.79 &  70.9 & 13.9 & 24.1 & 35.3 \\
+    400 & 4.57 & 1.50 & 101.4 & 15.3 & 27.1 & 40.3 \\
+    500 & 4.92 & 1.50 & 145.0 & 17.1 & 30.6 & 45.6 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -83,15 +85,15 @@ decompose the effective stiffness $K_\mathrm{total}$ and effective mass
 $m_\mathrm{eff}$ into their constituent terms as functions of fill volume
 (figure~\ref{fig:decomposition}).
 
-At the frequency minimum ($V^* \approx \SI{169}{\milli\litre}$), the
+At the frequency minimum ($V^* \approx \SI{222}{\milli\litre}$), the
 stiffness is dominated by the pre-stress term:
-$K_P = 67.3\%$, $K_\mathrm{memb} = 31.9\%$, and
-$K_\mathrm{bend} = 0.8\%$.  Bending stiffness, which scales as $Dh^3/R^4$
+$K_P = 58.7\%$, $K_\mathrm{memb} = 40.7\%$, and
+$K_\mathrm{bend} = 0.6\%$.  Bending stiffness, which scales as $Dh^3/R^4$
 and dominates thin-shell vibration in vacuo, is negligible for the
 fluid-loaded bladder because the fluid added mass greatly exceeds the wall
 mass.  The effective mass is similarly dominated by the fluid:
-$m_\mathrm{fluid} = \rho_f R / n = 86.7\%$ of $m_\mathrm{eff}$, with the
-wall contributing only $m_\mathrm{wall} = \rho_w h = 13.3\%$.
+$m_\mathrm{fluid} = \rho_f R / n = 89.4\%$ of $m_\mathrm{eff}$, with the
+wall contributing only $m_\mathrm{wall} = \rho_w h = 10.6\%$.
 
 \paragraph{Analytical condition for the $f_2$ minimum.}
 Since $\omega_n^2 = K_\mathrm{total} / m_\mathrm{eff}$, the condition
@@ -102,7 +104,7 @@ $\partial f_2 / \partial V = 0$ requires
 \end{equation}
 i.e.\ the fractional growth rate of total stiffness must equal the
 fractional growth rate of effective mass.  Figure~\ref{fig:decomposition}(d)
-plots both log-rates; they cross at $V \approx \SI{168}{\milli\litre}$,
+plots both log-rates; they cross at $V \approx \SI{222}{\milli\litre}$,
 confirming the numerical minimum.  Below $V^*$, geometric softening causes
 $K_\mathrm{total}$ to decrease faster (in fractional terms) than
 $m_\mathrm{eff}$ increases, so $f_2$ falls.  Above $V^*$,
@@ -117,11 +119,11 @@ $K_\mathrm{total}$ upward faster than the mass grows, so $f_2$ rises.
   ($K_\mathrm{memb}$, green), pre-stress ($K_P$, red), and total (dashed).
   Pre-stress dominates above \SI{100}{\milli\litre}.
   (b)~Mass components: wall mass ($\rho_w h$, blue) and fluid added mass
-  ($\rho_f R/n$, red).  The fluid contribution exceeds 80\% at all fill
+  ($\rho_f R/n$, red).  The fluid contribution exceeds 85\% at all fill
   volumes.  (c)~Resulting $f_2$ curve with the minimum at
-  $V^* = \SI{169}{\milli\litre}$, $f_2^\mathrm{min} = \SI{12.0}{\hertz}$.
+  $V^* = \SI{222}{\milli\litre}$, $f_2^\mathrm{min} = \SI{13.5}{\hertz}$.
   (d)~Logarithmic growth rates $\mathrm{d}(\ln K)/\mathrm{d}V$ and
-  $\mathrm{d}(\ln m)/\mathrm{d}V$; their crossing at \SI{168}{\milli\litre}
+  $\mathrm{d}(\ln m)/\mathrm{d}V$; their crossing at \SI{222}{\milli\litre}
   satisfies equation~\eqref{eq:f2_min}.}
   \label{fig:decomposition}
 \end{figure}
@@ -133,18 +135,19 @@ $K_\mathrm{total}$ upward faster than the mass grows, so $f_2$ rises.
 We assess the sensitivity of $f_2$ to five uncertain parameters using
 one-at-a-time perturbation over their literature ranges
 (table~\ref{tab:sensitivity}).  At the baseline volume
-$V = \SI{170}{\milli\litre}$ (near the frequency minimum), the wall
+$V = \SI{222}{\milli\litre}$ (the frequency minimum), the wall
 elastic modulus $E$ dominates all other parameters, with
-$\Delta f_2 = \SI{22.0}{\hertz}$ (183\% of baseline) across the range
+$\Delta f_2 = \SI{14.9}{\hertz}$ (111\% of baseline) across the range
 \SIrange{10}{500}{\kilo\pascal}.  The wall thickness $h$ is a distant
-second at $\Delta f_2 = \SI{1.7}{\hertz}$ (14\%).  The Poisson ratio,
-urine density, and loss tangent each contribute less than 1\% and are
+second at $\Delta f_2 = \SI{3.4}{\hertz}$ (25\%).  The Poisson ratio
+changes $f_2$ by only \SI{0.14}{\hertz}, urine density by
+\SI{0.06}{\hertz}, and the loss tangent not at all; these effects are
 effectively negligible.
 
 \begin{table}[htbp]
   \centering
   \caption{Sensitivity of $f_2$ to parameter uncertainty at
-  $V = \SI{170}{\milli\litre}$ (baseline $f_2 = \SI{12.0}{\hertz}$).}
+  $V = \SI{222}{\milli\litre}$ (baseline $f_2 = \SI{13.5}{\hertz}$).}
   \label{tab:sensitivity}
   \begin{tabular}{lccccc}
     \toprule
@@ -152,11 +155,11 @@ effectively negligible.
       $\Delta f_2$ & Fraction \\
     & & (Hz) & (Hz) & (Hz) & (\%) \\
     \midrule
-    $E$ (wall modulus) & 10--500~kPa & 8.2 & 34.0 & 22.0 & 183 \\
-    $h$ (wall thickness) & 2--6~mm & 11.6 & 13.7 & 1.7 & 14 \\
-    $\nu$ (Poisson ratio) & 0.40--0.50 & 11.9 & 12.0 & 0.1 & 1 \\
-    $\rho_f$ (urine density) & 1010--1030~kg/m$^3$ & 11.9 & 12.1 & 0.1 & $<$1 \\
-    $\eta$ (loss tangent) & 0.30--0.50 & 12.0 & 12.0 & 0.0 & 0 \\
+    $E$ (wall modulus) & 10--500~kPa & 11.0 & 28.4 & 14.9 & 111 \\
+    $h$ (wall thickness) & 2--6~mm & 13.3 & 16.8 & 3.4 & 25 \\
+    $\nu$ (Poisson ratio) & 0.40--0.50 & 13.4 & 13.5 & 0.1 & 1 \\
+    $\rho_f$ (urine density) & 1010--1030~kg/m$^3$ & 13.6 & 13.4 & 0.1 & $<$1 \\
+    $\eta$ (loss tangent) & 0.30--0.50 & 13.5 & 13.5 & 0.0 & 0 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -173,9 +176,10 @@ affects only the peak amplitude (via $Q$), not the resonant frequency.
   \centering
   \includegraphics[width=0.85\textwidth]{figures/fig_tornado_sensitivity.pdf}
   \caption{Tornado chart showing the sensitivity of $f_2$ to each uncertain
-  parameter at $V = \SI{170}{\milli\litre}$.  The wall elastic modulus $E$
-  dominates, producing a \SI{22}{\hertz} swing across its literature
-  range; all other parameters contribute $\leq$\SI{1.7}{\hertz}.}
+  parameter at $V = \SI{222}{\milli\litre}$.  The wall elastic modulus $E$
+  dominates, producing a \SI{14.9}{\hertz} swing across its literature
+  range; wall thickness contributes \SI{3.4}{\hertz}, and all remaining
+  parameters contribute $\leq$\SI{0.14}{\hertz}.}
   \label{fig:tornado}
 \end{figure}
 
@@ -183,11 +187,13 @@ affects only the peak amplitude (via $Q$), not the resonant frequency.
 Figure~\ref{fig:min_shift} examines how the location $V^*$ and value
 $f_2^\mathrm{min}$ of the frequency minimum shift under parameter
 perturbation.  The minimum is remarkably robust to all parameters except
-$E$: perturbing $h$, $\nu$, $\rho_f$, or $\eta$ shifts $V^*$ by at most
-\SI{4}{\milli\litre} and $f_2^\mathrm{min}$ by at most
-\SI{1.6}{\hertz}.  The elastic modulus, however, shifts the minimum
-substantially: at the upper bound ($E = \SI{500}{\kilo\pascal}$), the
-minimum moves to $V^* = \SI{461}{\milli\litre}$ with
+$E$: perturbing $h$ shifts $V^*$ from \SI{186}{\milli\litre} to
+\SI{216}{\milli\litre} and $f_2^\mathrm{min}$ from \SI{13.2}{\hertz} to
+\SI{16.8}{\hertz}, whereas $\nu$ and $\rho_f$ move the minimum by less than
+\SI{3}{\milli\litre} and \SI{0.2}{\hertz}, and $\eta$ leaves it unchanged.
+The elastic modulus, however, shifts the minimum substantially: at the upper
+bound ($E = \SI{500}{\kilo\pascal}$), the minimum moves to
+$V^* = \SI{462}{\milli\litre}$ with
 $f_2^\mathrm{min} = \SI{21.2}{\hertz}$.  This shift occurs because a
 stiffer wall delays the crossover between geometric softening and
 strain-stiffening to higher volumes where the radius is larger.
@@ -203,8 +209,8 @@ and the fill volume at which it occurs.
   \caption{Robustness of the $f_2$ minimum to parameter uncertainty.
   (a)~Shift in $V^*$ (volume at minimum).
   (b)~Shift in $f_2^\mathrm{min}$ (frequency at minimum).
-  Only $E$ produces a substantial shift; all other parameters leave the
-  minimum within $\pm$\SI{4}{\milli\litre} and $\pm$\SI{1.6}{\hertz} of the
+  Only $E$ produces a very large shift; $h$ causes a secondary but visible
+  change, while $\nu$, $\rho_f$, and $\eta$ leave the minimum close to the
   baseline.}
   \label{fig:min_shift}
 \end{figure}
@@ -215,21 +221,21 @@ and the fill volume at which it occurs.
 
 Figure~\ref{fig:coupling} compares the airborne and mechanical coupling
 pathways to the bladder at a representative fill of \SI{300}{\milli\litre}
-($f_2 = \SI{13.4}{\hertz}$).  Three key observations emerge.
+($f_2 = \SI{13.9}{\hertz}$).  Three key observations emerge.
 
 First, the airborne acoustic coupling scales as $(ka)^2$ and is vanishingly
-small across the entire frequency range of interest: at \SI{13.4}{\hertz},
-$(ka)^2 \approx 1.0 \times 10^{-4}$.  The bladder, like the abdominal
+small across the entire frequency range of interest: at \SI{13.9}{\hertz},
+$(ka)^2 \approx 1.1 \times 10^{-4}$.  The bladder, like the abdominal
 cavity, is deep in the Rayleigh regime at all physiologically relevant
 frequencies.
 
 Second, the mechanical coupling---the product of seat-to-pelvis
 transmissibility and bladder modal amplification---peaks near the bladder
 resonance frequency.  Even though pelvic transmissibility is attenuated
-at \SI{13.4}{\hertz} ($T \approx 0.31$), the bladder modal amplification
+at \SI{13.9}{\hertz} ($T \approx 0.29$), the bladder modal amplification
 ($Q = 2.5$) partially compensates.
 
-Third, the coupling ratio $\mathcal{R} \approx 7{,}600$ at $f_2$
+Third, the coupling ratio $\mathcal{R} \approx 6{,}400$ at $f_2$
 (equation~\ref{eq:R_coupling}) confirms that mechanical vibration is the
 dominant excitation pathway by nearly four orders of magnitude.  This is
 quantitatively consistent with---though somewhat smaller than---the
@@ -272,21 +278,21 @@ a severe airborne coupling penalty in the Rayleigh regime.
     \midrule
     Equivalent radius & \SI{4.2}{\centi\metre} & \SI{15.7}{\centi\metre} \\
     Wall thickness & \SI{1.8}{\milli\metre} & \SI{10}{\milli\metre} \\
-    Elastic modulus & \SI{53}{\kilo\pascal} & \SI{100}{\kilo\pascal} \\
+    Elastic modulus & \SI{71}{\kilo\pascal} & \SI{100}{\kilo\pascal} \\
     Poisson's ratio & 0.49 & 0.45 \\
     Loss tangent & 0.40 & 0.25 \\
     Quality factor $Q$ & 2.5 & 4.0 \\
     Breathing mode $f_0$ & $\sim$\SI{9500}{\hertz} & $\sim$\SI{2500}{\hertz} \\
-    Flexural $f_2$ & \SI{13.4}{\hertz} & \SI{4.0}{\hertz} \\
-    $ka$ at $f_2$ & 0.010 & 0.011 \\
-    Coupling ratio $\mathcal{R}$ & $\sim$7,600 & $\sim$66,000 \\
+    Flexural $f_2$ & \SI{13.9}{\hertz} & \SI{4.0}{\hertz} \\
+    $ka$ at $f_2$ & 0.011 & 0.011 \\
+    Coupling ratio $\mathcal{R}$ & $\sim$6,400 & $\sim$66,000 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 The principal quantitative differences are the higher flexural frequency of
-the bladder ($f_2 = \SI{13.4}{\hertz}$ vs \SI{4.0}{\hertz}) and the smaller
-coupling ratio ($\sim$7,600 vs $\sim$66,000).  The higher $f_2$ is a direct
+the bladder ($f_2 = \SI{13.9}{\hertz}$ vs \SI{4.0}{\hertz}) and the smaller
+coupling ratio ($\sim$6,400 vs $\sim$66,000).  The higher $f_2$ is a direct
 consequence of the smaller radius: the stiffness-to-mass ratio scales
 roughly as $1/R^2$, and the bladder is approximately four times smaller
 than the abdomen.  The smaller coupling ratio reflects the fact that the
