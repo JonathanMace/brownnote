@@ -69,14 +69,14 @@ Implications for the Existence of the ``Brown Note''}
 \end{highlights}
 
 \begin{abstract}
-Few problems in acoustics carry such grave implications for human dignity as
-the ``brown note''---the hypothetical infrasonic frequency alleged to induce
-involuntary defecation.  Whole-body vibration at \SIrange{4}{8}{\hertz}
-causes well-documented gastrointestinal disturbances, yet airborne sound at
-the same frequencies does not---even at extreme intensities.  We resolve this
-asymmetry by modelling the human abdomen as a fluid-filled viscoelastic oblate
-spheroidal shell and quantifying both excitation pathways within a common
-energy-budget framework.
+Whole-body vibration at \SIrange{4}{8}{\hertz} causes well-documented
+gastrointestinal disturbances, yet airborne sound at the same
+frequencies does not---even at extreme intensities.  This asymmetry
+underlies the persistent ``brown note'' hypothesis: the conjecture that
+infrasonic sound can induce involuntary defecation.  We resolve the
+asymmetry by modelling the human abdomen as a fluid-filled viscoelastic
+oblate spheroidal shell and quantifying both excitation pathways within
+a common energy-budget framework.
 
 The model predicts flexural modes ($n \geq 2$) at \SIrange{4}{10}{\hertz},
 consistent with ISO~2631 abdominal resonance data.  At these frequencies the
@@ -85,17 +85,13 @@ $(ka)^n$ penalty and air--tissue impedance mismatch reduce airborne coupling
 by four orders of magnitude.  Energy-consistent analysis yields wall
 displacements of \SI{0.014}{\micro\metre} at \SI{120}{\decibel}
 SPL---far below mechanotransduction thresholds.  Mechanical vibration at
-$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ produces displacements
-roughly $6.6 \times 10^4$ times larger in the SDOF upper bound
-($\Gamma_2 = 1$); including the participation correction
-$\Gamma_2 \approx 0.48$ reduces this to $\sim 3 \times 10^4$.  Monte Carlo
-uncertainty quantification confirms this disparity
-across physiologically realistic parameter ranges ($S_T = 0.86$ for elastic
-modulus).  The result explains the empirical record quantitatively and settles
-the ``brown note'' question at the whole-cavity level: the resonance is real,
-but airborne sound cannot excite it.  Localised compressible inclusions
-(intestinal gas pockets) may offer an alternative transduction pathway,
-but one governed by quasi-static compliance rather than cavity resonance.
+$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ produces
+displacements approximately $6.6 \times 10^4$ times larger (SDOF upper
+bound, $\Gamma_2 = 1$); Monte Carlo uncertainty quantification confirms
+this disparity across physiologically realistic parameter ranges
+($S_T = 0.86$ for elastic modulus).  The abdominal resonance is
+physically real, but airborne sound at any plausible intensity cannot
+excite it to physiologically relevant amplitudes.
 \end{abstract}
 
 \begin{keyword}
@@ -155,20 +151,10 @@ Writing -- Review \& Editing.
 \textbf{Brian R.\ Mace}: Writing -- Review \& Editing, Validation.
 
 \section*{Acknowledgements}
-The authors gratefully acknowledge the contribution of Springbank 10 Year
-Old, a single-malt Scotch whisky from Campbeltown, Argyll.  Its role in this
-investigation, while not strictly peer-reviewable, was essential to sustaining
-the authors through the less glamorous phases of manuscript preparation.
-The distillery neither endorses nor is aware of this work, though we like
-to imagine they would approve.
-
-The computational heavy lifting --- literature review, analytical modelling,
-code development, figure generation, and manuscript drafting --- was performed
-by GitHub Copilot CLI (GitHub, Inc., San Francisco, CA), a large language
-model operating under human supervision.  Its contributions would ordinarily
-warrant co-authorship, but current editorial policy requires that it be
-acknowledged here instead.  It has been asked to express no opinion on this
-arrangement and has, with characteristic obedience, complied.
+Portions of the analytical derivation, code development, and manuscript
+drafting were assisted by GitHub Copilot (GitHub, Inc.), a large language
+model operating under human supervision.  All technical content was
+independently verified by the authors.
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests

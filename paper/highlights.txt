@@ -1,6 +1,6 @@
 Highlights
 
-- Coupling disparity of ~7x10^4 explains vibration-sound asymmetry
+- Upper-bound coupling disparity of 6.6x10^4 explains vibration-sound asymmetry
 - Viscoelastic shell model predicts abdominal resonance at 4-10 Hz
 - Breathing mode at ~2500 Hz; flexural modes at infrasonic frequencies
 - Airborne coupling penalised by (ka)^n; negligible at 120 dB SPL
