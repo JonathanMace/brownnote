@@ -22,8 +22,11 @@ parameters with physiological justification.
 
 The thin-shell assumption ($h/R_\mathrm{eq} \ll 1$) is satisfied: for
 $h = 10$\,mm and $R_\mathrm{eq} \approx 157$\,mm, $h/R \approx 0.06$.  The
-Love--Kirchhoff hypothesis (normals remain straight and normal to the
-deformed mid-surface) is therefore applicable.  This linear framework remains
+Love--Kirchhoff hypothesis \cite{Love1927} (normals remain straight and normal to the
+deformed mid-surface) is therefore applicable.  Classical thin-shell theory is
+used for analytical tractability; higher-order shear effects are expected to
+perturb frequencies modestly rather than overturn the coupling argument.
+This linear framework remains
 the standard starting point even in modern reviews of nonlinear shell
 vibration, which treat geometric nonlinearities as amplitude corrections to
 the same modal backbone \cite{Alijani2014}.
@@ -240,8 +243,12 @@ that violates the energy budget; see \S\ref{sec:coupling}.)
 
 Whole-body vibration (WBV) transmits through the skeleton and acts as
 \emph{base excitation} of the abdominal shell.  Unlike airborne acoustic
-coupling, there is no impedance mismatch and no $(ka)^n$ penalty.  The
-vibration is transmitted at full amplitude through the rigid skeletal frame.
+coupling, there is no $(ka)^n$ penalty: the impedance mismatch between bone
+and peritoneal wall is orders of magnitude smaller than the air--tissue
+contrast, and the vibration bypasses the geometric filtering entirely.  The
+following analysis therefore represents an \emph{upper-bound} base-excitation
+model in which the skeletal frame transmits vibration rigidly to the shell
+boundary.
 
 For harmonic base acceleration $a_\mathrm{base}(t) = a_0 \cos(\omega t)$, the
 base displacement amplitude is
@@ -287,5 +294,9 @@ infrasound at comparable frequencies is not.  Section~\ref{sec:coupling}
 shows that, for \SI{120}{\decibel} SPL airborne excitation and
 $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
 vibration, the SDOF upper bound is $\mathcal{R}_\mathrm{full} \approx 6.6 \times 10^4$
-($\Gamma_2 = 1$), reducing to $\sim 3 \times 10^4$ when the canonical
-participation factor $\Gamma_2 \approx 0.48$ is included.
+($\Gamma_2 = 1$).  However, vertical base excitation does not couple
+perfectly into the $n = 2$ mode: the modal participation factor
+$\Gamma_2 \approx 0.48$ (\S\ref{sec:coupling_ratio}) reduces the effective
+mechanical displacement to about half the SDOF value, giving a corrected
+ratio of $\sim 3 \times 10^4$.  Even with this correction, the four-order-of-magnitude
+gap between pathways is unaffected.

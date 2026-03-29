@@ -48,11 +48,12 @@ $\zeta_{\mathrm{rad}} \approx 10^{-15}$, whereas the structural damping
 ratio is $\zeta_{\mathrm{struct}} = 0.125$, so the absorption efficiency
 $\zeta_{\mathrm{rad}} / \zeta_{\mathrm{total}} \sim 10^{-14}$.  The shell
 is, for practical purposes, acoustically transparent at infrasonic
-frequencies.  By contrast, mechanical vibration transmitted through the
-skeleton bypasses both barriers entirely: there is no impedance mismatch
-(bone couples directly to the peritoneal wall) and no geometric filtering
-(the base-excitation drives the $n = 2$ mode at full amplitude via
-equation~\ref{eq:Hrel}).
+frequencies.  By contrast, the upper-bound mechanical model assumes rigid
+skeletal transmission: the bone--peritoneum impedance contrast is orders of
+magnitude smaller than the air--tissue mismatch, and the base-excitation
+drives the $n = 2$ mode via equation~\ref{eq:Hrel} with a modal
+participation factor $\Gamma_2 \approx 0.48$
+(\S\ref{sec:coupling_ratio}).
 
 This disparity resolves an apparent paradox in the literature.  Whole-body
 vibration at \SIrange{4}{8}{\hertz} is well documented to cause
@@ -291,69 +292,15 @@ developed in \S\ref{sec:formulation}.  The two key dimensionless groups that
 govern the physics, the Helmholtz number $ka$ and the impedance ratio
 $Z_{\mathrm{wall}}/Z_{\mathrm{fluid}}$, transfer directly; what changes
 between applications is the frequency range, the material properties, and
-the geometric aspect ratio of the shell.
-
-Perhaps the most consequential extension is to \emph{primary blast injury}.
-Explosive detonations generate overpressure pulses with spectral content
-spanning \SIrange{10}{10000}{\hertz} and peak overpressures of
-\SIrange{100}{1000}{\kilo\pascal}---orders of magnitude above the
-\SI{20}{\pascal} of a \SI{120}{\decibel} sound field, but governed by the
-same impedance-mismatch physics
-\cite{Stuhmiller2008,Owers2011,Mayorga1997}.  Gas-containing abdominal organs (bowel,
-stomach) are clinically the most vulnerable viscera precisely because the
-gas--tissue interface maximises energy transfer from the blast wave into
-flexural wall deformation.  The coupling comparison of
-\S\ref{sec:coupling} translates directly: replacing the air--tissue
-impedance ratio with the blast-wave--tissue ratio and adjusting $ka$ for
-the broadband blast spectrum yields quantitative predictions of wall
-displacement that could inform threshold models for primary blast bowel
-injury.  Unlike the infrasonic brown-note scenario, blast frequencies place
-$ka$ near or above unity, so the geometric filtering penalty that rendered
-airborne coupling negligible at \SI{7}{\hertz} largely disappears---the
-blast wave \emph{can} efficiently excite flexural modes, which is precisely
-why blast bowel injury occurs and the brown note does not.
-
-In \emph{fisheries and marine bioacoustics}, the swim bladder of teleost
-fish is an almost literal instantiation of the present model: a gas-filled
-viscoelastic shell immersed in a dense fluid
-\cite{Feuillade1996,Love1978}.  Fisheries sonar operates at frequencies
-(\SIrange{18}{200}{\kilo\hertz}) chosen to coincide with swim-bladder
-resonance, where the target strength is maximal.  The viscoelastic shell
-formulation of \S\ref{sec:formulation} provides a physics-based alternative
-to the empirical Love equation for predicting resonance frequency as a
-function of bladder volume, wall thickness, and depth-dependent ambient
-pressure.  The same framework is directly relevant to environmental impact
-assessments of naval sonar on marine fauna~\cite{Southall2007}: organisms possessing gas-filled
-cavities (swim bladders, lungs of diving mammals) experience tissue strains
-that the present coupling analysis can bound quantitatively.
-
-The framework also extends to \emph{therapeutic and diagnostic ultrasound}.
-In high-intensity focused ultrasound (HIFU) and extracorporeal shock-wave
-lithotripsy, acoustic energy must couple efficiently into a tissue target---the
-inverse of our brown-note problem, where coupling is deliberately maximised
-rather than shown to be negligible \cite{terHaar2007}.  The modal
-decomposition clarifies which spatial harmonics of the incident field
-deposit energy into flexural versus breathing deformation of encapsulated
-structures such as kidney stones, gallstones, or tumour capsules
-\cite{Bailey2003}.  At
-therapeutic frequencies (\SIrange{0.5}{4}{\mega\hertz}), $ka \gg 1$ for
-organ-scale structures and the long-wavelength penalty vanishes entirely,
-but for millimetre-scale targets (renal calculi, encapsulated lesions) $ka$
-re-enters the order-unity regime where the coupling comparison of
-\S\ref{sec:coupling} again becomes the governing consideration.
-Separately, in obstetric ultrasonography the amniotic sac constitutes a
-fluid-filled cavity of dimensions comparable to the adult abdomen; a
-straightforward reparametrisation of the shell model (thinner wall, lower
-modulus, smaller radius) would yield resonance predictions relevant to fetal
-exposure safety assessment \cite{Duck1999}.
-
-Taken together, these applications illustrate that the coupling-comparison
-methodology---rather than the brown-note conclusion per se---is the
-transferable contribution of this work.  The conclusion that airborne
-infrasound cannot produce involuntary defecation is, we concede, of
-limited industrial utility; the ability to predict \emph{when and why}
-acoustic--structural coupling to a fluid-filled biological cavity is or is
-not effective has considerably broader reach.
+the geometric aspect ratio of the shell.  Potential applications include
+primary blast injury modelling---where $ka$ approaches unity and the
+geometric filtering penalty largely disappears
+\cite{Stuhmiller2008,Owers2011}---swim-bladder target-strength prediction
+in fisheries acoustics \cite{Feuillade1996,Love1978}, and therapeutic
+ultrasound dosimetry where coupling must be maximised rather than shown to be
+negligible \cite{terHaar2007}.  These extensions are beyond the scope of the
+present work but follow directly from the same modal decomposition and
+coupling-comparison methodology.
 
 \subsection{Nonlinear Amplitude Effects}
 \label{sec:disc:nonlinear}
@@ -418,12 +365,17 @@ the conclusions.
 
   \item \textbf{Free-shell boundary conditions.}  The abdomen is partially
     constrained by the spine posteriorly, the pelvis inferiorly, and the
-    rib cage superiorly.  The Rayleigh--Ritz boundary condition study
-    (\S\ref{sec:bc_effects}) shows that even clamping \SI{25}{\percent} of
-    the shell surface shifts $f_2$ by only \SI{11.4}{\percent}, because the
-    fluid added mass ($7.4\times$ the shell mass for $n=2$) dominates the
-    system inertia.  This shift is well within the material property
-    uncertainty band, supporting the free-shell approximation.  The coupling
+    rib cage superiorly.  The Rayleigh--Ritz study
+    (\S\ref{sec:bc_effects}) is best understood as a \emph{bracketing
+    exercise}: it shows the range of possible frequencies under
+    progressively constrained assumptions, from a free sphere
+    ($f_2 = \SI{4.13}{\hertz}$) to 25\% surface clamped
+    ($f_2 = \SI{3.66}{\hertz}$, $-11.4\%$).  That clamping
+    \emph{lowers} $f_2$ is a consequence of the fluid-dominated inertia:
+    the added mass ($7.4\times$ the shell mass for $n=2$) means that
+    constraining the wall reduces the effective modal stiffness more than
+    it reduces the kinetic energy.  The entire bracketed range lies well
+    within the material-property uncertainty band, and the coupling
     ratio is unaffected because both excitation pathways address the same
     modal structure.
 
