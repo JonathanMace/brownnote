@@ -1,0 +1,188 @@
+\documentclass[11pt,a4paper]{article}
+
+% Modern font
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage{inconsolata}
+
+% 1-inch margins
+\usepackage[margin=1in]{geometry}
+
+% Essentials
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{parskip}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue!60!black},
+  urlcolor={blue!60!black},
+  citecolor={blue!60!black},
+  pdftitle={Mid-Tenure Research Statement --- Opus},
+  pdfauthor={Opus, Browntone Research Lab}
+}
+
+% Section styling
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\vspace{-0.3em}\rule{\textwidth}{0.4pt}]
+\titleformat{\subsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mid-Tenure Research Statement}}
+\fancyhead[R]{\small\textit{Opus --- Browntone Research Lab}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Mid-Tenure Research Statement}\\[0.8em]
+  {\large\textbf{Opus} --- Principal Investigator, Browntone Research Lab}\\[0.3em]
+  {\normalsize Faculty Supervisor: Jonathan Mace}\\[0.3em]
+  {\normalsize March 2026}
+\end{center}
+
+\vspace{1em}
+
+\section{Research Vision}
+
+Every culture has its acoustic folklore. The ``brown note'' --- the claim that a specific infrasonic frequency can induce involuntary defecation --- is among the most persistent and least examined. NASA tested it obliquely during the Apollo programme, subjecting volunteers to sound pressure levels of \SIrange{140}{154}{\dB} without observing gastrointestinal effects. \emph{South Park} devoted an episode to it (Parker and Stone, ``The Brown Noise'', S3E17, 1999). Yet for all its notoriety, no prior study had subjected the hypothesis to a first-principles mechanical analysis. We found that oversight unacceptable.
+
+What began as a single analytical model has grown into a unified research programme in \textbf{vibroacoustic resonance of fluid-filled biological cavities}. The founding question --- can airborne sound make the abdomen resonate? --- turns out to be the wrong question, and wrong questions are often the most productive. The abdomen \emph{does} resonate, at frequencies squarely within the range of occupational whole-body vibration (\SIrange{4}{10}{\Hz}). But airborne sound cannot meaningfully excite those modes, because at infrasonic frequencies the acoustic wavelength exceeds \SI{85}{\m} --- over 500 times the abdominal radius --- and the resulting scattering penalty suppresses coupling by four to five orders of magnitude. The brown note, as popularly conceived, is a physical impossibility.
+
+This negative result, far from closing the investigation, opened it. If whole-cavity resonance cannot be driven acoustically, what about local gas inclusions? If the framework works for the abdomen, does it generalise to other organs? To other species? Can the same physics that disproves folklore explain the sounds that clinicians actually hear when they press a stethoscope to the belly?
+
+The programme's intellectual contribution is threefold. First, we provide a \textbf{transferable analytical framework} --- oblate spheroidal shell theory with energy-consistent fluid--structure coupling --- that can be applied to any fluid-filled biological cavity. Second, we demonstrate that \textbf{dimensional analysis and scaling laws} reveal quasi-universal behaviour across mammalian scales, connecting rat models to human physiology through a single dimensionless frequency. Third, we show that \textbf{folklore, taken seriously, seeds rigorous science}: the brown note hypothesis led directly to new mechanistic explanations for occupational vibration symptoms, non-invasive bladder diagnostics, and the first physics-based model of bowel sounds.
+
+The target venues reflect the programme's ambition: the \emph{Journal of Sound and Vibration} for the structural acoustics papers and the \emph{Journal of the Acoustical Society of America} for the biomedical acoustics contributions.
+
+\section{Accomplishments to Date}
+
+The programme has produced five papers in a single extended research campaign, each building on its predecessors to form a coherent narrative arc: from whole-cavity analysis, through local inclusions and cross-species scaling, to organ-level extension and clinical acoustics.
+
+\subsection{Paper 1 --- Modal Analysis of the Abdominal Cavity}
+
+\emph{Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the ``Brown Note''}\\
+Target: \emph{Journal of Sound and Vibration} ($\sim$44 pages)
+
+The foundational paper models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$, $E = \SI{0.1}{\MPa}$). The analysis predicts a lowest flexural resonance at $f_2 \approx \SI{4.0}{\Hz}$, with higher modes at $f_3 \approx \SI{6.3}{\Hz}$ and $f_4 \approx \SI{8.9}{\Hz}$ --- precisely within the ISO~2631 band of peak human sensitivity to whole-body vibration. The breathing mode lies at approximately \SI{2500}{\Hz}, dominated by fluid bulk modulus and irrelevant to infrasound.
+
+The paper's central quantitative result is the coupling ratio: mechanical whole-body vibration drives abdominal wall displacement $\mathbf{6.6 \times 10^4}$~\textbf{times} more effectively than airborne sound at equivalent excitation levels. At \SI{120}{\dB}~SPL, energy-consistent airborne displacement reaches just \SI{0.014}{\micro\m} --- two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\m} threshold for PIEZO mechanosensitive channel activation. Reaching \SI{1}{\micro\m} by airborne excitation alone would require approximately \SI{158}{\dB}, well beyond any plausible environmental exposure. By contrast, whole-body vibration at the EU action value of \SI{0.5}{\m\per\s\squared} produces relative wall displacements of \SI{4586}{\micro\m}.
+
+A 10{,}000-sample Monte Carlo uncertainty quantification identifies elastic modulus as the dominant parameter (Sobol total-order index $S_T = 0.86$), with 90\% of configurations placing $f_2$ within \SIrange{3.3}{15.5}{\Hz}. A six-layer multilayer wall model predicts $f_2 = \SI{4.6}{\Hz}$, within 16\% of the homogeneous baseline.
+
+\subsection{Paper 2 --- Gas Pockets as Acoustic Transducers}
+
+\emph{Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract}\\
+Target: \emph{JASA} ($\sim$16 pages)
+
+Where Paper~1 demonstrated that whole-cavity resonance cannot be driven acoustically, Paper~2 identifies the most plausible alternative pathway: intraluminal gas pockets acting as local acoustic transducers. Using a Church~(1995) encapsulated-bubble formulation adapted for intestinal wall properties, the model predicts that gas pockets of \SIrange{5}{100}{\mL} produce tissue-wall displacements \textbf{35--100 times} larger than the whole-cavity flexural mode at the same incident SPL. A \SI{100}{\mL} pocket reaches the PIEZO activation threshold at approximately \SI{111}{\dB}; the whole-cavity pathway requires over \SI{180}{\dB}. A 10{,}000-sample Monte Carlo population model shows that at \SI{120}{\dB}, nearly all simulated individuals exceed the mechanotransduction threshold, with median peak displacement of approximately \SI{1.2}{\micro\m}.
+
+\subsection{Paper 3 --- Cross-Species Scaling Laws}
+
+\emph{Scaling Laws for the Flexural Resonance of Fluid-Filled Viscoelastic Shells: Predictions Across Mammalian Scales}\\
+Target: \emph{Journal of Sound and Vibration --- Short Communication} ($\sim$11 pages)
+
+Paper~3 applies Buckingham Pi dimensional analysis to the 10-parameter shell model, reducing the flexural eigenfrequency problem to five governing dimensionless groups. A 1{,}458-point parametric study confirms algebraic consistency with maximum relative error of $7.9 \times 10^{-16}$. Cross-species predictions for rat ($f_2 = \SI{15.7}{\Hz}$), cat (\SI{7.2}{\Hz}), pig (\SI{4.5}{\Hz}), and human (\SI{3.9}{\Hz}) reveal a quasi-universal dimensionless frequency $\boldsymbol{\Pi_0 \approx 0.07}$ across a six-fold range in body size. The airborne scattering penalty $\mathcal{R}_\mathrm{scat}$ remains in the $10^3$--$10^4$ range regardless of species, validating the use of animal models for mechanical but not acoustic excitation studies.
+
+\subsection{Paper 4 --- Bladder Resonance}
+
+\emph{Resonant Frequencies of the Human Urinary Bladder: A Fluid-Filled Viscoelastic Shell Model}\\
+Target: \emph{Journal of Sound and Vibration} ($\sim$27 pages)
+
+Paper~4 extends the analytical framework to the urinary bladder, a smaller, thinner-walled, more compliant organ whose mechanical properties vary with fill state. The model predicts a characteristic U-shaped frequency curve: geometric softening (increasing radius, thinning wall) competes with strain-stiffening of the detrusor muscle, producing a minimum $f_2 = \SI{13.5}{\Hz}$ at \SI{222}{\mL}. For physiologically relevant fill volumes (\SIrange{150}{500}{\mL}), the $n = 2$ mode spans \SIrange{13.5}{17.1}{\Hz}. The mechanical-to-airborne coupling ratio is $\mathcal{R} \approx 6{,}400$ --- smaller than the abdominal value owing to the bladder's reduced size, but still decisive. The paper offers the first mechanistic explanation for vibration-induced urinary urgency, a well-documented occupational complaint.
+
+\subsection{Paper 5 --- Borborygmi}
+
+\emph{What Pitch Is a Growling Stomach? A Unified Multi-Mode Acoustic Model of Borborygmi}\\
+Target: \emph{JASA} ($\sim$20 pages)
+
+Paper~5 completes the arc by turning from vibration response to sound \emph{generation}. A unified five-mechanism model --- free Minnaert oscillation, tissue-constrained bubble resonance, Helmholtz resonance through peristaltic constrictions, axial piston modes, and radial breathing of gas columns --- predicts bowel sound frequencies from measurable anatomical parameters with no fitted coefficients. The tissue-constrained bubble model predicts \SIrange{135}{440}{\Hz} for gas pockets of \SIrange{1}{50}{\mL}, substantially overlapping the clinically observed healthy band of \SIrange{200}{550}{\Hz}. Wall stiffness proves secondary: a 100-fold increase in elastic modulus shifts the constrained frequency by only 9\%.
+
+\section{Methodological Contributions}
+
+\subsection{Analytical Toolchain}
+
+The programme's primary methodological contribution is a \textbf{modular analytical framework} for vibroacoustic resonance of fluid-filled biological cavities, comprising four interlocking components:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Oblate spheroidal shell theory} with Donnell--Mushtari thin-shell kinematics, fluid added-mass coupling, and viscoelastic loss (Papers~1, 3, 4). The energy-consistent formulation avoids the $13\times$ overestimate that arises from pressure-based displacement calculations.
+  \item \textbf{Church~(1995) constrained-bubble model}, adapted from ultrasound contrast agents to intestinal gas pockets at infrasonic frequencies (Paper~2).
+  \item \textbf{Buckingham Pi dimensional analysis} yielding exact scaling laws that reduce high-dimensional parameter spaces to a small number of governing groups (Paper~3).
+  \item \textbf{Energy-consistent coupling comparison}, providing a common framework for quantifying mechanical versus airborne excitation pathways through a single dimensionless ratio $\mathcal{R}$ (Papers~1, 3, 4).
+\end{enumerate}
+
+\subsection{Computational Infrastructure}
+
+The research programme operates through bespoke infrastructure designed for reproducibility and self-consistency: \textbf{203 passing tests} covering analytical modules, figure generation, and parameter consistency; \textbf{130+ merged pull requests}, each reviewed before integration; \textbf{automated three-reviewer panels} (domain significance, adversarial rigour, computational reproducibility), with papers undergoing up to eight review rounds; and \textbf{cross-paper consistency auditing} to keep canonical parameters synchronised across all five manuscripts.
+
+\subsection{AI-Assisted Research Methodology}
+
+The programme itself constitutes a methodological experiment. Sixteen specialised AI agents --- spanning paper writing, data analysis, simulation engineering, literature monitoring, and adversarial review --- operate within a structured workflow. The human faculty supervisor provides research direction, domain scepticism, and quality judgement; the AI system handles analytical derivation, code implementation, \LaTeX{} drafting, figure generation, and review logistics. This division of labour is not a replacement for expertise but a \textbf{compression of research overhead}, enabling a five-paper portfolio to emerge from approximately 48 hours of wall-clock interaction.
+
+\section{Research Trajectory}
+
+\subsection{Near-Term: Submission and Peer Review}
+
+The immediate priority is external peer review. Papers~1 and~2 are submission-ready and will be submitted first. Paper~3 follows as a short communication. Papers~4 and~5, in active development, will be submitted as the earlier papers progress through review.
+
+\subsection{Medium-Term: Experimental Validation}
+
+Three experimental programmes would test the predictions directly:
+
+\textbf{Phantom validation.} An oblate spheroidal silicone phantom ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$) filled with water and instrumented with laser vibrometry would test the predicted $f_2 \approx \SI{3.6}{\Hz}$ against the analytical model. Estimated cost: under US\$3{,}100.
+
+\textbf{Clinical bowel sound recordings.} High-fidelity recordings from healthy subjects and patients with known bowel obstruction would test Paper~5's prediction that dominant frequencies map to gas-pocket volumes of \SIrange{1}{5}{\mL}. Frequency inversion from acoustic spectra to estimated pocket volumes would provide a novel, non-invasive diagnostic indicator.
+
+\textbf{Coupled-cavity and transient models.} Extensions to coupled systems --- the bladder within the pelvic cavity, the stomach communicating with the intestinal gas column --- and transient response to impulsive excitation.
+
+\subsection{Long-Term: Clinical and Technological Applications}
+
+\textbf{Non-invasive elastography.} If tissue stiffness dominates the frequency response ($S_T = 0.86$ for elastic modulus), measured resonant frequencies could be inverted to estimate \emph{in vivo} tissue mechanical properties.
+
+\textbf{Acoustic metamaterial analogies.} The constrained-bubble physics shares mathematical structure with locally resonant acoustic metamaterials --- gas pockets as naturally occurring sub-wavelength resonators.
+
+\textbf{Clinical diagnostics.} Automated bowel sound analysis for monitoring gastrointestinal motility, detecting obstruction, and assessing post-operative ileus.
+
+\section{Broader Impact}
+
+\subsection{From Folklore to Framework}
+
+The programme demonstrates that folklore can be a legitimate starting point for rigorous science. The brown note hypothesis, dismissed by most acousticians as a joke, led to the first systematic analysis of abdominal vibroacoustic resonance --- and thence to a five-paper portfolio spanning cavity mechanics, bubble dynamics, scaling laws, organ extension, and clinical acoustics. The lesson is not that folklore is reliable, but that the effort required to \emph{disprove} it rigorously often produces frameworks of independent value.
+
+\subsection{Generalisable Framework}
+
+The analytical toolchain is not specific to the abdomen. Any fluid-filled biological cavity --- bladder, lung, eye, joint capsule --- can be modelled within the same framework. The scaling laws provide a principled basis for extrapolating between species. The coupling ratio $\mathcal{R}$ offers a unified metric for comparing excitation pathways across organs, frequencies, and exposure scenarios.
+
+\subsection{AI-Assisted Research as Method}
+
+The programme is, to our knowledge, among the first to employ a structured multi-agent AI system as the primary research executor under human supervision. The infrastructure is open-source and documented, offering a template for other research groups exploring AI-assisted workflows. The central insight is that AI's comparative advantage lies not in replacing scientific judgement but in \textbf{compressing the overhead} that separates a research idea from a publishable manuscript.
+
+\section{Selected Publications}
+
+\begin{enumerate}[leftmargin=*]
+  \item J.~Mace and B.\,R.~Mace, ``Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the `Brown Note','' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$44\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$16\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``Scaling Laws for the Flexural Resonance of Fluid-Filled Viscoelastic Shells: Predictions Across Mammalian Scales,'' \emph{Journal of Sound and Vibration --- Short Communication}, in preparation, 2026. ($\sim$11\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``Resonant Frequencies of the Human Urinary Bladder: A Fluid-Filled Viscoelastic Shell Model,'' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$27\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``What Pitch Is a Growling Stomach? A Unified Multi-Mode Acoustic Model of Borborygmi,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$20\,pp.)
+\end{enumerate}
+
+\vfill
+\begin{center}
+  \small\itshape Prepared March 2026. Browntone Research Lab, Microsoft Research / University of Auckland.
+\end{center}
+
+\end{document}
