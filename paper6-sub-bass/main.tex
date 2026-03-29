@@ -30,20 +30,21 @@
   group-separator={,},
 }
 
-% Line numbering (required for JSV review submission)
+% Line numbering (required for JASA review submission)
 \linenumbers
 
 % =============================================================================
 % Metadata
 % =============================================================================
-\journal{Journal of Sound and Vibration}
+\journal{Journal of the Acoustical Society of America}
 
 \begin{document}
 
 \begin{frontmatter}
 
-\title{Can You Feel the Bass? Sub-Bass Perception Thresholds and
-Abdominal Resonance at Concert Sound Pressure Levels}
+\title{Can You Feel the Bass? Quantitative Partition of Airborne and
+Structure-Borne Pathways for Sub-Bass Perception at Concert Sound
+Pressure Levels}
 
 \author[msr]{Jonathan Mace\corref{cor1}}
 \cortext[cor1]{Corresponding author}
@@ -68,18 +69,20 @@ Abdominal Resonance at Concert Sound Pressure Levels}
 \begin{highlights}
 \item Airborne acoustic coupling to the abdomen increases as $(ka)^n$ with frequency
 \item At \SIrange{20}{80}{\hertz}, $ka$ transitions from negligible to $\sim$0.2
-\item Concert sub-bass (\SIrange{100}{115}{\decibel}) produces tissue displacements far below perception thresholds
-\item Mechanical (whole-body) pathway remains dominant even in the sub-bass band
-\item The ``feel it in your gut'' sensation at concerts requires structural rather than airborne transmission
+\item Energy-consistent displacement at concert levels is $\sim$\num{2.5} orders below perception thresholds
+\item Structure-borne (floor/seat) pathway dominates by $\sim$40$\times$ over airborne at \SI{40}{\hertz}
+\item The ``feel it in your gut'' sensation requires structural rather than airborne transmission
 \end{highlights}
 
 \begin{abstract}
 Concertgoers commonly report ``feeling the bass in their gut'' at high
 sound pressure levels, particularly during electronic dance music and
 pipe-organ performances.  While whole-body vibration at
-\SIrange{4}{8}{\hertz} is known to excite abdominal resonances, the role
-of airborne sub-bass sound (\SIrange{20}{80}{\hertz}) in producing
-visceral sensation remains unquantified.
+\SIrange{4}{8}{\hertz} is known to excite abdominal resonances, the
+relative contributions of airborne sub-bass sound
+(\SIrange{20}{80}{\hertz}) and structure-borne vibration (through floors
+and seating) to this visceral sensation have not been quantitatively
+partitioned.
 
 We extend the fluid-filled viscoelastic oblate spheroidal shell model
 developed in our companion paper to the \SIrange{20}{80}{\hertz} band,
@@ -87,31 +90,36 @@ where the Helmholtz number $ka$ transitions from negligible
 (${\sim}\num{0.01}$ at \SI{4}{\hertz}) to appreciable (${\sim}\num{0.23}$
 at \SI{80}{\hertz}).  Using literature-derived concert sound pressure
 level spectra for rock, electronic dance music, and pipe-organ venues,
-we compute energy-consistent tissue displacements and compare them with
-whole-body vibration perception thresholds from ISO~2631-1.
+we compute energy-consistent tissue displacements via the Junger \& Feit
+reciprocity formulation and compare them with whole-body vibration
+perception thresholds from ISO~2631-1.
 
 Despite the improved acoustic coupling at higher frequencies, the
 off-resonance penalty (the abdomen's flexural resonance lies at
 ${\sim}\SI{4}{\hertz}$, not \SIrange{20}{80}{\hertz}) reduces
-displacements by several orders of magnitude.  Even at peak electronic
-dance music levels (\SI{115}{\decibel} at \SI{40}{\hertz}), airborne
-sub-bass produces tissue displacements that are negligible compared with
-perception thresholds.  The familiar sensation of ``feeling'' concert
-bass therefore cannot be explained by airborne acoustic coupling to the
-abdominal cavity; it is instead attributable to whole-body vibration
-transmitted through the floor and seating, chest-wall motion, and
-somatosensory stimulation of the skin.
+displacements by approximately \num{2.5}~orders of magnitude below
+perception thresholds.  At peak electronic dance music levels
+(\SI{115}{\decibel} at \SI{40}{\hertz}), airborne-induced displacement
+reaches \SI{0.35}{\percent} of the ISO~2631 perception threshold:
+insufficient alone, but not negligible.  By contrast, structure-borne
+vibration transmitted through the floor and seating produces
+displacements ${\sim}40\times$ larger, approaching the perception
+threshold.
 
-These results close a gap between structural acoustics and
-psychoacoustics by providing the first quantitative assessment of
-airborne sub-bass coupling to the human abdomen at concert sound
-pressure levels.
+These results partition the ``feel it in your gut'' experience into its
+constituent pathways: the airborne acoustic contribution is a near-miss
+(not the four-orders-of-magnitude gap previously estimated using
+pressure-based methods), while the structure-borne pathway provides
+the dominant route to visceral sensation.  Near-field pressure
+enhancement ($+\SI{6}{}$--\SI{10}{\decibel}$ within \SI{1.5}{\metre}
+of a subwoofer stack) and mechanical coupling through resonant church
+pews may further narrow the gap in specific scenarios.
 \end{abstract}
 
 \begin{keyword}
 sub-bass perception \sep concert acoustics \sep abdominal resonance \sep
 whole-body vibration \sep acoustic--structural coupling \sep
-ISO~2631
+pathway partition \sep ISO~2631
 \end{keyword}
 
 \end{frontmatter}

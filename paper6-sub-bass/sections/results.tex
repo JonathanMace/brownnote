@@ -7,13 +7,22 @@
 \subsection{Coupling parameter transition}
 \label{sec:ka-transition}
 
-Figure~\ref{fig:ka-transition} shows the Helmholtz number $ka$ and the
-quadrupole coupling factor $(ka)^2$ as functions of frequency for the
-canonical abdominal model ($R_\mathrm{eq} = \SI{0.157}{\metre}$).  At
-the $n = 2$ flexural resonance (\SI{3.95}{\hertz}), $ka = 0.011$ and
-$(ka)^2 = 1.3 \times 10^{-4}$.  By \SI{40}{\hertz}, $ka = 0.115$ and
-$(ka)^2 = 1.3 \times 10^{-2}$---a hundredfold improvement.  At
-\SI{80}{\hertz}, $ka = 0.23$ and $(ka)^2 = 5.3 \times 10^{-2}$.
+Figure~\ref{fig:coupling-competition} shows the Helmholtz number $ka$,
+the off-resonance transfer function $H(r)/Q$, and their product as
+functions of frequency.  At the $n = 2$ flexural resonance
+(\SI{3.95}{\hertz}), $ka = 0.011$ and $(ka)^2 = 1.3 \times 10^{-4}$.
+By \SI{40}{\hertz}, $ka = 0.115$ and $(ka)^2 = 1.3 \times 10^{-2}$---a
+hundredfold improvement.  At \SI{80}{\hertz}, $ka = 0.23$ and
+$(ka)^2 = 5.3 \times 10^{-2}$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/fig_coupling_competition.pdf}
+  \caption{Competition between improved $ka$-coupling (blue) and
+    off-resonance penalty $H(r)/Q$ (red dashed) in the sub-bass band.
+    The product (black) determines the net coupling efficiency.}
+  \label{fig:coupling-competition}
+\end{figure}
 
 \begin{table}[htbp]
   \centering
@@ -71,14 +80,25 @@ wins convincingly.
 \subsection{Tissue displacement at concert SPLs}
 \label{sec:displacement-results}
 
-Figure~\ref{fig:displacement-spectrum} presents tissue displacement as a
-function of frequency for the three concert spectra.  Key results:
+Figure~\ref{fig:displacement-spectrum} presents energy-consistent
+tissue displacement as a function of frequency for the three concert
+spectra, compared with the ISO~2631 perception threshold.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/fig_displacement_spectrum.pdf}
+  \caption{Airborne tissue displacement at concert SPLs (energy-consistent)
+    compared with ISO~2631 whole-body vibration perception thresholds.
+    The gap is $\sim$\num{2.5} orders of magnitude.}
+  \label{fig:displacement-spectrum}
+\end{figure}
 
 \begin{enumerate}
   \item \textbf{Electronic dance music} ($L_p \approx \SI{115}{\decibel}$
     at \SI{40}{\hertz}):  Peak displacement
-    $\xi \approx \SI{e-4}{\micro\metre}$---four orders of magnitude below
-    whole-body vibration perception thresholds.
+    $\xi \approx \SI{0.002}{\micro\metre}$---approximately \num{2.5}
+    orders of magnitude below whole-body vibration perception thresholds,
+    reaching $\sim$\SI{0.35}{\percent} of the threshold.
 
   \item \textbf{Rock concert} ($L_p \approx \SI{108}{\decibel}$ at
     \SI{63}{\hertz}):  Peak displacement comparable to the EDM case.
@@ -90,7 +110,8 @@ function of frequency for the three concert spectra.  Key results:
 \begin{table}[htbp]
   \centering
   \caption{Tissue displacement at selected sub-bass frequencies for the
-    EDM spectrum (peak genre).  Perception thresholds from ISO~2631-1.}
+    EDM spectrum (peak genre).  Perception thresholds from ISO~2631-1.
+    All displacements computed using the energy-consistent method.}
   \label{tab:displacement}
   \begin{tabular}{@{}llllll@{}}
     \toprule
@@ -98,19 +119,103 @@ function of frequency for the three concert spectra.  Key results:
       $\xi$ [\si{\micro\metre}] & $\xi_\mathrm{thresh}$
       [\si{\micro\metre}] & Ratio \\
     \midrule
-    20 & 100 & 0.057 & --- & --- & --- \\
-    31.5 & 112 & 0.091 & --- & --- & --- \\
-    40 & 115 & 0.115 & --- & --- & --- \\
-    50 & 114 & 0.144 & --- & --- & --- \\
-    63 & 110 & 0.181 & --- & --- & --- \\
-    80 & 106 & 0.230 & --- & --- & --- \\
+    20   & 100 & 0.058 & $2.0 \times 10^{-3}$ & 1.164 & $1.7 \times 10^{-3}$ \\
+    31.5 & 112 & 0.091 & $1.97 \times 10^{-3}$ & 0.720 & $2.7 \times 10^{-3}$ \\
+    40   & 115 & 0.115 & $1.95 \times 10^{-3}$ & 0.560 & $3.5 \times 10^{-3}$ \\
+    50   & 114 & 0.144 & $1.94 \times 10^{-3}$ & 0.459 & $4.2 \times 10^{-3}$ \\
+    63   & 110 & 0.181 & $1.94 \times 10^{-3}$ & 0.361 & $5.4 \times 10^{-3}$ \\
+    80   & 106 & 0.230 & $1.94 \times 10^{-3}$ & 0.280 & $6.9 \times 10^{-3}$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\noindent
-\emph{Note: Numerical values in Table~\ref{tab:displacement} are
-placeholders to be populated from the computational results.}
+The peak ratio to threshold of $\sim$\SI{0.35}{\percent} (at
+\SI{40}{\hertz}) is small but not negligible.  This is a ``near-miss''
+rather than the ``four orders of magnitude below'' that would result
+from a pressure-based calculation.
+
+\subsection{Structure-borne pathway comparison}
+\label{sec:pathway-comparison}
+
+Figure~\ref{fig:pathway-comparison} compares the airborne and
+structure-borne (floor/seat) pathways at \SI{40}{\hertz} and
+\SI{115}{\decibel}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/fig_pathway_comparison.pdf}
+  \caption{Pathway comparison at \SI{40}{\hertz}, \SI{115}{\decibel}:
+    airborne displacement is ${\sim}40\times$ weaker than the
+    structure-borne pathway.  Neither reaches the perception threshold
+    under the conservative floor model assumed here.}
+  \label{fig:pathway-comparison}
+\end{figure}
+
+At \SI{40}{\hertz} and \SI{115}{\decibel}:
+\begin{itemize}
+  \item Airborne pathway: $\xi \approx \SI{0.002}{\micro\metre}$
+    (\SI{0.35}{\percent} of threshold).
+  \item Structure-borne pathway: $\xi \approx \SI{0.078}{\micro\metre}$
+    (\SI{14}{\percent} of threshold).
+  \item The floor/seat pathway dominates by a factor of ${\sim}40$.
+\end{itemize}
+
+The structure-borne estimate is conservative (assuming only
+\SI{1}{\percent} floor--acoustic coupling efficiency).  On lightweight
+timber floors or with tactile transducers, the floor pathway can easily
+exceed the perception threshold.
+
+\subsection{Near-field effects}
+\label{sec:near-field-results}
+
+Within $\lambda/(2\pi) \approx \SI{1.4}{\metre}$ of a subwoofer stack
+at \SI{40}{\hertz}, near-field pressure enhancement is significant
+(Table~\ref{tab:near-field}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Near-field pressure enhancement at \SI{40}{\hertz}
+    ($\lambda/(2\pi) = \SI{1.4}{\metre}$).}
+  \label{tab:near-field}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Distance [\si{\metre}] & Enhancement [\si{\decibel}] \\
+    \midrule
+    0.5 & +9.3 \\
+    1.0 & +4.6 \\
+    1.5 & +2.5 \\
+    2.0 & +1.7 \\
+    5.0 & +0.3 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+At \SI{0.5}{\metre} from a subwoofer (a realistic distance for front-row
+audience members), the $+\SI{9}{\decibel}$ enhancement approximately
+triples the effective pressure, raising the airborne displacement to
+${\sim}\SI{1}{\percent}$ of the perception threshold.  While still
+insufficient for perception via the airborne pathway alone, this
+narrows the gap by nearly a factor of three.
+
+\subsection{SPL sensitivity}
+\label{sec:spl-sensitivity}
+
+Figure~\ref{fig:spl-sensitivity} presents the ratio of airborne
+displacement to perception threshold as a function of both frequency
+and SPL.  The contour plot confirms that the ratio remains below unity
+across the entire parameter space, with the highest values occurring at
+low frequencies (near the flexural resonance) rather than in the
+sub-bass band.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/fig_spl_sensitivity.pdf}
+  \caption{Contour plot of $\log_{10}(\xi/\xi_\mathrm{thresh})$ as a
+    function of frequency and SPL.  Stars, squares, and triangles mark
+    typical concert peak levels for EDM, rock, and pipe organ
+    respectively.}
+  \label{fig:spl-sensitivity}
+\end{figure}
 
 \subsection{Coupling transition band}
 \label{sec:transition-band}
