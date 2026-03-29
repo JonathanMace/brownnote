@@ -1,3 +1,4 @@
+# EXPERIMENTAL: Not used in published papers.
 """
 Viscous correction to the inviscid fluid-structure interaction model.
 

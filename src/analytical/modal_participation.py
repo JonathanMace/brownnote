@@ -1,3 +1,4 @@
+# EXPERIMENTAL: Not used in published papers.
 """
 Modal participation factor and multi-mode analysis for the M2 gap resolution.
 
