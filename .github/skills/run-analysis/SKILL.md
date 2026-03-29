@@ -40,9 +40,9 @@ print(f'  xi_energy = {result[\"xi_energy_um\"]:.4f} um')
 ```powershell
 python -c "
 from src.analytical.natural_frequency_v2 import AbdominalModelV2
-from src.analytical.mechanical_coupling import mechanical_coupling_analysis
+from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
 model = AbdominalModelV2(E=0.1e6, a=0.18, c=0.12, h=0.01, nu=0.45, rho_wall=1100, rho_fluid=1020, K_fluid=2.2e9, P_iap=1000, loss_tangent=0.25)
-result = mechanical_coupling_analysis(model)
+result = compare_airborne_vs_mechanical(model)
 print(f'  Coupling ratio R = {result[\"coupling_ratio\"]:.0f}')
 "
 ```

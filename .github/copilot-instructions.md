@@ -82,7 +82,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 206 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 333 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -174,7 +174,7 @@ git push origin --delete <branch-name>
 ```python
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
 from src.analytical.energy_budget import self_consistent_displacement
-from src.analytical.mechanical_coupling import mechanical_coupling_analysis
+from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
 
 model = AbdominalModelV2(
     E=0.1e6, a=0.18, c=0.12, h=0.01, nu=0.45,
@@ -260,11 +260,14 @@ Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`
 
 | Paper | Venue | Status | Location |
 |-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | ~44pp, ref-updated, final-polished, submission-ready | `paper/` |
+| Paper 1: Brown Note | JSV | Submission-ready (~44pp) | `paper/` |
 | Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Under revision (8pp), dim error fixed | `paper3-scaling-laws/` |
-| Bladder Resonance | JSV/J Biomech | Under development, all Reviewer A issues addressed | `projects/bladder-resonance/` |
-| Borborygmi | JASA / Acta Acustica | First draft complete (17pp) | `projects/borborygmi/` |
+| Paper 3: Scaling Laws | JSV Short | Under revision (8pp) | `paper3-scaling-laws/` |
+| Paper 4: Bladder Resonance | JSV/J Biomech | Minor revision addressed | `projects/bladder-resonance/` |
+| Paper 5: Borborygmi | JASA | ACCEPTED | `projects/borborygmi/` |
+| Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `paper6-sub-bass/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft (16pp) | `projects/watermelon-ripeness/` |
+| Paper 8: Kac Identifiability | Inverse Problems | Planned | `projects/kac-identifiability/` |
 
 ## The Academic Calendar
 

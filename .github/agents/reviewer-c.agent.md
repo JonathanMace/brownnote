@@ -51,7 +51,7 @@ sys.path.insert(0, r'<worktree-path>')
 
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
 from src.analytical.energy_budget import self_consistent_displacement
-from src.analytical.mechanical_coupling import mechanical_coupling_analysis
+from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
 
 model = AbdominalModelV2(
     E=0.1e6, a=0.18, c=0.12, h=0.01, nu=0.45,
@@ -59,7 +59,7 @@ model = AbdominalModelV2(
 )
 freqs = flexural_mode_frequencies_v2(model, n_max=6)
 disp = self_consistent_displacement(model, mode_n=2, spl_db=120)
-mech = mechanical_coupling_analysis(model)
+mech = compare_airborne_vs_mechanical(model)
 # Compare ALL outputs to paper tables
 ```
 
