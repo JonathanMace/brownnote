@@ -1,0 +1,68 @@
+% =============================================================================
+% Methodology
+% =============================================================================
+\section{Methodology}\label{sec:methodology}
+
+\subsection{Jacobian computation}
+
+The Jacobian~\eqref{eq:jacobian} is computed by central finite differences:
+\begin{equation}
+  J_{ij}
+  \approx \frac{f_i(\boldsymbol{\theta} + \delta_j \mathbf{e}_j)
+              - f_i(\boldsymbol{\theta} - \delta_j \mathbf{e}_j)}
+               {2 \delta_j},
+\end{equation}
+where $\delta_j = \epsilon \lvert \theta_j \rvert$ with $\epsilon = 10^{-6}$.
+Convergence is verified by comparing step sizes $\epsilon = 10^{-5}$ and
+$10^{-7}$; agreement to four significant figures confirms that the
+perturbation is within the smooth regime.
+
+\subsection{Condition number}
+
+The condition number of the Jacobian in the 2-norm,
+\begin{equation}
+  \kappa(\mathbf{J}) = \frac{\sigma_\text{max}}{\sigma_\text{min}},
+\end{equation}
+where $\sigma_i$ are the singular values of~$\mathbf{J}$, quantifies the
+worst-case amplification of measurement noise into parameter uncertainty.
+A value $\kappa \sim 1$ indicates ideal identifiability;
+$\kappa \gtrsim 10^6$ indicates practical non-identifiability.
+
+\subsection{Fisher information and Cram\'er--Rao bounds}
+
+Assuming additive Gaussian noise with covariance
+$\boldsymbol{\Sigma} = \operatorname{diag}(\sigma_1^2, \dots, \sigma_N^2)$,
+where $\sigma_i = \epsilon_\text{noise} \, f_i$, the Fisher information
+matrix is
+\begin{equation}\label{eq:fisher}
+  \mathbf{F}
+  = \mathbf{J}^\top \boldsymbol{\Sigma}^{-1} \mathbf{J}.
+\end{equation}
+The Cram\'er--Rao lower bound on the variance of any unbiased estimator of
+$\theta_j$ is
+\begin{equation}
+  \operatorname{Var}(\hat\theta_j) \geq [\mathbf{F}^{-1}]_{jj}.
+\end{equation}
+When $\mathbf{F}$ is singular (as for the sphere model), no finite-variance
+unbiased estimator exists, confirming non-identifiability.
+
+\subsection{Newton--Raphson inversion}
+
+We recover parameters by minimising the squared residual
+\begin{equation}
+  \mathcal{C}(\boldsymbol{\theta})
+  = \tfrac{1}{2}
+    \lVert \mathbf{f}(\boldsymbol{\theta}) - \mathbf{f}^\text{obs} \rVert^2
+\end{equation}
+using a trust-region reflective algorithm (Levenberg--Marquardt variant) with
+positivity constraints on all parameters.  The initial guess is perturbed by
+$\pm 10\%$ from the true values to test convergence basins.
+
+\subsection{Parameter-space condition maps}
+
+To assess how identifiability varies across physiologically relevant
+parameter ranges, we sweep $\kappa(\mathbf{J})$ over a three-dimensional
+grid: $a \in [\SI{0.14}{m}, \SI{0.22}{m}]$,
+$c \in [\SI{0.08}{m}, \SI{0.16}{m}]$,
+$E \in [\SI{0.05}{MPa}, \SI{0.5}{MPa}]$, holding all other parameters at
+their canonical values.
