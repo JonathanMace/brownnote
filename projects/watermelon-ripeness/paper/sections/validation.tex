@@ -7,7 +7,7 @@
 \subsection{Comparison with published resonance data}
 \label{sec:published_data}
 
-We validate the forward model against published acoustic measurements
+We benchmark the forward model against published acoustic measurements
 on watermelons and other fruits.  Direct comparison requires care because
 the published studies report resonant frequencies for fruits of varied
 and often incompletely documented geometry and ripeness.  We therefore
@@ -171,8 +171,9 @@ reduces the dominant source of geometric uncertainty.
   \includegraphics[width=0.7\textwidth]{fig_inversion_noise}
   \caption{Effect of frequency measurement noise on inverted rind modulus,
     assessed by 1\,000 Monte Carlo trials at each noise level.  The
-    $2\times$ noise amplification inherent to the $E \propto f_2^2$
-    inversion is confirmed: \SI{2}{\percent} frequency noise yields
+    condition number of the inversion with respect to~$f$ is
+    approximately~2 (since $E \propto f_2^2$, the condition number with
+    respect to~$f^2$ is unity): \SI{2}{\percent} frequency noise yields
     $\approx\SI{4}{\percent}$ modulus error.  Violin plots show the full
     distribution; box plots indicate interquartile range.}
   \label{fig:inversion_noise}

@@ -5,10 +5,10 @@ resonance inversion.
 Reuses the oblate spheroidal shell framework (AbdominalModelV2) with
 watermelon-specific parameters.  Provides:
 
-  1. Forward model  — shell theory → predicted tap-tone frequency
-  2. Closed-form inverse — measured frequency → rind elastic modulus
-  3. Universal dimensionless ripeness curve (collapses cultivars)
-  4. Validation hooks for De Belie et al. (2000) data
+  1. Forward model  -- shell theory -> predicted tap-tone frequency
+  2. Closed-form inverse -- measured frequency -> rind elastic modulus
+  3. Universal dimensionless geometric invariant (collapses cultivars)
+  4. Validation hooks for Yamamoto et al. (1980) published frequency data
 
 Paper 7 of the Browntone research programme.
 
@@ -244,6 +244,13 @@ def invert_frequency_to_modulus(
     -------
     float
         Inferred rind elastic modulus E_rind [Pa].
+
+    Notes
+    -----
+    The condition number of this inversion with respect to f-squared is
+    unity (the mapping E -> f-squared is linear). The practical condition
+    number with respect to measured frequency f is approximately 2, since
+    E proportional to f-squared implies dE/E ~ 2*df/f.
     """
     R = (a * a * c) ** (1.0 / 3.0)
     omega = 2.0 * np.pi * f_measured
@@ -312,13 +319,12 @@ def ripeness_from_modulus(E_rind: float) -> tuple[str, float]:
 
 
 def universal_ripeness_curve(params_list: list[dict]) -> list[tuple[float, float]]:
-    """Compute dimensionless ripeness parameter Π_ripe for each parameter set.
+    """Compute dimensionless geometric invariant Pi_ripe.
 
-    Following Paper 3's dimensional analysis:
-
-        Π_ripe = f₂ · R_eq · √(ρ_eff / E_rind)
-
-    This should collapse across cultivars onto a near-constant value.
+    Because f2-squared is proportional to E_rind, the elastic modulus
+    cancels, making Pi_ripe invariant w.r.t. ripeness BY CONSTRUCTION.
+    It is a geometric invariant that collapses cultivar geometries onto
+    a single calibration constant.
 
     Parameters
     ----------
@@ -327,9 +333,9 @@ def universal_ripeness_curve(params_list: list[dict]) -> list[tuple[float, float
 
     Returns
     -------
-    list of (Π_ripe, ka)
-        ``Π_ripe`` is the dimensionless ripeness parameter.
-        ``ka`` is the Helmholtz number at f₂ in air (c_air = 343 m/s).
+    list of (Pi_ripe, ka)
+        Pi_ripe is the dimensionless geometric invariant.
+        ka is the Helmholtz number at f2 in air (c_air = 343 m/s).
     """
     c_air = 343.0
     results = []
@@ -390,97 +396,97 @@ def parametric_ripening_sweep(n_stages: int = 20) -> list[dict]:
     return rows
 
 
-def validate_against_debelie(model_predictions: list[dict]) -> dict:
-    """Compare model predictions against De Belie et al. (2000) data.
-
-    De Belie measured resonant frequencies of 144 watermelons with
-    paired firmness data. We use a representative subset (Table 2 from
-    the publication) for validation.
-
-    Parameters
-    ----------
-    model_predictions : list of dict
-        Each dict must contain ``'E_rind'`` [Pa] and ``'f2'`` [Hz].
-
-    Returns
-    -------
-    dict
-        ``R2``, ``RMSE``, ``bias`` comparing model f₂ with De Belie's
-        linear fit f = 0.93·firmness_index + 68.2 (R² = 0.81).
-    """
-    # De Belie's empirical fit: f [Hz] ≈ 0.93 * FI + 68.2
-    # where FI = stiffness index ~ sqrt(E) in their normalisation.
-    # We map our E_rind to their FI via FI ~ sqrt(E_rind[MPa]) * 40
-    preds, obs = [], []
-    for row in model_predictions:
-        E_MPa = row["E_rind"] / 1e6
-        FI = np.sqrt(E_MPa) * 40.0
-        f_debelie = 0.93 * FI + 68.2
-        obs.append(f_debelie)
-        preds.append(row["f2"])
-
-    preds = np.asarray(preds)
-    obs = np.asarray(obs)
-
-    ss_res = np.sum((preds - obs) ** 2)
-    ss_tot = np.sum((obs - np.mean(obs)) ** 2)
-    R2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
-    RMSE = float(np.sqrt(np.mean((preds - obs) ** 2)))
-    bias = float(np.mean(preds - obs))
-
-    return {"R2": R2, "RMSE": RMSE, "bias": bias}
+def _yamamoto_reference_data() -> list[dict]:
+    """Published frequency ranges from Yamamoto et al. (1980)."""
+    return [
+        {"description": "Small, ripe",    "a": 0.110, "c": 0.100, "h": 0.013,
+         "E": 50.0e6,  "f_lo": 80.0,  "f_hi": 120.0},
+        {"description": "Medium, ripe",   "a": 0.140, "c": 0.120, "h": 0.015,
+         "E": 50.0e6,  "f_lo": 80.0,  "f_hi": 120.0},
+        {"description": "Large, ripe",    "a": 0.170, "c": 0.140, "h": 0.017,
+         "E": 50.0e6,  "f_lo": 80.0,  "f_hi": 120.0},
+        {"description": "Small, unripe",  "a": 0.110, "c": 0.100, "h": 0.015,
+         "E": 150.0e6, "f_lo": 120.0, "f_hi": 180.0},
+        {"description": "Medium, unripe", "a": 0.140, "c": 0.120, "h": 0.018,
+         "E": 150.0e6, "f_lo": 120.0, "f_hi": 180.0},
+        {"description": "Large, unripe",  "a": 0.170, "c": 0.140, "h": 0.020,
+         "E": 150.0e6, "f_lo": 120.0, "f_hi": 180.0},
+    ]
 
 
-def sobol_sensitivity_watermelon(N_base: int = 2048) -> dict:
-    """Sobol sensitivity analysis for watermelon f₂.
+def validate_against_yamamoto() -> dict:
+    """Benchmark model predictions against Yamamoto et al. (1980) data."""
+    ref = _yamamoto_reference_data()
+    base = watermelon_canonical_params("ripe")
+    cases = []
+    for entry in ref:
+        p = dict(base)
+        p["a"] = entry["a"]; p["c"] = entry["c"]
+        p["h"] = entry["h"]; p["E"] = entry["E"]
+        res = predict_tap_tone(p, mode=2)
+        f_pred = res["f_n"]
+        within = entry["f_lo"] <= f_pred <= entry["f_hi"]
+        if f_pred < entry["f_lo"]:
+            deviation = entry["f_lo"] - f_pred
+        elif f_pred > entry["f_hi"]:
+            deviation = f_pred - entry["f_hi"]
+        else:
+            deviation = 0.0
+        cases.append({
+            "description": entry["description"],
+            "f_predicted": float(f_pred),
+            "f_lo": entry["f_lo"], "f_hi": entry["f_hi"],
+            "within_range": within,
+            "deviation_Hz": float(deviation),
+        })
+    n_within = sum(1 for c in cases if c["within_range"])
+    devs = [c["deviation_Hz"] for c in cases]
+    return {
+        "n_cases": len(cases),
+        "n_within_range": n_within,
+        "fraction_within": n_within / len(cases),
+        "mean_abs_deviation": float(np.mean(devs)),
+        "cases": cases,
+    }
 
-    Varies: E_rind, h, a, c, rho_rind, rho_flesh, nu, P_int, loss_tangent.
 
-    Parameters
-    ----------
-    N_base : int
-        Saltelli base sample count (total evaluations ≈ N*(2D+2)).
+def validate_against_debelie(model_predictions=None) -> dict:
+    """Deprecated. Use validate_against_yamamoto() instead."""
+    warnings.warn(
+        "validate_against_debelie() is deprecated; use validate_against_yamamoto()",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return validate_against_yamamoto()
 
-    Returns
-    -------
-    dict
-        ``S1`` and ``ST`` dicts mapping parameter names to indices.
-        Expect E_rind to dominate (S_T > 0.5).
 
-    Raises
-    ------
-    ImportError
-        If SALib is not installed.
+def sobol_sensitivity_watermelon(N_base: int = 2048, seed: int | None = None) -> dict:
+    """Sobol sensitivity analysis for watermelon f2.
+
+    Uses calc_second_order=False: total evaluations = N_base*(D+2).
     """
     if _saltelli_mod is None or _sobol_analyze is None:
         raise ImportError("SALib is required for Sobol analysis")
-
     param_names = [
         "E", "h", "a", "c",
         "rho_rind", "rho_flesh", "nu", "P_int", "loss_tangent",
     ]
-
-    # Bounds: [low, high] in physical units
     bounds_phys = {
-        "E":            (10.0e6, 250.0e6),
-        "h":            (0.010, 0.025),
-        "a":            (0.090, 0.220),
-        "c":            (0.080, 0.160),
-        "rho_rind":     (1000.0, 1100.0),
-        "rho_flesh":    (920.0, 990.0),
-        "nu":           (0.35, 0.45),
-        "P_int":        (100.0, 800.0),
+        "E": (10.0e6, 250.0e6), "h": (0.010, 0.025),
+        "a": (0.090, 0.220), "c": (0.080, 0.160),
+        "rho_rind": (1000.0, 1100.0), "rho_flesh": (920.0, 990.0),
+        "nu": (0.35, 0.45), "P_int": (100.0, 800.0),
         "loss_tangent": (0.05, 0.25),
     }
-
     problem = {
         "num_vars": len(param_names),
         "names": param_names,
         "bounds": [list(bounds_phys[n]) for n in param_names],
     }
-
-    X = _saltelli_mod.sample(problem, N_base, calc_second_order=False)
-
+    sample_kwargs: dict = {"calc_second_order": False}
+    if seed is not None:
+        sample_kwargs["seed"] = seed
+    X = _saltelli_mod.sample(problem, N_base, **sample_kwargs)
     Y = np.empty(X.shape[0])
     for i in range(X.shape[0]):
         p = watermelon_canonical_params("ripe")
@@ -491,18 +497,16 @@ def sobol_sensitivity_watermelon(N_base: int = 2048) -> dict:
             Y[i] = res["f_n"]
         except Exception:
             Y[i] = np.nan
-
     median_val = np.nanmedian(Y)
     Y[~np.isfinite(Y)] = median_val
-
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         Si = _sobol_analyze.analyze(problem, Y, calc_second_order=False)
-
     S1 = {name: float(Si["S1"][j]) for j, name in enumerate(param_names)}
     ST = {name: float(Si["ST"][j]) for j, name in enumerate(param_names)}
-
-    return {"S1": S1, "ST": ST}
+    S1_conf = {name: float(Si["S1_conf"][j]) for j, name in enumerate(param_names)}
+    ST_conf = {name: float(Si["ST_conf"][j]) for j, name in enumerate(param_names)}
+    return {"S1": S1, "ST": ST, "S1_conf": S1_conf, "ST_conf": ST_conf, "n_evaluations": X.shape[0]}
 
 
 def multi_cultivar_comparison() -> list[dict]:

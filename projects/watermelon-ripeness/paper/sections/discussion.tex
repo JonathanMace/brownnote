@@ -56,7 +56,7 @@ that a single theoretical framework, rooted in Lamb's classical shell
 theory~\cite{lamb1882} and the Junger--Feit fluid-loading
 formulation~\cite{Junger1986}, can span applications from clinical
 diagnostics to agricultural quality assessment.  The dimensionless
-ripeness parameter~$\Pi_{\mathrm{ripe}}$ is the fruit-domain analogue
+geometric invariant~$\Pi_{\mathrm{ripe}}$ is the fruit-domain analogue
 of the dimensionless coupling parameters derived in the abdominal
 studies, and the inversion formula (Eq.~\ref{eq:inversion}) is the
 direct counterpart of elastography-style inversions used in medical
@@ -124,8 +124,10 @@ trivial and could be implemented in a smartphone application.  A
 microphone records the tap-tone, a fast Fourier transform extracts
 $f_2$, and the inversion formula returns $E_{\mathrm{rind}}$ given
 approximate fruit dimensions (obtainable from a photograph).  The
-dimensionless ripeness parameter $\Pi_{\mathrm{ripe}}$ then maps the
-result onto a cultivar-independent ripeness scale.
+dimensionless geometric invariant $\Pi_{\mathrm{ripe}}$ then provides
+a cultivar-independent calibration constant that maps the
+result onto a ripeness scale without requiring detailed material
+characterisation.
 
 The Monte Carlo uncertainty analysis (\S\ref{sec:geom_uncertainty})
 demonstrates that even with $\pm\SI{10}{\percent}$ geometric
@@ -160,8 +162,8 @@ honeydew, pumpkin), drupes (coconut), and even non-biological systems
 such as pressurised tanks and sporting goods.  The multi-cultivar
 comparison (\S\ref{sec:cultivar}) demonstrates that cultivar-specific
 geometry is easily accommodated by adjusting three parameters ($a$, $c$,
-$h$), and the dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
-provides a natural framework for cross-species normalisation.
+$h$), and the dimensionless geometric invariant~$\Pi_{\mathrm{ripe}}$
+provides a natural framework for cross-species calibration.
 
 The collapse of $\Pi_{\mathrm{ripe}}$ to within
 \SI{3.3}{\percent} across four geometrically distinct watermelon

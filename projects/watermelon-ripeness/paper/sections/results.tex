@@ -89,8 +89,8 @@ We perform a variance-based global sensitivity analysis
 most strongly influence the tap-tone frequency.  Nine input parameters
 are varied simultaneously over physically realistic ranges
 (Table~\ref{tab:sobol_inputs}), and the Saltelli sampling scheme
-generates $N_{\mathrm{base}} = 512$ base samples (total model
-evaluations: $N(2D + 2) = 10{,}240$).
+generates $N_{\mathrm{base}} = 512$ base samples with first-order
+indices only (\texttt{calc\_second\_order=False}), giving a total of $N_{\mathrm{base}} (D + 2) = 512 \times 11 = 5{,}632$ model evaluations).
 
 \begin{table}[t]
   \centering
@@ -116,11 +116,14 @@ evaluations: $N(2D + 2) = 10{,}240$).
 \end{table}
 
 Table~\ref{tab:sobol_results} presents the first-order ($S_1$) and
-total-order ($S_T$) Sobol indices.  The rind elastic modulus dominates
-the frequency response with $S_1 = 0.49$ and $S_T = 0.54$, confirming
+total-order ($S_T$) Sobol indices with bootstrap confidence intervals.
+The rind elastic modulus dominates
+the frequency response with $S_1 = 0.49 \pm 0.04$ and
+$S_T = 0.54 \pm 0.05$, confirming
 that the rind stiffness---and hence ripeness---is the primary
 determinant of the tap-tone frequency.  The semi-major axis~$a$ is the
-second most influential parameter ($S_1 = 0.33$, $S_T = 0.38$),
+second most influential parameter ($S_1 = 0.33 \pm 0.03$,
+$S_T = 0.38 \pm 0.04$),
 reflecting the strong geometric scaling $f_2 \propto R_{\mathrm{eq}}^{-3/2}$.
 Rind thickness ranks third ($S_1 = 0.07$, $S_T = 0.09$), and the
 semi-minor axis fourth ($S_1 = 0.05$, $S_T = 0.06$).
@@ -128,19 +131,20 @@ semi-minor axis fourth ($S_1 = 0.05$, $S_T = 0.06$).
 \begin{table}[t]
   \centering
   \caption{Sobol sensitivity indices for the tap-tone frequency~$f_2$.
-    Parameters are ranked by total-order index~$S_T$.  The rind
-    modulus~$E_{\mathrm{rind}}$ dominates, contributing over half the
-    total variance.}
+    Parameters are ranked by total-order index~$S_T$.  Confidence
+    intervals (95\%, from bootstrap resampling) are shown as $\pm$
+    values.  The rind modulus~$E_{\mathrm{rind}}$ dominates, contributing
+    over half the total variance.}
   \label{tab:sobol_results}
   \begin{tabular}{lcc}
     \toprule
     Parameter & $S_1$ & $S_T$ \\
     \midrule
-    $E_{\mathrm{rind}}$     & 0.494 & 0.542 \\
-    $a$                     & 0.331 & 0.375 \\
-    $h$                     & 0.072 & 0.085 \\
-    $c$                     & 0.047 & 0.059 \\
-    $\nu$                   & 0.001 & 0.001 \\
+    $E_{\mathrm{rind}}$     & $0.494 \pm 0.04$ & $0.542 \pm 0.05$ \\
+    $a$                     & $0.331 \pm 0.03$ & $0.375 \pm 0.04$ \\
+    $h$                     & $0.072 \pm 0.02$ & $0.085 \pm 0.02$ \\
+    $c$                     & $0.047 \pm 0.02$ & $0.059 \pm 0.02$ \\
+    $\nu$                   & $0.001 \pm 0.01$ & $0.001 \pm 0.01$ \\
     $\rho_f$                & $< 0.001$ & $< 0.001$ \\
     $\rho_w$                & $< 0.001$ & $< 0.001$ \\
     $P_{\mathrm{int}}$      & $< 0.001$ & $< 0.001$ \\
@@ -178,21 +182,22 @@ Eq.~\eqref{eq:f2_squared}.
 % =============================================================================
 % 3.3  Universal ripeness curve
 % =============================================================================
-\subsection{Universal ripeness curve}
+\subsection{Geometric invariant $\Pi_{\mathrm{ripe}}$}
 \label{sec:universal_curve}
 
-The dimensionless ripeness parameter
-$\Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}} \sqrt{\rho_{\mathrm{eff}} / E_{\mathrm{rind}}}$
+The dimensionless geometric invariant
+$\Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}} \sqrt{\tilde{\rho}_{\mathrm{eff}} / E_{\mathrm{rind}}}$
 (Eq.~\ref{eq:Pi_ripe}) is evaluated for all four cultivars at each of
 the four ripeness stages, yielding 16 data points.
 Table~\ref{tab:Pi_ripe} presents the results.
 
 \begin{table}[t]
   \centering
-  \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$ for
+  \caption{Dimensionless geometric invariant~$\Pi_{\mathrm{ripe}}$ for
     four cultivars across all ripeness stages.  The near-constant value
     ($\overline{\Pi}_{\mathrm{ripe}} = 0.062$, CoV~$= \SI{3.3}{\percent}$)
-    confirms cultivar-independent collapse.}
+    confirms that $E_{\mathrm{rind}}$ cancels by construction, and
+    the residual spread reflects cultivar geometry alone.}
   \label{tab:Pi_ripe}
   \begin{tabular}{lcccc}
     \toprule
@@ -208,10 +213,13 @@ Table~\ref{tab:Pi_ripe} presents the results.
 
 \noindent
 A key observation emerges: $\Pi_{\mathrm{ripe}}$ is \emph{invariant
-with respect to ripeness stage} for a given cultivar.  This is
-a direct consequence of the linear dependence $f_2^2 \propto
-E_{\mathrm{rind}}$, which cancels the modulus from the numerator and
-denominator of~$\Pi_{\mathrm{ripe}}$.  The residual variation across
+with respect to ripeness stage} for a given cultivar.  This is not an
+empirical finding but a direct algebraic consequence of the linear dependence $f_2^2 \propto
+E_{\mathrm{rind}}$, which causes the modulus
+to cancel from the numerator and denominator
+of~$\Pi_{\mathrm{ripe}}$.  The parameter is therefore a \emph{geometric
+invariant} of the shell--fluid system, not a ripeness metric.  The
+residual variation across
 cultivars is small: the mean value is
 $\overline{\Pi}_{\mathrm{ripe}} = 0.062$ with a coefficient of
 variation of~\SI{3.3}{\percent} and a maximum deviation
@@ -220,10 +228,16 @@ arises solely from differences in the geometric factor
 $\mathcal{G}_2(\nu, \zeta)$ across cultivar aspect ratios.
 
 The practical consequence is that $\Pi_{\mathrm{ripe}}$ serves as a
-\emph{universal calibration constant}: once its value is known for a
+\emph{cultivar-independent calibration constant}: once its value is known for a
 given cultivar geometry, any measured $f_2$ can be directly mapped to
 $E_{\mathrm{rind}}$ without detailed knowledge of the flesh properties
-or internal pressure.
+or internal pressure.  The universality is across cultivars
+(different geometries collapsing onto a single constant), not across
+ripeness states---the latter invariance being trivially guaranteed by
+the $f_2^2 \propto E_{\mathrm{rind}}$ proportionality.  The universality is across cultivars
+(different geometries collapsing onto a single constant), not across
+ripeness states---the latter invariance being trivially guaranteed by
+the $f_2^2 \propto E_{\mathrm{rind}}$ proportionality.
 
 \begin{figure}[t]
   \centering
@@ -231,8 +245,9 @@ or internal pressure.
   \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
     for four cultivars at four ripeness stages.  All 16 points fall
     within a narrow band ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$),
-    confirming that $\Pi_{\mathrm{ripe}}$ is a universal descriptor
-    of the shell--fluid system geometry.}
+    confirming that $\Pi_{\mathrm{ripe}}$ is invariant with respect to
+    $E_{\mathrm{rind}}$ by construction.  The residual spread reflects
+    cultivar-specific geometry ($\mathcal{G}_2$).}
   \label{fig:universal_curve}
 \end{figure}
 

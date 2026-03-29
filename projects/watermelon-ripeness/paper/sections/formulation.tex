@@ -20,6 +20,16 @@ The equivalent-volume sphere has radius
   \label{eq:Req}
 \end{equation}
 
+\noindent
+The oblate geometry enters the model through~$R_{\mathrm{eq}} = (a^2
+c)^{1/3}$, which depends on the aspect ratio~$\zeta$.  At fixed
+equatorial radius~$a$, varying~$\zeta$ from~0.5 (strongly oblate)
+to~0.95 (nearly spherical) changes~$R_{\mathrm{eq}}$ and thereby
+shifts~$f_2$ by approximately~\SI{30}{\percent}.  The model thus
+requires separate specification of both~$a$ and~$c$; substituting
+the equatorial diameter for~$R_{\mathrm{eq}}$ would introduce
+systematic error.
+
 The rind is treated as a thin, isotropic, viscoelastic shell with Young's
 modulus $E_{\mathrm{rind}}$, Poisson's ratio $\nu$, density
 $\rho_w$, and structural loss factor $\eta$.  The enclosed flesh is
@@ -92,7 +102,31 @@ density incorporating the fluid loading,
   \label{eq:rho_eff}
 \end{equation}
 where $\mathcal{F}_n(\zeta)$ is the fluid-loading shape factor for
-mode~$n$ \cite{Junger1986, lamb1882}.
+mode~$n$ \cite{Junger1986, lamb1882}.  Note that $\rho_{\mathrm{eff}}$
+as defined in Eq.~\eqref{eq:rho_eff} has units of
+\si{\kilogram\per\metre\squared} (mass per unit area).  To construct a
+dimensionless group (\S\ref{sec:Pi_ripe}), we instead use
+the volumetric effective density
+\begin{equation}
+  \tilde{\rho}_{\mathrm{eff}} = \frac{\rho_w\, h}{R_{\mathrm{eq}}} + \rho_f,
+  \label{eq:rho_eff_vol}
+\end{equation}
+which has units of \si{\kilogram\per\metre\cubed}.  All occurrences of
+$\rho_{\mathrm{eff}}$ in the dimensionless analysis
+(Eqs.~\ref{eq:Pi_ripe}--\ref{eq:Pi_ripe_universal}) refer to this
+volumetric form.  Note that $\rho_{\mathrm{eff}}$
+as defined in Eq.~\eqref{eq:rho_eff} has units of
+\si{\kilogram\per\metre\squared} (mass per unit area).  To construct a
+dimensionless group (\S\ref{sec:Pi_ripe}), we instead use
+the volumetric effective density
+\begin{equation}
+  \tilde{\rho}_{\mathrm{eff}} = \frac{\rho_w\, h}{R_{\mathrm{eq}}} + \rho_f,
+  \label{eq:rho_eff_vol}
+\end{equation}
+which has units of \si{\kilogram\per\metre\cubed}.  All occurrences of
+$\rho_{\mathrm{eff}}$ in the dimensionless analysis
+(Eqs.~\ref{eq:Pi_ripe}--\ref{eq:Pi_ripe_universal}) refer to this
+volumetric form.
 
 The dominant tap-tone mode is the lowest flexural mode, $n = 2$.  For
 this mode, the squared frequency is
@@ -185,33 +219,70 @@ round-trip error $|E_{\mathrm{inv}} - E_{\mathrm{true}}| /
 E_{\mathrm{true}}$ is less than \SI{0.01}{\percent} for all ripeness
 stages tested (\S\ref{sec:forward}).
 
+The condition number of this inversion with respect to~$f_2^2$ is unity,
+since the mapping $f_2^2 \mapsto E_{\mathrm{rind}}$ is linear.  The
+practical condition number with respect to the \emph{measured
+frequency}~$f_2$ is approximately~2, because $E \propto f_2^2$ implies
+$\delta E / E \approx 2\, \delta f / f$.  This~$2\times$ noise
+amplification is inherent to any square-law inversion and is confirmed
+numerically in the Monte Carlo analysis of \S\ref{sec:geom_uncertainty}.
+
+The condition number of this inversion with respect to~$f_2^2$ is unity,
+since the mapping $f_2^2 \mapsto E_{\mathrm{rind}}$ is linear.  The
+practical condition number with respect to the \emph{measured
+frequency}~$f_2$ is approximately~2, because $E \propto f_2^2$ implies
+$\delta E / E \approx 2\, \delta f / f$.  This~$2\times$ noise
+amplification is inherent to any square-law inversion and is confirmed
+numerically in the Monte Carlo analysis of \S\ref{sec:geom_uncertainty}.
+
 % =============================================================================
 % 2.4  Dimensional analysis and the ripeness parameter
 % =============================================================================
-\subsection{Dimensionless ripeness parameter}
+\subsection{Dimensionless geometric invariant}
 \label{sec:Pi_ripe}
 
 To collapse predictions across cultivars, we define the dimensionless
-ripeness parameter
+group
 \begin{equation}
   \Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}}
-    \sqrt{\frac{\rho_{\mathrm{eff}}}{E_{\mathrm{rind}}}},
+    \sqrt{\frac{\tilde{\rho}_{\mathrm{eff}}}{E_{\mathrm{rind}}}},
   \label{eq:Pi_ripe}
 \end{equation}
-where $\rho_{\mathrm{eff}} = \rho_w h / R_{\mathrm{eq}} + \rho_f$.
-From Eq.~\eqref{eq:f2_squared}, this parameter evaluates to a universal
-constant
+where $\tilde{\rho}_{\mathrm{eff}} = \rho_w h / R_{\mathrm{eq}} +
+\rho_f$ is the volumetric effective density
+(Eq.~\ref{eq:rho_eff_vol}; units \si{\kilogram\per\metre\cubed}),
+ensuring that $\Pi_{\mathrm{ripe}}$ is dimensionless.
+From Eq.~\eqref{eq:f2_squared}, this parameter evaluates to
 \begin{equation}
   \Pi_{\mathrm{ripe}} = \frac{1}{2\pi}
     \sqrt{h\, \mathcal{G}_2(\nu, \zeta) / R_{\mathrm{eq}}^3}
   \label{eq:Pi_ripe_universal}
 \end{equation}
-for geometrically similar fruits.  Deviations from the master curve
-indicate cultivar-specific geometry or constitutive effects.
+for geometrically similar fruits.
+
+A key observation is that $E_{\mathrm{rind}}$ cancels from
+$\Pi_{\mathrm{ripe}}$ \emph{by construction}: since $f_2 \propto
+\sqrt{E_{\mathrm{rind}}}$, the modulus appears in both the numerator
+($f_2$) and denominator ($\sqrt{E_{\mathrm{rind}}}$) and divides out.
+Consequently, $\Pi_{\mathrm{ripe}}$ is \emph{invariant with respect to
+ripeness state} for fixed geometry.  It is therefore not a ``ripeness
+parameter'' in the sense of measuring ripeness, but rather a
+\emph{geometric invariant} that characterises the shell--fluid system
+independently of the elastic modulus.
+
+The practical utility of $\Pi_{\mathrm{ripe}}$ lies in
+cultivar-independent calibration: once its value is known for a given
+cultivar geometry, any measured $f_2$ can be mapped to
+$E_{\mathrm{rind}}$ via rearrangement of Eq.~\eqref{eq:Pi_ripe},
+without detailed knowledge of the flesh properties or internal pressure.
+The universality is across cultivars (different geometries collapsing
+onto a single calibration constant), not across ripeness states---the
+latter invariance is trivially guaranteed by the linear relationship
+$f_2^2 \propto E_{\mathrm{rind}}$.
 
 For the four cultivars considered in this study (Crimson Sweet, Sugar
 Baby, Charleston Gray, and Seedless Tri-X~313),
 $\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ (CoV~$= \SI{3.3}{\percent}$;
 see Table~\ref{tab:Pi_ripe} in \S\ref{sec:universal_curve}).  This
-tight collapse confirms that the dimensionless parameter effectively
+tight collapse confirms that the dimensionless group effectively
 normalises out the dominant cultivar-specific geometric variation.
