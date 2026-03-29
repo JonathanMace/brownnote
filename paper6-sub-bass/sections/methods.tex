@@ -54,12 +54,22 @@ driving pressure for flexural mode $n$ in the long-wavelength limit
 is~\cite{Junger2012}:
 %
 \begin{equation}
-  p_\mathrm{eff}(n) = p_\mathrm{inc} \, (ka)^n,
+  p_\mathrm{eff}(n) = \alpha_n \, p_\mathrm{inc} \, (ka)^n,
   \label{eq:ka-coupling}
 \end{equation}
 %
-where $k = 2\pi f / c_\mathrm{air}$ is the acoustic wavenumber and
-$a \equiv R_\mathrm{eq}$.  The Helmholtz number $ka$ is the
+where $k = 2\pi f / c_\mathrm{air}$ is the acoustic wavenumber,
+$a \equiv R_\mathrm{eq}$, and $\alpha_n$ is a mode-dependent numerical
+prefactor arising from the projection of the incident field onto the
+spherical harmonic of order $n$.  For $n = 2$, $\alpha_2 = 5/3$; we
+absorb this prefactor into the energy-consistent calibration
+(equation~\ref{eq:energy-consistent}) so that the on-resonance
+displacement is computed directly from reciprocity rather than from
+$p_\mathrm{eff}$.  The residual error from omitting $\alpha_n$ in the
+off-resonance scaling is $< \SI{5}{\percent}$ for $n \leq 4$ in the
+long-wavelength regime ($ka < 0.25$).
+
+The Helmholtz number $ka$ is the
 dimensionless parameter governing the transition from Rayleigh
 scattering ($ka \ll 1$) to geometric acoustics ($ka \gg 1$).
 
@@ -176,23 +186,41 @@ To provide quantitative context, we estimate the structure-borne
 couple acoustic energy into the floor structure.  The resulting floor
 vibration propagates through the body via the skeleton and soft tissue.
 
-We model this pathway as:
+We model the floor as a damped plate driven by broadband acoustic power.
+At steady state the time-averaged dissipated power equals the input
+power, giving the floor r.m.s.\ velocity:
 %
 \begin{equation}
-  \xi_\mathrm{body} = T_\mathrm{body} \times \xi_\mathrm{floor},
-  \quad
-  \xi_\mathrm{floor} = \frac{v_\mathrm{floor}}{\omega},
-  \quad
-  v_\mathrm{floor} = \sqrt{\frac{\eta_f I A_f}{m_f \omega^2}},
+  v_\mathrm{floor} = \sqrt{\frac{P_\mathrm{floor}}
+    {2\,\zeta_\mathrm{floor}\,\omega\,m_\mathrm{floor}}},
+  \label{eq:floor-velocity}
+\end{equation}
+%
+where $P_\mathrm{floor} = \eta_f I A_f$ is the acoustic power coupled
+into the floor ($\eta_f \sim 0.01$ coupling efficiency,
+$A_f = \SI{100}{\metre\squared}$ excited area),
+$\zeta_\mathrm{floor}$ is the floor structural damping ratio
+(concrete slab: $0.02$--$0.05$, default $0.03$), and
+$m_\mathrm{floor} = \rho_f^{\prime} A_f$ is the total floor mass
+($\rho_f^{\prime} = \SI{200}{\kilogram\per\metre\squared}$ for concrete).
+The body displacement is then:
+%
+\begin{equation}
+  \xi_\mathrm{body} = T_\mathrm{body} \times
+    \frac{v_\mathrm{floor}}{\omega},
   \label{eq:floor-pathway}
 \end{equation}
 %
 where $T_\mathrm{body} \approx 1.8$ is the seat-to-abdomen
-transmissibility from ISO~2631~\cite{Kitazaki1998, Griffin1990},
-$\eta_f \sim 0.01$ is the floor--acoustic coupling efficiency,
-$A_f$ is the excited floor area, and $m_f$ is the floor mass per unit
-area.  This is a simplified order-of-magnitude estimate; actual floor
-vibration depends strongly on venue construction.
+transmissibility from ISO~2631~\cite{Kitazaki1998, Griffin1990}.
+
+\emph{Dimensional verification.}  In equation~\eqref{eq:floor-velocity},
+the numerator has dimensions of power [\si{\watt}] $=
+\si{\kilogram\metre\squared\per\second\cubed}$; the denominator has
+dimensions $[1]\times[\si{\per\second}]\times[\si{\kilogram}] =
+\si{\kilogram\per\second}$.  The ratio is
+$\si{\metre\squared\per\second\squared}$, whose square root is
+$\si{\metre\per\second}$ as required.
 
 \subsection{Near-field pressure enhancement}
 \label{sec:near-field}
@@ -212,12 +240,23 @@ enhancement as~\cite{Junger2012}:
 which gives $+\SI{9}{\decibel}$ at \SI{0.5}{\metre} and
 $+\SI{5}{\decibel}$ at \SI{1}{\metre}.
 
-
+\subsection{Perception thresholds}
+\label{sec:perception-model}
 
 We compare computed tissue displacements against whole-body vibration
-perception thresholds from ISO~2631-1:1997~\cite{iso2631}.  The standard
-specifies root-mean-square acceleration thresholds as a function of
-frequency; we convert these to displacement amplitudes via:
+perception thresholds derived from ISO~2631-1:1997~\cite{iso2631}.
+The standard specifies frequency-weighted r.m.s.\ acceleration
+evaluation criteria (Annex~C, Table~1) for the $z$-axis (vertical)
+direction.  The ``perception threshold'' values used here are
+interpolated from the frequency-weighted comfort boundaries in
+Griffin~\cite{Griffin1990} and Mansfield~\cite{Mansfield2005}, which
+themselves are based on experimental data underlying
+ISO~2631-1.  These thresholds are therefore \emph{derived from} rather
+than \emph{directly tabulated in} the standard; the interpolation
+introduces an estimated uncertainty of ${\pm}\SI{3}{\decibel}$ (factor
+of ${\sim}1.4$) relative to any individual's true perception threshold.
+
+We convert acceleration thresholds to displacement amplitudes via:
 %
 \begin{equation}
   \xi_\mathrm{thresh}(f) = \frac{a_\mathrm{rms}(f)\,\sqrt{2}}{(2\pi f)^2}.

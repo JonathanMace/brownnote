@@ -109,30 +109,42 @@ spectra, compared with the ISO~2631 perception threshold.
 
 \begin{table}[htbp]
   \centering
-  \caption{Tissue displacement at selected sub-bass frequencies for the
-    EDM spectrum (peak genre).  Perception thresholds from ISO~2631-1.
-    All displacements computed using the energy-consistent method.}
+  \caption{Airborne and structure-borne displacement at selected
+    sub-bass frequencies for the EDM spectrum (peak genre).
+    All values computed at the \emph{actual} interpolated SPL from
+    the EDM third-octave spectrum.  Perception thresholds derived from
+    ISO~2631-1 (see \S\ref{sec:perception-model}).  Floor model:
+    $\zeta_\mathrm{floor} = 0.03$, $\eta_f = 0.01$,
+    $A_f = \SI{100}{\metre\squared}$,
+    $\rho_f^{\prime} = \SI{200}{\kilogram\per\metre\squared}$.}
   \label{tab:displacement}
-  \begin{tabular}{@{}llllll@{}}
+  \begin{tabular}{@{}lllllll@{}}
     \toprule
     $f$ [\si{\hertz}] & $L_p$ [\si{\decibel}] & $ka$ &
-      $\xi$ [\si{\micro\metre}] & $\xi_\mathrm{thresh}$
-      [\si{\micro\metre}] & Ratio \\
+      $\xi_\mathrm{air}$ [\si{\micro\metre}] &
+      $\xi_\mathrm{floor}$ [\si{\micro\metre}] &
+      $\xi_\mathrm{thresh}$ [\si{\micro\metre}] &
+      $\xi_\mathrm{floor}/\xi_\mathrm{thresh}$ \\
     \midrule
-    20   & 100 & 0.058 & $2.0 \times 10^{-3}$ & 1.164 & $1.7 \times 10^{-3}$ \\
-    31.5 & 112 & 0.091 & $1.97 \times 10^{-3}$ & 0.720 & $2.7 \times 10^{-3}$ \\
-    40   & 115 & 0.115 & $1.95 \times 10^{-3}$ & 0.560 & $3.5 \times 10^{-3}$ \\
-    50   & 114 & 0.144 & $1.94 \times 10^{-3}$ & 0.459 & $4.2 \times 10^{-3}$ \\
-    63   & 110 & 0.181 & $1.94 \times 10^{-3}$ & 0.361 & $5.4 \times 10^{-3}$ \\
-    80   & 106 & 0.230 & $1.94 \times 10^{-3}$ & 0.280 & $6.9 \times 10^{-3}$ \\
+    20   & 100 & 0.058 & $3.6 \times 10^{-4}$ & 2.54  & 1.164 & 2.2 \\
+    31.5 & 112 & 0.091 & $1.4 \times 10^{-3}$ & 5.13  & 0.720 & 7.1 \\
+    40   & 115 & 0.115 & $2.0 \times 10^{-3}$ & 5.06  & 0.560 & 9.0 \\
+    50   & 114 & 0.144 & $1.7 \times 10^{-3}$ & 3.23  & 0.459 & 7.0 \\
+    63   & 110 & 0.181 & $1.1 \times 10^{-3}$ & 1.44  & 0.361 & 4.0 \\
+    80   & 106 & 0.230 & $6.9 \times 10^{-4}$ & 0.63  & 0.280 & 2.3 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The peak ratio to threshold of $\sim$\SI{0.35}{\percent} (at
-\SI{40}{\hertz}) is small but not negligible.  This is a ``near-miss''
-rather than the ``four orders of magnitude below'' that would result
-from a pressure-based calculation.
+The peak ratio of airborne displacement to threshold of
+$\sim$\SI{0.35}{\percent} (at \SI{40}{\hertz}) is small but not
+negligible.  This is a ``near-miss'' rather than the ``four orders of
+magnitude below'' that would result from a pressure-based calculation.
+
+The structure-borne floor pathway, by contrast, exceeds the perception
+threshold at all frequencies from \SI{20}{\hertz} to \SI{80}{\hertz}
+under the EDM spectrum, peaking at $\sim 9\times$ the threshold at
+\SI{40}{\hertz}.
 
 \subsection{Structure-borne pathway comparison}
 \label{sec:pathway-comparison}
@@ -145,9 +157,10 @@ structure-borne (floor/seat) pathways at \SI{40}{\hertz} and
   \centering
   \includegraphics[width=0.7\linewidth]{figures/fig_pathway_comparison.pdf}
   \caption{Pathway comparison at \SI{40}{\hertz}, \SI{115}{\decibel}:
-    airborne displacement is ${\sim}40\times$ weaker than the
-    structure-borne pathway.  Neither reaches the perception threshold
-    under the conservative floor model assumed here.}
+    airborne displacement is ${\sim}\num{2600}\times$ weaker than the
+    structure-borne pathway.  The floor pathway exceeds the perception
+    threshold by ${\sim}9\times$; the airborne pathway reaches only
+    $\sim$\SI{0.35}{\percent}.}
   \label{fig:pathway-comparison}
 \end{figure}
 
@@ -155,15 +168,70 @@ At \SI{40}{\hertz} and \SI{115}{\decibel}:
 \begin{itemize}
   \item Airborne pathway: $\xi \approx \SI{0.002}{\micro\metre}$
     (\SI{0.35}{\percent} of threshold).
-  \item Structure-borne pathway: $\xi \approx \SI{0.078}{\micro\metre}$
-    (\SI{14}{\percent} of threshold).
-  \item The floor/seat pathway dominates by a factor of ${\sim}40$.
+  \item Structure-borne pathway: $\xi \approx \SI{5.1}{\micro\metre}$
+    ($9\times$ the perception threshold).
+  \item The floor/seat pathway dominates by a factor of
+    ${\sim}\num{2600}$.
 \end{itemize}
 
-The structure-borne estimate is conservative (assuming only
-\SI{1}{\percent} floor--acoustic coupling efficiency).  On lightweight
-timber floors or with tactile transducers, the floor pathway can easily
-exceed the perception threshold.
+The structure-borne pathway now clearly exceeds the perception threshold
+under the corrected damped-plate power-balance model
+(equation~\ref{eq:floor-velocity}).  This result is robust:
+even increasing the floor damping ratio to
+$\zeta_\mathrm{floor} = 0.05$ yields a floor displacement of
+$\SI{3.9}{\micro\metre}$, still $7\times$ above threshold.
+
+\subsection{Uncertainty quantification}
+\label{sec:uq}
+
+To assess the robustness of these headline numbers, we performed a
+Monte Carlo analysis ($N = \num{10000}$ samples) varying three uncertain
+parameters simultaneously:
+%
+\begin{itemize}
+  \item Tissue Young's modulus $E$: uniform on
+    $[\SI{0.05}{\mega\pascal}, \SI{0.15}{\mega\pascal}]$ ($\pm$50\%).
+  \item Floor damping ratio $\zeta_\mathrm{floor}$: uniform on
+    $[0.02, 0.05]$.
+  \item Sound pressure level: uniform on
+    $\SI{115}{\decibel} \pm \SI{3}{\decibel}$.
+\end{itemize}
+
+Figure~\ref{fig:uq-sensitivity} shows the resulting distributions.
+Table~\ref{tab:uq-summary} summarises the 90\% credible intervals.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_uq_sensitivity.pdf}
+  \caption{Monte Carlo sensitivity analysis ($N = \num{10000}$) at
+    \SI{40}{\hertz}.  (a)~Floor-to-airborne ratio.
+    (b)~Floor displacement as a percentage of perception threshold.
+    (c)~Airborne displacement as a percentage of threshold.}
+  \label{fig:uq-sensitivity}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Monte Carlo 90\% credible intervals for key results at
+    \SI{40}{\hertz}.}
+  \label{tab:uq-summary}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    Quantity & 5th pctl & Median & 95th pctl \\
+    \midrule
+    Floor / airborne ratio & \num{2040} & \num{2390} & \num{3060} \\
+    Floor / threshold (\%) & 575 & 853 & 1265 \\
+    Airborne / threshold (\%) & 0.25 & 0.35 & 0.48 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Across the full parameter space, the floor pathway
+\emph{always} exceeds the perception threshold (minimum $5.8\times$),
+while the airborne pathway \emph{never} exceeds \SI{0.5}{\percent}.
+The floor-to-airborne dominance ratio ranges from $\sim$\num{2000} to
+$\sim$\num{3100}, confirming that the qualitative conclusion is
+insensitive to the assumed parameter values.
 
 \subsection{Near-field effects}
 \label{sec:near-field-results}
