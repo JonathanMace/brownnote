@@ -57,13 +57,13 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 
 ### Paper 6 — *Can You Feel the Bass?*
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
-**Status:** Early draft (scaffolded)  
-**Target venue:** *JSV or JASA*  
+**Status:** Minor revision (R2 fixes applied)  
+**Target venue:** *JASA*  
 **Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1730_pathway.pdf)  
 **Location:** `paper6-sub-bass/`  
-**Key finding (preliminary):** Airborne acoustic coupling produces tissue displacement ~4 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway.
+**Key finding:** Airborne acoustic coupling produces tissue displacement ~2.5 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway, with floor displacement reaching 904% of the perception threshold.
 
-If concert bass feels visceral, is the abdomen actually being driven by airborne sound? This early draft compares predicted sub-bass-induced tissue motion against perception thresholds and finds the airborne pathway falls roughly four orders of magnitude short even at concert SPL. The dominant pathway is structure-borne vibration transmitted through floors and seating, not direct acoustic coupling.
+If concert bass feels visceral, is the abdomen actually being driven by airborne sound? This paper compares predicted sub-bass-induced tissue motion against perception thresholds and finds the airborne pathway falls roughly 2.5 orders of magnitude short even at concert SPL. The dominant pathway is structure-borne vibration transmitted through floors and seating — floor displacement alone reaches 904% of the vibrotactile perception threshold.
 
 ### Paper 7 — *Can You Hear the Ripeness?*
 **Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Shell Resonance Inversion**  
@@ -90,7 +90,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 | n=2 flexural frequency (f₂) | 3.95 Hz |
 | Breathing mode (n=0) | 2,490 Hz |
 | Airborne displacement (ξ_air, 120 dB) | 0.014 μm |
-| Mechanical displacement (ξ_mech, 0.5 m/s²) | 4,586 μm |
+| Mechanical displacement (ξ_mech, 0.1 m/s²) | 917 μm |
 | Coupling ratio R | ≈ 66,000× (6.6×10⁴) |
 | Sobol total-order index S_T(E) | 0.86 |
 

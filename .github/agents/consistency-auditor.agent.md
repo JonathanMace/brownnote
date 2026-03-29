@@ -39,7 +39,7 @@ import sys
 sys.path.insert(0, r'<repo-root>')
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
 from src.analytical.energy_budget import self_consistent_displacement
-from src.analytical.mechanical_coupling import mechanical_coupling_analysis
+from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
 ```
 Flag ANY discrepancy > 1%.
 
