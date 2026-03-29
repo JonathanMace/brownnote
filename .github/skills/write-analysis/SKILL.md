@@ -1,5 +1,7 @@
 ---
-applyTo: "src/analytical/**"
+name: write-analysis
+description: >
+  Guide for writing and editing analytical model code in src/analytical/. Use when changing the Browntone analytical model implementation.
 ---
 
 # Analytical Code Instructions
@@ -58,7 +60,7 @@ All new functions need corresponding tests in `tests/`. Run with:
 cd C:\Users\jon\OneDrive\Projects\browntone
 python -m pytest tests/ -v
 ```
-Currently 118 tests, all passing. Do not break them.
+Currently 198 tests, all passing. Do not break them.
 
 ## Key Physics Reminders
 

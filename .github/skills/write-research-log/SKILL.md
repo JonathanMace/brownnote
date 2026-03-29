@@ -1,5 +1,7 @@
 ---
-applyTo: "docs/research-logs/**"
+name: write-research-log
+description: >
+  Guide for writing research log entries in docs/research-logs/. Use when documenting a productive Browntone work session or reviewer report.
 ---
 
 # Research Log Instructions

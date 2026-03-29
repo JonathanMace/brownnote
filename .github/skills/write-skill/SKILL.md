@@ -1,3 +1,9 @@
+---
+name: write-skill
+description: >
+  Guide for writing effective Copilot CLI skill files. Use when creating, reviewing, or restructuring skills under .github/skills/.
+---
+
 # Skill Author Reference
 
 Practical guidance for writing reusable skill files for GitHub Copilot CLI and adjacent agentic coding tools.

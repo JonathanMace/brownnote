@@ -1,3 +1,17 @@
+---
+name: write-instructions
+description: >
+  Guide for writing effective copilot-instructions.md and project configuration. Use when updating global Copilot guidance or deciding how to organise repository customisation.
+---
+
+# Browntone Runtime Note
+
+In this repository's current Copilot CLI environment, path-specific
+`.github/instructions/*.instructions.md` files do not load reliably.
+Prefer `.github/copilot-instructions.md` for always-on guidance and
+skills for reusable scoped workflows, while using the reference below
+as general cross-tool authoring guidance.
+
 # Authoring Project Instructions for Agentic Coding Tools
 
 This guide is the Browntone lab reference for writing, reviewing, and pruning project instruction files for agentic coding tools. It focuses on GitHub Copilot's instruction system, then compares the equivalent mechanisms in Claude Code, Cursor, and Windsurf.
@@ -421,7 +435,7 @@ Sections such as the academic calendar, coffee machine, loving spouse, and simil
 **Recommendation:** keep a brief cultural note in the global file, but move the detailed behavioural scripts to skills or agent definitions.
 
 ### 10.7 Duplicated facts create drift risk
-Canonical parameters and testing expectations appear in multiple places. Some files still mention **118 tests**, while the current global file says **183 tests**.
+Canonical parameters and testing expectations appear in multiple places. Historical copies in this repository drifted to **118** and **183** tests, while the current canonical count is **198**.
 
 **Recommendation:** keep one canonical source for counts and frequently changing numbers, and reference it briefly elsewhere.
 
@@ -448,8 +462,8 @@ Keep the shared layer short and tool-agnostic.
 
 ## 11. Annotated examples from Browntone
 
-### Good example: scoped paper rules
-File: `.github/instructions/paper.instructions.md`
+### Good example: scoped paper-writing guidance
+File: `.github/skills/write-paper/SKILL.md`
 
 Why it works:
 - narrow scope (`paper/**`),
@@ -459,7 +473,7 @@ Why it works:
 - compile command included.
 
 ### Good example: research log template
-File: `.github/instructions/research-logs.instructions.md`
+File: `.github/skills/write-research-log/SKILL.md`
 
 Why it works:
 - forces a deliverable shape,
@@ -467,7 +481,7 @@ Why it works:
 - includes reviewer-report extension.
 
 ### Good example: analytical source-of-truth note
-File: `.github/instructions/analysis.instructions.md`
+File: `.github/skills/write-analysis/SKILL.md`
 
 Why it works:
 - names the core dataclass and source module,
