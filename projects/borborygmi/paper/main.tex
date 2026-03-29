@@ -42,7 +42,7 @@ elasticity, (iii)~Helmholtz resonance through peristaltic constrictions,
 (iv)~axial piston modes of cylindrical gas slugs, and (v)~radial breathing
 modes of gas columns in elastic tubes.  The constrained bubble model predicts
 frequencies of \SIrange{135}{440}{\hertz} for gas pocket volumes of
-\SIrange{1}{50}{\milli\litre}, spanning the clinically observed
+\SIrange{1}{50}{\milli\litre}, overlapping the clinically observed
 \SIrange{200}{550}{\hertz} band for healthy adults without curve-fitting.
 A mode-transition map identifies which resonance mechanism dominates in each
 region of the volume--geometry parameter space.  The framework provides a
@@ -103,14 +103,17 @@ tract.
 
 We bridge this gap.  In this paper we present a unified analytical framework
 in which intestinal gas pockets are modelled as acoustically resonant systems,
-with five distinct mechanisms producing frequencies that span the clinically
-observed spectrum.  The model requires no free parameters: all inputs are
+with five distinct mechanisms producing frequencies that overlap the clinically
+observed spectrum.  The model requires no fitted parameters: all inputs are
 measurable anatomical and material properties---gas pocket volume, intestinal
-wall stiffness, lumen diameter, and constriction geometry.  The
+wall stiffness, lumen diameter, and constriction geometry---drawn from
+published literature or standard anatomical measurements.  The
 tissue-constrained bubble model, which augments the Minnaert formula with
-elastic wall stiffness and inertia, reproduces the healthy bowel sound band
+elastic wall stiffness and inertia, captures much of the healthy bowel sound band
 of \SIrange{200}{550}{\hertz} for pocket volumes of
-\SIrange{1}{50}{\milli\litre}.  A mode-transition map reveals which resonance
+\SIrange{1}{50}{\milli\litre}, specifically the \SIrange{200}{440}{\hertz}
+sub-band.  Frequencies above \SI{440}{\hertz} likely require sub-millilitre
+pockets or Helmholtz contributions.  A mode-transition map reveals which resonance
 mechanism dominates in each region of the volume--diameter parameter space,
 providing physical insight for interpreting auscultatory findings.
 
@@ -147,12 +150,16 @@ Wall Poisson's ratio & $\nu$ & 0.45 & --- \\
 Wall thickness & $h$ & 3.0 & \si{\milli\metre} \\
 Wall density & $\rho_w$ & 1,040 & \si{\kilogram\per\metre\cubed} \\
 Lumen diameter & $d$ & 30 & \si{\milli\metre} \\
-Gas sound speed & $c_g$ & 343 & \si{\metre\per\second} \\
+Gas sound speed & $c_g$ & 343\textsuperscript{a} & \si{\metre\per\second} \\
 Neck diameter (Helmholtz) & $d_n$ & 5 & \si{\milli\metre} \\
 Neck length (Helmholtz) & $L_n$ & 10 & \si{\milli\metre} \\
 Loss tangent & $\eta$ & 0.25 & --- \\
 \bottomrule
 \end{tabular}
+\par\smallskip
+\textsuperscript{a}Room-temperature value; air at \SI{37}{\degreeCelsius} gives
+$c_g \approx \SI{353}{\metre\per\second}$, a ${\sim}3\%$ difference that
+affects only the Helmholtz mode and is smaller than the parametric uncertainty.
 \end{table}
 
 \subsection{Free Minnaert bubble}
@@ -320,10 +327,18 @@ Helmholtz resonators.
 We define the dominant mode at each volume as the one producing the lowest
 frequency, on the physical grounds that the lowest-frequency mode requires
 the least energy to excite and is most readily driven by broadband peristaltic
-forcing.  For the canonical parameters, the constrained bubble mode is
-dominant for volumes above approximately \SI{0.22}{\milli\litre}, with a
-crossover to the axial piston mode at smaller volumes (where the slug length
-becomes very short and the axial spring stiffness rises).
+forcing.  For the canonical parameters, the constrained bubble mode has the
+lowest frequency below approximately \SI{0.22}{\milli\litre}; above this
+volume, the axial piston mode takes over as the lowest-frequency mode because
+its frequency drops rapidly with increasing slug length ($f_\mathrm{ax}
+\propto V^{-1}$ vs.\ $f_c \propto V^{-1/3}$ for the constrained bubble).
+
+However, the axial piston frequency falls below the audible range at
+physiological volumes: $f_\mathrm{ax} < \SI{100}{\hertz}$ for $V >
+\SI{1}{\milli\litre}$.  Consequently, the constrained bubble mode
+dominates the \emph{clinically audible} band (\SIrange{200}{550}{\hertz})
+across the entire physiologically relevant volume range, even though it is
+not the overall lowest-frequency mode.
 
 The coexistence of multiple modes at each pocket volume provides a natural
 explanation for the broadband character of borborygmi: a single peristaltic
@@ -379,8 +394,8 @@ Minnaert-type modes and $f \propto V^{-1/2}$ for the Helmholtz and axial
 modes.  The radial breathing mode is independent of gas pocket volume as it
 depends solely on tube properties.
 
-The constrained bubble model spans \SIrange{135}{440}{\hertz} over this
-volume range, covering the majority of the clinically observed healthy bowel
+The constrained bubble model covers \SIrange{135}{440}{\hertz} over this
+volume range, overlapping the lower portion of the clinically observed healthy bowel
 sound band.  At $V = \SI{1}{\milli\litre}$, the constrained frequency is
 \SI{440}{\hertz}; at $V = \SI{50}{\milli\litre}$, it decreases to
 \SI{135}{\hertz}.  The Minnaert model predicts a slightly wider range of
@@ -403,16 +418,20 @@ constrained model because it neglects wall inertia.
 Figure~\ref{fig:transition_map} presents a mode transition map showing all
 five mode frequencies on logarithmic axes across a volume range of
 \SIrange{0.1}{100}{\milli\litre}.  Crossover points mark volumes at which
-the dominant (lowest-frequency) mode changes.  For the canonical parameters,
+the lowest-frequency mode changes.  For the canonical parameters,
 a single crossover occurs at $V \approx \SI{0.22}{\milli\litre}$
-($f \approx \SI{667}{\hertz}$), where the axial piston mode (dominant at
-very small volumes) yields to the constrained bubble mode.
+($f \approx \SI{667}{\hertz}$), where the constrained bubble mode
+(dominant at very small volumes) yields to the axial piston mode, whose
+frequency decreases more steeply with volume.
 
-Above this crossover, the constrained bubble mode remains dominant across
-the entire physiologically relevant range (\SIrange{1}{50}{\milli\litre}),
-confirming it as the primary mechanism for healthy bowel sounds.  The
-Helmholtz mode consistently lies above both bubble modes, becoming relevant
-only when narrow constrictions are present.
+Above this crossover, the axial piston mode is formally the
+lowest-frequency mode across the physiologically relevant range
+(\SIrange{1}{50}{\milli\litre}).  However, $f_\mathrm{ax}$ is sub-audible
+at these volumes ($< \SI{100}{\hertz}$ for $V > \SI{1}{\milli\litre}$),
+so the constrained bubble mode is the dominant mechanism within the
+\emph{clinically audible} band, confirming it as the primary contributor to
+auscultated bowel sounds.  The Helmholtz mode consistently lies above both
+bubble modes, becoming relevant only when narrow constrictions are present.
 
 \begin{figure}[htbp]
 \centering
@@ -420,8 +439,10 @@ only when narrow constrictions are present.
 \caption{Mode transition map showing the five resonance mechanisms across
   gas pocket volumes from \SIrange{0.1}{100}{\milli\litre}.  The clinical
   band (\SIrange{200}{550}{\hertz}) is indicated by horizontal dashed lines.
-  The constrained bubble mode dominates above
-  $V \approx \SI{0.22}{\milli\litre}$.}
+  The constrained bubble mode dominates the clinically audible band; the
+  axial piston mode has the lowest overall frequency above
+  $V \approx \SI{0.22}{\milli\litre}$ but is sub-audible at physiological
+  volumes.}
 \label{fig:transition_map}
 \end{figure}
 
@@ -489,15 +510,23 @@ each parameter's influence through targeted sweeps.
 \paragraph{Wall stiffness.}
 Increasing the wall modulus from \SI{1}{\kilo\pascal} (very soft mucosa) to
 \SI{100}{\kilo\pascal} (fibrotic bowel) raises $k_\mathrm{wall}$
-proportionally.  At \SI{10}{\milli\litre}, the constrained frequency shifts
-from approximately \SI{215}{\hertz} at $E = \SI{1}{\kilo\pascal}$ to
-\SI{310}{\hertz} at $E = \SI{100}{\kilo\pascal}$---a clinically significant
-shift that provides a potential mechanism for pathological spectral changes
-in conditions involving bowel wall fibrosis or inflammation.
+proportionally.  At \SI{10}{\milli\litre}, however, the constrained frequency
+shifts only from approximately \SI{221}{\hertz} at $E = \SI{1}{\kilo\pascal}$
+to \SI{241}{\hertz} at $E = \SI{100}{\kilo\pascal}$---a modest $9\%$ increase.
+The constrained frequency is thus remarkably insensitive to wall stiffness,
+dominated instead by gas compressibility.  This insensitivity arises because
+$k_\mathrm{wall}$ is small relative to $k_\mathrm{gas}$ for the soft
+intestinal wall, even at a hundredfold increase in $E$.  Pathological spectral
+shifts from fibrosis are therefore expected to be subtle, though potentially
+still detectable with sufficiently precise acoustic monitoring.
 
 \paragraph{Tube diameter.}
-The constrained bubble frequency is weakly sensitive to tube diameter, since
-the equivalent spherical radius $R$ depends on volume alone.  However, tube
+The constrained bubble frequency is independent of tube diameter, since
+the equivalent spherical radius $R$ depends on volume alone and the
+constrained model (Eq.~\ref{eq:constrained}) contains no lumen-geometry
+terms.  This is a limitation of the spherical approximation: in reality,
+the lumen boundary would modify the added-mass term for non-spherical
+pockets.  However, tube
 diameter strongly influences the axial and radial modes, which scale directly
 with lumen radius $R_l$.  For larger-diameter segments (colon,
 $d \approx \SIrange{40}{60}{\milli\metre}$), the radial breathing mode
@@ -542,12 +571,18 @@ or tube-filling gas column geometries.
 \subsection{Interpreting the mode transition map}
 \label{sec:interpreting_map}
 
-The mode transition map (Fig.~\ref{fig:transition_map}) reveals a simple
-landscape: the constrained bubble mode dominates across virtually the
-entire physiologically relevant volume range, with only a narrow crossover
-to the axial mode below \SI{0.22}{\milli\litre}.  This simplicity is itself
-a useful result, as it indicates that a single-mode model (the constrained
-bubble) is sufficient for most clinical interpretations.
+The mode transition map (Fig.~\ref{fig:transition_map}) reveals a nuanced
+landscape.  By the lowest-frequency criterion, the axial piston mode
+dominates above $V \approx \SI{0.22}{\milli\litre}$ because its frequency
+drops more steeply with volume ($f \propto V^{-1}$ vs.\ $V^{-1/3}$ for
+the constrained bubble).  However, the axial frequency is sub-audible
+at physiological volumes ($f_\mathrm{ax} < \SI{100}{\hertz}$ for
+$V > \SI{1}{\milli\litre}$), placing it below the clinically observable
+range.  Within the audible band (\SIrange{200}{550}{\hertz}), the
+constrained bubble mode is the dominant contributor.  This distinction
+is clinically important: a single-mode model based on the constrained
+bubble is sufficient for interpreting auscultatory findings, even though
+the formal lowest-frequency mode is sub-audible.
 
 The Helmholtz mode, while not dominant in the lowest-frequency sense,
 deserves attention as a secondary mechanism.  When peristaltic contractions
@@ -590,7 +625,18 @@ Several simplifications warrant discussion.
 \emph{Geometry.}  Real intestinal gas pockets are irregular, not spherical
 or cylindrical.  The spherical approximation is most accurate for compact
 pockets where the aspect ratio is near unity; elongated pockets would
-require a more detailed geometrical treatment.
+require a more detailed geometrical treatment.  Furthermore, the
+equivalent-sphere diameter exceeds the lumen diameter for volumes above
+approximately \SI{14}{\milli\litre} (a sphere of \SI{14}{\milli\litre}
+has a diameter of \SI{30}{\milli\metre}, matching the lumen).  Larger
+pockets necessarily adopt elongated, non-spherical geometries to fit
+within the lumen.  We therefore consider the spherical constrained-bubble
+model to be most reliable for volumes up to approximately
+\SI{14}{\milli\litre} and treat predictions at larger volumes as an
+extrapolation that likely overestimates the effective bubble radius.
+The constrained model is also strictly independent of tube diameter---a
+consequence of the spherical assumption that neglects lumen-boundary
+effects on the added-mass term.
 
 \emph{Static equilibrium.}  We model steady-state resonance frequencies and
 do not account for the time-varying geometry imposed by peristaltic waves.
@@ -642,16 +688,21 @@ modes.  The principal findings are:
   \item The tissue-constrained bubble model, which augments the classical
     Minnaert formula with intestinal wall elasticity and inertia, predicts
     frequencies of \SIrange{135}{440}{\hertz} for gas pocket volumes of
-    \SIrange{1}{50}{\milli\litre}.  This range spans the clinically observed
-    healthy bowel sound band of \SIrange{200}{550}{\hertz} without
-    curve-fitting or free parameters.
+    \SIrange{1}{50}{\milli\litre}.  This range overlaps the clinically
+    observed healthy bowel sound band of \SIrange{200}{550}{\hertz},
+    specifically capturing the \SIrange{200}{440}{\hertz} sub-band without
+    curve-fitting or fitted parameters.  Frequencies above
+    \SI{440}{\hertz} require sub-millilitre pockets or Helmholtz
+    contributions.
 
-  \item A mode-transition map across the volume--frequency space identifies
-    the constrained bubble mode as dominant for pocket volumes above
-    $\sim$\SI{0.22}{\milli\litre}, covering the entire physiologically
-    relevant range.  The Helmholtz and axial piston modes provide secondary
-    contributions that account for high-pitched obstruction sounds and
-    sub-audible rumbling, respectively.
+  \item A mode-transition map across the volume--frequency space shows that
+    the axial piston mode has the lowest overall frequency above
+    $\sim$\SI{0.22}{\milli\litre}, but it is sub-audible at physiological
+    volumes ($< \SI{100}{\hertz}$ for $V > \SI{1}{\milli\litre}$).  The
+    constrained bubble mode therefore dominates the clinically audible
+    band across the entire physiologically relevant volume range.  The
+    Helmholtz mode provides a secondary high-frequency contribution
+    relevant to obstruction-related tinkling sounds.
 
   \item The model provides a physics-based framework for interpreting
     clinical spectral shifts: the reported peak frequencies for small bowel
@@ -660,11 +711,18 @@ modes.  The principal findings are:
     \SI{5}{\milli\litre} and \SI{1}{\milli\litre}, respectively, under the
     constrained model.
 
-  \item Wall stiffness is a secondary but clinically significant parameter:
-    a tenfold increase (from \SI{10}{\kilo\pascal} to
-    \SI{100}{\kilo\pascal}, representing fibrotic bowel) raises the predicted
-    frequency by approximately 40\%, suggesting that pathological changes in
-    wall compliance could produce detectable acoustic signatures.
+  \item Wall stiffness is a secondary parameter: a hundredfold increase
+    (from \SI{1}{\kilo\pascal} to \SI{100}{\kilo\pascal}, representing
+    fibrotic bowel) raises the predicted frequency by only ${\sim}9\%$,
+    indicating that the constrained frequency is dominated by gas
+    compressibility rather than wall elasticity.  Pathological spectral
+    shifts from fibrosis, while potentially detectable, are expected to
+    be subtle.
+
+  \item The spherical bubble assumption limits the model's high-confidence
+    range to volumes below approximately \SI{14}{\milli\litre}, above which
+    the equivalent-sphere diameter exceeds the lumen diameter.  Predictions
+    for larger volumes should be treated as extrapolations.
 \end{enumerate}
 
 Experimental validation through simultaneous bowel sound recording and
