@@ -23,6 +23,16 @@ The corresponding improvement factor is therefore
 By the standards of practical inversion, this is the difference between an
 essentially singular map and a well-conditioned three-parameter estimate.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_sphere_vs_oblate}
+  \caption{Frequency spectra comparison between the spherical and canonical
+  oblate operating points for flexural modes $n=2,\ldots,6$.  The oblate case
+  produces a well-separated spectrum; the spherical case shows near-degenerate
+  clustering.}
+  \label{fig:sphere_vs_oblate}
+\end{figure}
+
 \subsection{Singular-value structure}
 
 The singular value decomposition provides the clearest picture.  In the
@@ -37,6 +47,17 @@ $\kappa$ could arise from one weak direction in an otherwise healthy problem; in
 the spherical case, the singular values show something stronger: the Jacobian is
 numerically rank deficient.  At the oblate operating point, by contrast, the
 inverse map is not perfect but it is usable.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig_singular_values}
+  \caption{Singular value spectrum of the scaled Jacobian at the spherical and
+  oblate operating points.  In the spherical case, the smallest singular value
+  collapses to near-zero, rendering the Jacobian numerically rank deficient.
+  In the oblate case, all three singular values remain well separated from
+  zero.}
+  \label{fig:singular_values}
+\end{figure}
 
 \subsection{Physical interpretation}
 
@@ -114,6 +135,16 @@ parameter standard deviations.  The uncertainty budget is therefore governed by
 two levers: the intrinsic conditioning of the operating point and the
 experimental precision of the measured resonances.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_inversion_noise}
+  \caption{Monte Carlo inversion error as a function of fractional frequency
+  noise level.  Relative parameter recovery errors for $a$, $c$, and~$E$ are
+  shown, confirming the linear scaling predicted by the Cram\'er--Rao bounds.
+  Five-mode inversion remains robust across the tested noise range.}
+  \label{fig:inversion_noise}
+\end{figure}
+
 \subsection{Condition-number map in parameter space}
 
 Condition-number maps over $(a,\zeta_g)$ show a broad region of acceptable
@@ -128,6 +159,16 @@ The maps are valuable because they show where an experiment is likely to work
 before any inversion is attempted.  They also suggest that identifiability is
 not a single number attached to the model in general; it depends strongly on the
 operating point.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig_condition_map}
+  \caption{Condition number $\kappa(\mathbf{J}_s)$ mapped over the
+  $(a,\,\zeta_g)$ parameter plane.  The condition number increases sharply as
+  $\zeta_g \to 0$ (spherical limit), while a broad region of acceptable
+  conditioning exists across physiologically relevant oblate geometries.}
+  \label{fig:condition_map}
+\end{figure}
 
 \subsection{Watermelon cross-application}
 

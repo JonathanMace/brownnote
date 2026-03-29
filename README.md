@@ -82,7 +82,7 @@ If growers can judge a watermelon by tapping it, the obvious question is whether
 **Status:** First complete draft  
 **Venue:** *Inverse Problems*  
 **Location:** `projects/kac-identifiability/`  
-**Latest draft:** [`draft_2026-03-29_1501.pdf`](projects/kac-identifiability/paper/drafts/draft_2026-03-29_1501.pdf)  
+**Latest draft:** [`draft_2026-03-29_1519.pdf`](projects/kac-identifiability/paper/drafts/draft_2026-03-29_1519.pdf)  
 **Key result:** oblate geometry reduces the condition number from 10¹⁰ to 73, making the (a, c, E) parameter triple practically identifiable from resonant frequencies.
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.
