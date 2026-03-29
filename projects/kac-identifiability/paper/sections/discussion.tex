@@ -3,77 +3,111 @@
 % =============================================================================
 \section{Discussion}\label{sec:discussion}
 
-\subsection{Connection to Kac's problem}
+\subsection{Connection to Kac's question}
 
-Kac \cite{Kac1966} asked whether the eigenvalues of the Laplacian uniquely
-determine the shape of a membrane.  Our result is an engineering analogue:
-the eigenfrequencies of a \emph{viscoelastic shell} determine its shape and
-stiffness, provided the model captures the geometric anisotropy.  The sphere
-model fails precisely because it discards this anisotropy by collapsing all
-geometry into a single radius.
+Kac's original problem asked whether one could infer geometry from a spectrum.
+Our answer is deliberately narrower and more practical.  For the present
+viscoelastic shell model, the results suggest that one \emph{can} hear the shape
+of an oblate organ, in the sense that the local inverse problem for
+$(a,c,E)$ is well conditioned and statistically finite.  At the spherical
+limit, one cannot: the Jacobian becomes rank deficient and the Fisher matrix
+loses invertibility.
 
-Gordon, Webb, and Wolpert \cite{Gordon1992} showed that isospectral
-non-isometric domains exist for membranes.  Our oblate shell model avoids
-this pathology because the stiffness terms (bending, membrane, prestress)
-create mode-dependent coupling to the geometry that is absent in the
-Laplacian.
+The analogy with Kac should therefore be handled with care.  We do not prove a
+uniqueness theorem over an infinite function space, nor do we exclude the
+possibility of remote isospectral parameter sets.  Our claim is about
+\emph{practical identifiability} in a finite-dimensional model relevant to
+measurement and inversion.  That is a less grand claim, but also the one an
+experimentalist can actually use.
 
-\subsection{Practical versus structural identifiability}
+\subsection{Implications for vibroacoustic elastography}
 
-Following Raue et al.\ \cite{Raue2009}, we emphasise that our result is one
-of \emph{practical identifiability}: given finite-precision measurements, the
-parameter estimation is well-conditioned.  We do not claim global uniqueness
-(structural identifiability), which would require proving injectivity of the
-forward map over the entire parameter domain --- a significantly harder
-problem that we leave for future work.
+The results are encouraging for vibroacoustic elastography and related spectral
+methods.  A small number of low-order flexural resonances may contain enough
+information to estimate both geometry and stiffness, provided that the operating
+point is sufficiently aspherical and provided that enough modes are measured.
+This is attractive because resonant frequencies are often easier to estimate
+robustly than full-field mode shapes or transient wavefields.
 
-The condition number $\kappa \approx 83.5$ means that $1\%$ measurement noise
-translates to at most $\sim 83.5\%$ worst-case parameter error in the least
-observable direction.  In practice, the Cram\'er--Rao bounds show that the
-\emph{expected} uncertainty is much smaller, of order a few percent for each
-parameter.
+The Cram\'er--Rao bounds give the result practical content.  At $1\%$ frequency
+noise, the uncertainty in $c$ is modest, while $a$ and $E$ remain more weakly
+resolved but still finite.  That anisotropy matters for experimental design:
+one should not expect the same confidence in all parameters, even when the
+Jacobian has full rank.
 
-\subsection{Implications for tissue characterisation}
+\subsection{Why model choice matters}
 
-The result suggests that vibroacoustic spectroscopy could, in principle, be
-used for non-invasive assessment of organ stiffness and geometry.  The key
-requirement is that the forward model must capture the organ's aspherical
-shape.  An equivalent-sphere assumption, while computationally convenient,
-destroys the information content needed for inversion.
+The most important modelling lesson is that forward-model convenience and
+inverse-model usefulness are not the same thing.  A spherical reduction may be
+acceptable for a rough forward estimate of resonance frequency, but it is a poor
+foundation for parameter recovery.  Spherical simplifications are serviceable on
+the blackboard; in inverse problems they become noticeably less cooperative.
 
-This has particular relevance for:
+At the same time, the present study does \emph{not} rely on a full oblate shell
+theory.  The model analysed here is still an equivalent-sphere approximation.
+That limitation should be kept in view when interpreting the phrase ``hear the
+shape''.  The present results show what is identifiable within the implemented
+model, not what Nature has promised in advance.
+
+\subsection{Relation to existing inverse methods}
+
+Inverse vibration problems have long been studied in structural
+dynamics~\cite{Gladwell2004,Gladwell2005}, and model-based elastography has
+developed a wide range of optimisation and regularisation
+strategies~\cite{Doyley2012}.  In acoustics and biomechanics, several studies
+have estimated material parameters by fitting dynamic response models to
+spectral data~\cite{Aernouts2012}.  The present contribution is more modest but
+useful: before attempting a sophisticated inversion, we ask whether the chosen
+measurements can, in principle, resolve the chosen parameters with acceptable
+conditioning.
+
+That perspective is valuable because poor inverse performance is often blamed on
+optimisers, priors, or noise models when the underlying issue is simpler: the
+Jacobian is nearly singular.  A condition-number and Fisher-information analysis
+cannot solve the inverse problem by itself, but it can prevent one from asking
+the data for information they do not contain.
+
+\subsection{Local versus global identifiability}
+
+The round-trip tests demonstrate very accurate local recovery, but global
+identifiability is a separate matter.  The three-mode system is especially
+vulnerable because it is exactly determined.  Local minima can occur, and a
+small residual does not necessarily imply the correct parameter set when the
+search is started far away.  This is why the five-mode result matters more for
+practice than the machine-precision local recovery.
+
+Our recommendation is therefore not based on elegance but on behaviour:
 \begin{itemize}
-  \item \textbf{Liver fibrosis staging}, where organ stiffness increases
-    with disease progression and the liver is markedly non-spherical.
-  \item \textbf{Bladder volume estimation}, where the organ changes shape
-    as it fills.
-  \item \textbf{Non-destructive food testing}, as demonstrated by our
-    watermelon validation case.
+  \item use three modes only for local studies or controlled round-trip tests;
+  \item use at least five flexural modes for robust inversion in realistic
+  settings.
 \end{itemize}
 
 \subsection{Limitations}
 
-Several limitations should be noted:
+Several limitations remain.
 \begin{enumerate}
-  \item We consider only three parameters $(a, c, E)$.  Including additional
-    unknowns (e.g.\ wall thickness~$h$, Poisson's ratio~$\nu$, fluid
-    density~$\rho_f$) would require more measured frequencies and may
-    degrade conditioning.
-  \item The forward model assumes a homogeneous, isotropic shell.  Real
-    organs exhibit spatial heterogeneity and anisotropy.
-  \item We assume the mode numbers of measured frequencies are known
-    \emph{a priori}.  Mode identification from experimental data is itself
-    a non-trivial problem.
-  \item The noise model is Gaussian and frequency-proportional.  Real
-    measurement noise may have different structure.
+  \item The forward model is an equivalent-sphere approximation.  It does not
+  contain explicit $\zeta_g$-dependent shell terms, so the present paper should
+  not be read as a definitive study of full spheroidal shell identifiability.
+  \item The analysis is local.  We do not prove global injectivity of the map
+  $(a,c,E)\mapsto \{f_n\}$.
+  \item Synthetic inversion uses the same model for data generation and
+  inversion.  This isolates identifiability, but it avoids model-form error.
+  \item The mode numbers are assumed known.  In experiment, mode assignment may
+  itself be uncertain.
+  \item Only three parameters are estimated.  Allowing $h$, $\nu$, or fluid
+  properties to vary would enlarge the parameter space and may degrade
+  conditioning.
 \end{enumerate}
 
 \subsection{Future directions}
 
-Natural extensions include:
-\begin{itemize}
-  \item Bayesian inversion with informative priors on tissue properties.
-  \item Experimental validation using phantom organs with known properties.
-  \item Extension to triaxial ellipsoids (three distinct semi-axes).
-  \item Sensitivity analysis for the full parameter set using Sobol indices.
-\end{itemize}
+The natural next step is a genuine Ritz or finite-element oblate shell model
+with explicit aspect-ratio dependence, followed by the same identifiability
+analysis.  That would show whether the encouraging results reported here
+strengthen further when the geometry is represented more faithfully.  The second
+priority is experimental validation, ideally first on phantoms of known
+geometry and stiffness and then on biological specimens.  A Bayesian treatment,
+with priors on tissue properties and uncertainty in mode identification, would
+also be a useful extension.

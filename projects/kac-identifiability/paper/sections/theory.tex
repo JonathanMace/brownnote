@@ -1,79 +1,154 @@
 % =============================================================================
-% Theory — Forward Model Summary
+% Theory
 % =============================================================================
 \section{Theory}\label{sec:theory}
 
-\subsection{Shell geometry and material model}
+\subsection{Equivalent-sphere forward model}
 
-We model the organ as an oblate spheroidal shell with semi-major axis~$a$,
-semi-minor axis~$c < a$, uniform wall thickness~$h$, and constitutive
-properties described by Young's modulus~$E$, Poisson's ratio~$\nu$, wall
-density~$\rho_w$, and a Kelvin--Voigt loss tangent~$\eta$.  The cavity is
-filled with an incompressible fluid of density~$\rho_f$ and bulk
-modulus~$K_f$.  A static intra-abdominal pressure~$P_\text{iap}$ pre-stresses
-the membrane.
+We use the flexural-frequency model introduced in the companion
+paper~\cite{BrowntoneCompanion}.  The shell has semi-major axis $a$, semi-minor
+axis $c$, thickness $h$, Young's modulus $E$, Poisson's ratio $\nu$, wall
+density $\rho_w$, and internal fluid density $\rho_f$.  The fluid bulk modulus
+is denoted by $K_f$, the static internal pressure by $P_\mathrm{iap}$, and the
+loss tangent by $\eta$.  Unless stated otherwise, the canonical parameter set is
+\[
+a=\SI{0.18}{m},\quad
+c=\SI{0.12}{m},\quad
+h=\SI{0.01}{m},\quad
+E=\SI{0.1}{MPa},\quad
+\nu=0.45,
+\]
+\[
+\rho_w=\SI{1100}{kg/m^3},\quad
+\rho_f=\SI{1020}{kg/m^3},\quad
+K_f=\SI{2.2}{GPa},\quad
+P_\mathrm{iap}=\SI{1000}{Pa},\quad
+\eta=0.25.
+\]
 
-For the canonical human abdomen, $a = \SI{0.18}{m}$, $c = \SI{0.12}{m}$,
-$h = \SI{0.010}{m}$, $E = \SI{0.1}{MPa}$, $\nu = 0.45$,
-$\rho_w = \SI{1100}{kg/m^3}$, $\rho_f = \SI{1020}{kg/m^3}$,
-$K_f = \SI{2.2}{GPa}$, $P_\text{iap} = \SI{1000}{Pa}$, and $\eta = 0.25$.
-
-\subsection{Equivalent-sphere model}
-
-The simplest forward model replaces the oblate spheroid with an equivalent
-sphere of radius $R_\text{eq} = (a^2 c)^{1/3}$.  The flexural frequency of
-mode~$n$ ($n \geq 2$) is then
-\begin{equation}\label{eq:sphere-freq}
+The model collapses the geometry to the equivalent radius
+\begin{equation}\label{eq:req}
+  R_\mathrm{eq} = (a^2 c)^{1/3}.
+\end{equation}
+For flexural modes $n \geq 2$, the angular frequency $\omega_n=2\pi f_n$ is
+written as
+\begin{equation}\label{eq:flexural_forward}
   \omega_n^2
-  = \frac{K_\text{bend}(n) + K_\text{memb}(n) + K_\text{pre}(n)}
-         {m_\text{wall}(n) + m_\text{fluid}(n)},
+  =
+  \frac{K_\mathrm{bend}^{(n)} + K_\mathrm{memb}^{(n)} + K_\mathrm{pre}^{(n)}}
+       {m_\mathrm{eff}^{(n)}},
 \end{equation}
-where all stiffness and mass terms depend on $R_\text{eq}$, $h$, $E$, $\nu$,
-$\rho_w$, $\rho_f$, and $P_\text{iap}$ through well-known shell-theory
-expressions.
+where the effective stiffness contains bending, membrane, and prestress terms,
+and the effective mass contains wall mass and fluid added mass.
 
-Crucially, because every term in \eqref{eq:sphere-freq} involves only the
-\emph{single} length scale~$R_\text{eq}$, the ratio $f_n / f_m$ for any two
-modes $n, m$ is independent of $(a, c)$ --- it depends only on shell-theory
-mode-shape factors.  This means that geometry and stiffness are
-\emph{confounded}: many different $(a, c, E)$ triples produce the same
-spectrum.
-
-\subsection{Rayleigh--Ritz oblate model}\label{sec:ritz}
-
-The Ritz model retains the oblate geometry.  For each mode number~$n$, we
-adopt a two-degree-of-freedom trial displacement:
+With flexural rigidity
 \begin{equation}
-  w(\eta) = \beta \, P_n(\eta), \qquad
-  u(\theta) = \alpha \, \sin\theta \, P_n'(\cos\theta),
+  D = \frac{E h^3}{12(1-\nu^2)},
 \end{equation}
-where $P_n$ is the Legendre polynomial and $(\alpha, \beta)$ are generalised
-coordinates.  The strain energy and kinetic energy are assembled by
-Gauss--Legendre quadrature over the actual oblate surface, yielding a $2
-\times 2$ generalised eigenvalue problem
+the individual contributions are
 \begin{equation}
-  \mathbf{K} \mathbf{q} = \omega^2 \mathbf{M} \mathbf{q},
+  K_\mathrm{bend}^{(n)}
+  =
+  \frac{n(n-1)(n+2)^2}{R_\mathrm{eq}^4}\,D,
 \end{equation}
-whose smallest positive eigenvalue gives $\omega_n$.
+\begin{equation}
+  K_\mathrm{memb}^{(n)}
+  =
+  \frac{E h}{R_\mathrm{eq}^2}\,\lambda_n,
+  \qquad
+  \lambda_n
+  =
+  \frac{n^2+n-2+2\nu}{n^2+n+1-\nu},
+\end{equation}
+\begin{equation}
+  K_\mathrm{pre}^{(n)}
+  =
+  \frac{P_\mathrm{iap}}{R_\mathrm{eq}}(n-1)(n+2),
+\end{equation}
+and
+\begin{equation}
+  m_\mathrm{eff}^{(n)}
+  =
+  \rho_w h + \frac{\rho_f R_\mathrm{eq}}{n}.
+\end{equation}
 
-Because the oblate surface has position-dependent curvature, different modes
-``sample'' the geometry differently: the meridional and circumferential
-curvatures at the pole differ from those at the equator.  As a result, the
-frequency ratios $f_n / f_m$ \emph{do} depend on the aspect ratio~$a/c$,
-breaking the confounding seen in the sphere model.
+Equation~\eqref{eq:flexural_forward} is the model analysed throughout this
+paper.  It is important to emphasise again that it is \emph{not} a full oblate
+spheroidal shell theory: explicit aspect-ratio terms do not appear.  The model
+depends on $(a,c)$ only through $R_\mathrm{eq}$.
 
-\subsection{The inverse problem}
+\subsection{Inverse problem}
 
-Let $\boldsymbol{\theta} = (a, c, E)^\top$ denote the parameter vector and
-$\mathbf{f}(\boldsymbol{\theta}) = (f_2, f_3, \dots, f_{N+1})^\top$ the
-vector of flexural frequencies.  The inverse problem is: given
-observed~$\mathbf{f}^\text{obs}$, find~$\boldsymbol{\hat\theta}$ such that
-$\mathbf{f}(\boldsymbol{\hat\theta}) \approx \mathbf{f}^\text{obs}$.
+Let
+\begin{equation}
+  \boldsymbol{\theta} = (a,c,E)^\top
+\end{equation}
+denote the parameter vector to be estimated, and let
+\begin{equation}
+  \mathbf{f}(\boldsymbol{\theta})
+  =
+  \bigl(f_2(\boldsymbol{\theta}),
+        f_3(\boldsymbol{\theta}),
+        \ldots,
+        f_N(\boldsymbol{\theta})\bigr)^\top
+\end{equation}
+be the vector of measured flexural frequencies.  The inverse problem is to
+recover $\boldsymbol{\theta}$ from the observation
+$\mathbf{f}^\mathrm{obs}$.
 
-This is well-posed if the Jacobian
-\begin{equation}\label{eq:jacobian}
+Local identifiability is controlled by the Jacobian
+\begin{equation}\label{eq:jacobian_raw}
   J_{ij}
-  = \frac{\partial f_i}{\partial \theta_j}
+  =
+  \frac{\partial f_i}{\partial \theta_j},
 \end{equation}
-has full column rank.  We quantify identifiability via the condition
-number~$\kappa(\mathbf{J})$ and the Fisher information matrix.
+where $i$ indexes the measured mode and $j$ indexes the unknown parameter.
+Because the raw Jacobian mixes units of \si{Hz/m} and \si{Hz/Pa}, its condition
+number is not a meaningful identifiability metric by itself.  We therefore use
+the dimensionless scaled Jacobian
+\begin{equation}\label{eq:jacobian_scaled}
+  J_s[i,j]
+  =
+  \left(\frac{\partial f_i}{\partial \theta_j}\right)
+  \left(\frac{\theta_j}{f_i}\right),
+\end{equation}
+which measures fractional frequency change per fractional parameter change.
+
+The singular values $\sigma_1 \ge \sigma_2 \ge \sigma_3$ of $\mathbf{J}_s$
+quantify the observable directions in parameter space, and the corresponding
+condition number
+\begin{equation}\label{eq:kappa}
+  \kappa(\mathbf{J}_s)
+  =
+  \frac{\sigma_{\max}}{\sigma_{\min}}
+\end{equation}
+measures the worst-case amplification of small frequency errors into parameter
+errors.  A large $\kappa$ indicates a nearly unobservable parameter
+combination; a divergent $\kappa$ indicates rank deficiency.
+
+\subsection{Fisher information and Cram\'er--Rao bounds}
+
+Assume independent fractional frequency errors with standard deviation
+$\epsilon_\mathrm{noise}$.  In dimensionless form, the Fisher information
+matrix becomes
+\begin{equation}\label{eq:fisher}
+  \mathbf{F}
+  =
+  \frac{1}{\epsilon_\mathrm{noise}^2}\,
+  \mathbf{J}_s^\top \mathbf{J}_s.
+\end{equation}
+Equivalently, one may interpret \eqref{eq:fisher} as the Fisher matrix of the
+whitened residuals.  The Cram\'er--Rao lower bound then states that the
+covariance of any unbiased local estimator satisfies
+\begin{equation}\label{eq:crlb}
+  \mathrm{Cov}(\hat{\boldsymbol{\theta}})
+  \succeq
+  \mathbf{F}^{-1},
+\end{equation}
+with the diagonal entries of $\mathbf{F}^{-1}$ giving the minimum achievable
+variances under the assumed noise model.
+
+This framework does not prove global uniqueness.  It answers a more practical
+question: at a chosen operating point, do the measured resonances contain enough
+independent information to recover $(a,c,E)$ with tolerable sensitivity to
+noise?  That is the question addressed in the next sections.
