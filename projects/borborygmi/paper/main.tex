@@ -7,6 +7,7 @@
 \usepackage{booktabs}
 \usepackage[pdfencoding=auto,psdextra]{hyperref}
 \usepackage{lineno}
+\graphicspath{{figures/}}
 \hypersetup{pageanchor=false}
 \AtBeginDocument{\hypersetup{pageanchor=true}}
 \sisetup{per-mode=symbol, group-separator={,}}
@@ -386,13 +387,9 @@ sound band.  At $V = \SI{1}{\milli\litre}$, the constrained frequency is
 \SIrange{143}{527}{\hertz}, but systematically overpredicts relative to the
 constrained model because it neglects wall inertia.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{3cm}
-  \textbf{Figure placeholder}: All five resonance modes vs.\ gas pocket volume.
-  Grey shading indicates the clinical borborygmi band
-  (\SIrange{200}{550}{\hertz}).
-  \vspace{3cm}}}
+\includegraphics[width=\linewidth]{fig_borborygmi_frequency_vs_volume.pdf}
 \caption{Predicted borborygmi frequencies as a function of gas pocket volume
   for the five resonance mechanisms.  Shaded region: clinically observed
   healthy bowel sound range~\protect\cite{Ching2012}.  The constrained bubble
@@ -417,12 +414,9 @@ confirming it as the primary mechanism for healthy bowel sounds.  The
 Helmholtz mode consistently lies above both bubble modes, becoming relevant
 only when narrow constrictions are present.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{3cm}
-  \textbf{Figure placeholder}: Mode transition map on log--log axes.
-  Background shading indicates the dominant mode at each volume.
-  \vspace{3cm}}}
+\includegraphics[width=\linewidth]{fig_mode_transition_map.pdf}
 \caption{Mode transition map showing the five resonance mechanisms across
   gas pocket volumes from \SIrange{0.1}{100}{\milli\litre}.  The clinical
   band (\SIrange{200}{550}{\hertz}) is indicated by horizontal dashed lines.

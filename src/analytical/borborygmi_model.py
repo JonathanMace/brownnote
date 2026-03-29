@@ -57,7 +57,7 @@ R_LUMEN = 0.015           # resting lumen radius [m] (small intestine ~3 cm dia)
 NECK_DIAMETER_DEFAULT = 0.005   # constriction diameter [m]
 NECK_LENGTH_DEFAULT = 0.010     # constriction length [m]
 
-FIG_DIR = Path(__file__).resolve().parents[2] / "projects" / "borborygmi" / "figures"
+FIG_DIR = Path(__file__).resolve().parents[2] / "projects" / "borborygmi" / "paper" / "figures"
 
 
 # ---------------------------------------------------------------------------
@@ -530,7 +530,7 @@ def mode_transition_map(
 # Figure generation
 # ---------------------------------------------------------------------------
 
-def fig_frequency_vs_volume(save: bool = True):
+def fig_frequency_vs_volume(save: bool = True, save_dir: Path | str | None = None):
     """Publication-quality figure: predicted borborygmi frequency vs gas pocket volume.
 
     Four-panel figure:
@@ -648,11 +648,12 @@ def fig_frequency_vs_volume(save: bool = True):
     fig.tight_layout(rect=[0, 0, 1, 0.94])
 
     if save:
-        FIG_DIR.mkdir(parents=True, exist_ok=True)
+        out = FIG_DIR if save_dir is None else Path(save_dir)
+        out.mkdir(parents=True, exist_ok=True)
         for ext in ("png", "pdf"):
-            fig.savefig(FIG_DIR / f"fig_borborygmi_frequency_vs_volume.{ext}",
+            fig.savefig(out / f"fig_borborygmi_frequency_vs_volume.{ext}",
                         dpi=300, bbox_inches="tight")
-        print(f"Saved figure to {FIG_DIR}")
+        print(f"Saved figure to {out}")
 
     return fig
 
@@ -682,7 +683,7 @@ def plot_mode_transition_map(
     save : bool
         If True, save PNG and PDF.
     save_dir : Path or str, optional
-        Output directory.  Default: ``paper2-gas-pockets/figures/``.
+        Output directory.  Default: ``projects/borborygmi/paper/figures/``.
     **kwargs
         Passed to :func:`mode_transition_map`.
 
@@ -792,10 +793,7 @@ def plot_mode_transition_map(
     fig.tight_layout()
 
     if save:
-        if save_dir is None:
-            out = Path(__file__).resolve().parents[2] / "paper2-gas-pockets" / "figures"
-        else:
-            out = Path(save_dir)
+        out = FIG_DIR if save_dir is None else Path(save_dir)
         out.mkdir(parents=True, exist_ok=True)
         for ext in ("png", "pdf"):
             fig.savefig(
