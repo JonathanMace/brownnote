@@ -1,5 +1,7 @@
 ---
-applyTo: "tests/**"
+name: write-tests
+description: >
+  Guide for writing pytest tests for the browntone analytical suite. Use when adding, editing, or reviewing tests under tests/.
 ---
 
 # Test Instructions
@@ -9,7 +11,7 @@ You are writing or editing tests for the browntone analytical suite.
 ## Framework
 - pytest (globally installed)
 - Run: `python -m pytest tests/ -v` from repo root
-- Currently 118 tests, all passing. **Do not break existing tests.**
+- Currently 198 tests, all passing. **Do not break existing tests.**
 
 ## Conventions
 - Test files: `test_<module_name>.py`

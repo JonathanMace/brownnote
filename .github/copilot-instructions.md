@@ -83,12 +83,12 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 183 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 198 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
-- Agent definitions, skills, path-specific instructions, docs, and README must
-  reflect the actual state of the project. If you add a module, update the docs.
+- Agent definitions, skills, docs, and README must reflect the actual state of the
+  project. If you add a module, update the docs.
 - `copilot-instructions.md` is updated after every major iteration.
 - Run the lab-meeting agent periodically to audit freshness.
 - Run the consistency-auditor before every paper compilation.
@@ -229,6 +229,12 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `generate-figures` | Create publication-quality figures |
 | `critique-results` | Invoke 3-reviewer panel on recent work |
 | `write-paper` | Drafting guide with JSV conventions |
+| `write-analysis` | Guide for analytical model code in `src/analytical/` |
+| `write-tests` | Guide for pytest tests in `tests/` |
+| `write-research-log` | Guide for research log entries in `docs/research-logs/` |
+| `write-agent` | Guide for authoring Browntone custom agents |
+| `write-skill` | Guide for authoring Copilot CLI skills |
+| `write-instructions` | Guide for authoring `copilot-instructions.md` and related configuration |
 | `git-checkpoint` | Branch→PR→merge→cleanup workflow |
 | `jmace-writing-style` | Jonathan Mace's active, confident style |
 | `mace-writing-style` | Brian Mace's JSV structural conventions |
@@ -237,14 +243,6 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`,
 `run-simulation.md`, and `submit-paper.md`.
 
-### Path-Specific Instructions (`.github/instructions/`)
-| File | Applies To |
-|------|-----------|
-| `paper.instructions.md` | `paper/**` — JSV style, canonical params, compilation |
-| `analysis.instructions.md` | `src/analytical/**` — code conventions, model API |
-| `research-logs.instructions.md` | `docs/research-logs/**` — log format, PDF snapshots |
-| `tests.instructions.md` | `tests/**` — pytest conventions, expected values |
-| `agents.instructions.md` | `.github/agents/**` — agent definition standards |
 
 ## Publication Pipeline
 

@@ -1,3 +1,9 @@
+---
+name: write-agent
+description: >
+  Guide for writing effective Copilot CLI agent definitions. Use when creating, reviewing, or restructuring Browntone custom agents under .github/agents/.
+---
+
 # Agent Definition Authoring Guide
 
 Practical reference for AI agents writing or reviewing custom agent definitions in this repository. This guide is written primarily for **GitHub Copilot custom agents** and secondarily for **Claude Code**, **Cursor**, and similar agentic coding tools.
@@ -37,7 +43,7 @@ Use the right customization surface.
 
 | Surface | Best for | Loaded when | Typical contents |
 |---|---|---|---|
-| `.github/copilot-instructions.md` or `.github/instructions/*.instructions.md` | Always-on repository or path-specific guidance | Every relevant interaction | coding standards, canonical parameters, file-specific rules |
+| `.github/copilot-instructions.md` plus supporting skills | Always-on repository guidance plus reusable workflow support | Every relevant interaction or when a skill is invoked | coding standards, canonical parameters, file-specific rules, validation workflows |
 | `.github/agents/*.agent.md` | Persistent specialist persona with tool restrictions and workflow | When selected explicitly or inferred from description | role, trigger conditions, SOP, output format, constraints |
 | `.github/skills/<skill>/SKILL.md` | Reusable task workflow, scripts, or supporting resources | On demand / when invoked | step-by-step procedures, helper assets, validation steps |
 
@@ -180,9 +186,9 @@ For **GitHub Copilot portability**, prefer the documented aliases:
 
 Avoid repository-local or runtime-specific tool spellings unless you have a strong reason.
 
-### Important Browntone note: public docs vs current repo template
+### Important Browntone note: public docs vs current repo house style
 
-The active repository instruction template for `.github/agents/**` still demonstrates `read_file`, `edit_file`, `powershell`, `grep`, and `glob`.[^repo-agent-instr] Public Copilot documentation, by contrast, documents portable aliases such as `read`, `edit`, `search`, `execute`, `agent`, and `web`.[^gh-config]
+The Browntone house style captured in this skill still discusses the older `read_file`, `edit_file`, `powershell`, `grep`, and `glob` examples alongside newer portable aliases.[^repo-agent-instr] Public Copilot documentation, by contrast, documents portable aliases such as `read`, `edit`, `search`, `execute`, `agent`, and `web`.[^gh-config]
 
 So the practical rule in this repository is:
 
@@ -220,7 +226,7 @@ If the agent should only be callable by another orchestrator, consider `user-inv
 
 ## 8. Recommended body structure for Browntone agents
 
-The repository’s path-specific instructions for `.github/agents/**` already define the intended structure: frontmatter plus body sections for **Identity**, **When to Activate**, **Standard Operating Procedure**, **Output Format**, **Constraints**, and **Quality Gates**.[^repo-agent-instr]
+The Browntone house style for agent definitions already uses frontmatter plus body sections for **Identity**, **When to Activate**, **Standard Operating Procedure**, **Output Format**, **Constraints**, and **Quality Gates**.[^repo-agent-instr]
 
 Treat that as the local house style.
 
@@ -454,9 +460,9 @@ Across the current set, the most commonly missing ingredients are:
 4. **Portable tool names**
 5. **A clear output skeleton in some implementation-facing agents**
 
-### 12.4 One more local gotcha: the instruction file’s “existing agents” list is incomplete
+### 12.4 One more local gotcha: the house-style “existing agents” list is incomplete
 
-The repository instruction file for `.github/agents/**` contains an “Existing Agents (avoid duplication)” list, but it does **not** enumerate every agent currently present in `.github/agents/`. Treat that list as helpful but incomplete; always inspect the actual directory before concluding a role is free.[^repo-agent-instr]
+The Browntone house-style guidance includes an “Existing Agents (avoid duplication)” list, but it does **not** enumerate every agent currently present in `.github/agents/`. Treat that list as helpful but incomplete; always inspect the actual directory before concluding a role is free.[^repo-agent-instr]
 
 ### 12.5 Other active agents worth noting
 
@@ -670,7 +676,7 @@ For new agent files in this repository:
 [^claude-subagents]: Claude Code Docs, “Subagents.” https://code.claude.com/docs/en/sub-agents
 [^cursor-rules]: Cursor Docs, “Rules.” https://cursor.com/docs/rules
 [^gh-blog]: GitHub Blog, “How to write a great agents.md: Lessons from over 2,500 repositories.” https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/
-[^repo-agent-instr]: Repository instruction file `.github/agents/**` loaded in Copilot context for this repository.
+[^repo-agent-instr]: Browntone house style for agent definitions now lives in `.github/skills/write-agent/SKILL.md` after the instruction files were converted to skills.
 [^chief-of-staff]: `.github/agents/chief-of-staff.agent.md:1-220`
 [^paper-writer]: `.github/agents/paper-writer.agent.md:1-83`
 [^consistency-auditor]: `.github/agents/consistency-auditor.agent.md:1-88`
@@ -686,3 +692,78 @@ For new agent files in this repository:
 [^simulation-engineer]: `.github/agents/simulation-engineer.agent.md`
 [^lab-meeting]: `.github/agents/lab-meeting.agent.md`
 [^provocateur]: `.github/agents/provocateur.agent.md`
+
+
+\
+        ## Browntone-Specific Conventions
+
+The following repository-specific guidance is merged from the former
+`.github/instructions/agents.instructions.md` file so agent authors still have
+access to the local house rules in one place.
+
+        ### Required Structure
+
+        Every Browntone agent `.agent.md` file should include:
+
+        1. YAML frontmatter with at least:
+           ```yaml
+           ---
+           name: agent-name
+           description: >
+             One paragraph describing the agent's expertise and when to use it.
+             Be specific about trigger conditions.
+           tools:
+             - read
+             - edit
+             - search
+             - execute
+           ---
+           ```
+        2. Body sections for:
+           - **Identity**
+           - **When to Activate**
+           - **Standard Operating Procedure**
+           - **Output Format**
+           - **Constraints**
+           - **Quality Gates**
+
+        ### Key Principles
+
+        - **Self-contained**: put reusable logic in the agent file so the orchestrator
+          only needs task-specific context.
+        - **Idempotent**: running the same agent twice on the same input should produce
+          consistent behaviour.
+        - **Scoped**: agents work in their assigned worktree only and should not modify
+          unrelated files.
+        - **Quantitative**: outputs must include specific numbers, not vague assessments.
+
+        ### Browntone Git Workflow
+
+        Every agent that produces file changes should encode the current lab workflow:
+
+        ```text
+        1. Work in an assigned worktree: C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>
+        2. Commit: git add -A && git commit -m "[category] Description\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+        3. Push: git push origin <branch>
+        4. Create a PR: gh pr create --base main --head <branch> ...
+        5. Merge its own PR: gh pr merge <N> --merge
+        6. Delete the remote branch after merge: git push origin --delete <branch>
+        ```
+
+        If you mention merge-conflict handling, instruct the agent to rebase onto
+        `origin/main`, resolve conflicts promptly, force-push with lease, then merge.
+
+        ### Existing Agents (avoid duplication)
+
+        Before inventing a new role, check the current Browntone roster:
+
+        - `reviewer-a`: Domain expert (novelty, significance, narrative)
+        - `reviewer-b`: Cynical gatekeeper (fatal flaws, consistency)
+        - `reviewer-c`: Methodologist (runs code, checks numbers)
+        - `consistency-auditor`: Parameter and number consistency checker
+        - `lab-meeting`: Holistic audit plus documentation freshness
+        - `research-scout`: New research topic discovery
+        - `provocateur`: Devil's advocate
+        - `communications`: Outreach and public-facing summaries
+        - `bibliographer`: Literature tracking and citation radar
+        - `lab-manager`: Infrastructure maintenance
