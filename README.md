@@ -59,6 +59,7 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
 **Status:** Early draft (scaffolded)  
 **Target venue:** *JSV or JASA*  
+**Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1730_pathway.pdf)  
 **Location:** `paper6-sub-bass/`  
 **Key finding (preliminary):** Airborne acoustic coupling produces tissue displacement ~4 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway.
 
