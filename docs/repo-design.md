@@ -30,8 +30,7 @@ browntone/
 │   ├── experimental/            # Experimental / exploratory code
 │   ├── fem/                     # Finite-element support modules
 │   └── postprocess/             # Shared post-processing helpers
-├── tests/                       # Pytest suite (183 tests)
-└── whisky/                      # Semester-break artefacts and lab miscellany
+└── tests/                       # Pytest suite (203 tests)
 ```
 
 ### Directory Purposes
@@ -78,6 +77,7 @@ The active agent roster in `.github/agents/` is:
 - `lab-meeting`
 - `loving-spouse`
 - `paper-writer`
+- `pop-culture-verifier`
 - `provocateur`
 - `research-scout`
 - `reviewer-a`
@@ -86,7 +86,7 @@ The active agent roster in `.github/agents/` is:
 - `simulation-engineer`
 
 These agents cover operations, literature, writing, numerical analysis, QA, strategy,
-and reviewer simulation.
+reviewer simulation, and non-scientific citation auditing.
 
 ### Skills
 
@@ -101,7 +101,13 @@ Active skill directories in `.github/skills/`:
 - `research-iteration`
 - `run-analysis`
 - `semester-break`
+- `write-agent`
+- `write-analysis`
+- `write-instructions`
 - `write-paper`
+- `write-research-log`
+- `write-skill`
+- `write-tests`
 
 Legacy single-file workflow notes also remain in this folder:
 
@@ -127,7 +133,7 @@ Legacy single-file workflow notes also remain in this folder:
 ## 4. Tests, Outputs, and Tracking
 
 - The main regression command is `python -m pytest tests/ -v`.
-- Current collected test count: **183**.
+- Current collected test count: **203**.
 - LaTeX intermediates are ignored, but PDF outputs are intentionally tracked.
 - `data/meshes/` is no longer part of the working tree; mesh outputs should not be
   recreated there unless the data policy changes.

@@ -39,7 +39,7 @@ vs mechanical (whole-body vibration) coupling.
 - `main` is branch-protected. No direct pushes. ALL changes via PRs.
 - Every agent works in its own **git worktree** on its own **branch**.
 - Agents create their own PRs: `gh pr create --base main --head <branch> ...`
-- Agents **merge their own PRs immediately**: `gh pr merge <N> --squash --delete-branch`
+- Agents **merge their own PRs immediately**: `gh pr merge <N> --merge`
 - Agents **resolve merge conflicts eagerly** while context is fresh. Rebase onto
   main, fix conflicts, force-push, then merge.
 - Every commit includes the trailer:
@@ -82,7 +82,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 198 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 203 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -261,7 +261,7 @@ Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`
 | Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `paper2-gas-pockets/` |
 | Paper 3: Scaling Laws | JSV Short | Under revision (8pp), dim error fixed | `paper3-scaling-laws/` |
 | Bladder Resonance | JSV/J Biomech | Under development, all Reviewer A issues addressed | `projects/bladder-resonance/` |
-| Borborygmi | JASA / Acta Acustica | First draft complete (17pp) | `src/analytical/borborygmi_model.py` |
+| Borborygmi | JASA / Acta Acustica | First draft complete (17pp) | `projects/borborygmi/` |
 
 ## The Academic Calendar
 

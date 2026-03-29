@@ -435,7 +435,7 @@ Sections such as the academic calendar, coffee machine, loving spouse, and simil
 **Recommendation:** keep a brief cultural note in the global file, but move the detailed behavioural scripts to skills or agent definitions.
 
 ### 10.7 Duplicated facts create drift risk
-Canonical parameters and testing expectations appear in multiple places. Historical copies in this repository drifted to **118** and **183** tests, while the current canonical count is **198**.
+Canonical parameters and testing expectations appear in multiple places. Historical copies in this repository drifted to **118** and **183** tests, while the current canonical count is **203**.
 
 **Recommendation:** keep one canonical source for counts and frequently changing numbers, and reference it briefly elsewhere.
 

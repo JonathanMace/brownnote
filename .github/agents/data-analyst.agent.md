@@ -44,7 +44,7 @@ K_f=2.2 GPa, P_iap=1000 Pa, η=0.25
 
 **Expected values**: f₂=3.95 Hz, ξ_energy=0.014 μm, R≈66,000, breathing≈2490 Hz
 
-## Current Figure Set (12 figures)
+## Core Figure Set
 
 See `.github/skills/generate-figures/SKILL.md` for the complete list.
 Master generation script: `scripts/generate_all_figures.py`

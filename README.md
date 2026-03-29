@@ -21,7 +21,7 @@ Can a sufficiently powerful subwoofer ruin your afternoon? We model the human ab
 
 ### Paper 2 — *Gas Pockets*
 **Gas pocket resonance as an alternative acoustic coupling mechanism**  
-**Status:** Submission-ready (~16 pages)  
+**Status:** ACCEPT after internal review; submission-ready (~16 pages)  
 **Target venue:** *JASA Express Letters*  
 **Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-27_1023.pdf)  
 **Key result:** 35-100× more efficient than whole-cavity coupling
@@ -32,7 +32,7 @@ If the whole abdomen will not cooperate, perhaps the gas trapped inside it will.
 **Dimensional analysis predictions across mammalian scales**  
 **Status:** Under revision (8 pages)  
 **Target venue:** *JSV Short Communication*  
-**Latest draft:** [PDF](paper3-scaling-laws/main.pdf)  
+**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_0017.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
 Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
@@ -41,16 +41,16 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 **Resonance of the human urinary bladder**  
 **Status:** Under development (20+ pages)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-27_0910.pdf)  
+**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_0030.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
 Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
 
 ### Paper 5 — *Borborygmi*
 **Multi-mode acoustic model of bowel sounds**  
-**Status:** First draft (17 pages)  
+**Status:** First draft complete (17 pages)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](projects/borborygmi/paper/main.pdf)  
+**Latest draft:** [PDF](projects/borborygmi/paper/drafts/draft_2026-03-29_0004.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
@@ -76,14 +76,16 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **228 commits**, **100 pull requests merged**, **183 tests passing**, **16 custom agents**, **10 reusable skills**, **52+ research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **300 commits**, **117 pull requests merged**, **203 tests passing**, **17 custom agents**, **16 reusable skills**, **57+ research logs**, and about **24 hours of wall-clock interaction time**.  
+
+The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, and `loving-spouse`.
 
 See [docs/ai-assisted-research.md](docs/ai-assisted-research.md) for the workflow notes.
 
 ## Quick Start
 
 ```bash
-pip install -e .
+pip install -e .[dev]
 python -m pytest tests/ -v
 ```
 
@@ -136,7 +138,7 @@ browntone/
 
 ## Tests
 
-The analytical suite currently has **183 passing tests**. From the repository root:
+The analytical suite currently has **203 passing tests**. From the repository root:
 
 ```bash
 python -m pytest tests/ -v

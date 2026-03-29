@@ -11,7 +11,7 @@ You are writing or editing tests for the browntone analytical suite.
 ## Framework
 - pytest (globally installed)
 - Run: `python -m pytest tests/ -v` from repo root
-- Currently 198 tests, all passing. **Do not break existing tests.**
+- Currently 203 tests, all passing. **Do not break existing tests.**
 
 ## Conventions
 - Test files: `test_<module_name>.py`

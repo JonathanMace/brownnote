@@ -79,7 +79,7 @@ bt-modal = "browntone.fem.modal_analysis:main"
 bt-mesh = "browntone.mesh.abdominal_cavity:main"
 
 [project.urls]
-Repository = "https://github.com/your-username/browntone"
+Repository = "https://github.com/JonathanMace/brownnote"
 
 [tool.setuptools.packages.find]
 where = ["src"]
