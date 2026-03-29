@@ -50,20 +50,27 @@ using geometry consistent with their reported dimensions
   \end{tabular}
 \end{table}
 
-For the ripe fruit, the model predicts
-$f_2 \approx \SIrange{83}{132}{\hertz}$, which overlaps well with
-Yamamoto's reported range of \SIrange{80}{120}{\hertz}.  The small
-ripe prediction (\SI{132}{\hertz}) exceeds their upper bound,
-likely because the smallest fruits in their study had somewhat softer
-rinds than the canonical \SI{50}{\mega\pascal} assumed here.
-For the unripe fruit, the model predicts
-$f_2 \approx \SIrange{155}{245}{\hertz}$; Yamamoto reported unripe
-frequencies up to approximately \SI{180}{\hertz}, suggesting that
-the very stiffest rinds in our parameter set
-($E = \SI{150}{\mega\pascal}$) may overestimate the unripe modulus
-for the cultivars studied in 1980.  Nevertheless, the overall
-scaling---larger fruit yields lower frequency, stiffer rind yields
-higher frequency---is captured quantitatively.
+Three of six predicted frequencies fall within the reported
+experimental range (Table~\ref{tab:yamamoto}): the medium and large
+ripe cases (\SI{102}{\hertz} and \SI{83}{\hertz}, both within
+\SIrange{80}{120}{\hertz}) and the large unripe case
+(\SI{155}{\hertz}, within \SIrange{120}{180}{\hertz}).  The remaining
+three predictions systematically overshoot the upper experimental
+bound---the small ripe prediction (\SI{132}{\hertz}) exceeds the
+ripe range by \SI{12}{\hertz}, while the small and medium unripe
+predictions (\SI{245}{\hertz} and \SI{192}{\hertz}) exceed the
+unripe range by \SI{65}{\hertz} and \SI{12}{\hertz}, respectively.
+The mean absolute deviation from the nearest experimental bound is
+\SI{15}{\hertz} across all six cases (zero for points within range).
+The systematic overprediction for smaller and stiffer fruit suggests
+that the canonical moduli assumed here
+($E = \SI{150}{\mega\pascal}$ for unripe) may exceed the actual
+values for the cultivars studied by Yamamoto et al.\ in 1980, or
+that the equivalent-sphere approximation introduces a size-dependent
+bias.  Nevertheless, the qualitative scaling---larger fruit yields
+lower frequency, stiffer rind yields higher frequency---is captured
+correctly, and the model reproduces the correct order of magnitude
+across the full size--ripeness matrix.
 
 \subsubsection{Sadrnia et al.\ (2008): vibration-based quality prediction in watermelon}
 
