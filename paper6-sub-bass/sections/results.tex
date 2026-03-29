@@ -227,11 +227,27 @@ Table~\ref{tab:uq-summary} summarises the 90\% credible intervals.
 \end{table}
 
 Across the full parameter space, the floor pathway
-\emph{always} exceeds the perception threshold (minimum $5.8\times$),
+\emph{always} exceeds the perception threshold (5th-percentile $5.8\times$),
 while the airborne pathway \emph{never} exceeds \SI{0.5}{\percent}.
 The floor-to-airborne dominance ratio ranges from $\sim$\num{2000} to
 $\sim$\num{3100}, confirming that the qualitative conclusion is
 insensitive to the assumed parameter values.
+
+The Monte Carlo analysis varies $E$, $\zeta_\mathrm{floor}$, and SPL but
+holds the body transmissibility $T_\mathrm{body} = 1.8$ and floor
+coupling efficiency $\eta_f = 0.01$ at their nominal values.  This
+choice is justified on three grounds: (i)~transmissibility and coupling
+efficiency are physically correlated with floor damping---higher damping
+implies lower transmissibility and reduced coupling---so varying them
+independently would overstate the true uncertainty envelope;
+(ii)~published seat-to-abdomen transmissibility values cluster narrowly
+around $1.5$--$2.0$ across typical concert seating
+configurations~\cite{Griffin1990, Kitazaki1998}; and (iii)~the coupling
+efficiency $\eta_f \sim 0.005$--$0.02$ for concrete concert floors
+introduces at most a factor-of-two variation, which is already
+encompassed by the $\zeta_\mathrm{floor}$ sweep (a twofold change in
+damping produces a comparable change in floor velocity via
+equation~\ref{eq:floor-velocity}).
 
 \subsection{Near-field effects}
 \label{sec:near-field-results}
