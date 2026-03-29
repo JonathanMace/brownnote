@@ -1,15 +1,15 @@
 \section{Results}
 \label{sec:results}
 
-\subsection{Flexural Mode Frequencies Across Fill Volume}
+\subsection{The U-Shaped Frequency--Volume Relationship}
 \label{sec:freq_vs_volume}
 
 Figure~\ref{fig:freq_vs_volume} presents the $n = 2$ and $n = 3$ flexural
 mode frequencies across the physiological fill range
-(\SIrange{50}{500}{\milli\litre}).  The $n = 2$ frequency follows a
-distinctive U-shaped curve, with a minimum of \SI{13.5}{\hertz}
-at \SI{222}{\milli\litre} and higher values at both extremes of the fill
-range.
+(\SIrange{50}{500}{\milli\litre}).  The central finding of this study is
+that the $n = 2$ frequency follows a distinctive U-shaped curve, with a
+minimum of \SI{13.5}{\hertz} at \SI{222}{\milli\litre} and higher values
+at both extremes of the fill range.
 
 The physical mechanism behind this non-monotonic behaviour is a competition
 between two opposing effects:
@@ -35,7 +35,7 @@ individuals.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{../figures/fig_bladder_frequency_vs_volume.png}
+  \includegraphics[width=\textwidth]{figures/fig_bladder_frequency_vs_volume.pdf}
   \caption{Bladder resonant properties across fill volume.  (a)~Flexural
   mode frequencies $f_2$ and $f_3$, with the ISO~2631 pelvic resonance band
   (\SIrange{4}{8}{\hertz}) shown for reference.  (b)~Geometry: equivalent
@@ -251,15 +251,81 @@ transmissibility) of the bladder.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{../figures/fig_bladder_coupling.png}
+  \includegraphics[width=\textwidth]{figures/fig_bladder_coupling.pdf}
   \caption{Coupling pathways to the bladder at \SI{300}{\milli\litre} fill.
   (a)~Airborne $(ka)^2$ coupling (blue) vs mechanical seat--pelvis--bladder
   coupling (red), with the $n{=}2$ resonance frequency marked.  (b)~Ratio of
   mechanical to airborne coupling (mechanical advantage), reaching
   $\sim$$10^4$--$10^6$ across the frequency range.  (c)~Components of the
   mechanical pathway: seat-to-pelvis transmissibility (green) and bladder
-  modal amplification (magenta).}
+  modal amplification (purple).}
   \label{fig:coupling}
+\end{figure}
+
+
+\subsection{Sub-Resonant Forced Response}
+\label{sec:sub_resonant}
+
+The predicted bladder resonance range (\SIrange{13.5}{17.1}{\hertz}) sits
+above the ISO~2631 peak pelvic transmissibility band
+(\SIrange{4}{8}{\hertz}).  Occupational WBV therefore excites the bladder
+primarily in the sub-resonant regime, where the frequency ratio
+$r = f/f_2 \approx 0.35$--$0.59$.  This section quantifies the forced
+response in this practically important regime.
+
+Figure~\ref{fig:sub_resonant}(a) shows the combined
+transmissibility--amplification product $T(f) \times H(f)$ at
+\SI{300}{\milli\litre} fill.  The pelvic transmissibility $T(f)$ peaks near
+\SI{5.5}{\hertz} with $T \approx 2.3$, while the bladder modal
+amplification $H(f)$ peaks at $f_2 = \SI{13.9}{\hertz}$ with
+$H = Q = 2.5$.  These two peaks do not coincide.  The product $T \times H$
+exhibits a broad plateau across \SIrange{4}{10}{\hertz} at values of
+1.5--2.5, then a secondary peak near $f_2$.
+
+\paragraph{Displacement quantification.}
+At the ISO~2631 daily exposure action value
+($a_\mathrm{seat} = \SI{0.5}{\metre\per\second\squared}$ RMS), the seat
+displacement amplitude at \SI{6}{\hertz} is
+$y_\mathrm{seat} = a/(2\pi f)^2 \approx \SI{350}{\micro\metre}$.  Through
+the pelvic skeleton at peak transmissibility ($T \approx 2.0$), this delivers
+$y_\mathrm{pelvis} \approx \SI{700}{\micro\metre}$ to the bladder base.
+The sub-resonant bladder amplification at $r \approx 0.43$ is
+$H \approx 1.15$, giving a wall displacement of approximately
+\SI{160}{\micro\metre}.
+
+By contrast, at the bladder resonance frequency
+($f_2 = \SI{13.9}{\hertz}$ at \SI{300}{\milli\litre}), the seat
+displacement is only $\sim$\SI{65}{\micro\metre} and pelvic
+transmissibility has rolled off to $T \approx 0.29$.  Even with the full
+resonant amplification ($Q = 2.5$), the resulting wall displacement is
+approximately \SI{47}{\micro\metre}---\emph{less than one-third} of the
+sub-resonant value.
+
+Figure~\ref{fig:sub_resonant}(c) confirms this relationship across all fill
+volumes: the sub-resonant displacement at \SI{6}{\hertz} exceeds the
+at-resonance displacement throughout the physiological fill range.  The
+sub-resonant regime is therefore the practically dominant response mechanism
+for occupational WBV, not because the bladder resonates at these frequencies,
+but because the seat displacement amplitude and pelvic amplification are both
+much larger in this band.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig_sub_resonant_response.pdf}
+  \caption{Sub-resonant forced response analysis.
+  (a)~Combined seat-to-pelvis transmissibility $T$ (green dashed), bladder
+  modal amplification $H$ (purple dashed), and their product $T \times H$
+  (red solid) vs frequency at \SI{300}{\milli\litre} fill.  The ISO~2631
+  pelvic band (\SIrange{4}{8}{\hertz}, shaded) and $f_2$ (vertical dotted)
+  are marked.
+  (b)~Resulting wall displacement vs frequency at the ISO~2631 action value
+  ($a = \SI{0.5}{\metre\per\second\squared}$), showing that the sub-resonant
+  band produces larger displacements than the resonance peak.
+  (c)~Wall displacement vs fill volume comparing the sub-resonant response
+  at \SI{6}{\hertz} (red) with the at-resonance response at $f_2$ (blue
+  dashed).  The sub-resonant displacement is 2--4$\times$ larger at all fill
+  states.}
+  \label{fig:sub_resonant}
 \end{figure}
 
 

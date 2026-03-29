@@ -1,11 +1,12 @@
 """Tests for bladder model M1 (decomposition) and M4 (sensitivity) functions."""
-import sys, os, numpy as np, pytest
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+import numpy as np
+import pytest
+
 from bladder_model import (
     bladder_radius_from_volume, bladder_wall_thickness, bladder_elastic_modulus,
     intravesical_pressure, make_bladder_model, stiffness_decomposition,
     decomposition_vs_volume, find_f2_minimum, sensitivity_analysis,
-    minimum_shift_analysis, SENSITIVITY_PARAMS,
+    minimum_shift_analysis, sub_resonant_analysis, SENSITIVITY_PARAMS,
 )
 
 class TestStiffnessDecomposition:
@@ -138,3 +139,29 @@ class TestGeometry:
     def test_make_model_overrides(self):
         model = make_bladder_model(300, E=1e6, nu=0.40)
         assert model.E == 1e6 and model.nu == 0.40
+
+
+class TestSubResonantAnalysis:
+    def test_returns_all_keys(self):
+        data = sub_resonant_analysis(volumes=np.linspace(100, 400, 5))
+        for k in ['volumes', 'f_wbv', 'f2', 'y_wall_wbv_um', 'y_wall_res_um',
+                   'TH_wbv', 'TH_res', 'T_wbv']:
+            assert k in data
+
+    def test_displacements_positive(self):
+        data = sub_resonant_analysis(volumes=np.linspace(100, 400, 5))
+        assert np.all(data['y_wall_wbv_um'] > 0)
+        assert np.all(data['y_wall_res_um'] > 0)
+
+    def test_sub_resonant_exceeds_resonant(self):
+        """Sub-resonant displacement should exceed at-resonance displacement."""
+        data = sub_resonant_analysis(volumes=np.linspace(150, 500, 20))
+        # For most fill volumes, sub-resonant should be larger
+        ratio = data['y_wall_wbv_um'] / data['y_wall_res_um']
+        assert np.median(ratio) > 1.0
+
+    def test_correct_volume_count(self):
+        vols = np.linspace(50, 500, 7)
+        data = sub_resonant_analysis(volumes=vols)
+        assert len(data['f2']) == 7
+        assert len(data['y_wall_wbv_um']) == 7

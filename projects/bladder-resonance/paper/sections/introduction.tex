@@ -1,6 +1,16 @@
 \section{Introduction}
 \label{sec:introduction}
 
+The natural frequencies of fluid-filled biological shells depend on geometry,
+wall stiffness, and internal pressure---all of which vary with the organ's
+functional state.  The urinary bladder is a compelling example: as it fills
+from \SI{50}{\milli\litre} to \SI{500}{\milli\litre}, the radius doubles,
+the wall thins by a factor of three, the detrusor muscle stiffens five-fold,
+and the intravesical pressure rises six-fold.  These competing effects---some
+lowering and others raising the natural frequency---produce a rich,
+non-monotonic frequency--volume relationship that has not previously been
+characterised from first principles.
+
 Whole-body vibration (WBV) at \SIrange{4}{16}{\hertz} is a recognised
 occupational hazard for vehicle operators.  ISO~2631-1~\cite{iso2631}
 documents peak pelvic transmissibility at \SIrange{4}{8}{\hertz}, and
@@ -10,8 +20,7 @@ frequency---among truck drivers, bus operators, and forklift
 operators~\cite{Seidel1986,Griffin1990}.  Despite this well-established
 empirical record, no first-principles mechanical model of the urinary bladder
 exists to explain \emph{why} whole-body vibration should preferentially excite
-this organ, or to predict the frequency range at which the bladder wall is most
-susceptible to vibratory loading.
+this organ, or to predict how its susceptibility changes with fill state.
 
 The urinary bladder is, from a structural dynamics perspective, a remarkably
 clean example of a fluid-filled viscoelastic shell.  The detrusor muscle forms
@@ -59,16 +68,18 @@ modelled as a spherical shell (the near-spherical approximation is
 appropriate here, unlike the distinctly oblate abdominal cavity) with
 fill-dependent radius, wall thickness, elastic modulus, and internal pressure.
 We compute the flexural mode frequencies across the physiological fill range
-(\SIrange{50}{500}{\milli\litre}), identify the minimum-frequency fill state,
+(\SIrange{50}{500}{\milli\litre}), characterise the non-monotonic
+frequency--volume relationship, identify the minimum-frequency fill state,
+quantify the sub-resonant forced response at occupational WBV frequencies,
 and compare airborne acoustic coupling with mechanical WBV coupling to the
 bladder wall.
 
 The remainder of this paper is organised as follows.
 Section~\ref{sec:theory} presents the mathematical formulation, including the
 fill-dependent parameter model and the modal analysis.
-Section~\ref{sec:results} reports flexural mode frequencies across fill
-volume, identifies the frequency minimum, and quantifies the coupling
-disparity between mechanical and airborne excitation.
-Section~\ref{sec:discussion} discusses clinical implications, limitations,
-and comparison with the abdominal cavity model.
+Section~\ref{sec:results} reports the fill-dependent frequency behaviour,
+elevates the sub-resonant forced response analysis, and quantifies coupling
+pathways.
+Section~\ref{sec:discussion} separates model predictions from biological
+hypotheses and clinical conjecture.
 Section~\ref{sec:conclusion} draws conclusions.

@@ -41,7 +41,7 @@
 
 \begin{frontmatter}
 
-\title{Resonant Frequencies of the Human Urinary Bladder:\\ A Fluid-Filled Viscoelastic Shell Model}
+\title{Fill-Dependent Resonance of the Human Urinary Bladder:\\ Competing Geometry and Stiffening in a Fluid-Filled Viscoelastic Shell}
 
 \author[msr]{Jonathan Mace\corref{cor1}}
 \cortext[cor1]{Corresponding author}
@@ -64,39 +64,44 @@
 }
 
 \begin{highlights}
-\item Bladder $n{=}2$ flexural mode spans \SIrange{13.5}{17.1}{\hertz} for fills above \SI{150}{\milli\litre}
-\item Frequency minimum of \SI{13.5}{\hertz} at \SI{222}{\milli\litre} from competing geometry and stiffening
+\item Bladder $n{=}2$ frequency follows a U-shaped curve: minimum \SI{13.5}{\hertz} at \SI{222}{\milli\litre}
+\item Minimum arises from competition between geometric softening and detrusor strain-stiffening
+\item Sub-resonant forced response at \SIrange{4}{8}{\hertz} produces larger wall displacements than resonance
 \item Mechanical (WBV) coupling exceeds airborne acoustic coupling by $\sim$6,400$\times$
 \item Same analytical framework as abdominal cavity model, with fill-dependent parameters
-\item Results consistent with occupational reports of vibration-induced urinary urgency
 \end{highlights}
 
 \begin{abstract}
-Occupational exposure to whole-body vibration (WBV) is associated with
-increased urinary urgency among vehicle operators, yet no first-principles
-model of bladder resonance exists to explain this observation.  We model the
-human urinary bladder as a fluid-filled viscoelastic spherical shell whose
-geometry, wall stiffness, and internal pressure vary with fill volume
-(\SIrange{50}{500}{\milli\litre}).  The framework---an adaptation of an oblate
-spheroidal shell model developed for the abdominal cavity---predicts that the
-fundamental flexural mode ($n = 2$) spans \SIrange{13.5}{17.1}{\hertz} for
-fill volumes above \SI{150}{\milli\litre}, with a minimum of
-\SI{13.5}{\hertz} at \SI{222}{\milli\litre}.  This minimum arises
-from the competition between
-increasing radius (which lowers frequency) and strain-stiffening of the
-detrusor muscle (which raises it).  Coupling analysis shows that mechanical
-vibration transmitted through the pelvis is approximately $6{,}400$ times
-more effective than airborne sound at exciting bladder wall modes, consistent
-with the dominance of the WBV pathway reported in the epidemiological
-literature.  The predicted frequency range sits above the ISO~2631 peak
-pelvic transmissibility band (\SIrange{4}{8}{\hertz}) but within the broader
-WBV-affected spectrum, suggesting a forced sub-resonant response mechanism
-rather than direct resonance.
+We model the human urinary bladder as a fluid-filled viscoelastic spherical
+shell whose geometry, wall stiffness, and internal pressure vary with fill
+volume (\SIrange{50}{500}{\milli\litre}).  The fundamental flexural mode
+($n = 2$) follows a distinctive U-shaped frequency--volume curve: as the
+bladder fills, increasing radius and wall thinning lower the frequency
+(geometric softening), while exponential strain-stiffening of the detrusor
+muscle raises it.  These competing effects produce a minimum of
+\SI{13.5}{\hertz} at \SI{222}{\milli\litre}---a fill state corresponding
+to early urge sensation---with higher frequencies at both extremes of the
+physiological range (\SIrange{13.5}{17.1}{\hertz} for fills above
+\SI{150}{\milli\litre}).  Because the predicted resonance lies above the
+ISO~2631 peak pelvic transmissibility band (\SIrange{4}{8}{\hertz}), the
+bladder responds to occupational whole-body vibration (WBV) primarily as a
+forced sub-resonant oscillator.  At \SI{6}{\hertz}, where pelvic
+amplification is maximal, the sub-resonant wall displacement
+($\sim$\SI{160}{\micro\metre}) exceeds the at-resonance displacement
+($\sim$\SI{47}{\micro\metre}) because the larger pelvic transmissibility
+more than compensates for the reduced modal amplification.  Coupling analysis
+confirms that mechanical vibration transmitted through the pelvis is
+approximately $6{,}400$ times more effective than airborne sound at exciting
+bladder wall modes, consistent with the epidemiological dominance of the
+WBV pathway.  These results provide a first-principles physical basis for
+the fill-dependent resonance behaviour of the bladder wall and identify
+the sub-resonant forced response as the regime most relevant to occupational
+WBV exposure.
 \end{abstract}
 
 \begin{keyword}
-bladder resonance \sep fluid-filled shell \sep whole-body vibration \sep
-viscoelastic shell \sep urinary urgency \sep ISO~2631
+bladder resonance \sep fill-dependent frequency \sep fluid-filled shell \sep
+whole-body vibration \sep sub-resonant response \sep viscoelastic shell
 \end{keyword}
 
 \end{frontmatter}
@@ -146,10 +151,6 @@ Writing -- Review \& Editing.
 \textbf{Brian R.\ Mace}: Methodology, Validation, Writing -- Review \& Editing.
 
 \section*{Acknowledgements}
-The authors are grateful to colleagues who, upon learning the subject
-of this paper, invariably offered personal anecdotes in lieu of
-constructive feedback.  We did not use their data.
-
 This work was assisted by GitHub Copilot CLI (Claude Opus 4), which
 contributed to analytical model development, figure generation, and manuscript
 drafting, in accordance with Elsevier's guidelines on the use of AI-assisted
