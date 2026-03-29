@@ -82,7 +82,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 203 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 206 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -183,7 +183,7 @@ model = AbdominalModelV2(
 )
 freqs = flexural_mode_frequencies_v2(model, n_max=5)
 disp = self_consistent_displacement(model, mode_n=2, spl_db=120)  # → dict with xi_energy_um
-mech = mechanical_coupling_analysis(model)  # → coupling ratio ~66,000
+mech = compare_airborne_vs_mechanical(model)  # → coupling ratio ~66,000
 ```
 
 ```python

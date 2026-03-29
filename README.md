@@ -76,9 +76,9 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **300 commits**, **117 pull requests merged**, **203 tests passing**, **17 custom agents**, **16 reusable skills**, **57+ research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **340 commits**, **167 pull requests merged**, **206 tests passing**, **20 custom agents**, **16 reusable skills**, **72+ research logs**, and about **24 hours of wall-clock interaction time**.  
 
-The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, and `loving-spouse`.
+The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
 See [docs/ai-assisted-research.md](docs/ai-assisted-research.md) for the workflow notes.
 
@@ -98,7 +98,7 @@ from src.analytical.natural_frequency_v2 import (
     flexural_mode_frequencies_v2,
 )
 from src.analytical.energy_budget import self_consistent_displacement
-from src.analytical.mechanical_coupling import mechanical_coupling_analysis
+from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
 
 model = AbdominalModelV2(
     E=0.1e6,
@@ -115,7 +115,7 @@ model = AbdominalModelV2(
 
 freqs = flexural_mode_frequencies_v2(model, n_max=5)
 disp = self_consistent_displacement(model, mode_n=2, spl_db=120)
-mech = mechanical_coupling_analysis(model)
+mech = compare_airborne_vs_mechanical(model)
 ```
 
 If you only want one number, ask the model for the n=2 flexural mode. If you want the whole joke explained properly, read Paper 1.
@@ -138,7 +138,7 @@ browntone/
 
 ## Tests
 
-The analytical suite currently has **203 passing tests**. From the repository root:
+The analytical suite currently has **206 passing tests**. From the repository root:
 
 ```bash
 python -m pytest tests/ -v
