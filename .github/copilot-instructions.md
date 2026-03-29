@@ -82,7 +82,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 333 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 377 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -267,7 +267,7 @@ Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`
 | Paper 5: Borborygmi | JASA | ACCEPTED | `projects/borborygmi/` |
 | Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `paper6-sub-bass/` |
 | Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft (16pp) | `projects/watermelon-ripeness/` |
-| Paper 8: Kac Identifiability | Inverse Problems | Planned | `projects/kac-identifiability/` |
+| Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `projects/kac-identifiability/` |
 
 ## The Academic Calendar
 
