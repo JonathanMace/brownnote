@@ -23,7 +23,7 @@ Can a sufficiently powerful subwoofer ruin your afternoon? We model the human ab
 **Gas pocket resonance as an alternative acoustic coupling mechanism**  
 **Status:** ACCEPT after internal review; submission-ready (18 pages)  
 **Target venue:** *Journal of the Acoustical Society of America*  
-**Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-29_1538_submission.pdf)  
+**Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-29_1627.pdf)  
 **Key result:** 35-100× more efficient than whole-cavity coupling
 
 If the whole abdomen will not cooperate, perhaps the gas trapped inside it will. We model intestinal gas pockets as tissue-constrained bubbles and show they couple to airborne sound 35–100× more efficiently than the cavity itself — enough, at extreme SPL, to activate mechanosensitive ion channels in nearby tissue.
@@ -32,7 +32,7 @@ If the whole abdomen will not cooperate, perhaps the gas trapped inside it will.
 **Dimensional analysis predictions across mammalian scales**  
 **Status:** Under revision (8 pages)  
 **Target venue:** *JSV Short Communication*  
-**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_1556.pdf)  
+**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_1627.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
 Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
