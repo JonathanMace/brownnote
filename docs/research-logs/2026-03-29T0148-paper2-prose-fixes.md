@@ -2,7 +2,7 @@
 
 **Author**: Opus
 **Branch**: p2-prose-fix
-**PR**: pending
+**PR**: #148
 
 ## Summary
 Applied Reviewer C's post-fix corrections to the Paper 2 gas-pocket manuscript and aligned the analytical code comments with the paper where parameter labels had drifted. The update removes stale pre-PR-129 frequency prose, corrects the Monte Carlo displacement and log-normal confidence-interval summaries, clarifies the \(f_0/f_M\) range for clinically relevant volumes, and relabels \(P_0\) consistently as atmospheric pressure.
@@ -26,5 +26,4 @@ Applied Reviewer C's post-fix corrections to the Paper 2 gas-pocket manuscript a
 - MINOR: The rounded analytical 95\% interval from the seeded Monte Carlo sample is \(\SIrange{55.5}{719.3}{\milli\litre}\), so the manuscript now uses the parameter-consistent rounded values \(\SIrange{56}{715}{\milli\litre}\).
 
 ## Next Steps
-- Create the PR for `p2-prose-fix`, then update this log with the PR number if desired before merge.
-- Merge once CI is satisfied, as the manuscript prose, code comments, tests, and compiled snapshot are now mutually consistent for the reviewed items.
+- Merge PR #148 once CI is satisfied, as the manuscript prose, code comments, tests, and compiled snapshot are now mutually consistent for the reviewed items.
