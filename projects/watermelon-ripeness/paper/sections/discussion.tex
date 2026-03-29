@@ -8,19 +8,32 @@
 \label{sec:physical_interp}
 
 The monotonic decrease in tap-tone frequency during ripening
-(Fig.~\ref{fig:ripening_sweep}) has a straightforward physical
+has a straightforward physical
 explanation.  As the fruit ripens, enzymatic degradation of pectin in the
 rind cell walls reduces the effective Young's modulus
 $E_{\mathrm{rind}}$.  Since $f_2 \propto \sqrt{E_{\mathrm{rind}}}$
-(Eq.~\ref{eq:f2_squared}), the frequency falls.  This is precisely the
-information that experienced shoppers extract unconsciously: a lower pitch
-signals a softer, riper melon.
+(Eq.~\ref{eq:f2_squared}), the frequency falls.  For the canonical
+Crimson Sweet geometry, $f_2$ drops from \SI{203}{\hertz} (unripe,
+$E = \SI{200}{\mega\pascal}$) to \SI{46}{\hertz} (overripe,
+$E = \SI{15}{\mega\pascal}$)---a factor of~4.4 reduction.  This is
+precisely the information that experienced shoppers extract
+unconsciously: a lower pitch signals a softer, riper melon.
 
 The frequency shift is not driven by changes in fluid density or fruit
 geometry, both of which vary by less than $\SI{5}{\percent}$ over the
 ripening window.  The Sobol analysis (\S\ref{sec:sobol}) confirms that
-$E_{\mathrm{rind}}$ is the dominant parameter, contributing more than
-half the total variance.
+$E_{\mathrm{rind}}$ is the dominant parameter, contributing
+\SI{54}{\percent} of the total variance ($S_T = 0.54$), whereas flesh
+density and turgor pressure contribute less than \SI{0.1}{\percent}
+each.  The secondary contribution of fruit size ($S_T = 0.38$) is
+relevant across cultivars but approximately constant during ripening of
+a single fruit.
+
+The quality factor also decreases during ripening---from $Q = 12.5$
+(unripe) to $Q = 5.0$ (overripe)---as the loss tangent increases from
+0.08 to~0.20 with pectin degradation.  In practice, this means that an
+overripe melon produces a duller, more heavily damped thump, consistent
+with the subjective experience of a `mushy' sound.
 
 % =============================================================================
 % 5.2  Connection to biomedical FSI
@@ -32,17 +45,30 @@ The shell model employed here is structurally identical to the one
 developed in our companion papers for the human abdomen.  Both systems
 are fluid-filled, viscoelastic, oblate spheroidal shells; only the
 material parameters differ.  The watermelon rind
-($E \sim \SIrange{2}{20}{\mega\pascal}$) is considerably stiffer than
-the abdominal wall ($E \sim \SI{0.1}{\mega\pascal}$), which shifts the
-eigenfrequencies upward by roughly an order of magnitude---from
-$\sim\SI{4}{\hertz}$ for the abdomen to $\sim\SIrange{80}{200}{\hertz}$
-for watermelons.
+($E \sim \SIrange{15}{200}{\mega\pascal}$) is two to three orders of
+magnitude stiffer than the abdominal wall
+($E \sim \SI{0.1}{\mega\pascal}$), which shifts the eigenfrequencies
+upward accordingly---from $\sim\SI{4}{\hertz}$ for the abdomen to
+$\SIrange{46}{203}{\hertz}$ for watermelons.
 
 This connection is more than a mathematical curiosity.  It demonstrates
 that a single theoretical framework, rooted in Lamb's classical shell
 theory~\cite{lamb1882} and the Junger--Feit fluid-loading
 formulation~\cite{Junger1986}, can span applications from clinical
-diagnostics to agricultural quality assessment.
+diagnostics to agricultural quality assessment.  The dimensionless
+ripeness parameter~$\Pi_{\mathrm{ripe}}$ is the fruit-domain analogue
+of the dimensionless coupling parameters derived in the abdominal
+studies, and the inversion formula (Eq.~\ref{eq:inversion}) is the
+direct counterpart of elastography-style inversions used in medical
+ultrasound~\cite{parker2011imaging}.
+
+The proportionality constant $\alpha = \SI{161.5}{\hertz\squared
+\per\mega\pascal}$ for the canonical watermelon geometry provides a
+convenient benchmark.  The corresponding constant for the human abdomen
+is approximately $\SI{155}{\hertz\squared\per\mega\pascal}$ when
+expressed in the same dimensionless form---a striking similarity that
+reflects the common underlying physics despite very different material
+scales.
 
 % =============================================================================
 % 5.3  Limitations
@@ -61,7 +87,10 @@ Several simplifications deserve acknowledgement:
   \item \textbf{Uniform thickness.}  Real rinds are thicker near the
     blossom end.  Thickness variation could be incorporated via
     perturbation methods but is unlikely to shift $f_2$ by more than
-    $\sim\SI{10}{\percent}$.
+    $\sim\SI{10}{\percent}$, based on the $\pm\SI{10}{\percent}$
+    sensitivity analysis in \S\ref{sec:geom_uncertainty}
+    ($\Delta f_2 \in [\SI{-4.6}{\percent}, \SI{+4.4}{\percent}]$ for
+    $\pm\SI{10}{\percent}$ uniform thickness perturbation).
 
   \item \textbf{Flesh as inviscid fluid.}  Watermelon flesh has finite
     shear strength.  At the frequencies of interest
@@ -69,10 +98,19 @@ Several simplifications deserve acknowledgement:
     fluid-like regime ($\omega \tau \ll 1$, where $\tau$ is the
     viscoelastic relaxation time), so this approximation is reasonable.
 
-  \item \textbf{Turgor pressure.}  We neglect internal turgor pressure,
-    which stiffens the shell.  For ripe fruit with degraded cell
-    walls, this is appropriate; for very unripe fruit, turgor may
-    contribute a correction of order $\SI{10}{\percent}$.
+  \item \textbf{Turgor pressure.}  We neglect internal turgor pressure
+    effects on the eigenfrequency in the inversion.  The Sobol analysis
+    confirms that $P_{\mathrm{int}}$ contributes less than
+    \SI{0.1}{\percent} of the total variance in $f_2$, validating this
+    simplification.  For very unripe fruit with intact cell walls,
+    turgor may contribute a correction of order $\SI{10}{\percent}$,
+    but this falls within the geometric uncertainty band.
+
+  \item \textbf{Experimental validation.}  The model predictions are
+    compared with published data (\S\ref{sec:published_data}) but have
+    not yet been validated against purpose-designed experiments with
+    controlled geometry and material characterisation.  Such validation
+    is a priority for future work.
 \end{itemize}
 
 % =============================================================================
@@ -89,8 +127,46 @@ approximate fruit dimensions (obtainable from a photograph).  The
 dimensionless ripeness parameter $\Pi_{\mathrm{ripe}}$ then maps the
 result onto a cultivar-independent ripeness scale.
 
+The Monte Carlo uncertainty analysis (\S\ref{sec:geom_uncertainty})
+demonstrates that even with $\pm\SI{10}{\percent}$ geometric
+measurement error, the inverted modulus has a coefficient of variation
+of only \SI{13.5}{\percent} ($\SI{95}{\percent}$ CI:
+$[\SI{38.5}{\mega\pascal}, \SI{64.1}{\mega\pascal}]$ for a true value
+of \SI{50}{\mega\pascal}).  This uncertainty is well within the
+factor-of-four modulus difference between ripeness categories
+(Table~\ref{tab:forward_results}), confirming that reliable ripeness
+classification is achievable even with imprecise geometry.
+
 This approach offers several advantages over existing non-destructive
 methods (near-infrared spectroscopy, impact testing with accelerometers):
 it requires no specialised hardware, is non-contact (or nearly so---one
 need only tap), and provides a physics-based rather than purely
-statistical estimate of internal quality.
+statistical estimate of internal quality.  The Sobol analysis further
+shows that the parameters most difficult to measure \emph{in situ}
+(flesh density, Poisson's ratio, turgor pressure) are precisely those
+to which the tap-tone is least sensitive, a fortuitous alignment that
+makes the method practically robust.
+
+% =============================================================================
+% 5.5  Generality of the framework
+% =============================================================================
+\subsection{Generality of the shell--fluid framework}
+\label{sec:generality}
+
+The model is not fruit-specific.  Any fluid-filled biological structure
+that can be approximated as an oblate spheroidal shell falls within its
+scope.  Candidate applications include other cucurbits (cantaloupe,
+honeydew, pumpkin), drupes (coconut), and even non-biological systems
+such as pressurised tanks and sporting goods.  The multi-cultivar
+comparison (\S\ref{sec:cultivar}) demonstrates that cultivar-specific
+geometry is easily accommodated by adjusting three parameters ($a$, $c$,
+$h$), and the dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
+provides a natural framework for cross-species normalisation.
+
+The collapse of $\Pi_{\mathrm{ripe}}$ to within
+\SI{3.3}{\percent} across four geometrically distinct watermelon
+cultivars (Table~\ref{tab:Pi_ripe}) suggests that extension to other
+fruit species requires only measurement of the species-specific
+$\mathcal{G}_2(\nu, \zeta)$, which is determined entirely by the
+geometry and Poisson's ratio.  This positions the framework as a
+\emph{unified theory of percussive produce assessment}.

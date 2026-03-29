@@ -24,9 +24,37 @@ The rind is treated as a thin, isotropic, viscoelastic shell with Young's
 modulus $E_{\mathrm{rind}}$, Poisson's ratio $\nu$, density
 $\rho_w$, and structural loss factor $\eta$.  The enclosed flesh is
 modelled as an inviscid, nearly incompressible fluid with density
-$\rho_f$ and bulk modulus $K_f$.
+$\rho_f$ and bulk modulus $K_f$.  The canonical parameter values used
+throughout this study are given in Table~\ref{tab:canonical}.
 
-% TODO: Add schematic figure
+\begin{table}[t]
+  \centering
+  \caption{Canonical parameters for the Crimson Sweet watermelon at
+    optimal ripeness.  Values are drawn from Sadrnia et
+    al.~\cite{Sadrnia2006}, De Belie et al.~\cite{DeBelieetal2000},
+    and established tissue mechanics compilations.}
+  \label{tab:canonical}
+  \begin{tabular}{llcc}
+    \toprule
+    Parameter & Symbol & Value & Unit \\
+    \midrule
+    Semi-major axis    & $a$                 & 0.158 & m \\
+    Semi-minor axis    & $c$                 & 0.123 & m \\
+    Aspect ratio       & $\zeta = c/a$       & 0.78  & --- \\
+    Equivalent radius  & $R_{\mathrm{eq}}$   & 0.145 & m \\
+    Rind thickness     & $h$                 & 15    & mm \\
+    Rind modulus (ripe) & $E_{\mathrm{rind}}$ & 50   & MPa \\
+    Poisson's ratio    & $\nu$               & 0.40  & --- \\
+    Rind density       & $\rho_w$            & 1050  & kg/m$^3$ \\
+    Flesh density      & $\rho_f$            & 950   & kg/m$^3$ \\
+    Flesh bulk modulus  & $K_f$              & 2.2   & GPa \\
+    Turgor pressure     & $P_{\mathrm{int}}$ & 500   & Pa \\
+    Loss tangent        & $\eta$             & 0.15  & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% Uncomment when figure is generated:
 % \begin{figure}[t]
 %   \centering
 %   \includegraphics[width=0.6\textwidth]{figures/fig_watermelon_schematic}
@@ -45,7 +73,7 @@ $\rho_f$ and bulk modulus $K_f$.
 \label{sec:eigenfreq}
 
 For a thin spheroidal shell filled with fluid, the natural frequency of
-the $n$	h flexural mode may be written in the general form
+the $n$th flexural mode may be written in the general form
 \begin{equation}
   f_n = \frac{1}{2\pi}
   \sqrt{
@@ -79,7 +107,47 @@ $E_{\mathrm{rind}}$ when turgor pressure is negligible.  This linearity
 is the foundation of the closed-form inversion developed in
 \S\ref{sec:inversion}.
 
-% TODO: Derive explicit G_2 for oblate spheroid from Rayleigh-Ritz
+The geometric factor~$\mathcal{G}_2$ incorporates both bending and
+membrane stiffness contributions.  In the Rayleigh--Ritz framework
+\cite{Leissa1973, Soedel2004}, the modal stiffness for mode~$n$ of a
+thin shell decomposes as
+\begin{equation}
+  K_n = K_{\mathrm{bend}} + K_{\mathrm{memb}} + K_{\mathrm{prestress}},
+  \label{eq:stiffness_decomp}
+\end{equation}
+where the bending stiffness scales as
+\begin{equation}
+  K_{\mathrm{bend}} = \frac{n(n-1)(n+2)^2\, h^3}
+    {12(1-\nu^2)\, R_{\mathrm{eq}}^4}\, E_{\mathrm{rind}},
+  \label{eq:K_bend}
+\end{equation}
+the membrane stiffness scales as
+\begin{equation}
+  K_{\mathrm{memb}} = \frac{h}{R_{\mathrm{eq}}^2}\,
+    \frac{n^2 + n - 2 + 2\nu}{n^2 + n + 1 - \nu}\,
+    E_{\mathrm{rind}},
+  \label{eq:K_memb}
+\end{equation}
+and the pre-stress stiffness (from internal turgor pressure~$P_{\mathrm{int}}$) is
+\begin{equation}
+  K_{\mathrm{prestress}} = \frac{P_{\mathrm{int}}}{R_{\mathrm{eq}}}
+    \, (n-1)(n+2).
+  \label{eq:K_prestress}
+\end{equation}
+
+For the canonical ripe watermelon ($n = 2$, $h = \SI{15}{\milli\metre}$,
+$R_{\mathrm{eq}} = \SI{0.145}{\metre}$), the bending and membrane
+terms both scale linearly with~$E_{\mathrm{rind}}$, whereas the
+pre-stress term is independent of~$E$.  This separation underpins the
+linearity $f_2^2 = \alpha E_{\mathrm{rind}}$, where the proportionality
+constant is
+\begin{equation}
+  \alpha = \frac{h\,\mathcal{G}_2(\nu, \zeta)}
+    {4\pi^2\, \rho_{\mathrm{eff}}\, R_{\mathrm{eq}}^3}
+    = \SI{161.5}{\hertz\squared\per\mega\pascal}
+  \label{eq:alpha_value}
+\end{equation}
+for the canonical geometry.
 
 % =============================================================================
 % 2.3  Closed-form inversion
@@ -97,7 +165,25 @@ Rearranging Eq.~\eqref{eq:f2_squared} for $E_{\mathrm{rind}}$ gives
 \end{equation}
 Thus a single measurement of the tap-tone frequency~$f_2$, combined
 with knowledge (or estimation) of the fruit geometry and flesh density,
-yields the rind elastic modulus directly.
+yields the rind elastic modulus directly.  No iterative solver or
+optimisation is required.
+
+More explicitly, the inversion takes the form
+\begin{equation}
+  E_{\mathrm{rind}} = \frac{\omega^2\, m_{\mathrm{eff}}
+    - K_{\mathrm{prestress}}}
+    {K_{\mathrm{bend}}^{(0)} + K_{\mathrm{memb}}^{(0)}},
+  \label{eq:inversion_explicit}
+\end{equation}
+where $\omega = 2\pi f_2$, $m_{\mathrm{eff}} = \rho_w h + \rho_f
+R_{\mathrm{eq}} / n$ is the effective mass per unit area including
+fluid loading, and $K_{\mathrm{bend}}^{(0)}$ and
+$K_{\mathrm{memb}}^{(0)}$ are the geometric pre-factors of
+$E_{\mathrm{rind}}$ in Eqs.~\eqref{eq:K_bend}--\eqref{eq:K_memb}.
+Equation~\eqref{eq:inversion_explicit} is algebraically exact: the
+round-trip error $|E_{\mathrm{inv}} - E_{\mathrm{true}}| /
+E_{\mathrm{true}}$ is less than \SI{0.01}{\percent} for all ripeness
+stages tested (\S\ref{sec:forward}).
 
 % =============================================================================
 % 2.4  Dimensional analysis and the ripeness parameter
@@ -108,13 +194,24 @@ yields the rind elastic modulus directly.
 To collapse predictions across cultivars, we define the dimensionless
 ripeness parameter
 \begin{equation}
-  \Pi_{\mathrm{ripe}} = \frac{f_2^2\, \rho_f\, R_{\mathrm{eq}}^3}
-    {E_{\mathrm{rind}}\, h},
+  \Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}}
+    \sqrt{\frac{\rho_{\mathrm{eff}}}{E_{\mathrm{rind}}}},
   \label{eq:Pi_ripe}
 \end{equation}
-which, from Eq.~\eqref{eq:f2_squared}, should equal a universal constant
-$\mathcal{G}_2(\nu, \zeta) / (4\pi^2)$ for geometrically similar
-fruits.  Deviations from the master curve indicate cultivar-specific
-geometry or constitutive effects.
+where $\rho_{\mathrm{eff}} = \rho_w h / R_{\mathrm{eq}} + \rho_f$.
+From Eq.~\eqref{eq:f2_squared}, this parameter evaluates to a universal
+constant
+\begin{equation}
+  \Pi_{\mathrm{ripe}} = \frac{1}{2\pi}
+    \sqrt{h\, \mathcal{G}_2(\nu, \zeta) / R_{\mathrm{eq}}^3}
+  \label{eq:Pi_ripe_universal}
+\end{equation}
+for geometrically similar fruits.  Deviations from the master curve
+indicate cultivar-specific geometry or constitutive effects.
 
-% TODO: Tabulate canonical parameters for each cultivar
+For the four cultivars considered in this study (Crimson Sweet, Sugar
+Baby, Charleston Gray, and Seedless Tri-X~313),
+$\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ (CoV~$= \SI{3.3}{\percent}$;
+see Table~\ref{tab:Pi_ripe} in \S\ref{sec:universal_curve}).  This
+tight collapse confirms that the dimensionless parameter effectively
+normalises out the dominant cultivar-specific geometric variation.

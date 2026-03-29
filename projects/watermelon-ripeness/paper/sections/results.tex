@@ -7,24 +7,75 @@
 \subsection{Forward model: tap-tone frequency predictions}
 \label{sec:forward}
 
-% TODO: Compute f_2 for canonical watermelon parameters
-% Typical ranges:
-%   a ~ 0.12--0.18 m, zeta ~ 0.55--0.90
-%   h ~ 8--15 mm
-%   E_rind ~ 2--20 MPa (ripe to unripe)
-%   rho_f ~ 1020--1060 kg/m^3
-%   rho_w ~ 1050--1150 kg/m^3
+We evaluate the forward model for the canonical Crimson Sweet geometry
+($a = \SI{0.158}{\metre}$, $c = \SI{0.123}{\metre}$,
+$R_{\mathrm{eq}} = \SI{0.1453}{\metre}$) at four ripeness stages
+spanning the full maturation trajectory.  The parameters and predicted
+tap-tone frequencies are summarised in Table~\ref{tab:forward_results}.
 
-% TODO: Add figure
+\begin{table}[t]
+  \centering
+  \caption{Forward model predictions of the $n = 2$ flexural mode
+    frequency~$f_2$ for the canonical Crimson Sweet watermelon at four
+    ripeness stages.  The rind modulus~$E_{\mathrm{rind}}$, rind
+    thickness~$h$, loss tangent~$\eta$, and flesh density~$\rho_f$ vary
+    with ripening; all other parameters are held at their canonical values.}
+  \label{tab:forward_results}
+  \begin{tabular}{lcccccc}
+    \toprule
+    Stage & $E_{\mathrm{rind}}$ [MPa] & $h$ [mm] & $\eta$ &
+      $f_2$ [Hz] & $Q$ & $f_{\mathrm{d}}$ [Hz] \\
+    \midrule
+    Unripe   & 200 & 20 & 0.08 & 203.2 & 12.5 & 203.0 \\
+    Turning  & 120 & 17 & 0.11 & 146.7 &  9.1 & 146.5 \\
+    Ripe     &  50 & 15 & 0.15 &  89.9 &  6.7 &  89.6 \\
+    Overripe &  15 & 13 & 0.20 &  46.4 &  5.0 &  46.2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The tap-tone frequency drops monotonically from $\SI{203.2}{\hertz}$ for
+the unripe fruit to $\SI{46.4}{\hertz}$ for the overripe fruit---a
+factor of~4.4 reduction driven primarily by the decrease in
+$E_{\mathrm{rind}}$ from \SI{200}{\mega\pascal} to
+\SI{15}{\mega\pascal}.  The quality factor~$Q$ also decreases from~12.5
+to~5.0 as the loss tangent rises with pectin degradation, reflecting the
+increasingly lossy mechanical response of the softening rind.
+
+A central prediction of the model is that $f_2^2$ is exactly linear in
+$E_{\mathrm{rind}}$ when turgor pressure is negligible.  We verify this
+by computing $\alpha = f_2^2 / E_{\mathrm{rind}}$ across the full
+modulus range $\SIrange{10}{250}{\mega\pascal}$ for the canonical ripe
+geometry ($h = \SI{15}{\milli\metre}$).  The proportionality constant is
+\begin{equation}
+  \alpha = \SI{161.5 \pm 0.1}{\hertz\squared\per\mega\pascal}
+  \label{eq:alpha}
+\end{equation}
+with a coefficient of variation of \SI{0.07}{\percent}, confirming
+near-perfect linearity.  The residual variation arises from the weak
+turgor pressure contribution ($P_{\mathrm{int}} = \SI{500}{\pascal}$),
+which introduces a small constant offset in the stiffness.  This
+linearity validates the closed-form inversion of
+Eq.~\eqref{eq:inversion}: no iterative solver is required.
+
+We also verify that the inversion is self-consistent.  For each
+ripeness stage, we compute $f_2$ from the forward model and then
+invert the frequency back to $E_{\mathrm{rind}}$.  In all four cases
+the round-trip error is less than $\SI{0.01}{\percent}$, confirming
+that the inversion formula (Eq.~\ref{eq:inversion}) is algebraically
+exact within the model framework.
+
+% Uncomment when figure is generated:
 % \begin{figure}[t]
 %   \centering
 %   \includegraphics[width=0.7\textwidth]{figures/fig_frequency_vs_E}
 %   \caption{Predicted tap-tone frequency~$f_2$ as a function of rind
 %     elastic modulus~$E_{\mathrm{rind}}$ for the canonical watermelon
-%     geometry ($a = \SI{0.15}{\metre}$, $\zeta = 0.7$,
-%     $h = \SI{10}{\milli\metre}$).  The squared frequency is exactly
-%     linear in~$E_{\mathrm{rind}}$, confirming that the inversion
-%     formula~\eqref{eq:inversion} is well-posed.}
+%     geometry ($a = \SI{0.158}{\metre}$, $\zeta = 0.78$,
+%     $h = \SI{15}{\milli\metre}$).  The squared frequency is exactly
+%     linear in~$E_{\mathrm{rind}}$ (inset shows $f_2^2$ vs.\
+%     $E_{\mathrm{rind}}$ with $R^2 > 0.9999$), confirming that the
+%     inversion formula~\eqref{eq:inversion} is well-posed.}
 %   \label{fig:frequency_vs_E}
 % \end{figure}
 
@@ -36,21 +87,93 @@
 
 We perform a variance-based global sensitivity analysis
 \cite{Sobol2001, Saltelli2002} to identify which physical parameters
-most strongly influence the tap-tone frequency.  The input parameters and
-their ranges are summarised in Table~\ref{tab:sobol_inputs}.
+most strongly influence the tap-tone frequency.  Nine input parameters
+are varied simultaneously over physically realistic ranges
+(Table~\ref{tab:sobol_inputs}), and the Saltelli sampling scheme
+generates $N_{\mathrm{base}} = 512$ base samples (total model
+evaluations: $N(2D + 2) = 10{,}240$).
 
-% TODO: Add table of Sobol input ranges
+\begin{table}[t]
+  \centering
+  \caption{Input parameter ranges for the Sobol sensitivity analysis.
+    Ranges span the full variability expected across commercial
+    watermelon cultivars and ripeness stages.}
+  \label{tab:sobol_inputs}
+  \begin{tabular}{llcc}
+    \toprule
+    Parameter & Symbol & Lower bound & Upper bound \\
+    \midrule
+    Rind modulus    & $E_{\mathrm{rind}}$ & \SI{10}{\mega\pascal}   & \SI{250}{\mega\pascal} \\
+    Rind thickness  & $h$                 & \SI{10}{\milli\metre}   & \SI{25}{\milli\metre}  \\
+    Semi-major axis & $a$                 & \SI{0.090}{\metre}      & \SI{0.220}{\metre}     \\
+    Semi-minor axis & $c$                 & \SI{0.080}{\metre}      & \SI{0.160}{\metre}     \\
+    Rind density    & $\rho_w$            & \SI{1000}{\kilogram\per\metre\cubed} & \SI{1100}{\kilogram\per\metre\cubed} \\
+    Flesh density   & $\rho_f$            & \SI{920}{\kilogram\per\metre\cubed}  & \SI{990}{\kilogram\per\metre\cubed}  \\
+    Poisson's ratio & $\nu$               & 0.35  & 0.45  \\
+    Turgor pressure & $P_{\mathrm{int}}$  & \SI{100}{\pascal} & \SI{800}{\pascal} \\
+    Loss tangent    & $\eta$              & 0.05  & 0.25  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-% TODO: Add figure
+Table~\ref{tab:sobol_results} presents the first-order ($S_1$) and
+total-order ($S_T$) Sobol indices.  The rind elastic modulus dominates
+the frequency response with $S_1 = 0.49$ and $S_T = 0.54$, confirming
+that the rind stiffness---and hence ripeness---is the primary
+determinant of the tap-tone frequency.  The semi-major axis~$a$ is the
+second most influential parameter ($S_1 = 0.33$, $S_T = 0.38$),
+reflecting the strong geometric scaling $f_2 \propto R_{\mathrm{eq}}^{-3/2}$.
+Rind thickness ranks third ($S_1 = 0.07$, $S_T = 0.09$), and the
+semi-minor axis fourth ($S_1 = 0.05$, $S_T = 0.06$).
+
+\begin{table}[t]
+  \centering
+  \caption{Sobol sensitivity indices for the tap-tone frequency~$f_2$.
+    Parameters are ranked by total-order index~$S_T$.  The rind
+    modulus~$E_{\mathrm{rind}}$ dominates, contributing over half the
+    total variance.}
+  \label{tab:sobol_results}
+  \begin{tabular}{lcc}
+    \toprule
+    Parameter & $S_1$ & $S_T$ \\
+    \midrule
+    $E_{\mathrm{rind}}$     & 0.494 & 0.542 \\
+    $a$                     & 0.331 & 0.375 \\
+    $h$                     & 0.072 & 0.085 \\
+    $c$                     & 0.047 & 0.059 \\
+    $\nu$                   & 0.001 & 0.001 \\
+    $\rho_f$                & $< 0.001$ & $< 0.001$ \\
+    $\rho_w$                & $< 0.001$ & $< 0.001$ \\
+    $P_{\mathrm{int}}$      & $< 0.001$ & $< 0.001$ \\
+    $\eta$                  & $< 0.001$ & $< 0.001$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The remaining parameters---densities, Poisson's ratio, turgor pressure,
+and loss tangent---contribute negligibly ($S_T < 0.001$ in all cases).
+This has a critical practical implication: the inversion from $f_2$ to
+$E_{\mathrm{rind}}$ is robust to uncertainty in parameters that are
+difficult to measure \emph{in situ} (e.g.\ flesh density, turgor
+pressure).  Only the easily measurable fruit geometry ($a$, $c$, $h$)
+introduces significant model sensitivity beyond the target
+parameter~$E_{\mathrm{rind}}$.
+
+The gap between $S_1$ and $S_T$ for each parameter is small (typically
+$S_T - S_1 < 0.05$), indicating weak parameter interactions.  This
+confirms that the model is well approximated by a sum of univariate
+contributions, consistent with the near-separable form of
+Eq.~\eqref{eq:f2_squared}.
+
+% Uncomment when figure is generated:
 % \begin{figure}[t]
 %   \centering
 %   \includegraphics[width=0.7\textwidth]{figures/fig_sobol_sensitivity}
 %   \caption{First-order ($S_1$) and total-order ($S_T$) Sobol
 %     sensitivity indices for the tap-tone frequency~$f_2$.  The rind
-%     elastic modulus~$E_{\mathrm{rind}}$ dominates, with
-%     $S_T > 0.5$, consistent with the linear dependence identified in
-%     Eq.~\eqref{eq:f2_squared}.  Fruit size ($R_{\mathrm{eq}}$) is
-%     the second most influential parameter.}
+%     elastic modulus~$E_{\mathrm{rind}}$ dominates ($S_T = 0.54$),
+%     followed by the semi-major axis~$a$ ($S_T = 0.38$).  Densities,
+%     Poisson's ratio, turgor pressure, and loss tangent are negligible.}
 %   \label{fig:sobol}
 % \end{figure}
 
@@ -60,16 +183,59 @@ their ranges are summarised in Table~\ref{tab:sobol_inputs}.
 \subsection{Universal ripeness curve}
 \label{sec:universal_curve}
 
-% TODO: Add figure
+The dimensionless ripeness parameter
+$\Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}} \sqrt{\rho_{\mathrm{eff}} / E_{\mathrm{rind}}}$
+(Eq.~\ref{eq:Pi_ripe}) is evaluated for all four cultivars at each of
+the four ripeness stages, yielding 16 data points.
+Table~\ref{tab:Pi_ripe} presents the results.
+
+\begin{table}[t]
+  \centering
+  \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$ for
+    four cultivars across all ripeness stages.  The near-constant value
+    ($\overline{\Pi}_{\mathrm{ripe}} = 0.062$, CoV~$= \SI{3.3}{\percent}$)
+    confirms cultivar-independent collapse.}
+  \label{tab:Pi_ripe}
+  \begin{tabular}{lcccc}
+    \toprule
+    Cultivar & Unripe & Turning & Ripe & Overripe \\
+    \midrule
+    Crimson Sweet      & 0.0601 & 0.0601 & 0.0601 & 0.0601 \\
+    Sugar Baby         & 0.0655 & 0.0655 & 0.0654 & 0.0655 \\
+    Charleston Gray    & 0.0621 & 0.0620 & 0.0620 & 0.0620 \\
+    Seedless (Tri-X 313) & 0.0607 & 0.0607 & 0.0607 & 0.0607 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent
+A key observation emerges: $\Pi_{\mathrm{ripe}}$ is \emph{invariant
+with respect to ripeness stage} for a given cultivar.  This is
+a direct consequence of the linear dependence $f_2^2 \propto
+E_{\mathrm{rind}}$, which cancels the modulus from the numerator and
+denominator of~$\Pi_{\mathrm{ripe}}$.  The residual variation across
+cultivars is small: the mean value is
+$\overline{\Pi}_{\mathrm{ripe}} = 0.062$ with a coefficient of
+variation of~\SI{3.3}{\percent} and a maximum deviation
+of~\SI{5.4}{\percent} from the mean (Sugar Baby).  This variation
+arises solely from differences in the geometric factor
+$\mathcal{G}_2(\nu, \zeta)$ across cultivar aspect ratios.
+
+The practical consequence is that $\Pi_{\mathrm{ripe}}$ serves as a
+\emph{universal calibration constant}: once its value is known for a
+given cultivar geometry, any measured $f_2$ can be directly mapped to
+$E_{\mathrm{rind}}$ without detailed knowledge of the flesh properties
+or internal pressure.
+
+% Uncomment when figure is generated:
 % \begin{figure}[t]
 %   \centering
 %   \includegraphics[width=0.7\textwidth]{figures/fig_universal_curve}
 %   \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
-%     plotted against normalised rind modulus for four cultivars: Crimson
-%     Sweet, Sugar Baby, Charleston Gray, and a seedless hybrid.  All
-%     cultivars collapse onto a single master curve (solid line),
+%     for four cultivars at four ripeness stages.  All 16 points fall
+%     within a narrow band ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$),
 %     confirming that $\Pi_{\mathrm{ripe}}$ is a universal descriptor
-%     of ripeness state.}
+%     of the shell--fluid system geometry.}
 %   \label{fig:universal_curve}
 % \end{figure}
 
@@ -79,17 +245,65 @@ their ranges are summarised in Table~\ref{tab:sobol_inputs}.
 \subsection{Multi-cultivar comparison}
 \label{sec:cultivar}
 
-% TODO: Table comparing predicted f_2 ranges across cultivars
+We compare tap-tone predictions across four commercially important
+cultivars evaluated at the canonical ripe modulus
+($E_{\mathrm{rind}} = \SI{50}{\mega\pascal}$).
+Table~\ref{tab:cultivar} summarises the geometry and predicted
+frequencies.
 
-% TODO: Add figure
+\begin{table}[t]
+  \centering
+  \caption{Multi-cultivar comparison of predicted tap-tone
+    frequency~$f_2$ at the canonical ripe modulus
+    $E_{\mathrm{rind}} = \SI{50}{\mega\pascal}$.  All four cultivars
+    use $\nu = 0.40$, $\rho_w = \SI{1050}{\kilogram\per\metre\cubed}$,
+    $\rho_f = \SI{950}{\kilogram\per\metre\cubed}$.}
+  \label{tab:cultivar}
+  \begin{tabular}{lccccc}
+    \toprule
+    Cultivar & $a$ [m] & $c$ [m] & $h$ [mm] & $R_{\mathrm{eq}}$ [m]
+      & $f_2$ [Hz] \\
+    \midrule
+    Crimson Sweet       & 0.158 & 0.123 & 15 & 0.145 &  89.9 \\
+    Sugar Baby          & 0.100 & 0.095 & 12 & 0.098 & 143.4 \\
+    Charleston Gray     & 0.200 & 0.110 & 18 & 0.164 &  82.0 \\
+    Seedless (Tri-X 313) & 0.140 & 0.120 & 14 & 0.133 &  99.1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The predicted $f_2$ ranges from \SI{82.0}{\hertz} (Charleston Gray,
+the largest cultivar) to \SI{143.4}{\hertz} (Sugar Baby, the smallest),
+illustrating the strong geometric scaling.  Despite this factor-of-1.7
+spread in absolute frequency, all four cultivars yield
+$\Pi_{\mathrm{ripe}}$ values within \SI{5.4}{\percent} of the
+mean~$0.062$ (Table~\ref{tab:Pi_ripe}), demonstrating that the
+dimensionless parameter effectively normalises out cultivar-specific
+geometry.
+
+We also compute the full ripening trajectory for the Crimson Sweet
+cultivar by sweeping the rind modulus from
+$\SI{250}{\mega\pascal}$ (very unripe) to $\SI{10}{\mega\pascal}$
+(very overripe) in 20~stages, simultaneously thinning the rind from
+\SI{22}{\milli\metre} to \SI{12}{\milli\metre} and increasing the
+loss tangent from~0.06 to~0.22.  The tap-tone frequency decreases
+monotonically from \SI{239.3}{\hertz} to \SI{36.4}{\hertz}, spanning
+a factor of~6.6.  The optimal ripeness window
+($E_{\mathrm{rind}} \approx \SIrange{40}{80}{\mega\pascal}$)
+corresponds to $f_2 \approx \SIrange{84}{108}{\hertz}$---a comfortable
+range for human auditory discrimination
+\cite{Yamamoto1980}.
+
+% Uncomment when figure is generated:
 % \begin{figure}[t]
 %   \centering
 %   \includegraphics[width=0.7\textwidth]{figures/fig_ripening_sweep}
 %   \caption{Predicted trajectory of tap-tone frequency~$f_2$ during
 %     ripening for the Crimson Sweet cultivar.  As pectin degradation
-%     reduces $E_{\mathrm{rind}}$ from $\sim\SI{15}{\mega\pascal}$
-%     (unripe) to $\sim\SI{3}{\mega\pascal}$ (over-ripe), the
-%     frequency drops monotonically.  The shaded region indicates the
-%     `optimal ripeness'' window.}
+%     reduces $E_{\mathrm{rind}}$ from \SI{250}{\mega\pascal} (unripe)
+%     to \SI{10}{\mega\pascal} (overripe), the frequency drops
+%     monotonically from \SI{239}{\hertz} to \SI{36}{\hertz}.  The
+%     shaded region indicates the optimal ripeness window
+%     ($f_2 \approx \SIrange{84}{108}{\hertz}$).}
 %   \label{fig:ripening_sweep}
 % \end{figure}
