@@ -1,3 +1,10 @@
+---
+name: compile-paper
+description: >
+  Compile the LaTeX paper, preserve timestamped PDF, and report any errors.
+  Use this after any paper content changes.
+---
+
 # Paper Compiler Skill
 
 ## Description

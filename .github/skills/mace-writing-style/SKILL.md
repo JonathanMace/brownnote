@@ -1,3 +1,10 @@
+---
+name: mace-writing-style
+description: >
+  Writing style guide based on Brian Mace's published works.
+  Use when drafting or editing text to match Brian's voice.
+---
+
 # Mace Academic Writing Style
 
 Apply this style guide when drafting or revising academic papers targeting the Journal of Sound and Vibration (JSV) or similar structural dynamics venues. The guide replicates the voice and conventions of Professor Brian R. Mace (University of Auckland / ISVR Southampton).
