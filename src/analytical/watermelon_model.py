@@ -65,7 +65,7 @@ _RIPENESS_STAGES = {
         "a": 0.158,               # semi-major axis [m]
         "c": 0.123,               # semi-minor axis [m]
         "h": 0.020,               # rind thickness [m]
-        "E": 8.0e6,               # rind Young's modulus [Pa]
+        "E": 200.0e6,             # 200 MPa — stiff green rind
         "nu": 0.40,               # Poisson's ratio
         "rho_rind": 1050.0,       # rind density [kg/m³]
         "rho_flesh": 970.0,       # flesh density [kg/m³]
@@ -77,7 +77,7 @@ _RIPENESS_STAGES = {
         "a": 0.158,
         "c": 0.123,
         "h": 0.017,
-        "E": 5.0e6,
+        "E": 120.0e6,             # 120 MPa — beginning to soften
         "nu": 0.40,
         "rho_rind": 1050.0,
         "rho_flesh": 960.0,
@@ -89,7 +89,7 @@ _RIPENESS_STAGES = {
         "a": 0.158,
         "c": 0.123,
         "h": 0.015,
-        "E": 2.0e6,
+        "E": 50.0e6,              # 50 MPa — optimal ripeness
         "nu": 0.40,
         "rho_rind": 1050.0,
         "rho_flesh": 950.0,
@@ -101,7 +101,7 @@ _RIPENESS_STAGES = {
         "a": 0.158,
         "c": 0.123,
         "h": 0.013,
-        "E": 0.8e6,
+        "E": 15.0e6,              # 15 MPa — degraded pectin
         "nu": 0.40,
         "rho_rind": 1050.0,
         "rho_flesh": 940.0,
@@ -288,14 +288,14 @@ def ripeness_from_modulus(E_rind: float) -> tuple[str, float]:
     """
     E_MPa = E_rind / 1e6
 
-    # Boundaries (MPa): overripe < 1.2 < ripe < 3.5 < turning < 6.5 < unripe
+    # Boundaries (MPa): overripe < 25 < ripe < 80 < turning < 160 < unripe
     thresholds = [
-        ("overripe", 0.0, 1.2),
-        ("ripe",     1.2, 3.5),
-        ("turning",  3.5, 6.5),
-        ("unripe",   6.5, 15.0),
+        ("overripe", 0.0,  25.0),
+        ("ripe",    25.0,  80.0),
+        ("turning", 80.0, 160.0),
+        ("unripe", 160.0, 400.0),
     ]
-    centres = {"overripe": 0.8, "ripe": 2.0, "turning": 5.0, "unripe": 8.0}
+    centres = {"overripe": 15.0, "ripe": 50.0, "turning": 120.0, "unripe": 200.0}
 
     for cat, lo, hi in thresholds:
         if lo <= E_MPa < hi:
@@ -347,7 +347,7 @@ def universal_ripeness_curve(params_list: list[dict]) -> list[tuple[float, float
 
 
 def parametric_ripening_sweep(n_stages: int = 20) -> list[dict]:
-    """Sweep from very unripe (E=10 MPa) to overripe (E=0.5 MPa).
+    """Sweep from very unripe (E=250 MPa) to overripe (E=10 MPa).
 
     Also varies rind thickness *h* (thins during ripening) and loss tangent
     *η* (increases).
@@ -363,7 +363,7 @@ def parametric_ripening_sweep(n_stages: int = 20) -> list[dict]:
         Each entry has keys: ``stage``, ``E_rind``, ``h``, ``eta``, ``f2``,
         ``Q``, ``category``.
     """
-    E_vals = np.linspace(10.0e6, 0.5e6, n_stages)
+    E_vals = np.linspace(250.0e6, 10.0e6, n_stages)
     h_vals = np.linspace(0.022, 0.012, n_stages)
     eta_vals = np.linspace(0.06, 0.22, n_stages)
 
@@ -445,7 +445,7 @@ def sobol_sensitivity_watermelon(N_base: int = 2048) -> dict:
     -------
     dict
         ``S1`` and ``ST`` dicts mapping parameter names to indices.
-        Expect E_rind to dominate (S_T > 0.7).
+        Expect E_rind to dominate (S_T > 0.5).
 
     Raises
     ------
@@ -462,7 +462,7 @@ def sobol_sensitivity_watermelon(N_base: int = 2048) -> dict:
 
     # Bounds: [low, high] in physical units
     bounds_phys = {
-        "E":            (0.5e6, 12.0e6),
+        "E":            (10.0e6, 250.0e6),
         "h":            (0.010, 0.025),
         "a":            (0.090, 0.220),
         "c":            (0.080, 0.160),

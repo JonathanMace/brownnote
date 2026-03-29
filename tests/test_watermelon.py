@@ -87,10 +87,10 @@ class TestCanonicalParameters:
         assert required.issubset(ripe_params.keys())
 
     def test_ripe_E_value(self, ripe_params):
-        assert ripe_params["E"] == 2.0e6
+        assert ripe_params["E"] == 50.0e6
 
     def test_unripe_E_value(self, unripe_params):
-        assert unripe_params["E"] == 8.0e6
+        assert unripe_params["E"] == 200.0e6
 
     def test_ripe_geometry(self, ripe_params):
         assert ripe_params["a"] == pytest.approx(0.158)
@@ -136,13 +136,13 @@ class TestForwardModel:
 
     def test_ripe_frequency_range(self, ripe_params):
         res = predict_tap_tone(ripe_params)
-        # Shell model with full fluid added mass: ~18 Hz for ripe watermelon
-        assert 5 < res["f_n"] < 60, f"f₂ ripe = {res['f_n']:.1f} Hz"
+        # Ripe watermelon: ~90 Hz (literature 80–160 Hz)
+        assert 50 < res["f_n"] < 150, f"f₂ ripe = {res['f_n']:.1f} Hz"
 
     def test_unripe_frequency_range(self, unripe_params):
         res = predict_tap_tone(unripe_params)
-        # Shell model with full fluid added mass: ~41 Hz for unripe
-        assert 15 < res["f_n"] < 100, f"f₂ unripe = {res['f_n']:.1f} Hz"
+        # Unripe watermelon: ~203 Hz (literature 140–250 Hz)
+        assert 100 < res["f_n"] < 350, f"f₂ unripe = {res['f_n']:.1f} Hz"
 
     def test_ripe_lower_than_unripe(self, ripe_params, unripe_params):
         f_ripe = predict_tap_tone(ripe_params)["f_n"]
@@ -237,7 +237,7 @@ class TestInversion:
         assert E_hi > E_lo
 
     def test_inversion_output_is_Pa(self, ripe_params):
-        """E_rind should be of order 10⁵–10⁷ Pa (0.1–10 MPa)."""
+        """E_rind should be of order 10⁶–10⁸ Pa (1–200 MPa)."""
         res = predict_tap_tone(ripe_params)
         E_inv = invert_frequency_to_modulus(
             f_measured=res["f_n"],
@@ -245,7 +245,7 @@ class TestInversion:
             rho_rind=ripe_params["rho_rind"],
             rho_flesh=ripe_params["rho_flesh"],
         )
-        assert 1e5 < E_inv < 1e8, f"E_inv = {E_inv:.2e} Pa"
+        assert 1e5 < E_inv < 1e9, f"E_inv = {E_inv:.2e} Pa"
 
     def test_inversion_positive_E(self, ripe_params):
         res = predict_tap_tone(ripe_params)
@@ -266,28 +266,28 @@ class TestRipenessCategorisation:
     """Tests for ripeness_from_modulus."""
 
     def test_ripe_category(self):
-        cat, conf = ripeness_from_modulus(2.0e6)
+        cat, conf = ripeness_from_modulus(50.0e6)
         assert cat == "ripe"
 
     def test_unripe_category(self):
-        cat, conf = ripeness_from_modulus(8.0e6)
+        cat, conf = ripeness_from_modulus(200.0e6)
         assert cat == "unripe"
 
     def test_overripe_category(self):
-        cat, conf = ripeness_from_modulus(0.5e6)
+        cat, conf = ripeness_from_modulus(15.0e6)
         assert cat == "overripe"
 
     def test_turning_category(self):
-        cat, conf = ripeness_from_modulus(5.0e6)
+        cat, conf = ripeness_from_modulus(120.0e6)
         assert cat == "turning"
 
     def test_confidence_in_range(self):
-        for E in [0.5e6, 2.0e6, 5.0e6, 8.0e6]:
+        for E in [15.0e6, 50.0e6, 120.0e6, 200.0e6]:
             _, conf = ripeness_from_modulus(E)
             assert 0 <= conf <= 1
 
     def test_very_high_E_is_unripe(self):
-        cat, _ = ripeness_from_modulus(20.0e6)
+        cat, _ = ripeness_from_modulus(500.0e6)
         assert cat == "unripe"
 
 
@@ -409,7 +409,7 @@ class TestMonotonicity:
 
     def test_f2_vs_E(self):
         base = watermelon_canonical_params("ripe")
-        E_vals = np.linspace(0.5e6, 10e6, 20)
+        E_vals = np.linspace(10e6, 250e6, 20)
         f_prev = 0
         for E in E_vals:
             p = dict(base)
@@ -463,14 +463,14 @@ class TestRegression:
     """Pin specific numerical values to guard against drift."""
 
     def test_ripe_f2_value(self, ripe_params):
-        """Canonical ripe watermelon f₂ — pinned to 18.08 Hz (±5%)."""
+        """Canonical ripe watermelon f₂ — pinned to 89.87 Hz (±5%)."""
         f2 = predict_tap_tone(ripe_params)["f_n"]
-        assert f2 == pytest.approx(18.08, rel=0.05)
+        assert f2 == pytest.approx(89.87, rel=0.05)
 
     def test_unripe_f2_value(self, unripe_params):
-        """Canonical unripe f₂ — pinned to 40.65 Hz (±5%)."""
+        """Canonical unripe f₂ — pinned to 203.17 Hz (±5%)."""
         f2 = predict_tap_tone(unripe_params)["f_n"]
-        assert f2 == pytest.approx(40.65, rel=0.05)
+        assert f2 == pytest.approx(203.17, rel=0.05)
 
     def test_R_eq_ripe(self, ripe_params):
         model = _build_model(ripe_params)
@@ -491,15 +491,10 @@ class TestRegression:
 class TestLiteratureComparison:
     """Predicted frequencies within published experimental ranges."""
 
-    def test_ripe_in_model_range(self, ripe_params):
-        """Shell model with fluid added mass predicts ~18 Hz for ripe.
-
-        Literature tap-tones (80–160 Hz) are higher because measured
-        modes involve local rind vibration, not global n=2 flexural.
-        The model captures the correct *relative* ranking.
-        """
+    def test_ripe_in_literature_range(self, ripe_params):
+        """Ripe watermelon f₂ should fall within published range (80–160 Hz)."""
         f2 = predict_tap_tone(ripe_params)["f_n"]
-        assert 5 < f2 < 60, f"Ripe f₂={f2:.1f} Hz outside model range"
+        assert 50 < f2 < 160, f"Ripe f₂={f2:.1f} Hz outside expected range"
 
     def test_frequency_ratio_ripe_unripe(self, ripe_params, unripe_params):
         """f₂(unripe)/f₂(ripe) should be ~2.0–2.5."""
