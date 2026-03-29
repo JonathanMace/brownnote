@@ -2,12 +2,15 @@
 Non-destructive acoustic assessment of watermelon ripeness via shell
 resonance inversion.
 
-Reuses the oblate spheroidal shell framework (AbdominalModelV2) with
-watermelon-specific parameters.  Provides:
+Reuses the equivalent-sphere shell framework (AbdominalModelV2) with
+watermelon-specific parameters.  The oblate geometry is captured through
+the equivalent-volume radius R_eq = (a²c)^(1/3); the frequency model is
+that of a spherical shell of radius R_eq and has no explicit
+aspect-ratio (ζ) dependence beyond R_eq.  Provides:
 
-  1. Forward model  -- shell theory -> predicted tap-tone frequency
+  1. Forward model  -- equivalent-sphere shell theory -> predicted tap-tone frequency
   2. Closed-form inverse -- measured frequency -> rind elastic modulus
-  3. Universal dimensionless geometric invariant (collapses cultivars)
+  3. Universal dimensionless geometric invariant (collapses cultivar geometries)
   4. Validation hooks for Yamamoto et al. (1980) published frequency data
 
 Paper 7 of the Browntone research programme.
@@ -322,9 +325,11 @@ def universal_ripeness_curve(params_list: list[dict]) -> list[tuple[float, float
     """Compute dimensionless geometric invariant Pi_ripe.
 
     Because f2-squared is proportional to E_rind, the elastic modulus
-    cancels, making Pi_ripe invariant w.r.t. ripeness BY CONSTRUCTION.
-    It is a geometric invariant that collapses cultivar geometries onto
-    a single calibration constant.
+    cancels, making Pi_ripe invariant w.r.t. E at FIXED GEOMETRY.
+    It is a geometric invariant that collapses different cultivar
+    geometries onto a single calibration constant.  Note: Pi_ripe is
+    NOT invariant across ripeness stages if geometry (especially h)
+    also changes with ripening.
 
     Parameters
     ----------

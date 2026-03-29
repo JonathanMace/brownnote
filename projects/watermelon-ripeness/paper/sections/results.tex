@@ -194,10 +194,13 @@ Table~\ref{tab:Pi_ripe} presents the results.
 \begin{table}[t]
   \centering
   \caption{Dimensionless geometric invariant~$\Pi_{\mathrm{ripe}}$ for
-    four cultivars across all ripeness stages.  The near-constant value
+    four cultivars evaluated at each cultivar's canonical geometry
+    (fixed~$a$, $c$, $h$) with varying~$E_{\mathrm{rind}}$.  The
+    near-constant value per cultivar
     ($\overline{\Pi}_{\mathrm{ripe}} = 0.062$, CoV~$= \SI{3.3}{\percent}$)
-    confirms that $E_{\mathrm{rind}}$ cancels by construction, and
-    the residual spread reflects cultivar geometry alone.}
+    confirms that $E_{\mathrm{rind}}$ cancels by construction at fixed
+    geometry.  The residual spread across cultivars reflects differences
+    in shell geometry.}
   \label{tab:Pi_ripe}
   \begin{tabular}{lcccc}
     \toprule
@@ -212,42 +215,45 @@ Table~\ref{tab:Pi_ripe} presents the results.
 \end{table}
 
 \noindent
-A key observation emerges: $\Pi_{\mathrm{ripe}}$ is \emph{invariant
-with respect to ripeness stage} for a given cultivar.  This is not an
-empirical finding but a direct algebraic consequence of the linear dependence $f_2^2 \propto
-E_{\mathrm{rind}}$, which causes the modulus
-to cancel from the numerator and denominator
-of~$\Pi_{\mathrm{ripe}}$.  The parameter is therefore a \emph{geometric
-invariant} of the shell--fluid system, not a ripeness metric.  The
-residual variation across
+A key observation emerges: within the equivalent-sphere model,
+$\Pi_{\mathrm{ripe}}$ is constant across cultivars evaluated at a common
+geometry.  The parameter is a \emph{geometric
+invariant} of the shell--fluid system.  Note that $E_{\mathrm{rind}}$
+cancels from $\Pi_{\mathrm{ripe}}$ by construction (since $f_2 \propto
+\sqrt{E}$), so the invariant is independent of the elastic modulus
+\emph{provided the geometry is held fixed}.  In a biological ripening
+scenario where the rind thickness~$h$ also changes
+(Table~\ref{tab:forward_results}), $\Pi_{\mathrm{ripe}}$ will
+vary weakly because the effective density depends on~$h$.  The
+values shown in Table~\ref{tab:Pi_ripe} are evaluated at each
+cultivar's canonical geometry (fixed~$h$), so the per-cultivar
+constancy is exact.
+The residual variation across
 cultivars is small: the mean value is
 $\overline{\Pi}_{\mathrm{ripe}} = 0.062$ with a coefficient of
 variation of~\SI{3.3}{\percent} and a maximum deviation
 of~\SI{5.4}{\percent} from the mean (Sugar Baby).  This variation
-arises solely from differences in the geometric factor
-$\mathcal{G}_2(\nu, \zeta)$ across cultivar aspect ratios.
+arises from differences in the shell geometry ($R_{\mathrm{eq}}$,
+$h/R_{\mathrm{eq}}$) across cultivars.
 
 The practical consequence is that $\Pi_{\mathrm{ripe}}$ serves as a
 \emph{cultivar-independent calibration constant}: once its value is known for a
 given cultivar geometry, any measured $f_2$ can be directly mapped to
 $E_{\mathrm{rind}}$ without detailed knowledge of the flesh properties
-or internal pressure.  The universality is across cultivars
-(different geometries collapsing onto a single constant), not across
-ripeness states---the latter invariance being trivially guaranteed by
-the $f_2^2 \propto E_{\mathrm{rind}}$ proportionality.  The universality is across cultivars
-(different geometries collapsing onto a single constant), not across
-ripeness states---the latter invariance being trivially guaranteed by
-the $f_2^2 \propto E_{\mathrm{rind}}$ proportionality.
+or internal pressure.  The universality is across cultivar geometries
+(different sizes and shapes collapsing onto a single constant), not
+across ripeness stages where geometry itself evolves.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.7\textwidth]{fig_universal_curve}
-  \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
-    for four cultivars at four ripeness stages.  All 16 points fall
-    within a narrow band ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$),
-    confirming that $\Pi_{\mathrm{ripe}}$ is invariant with respect to
+  \caption{Dimensionless geometric invariant~$\Pi_{\mathrm{ripe}}$
+    for four cultivars at their canonical geometry (fixed~$h$).
+    All points fall within a narrow band
+    ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$),
+    confirming that $\Pi_{\mathrm{ripe}}$ is independent of
     $E_{\mathrm{rind}}$ by construction.  The residual spread reflects
-    cultivar-specific geometry ($\mathcal{G}_2$).}
+    cultivar-specific geometry.}
   \label{fig:universal_curve}
 \end{figure}
 
