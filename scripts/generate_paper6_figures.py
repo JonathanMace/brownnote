@@ -1,11 +1,12 @@
 """
 Generate publication-quality figures for Paper 6: Sub-Bass Pathway Partition.
 
-Produces four figures:
+Produces five figures:
 1. fig_coupling_competition.pdf — ka² coupling vs H(r) penalty vs product
 2. fig_displacement_spectrum.pdf — Concert displacement vs threshold
 3. fig_pathway_comparison.pdf — Airborne vs floor vs threshold bar chart
 4. fig_spl_sensitivity.pdf — Frequency × SPL contour, colour = ratio-to-threshold
+5. fig_uq_sensitivity.pdf — Monte Carlo distributions of key ratios
 
 Usage:
     python scripts/generate_paper6_figures.py
@@ -28,6 +29,7 @@ from analytical.sub_bass_coupling import (
     pathway_comparison,
     near_field_enhancement,
     pew_bending_resonance,
+    monte_carlo_pathway_uq,
 )
 from analytical.natural_frequency_v2 import (
     AbdominalModelV2,
@@ -82,7 +84,7 @@ def fig_coupling_competition():
     fig.tight_layout()
     fig.savefig(os.path.join(OUTDIR, 'fig_coupling_competition.pdf'))
     plt.close(fig)
-    print('  [1/4] fig_coupling_competition.pdf')
+    print('  [1/5] fig_coupling_competition.pdf')
 
 
 def fig_displacement_spectrum():
@@ -119,7 +121,7 @@ def fig_displacement_spectrum():
     fig.tight_layout()
     fig.savefig(os.path.join(OUTDIR, 'fig_displacement_spectrum.pdf'))
     plt.close(fig)
-    print('  [2/4] fig_displacement_spectrum.pdf')
+    print('  [2/5] fig_displacement_spectrum.pdf')
 
 
 def fig_pathway_comparison():
@@ -142,14 +144,20 @@ def fig_pathway_comparison():
     # Add value labels
     for bar, val in zip(bars, values):
         ax.text(bar.get_x() + bar.get_width() / 2, val * 1.5,
-                f'{val:.4f}' if val < 0.01 else f'{val:.3f}',
+                f'{val:.4f}' if val < 0.01 else f'{val:.2f}',
                 ha='center', va='bottom', fontsize=9)
 
-    ax.set_ylim(1e-4, 5)
+    # threshold line
+    ax.axhline(pc['threshold_um'][0], color='gray', linestyle='--',
+               alpha=0.5, linewidth=1.0)
+    ax.text(2.35, pc['threshold_um'][0] * 1.15, 'threshold', fontsize=8,
+            color='gray', ha='right')
+
+    ax.set_ylim(1e-4, 50)
     fig.tight_layout()
     fig.savefig(os.path.join(OUTDIR, 'fig_pathway_comparison.pdf'))
     plt.close(fig)
-    print('  [3/4] fig_pathway_comparison.pdf')
+    print('  [3/5] fig_pathway_comparison.pdf')
 
 
 def fig_spl_sensitivity():
@@ -196,7 +204,63 @@ def fig_spl_sensitivity():
     fig.tight_layout()
     fig.savefig(os.path.join(OUTDIR, 'fig_spl_sensitivity.pdf'))
     plt.close(fig)
-    print('  [4/4] fig_spl_sensitivity.pdf')
+    print('  [4/5] fig_spl_sensitivity.pdf')
+
+
+def fig_uq_sensitivity():
+    """Figure 5: Monte Carlo sensitivity distributions."""
+    mc = monte_carlo_pathway_uq(f=40.0, spl_db_nominal=115.0, n_samples=10000)
+    s = mc['summary']
+
+    fig, axes = plt.subplots(1, 3, figsize=(10, 3.5))
+
+    # Panel A: Floor/airborne ratio
+    ax = axes[0]
+    ax.hist(mc['floor_to_airborne_ratio'], bins=60, color='#e41a1c',
+            alpha=0.7, edgecolor='black', linewidth=0.3)
+    ax.axvline(s['floor_to_airborne']['p50'], color='k', linestyle='-',
+               linewidth=1.5, label=f"median = {s['floor_to_airborne']['p50']:.0f}")
+    ax.axvline(s['floor_to_airborne']['p5'], color='k', linestyle='--',
+               linewidth=0.8, label=f"90% CI")
+    ax.axvline(s['floor_to_airborne']['p95'], color='k', linestyle='--',
+               linewidth=0.8)
+    ax.set_xlabel(r'Floor / airborne ratio')
+    ax.set_ylabel('Count')
+    ax.set_title('(a) Pathway dominance')
+    ax.legend(fontsize=8)
+
+    # Panel B: Floor / threshold
+    ax = axes[1]
+    ax.hist(mc['floor_ratio_to_threshold'] * 100, bins=60, color='#377eb8',
+            alpha=0.7, edgecolor='black', linewidth=0.3)
+    ax.axvline(s['floor_over_threshold']['p50'] * 100, color='k',
+               linestyle='-', linewidth=1.5,
+               label=f"median = {s['floor_over_threshold']['p50']*100:.0f}%")
+    ax.axvline(100, color='red', linestyle=':', linewidth=1.5,
+               label='threshold')
+    ax.set_xlabel(r'Floor / threshold (%)')
+    ax.set_title('(b) Floor perceptibility')
+    ax.legend(fontsize=8)
+
+    # Panel C: Airborne / threshold
+    ax = axes[2]
+    ax.hist(mc['airborne_ratio_to_threshold'] * 100, bins=60, color='#4daf4a',
+            alpha=0.7, edgecolor='black', linewidth=0.3)
+    ax.axvline(s['airborne_over_threshold']['p50'] * 100, color='k',
+               linestyle='-', linewidth=1.5,
+               label=f"median = {s['airborne_over_threshold']['p50']*100:.3f}%")
+    ax.set_xlabel(r'Airborne / threshold (%)')
+    ax.set_title('(c) Airborne (im)perceptibility')
+    ax.legend(fontsize=8)
+
+    fig.suptitle('Monte Carlo sensitivity (N = 10,000): $E$ '
+                 r'$\pm$50%, $\zeta_\mathrm{floor}$ = 0.02–0.05, '
+                 r'SPL $\pm$3 dB',
+                 fontsize=10, y=1.02)
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUTDIR, 'fig_uq_sensitivity.pdf'))
+    plt.close(fig)
+    print('  [5/5] fig_uq_sensitivity.pdf')
 
 
 if __name__ == '__main__':
@@ -207,6 +271,7 @@ if __name__ == '__main__':
     fig_displacement_spectrum()
     fig_pathway_comparison()
     fig_spl_sensitivity()
+    fig_uq_sensitivity()
     print()
     print(f'All figures saved to {os.path.abspath(OUTDIR)}')
     print()

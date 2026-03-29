@@ -551,6 +551,7 @@ def floor_vibration_displacement(
     body_transmissibility: float = 1.8,
     floor_area: float = 100.0,
     floor_mass_per_area: float = 200.0,
+    zeta_floor: float = 0.03,
 ) -> dict:
     """
     Estimate abdominal displacement from floor-transmitted vibration.
@@ -562,7 +563,9 @@ def floor_vibration_displacement(
 
     Model:
         1. Acoustic power from SPL → intensity × floor area × efficiency
-        2. Floor velocity = √(P_floor / (m_floor × ω²))
+        2. Floor velocity via damped-plate power balance:
+           v_rms = √(P_floor / (2 · ζ_floor · ω · m_floor))
+           [Dimensions: W / (s⁻¹ · kg) = m²/s² → √ = m/s  ✓]
         3. Body displacement = floor_displacement × transmissibility
 
     Parameters
@@ -580,12 +583,15 @@ def floor_vibration_displacement(
         Effective floor area excited [m²].
     floor_mass_per_area : float
         Floor mass per unit area [kg/m²]. Concrete ~200, timber ~50.
+    zeta_floor : float
+        Floor structural damping ratio.  Typical values:
+        concrete slab 0.02–0.05 (default 0.03), timber 0.03–0.08.
 
     Returns
     -------
     dict with:
         frequency_hz, floor_velocity_ms, floor_displacement_m,
-        body_displacement_m, body_displacement_um
+        body_displacement_m, body_displacement_um, zeta_floor
     """
     f = np.atleast_1d(np.asarray(f, dtype=float))
     omega = 2 * np.pi * f
@@ -597,9 +603,12 @@ def floor_vibration_displacement(
     # Power intercepted by the floor × coupling efficiency
     P_floor = I_inc * floor_area * floor_radiation_efficiency
 
-    # Floor velocity: P = m_floor_total × ω² × v_rms (approximate)
+    # Floor velocity from damped-plate power balance:
+    #   P_dissipated = 2 ζ ω m v² (time-averaged)
+    #   ⟹ v_rms = √(P / (2 ζ ω m))
+    # Units check: W / (1 · s⁻¹ · kg) = m²/s² → √ = m/s  ✓
     m_floor_total = floor_mass_per_area * floor_area
-    v_floor = np.sqrt(P_floor / (m_floor_total * omega ** 2 + 1e-30))
+    v_floor = np.sqrt(P_floor / (2 * zeta_floor * omega * m_floor_total + 1e-30))
 
     # Floor displacement
     xi_floor = v_floor / (omega + 1e-30)
@@ -610,6 +619,7 @@ def floor_vibration_displacement(
     return {
         'frequency_hz': f,
         'spl_db': spl_db,
+        'zeta_floor': zeta_floor,
         'I_inc_Wm2': I_inc,
         'P_floor_W': P_floor,
         'floor_velocity_ms': v_floor,
@@ -627,6 +637,7 @@ def pathway_comparison(
     mode_n: int = 2,
     floor_radiation_efficiency: float = 0.01,
     body_transmissibility: float = 1.8,
+    zeta_floor: float = 0.03,
 ) -> dict:
     """
     Compare airborne vs floor-transmitted pathways at given frequency/SPL.
@@ -647,6 +658,8 @@ def pathway_comparison(
         Floor coupling efficiency.
     body_transmissibility : float
         Seat-to-abdomen transmissibility.
+    zeta_floor : float
+        Floor structural damping ratio (default 0.03).
 
     Returns
     -------
@@ -667,6 +680,7 @@ def pathway_comparison(
         f, spl_db,
         floor_radiation_efficiency=floor_radiation_efficiency,
         body_transmissibility=body_transmissibility,
+        zeta_floor=zeta_floor,
     )
 
     # Perception threshold
@@ -809,6 +823,106 @@ def pew_bending_resonance(
 
 
 
+
+# ---------------------------------------------------------------------------
+# M4: Monte Carlo uncertainty quantification
+# ---------------------------------------------------------------------------
+
+def monte_carlo_pathway_uq(
+    f: float = 40.0,
+    spl_db_nominal: float = 115.0,
+    n_samples: int = 10000,
+    seed: int = 42,
+    E_range: Tuple[float, float] = (0.05e6, 0.15e6),
+    zeta_floor_range: Tuple[float, float] = (0.02, 0.05),
+    spl_delta: float = 3.0,
+) -> dict:
+    """
+    Monte Carlo sensitivity analysis for pathway comparison.
+
+    Varies tissue Young's modulus E (uniform), floor damping ratio
+    zeta_floor (uniform), and SPL (±spl_delta, uniform) to produce
+    distributions of the key results.
+
+    Parameters
+    ----------
+    f : float
+        Frequency [Hz].
+    spl_db_nominal : float
+        Nominal SPL [dB].
+    n_samples : int
+        Number of Monte Carlo samples.
+    seed : int
+        Random seed for reproducibility.
+    E_range : tuple of float
+        (E_min, E_max) in Pa for Young's modulus (canonical ±50%).
+    zeta_floor_range : tuple of float
+        (zeta_min, zeta_max) for floor damping ratio.
+    spl_delta : float
+        SPL uncertainty half-range [dB].
+
+    Returns
+    -------
+    dict with:
+        floor_to_airborne_ratio — array of shape (n_samples,)
+        floor_ratio_to_threshold — array of shape (n_samples,)
+        airborne_ratio_to_threshold — array of shape (n_samples,)
+        summary — dict with p5, p50, p95 for each quantity
+    """
+    rng = np.random.default_rng(seed)
+
+    E_samples = rng.uniform(E_range[0], E_range[1], n_samples)
+    zeta_floor_samples = rng.uniform(
+        zeta_floor_range[0], zeta_floor_range[1], n_samples
+    )
+    spl_samples = rng.uniform(
+        spl_db_nominal - spl_delta,
+        spl_db_nominal + spl_delta,
+        n_samples,
+    )
+
+    f_arr = np.array([f])
+    thresh = perception_threshold_model(f_arr)
+    xi_thresh = thresh['xi_threshold_um'][0]
+
+    floor_air_ratios = np.empty(n_samples)
+    floor_thresh_ratios = np.empty(n_samples)
+    air_thresh_ratios = np.empty(n_samples)
+
+    for i in range(n_samples):
+        model_i = AbdominalModelV2(E=E_samples[i])
+        air = tissue_displacement(f_arr, spl_samples[i], model=model_i)
+        fl = floor_vibration_displacement(
+            f_arr, spl_samples[i], zeta_floor=zeta_floor_samples[i]
+        )
+        xi_air = air['xi_um'][0]
+        xi_fl = fl['body_displacement_um'][0]
+        floor_air_ratios[i] = xi_fl / (xi_air + 1e-30)
+        floor_thresh_ratios[i] = xi_fl / xi_thresh
+        air_thresh_ratios[i] = xi_air / xi_thresh
+
+    def _stats(arr):
+        return {
+            'p5': float(np.percentile(arr, 5)),
+            'p50': float(np.percentile(arr, 50)),
+            'p95': float(np.percentile(arr, 95)),
+            'mean': float(np.mean(arr)),
+            'std': float(np.std(arr)),
+        }
+
+    return {
+        'n_samples': n_samples,
+        'frequency_hz': f,
+        'spl_db_nominal': spl_db_nominal,
+        'floor_to_airborne_ratio': floor_air_ratios,
+        'floor_ratio_to_threshold': floor_thresh_ratios,
+        'airborne_ratio_to_threshold': air_thresh_ratios,
+        'summary': {
+            'floor_to_airborne': _stats(floor_air_ratios),
+            'floor_over_threshold': _stats(floor_thresh_ratios),
+            'airborne_over_threshold': _stats(air_thresh_ratios),
+        },
+    }
 
 # ---------------------------------------------------------------------------
 # Quick-run summary

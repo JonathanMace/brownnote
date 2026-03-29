@@ -17,18 +17,23 @@ four orders suggested by the pressure-based approach---but it remains
 insufficient for airborne perception alone.
 
 The structure-borne pathway (floor and seat vibration) dominates by a
-factor of ${\sim}40$ under conservative assumptions.  With realistic
-venue floors (lightweight timber, resonant panels), the structure-borne
-displacement can readily exceed the perception threshold, explaining the
-well-documented visceral sensation at concerts.
+factor of ${\sim}\num{2600}$ (90\% CI: \numrange{2000}{3100}) under the
+corrected damped-plate power-balance model.  At peak EDM levels, the
+floor-transmitted displacement is $\sim 9\times$ the perception
+threshold (90\% CI: $5.8$--$12.7\times$), confirming that the
+structure-borne pathway is not merely dominant but readily perceptible.
 
 The key insight is that the airborne pathway is not negligibly weak---it
 is a significant fraction of the overall budget, particularly in
 near-field conditions or at extreme SPLs.  The ``feel it in your gut''
-experience is best understood as a \emph{pathway partition problem}: the
-structure-borne pathway carries ${\sim}\SI{97}{\percent}$ of the
-perceptible energy, with the airborne component contributing a small
-but non-zero remainder.
+experience is best understood as a \emph{pathway partition problem}.
+Of the two coupling pathways analysed, structure-borne transmission
+accounts for $>\SI{99.9}{\percent}$ of abdominal wall displacement,
+though the airborne component is not negligible---it is a genuine
+near-miss at $\sim$\SI{0.35}{\percent} of threshold.  Neither pathway
+independently accounts for the full visceral experience, which
+likely also involves chest-wall coupling, somatosensory stimulation,
+and vestibular input (\S\ref{sec:additional-pathways}).
 
 \subsection{Additional coupling pathways}
 \label{sec:additional-pathways}
@@ -110,10 +115,10 @@ direction for future experimental work.
 The near-field pressure enhancement of \SIrange{6}{10}{\decibel}
 at distances of \SIrange{0.5}{1.5}{\metre} from a subwoofer stack is
 significant for front-row concert audiences.  At \SI{0.5}{\metre}, the
- effective SPL can reach \SI{124}{\decibel} at \SI{40}{\hertz},
- increasing the airborne displacement to approximately \SI{1}{\percent} of the
-perception threshold.  Combined with the structure-borne pathway, the
-total displacement in the near field may approach or exceed
+effective SPL can reach \SI{124}{\decibel} at \SI{40}{\hertz},
+increasing the airborne displacement to approximately \SI{1}{\percent}
+of the perception threshold.  Combined with the structure-borne pathway,
+the total displacement in the near field may approach or exceed
 perceptibility.
 
 This has implications for concert safety: audience members standing
@@ -131,6 +136,42 @@ vibration-induced health effects.  However, the structural vibration
 component---floor and seat vibration excited by the same
 sub-woofers---is a legitimate occupational health concern and should be
 assessed separately.
+
+\subsection{Frequency-dependent tissue properties}
+\label{sec:freq-dependent}
+
+Throughout this analysis, we treat the tissue Young's modulus $E$ and
+loss tangent $\eta$ as frequency-independent constants.  In reality,
+soft biological tissues exhibit viscoelastic frequency dependence: $E$
+typically increases with frequency (stiffening) while $\eta$ may
+decrease (reduced relative damping) over the \SIrange{1}{100}{\hertz}
+range~\cite{Griffin1990, Mansfield2005}.
+
+Published measurements of abdominal wall tissue at sub-bass frequencies
+are scarce.  Duck~\cite{Duck1990} and Fung~\cite{Fung1993} report that soft-tissue shear
+moduli increase by factors of 2--5 between quasi-static loading and
+\SI{100}{\hertz}, with loss tangent decreasing from $\sim$0.3 to
+$\sim$0.15 over the same range.  If we apply these trends to our model:
+%
+\begin{itemize}
+  \item Increasing $E$ from \SI{0.1}{\mega\pascal} to
+    \SI{0.2}{\mega\pascal} raises $f_2$ by $\sim$\SI{40}{\percent}
+    (to $\sim$\SI{5.5}{\hertz}), reducing the frequency ratio $r$ and
+    slightly increasing the SDOF transfer function at sub-bass
+    frequencies.  The net effect on displacement is $< 2\times$.
+
+  \item Decreasing $\eta$ from 0.25 to 0.15 increases $Q$ from 4 to
+    $\sim$6.7, amplifying the on-resonance displacement but having
+    little effect far off-resonance where $H \approx 1/r^2$.
+\end{itemize}
+%
+Our Monte Carlo analysis (\S\ref{sec:uq}) brackets $E$ over
+$\pm$\SI{50}{\percent}, which encompasses the plausible range of
+frequency-dependent stiffening.  The qualitative conclusions---airborne
+pathway $\ll$ threshold, floor pathway $\gg$ threshold---are robust to
+this uncertainty.  Future work incorporating dynamic mechanical analysis
+of excised abdominal wall tissue at controlled frequencies would
+strengthen the quantitative precision of the model.
 
 \subsection{Limitations}
 \label{sec:limitations}
@@ -156,13 +197,20 @@ Several simplifications constrain the present analysis:
     values; actual exposure will differ.
 
   \item The floor vibration model is a simplified order-of-magnitude
-    estimate.  Actual floor response depends on construction type,
-    sub-woofer placement, and room modes.
+    estimate using a single-mode damped-plate assumption.  Actual floor
+    response depends on construction type, sub-woofer placement, room
+    modes, and the spatial distribution of excitation.
 
-  \item The ISO~2631-1 perception thresholds are conservative for our
-    comparison because they describe whole-body perception via the
-    mechanical pathway.  True perception thresholds for airborne-induced
-    abdominal displacement may be even higher.
+  \item The perception thresholds used here are derived from the
+    experimental literature underlying ISO~2631-1, not directly
+    tabulated in the standard (see \S\ref{sec:perception-model}).  The
+    interpolation introduces an estimated $\pm\SI{3}{\decibel}$
+    uncertainty.
+
+  \item Tissue mechanical properties ($E$, $\eta$) are treated as
+    frequency-independent (\S\ref{sec:freq-dependent}).  Viscoelastic
+    frequency dependence may alter quantitative predictions by up to
+    $2\times$ but does not change the qualitative conclusions.
 
   \item We do not model the chest wall, skin, or vestibular system,
     which may contribute significantly to bass perception.

@@ -25,6 +25,7 @@ from analytical.sub_bass_coupling import (
     pathway_comparison,
     near_field_enhancement,
     pew_bending_resonance,
+    monte_carlo_pathway_uq,
     RHO_AIR,
     C_AIR,
     P_REF,
@@ -272,7 +273,7 @@ class TestPhysicalConsistency:
         assert result['xi_um'][0] < 1e-6  # well below any threshold
 
 
-# ── 10. Floor vibration pathway ────────────────────────────────────────────
+# ── 10. Floor vibration pathway (corrected formula) ────────────────────────
 
 class TestFloorVibrationDisplacement:
 
@@ -307,6 +308,75 @@ class TestFloorVibrationDisplacement:
         ratio = r2['body_displacement_um'][0] / r1['body_displacement_um'][0]
         assert abs(ratio - 2.0) < 0.01
 
+    # --- NEW TESTS: dimensional consistency and corrected formula ---
+
+    def test_floor_velocity_units_are_ms(self):
+        """
+        Dimensional check: v_floor = sqrt(P / (2 zeta omega m)) must
+        have units of m/s.
+
+        Hand calculation at 40 Hz, 115 dB:
+          p_inc = 20e-6 * 10^(115/20) = 11.247 Pa
+          I = p^2 / (2 * 1.225 * 343) = 0.1506 W/m^2
+          P_floor = I * 100 * 0.01 = 0.1506 W
+          omega = 2*pi*40 = 251.33 rad/s
+          m_total = 200 * 100 = 20000 kg
+          v = sqrt(0.1506 / (2 * 0.03 * 251.33 * 20000))
+            = sqrt(0.1506 / 301596) = sqrt(4.994e-7) = 7.067e-4 m/s
+        """
+        result = floor_vibration_displacement(
+            40.0, 115.0,
+            floor_radiation_efficiency=0.01,
+            floor_area=100.0,
+            floor_mass_per_area=200.0,
+            zeta_floor=0.03,
+        )
+        v = result['floor_velocity_ms'][0]
+        # Check against hand calculation
+        assert abs(v - 7.067e-4) / 7.067e-4 < 0.01  # within 1%
+
+    def test_displacement_increases_with_lower_damping(self):
+        """Lower floor damping → more displacement (energy trapped longer)."""
+        r_low = floor_vibration_displacement(40.0, 115.0, zeta_floor=0.02)
+        r_high = floor_vibration_displacement(40.0, 115.0, zeta_floor=0.05)
+        assert r_low['body_displacement_um'][0] > r_high['body_displacement_um'][0]
+
+    def test_damping_scaling_sqrt(self):
+        """v scales as 1/sqrt(zeta), so halving zeta should increase v by sqrt(2)."""
+        r1 = floor_vibration_displacement(40.0, 115.0, zeta_floor=0.04)
+        r2 = floor_vibration_displacement(40.0, 115.0, zeta_floor=0.02)
+        ratio = r2['floor_velocity_ms'][0] / r1['floor_velocity_ms'][0]
+        expected = np.sqrt(0.04 / 0.02)  # = sqrt(2)
+        assert abs(ratio - expected) / expected < 0.001
+
+    def test_hand_calculation_body_displacement(self):
+        """
+        Full hand calculation at 40 Hz, 115 dB, zeta=0.03:
+          v_floor = 7.067e-4 m/s  (from test above)
+          omega = 251.33 rad/s
+          xi_floor = v / omega = 2.812e-6 m = 2.812 um
+          xi_body = xi_floor * 1.8 = 5.062 um
+        """
+        result = floor_vibration_displacement(
+            40.0, 115.0,
+            body_transmissibility=1.8,
+            zeta_floor=0.03,
+        )
+        xi = result['body_displacement_um'][0]
+        assert abs(xi - 5.06) / 5.06 < 0.02  # within 2%
+
+    def test_zeta_floor_returned_in_result(self):
+        """Result dict should include zeta_floor for traceability."""
+        result = floor_vibration_displacement(40.0, 115.0, zeta_floor=0.04)
+        assert result['zeta_floor'] == 0.04
+
+    def test_floor_exceeds_threshold_at_peak_edm(self):
+        """At 40 Hz / 115 dB, corrected floor pathway should exceed threshold."""
+        result = floor_vibration_displacement(40.0, 115.0, zeta_floor=0.03)
+        thresh = perception_threshold_model(np.array([40.0]))
+        # floor must exceed threshold (this is the key F1-fix consequence)
+        assert result['body_displacement_um'][0] > thresh['xi_threshold_um'][0]
+
 
 # ── 11. Pathway comparison ─────────────────────────────────────────────────
 
@@ -329,12 +399,29 @@ class TestPathwayComparison:
         result = pathway_comparison(np.array([40.0]), 115.0, default_model)
         assert result['airborne_ratio'][0] < 0.1
 
+    def test_floor_exceeds_threshold(self, default_model):
+        """With corrected formula, floor pathway exceeds perception threshold."""
+        result = pathway_comparison(np.array([40.0]), 115.0, default_model)
+        assert result['floor_ratio'][0] > 1.0
+
+    def test_floor_to_airborne_ratio_order_of_magnitude(self, default_model):
+        """Floor/airborne ratio should be ~1000-5000× with corrected formula."""
+        result = pathway_comparison(np.array([40.0]), 115.0, default_model)
+        ratio = result['floor_to_airborne_ratio'][0]
+        assert 500 < ratio < 10000
+
     def test_array_frequencies(self, default_model):
         """Should work with array of frequencies."""
         f = np.array([20, 40, 60, 80])
         result = pathway_comparison(f, 115.0, default_model)
         assert result['airborne_um'].shape == (4,)
         assert result['floor_um'].shape == (4,)
+
+    def test_zeta_floor_passthrough(self, default_model):
+        """zeta_floor parameter should affect floor results."""
+        r1 = pathway_comparison(np.array([40.0]), 115.0, default_model, zeta_floor=0.02)
+        r2 = pathway_comparison(np.array([40.0]), 115.0, default_model, zeta_floor=0.05)
+        assert r1['floor_um'][0] > r2['floor_um'][0]
 
 
 # ── 12. Near-field enhancement ─────────────────────────────────────────────
@@ -439,3 +526,49 @@ class TestEnergyConsistentRegression:
         f2 = flexural_mode_frequencies_v2(default_model)[2]
         result = tissue_displacement(f2, 120.0, model=default_model)
         assert result['xi_um'][0] < 0.05  # well below old 0.18 μm
+
+
+# ── 15. Monte Carlo UQ ─────────────────────────────────────────────────────
+
+class TestMonteCarloUQ:
+    """Tests for Monte Carlo uncertainty quantification."""
+
+    def test_returns_expected_keys(self):
+        """MC result should have all required keys."""
+        mc = monte_carlo_pathway_uq(n_samples=100)
+        assert 'summary' in mc
+        assert 'floor_to_airborne_ratio' in mc
+        assert len(mc['floor_to_airborne_ratio']) == 100
+        for k in ['floor_to_airborne', 'floor_over_threshold',
+                   'airborne_over_threshold']:
+            assert k in mc['summary']
+            for stat in ['p5', 'p50', 'p95', 'mean', 'std']:
+                assert stat in mc['summary'][k]
+
+    def test_floor_always_dominates_airborne(self):
+        """In all MC samples, floor > airborne."""
+        mc = monte_carlo_pathway_uq(n_samples=500, seed=123)
+        assert np.all(mc['floor_to_airborne_ratio'] > 1.0)
+
+    def test_reproducible_with_seed(self):
+        """Same seed should give same results."""
+        mc1 = monte_carlo_pathway_uq(n_samples=50, seed=42)
+        mc2 = monte_carlo_pathway_uq(n_samples=50, seed=42)
+        np.testing.assert_array_equal(
+            mc1['floor_to_airborne_ratio'],
+            mc2['floor_to_airborne_ratio'],
+        )
+
+    def test_wider_range_increases_spread(self):
+        """Wider parameter ranges should increase output spread."""
+        mc_narrow = monte_carlo_pathway_uq(
+            n_samples=500, E_range=(0.09e6, 0.11e6),
+            zeta_floor_range=(0.029, 0.031), spl_delta=0.5,
+        )
+        mc_wide = monte_carlo_pathway_uq(
+            n_samples=500, E_range=(0.05e6, 0.15e6),
+            zeta_floor_range=(0.02, 0.05), spl_delta=3.0,
+        )
+        std_narrow = mc_narrow['summary']['floor_to_airborne']['std']
+        std_wide = mc_wide['summary']['floor_to_airborne']['std']
+        assert std_wide > std_narrow
