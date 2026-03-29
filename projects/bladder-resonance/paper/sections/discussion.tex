@@ -1,90 +1,79 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Clinical Implications}
-\label{sec:clinical}
+We organise the discussion into three tiers of decreasing certainty:
+model predictions (Section~\ref{sec:model_predictions}), which follow
+directly from the mathematical framework; biological hypotheses
+(Section~\ref{sec:bio_hypotheses}), which connect model outputs to
+plausible physiological mechanisms; and clinical conjecture
+(Section~\ref{sec:clinical_conjecture}), which speculates on
+implications that would require experimental validation.
 
-The predicted $n = 2$ frequency range (\SIrange{13.5}{17.1}{\hertz}) has
-immediate relevance to occupational health.  Vehicle cabins expose operators
-to broadband vibration spanning \SIrange{1}{20}{\hertz}, with dominant energy
-typically concentrated below \SI{10}{\hertz} from engine and road
-excitation~\cite{Griffin1990,mansfield2005human}.  The bladder's
-fundamental mode sits at the upper edge of this band.  Two coupling mechanisms
-are therefore relevant:
 
-\paragraph{Sub-resonant forced response.}
-At the ISO~2631 pelvic resonance peak (\SIrange{4}{8}{\hertz}), the bladder
-responds as a forced sub-resonant oscillator.  The pelvic transmissibility is
-at its maximum ($T \approx 2.3$ at \SI{5.5}{\hertz}), and while the bladder
-modal amplification is below unity at these frequencies, the product
-$T \times H$ remains significant.  This is the regime most relevant to
-occupational WBV exposure: the bladder wall undergoes forced cyclic
-deformation driven by amplified pelvic motion, even though the excitation
-frequency is below the bladder's own resonance.
+\subsection{Tier~1: Model Predictions}
+\label{sec:model_predictions}
 
-\paragraph{Near-resonant amplification.}
-At the bladder's natural frequency (\SIrange{13.5}{17.1}{\hertz}), the modal
-amplification reaches its peak ($Q = 2.5$), but pelvic transmissibility has
-rolled off ($T \approx 0.3$).  This regime may be relevant to certain
-industrial vibration sources (e.g., pneumatic tools, vibratory compactors)
-that produce significant energy above \SI{10}{\hertz}.  The
-fill-volume-dependent nature of the resonance means that the bladder's
-susceptibility to a particular frequency shifts as it fills---a dynamic
-vulnerability window.
+The following results are direct, quantitative outputs of the model and
+do not depend on biological or clinical interpretation.
 
-\paragraph{Displacement quantification.}
-To place the model predictions in physiological context, we estimate the
-bladder wall displacement under representative occupational WBV exposure.
-At the ISO~2631 daily exposure action value
-($a_\mathrm{seat} = \SI{0.5}{\metre\per\second\squared}$ RMS), the seat
-displacement amplitude at the bladder resonance frequency
-($f_2 = \SI{13.9}{\hertz}$ at \SI{300}{\milli\litre}) is
-$y_\mathrm{seat} = a/(2\pi f)^2 \approx \SI{65}{\micro\metre}$.  Through
-the pelvic skeleton ($T \approx 0.29$), this delivers
-$y_\mathrm{pelvis} \approx \SI{19}{\micro\metre}$ to the bladder base.
-At resonance, the bladder wall amplifies this by $Q = 2.5$, giving a peak
-relative wall displacement of approximately \SI{47}{\micro\metre}---a cyclic
-wall strain of $\varepsilon \approx 1.1 \times 10^{-3}$ ($0.11\%$).
+\paragraph{U-shaped frequency--volume relationship.}
+The competition between geometric softening (increasing radius and wall
+thinning) and detrusor strain-stiffening produces a non-monotonic $f_2(V)$
+curve with a minimum of \SI{13.5}{\hertz} at \SI{222}{\milli\litre}.  This
+is a robust prediction: the analytical condition
+$\mathrm{d}(\ln K)/\mathrm{d}V = \mathrm{d}(\ln m)/\mathrm{d}V$
+(equation~\ref{eq:f2_min}) provides a necessary and sufficient condition for
+the minimum, and the sensitivity analysis (Section~\ref{sec:sensitivity})
+confirms that only the wall elastic modulus $E$ can shift the minimum
+substantially.  The U-shaped curve is the signature of fill-dependent
+resonance and distinguishes the bladder from fixed-geometry resonators.
 
-In the sub-resonant regime at \SI{6}{\hertz} (near the pelvic
-transmissibility peak), the seat displacement is much larger
-($\sim$\SI{350}{\micro\metre}) and pelvic amplification is near its maximum
-($T \approx 2.0$).  Despite the bladder being below resonance, the relative
-wall displacement reaches approximately \SI{160}{\micro\metre}
-($\varepsilon \approx 0.38\%$), because the large base displacement more
-than compensates for the reduced modal amplification.
+\paragraph{Coupling disparity.}
+Mechanical vibration is $\sim$$6{,}400\times$ more effective than airborne
+sound at exciting the bladder's $n = 2$ mode.  This ratio follows directly
+from the $(ka)^2$ scaling in the Rayleigh regime and the pelvic
+transmissibility chain, and is consistent with the analogous
+$\sim$$66{,}000\times$ ratio computed for the abdominal cavity.
 
-\paragraph{Physiological context.}
-These vibration-induced displacements are minute compared to the quasi-static
-deformations the bladder routinely accommodates.  Normal filling from
-\SI{50}{\milli\litre} to \SI{300}{\milli\litre} stretches the wall by
-approximately \SI{19}{\milli\metre} ($\varepsilon \approx 81\%$), and
-detrusor contraction during micturition---which generates pressures of
-\SIrange{40}{60}{cmH_2O}---produces wall displacements of order
-\SI{30}{\milli\metre}~\cite{Griffiths1980}.  The WBV displacement of
-\SI{47}{\micro\metre} is therefore roughly three orders of magnitude smaller
-than the filling displacement and far below the amplitude of normal physiological
-wall deformation.
+\paragraph{Sub-resonant dominance.}
+At occupational WBV frequencies (\SIrange{4}{8}{\hertz}), the product of
+seat displacement amplitude, pelvic transmissibility, and bladder
+sub-resonant amplification produces wall displacements of
+$\sim$\SI{160}{\micro\metre}---2--4$\times$ larger than the at-resonance
+displacement ($\sim$\SI{47}{\micro\metre}).  The sub-resonant regime is
+therefore the practically dominant response mechanism.  This is a
+quantitative prediction of the model and does not require any assumption
+about biological sensitivity.
 
-The equivalent quasi-static intravesical pressure perturbation from the
-resonant wall strain is only $\Delta p \approx E\varepsilon \approx
-\SI{80}{\pascal}$ ($\sim$\SI{0.8}{cmH_2O}), well below the
-\SIrange{5}{15}{cmH_2O} threshold at which myelinated A$\delta$ afferents
-begin firing in response to slow bladder
-distension~\cite{Habler1993,Fowler2008}.  On the basis of static
-displacement alone, WBV-induced wall motion would appear physiologically
-insignificant.
+\paragraph{Displacement magnitudes.}
+The predicted wall displacements (\SIrange{47}{160}{\micro\metre}) are
+approximately three orders of magnitude smaller than normal filling
+displacements ($\sim$\SI{19}{\milli\metre}).  The equivalent quasi-static
+intravesical pressure perturbation from the resonant wall strain is only
+$\Delta p \approx E\varepsilon \approx \SI{80}{\pascal}$
+($\sim$\SI{0.8}{cmH_2O}), well below the \SIrange{5}{15}{cmH_2O}
+threshold at which myelinated A$\delta$ afferents begin firing in response
+to slow bladder distension~\cite{Habler1993,Fowler2008}.
 
-\paragraph{Dynamic strain rate and mechanotransduction.}
-The critical distinction, however, is that WBV delivers its displacement
-cyclically at \SIrange{6}{17}{\hertz}, producing peak strain rates of
-$\dot{\varepsilon} \approx \SI{0.1}{\per\second}$ at resonance.  This
-is approximately 500 times faster than the strain rate during normal filling
+
+\subsection{Tier~2: Biological Hypotheses}
+\label{sec:bio_hypotheses}
+
+The following hypotheses connect the model predictions to known
+mechanotransduction pathways.  They are plausible but unverified.
+
+\paragraph{Dynamic strain rate.}
+The critical distinction between WBV-induced deformation and normal filling
+is temporal: WBV delivers its displacement cyclically at
+\SIrange{6}{17}{\hertz}, producing peak strain rates of
+$\dot{\varepsilon} \approx \SI{0.1}{\per\second}$ at resonance.  This is
+approximately 500 times faster than the strain rate during normal filling
 ($\dot{\varepsilon}_\mathrm{fill} \sim 2 \times 10^{-4}\;\mathrm{s}^{-1}$
-for a typical one-hour fill cycle).  Mechanosensitive ion channels in
-biological membranes are sensitive to the \emph{rate} of membrane
-deformation, not merely its magnitude~\cite{coste2010piezo1}.
+for a typical one-hour fill cycle).  We hypothesise that this rate
+difference, rather than absolute displacement magnitude, is the relevant
+stimulus for mechanosensitive transduction.
 
+\paragraph{PIEZO2 mechanotransduction.}
 Recent work has identified PIEZO2 as the principal low-threshold stretch
 sensor in the bladder urothelium and sensory
 neurons~\cite{Marshall2020}.  PIEZO2 mediates the earliest sensation of
@@ -95,42 +84,52 @@ humans~\cite{Marshall2020,Dalghi2021}.  Crucially, PIEZO channels
 are tuned to rapid membrane deformation---they inactivate under sustained
 stretch but respond robustly to dynamic, cyclic
 stimuli~\cite{coste2010piezo1}.  The cyclic strain delivered by WBV, though
-small in absolute magnitude, is precisely the class of stimulus to which
-these channels are optimised.
+small in absolute magnitude, falls within the class of stimulus to which
+these channels are optimised.  However, whether the WBV-induced strain rate
+of $\sim$\SI{0.1}{\per\second} exceeds the PIEZO2 activation threshold
+\emph{in vivo} remains unknown: the dynamic thresholds of bladder
+mechanoreceptors have not been characterised at infrasonic frequencies.
 
-Whether the WBV-induced strain rate of $\sim$\SI{0.1}{\per\second} exceeds
-the PIEZO2 activation threshold in vivo remains an open question: the
-dynamic thresholds of bladder mechanoreceptors have not been characterised
-at infrasonic frequencies.  The unmyelinated C-fibre population in the
-detrusor, which is normally quiescent (`silent') during physiological
-filling but can be recruited by pathological
-stimuli~\cite{Fowler2008,Habler1993}, represents an additional potential
-pathway for vibration-induced urgency sensitisation.
+\paragraph{Silent C-fibre recruitment.}
+The unmyelinated C-fibre population in the detrusor is normally quiescent
+during physiological filling but can be recruited by pathological
+stimuli~\cite{Fowler2008,Habler1993}.  It is conceivable that sustained
+cyclic loading could lower the C-fibre activation threshold through temporal
+summation, but this hypothesis is speculative and would require
+electrophysiological validation.
 
-\paragraph{Clinical scenarios.}
-The model provides a first-principles framework for three well-documented
-but mechanistically unexplained clinical observations:
-\begin{enumerate}
-  \item \textbf{Urgency in vehicle occupants.}  Professional drivers exposed
-    to broadband WBV at \SIrange{4}{16}{\hertz} report increased urinary
-    urgency and frequency~\cite{Seidel1986}.  The model suggests that even
-    at the ISO~2631 action level, cyclic bladder wall deformation of
-    \SIrange{50}{160}{\micro\metre} occurs across the relevant frequency
-    band.  The fill-dependent frequency minimum (\SI{13.5}{\hertz} at
-    \SI{222}{\milli\litre}) means the bladder becomes maximally susceptible
-    precisely as it begins to fill---the ``early urge'' fill state.
-  \item \textbf{Stress incontinence aggravation.}  Women with pre-existing
-    pelvic floor weakness may experience symptom aggravation during vibration
-    exposure.  The model predicts that a weakened pelvic floor (lower
-    $\zeta_\mathrm{pelvis}$, higher $T$) would deliver larger displacements
-    to the bladder wall, potentially amplifying the urgency signal.
-  \item \textbf{The ``long drive'' phenomenon.}  The common experience of
-    urgency during prolonged vehicle travel---often attributed to cold
-    exposure or psychological factors---may have a biomechanical
-    contribution: hours of sustained sub-threshold cyclic loading could
-    sensitise mechanoreceptor pathways through temporal summation, lowering
-    the effective urgency threshold progressively over the journey.
-\end{enumerate}
+
+\subsection{Tier~3: Clinical Conjecture}
+\label{sec:clinical_conjecture}
+
+The following scenarios are speculative extensions of the model results
+and biological hypotheses.  They are offered as testable predictions, not
+established findings.
+
+\paragraph{Urgency in vehicle occupants.}
+Professional drivers exposed to broadband WBV at
+\SIrange{4}{16}{\hertz} report increased urinary urgency and
+frequency~\cite{Seidel1986}.  The model suggests that cyclic bladder wall
+deformation of \SIrange{50}{160}{\micro\metre} may occur across this
+frequency band at the ISO~2631 action level.  The fill-dependent frequency
+minimum (\SI{13.5}{\hertz} at \SI{222}{\milli\litre}) means the bladder
+becomes maximally susceptible to near-resonant excitation precisely as it
+begins to fill---a ``dynamic vulnerability window.''  \emph{Whether this
+displacement is sufficient to trigger urgency through the PIEZO2 pathway
+remains to be demonstrated experimentally.}
+
+\paragraph{Pelvic floor weakness.}
+Individuals with pre-existing pelvic floor weakness (lower
+$\zeta_\mathrm{pelvis}$, higher $T$) would, according to the model, receive
+larger displacements at the bladder wall.  This could contribute to symptom
+aggravation during vibration exposure, though the model provides no direct
+evidence for or against this hypothesis.
+
+\paragraph{Temporal summation.}
+The common experience of urgency during prolonged vehicle travel may have a
+biomechanical contribution: hours of sustained sub-threshold cyclic loading
+could, in principle, sensitise mechanoreceptor pathways through temporal
+summation.  This remains entirely conjectural.
 
 
 \subsection{Comparison with Other Pelvic Organs}
@@ -153,12 +152,12 @@ rehabilitation in post-prostatectomy and postpartum
 patients~\cite{Pelvic2019}.  The bio\-electrical activity of pelvic floor
 muscles increases during synchronous WBV~\cite{Lauper2009}, and clinical
 trials report improvements in continence
-symptoms~\cite{NCT03325660}.  Our model suggests that these therapeutic
+symptoms~\cite{NCT03325660}.  The model predicts that these therapeutic
 frequencies (\SIrange{20}{40}{\hertz}) lie above the bladder's $n = 2$ mode
 for most fill states, placing the bladder in a supra-resonant regime where
-wall displacement decreases with frequency.  The therapeutic effect is
-therefore more likely mediated by pelvic floor muscle activation than by
-direct bladder wall resonance.
+wall displacement decreases with frequency.  If the model is correct, the
+therapeutic effect would be more likely mediated by pelvic floor muscle
+activation than by direct bladder wall resonance.
 
 
 \subsection{Limitations}

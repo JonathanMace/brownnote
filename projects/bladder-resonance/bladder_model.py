@@ -49,6 +49,27 @@ PAPER_FIGURES_DIR = os.path.join(os.path.dirname(__file__), 'paper', 'figures')
 os.makedirs(FIGURES_DIR, exist_ok=True)
 os.makedirs(PAPER_FIGURES_DIR, exist_ok=True)
 
+# ---------------------------------------------------------------------------
+# Publication-quality figure configuration (JSV standard)
+# ---------------------------------------------------------------------------
+_PUB_RC = {
+    'font.family': 'serif',
+    'font.size': 10,
+    'axes.labelsize': 11,
+    'axes.titlesize': 11,
+    'xtick.labelsize': 9,
+    'ytick.labelsize': 9,
+    'legend.fontsize': 9,
+    'savefig.dpi': 300,
+    'lines.linewidth': 1.5,
+    'axes.linewidth': 0.8,
+    'grid.linewidth': 0.5,
+    'grid.alpha': 0.3,
+}
+# Colorblind-friendly palette
+C_BLUE, C_RED, C_GREEN = '#2166AC', '#B2182B', '#1B7837'
+C_PURPLE, C_ORANGE, C_GREY = '#762A83', '#E08214', '#636363'
+
 
 # ---------------------------------------------------------------------------
 # Bladder geometry from fill volume
@@ -253,57 +274,58 @@ def parametric_frequency_vs_volume():
     }
 
 
-def plot_frequency_vs_volume(data: dict):
-    """Generate fig_bladder_frequency_vs_volume.png."""
-    fig, axes = plt.subplots(2, 2, figsize=(12, 9))
-    fig.suptitle('Bladder Resonant Frequency vs Fill Volume', fontsize=14, fontweight='bold')
+def plot_frequency_vs_volume(data: dict, save_paper=True):
+    """Generate fig_bladder_frequency_vs_volume (PNG + PDF)."""
+    with plt.rc_context(_PUB_RC):
+        fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 
-    # (a) f₂ and f₃ vs volume
-    ax = axes[0, 0]
-    ax.plot(data['volumes'], data['f2'], 'b-', linewidth=2, label='n = 2 (oblate-prolate)')
-    ax.plot(data['volumes'], data['f3'], 'r--', linewidth=2, label='n = 3')
-    ax.axhspan(4, 8, alpha=0.15, color='orange', label='ISO 2631 pelvic range (4–8 Hz)')
-    ax.set_xlabel('Fill Volume [mL]')
-    ax.set_ylabel('Frequency [Hz]')
-    ax.set_title('(a) Flexural Mode Frequencies')
-    ax.legend(fontsize=8)
-    ax.grid(True, alpha=0.3)
+        # (a) f₂ and f₃ vs volume
+        ax = axes[0, 0]
+        ax.plot(data['volumes'], data['f2'], color=C_BLUE, label='$n = 2$')
+        ax.plot(data['volumes'], data['f3'], color=C_RED, ls='--', label='$n = 3$')
+        ax.axhspan(4, 8, alpha=0.12, color=C_ORANGE, label='ISO 2631 pelvic band')
+        ax.set_xlabel('Fill volume (mL)')
+        ax.set_ylabel('Frequency (Hz)')
+        ax.set_title('(a) Flexural mode frequencies')
+        ax.legend(); ax.grid(True)
 
-    # (b) Geometry vs volume
-    ax = axes[0, 1]
-    ax2 = ax.twinx()
-    ln1 = ax.plot(data['volumes'], data['radii'], 'g-', linewidth=2, label='Radius [cm]')
-    ln2 = ax2.plot(data['volumes'], data['thicknesses'], 'm--', linewidth=2, label='Wall thickness [mm]')
-    ax.set_xlabel('Fill Volume [mL]')
-    ax.set_ylabel('Radius [cm]', color='g')
-    ax2.set_ylabel('Wall Thickness [mm]', color='m')
-    ax.set_title('(b) Geometry vs Fill State')
-    lns = ln1 + ln2
-    ax.legend(lns, [l.get_label() for l in lns], fontsize=8)
-    ax.grid(True, alpha=0.3)
+        # (b) Geometry vs volume
+        ax = axes[0, 1]
+        ax2 = ax.twinx()
+        ln1 = ax.plot(data['volumes'], data['radii'], color=C_GREEN, label='Radius (cm)')
+        ln2 = ax2.plot(data['volumes'], data['thicknesses'], color=C_PURPLE, ls='--',
+                       label='Wall thickness (mm)')
+        ax.set_xlabel('Fill volume (mL)')
+        ax.set_ylabel('Radius (cm)', color=C_GREEN)
+        ax2.set_ylabel('Wall thickness (mm)', color=C_PURPLE)
+        ax.set_title('(b) Geometry vs fill state')
+        lns = ln1 + ln2
+        ax.legend(lns, [l.get_label() for l in lns]); ax.grid(True)
 
-    # (c) Elastic modulus vs volume
-    ax = axes[1, 0]
-    ax.plot(data['volumes'], data['moduli'], 'k-', linewidth=2)
-    ax.set_xlabel('Fill Volume [mL]')
-    ax.set_ylabel('E [kPa]')
-    ax.set_title('(c) Wall Elastic Modulus (Strain-Stiffening)')
-    ax.set_yscale('log')
-    ax.grid(True, alpha=0.3)
+        # (c) Elastic modulus vs volume
+        ax = axes[1, 0]
+        ax.plot(data['volumes'], data['moduli'], color=C_BLUE)
+        ax.set_xlabel('Fill volume (mL)')
+        ax.set_ylabel('$E$ (kPa)')
+        ax.set_title('(c) Wall elastic modulus (strain-stiffening)')
+        ax.set_yscale('log'); ax.grid(True)
 
-    # (d) Intravesical pressure vs volume
-    ax = axes[1, 1]
-    ax.plot(data['volumes'], data['pressures'] / 98.0665, 'brown', linewidth=2)
-    ax.set_xlabel('Fill Volume [mL]')
-    ax.set_ylabel('Intravesical Pressure [cmH₂O]')
-    ax.set_title('(d) Cystometric Pressure Curve')
-    ax.grid(True, alpha=0.3)
+        # (d) Intravesical pressure vs volume
+        ax = axes[1, 1]
+        ax.plot(data['volumes'], data['pressures'] / 98.0665, color=C_RED)
+        ax.set_xlabel('Fill volume (mL)')
+        ax.set_ylabel('Intravesical pressure (cmH$_2$O)')
+        ax.set_title('(d) Cystometric pressure curve')
+        ax.grid(True)
 
-    plt.tight_layout()
-    path = os.path.join(FIGURES_DIR, 'fig_bladder_frequency_vs_volume.png')
-    fig.savefig(path, dpi=150, bbox_inches='tight')
-    plt.close(fig)
-    print(f'  Saved: {path}')
+        plt.tight_layout()
+        path = os.path.join(FIGURES_DIR, 'fig_bladder_frequency_vs_volume.png')
+        fig.savefig(path, bbox_inches='tight')
+        if save_paper:
+            pp = os.path.join(PAPER_FIGURES_DIR, 'fig_bladder_frequency_vs_volume.pdf')
+            fig.savefig(pp, bbox_inches='tight'); print(f'  Saved: {pp}')
+        plt.close(fig)
+        print(f'  Saved: {path}')
     return path
 
 
@@ -364,53 +386,194 @@ def coupling_analysis():
     }
 
 
-def plot_coupling(data: dict):
-    """Generate fig_bladder_coupling.png."""
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-    fig.suptitle(
-        f'Coupling Pathways to Bladder (300 mL, f₂ = {data["f2"]:.1f} Hz)',
-        fontsize=13, fontweight='bold',
+def plot_coupling(data: dict, save_paper=True):
+    """Generate fig_bladder_coupling (PNG + PDF)."""
+    with plt.rc_context(_PUB_RC):
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+        # (a) Airborne vs mechanical
+        ax = axes[0]
+        ax.semilogy(data['freq'], data['airborne'], color=C_BLUE, label='Airborne $(ka)^2$')
+        ax.semilogy(data['freq'], data['mechanical'], color=C_RED,
+                    label=r'Mechanical (seat$\to$pelvis$\to$bladder)')
+        ax.axvline(data['f2'], color=C_GREY, ls=':', label=f'$f_2 = {data["f2"]:.1f}$ Hz')
+        ax.axvspan(4, 8, alpha=0.10, color=C_ORANGE)
+        ax.set_xlabel('Frequency (Hz)')
+        ax.set_ylabel('Effective coupling (normalised)')
+        ax.set_title('(a) Coupling pathways')
+        ax.legend(); ax.grid(True)
+
+        # (b) Coupling ratio
+        ax = axes[1]
+        ax.semilogy(data['freq'], data['ratio'], color=C_BLUE)
+        ax.axvline(data['f2'], color=C_GREY, ls=':')
+        ax.set_xlabel('Frequency (Hz)')
+        ax.set_ylabel('Mechanical / airborne ratio')
+        ax.set_title('(b) Mechanical advantage')
+        ax.grid(True)
+
+        # (c) Components of mechanical path
+        ax = axes[2]
+        ax.plot(data['freq'], data['T_pelvis'], color=C_GREEN,
+                label=r'Seat$\to$pelvis transmissibility')
+        ax.plot(data['freq'], data['H_bladder'], color=C_PURPLE, ls='--',
+                label='Bladder modal amplification')
+        ax.axvline(data['f2'], color=C_GREY, ls=':', label=f'$f_2 = {data["f2"]:.1f}$ Hz')
+        ax.axvspan(4, 8, alpha=0.10, color=C_ORANGE, label='ISO 2631 band')
+        ax.set_xlabel('Frequency (Hz)')
+        ax.set_ylabel('Amplification factor')
+        ax.set_title('(c) Mechanical pathway components')
+        ax.legend(); ax.grid(True)
+
+        plt.tight_layout()
+        path = os.path.join(FIGURES_DIR, 'fig_bladder_coupling.png')
+        fig.savefig(path, bbox_inches='tight')
+        if save_paper:
+            pp = os.path.join(PAPER_FIGURES_DIR, 'fig_bladder_coupling.pdf')
+            fig.savefig(pp, bbox_inches='tight'); print(f'  Saved: {pp}')
+        plt.close(fig)
+        print(f'  Saved: {path}')
+    return path
+
+
+# ---------------------------------------------------------------------------
+# Sub-resonant forced response analysis
+# ---------------------------------------------------------------------------
+
+def sub_resonant_analysis(volumes=None, f_wbv=6.0, a_seat=0.5):
+    """
+    Compute forced response at sub-resonant WBV frequency vs at resonance.
+
+    Parameters
+    ----------
+    volumes : array-like, optional
+        Fill volumes in mL (default: 50–500 mL).
+    f_wbv : float
+        Sub-resonant excitation frequency in Hz (default: 6 Hz, near pelvic peak).
+    a_seat : float
+        Seat acceleration RMS in m/s² (default: 0.5, ISO 2631 action value).
+
+    Returns
+    -------
+    dict with displacement, strain, strain rate at both frequencies.
+    """
+    if volumes is None:
+        volumes = np.linspace(50, 500, 50)
+
+    f_pelvis = 5.5
+    zeta_pelvis = 0.25
+
+    # Pelvic transmissibility at the WBV frequency
+    r_p_wbv = f_wbv / f_pelvis
+    T_wbv = np.sqrt((1 + (2 * zeta_pelvis * r_p_wbv) ** 2) /
+                    ((1 - r_p_wbv ** 2) ** 2 + (2 * zeta_pelvis * r_p_wbv) ** 2))
+    y_seat_wbv = a_seat / (2 * np.pi * f_wbv) ** 2
+
+    f2_vals, y_wall_wbv, y_wall_res, TH_wbv_vals, TH_res_vals = [], [], [], [], []
+
+    for v in volumes:
+        model = make_bladder_model(v)
+        R = model.equivalent_sphere_radius
+        freqs = flexural_mode_frequencies_v2(model, n_max=2)
+        f2 = freqs[2]
+        f2_vals.append(f2)
+        zeta = model.damping_ratio
+
+        # Sub-resonant forced response at f_wbv
+        r_b = f_wbv / f2
+        H_wbv = 1 / np.sqrt((1 - r_b ** 2) ** 2 + (2 * zeta * r_b) ** 2)
+        y_wbv = y_seat_wbv * T_wbv * H_wbv
+        y_wall_wbv.append(y_wbv)
+        TH_wbv_vals.append(T_wbv * H_wbv)
+
+        # At-resonance forced response
+        r_p_res = f2 / f_pelvis
+        T_res = np.sqrt((1 + (2 * zeta_pelvis * r_p_res) ** 2) /
+                        ((1 - r_p_res ** 2) ** 2 + (2 * zeta_pelvis * r_p_res) ** 2))
+        y_seat_res = a_seat / (2 * np.pi * f2) ** 2
+        H_res = 1 / (2 * zeta)  # Q at resonance
+        y_res = y_seat_res * T_res * H_res
+        y_wall_res.append(y_res)
+        TH_res_vals.append(T_res * H_res)
+
+    return dict(
+        volumes=np.asarray(volumes),
+        f_wbv=f_wbv,
+        a_seat=a_seat,
+        f2=np.array(f2_vals),
+        y_wall_wbv_um=np.array(y_wall_wbv) * 1e6,
+        y_wall_res_um=np.array(y_wall_res) * 1e6,
+        TH_wbv=np.array(TH_wbv_vals),
+        TH_res=np.array(TH_res_vals),
+        T_wbv=T_wbv,
     )
 
-    # (a) Airborne vs mechanical
-    ax = axes[0]
-    ax.semilogy(data['freq'], data['airborne'], 'b-', linewidth=2, label='Airborne (ka)²')
-    ax.semilogy(data['freq'], data['mechanical'], 'r-', linewidth=2, label='Mechanical (seat→pelvis→bladder)')
-    ax.axvline(data['f2'], color='gray', ls=':', label=f'f₂ = {data["f2"]:.1f} Hz')
-    ax.axvspan(4, 8, alpha=0.1, color='orange')
-    ax.set_xlabel('Frequency [Hz]')
-    ax.set_ylabel('Effective Coupling (normalised)')
-    ax.set_title('(a) Coupling Pathways')
-    ax.legend(fontsize=7)
-    ax.grid(True, alpha=0.3)
 
-    # (b) Coupling ratio
-    ax = axes[1]
-    ax.semilogy(data['freq'], data['ratio'], 'k-', linewidth=2)
-    ax.axvline(data['f2'], color='gray', ls=':')
-    ax.axhspan(1, 1, color='gray')
-    ax.set_xlabel('Frequency [Hz]')
-    ax.set_ylabel('Mechanical / Airborne Ratio')
-    ax.set_title('(b) Mechanical Advantage')
-    ax.grid(True, alpha=0.3)
+def plot_sub_resonant_response(sub_data=None, save_paper=True):
+    """Generate fig_sub_resonant_response (PNG + PDF)."""
+    if sub_data is None:
+        sub_data = sub_resonant_analysis()
 
-    # (c) Components of mechanical path
-    ax = axes[2]
-    ax.plot(data['freq'], data['T_pelvis'], 'g-', linewidth=2, label='Seat→Pelvis transmissibility')
-    ax.plot(data['freq'], data['H_bladder'], 'm--', linewidth=2, label='Bladder modal amplification')
-    ax.axvline(data['f2'], color='gray', ls=':', label=f'f₂ = {data["f2"]:.1f} Hz')
-    ax.axvspan(4, 8, alpha=0.1, color='orange', label='ISO 2631 range')
-    ax.set_xlabel('Frequency [Hz]')
-    ax.set_ylabel('Amplification Factor')
-    ax.set_title('(c) Mechanical Pathway Components')
-    ax.legend(fontsize=7)
-    ax.grid(True, alpha=0.3)
+    # Also compute T×H vs frequency for a representative fill (300 mL)
+    model_300 = make_bladder_model(300.0)
+    f2_300 = flexural_mode_frequencies_v2(model_300, n_max=2)[2]
+    zeta_300 = model_300.damping_ratio
+    f_pelvis, zeta_pelvis = 5.5, 0.25
+    freq = np.linspace(1, 25, 500)
+    r_p = freq / f_pelvis
+    T = np.sqrt((1 + (2 * zeta_pelvis * r_p) ** 2) /
+                ((1 - r_p ** 2) ** 2 + (2 * zeta_pelvis * r_p) ** 2))
+    r_b = freq / f2_300
+    H = 1 / np.sqrt((1 - r_b ** 2) ** 2 + (2 * zeta_300 * r_b) ** 2)
+    TH = T * H
+    # Seat displacement amplitude varies as a/(2πf)²
+    a_seat = sub_data['a_seat']
+    y_seat = a_seat / (2 * np.pi * freq) ** 2
+    y_wall = y_seat * TH
 
-    plt.tight_layout()
-    path = os.path.join(FIGURES_DIR, 'fig_bladder_coupling.png')
-    fig.savefig(path, dpi=150, bbox_inches='tight')
-    plt.close(fig)
-    print(f'  Saved: {path}')
+    with plt.rc_context(_PUB_RC):
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+        # (a) T×H product vs frequency at 300 mL
+        ax = axes[0]
+        ax.plot(freq, T, color=C_GREEN, ls='--', label='$T$ (pelvic)')
+        ax.plot(freq, H, color=C_PURPLE, ls='--', label='$H$ (bladder)')
+        ax.plot(freq, TH, color=C_RED, lw=2, label='$T \\times H$')
+        ax.axvline(f2_300, color=C_GREY, ls=':', label=f'$f_2 = {f2_300:.1f}$ Hz')
+        ax.axvspan(4, 8, alpha=0.10, color=C_ORANGE, label='ISO 2631 band')
+        ax.set_xlabel('Frequency (Hz)')
+        ax.set_ylabel('Amplification factor')
+        ax.set_title('(a) Combined response at 300 mL')
+        ax.legend(); ax.grid(True)
+
+        # (b) Wall displacement vs frequency at 300 mL
+        ax = axes[1]
+        ax.semilogy(freq, y_wall * 1e6, color=C_BLUE, lw=2)
+        ax.axvline(f2_300, color=C_GREY, ls=':')
+        ax.axvspan(4, 8, alpha=0.10, color=C_ORANGE)
+        ax.set_xlabel('Frequency (Hz)')
+        ax.set_ylabel(r'Wall displacement ($\mu$m)')
+        ax.set_title('(b) Displacement at 300 mL')
+        ax.grid(True)
+
+        # (c) Wall displacement vs fill volume: sub-resonant vs at-resonance
+        ax = axes[2]
+        ax.plot(sub_data['volumes'], sub_data['y_wall_wbv_um'], color=C_RED, lw=2,
+                label=f'Sub-resonant ({sub_data["f_wbv"]:.0f} Hz)')
+        ax.plot(sub_data['volumes'], sub_data['y_wall_res_um'], color=C_BLUE, lw=2,
+                ls='--', label='At resonance ($f_2$)')
+        ax.set_xlabel('Fill volume (mL)')
+        ax.set_ylabel(r'Peak wall displacement ($\mu$m)')
+        ax.set_title('(c) Sub-resonant vs resonant displacement')
+        ax.legend(); ax.grid(True)
+
+        plt.tight_layout()
+        path = os.path.join(FIGURES_DIR, "fig_sub_resonant_response.png")
+        fig.savefig(path, bbox_inches="tight")
+        if save_paper:
+            pp = os.path.join(PAPER_FIGURES_DIR, "fig_sub_resonant_response.pdf")
+            fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
+        plt.close(fig); print("  Saved:", path)
     return path
 
 
@@ -422,48 +585,64 @@ def plot_stiffness_mass_decomposition(save_paper=True):
     data = decomposition_vs_volume()
     vols = data["vol_mL"]
     mi = find_f2_minimum()
-    fig, axes = plt.subplots(2, 2, figsize=(12, 9))
-    fig.suptitle(r"Stiffness / Mass Decomposition of $f_2$ vs Fill Volume", fontsize=14, fontweight="bold")
-    ax = axes[0, 0]
-    ax.semilogy(vols, data["K_bend"], "b-", lw=2, label=r"$K_\mathrm{bend}$")
-    ax.semilogy(vols, data["K_memb"], "g-", lw=2, label=r"$K_\mathrm{memb}$")
-    ax.semilogy(vols, data["K_P"], "r-", lw=2, label=r"$K_P$ (pre-stress)")
-    ax.semilogy(vols, data["K_total"], "k--", lw=2.5, label=r"$K_\mathrm{total}$")
-    if mi["V_min"] is not None: ax.axvline(mi["V_min"], color="grey", ls=":", alpha=0.5)
-    ax.set(xlabel="Fill Volume [mL]", ylabel="Stiffness [Pa/m]", title="(a) Stiffness Components")
-    ax.legend(fontsize=8, loc="upper left"); ax.grid(True, alpha=0.3)
-    ax = axes[0, 1]
-    ax.plot(vols, data["m_wall"], "b-", lw=2, label=r"$m_\mathrm{wall} = \rho_w h$")
-    ax.plot(vols, data["m_fluid"], "r-", lw=2, label=r"$m_\mathrm{fluid} = \rho_f R/n$")
-    ax.plot(vols, data["m_eff"], "k--", lw=2.5, label=r"$m_\mathrm{eff}$")
-    if mi["V_min"] is not None: ax.axvline(mi["V_min"], color="grey", ls=":", alpha=0.5)
-    ax.set(xlabel="Fill Volume [mL]", ylabel=r"Mass per unit area [kg/m$^2$]", title="(b) Effective Mass Components")
-    ax.legend(fontsize=8); ax.grid(True, alpha=0.3)
-    ax = axes[1, 0]
-    ax.plot(vols, data["f_n"], "b-", lw=2.5)
-    if mi["V_min"] is not None:
-        ax.plot(mi["V_min"], mi["f_min"], "ro", ms=10, zorder=5)
-        ax.annotate("$V^* = %d$ mL\n$f_2^\\mathrm{min} = %.1f$ Hz" % (mi["V_min"], mi["f_min"]),
-            xy=(mi["V_min"], mi["f_min"]), xytext=(mi["V_min"] + 80, mi["f_min"] + 1.5), fontsize=10,
-            arrowprops=dict(arrowstyle="->", color="red", lw=1.5),
-            bbox=dict(boxstyle="round,pad=0.3", fc="lightyellow", ec="red", alpha=0.9))
-    ax.axhspan(4, 8, alpha=0.12, color="orange", label="ISO 2631 range")
-    ax.set(xlabel="Fill Volume [mL]", ylabel=r"$f_2$ [Hz]", title=r"(c) $n=2$ Mode Frequency")
-    ax.legend(fontsize=8); ax.grid(True, alpha=0.3)
-    ax = axes[1, 1]
-    ax.plot(mi["volumes"], mi["dlnK_dV"] * 1e3, "r-", lw=2, label=r"$\mathrm{d}(\ln K_\mathrm{total})/\mathrm{d}V$")
-    ax.plot(mi["volumes"], mi["dlnm_dV"] * 1e3, "b-", lw=2, label=r"$\mathrm{d}(\ln m_\mathrm{eff})/\mathrm{d}V$")
-    ax.axhline(0, color="grey", ls="-", alpha=0.3)
-    if mi["V_analytic"] is not None: ax.axvline(mi["V_analytic"], color="grey", ls=":", alpha=0.5, label="crossing at %d mL" % mi["V_analytic"])
-    ax.set(xlabel="Fill Volume [mL]", ylabel=r"Log-rate [$\times 10^{-3}$ mL$^{-1}$]", title=r"(d) Condition $\partial f_2 / \partial V = 0$")
-    ax.legend(fontsize=8); ax.grid(True, alpha=0.3)
-    plt.tight_layout()
-    path = os.path.join(FIGURES_DIR, "fig_stiffness_mass_decomposition.png")
-    fig.savefig(path, dpi=150, bbox_inches="tight")
-    if save_paper:
-        pp = os.path.join(PAPER_FIGURES_DIR, "fig_stiffness_mass_decomposition.pdf")
-        fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
-    plt.close(fig); print("  Saved:", path); return path
+    with plt.rc_context(_PUB_RC):
+        fig, axes = plt.subplots(2, 2, figsize=(12, 9))
+        ax = axes[0, 0]
+        ax.semilogy(vols, data["K_bend"], color=C_BLUE, label=r"$K_\mathrm{bend}$")
+        ax.semilogy(vols, data["K_memb"], color=C_GREEN, label=r"$K_\mathrm{memb}$")
+        ax.semilogy(vols, data["K_P"], color=C_RED, label=r"$K_P$ (pre-stress)")
+        ax.semilogy(vols, data["K_total"], color=C_GREY, ls="--", lw=2, label=r"$K_\mathrm{total}$")
+        if mi["V_min"] is not None:
+            ax.axvline(mi["V_min"], color=C_GREY, ls=":", alpha=0.5)
+        ax.set(xlabel="Fill volume (mL)", ylabel="Stiffness (Pa/m)", title="(a) Stiffness components")
+        ax.legend(loc="upper left"); ax.grid(True)
+
+        ax = axes[0, 1]
+        ax.plot(vols, data["m_wall"], color=C_BLUE, label=r"$m_\mathrm{wall} = \rho_w h$")
+        ax.plot(vols, data["m_fluid"], color=C_RED, label=r"$m_\mathrm{fluid} = \rho_f R/n$")
+        ax.plot(vols, data["m_eff"], color=C_GREY, ls="--", lw=2, label=r"$m_\mathrm{eff}$")
+        if mi["V_min"] is not None:
+            ax.axvline(mi["V_min"], color=C_GREY, ls=":", alpha=0.5)
+        ax.set(xlabel="Fill volume (mL)", ylabel=r"Mass per unit area (kg/m$^2$)",
+               title="(b) Effective mass components")
+        ax.legend(); ax.grid(True)
+
+        ax = axes[1, 0]
+        ax.plot(vols, data["f_n"], color=C_BLUE, lw=2)
+        if mi["V_min"] is not None:
+            ax.plot(mi["V_min"], mi["f_min"], "o", color=C_RED, ms=8, zorder=5)
+            ax.annotate(
+                "$V^* = %d$ mL\n$f_2^\\mathrm{min} = %.1f$ Hz" % (mi["V_min"], mi["f_min"]),
+                xy=(mi["V_min"], mi["f_min"]),
+                xytext=(mi["V_min"] + 80, mi["f_min"] + 1.5),
+                arrowprops=dict(arrowstyle="->", color=C_RED, lw=1.2),
+                bbox=dict(boxstyle="round,pad=0.3", fc="lightyellow", ec=C_RED, alpha=0.9))
+        ax.axhspan(4, 8, alpha=0.10, color=C_ORANGE, label="ISO 2631 band")
+        ax.set(xlabel="Fill volume (mL)", ylabel=r"$f_2$ (Hz)", title=r"(c) $n=2$ mode frequency")
+        ax.legend(); ax.grid(True)
+
+        ax = axes[1, 1]
+        ax.plot(mi["volumes"], mi["dlnK_dV"] * 1e3, color=C_RED,
+                label=r"$\mathrm{d}(\ln K_\mathrm{total})/\mathrm{d}V$")
+        ax.plot(mi["volumes"], mi["dlnm_dV"] * 1e3, color=C_BLUE,
+                label=r"$\mathrm{d}(\ln m_\mathrm{eff})/\mathrm{d}V$")
+        ax.axhline(0, color=C_GREY, ls="-", alpha=0.3)
+        if mi["V_analytic"] is not None:
+            ax.axvline(mi["V_analytic"], color=C_GREY, ls=":", alpha=0.5,
+                       label="crossing at %d mL" % mi["V_analytic"])
+        ax.set(xlabel="Fill volume (mL)",
+               ylabel=r"Log-rate ($\times 10^{-3}$ mL$^{-1}$)",
+               title=r"(d) Condition $\partial f_2 / \partial V = 0$")
+        ax.legend(); ax.grid(True)
+
+        plt.tight_layout()
+        path = os.path.join(FIGURES_DIR, "fig_stiffness_mass_decomposition.png")
+        fig.savefig(path, bbox_inches="tight")
+        if save_paper:
+            pp = os.path.join(PAPER_FIGURES_DIR, "fig_stiffness_mass_decomposition.pdf")
+            fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
+        plt.close(fig); print("  Saved:", path)
+    return path
 
 def plot_tornado_chart(vol_mL=None, save_paper=True):
     if vol_mL is None:
@@ -472,52 +651,73 @@ def plot_tornado_chart(vol_mL=None, save_paper=True):
     f_base = list(sens.values())[0]["f_base"]
     items = sorted(sens.items(), key=lambda x: x[1]["delta_f"])
     vol_label = int(round(vol_mL))
-    fig, ax = plt.subplots(figsize=(10, 5))
-    y_pos = np.arange(len(items))
-    for i, (pname, v) in enumerate(items):
-        left, right = min(v["f_lo"], v["f_hi"]), max(v["f_lo"], v["f_hi"])
-        ax.barh(i, right - left, left=left, height=0.6, color="steelblue", alpha=0.8, edgecolor="navy")
-        ax.text(right + 0.15, i, r"$\Delta f_2 = %.1f$ Hz (%.0f%%)" % (v["delta_f"], v["pct"]), va="center", fontsize=9)
-    ax.axvline(f_base, color="red", ls="--", lw=1.5, label="Baseline $f_2 = %.1f$ Hz" % f_base)
-    ax.set_yticks(y_pos); ax.set_yticklabels([v["label"] for _, v in items], fontsize=10)
-    ax.set_xlabel(r"$f_2$ [Hz]", fontsize=11)
-    ax.set_title("Tornado Chart: Parameter Sensitivity at $V = %d$ mL" % vol_label, fontsize=13, fontweight="bold")
-    ax.legend(fontsize=9); ax.grid(True, axis="x", alpha=0.3); plt.tight_layout()
-    path = os.path.join(FIGURES_DIR, "fig_tornado_sensitivity.png")
-    fig.savefig(path, dpi=150, bbox_inches="tight")
-    if save_paper:
-        pp = os.path.join(PAPER_FIGURES_DIR, "fig_tornado_sensitivity.pdf")
-        fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
-    plt.close(fig); print("  Saved:", path); return path
+    with plt.rc_context(_PUB_RC):
+        fig, ax = plt.subplots(figsize=(10, 5))
+        y_pos = np.arange(len(items))
+        for i, (pname, v) in enumerate(items):
+            left, right = min(v["f_lo"], v["f_hi"]), max(v["f_lo"], v["f_hi"])
+            ax.barh(i, right - left, left=left, height=0.6,
+                    color=C_BLUE, alpha=0.85, edgecolor='#1a3e6e')
+            ax.text(right + 0.15, i,
+                    r"$\Delta f_2 = %.1f$ Hz (%.0f%%)" % (v["delta_f"], v["pct"]),
+                    va="center")
+        ax.axvline(f_base, color=C_RED, ls="--", lw=1.2,
+                   label="Baseline $f_2 = %.1f$ Hz" % f_base)
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels([v["label"] for _, v in items])
+        ax.set_xlabel(r"$f_2$ (Hz)")
+        ax.set_title("Parameter sensitivity at $V = %d$ mL" % vol_label)
+        ax.legend(); ax.grid(True, axis="x")
+        plt.tight_layout()
+        path = os.path.join(FIGURES_DIR, "fig_tornado_sensitivity.png")
+        fig.savefig(path, bbox_inches="tight")
+        if save_paper:
+            pp = os.path.join(PAPER_FIGURES_DIR, "fig_tornado_sensitivity.pdf")
+            fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
+        plt.close(fig); print("  Saved:", path)
+    return path
 
 def plot_minimum_shift(save_paper=True):
     shifts = minimum_shift_analysis()
     base_V, base_f = shifts["_base"]["V_min"], shifts["_base"]["f_min"]
-    rows = [(label, shifts[pname + "_lo"]["V_min"], shifts[pname + "_hi"]["V_min"], shifts[pname + "_lo"]["f_min"], shifts[pname + "_hi"]["f_min"]) for pname, (lo, hi, label, unit) in SENSITIVITY_PARAMS.items()]
+    rows = [(label, shifts[pname + "_lo"]["V_min"], shifts[pname + "_hi"]["V_min"],
+             shifts[pname + "_lo"]["f_min"], shifts[pname + "_hi"]["f_min"])
+            for pname, (lo, hi, label, unit) in SENSITIVITY_PARAMS.items()]
     rows.sort(key=lambda r: abs(r[2] - r[1]))
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
-    y_pos = np.arange(len(rows))
-    for i, (label, V_lo, V_hi, f_lo, f_hi) in enumerate(rows):
-        ax1.barh(i, max(V_lo,V_hi)-min(V_lo,V_hi), left=min(V_lo,V_hi), height=0.6, color="coral", alpha=0.8, edgecolor="darkred")
-        ax1.text(max(V_lo,V_hi)+5, i, "%d--%d mL" % (min(V_lo,V_hi), max(V_lo,V_hi)), va="center", fontsize=9)
-        ax2.barh(i, max(f_lo,f_hi)-min(f_lo,f_hi), left=min(f_lo,f_hi), height=0.6, color="steelblue", alpha=0.8, edgecolor="navy")
-        ax2.text(max(f_lo,f_hi)+0.15, i, "%.1f--%.1f Hz" % (min(f_lo,f_hi), max(f_lo,f_hi)), va="center", fontsize=9)
-    ax1.axvline(base_V, color="red", ls="--", lw=1.5, label="Baseline $V^* = %d$ mL" % base_V)
-    ax1.set_yticks(y_pos); ax1.set_yticklabels([r[0] for r in rows], fontsize=10)
-    ax1.set_xlabel("Volume at $f_2$ Minimum [mL]"); ax1.set_title("(a) Shift in $V^*$")
-    ax1.legend(fontsize=9); ax1.grid(True, axis="x", alpha=0.3)
-    ax2.axvline(base_f, color="red", ls="--", lw=1.5, label=r"Baseline $f_2^\mathrm{min} = %.1f$ Hz" % base_f)
-    ax2.set_yticks(y_pos); ax2.set_yticklabels([r[0] for r in rows], fontsize=10)
-    ax2.set_xlabel(r"$f_2^\mathrm{min}$ [Hz]"); ax2.set_title(r"(b) Shift in $f_2^\mathrm{min}$")
-    ax2.legend(fontsize=9); ax2.grid(True, axis="x", alpha=0.3)
-    fig.suptitle(r"Robustness of the $f_2$ Minimum to Parameter Uncertainty", fontsize=13, fontweight="bold")
-    plt.tight_layout()
-    path = os.path.join(FIGURES_DIR, "fig_minimum_shift.png")
-    fig.savefig(path, dpi=150, bbox_inches="tight")
-    if save_paper:
-        pp = os.path.join(PAPER_FIGURES_DIR, "fig_minimum_shift.pdf")
-        fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
-    plt.close(fig); print("  Saved:", path); return path
+    with plt.rc_context(_PUB_RC):
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
+        y_pos = np.arange(len(rows))
+        for i, (label, V_lo, V_hi, f_lo, f_hi) in enumerate(rows):
+            ax1.barh(i, max(V_lo, V_hi) - min(V_lo, V_hi), left=min(V_lo, V_hi),
+                     height=0.6, color=C_ORANGE, alpha=0.85, edgecolor='#8b4513')
+            ax1.text(max(V_lo, V_hi) + 5, i,
+                     "%d--%d mL" % (min(V_lo, V_hi), max(V_lo, V_hi)), va="center")
+            ax2.barh(i, max(f_lo, f_hi) - min(f_lo, f_hi), left=min(f_lo, f_hi),
+                     height=0.6, color=C_BLUE, alpha=0.85, edgecolor='#1a3e6e')
+            ax2.text(max(f_lo, f_hi) + 0.15, i,
+                     "%.1f--%.1f Hz" % (min(f_lo, f_hi), max(f_lo, f_hi)), va="center")
+        ax1.axvline(base_V, color=C_RED, ls="--", lw=1.2,
+                    label="Baseline $V^* = %d$ mL" % base_V)
+        ax1.set_yticks(y_pos)
+        ax1.set_yticklabels([r[0] for r in rows])
+        ax1.set_xlabel("Volume at $f_2$ minimum (mL)")
+        ax1.set_title("(a) Shift in $V^*$")
+        ax1.legend(); ax1.grid(True, axis="x")
+        ax2.axvline(base_f, color=C_RED, ls="--", lw=1.2,
+                    label=r"Baseline $f_2^\mathrm{min} = %.1f$ Hz" % base_f)
+        ax2.set_yticks(y_pos)
+        ax2.set_yticklabels([r[0] for r in rows])
+        ax2.set_xlabel(r"$f_2^\mathrm{min}$ (Hz)")
+        ax2.set_title(r"(b) Shift in $f_2^\mathrm{min}$")
+        ax2.legend(); ax2.grid(True, axis="x")
+        plt.tight_layout()
+        path = os.path.join(FIGURES_DIR, "fig_minimum_shift.png")
+        fig.savefig(path, bbox_inches="tight")
+        if save_paper:
+            pp = os.path.join(PAPER_FIGURES_DIR, "fig_minimum_shift.pdf")
+            fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
+        plt.close(fig); print("  Saved:", path)
+    return path
 
 def print_report(param_data, coupling_data):
     print("\n" + "=" * 72 + "\n  BLADDER RESONANCE MODEL\n" + "=" * 72)
@@ -536,4 +736,6 @@ if __name__ == '__main__':
     plot_stiffness_mass_decomposition()
     plot_tornado_chart()
     plot_minimum_shift()
+    sub_data = sub_resonant_analysis()
+    plot_sub_resonant_response(sub_data)
     print_report(param_data, coupling_data)

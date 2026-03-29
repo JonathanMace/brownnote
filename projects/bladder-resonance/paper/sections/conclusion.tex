@@ -6,29 +6,30 @@ spherical shell and computed its flexural mode frequencies across the
 physiological fill range.  The principal findings are:
 
 \begin{enumerate}
-  \item The fundamental flexural mode ($n = 2$) spans
-    \SIrange{13.5}{17.1}{\hertz} for fill volumes of
-    \SIrange{150}{500}{\milli\litre}
-    where the thin-shell assumption is valid ($h/R < 0.1$).
-    A frequency minimum of \SI{13.5}{\hertz} occurs at
+  \item The fundamental flexural mode ($n = 2$) follows a U-shaped
+    frequency--volume curve, with a minimum of \SI{13.5}{\hertz} at
     \SI{222}{\milli\litre}, arising from the competition between geometric
     softening (increasing radius and thinning wall) and strain-stiffening of
-    the detrusor muscle.
+    the detrusor muscle.  For fill volumes of
+    \SIrange{150}{500}{\milli\litre} where the thin-shell assumption is
+    valid ($h/R < 0.1$), $f_2$ spans \SIrange{13.5}{17.1}{\hertz}.
+    This non-monotonic, fill-dependent resonance behaviour is the central
+    physical contribution of this work.
+
+  \item The sub-resonant forced response is the practically dominant
+    excitation mechanism under occupational WBV.  At \SI{6}{\hertz}
+    (near the pelvic transmissibility peak), the predicted wall displacement
+    ($\sim$\SI{160}{\micro\metre}) exceeds the at-resonance displacement
+    ($\sim$\SI{47}{\micro\metre}) by a factor of 3--4$\times$, because the
+    larger seat displacement amplitude and pelvic amplification more than
+    compensate for the reduced bladder modal response.
 
   \item Mechanical vibration transmitted through the pelvic skeleton is
     approximately $6{,}400$ times more effective than airborne sound at
     exciting the bladder's $n = 2$ mode at \SI{300}{\milli\litre} fill.
     This coupling disparity, driven by the $(ka)^2$ penalty in the Rayleigh
     regime ($ka \approx 0.01$), confirms that whole-body vibration is the
-    dominant excitation pathway---consistent with the epidemiological
-    evidence and with the analogous result for the abdominal cavity.
-
-  \item The bladder's predicted resonance range (\SIrange{13.5}{17.1}{\hertz})
-    sits above the ISO~2631 peak pelvic transmissibility band
-    (\SIrange{4}{8}{\hertz}).  At typical occupational WBV frequencies, the
-    bladder therefore responds as a forced sub-resonant oscillator driven by
-    amplified pelvic motion, rather than being excited at its own natural
-    frequency.
+    dominant excitation pathway.
 
   \item The breathing mode ($f_0 \approx \SI{9500}{\hertz}$) is dominated by
     the fluid bulk modulus and is irrelevant to WBV or infrasonic exposure,
@@ -36,18 +37,16 @@ physiological fill range.  The principal findings are:
     mode families observed in the larger abdominal cavity.
 \end{enumerate}
 
-The model provides a first-principles basis for understanding
-vibration-induced bladder symptoms.  Under representative occupational WBV
+The model provides a first-principles physical characterisation of
+fill-dependent bladder resonance.  Under representative occupational WBV
 exposure ($a = \SI{0.5}{\metre\per\second\squared}$), the predicted peak
-bladder wall displacement is approximately \SI{47}{\micro\metre} at resonance
-and \SI{160}{\micro\metre} in the sub-resonant regime---roughly three orders
-of magnitude smaller than normal filling displacements, yet delivered at cyclic
-strain rates ($\sim$\SI{0.1}{\per\second}) that are 500 times faster than
-quasi-static filling and thus relevant to the rate-sensitive PIEZO2
-mechanotransduction pathway.  These results may inform both occupational
-exposure guidelines and the design of therapeutic WBV protocols for pelvic
-floor rehabilitation.  Future work should characterise the dynamic activation
-thresholds of bladder mechanoreceptors at infrasonic frequencies, incorporate
-the pelvic boundary constraint through finite element analysis with
-anatomically realistic geometry, and pursue experimental validation of the
-predicted resonance range.
+bladder wall displacements are small relative to physiological deformations
+but are delivered at cyclic strain rates ($\sim$\SI{0.1}{\per\second}) that
+are approximately 500 times faster than quasi-static filling.  Whether these
+strain rates are sufficient to activate bladder mechanotransduction pathways
+(particularly the rate-sensitive PIEZO2 channel) remains an open question
+requiring experimental investigation.  Future work should characterise the
+dynamic activation thresholds of bladder mechanoreceptors at infrasonic
+frequencies, incorporate the pelvic boundary constraint through finite
+element analysis with anatomically realistic geometry, and pursue
+experimental validation of the predicted fill-dependent resonance range.
