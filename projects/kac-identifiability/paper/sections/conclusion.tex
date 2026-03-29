@@ -3,28 +3,41 @@
 % =============================================================================
 \section{Conclusion}\label{sec:conclusion}
 
-We have investigated the practical identifiability of geometric and material
-parameters of a fluid-filled viscoelastic oblate spheroidal shell from its
-resonant frequencies.  The principal findings are:
+We have studied the practical identifiability of viscoelastic shell parameters
+from resonant frequencies in the spirit of Kac's spectral question.  For the
+equivalent-sphere flexural model used here, the inverse problem based on the
+parameter triple $(a,c,E)$ is almost singular at the spherical operating point
+but well conditioned at the canonical oblate operating point.
 
+The main findings are:
 \begin{enumerate}
-  \item The equivalent-sphere model renders the inverse problem
-    \emph{ill-posed}: the Jacobian of the frequency--parameter map is
-    rank-deficient (condition number $\sim 10^{10}$), because all flexural
-    modes scale identically with a single effective radius.
-  \item The oblate spheroid (Rayleigh--Ritz) model yields a
-    \emph{well-conditioned} inverse problem (condition number $\approx 83.5$),
-    because different modes sample the anisotropic curvature differently.
-  \item Newton--Raphson inversion recovers the semi-major axis~$a$,
-    semi-minor axis~$c$, and Young's modulus~$E$ to sub-percent accuracy
-    from three measured flexural frequencies, starting from a $10\%$-perturbed
-    initial guess.
-  \item Cram\'er--Rao lower bounds confirm that the minimum achievable
-    parameter uncertainty scales linearly with measurement noise, with
-    relative bounds of a few percent for $1\%$ frequency noise.
+  \item the spherical Jacobian is effectively rank deficient, with
+  $\kappa = 1.1 \times 10^{10}$;
+  \item the oblate Jacobian is well conditioned, with $\kappa = 73.0$;
+  \item the improvement factor is approximately $1.5 \times 10^{8}$;
+  \item local round-trip inversion recovers $(a,c,E)$ to relative errors below
+  $10^{-12}$;
+  \item at $1\%$ frequency noise, the Cram\'er--Rao bounds are approximately
+  $\pm 37\%$ for $a$, $\pm 13\%$ for $c$, and $\pm 36\%$ for $E$;
+  \item three-mode inversion is vulnerable to local minima, whereas five-mode
+  inversion is robust across the tested initial guesses;
+  \item a ripe-watermelon case remains well conditioned, with
+  $\kappa \approx 104$.
 \end{enumerate}
 
-In the language of Kac: one can hear the shape of an oblate organ, but not a
-spherical one.  The practical implication is that aspherical forward models
-are not merely more accurate --- they are \emph{essential} for solving the
-inverse problem.
+These results suggest a practical answer to the question posed in the title.
+Within the present model, one can hear the shape of an oblate organ in the
+limited but useful sense of practical local identifiability.  One cannot do so
+reliably at the spherical limit.
+
+The clearest practical recommendation is straightforward: measure at least five
+low-order flexural resonances if the goal is parameter inversion rather than
+mere modal description.  Fewer modes may suffice for local tests, but they do
+not provide the same robustness.
+
+Future work should replace the equivalent-sphere approximation by a true oblate
+Ritz model with explicit aspect-ratio dependence, and should test the inversion
+experimentally on phantoms and biological specimens.  That would move the
+present study from ``practically identifiable in silico'' to ``experimentally
+recoverable in the laboratory'', which is a more demanding and more interesting
+standard.
