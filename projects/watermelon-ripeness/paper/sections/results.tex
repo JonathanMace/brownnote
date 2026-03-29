@@ -65,19 +65,18 @@ the round-trip error is less than $\SI{0.01}{\percent}$, confirming
 that the inversion formula (Eq.~\ref{eq:inversion}) is algebraically
 exact within the model framework.
 
-% Uncomment when figure is generated:
-% \begin{figure}[t]
-%   \centering
-%   \includegraphics[width=0.7\textwidth]{figures/fig_frequency_vs_E}
-%   \caption{Predicted tap-tone frequency~$f_2$ as a function of rind
-%     elastic modulus~$E_{\mathrm{rind}}$ for the canonical watermelon
-%     geometry ($a = \SI{0.158}{\metre}$, $\zeta = 0.78$,
-%     $h = \SI{15}{\milli\metre}$).  The squared frequency is exactly
-%     linear in~$E_{\mathrm{rind}}$ (inset shows $f_2^2$ vs.\
-%     $E_{\mathrm{rind}}$ with $R^2 > 0.9999$), confirming that the
-%     inversion formula~\eqref{eq:inversion} is well-posed.}
-%   \label{fig:frequency_vs_E}
-% \end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_frequency_vs_E}
+  \caption{Predicted tap-tone frequency~$f_2$ as a function of rind
+    elastic modulus~$E_{\mathrm{rind}}$ for the canonical watermelon
+    geometry ($a = \SI{0.158}{\metre}$, $\zeta = 0.78$,
+    $h = \SI{15}{\milli\metre}$).  The squared frequency is exactly
+    linear in~$E_{\mathrm{rind}}$ (inset shows $f_2^2$ vs.\
+    $E_{\mathrm{rind}}$ with $R^2 > 0.9999$), confirming that the
+    inversion formula~\eqref{eq:inversion} is well-posed.}
+  \label{fig:frequency_vs_E}
+\end{figure}
 
 % =============================================================================
 % 3.2  Sobol sensitivity analysis
@@ -165,17 +164,16 @@ confirms that the model is well approximated by a sum of univariate
 contributions, consistent with the near-separable form of
 Eq.~\eqref{eq:f2_squared}.
 
-% Uncomment when figure is generated:
-% \begin{figure}[t]
-%   \centering
-%   \includegraphics[width=0.7\textwidth]{figures/fig_sobol_sensitivity}
-%   \caption{First-order ($S_1$) and total-order ($S_T$) Sobol
-%     sensitivity indices for the tap-tone frequency~$f_2$.  The rind
-%     elastic modulus~$E_{\mathrm{rind}}$ dominates ($S_T = 0.54$),
-%     followed by the semi-major axis~$a$ ($S_T = 0.38$).  Densities,
-%     Poisson's ratio, turgor pressure, and loss tangent are negligible.}
-%   \label{fig:sobol}
-% \end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_sobol_sensitivity}
+  \caption{First-order ($S_1$) and total-order ($S_T$) Sobol
+    sensitivity indices for the tap-tone frequency~$f_2$.  The rind
+    elastic modulus~$E_{\mathrm{rind}}$ dominates ($S_T = 0.54$),
+    followed by the semi-major axis~$a$ ($S_T = 0.38$).  Densities,
+    Poisson's ratio, turgor pressure, and loss tangent are negligible.}
+  \label{fig:sobol}
+\end{figure}
 
 % =============================================================================
 % 3.3  Universal ripeness curve
@@ -227,17 +225,16 @@ given cultivar geometry, any measured $f_2$ can be directly mapped to
 $E_{\mathrm{rind}}$ without detailed knowledge of the flesh properties
 or internal pressure.
 
-% Uncomment when figure is generated:
-% \begin{figure}[t]
-%   \centering
-%   \includegraphics[width=0.7\textwidth]{figures/fig_universal_curve}
-%   \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
-%     for four cultivars at four ripeness stages.  All 16 points fall
-%     within a narrow band ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$),
-%     confirming that $\Pi_{\mathrm{ripe}}$ is a universal descriptor
-%     of the shell--fluid system geometry.}
-%   \label{fig:universal_curve}
-% \end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_universal_curve}
+  \caption{Dimensionless ripeness parameter~$\Pi_{\mathrm{ripe}}$
+    for four cultivars at four ripeness stages.  All 16 points fall
+    within a narrow band ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$),
+    confirming that $\Pi_{\mathrm{ripe}}$ is a universal descriptor
+    of the shell--fluid system geometry.}
+  \label{fig:universal_curve}
+\end{figure}
 
 % =============================================================================
 % 3.4  Multi-cultivar comparison
@@ -281,6 +278,18 @@ mean~$0.062$ (Table~\ref{tab:Pi_ripe}), demonstrating that the
 dimensionless parameter effectively normalises out cultivar-specific
 geometry.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_cultivar_comparison}
+  \caption{Predicted tap-tone frequencies at canonical ripe modulus
+    ($E_{\mathrm{rind}} = \SI{50}{\mega\pascal}$) for four commercial
+    cultivars, sorted by~$f_2$.  The inverse relationship between
+    equivalent radius~$R_{\mathrm{eq}}$ (grey overlay) and frequency
+    demonstrates geometric scaling.  Hatching ensures greyscale
+    legibility.}
+  \label{fig:cultivar_comparison}
+\end{figure}
+
 We also compute the full ripening trajectory for the Crimson Sweet
 cultivar by sweeping the rind modulus from
 $\SI{250}{\mega\pascal}$ (very unripe) to $\SI{10}{\mega\pascal}$
@@ -294,16 +303,15 @@ corresponds to $f_2 \approx \SIrange{84}{108}{\hertz}$---a comfortable
 range for human auditory discrimination
 \cite{Yamamoto1980}.
 
-% Uncomment when figure is generated:
-% \begin{figure}[t]
-%   \centering
-%   \includegraphics[width=0.7\textwidth]{figures/fig_ripening_sweep}
-%   \caption{Predicted trajectory of tap-tone frequency~$f_2$ during
-%     ripening for the Crimson Sweet cultivar.  As pectin degradation
-%     reduces $E_{\mathrm{rind}}$ from \SI{250}{\mega\pascal} (unripe)
-%     to \SI{10}{\mega\pascal} (overripe), the frequency drops
-%     monotonically from \SI{239}{\hertz} to \SI{36}{\hertz}.  The
-%     shaded region indicates the optimal ripeness window
-%     ($f_2 \approx \SIrange{84}{108}{\hertz}$).}
-%   \label{fig:ripening_sweep}
-% \end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_ripening_sweep}
+  \caption{Predicted trajectory of tap-tone frequency~$f_2$ during
+    ripening for the Crimson Sweet cultivar.  As pectin degradation
+    reduces $E_{\mathrm{rind}}$ from \SI{250}{\mega\pascal} (unripe)
+    to \SI{10}{\mega\pascal} (overripe), the frequency drops
+    monotonically from \SI{239}{\hertz} to \SI{36}{\hertz}.  The
+    shaded region indicates the optimal ripeness window
+    ($f_2 \approx \SIrange{84}{108}{\hertz}$).}
+  \label{fig:ripening_sweep}
+\end{figure}
