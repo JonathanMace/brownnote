@@ -1,3 +1,5 @@
+# The Brown Note
+
 Among the many questions that humanity has posed to the universe — the nature of consciousness, the origin of dark matter, the thermodynamic arrow of time — one has proven uniquely resistant to serious academic inquiry: can sound make you soil yourself? 
 
 The hypothesis, known colloquially as the “brown note,” posits that infrasound at some critical frequency might induce involuntary gastrointestinal distress. Despite decades of anecdote, no rigorous analytical treatment existed. We found this oversight unacceptable. 
