@@ -30,7 +30,9 @@ References:
 import sys
 import os
 
-sys.path.insert(0, r'C:\Users\jon\OneDrive\Projects\browntone-worktrees\bladder-resonance')
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 from src.analytical.natural_frequency_v2 import (
     AbdominalModelV2,
     flexural_mode_frequencies_v2,
@@ -62,7 +64,7 @@ def bladder_wall_thickness(vol_mL: float) -> float:
     """
     Wall thickness [m] assuming approximately constant tissue volume.
 
-    At 50 mL the wall is ~5 mm; at 500 mL it thins to ~3 mm.
+    At 50 mL the wall is ~5 mm; at 500 mL it thins to ~1.5 mm.
     We assume a fixed tissue shell volume and compute h from that.
     """
     R0 = bladder_radius_from_volume(50.0)
@@ -192,7 +194,9 @@ SENSITIVITY_PARAMS = {
     "loss_tangent": (0.30,   0.50,   r"$\eta$ (loss tangent)",         ""),
 }
 
-def sensitivity_analysis(vol_mL=170.0, n=2):
+def sensitivity_analysis(vol_mL=None, n=2):
+    if vol_mL is None:
+        vol_mL = find_f2_minimum(n=n)["V_min"]
     f_base = stiffness_decomposition(vol_mL, n=n)["f_n"]
     results = {}
     for pname, (lo, hi, label, unit) in SENSITIVITY_PARAMS.items():
@@ -461,10 +465,13 @@ def plot_stiffness_mass_decomposition(save_paper=True):
         fig.savefig(pp, bbox_inches="tight"); print("  Saved:", pp)
     plt.close(fig); print("  Saved:", path); return path
 
-def plot_tornado_chart(vol_mL=170.0, save_paper=True):
+def plot_tornado_chart(vol_mL=None, save_paper=True):
+    if vol_mL is None:
+        vol_mL = find_f2_minimum()["V_min"]
     sens = sensitivity_analysis(vol_mL=vol_mL)
     f_base = list(sens.values())[0]["f_base"]
     items = sorted(sens.items(), key=lambda x: x[1]["delta_f"])
+    vol_label = int(round(vol_mL))
     fig, ax = plt.subplots(figsize=(10, 5))
     y_pos = np.arange(len(items))
     for i, (pname, v) in enumerate(items):
@@ -474,7 +481,7 @@ def plot_tornado_chart(vol_mL=170.0, save_paper=True):
     ax.axvline(f_base, color="red", ls="--", lw=1.5, label="Baseline $f_2 = %.1f$ Hz" % f_base)
     ax.set_yticks(y_pos); ax.set_yticklabels([v["label"] for _, v in items], fontsize=10)
     ax.set_xlabel(r"$f_2$ [Hz]", fontsize=11)
-    ax.set_title("Tornado Chart: Parameter Sensitivity at $V = %d$ mL" % vol_mL, fontsize=13, fontweight="bold")
+    ax.set_title("Tornado Chart: Parameter Sensitivity at $V = %d$ mL" % vol_label, fontsize=13, fontweight="bold")
     ax.legend(fontsize=9); ax.grid(True, axis="x", alpha=0.3); plt.tight_layout()
     path = os.path.join(FIGURES_DIR, "fig_tornado_sensitivity.png")
     fig.savefig(path, dpi=150, bbox_inches="tight")
