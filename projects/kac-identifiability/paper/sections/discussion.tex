@@ -14,11 +14,12 @@ limit, one cannot: the Jacobian becomes rank deficient and the Fisher matrix
 loses invertibility.
 
 The analogy with Kac should therefore be handled with care.  We do not prove a
-uniqueness theorem over an infinite function space, nor do we exclude the
-possibility of remote isospectral parameter sets.  Our claim is about
-\emph{practical identifiability} in a finite-dimensional model relevant to
-measurement and inversion.  That is a less grand claim, but also the one an
-experimentalist can actually use.
+global uniqueness theorem of the kind established by Sylvester and
+Uhlmann~\cite{SylvesterUhlmann1987} for the Calder\'on inverse conductivity
+problem, nor do we exclude the possibility of remote isospectral parameter sets.
+Our claim is about \emph{practical identifiability} in a finite-dimensional
+model relevant to measurement and inversion.  That is a less grand claim, but
+also the one an experimentalist can actually use.
 
 \subsection{Mechanism: mode-dependent curvature sampling}
 
@@ -108,7 +109,7 @@ shell inverse problem admits a unique solution over the full parameter domain
 --- remains an open question connecting to the spectral geometry programme
 initiated by Kac~\cite{Kac1966} and the perturbation theory of
 Kato~\cite{Kato1966}.  The eigenvalue perturbation results of
-Hald~\cite{Hald1984} and the shape optimisation framework of
+Hald~\cite{Hald1978,Hald1984CPAM} and the shape optimisation framework of
 Henrot~\cite{Henrot2006} provide relevant tools, but a proof of global
 uniqueness for the present coupled fluid--shell system would require substantial
 additional analysis.
@@ -142,8 +143,12 @@ Several limitations remain.
 
 The natural next step is a genuine Ritz or finite-element oblate shell model
 with explicit aspect-ratio dependence, followed by the same identifiability
-analysis.  That would show whether the encouraging results reported here
-strengthen further when the geometry is represented more faithfully.  The second
+analysis.  Shape-calculus tools~\cite{DelfourZolesio2011} would allow
+Hadamard-type Fr\'echet derivatives of the eigenvalues with respect to the
+domain boundary, enabling a geometry-aware sensitivity analysis that goes beyond
+the parametric approach taken here.  That would show whether the encouraging
+results reported here strengthen further when the geometry is represented more
+faithfully.  The second
 priority is experimental validation, ideally first on phantoms of known
 geometry and stiffness and then on biological specimens.  A Bayesian treatment,
 with priors on tissue properties and uncertainty in mode identification, would
