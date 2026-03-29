@@ -71,9 +71,11 @@ disturbance.
 Mechanical vibration, by contrast, does not knock politely at the acoustic
 impedance door---it kicks it open.  Vibration transmitted through the
 skeleton couples directly to the abdominal wall, bypassing the $(ka)^n$
-penalty entirely and avoiding the severe transmission losses associated with
-biological impedance discontinuities \cite{Gupta2021}.  Table~\ref{tab:mechanical}
-tells a very different story.
+penalty entirely.  Because the bone--peritoneum impedance contrast is orders
+of magnitude smaller than the air--tissue mismatch, an upper-bound
+base-excitation model that assumes rigid skeletal transmission
+captures the essential physics \cite{FahyGardonio2007,Gupta2021}.
+Table~\ref{tab:mechanical} tells a very different story.
 
 \begin{table}[htbp]
   \centering
@@ -158,7 +160,9 @@ corresponding to the SDOF idealisation.
 \subsection{Energy Budget}
 
 We verify self-consistency through the absorption cross-section derived from
-reciprocity \cite{Junger1986,Godin2023}:
+reciprocity \cite{Junger1986,Godin2023}.  The radiation efficiency of
+low-order shell modes is vanishingly small when $ka \ll 1$
+\cite{FahyGardonio2007}; formally:
 \begin{equation}
   \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
   \,\frac{\zeta_\mathrm{rad}}{\zeta_\mathrm{rad} + \zeta_\mathrm{struct}},
