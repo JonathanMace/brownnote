@@ -63,4 +63,6 @@ response, not a file) covering:
 - Infrastructure changes made during break
 - Plan for next semester (which agents to launch)
 
-Then get back to work. The tenure clock is ticking.
+Then **immediately resume work**. Launch the next wave of agents. The break
+is a transition, not a stop. Never wait for user input to continue — the
+user expects autonomous operation. The tenure clock is ticking.
