@@ -29,6 +29,11 @@ from analytical.universality import (
     _forward_prolate,
     _forward_triaxial,
     _condition_number_generic,
+    _compute_jacobian_generic,
+)
+from analytical.kac_identifiability import (
+    CANONICAL_ABDOMEN,
+    compute_jacobian,
 )
 from analytical.oblate_spheroid_ritz import oblate_ritz_frequency
 
@@ -381,3 +386,151 @@ class TestEdgeCases:
         )
         assert np.isfinite(kappa)
         assert kappa > 1.0
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  8. Prolate null result regression tests
+# ═══════════════════════════════════════════════════════════════════════════
+
+class TestProlateNullResult:
+    """Regression tests for the prolate null result.
+
+    The prolate spheroid shows fundamentally different identifiability
+    behaviour from the oblate: κ stays flat (no ε⁻² improvement),
+    σ_min is stuck on E, and overall κ is much higher.  These are
+    confirmed physics results — the prolate geometry lacks the
+    curvature-gradient mechanism that drives oblate identifiability.
+    """
+
+    def test_prolate_kappa_is_flat(self):
+        """Prolate κ should be nearly flat over ε ∈ [0.3, 0.65].
+
+        Unlike the oblate where κ ~ ε⁻², prolate κ barely changes
+        with eccentricity away from the sphere limit.  We sweep
+        ε ∈ [0.3, 0.65] (avoiding the ε < 0.2 sphere-limit spike
+        and ε > 0.65 numerical stiffening) and require max/min < 3.
+        """
+        eps_vals = np.linspace(0.3, 0.65, 8)
+        result = prolate_condition_sweep(
+            eccentricities=eps_vals, modes=(2, 3, 4),
+        )
+        kappa = result["kappa"]
+        finite = kappa[np.isfinite(kappa)]
+        assert len(finite) >= 6, (
+            f"Expected ≥6 finite κ values, got {len(finite)}"
+        )
+        ratio = finite.max() / finite.min()
+        assert ratio < 3.0, (
+            f"Prolate κ max/min ratio = {ratio:.2f}, expected < 3.0 "
+            f"(flat null result). min={finite.min():.1f}, max={finite.max():.1f}"
+        )
+
+    def test_prolate_kappa_higher_than_oblate(self):
+        """At ε = 0.5, prolate κ should exceed oblate κ by > 3×.
+
+        The prolate geometry is fundamentally harder to identify than
+        the oblate because eccentricity doesn't break the a–c–E
+        degeneracy for prolate shapes.
+        """
+        eps = np.array([0.5])
+        pro = prolate_condition_sweep(eccentricities=eps, modes=(2, 3, 4))
+        obl = oblate_condition_sweep(eccentricities=eps, modes=(2, 3, 4))
+        kappa_pro = pro["kappa"][0]
+        kappa_obl = obl["kappa"][0]
+        assert np.isfinite(kappa_pro) and np.isfinite(kappa_obl), (
+            f"Both κ must be finite: prolate={kappa_pro}, oblate={kappa_obl}"
+        )
+        assert kappa_pro > 3.0 * kappa_obl, (
+            f"Prolate κ={kappa_pro:.1f} should be > 3× oblate κ={kappa_obl:.1f}. "
+            f"Ratio = {kappa_pro / kappa_obl:.2f}"
+        )
+
+    def test_prolate_sigma_min_stuck_on_E(self):
+        """At ε = 0.5, the least-identifiable direction should be E.
+
+        With 5 modes (n = 2..6) and inversion params (a, c, E),
+        the right singular vector for σ_min should have its largest
+        component in the E direction (index 2).  This confirms the
+        prolate null result: E is trapped in a near-null subspace.
+        """
+        a_fixed = CANONICAL_ABDOMEN["a"]
+        eps = 0.5
+        c_val = a_fixed / np.sqrt(1.0 - eps ** 2)
+        params = dict(
+            a=a_fixed, c=c_val, h=0.010, E=0.1e6, nu=0.45,
+            rho_w=1100.0, rho_f=1020.0, K_f=2.2e9, P_iap=1000.0,
+        )
+        modes = (2, 3, 4, 5, 6)
+        inv_params = ("a", "c", "E")
+
+        J = _compute_jacobian_generic(
+            params, _forward_prolate, modes, inv_params, scaled=True,
+        )
+        U, s, Vt = np.linalg.svd(J, full_matrices=False)
+        # V_min is last row of Vt (right singular vector for smallest σ)
+        v_min = Vt[-1, :]
+        dominant_idx = np.argmax(np.abs(v_min))
+        assert dominant_idx == 2, (
+            f"V_min dominant component at index {dominant_idx} "
+            f"(expected 2 = E).  V_min = {v_min}, σ = {s}"
+        )
+
+    def test_oblate_sigma_min_grows_with_eccentricity(self):
+        """Oblate σ_min at ε = 0.6 should exceed σ_min at ε = 0.2.
+
+        For oblate spheroids, increasing eccentricity breaks the
+        sphere degeneracy and improves identifiability, so σ_min
+        should grow.  This is the opposite of the prolate null result.
+        """
+        modes = (2, 3, 4, 5, 6)
+        a_fixed = CANONICAL_ABDOMEN["a"]
+
+        sigma_mins = {}
+        for eps in (0.2, 0.6):
+            c_val = a_fixed * np.sqrt(1.0 - eps ** 2)
+            params = dict(CANONICAL_ABDOMEN)
+            params["a"] = a_fixed
+            params["c"] = c_val
+            J = compute_jacobian(
+                params, model="ritz", modes=modes, scaled=True,
+            )
+            s = np.linalg.svd(J, compute_uv=False)
+            sigma_mins[eps] = s[-1]
+
+        assert sigma_mins[0.6] > sigma_mins[0.2], (
+            f"Oblate σ_min should grow with ε: "
+            f"σ_min(0.6)={sigma_mins[0.6]:.4e} vs "
+            f"σ_min(0.2)={sigma_mins[0.2]:.4e}"
+        )
+
+    def test_sphere_limit_agreement(self):
+        """At ε = 0.01, oblate and prolate frequencies agree within 0.1%.
+
+        Both models collapse to the same sphere in the ε → 0 limit.
+        This tighter tolerance (vs the existing 15% test) confirms
+        the models are consistent at near-zero eccentricity.
+        """
+        R = 0.157
+        eps = 0.01
+        h, E, nu = 0.010, 0.1e6, 0.45
+        rho_w, rho_f, P_iap = 1100.0, 1020.0, 1000.0
+
+        # Prolate: c = a / √(1 − ε²), volume-preserving via a = canonical
+        a_fixed = CANONICAL_ABDOMEN["a"]
+        c_pro = a_fixed / np.sqrt(1.0 - eps ** 2)
+
+        # Oblate: c = a·√(1 − ε²)
+        c_obl = a_fixed * np.sqrt(1.0 - eps ** 2)
+
+        for n in (2, 3, 4):
+            f_pro = prolate_ritz_frequency(
+                n, a_fixed, c_pro, h, E, nu, rho_w, rho_f, P_iap,
+            )
+            f_obl = oblate_ritz_frequency(
+                n, a_fixed, c_obl, h, E, nu, rho_w, rho_f, P_iap,
+            )
+            rel_err = abs(f_pro - f_obl) / max(f_obl, 1e-10)
+            assert rel_err < 0.001, (
+                f"Mode n={n}: prolate={f_pro:.4f} Hz, oblate={f_obl:.4f} Hz, "
+                f"rel_err={rel_err:.6f} (expected < 0.001)"
+            )
