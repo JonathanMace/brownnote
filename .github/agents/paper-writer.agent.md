@@ -78,3 +78,17 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 git push origin <branch>
 ```
 Then follow the `/git-checkpoint` skill to create a PR, merge, and clean up.
+
+## Post-Edit Checklist (MANDATORY — no exceptions)
+
+After editing ANY `.tex` file, you MUST complete ALL of these steps before
+committing. **This applies to every paper, not just Paper 1.**
+
+1. **Recompile**: `pdflatex` → `bibtex` → `pdflatex` → `pdflatex`
+2. **Commit `main.pdf`**: The compiled PDF must be in the commit
+3. **Snapshot**: `Copy-Item main.pdf "drafts\draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"`
+4. **Update README.md**: Change the paper's draft link to the new snapshot path
+5. **Commit together**: Snapshot + README update go in the same commit
+
+Skipping steps 3–5 causes the repo to drift out of sync. This is an
+anti-pattern. See the `/compile-paper` skill for the full command template.

@@ -107,10 +107,24 @@ pdflatex -interaction=nonstopmode main.tex
 Copy-Item main.pdf "drafts\draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
 ```
 
+## Post-Edit Checklist (MANDATORY — no exceptions)
+
+After editing ANY `.tex` file, you MUST complete ALL of these steps:
+
+1. **Recompile**: `pdflatex` → `bibtex` → `pdflatex` → `pdflatex`
+2. **Commit `main.pdf`**: The compiled PDF must be in the commit
+3. **Snapshot**: `Copy-Item main.pdf "drafts\draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"`
+4. **Update README.md**: Change the paper's draft link to the new snapshot
+5. **Commit together**: Snapshot + README go in the same commit as content changes
+
+**Skipping steps 3–5 causes repo drift.** This is an anti-pattern.
+See `/compile-paper` skill for full commands.
+
 ## Done Criteria
 
 - the edited section follows JSV structure and Browntone style conventions
 - all quantities use canonical parameters unless explicitly marked otherwise
 - figures, equations, and citations are introduced and formatted correctly
-- the paper compiles cleanly, or any remaining errors are reported precisely
+- the paper compiles cleanly with zero errors
 - a timestamped PDF snapshot is preserved after successful compilation
+- the README draft link is updated to the new snapshot
