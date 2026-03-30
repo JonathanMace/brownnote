@@ -210,15 +210,15 @@ See the `compile-paper` skill for compilation instructions.
 
 | Paper | Venue | Status | Location |
 |-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | Submission-ready (~44pp) | `papers/paper1-brown-note/` |
+| Paper 1: Brown Note | JSV | Submission-ready (46pp) | `papers/paper1-brown-note/` |
 | Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `papers/paper2-gas-pockets/` |
 | Paper 3: Scaling Laws | JSV Short | Under revision (8pp) | `papers/paper3-scaling-laws/` |
 | Paper 4: Bladder Resonance | JSV/J Biomech | Minor revision addressed | `papers/paper4-bladder/` |
 | Paper 5: Borborygmi | JASA | ACCEPTED | `papers/paper5-borborygmi/` |
 | Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `papers/paper6-sub-bass/` |
-| Paper 7: Watermelon Ripeness | Postharvest B&T | ACCEPTED by reviewer, submission prep in progress | `papers/paper7-watermelon/` |
-| Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `papers/paper8-kac/` |
-| Paper 9: Lifting Theorem | Inverse Problems | Under revision — pivoting from lifting theorem to classification/mechanism note | `papers/paper9-lifting-theorem/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | `papers/paper7-watermelon/` |
+| Paper 8: Kac Identifiability | IPSE (under consideration) | Submission-ready (29pp) | `papers/paper8-kac/` |
+| Paper 9: Lifting Theorem | JSV Short | Scaffolded | `papers/paper9-lifting-theorem/` |
 
 ## The Academic Calendar
 

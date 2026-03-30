@@ -12,10 +12,10 @@ Whole-body vibration is another matter entirely, which is why we wrote nine pape
 
 ### Paper 1 — *The Brown Note*
 **Modal analysis of a fluid-filled viscoelastic oblate spheroidal shell**  
-**Status:** Submission-ready (~44pp)  
+**Status:** Submission-ready (46pp)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0206.pdf)  
-**Key result:** coupling ratio R ≈ 6.6 × 10⁴
+**Latest draft:** [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0339.pdf)  
+**Key result:** coupling ratio R ≈ 3.3 × 10⁴
 
 Can a sufficiently powerful subwoofer ruin your afternoon? We model the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derive its modal spectrum from first principles, and compare airborne acoustic coupling with whole-body mechanical vibration. The resonance is real; the acoustic pathway to it is not.
 
@@ -77,12 +77,12 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.
 
 ### Paper 8 — *Can You Hear the Shape of an Organ?*
-**Can You Hear the Shape of an Organ? Practical Identifiability of Elastic Shell Parameters from Resonant Frequencies**  
+**Can You Hear the Shape of an Organ? Local Practical Identifiability of Elastic Shell Parameters from Resonant Frequencies**  
 **Authors:** J. Mace and B.R. Mace  
-**Status:** First complete draft  
-**Venue:** *Inverse Problems*  
+**Status:** Submission-ready (29pp)  
+**Venue:** *Inverse Problems in Science and Engineering* (under consideration)  
 **Location:** `papers/paper8-kac/`  
-**Latest draft:** [`draft_2026-03-30_0125.pdf`](papers/paper8-kac/drafts/draft_2026-03-30_0125.pdf)  
+**Latest draft:** [`draft_2026-03-30_0253.pdf`](papers/paper8-kac/drafts/draft_2026-03-30_0253.pdf)  
 **Key result:** within the Ritz model, the canonical oblate geometry lowers the condition number from the near-spherical floor κ≈269 to 69.4 via a two-channel regular expansion, whereas the prolate branch remains poorly conditioned — revealing a three-class taxonomy (singular/regular bounded/non-lifting) rather than universal lifting.
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.
@@ -103,7 +103,7 @@ This paper abstracts the symmetry-breaking mechanism behind our shell inverse pr
 
 ## The Punchline
 
-The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intuition is not completely mad. What fails is the coupling: even at 120 dB SPL, the energy-consistent airborne displacement is only about 0.014 μm, around four orders of magnitude below mechanotransduction thresholds. Whole-body vibration, by contrast, produces millimetre-scale effective excitation of the relevant mode. In short: the “brown note” is a mechanical story misremembered as an acoustic one.
+The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intuition is not completely mad. What fails is the coupling: even at 120 dB SPL, the energy-consistent airborne displacement is only about 0.028 μm, around four orders of magnitude below mechanotransduction thresholds. Whole-body vibration, by contrast, produces millimetre-scale effective excitation of the relevant mode. In short: the “brown note” is a mechanical story misremembered as an acoustic one.
 
 ## Key Results
 
@@ -111,14 +111,14 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 |----------|-------|
 | n=2 flexural frequency (f₂) | 3.95 Hz |
 | Breathing mode (n=0) | 2,490 Hz |
-| Airborne displacement (ξ_air, 120 dB) | 0.014 μm |
+| Airborne displacement (ξ_air, 120 dB) | 0.028 μm |
 | Mechanical displacement (ξ_mech, 0.1 m/s²) | 917 μm |
-| Coupling ratio R | ≈ 66,000× (6.6×10⁴) |
+| Coupling ratio R | ≈ 33,000× (3.3×10⁴) |
 | Sobol total-order index S_T(E) | 0.86 |
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **454 commits**, **241 pull requests merged**, **487 tests passing**, **24 custom agents**, **22 reusable skills**, **82 research logs**, and about **28 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **548 commits**, **272 pull requests merged**, **487 tests passing**, **24 custom agents**, **22 reusable skills**, **92 research logs**, and about **30 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
@@ -184,7 +184,7 @@ browntone/
 
 ## Tests
 
-The analytical suite currently has **454 passing tests**. From the repository root:
+The analytical suite currently has **487 passing tests**. From the repository root:
 
 ```bash
 python -m pytest tests/ -v
