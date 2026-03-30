@@ -107,7 +107,8 @@ reflecting the log-normal distribution of $E$.
       ${\approx}\,\SI{158}{\decibel}$---a \SI{23}{\decibel} correction
       that represents the physically realisable SPL.}
       & 135 & [128, 139] & dB \\
-    SPL for PIEZO1/2 activation (energy) & ${\approx}\,158$ & --- & dB \\
+    \hline
+    \textbf{SPL for PIEZO1/2 activation (energy-consistent)} & $\mathbf{\approx\,158}$ & --- & dB \\
     \hline
   \end{tabular}
 \end{table}
@@ -196,7 +197,14 @@ added mass for the $n=2$ mode is $7.4\times$ the shell mass, so the system
 inertia is dominated by the enclosed fluid rather than the wall.  In a dry
 (empty) shell, the same boundary conditions would shift the frequency by
 approximately \SI{33}{\percent}---but once the cavity is fluid-filled, the
-added mass swamps the boundary stiffening effect.  The \SI{6}{\percent} shift
+added mass swamps the boundary stiffening effect.
+Clamping part of the shell forces the incompressible fluid to redistribute
+through a smaller aperture, increasing the effective modal mass.  When this
+kinetic-energy increase exceeds the additional potential energy from the
+constraint, the net effect is a frequency decrease.  We note that the 2-DOF
+Ritz basis, which carries a ${\sim}\,9\%$ bias at the sphere limit, may also
+contribute to this effect.
+The \SI{6}{\percent} shift
 is well within the $\pm 50$--$100\%$ uncertainty band set by material property
 variability (\S\ref{sec:results}), confirming that the free-shell model is an
 adequate approximation for the present purposes.
