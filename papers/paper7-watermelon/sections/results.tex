@@ -17,9 +17,14 @@ tap-tone frequencies are summarised in Table~\ref{tab:forward_results}.
   \centering
   \caption{Forward model predictions of the $n = 2$ flexural mode
     frequency~$f_2$ for the canonical Crimson Sweet watermelon at four
-    ripeness stages.  The rind modulus~$E_{\mathrm{rind}}$, rind
+    illustrative ripeness stages.  The rind modulus~$E_{\mathrm{rind}}$, rind
     thickness~$h$, loss tangent~$\eta$, and flesh density~$\rho_f$ vary
-    with ripening; all other parameters are held at their canonical values.}
+    with ripening; all other parameters are held at their canonical values.
+    \emph{Data source:} All values are \textbf{constructed scenarios}
+    based on ranges reported in the literature
+    \cite{Sadrnia2008, DeBelieetal2000}; no stage-resolved
+    measurements from a single cultivar study are available.
+    See text for details.}
   \label{tab:forward_results}
   \begin{tabular}{lcccccc}
     \toprule
@@ -42,7 +47,7 @@ $E_{\mathrm{rind}}$ from \SI{200}{\mega\pascal} to
 to~5.0 as the loss tangent rises with pectin degradation, reflecting the
 increasingly lossy mechanical response of the softening rind.
 
-A central prediction of the model is that $f_2^2$ is exactly linear in
+A central prediction of the model is that $f_2^2$ is linear in
 $E_{\mathrm{rind}}$ when turgor pressure is negligible.  We verify this
 by computing $\alpha = f_2^2 / E_{\mathrm{rind}}$ across the full
 modulus range $\SIrange{10}{250}{\mega\pascal}$ for the canonical ripe
@@ -182,10 +187,10 @@ Eq.~\eqref{eq:f2_squared}.
 % =============================================================================
 % 3.3  Universal ripeness curve
 % =============================================================================
-\subsection{Geometric invariant $\Pi_{\mathrm{ripe}}$}
+\subsection{Geometric invariant $\Pi_{\mathrm{ripe}}$: a secondary diagnostic}
 \label{sec:universal_curve}
 
-The dimensionless geometric invariant
+As a secondary result, we examine the dimensionless geometric invariant
 $\Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}} \sqrt{\tilde{\rho}_{\mathrm{eff}} / E_{\mathrm{rind}}}$
 (Eq.~\ref{eq:Pi_ripe}) is evaluated for all four cultivars at each of
 the four ripeness stages, yielding 16 data points.
@@ -236,11 +241,15 @@ of~\SI{5.4}{\percent} from the mean (Sugar Baby).  This variation
 arises from differences in the shell geometry ($R_{\mathrm{eq}}$,
 $h/R_{\mathrm{eq}}$) across cultivars.
 
-The practical consequence is that $\Pi_{\mathrm{ripe}}$ serves as a
+The practical consequence is that $\Pi_{\mathrm{ripe}}$ may serve as a
 \emph{cultivar-independent calibration constant}: once its value is known for a
 given cultivar geometry, any measured $f_2$ can be directly mapped to
 $E_{\mathrm{rind}}$ without detailed knowledge of the flesh properties
-or internal pressure.  The universality is across cultivar geometries
+or internal pressure.  However, this universality has been demonstrated
+only within the equivalent-sphere model; its validity across real
+cultivars with differing rind microstructure and ripening trajectories
+remains to be verified experimentally.  The universality is across
+cultivar geometries
 (different sizes and shapes collapsing onto a single constant), not
 across ripeness stages where geometry itself evolves.
 
@@ -318,11 +327,16 @@ $\SI{250}{\mega\pascal}$ (very unripe) to $\SI{10}{\mega\pascal}$
 \SI{22}{\milli\metre} to \SI{12}{\milli\metre} and increasing the
 loss tangent from~0.06 to~0.22.  The tap-tone frequency decreases
 monotonically from \SI{239.3}{\hertz} to \SI{36.4}{\hertz}, spanning
-a factor of~6.6.  The optimal ripeness window
-($E_{\mathrm{rind}} \approx \SIrange{40}{80}{\mega\pascal}$)
+a factor of~6.6.  A provisional optimal ripeness window
+($E_{\mathrm{rind}} \approx \SIrange{40}{80}{\mega\pascal}$),
+estimated from the modulus range at which watermelons are
+subjectively rated as having desirable texture in the literature
+\cite{Sadrnia2008, Valero2007},
 corresponds to $f_2 \approx \SIrange{84}{108}{\hertz}$---a comfortable
 range for human auditory discrimination
-\cite{Yamamoto1980}.
+\cite{Yamamoto1980}.  We stress that these bounds are illustrative;
+a validated ripeness window would require destructive reference
+measurements on the same fruit.
 
 \begin{figure}[t]
   \centering

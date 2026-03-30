@@ -71,7 +71,7 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 **Status:** First complete draft (19 pp) — submission-ready  
 **Venue:** *Postharvest Biology and Technology* / *PNAS*  
 **Location:** `papers/paper7-watermelon/`  
-**Latest draft:** [`draft_2026-03-29_1556_post-reviewer-b-r4.pdf`](papers/paper7-watermelon/drafts/draft_2026-03-29_1556_post-reviewer-b-r4.pdf)  
+**Latest draft:** [`draft_2026-03-29_2254.pdf`](papers/paper7-watermelon/drafts/draft_2026-03-29_2254.pdf)  
 **Key result:** tap-tone inversion maps measured resonance frequency to rind stiffness and ripeness stage.
 
 If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.

@@ -1,18 +1,22 @@
-\section{Validation}
+\section{Benchmarking Against Published Observations}
 \label{sec:validation}
 
 % =============================================================================
 % 4.1  Comparison with published data
 % =============================================================================
-\subsection{Comparison with published resonance data}
+\subsection{Consistency checks against published resonance data}
 \label{sec:published_data}
 
 We benchmark the forward model against published acoustic measurements
-on watermelons and other fruits.  Direct comparison requires care because
+on watermelons and other fruits.  These comparisons are
+\emph{consistency checks}, not controlled experimental validation:
 the published studies report resonant frequencies for fruits of varied
-and often incompletely documented geometry and ripeness.  We therefore
+and often incompletely documented geometry and ripeness, and the model
+parameters used here are assumed from literature ranges rather than
+measured on the same specimens.  We therefore
 construct model predictions using the reported fruit dimensions where
-available, supplemented by canonical material properties.
+available, supplemented by canonical material properties
+(\emph{assumed from literature}).
 
 \subsubsection{Yamamoto et al.\ (1980): watermelon tap-tones}
 
@@ -31,9 +35,12 @@ using geometry consistent with their reported dimensions
   \centering
   \caption{Comparison of model predictions with the frequency ranges
     reported by Yamamoto et al.~\cite{Yamamoto1980}.  Model geometry is
-    chosen to match reported fruit sizes; material properties are set to
+    chosen to match reported fruit sizes (\emph{measured from literature});
+    material properties are set to
     canonical ripe ($E = \SI{50}{\mega\pascal}$) or unripe
-    ($E = \SI{150}{\mega\pascal}$) values.}
+    ($E = \SI{150}{\mega\pascal}$) values (\emph{assumed from literature
+    range}).  This is a consistency check, not a point-by-point
+    validation.}
   \label{tab:yamamoto}
   \begin{tabular}{lcccccc}
     \toprule
@@ -85,20 +92,21 @@ intact fruit carries ripeness information---is entirely consistent with
 the present model, which identifies the informative observable as the
 lowest flexural resonance of a fluid-loaded shell.
 
-\subsubsection{De Belie et al.\ (2000): pear firmness--frequency correlation}
+\subsubsection{De Belie et al.\ (2000): cross-species consistency check (pear)}
 
 De Belie et al.~\cite{DeBelieetal2000} measured acoustic impulse
 response frequencies for Conference pears, not watermelons, and
 established an empirical correlation between the resonant frequency and
-a stiffness index~$FI$.  We use this comparison deliberately as a
-cross-species check rather than as a substitute for watermelon data.
+a stiffness index~$FI$.  We include this comparison deliberately as a
+\emph{cross-species consistency check} rather than as a substitute for watermelon
+validation.
 Although pears are smaller and have a different aspect ratio ($\zeta
 \approx 0.6$--$0.7$) than watermelons, they are also well described as
 fluid-filled shells.  The existence of a monotonic frequency--stiffness
 relationship in pears is qualitatively consistent with the model's
 prediction that $f_2 \propto \sqrt{E_{\mathrm{rind}}}$.
 
-\subsubsection{Chen and De Baerdemaeker (1993): pineapple modal analysis}
+\subsubsection{Chen and De Baerdemaeker (1993): cross-species consistency check (pineapple)}
 
 Chen and De Baerdemaeker~\cite{ChenDeBaerdemaeker1993} performed modal
 analysis on pineapples, identifying resonant modes that correlated with
@@ -106,8 +114,9 @@ flesh firmness.  Their measured frequencies
 ($\sim\SIrange{100}{300}{\hertz}$) are consistent with the general
 prediction of the shell model when pineapple-appropriate geometry and
 rind stiffness are used.  This cross-species consistency supports the
-claim that the equivalent-sphere shell framework generalises beyond
-watermelons.
+suggestion that the equivalent-sphere shell framework may generalise beyond
+watermelons, although a rigorous validation for each species would
+require purpose-designed experiments.
 
 % =============================================================================
 % 4.2  Sensitivity to geometric uncertainty

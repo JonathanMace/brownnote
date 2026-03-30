@@ -36,39 +36,63 @@ overripe melon produces a duller, more heavily damped thump, consistent
 with the subjective experience of a `mushy' sound.
 
 % =============================================================================
-% 5.2  Connection to biomedical FSI
+% 5.2  Practical workflow and measurement conditions
 % =============================================================================
-\subsection{Connection to biomedical vibroacoustics}
-\label{sec:biomedical}
+\subsection{Practical workflow and measurement considerations}
+\label{sec:practical_workflow}
 
-The shell model employed here is structurally identical to the one
-developed in our companion papers for the human abdomen.  Both systems
-are fluid-filled, viscoelastic shells analysed via the equivalent-sphere
-approximation; only the material parameters differ.  The watermelon rind
-($E \sim \SIrange{15}{200}{\mega\pascal}$) is two to three orders of
-magnitude stiffer than the abdominal wall
-($E \sim \SI{0.1}{\mega\pascal}$), which shifts the eigenfrequencies
-upward accordingly---from $\sim\SI{4}{\hertz}$ for the abdomen to
-$\SIrange{46}{203}{\hertz}$ for watermelons.
+Figure~\ref{fig:workflow} illustrates the envisaged measurement
+workflow.  The procedure involves five steps: (1)~tap the fruit with a
+knuckle or small impactor; (2)~record the acoustic response with a
+microphone (or accelerometer attached to the rind); (3)~extract the
+dominant spectral peak~$f_2$ via FFT; (4)~input the fruit geometry
+($a$, $c$, $h$), obtainable from callipers or a photograph; and
+(5)~apply the closed-form inversion (Eq.~\ref{eq:inversion}) to
+estimate~$E_{\mathrm{rind}}$.
 
-This connection is more than a mathematical curiosity.  It demonstrates
-that a single theoretical framework, rooted in Lamb's classical shell
-theory~\cite{lamb1882} and the Junger--Feit fluid-loading
-formulation~\cite{Junger1986}, can span applications from clinical
-diagnostics to agricultural quality assessment.  The dimensionless
-geometric invariant~$\Pi_{\mathrm{ripe}}$ is the fruit-domain analogue
-of the dimensionless coupling parameters derived in the abdominal
-studies, and the inversion formula (Eq.~\ref{eq:inversion}) is the
-direct counterpart of elastography-style inversions used in medical
-ultrasound~\cite{parker2011imaging}.
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\small
+    \textbf{Step 1: Tap} $\longrightarrow$
+    \textbf{Step 2: Record} $\longrightarrow$
+    \textbf{Step 3: Extract $f_2$} $\longrightarrow$
+    \textbf{Step 4: Input geometry} $\longrightarrow$
+    \textbf{Step 5: Invert $\to E_{\mathrm{rind}}$}\\[6pt]
+    Knuckle / impactor \quad$\to$\quad
+    Microphone / accelerometer \quad$\to$\quad
+    FFT peak detection \quad$\to$\quad
+    $(a, c, h)$ from callipers or photo \quad$\to$\quad
+    Eq.~\eqref{eq:inversion}
+  }}
+  \caption{Envisaged practical workflow for acoustic rind stiffness
+    estimation.  The closed-form inversion requires only the
+    tap-tone frequency~$f_2$ and approximate fruit geometry.
+    The subsequent mapping from $E_{\mathrm{rind}}$ to a ripeness
+    classification (dashed) requires cultivar-specific calibration
+    data not developed in this study.}
+  \label{fig:workflow}
+\end{figure}
 
-The proportionality constant $\alpha = \SI{161.5}{\hertz\squared
-\per\mega\pascal}$ for the canonical watermelon geometry provides a
-convenient benchmark.  The corresponding constant for the human abdomen
-is approximately $\SI{155}{\hertz\squared\per\mega\pascal}$
-\cite{MaceAndMace2026} when expressed in the same dimensionless
-form---a striking similarity that reflects the common underlying
-physics despite very different material scales.
+Several practical measurement conditions merit discussion:
+\begin{itemize}
+  \item \textbf{Support conditions.}  The fruit should rest on a soft
+    support (e.g.\ foam pad) to approximate free boundary conditions.
+    A hard surface introduces contact stiffness that may shift or
+    split the $n = 2$ resonance.
+  \item \textbf{Tap location.}  The $n = 2$ flexural mode has
+    maximum displacement at the equator; tapping near the equatorial
+    plane maximises the modal excitation.  Tapping at the poles
+    preferentially excites axisymmetric ($n = 0$) breathing modes at
+    much higher frequencies.
+  \item \textbf{Microphone or sensor position.}  The microphone
+    should be placed near the fruit surface (within a few centimetres)
+    to maximise the signal-to-noise ratio.  An accelerometer bonded
+    to the rind provides a stronger signal but requires contact.
+  \item \textbf{Ambient noise.}  Outdoor or market environments may
+    mask the tap-tone signal; a brief time-windowed acquisition
+    ($\sim\SI{50}{\milli\second}$) centred on the tap event can
+    reject most background noise.
+\end{itemize}
 
 % =============================================================================
 % 5.3  Limitations
@@ -130,6 +154,14 @@ Several simplifications deserve acknowledgement:
     not yet been validated against purpose-designed experiments with
     controlled geometry and material characterisation.  Such validation
     is a priority for future work.
+
+  \item \textbf{Frequency-to-ripeness chain.}  The model establishes
+    the link from tap-tone frequency to effective rind modulus.  The
+    further link from modulus to biological ripeness (eating quality,
+    sugar content, texture) requires cultivar-specific calibration
+    against destructive reference measurements, which has not been
+    performed here.  The model therefore delivers a \emph{stiffness
+    parameter}, not a ripeness classification.
 \end{itemize}
 
 % =============================================================================
@@ -145,9 +177,11 @@ $f_2$, and the inversion formula returns $E_{\mathrm{rind}}$ given
 approximate fruit dimensions (obtainable from a photograph).  The
 dimensionless geometric invariant $\Pi_{\mathrm{ripe}}$ then provides
 an approximate cultivar-independent calibration constant that maps the
-result onto a ripeness scale, although the \SI{5.4}{\percent} spread
+result onto a modulus scale, although the \SI{5.4}{\percent} spread
 across cultivars (Table~\ref{tab:Pi_ripe}) means that cultivar-specific
-calibration may still be preferable in practice.
+calibration would be preferable in practice.  We reiterate that
+$\Pi_{\mathrm{ripe}}$ collapses geometries, not ripeness stages;
+its utility as a ripeness predictor has not been biologically validated.
 
 The Monte Carlo uncertainty analysis (\S\ref{sec:geom_uncertainty})
 demonstrates that even with $\pm\SI{10}{\percent}$ geometric
@@ -156,8 +190,11 @@ of only \SI{13.5}{\percent} ($\SI{95}{\percent}$ CI:
 $[\SI{38.5}{\mega\pascal}, \SI{64.1}{\mega\pascal}]$ for a true value
 of \SI{50}{\mega\pascal}).  This uncertainty is well within the
 factor-of-four modulus difference between ripeness categories
-(Table~\ref{tab:forward_results}), confirming that reliable ripeness
-classification is achievable even with imprecise geometry.
+(Table~\ref{tab:forward_results}), suggesting that reliable
+\emph{stiffness discrimination} across ripeness categories is
+achievable even with imprecise geometry.  (Whether this stiffness
+discrimination translates to reliable ripeness classification
+requires cultivar-specific calibration.)
 
 This approach offers several advantages over existing non-destructive
 methods (near-infrared spectroscopy, impact testing with accelerometers):
@@ -190,5 +227,21 @@ The collapse of $\Pi_{\mathrm{ripe}}$ to within
 cultivars (Table~\ref{tab:Pi_ripe}) suggests that extension to other
 fruit species requires only measurement of the species-specific
 shell geometry ($a$, $c$, $h$), which determines~$R_{\mathrm{eq}}$
-and thereby the frequency scaling.  This positions the framework as a
-\emph{unified theory of percussive produce assessment}.
+and thereby the frequency scaling.
+
+% =============================================================================
+% 5.6  Connection to biomedical vibroacoustics
+% =============================================================================
+
+\paragraph{Connection to biomedical vibroacoustics.}
+The equivalent-sphere shell framework used here is structurally
+identical to the model applied to the human abdomen in our companion
+work~\cite{MaceAndMace2026}, where the abdominal wall
+($E \sim \SI{0.1}{\mega\pascal}$) encloses a fluid-filled cavity with
+eigenfrequencies near \SI{4}{\hertz}.  The watermelon rind
+($E \sim \SIrange{15}{200}{\mega\pascal}$) shifts these frequencies
+upward to \SIrange{46}{203}{\hertz}, but the governing equations are
+unchanged.  This parallel illustrates that classical shell
+theory~\cite{lamb1882, Junger1986} provides a common analytical basis
+for biological fluid-filled structures across very different material
+scales, from clinical diagnostics to agricultural quality assessment.

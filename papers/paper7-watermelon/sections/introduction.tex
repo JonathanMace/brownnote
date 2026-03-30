@@ -11,6 +11,22 @@ This `thump test'' is remarkably consistent across cultures, yet it has
 never been given a quantitative physical model that connects the tap-tone
 frequency to the measurable mechanical properties of the fruit.
 
+% --- Terminological clarification (Reviewer A, item 13) ----------------------
+
+Before proceeding, we clarify the terminology used throughout this paper.
+\emph{Harvest maturity} refers to the physiological stage at which a
+fruit is picked; \emph{eating ripeness} (or consumer ripeness) denotes
+the stage at which organoleptic quality---sweetness, texture,
+aroma---is optimal for consumption.  \emph{Firmness} is a mechanical
+property measurable by penetrometry or acoustic methods, and is an
+indirect indicator of both maturity and ripeness.  \emph{Internal
+defect state} (hollow heart, overripeness, bruising) refers to
+structural abnormalities that may or may not correlate with firmness.
+The model developed here estimates the effective rind stiffness, which
+is most directly related to firmness; the further inference from
+firmness to eating ripeness or harvest maturity requires
+cultivar-specific calibration that is beyond the scope of this work.
+
 % --- Existing empirical work -------------------------------------------------
 
 Yamamoto et al.~\cite{Yamamoto1980} pioneered the acoustic impulse
@@ -26,12 +42,64 @@ vibration signals, and Mao et al.~\cite{Mao2016} related vibrational
 characteristics directly to firmness.  In parallel, the broader fruit
 acoustics literature established the acoustic impulse technique as a
 practical firmness metric across multiple species, including Conference
-pears~\cite{Schotte1999, DeBelieetal2000, Zude2006}, while wider reviews
-placed such methods within the postharvest sensing toolbox
-\cite{Abbott1997}.  From an engineering standpoint, these approaches sit
+pears~\cite{Schotte1999, DeBelieetal2000}, kiwifruit
+\cite{Terasaki2006}, and other
+commodities~\cite{Taniwaki2009, Muramatsu2000, Sakurai2005}.
+Comprehensive reviews have placed such methods within the postharvest
+sensing toolbox~\cite{Abbott1997, Zude2006, Nicolai2007, GarciaRamos2005},
+while impact-based mechanical sensing has been developed
+by Ruiz-Altisent and coworkers for various fruit
+species~\cite{RuizAltisent1996, Barreiro1998}.
+From an engineering standpoint, these approaches sit
 comfortably within the broader family of acoustic non-destructive
 testing methods, in which transient responses are used to infer internal
-condition~\cite{GrosseOhtsu2008}.  The common weakness is that the
+condition~\cite{GrosseOhtsu2008}.
+
+% --- Literature comparison table (Reviewer A, item 4) ------------------------
+
+Table~\ref{tab:literature_comparison} positions the present work within
+this landscape.  Existing studies are predominantly empirical: they
+correlate an acoustic observable with a quality metric but do not derive
+the relationship from structural mechanics.  No previous study combines
+a physics-based shell model, closed-form inversion, and explicit
+treatment of fruit geometry.
+
+\begin{table}[t]
+  \centering
+  \caption{Comparison of acoustic and vibration-based fruit quality
+    studies.  Key:
+    \ding{51} = yes, \ding{55} = no, P = partial.
+    ``Geometry?'' indicates whether fruit shape enters the model
+    explicitly.  ``Physics model?'' indicates a mechanics-based
+    forward model (not merely a statistical correlation).
+    ``Inversion?'' indicates whether the method recovers a physical
+    parameter (e.g.\ modulus) rather than a statistical score.
+    ``Cultivar training?'' indicates whether the method requires
+    cultivar-specific training data.}
+  \label{tab:literature_comparison}
+  \begin{tabular}{p{3.2cm}lp{1.8cm}p{1.5cm}cccc}
+    \toprule
+    Study & Fruit & Acoustic observable & Output & Geom.? & Phys.? & Inv.? & Train.? \\
+    \midrule
+    Yamamoto et al.\ \cite{Yamamoto1980}
+      & Apple, melon & Resonant freq. & Firmness index & \ding{55} & \ding{55} & \ding{55} & \ding{51} \\
+    Stone et al.\ \cite{Stone1996}
+      & Watermelon & Impact response & Quality class & \ding{55} & \ding{55} & \ding{55} & \ding{51} \\
+    Diezma-Iglesias et al.\ \cite{DiezmaIglesias2004}
+      & Watermelon & Impact spectra & Internal quality & \ding{55} & \ding{55} & \ding{55} & \ding{51} \\
+    De Belie et al.\ \cite{DeBelieetal2000}
+      & Pear & Resonant freq. & Stiffness index & \ding{55} & \ding{55} & \ding{55} & \ding{51} \\
+    Chen \& De Baerdemaeker \cite{ChenDeBaerdemaeker1993}
+      & Pineapple & Modal freq. & Firmness & \ding{55} & P & \ding{55} & \ding{51} \\
+    Cooke \cite{Cooke1972}
+      & Various & Resonant freq. & Elastic prop. & P & P & \ding{55} & \ding{55} \\
+    \textbf{Present work}
+      & Watermelon & Tap-tone $f_2$ & $E_{\mathrm{rind}}$ & \ding{51} & \ding{51} & \ding{51} & \ding{55} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The common weakness of prior work is that the
 observable is informative but not explained: frequency or spectral
 features are correlated with firmness or maturity, yet the governing
 structural mechanics remain implicit.
@@ -45,7 +113,16 @@ between the tap-tone frequency and the measurable mechanical and
 geometric properties of the fruit.  The relationship does not merely fit
 data; it explains why stiffness, rind thickness, size, and fluid loading
 shift the resonance, and---crucially---it admits an \emph{inversion} from
-a single measured frequency to the elastic modulus of the rind.
+a single measured frequency to an estimate of the effective elastic
+modulus of the rind.
+
+We emphasise from the outset that the model delivers a mechanics-based
+\emph{effective rind stiffness parameter}, not a validated ripeness
+classification.  The chain from tap-tone frequency to rind modulus is
+established here; the subsequent chain from modulus to biological
+ripeness stage requires cultivar-specific calibration against
+destructive reference measurements (e.g.\ penetrometry, sugar content),
+which has not yet been performed.
 
 % --- Connection to prior work on biological cavities -------------------------
 
@@ -66,8 +143,10 @@ different material parameters and a far more appetising motivation.
 The title of this paper echoes Kac's celebrated question, `Can one hear
 the shape of a drum?''~\cite{Kac1966}.  We pose a related but distinct
 inverse problem: \emph{Can one hear the ripeness of a watermelon?}  We
-show that the answer is yes, at least for the dominant flexural mode
-$n = 2$, and that the inversion admits a closed-form solution.
+show that the answer is conditionally yes: the dominant flexural mode
+$n = 2$ can be inverted to yield the rind modulus, and the modulus is
+expected to correlate with ripeness through pectin degradation---although
+this correlation has not been experimentally demonstrated here.
 
 % --- Contribution and paper outline ------------------------------------------
 
@@ -79,10 +158,11 @@ In this paper, we:
   \item perform Sobol sensitivity analysis to identify the dominant
     parameter (the rind elastic modulus $E_{\mathrm{rind}}$);
   \item exploit the linearity of $f_2^2$ in $E_{\mathrm{rind}}$ to
-    construct a closed-form inversion from a single tap-tone measurement;
-  \item introduce a dimensionless geometric invariant
-    $\Pi_{\mathrm{ripe}}$ that collapses cultivar-dependent predictions
-    onto a single calibration constant; and
+    construct a closed-form inversion from a single tap-tone measurement
+    to the effective rind stiffness;
+  \item as a secondary result, introduce a dimensionless geometric
+    invariant $\Pi_{\mathrm{ripe}}$ that collapses cultivar-dependent
+    predictions onto a narrow band; and
   \item benchmark the model against published resonance measurements on
     watermelons and other fruits.
 \end{enumerate}
@@ -90,7 +170,8 @@ In this paper, we:
 The remainder of the paper is organised as follows.
 Section~\ref{sec:formulation} presents the mathematical formulation.
 Section~\ref{sec:results} gives the forward model predictions, Sobol
-analysis, and universal curve.  Section~\ref{sec:validation} compares
-predictions with published data.  Section~\ref{sec:discussion}
+analysis, and geometric invariant.  Section~\ref{sec:validation}
+benchmarks predictions against published data.
+Section~\ref{sec:discussion}
 discusses the physical interpretation and practical implications.
 Section~\ref{sec:conclusion} concludes.

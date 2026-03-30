@@ -171,10 +171,28 @@ dependence on the aspect ratio~$\zeta$.  The model is therefore an
 equivalent-sphere approximation: it assigns to each oblate watermelon
 the frequency of a sphere with the same enclosed volume.
 
-\noindent A key observation: $f_2^2$ is \emph{exactly linear} in
-$E_{\mathrm{rind}}$ when turgor pressure is negligible.  This linearity
+\noindent A key observation: $f_2^2$ is \emph{linear} in
+$E_{\mathrm{rind}}$ when turgor pressure is negligible (the residual
+turgor contribution is less than \SI{0.5}{\percent} of the total
+stiffness at canonical parameters).  This linearity
 is the foundation of the closed-form inversion developed in
 \S\ref{sec:inversion}.
+
+\paragraph{Operational identification of the $n = 2$ mode.}
+In the equivalent-sphere model, the target mode is the lowest flexural
+mode ($n = 2$), which produces a quadrupolar deformation pattern---the
+shell elongates along one axis while contracting along the
+perpendicular axis.  Experimentally, this mode would be identified as
+the lowest-frequency spectral peak in the impulse response of the
+tapped fruit (typically obtained via FFT of a microphone or
+accelerometer signal).  For watermelons in the ripe range, this
+corresponds to a frequency of approximately \SIrange{80}{110}{\hertz}
+(Table~\ref{tab:forward_results}).  Higher flexural modes ($n = 3, 4$)
+produce additional spectral peaks at higher frequencies but carry less
+energy in a knuckle-tap excitation.  Confirmation of mode identity
+would require multi-point vibration measurement (e.g.\ scanning laser
+Doppler vibrometry), which is beyond the scope of the present
+analytical study.
 
 For the canonical ripe watermelon ($n = 2$, $h = \SI{15}{\milli\metre}$,
 $R_{\mathrm{eq}} = \SI{0.145}{\metre}$), the bending and membrane
@@ -219,7 +237,8 @@ yields the rind elastic modulus directly.  No iterative solver or
 optimisation is required.
 
 Equation~\eqref{eq:inversion} is algebraically exact within the
-equivalent-sphere model: the
+equivalent-sphere model (which itself is an approximation to the true
+oblate geometry): the
 round-trip error $|E_{\mathrm{inv}} - E_{\mathrm{true}}| /
 E_{\mathrm{true}}$ is less than \SI{0.01}{\percent} for all ripeness
 stages tested (\S\ref{sec:forward}).
