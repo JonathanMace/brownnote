@@ -81,10 +81,14 @@ Using an oblate Ritz flexural forward model --- with the equivalent-sphere
 reduction as a degenerate comparator --- we compute the scaled
 Jacobian of the frequency--parameter map, its singular values, its condition
 number, and the associated Fisher information matrix for the parameter triple
-$(a,c,E)$.  At the spherical operating point the scaled Jacobian is
-effectively rank deficient (condition number $\kappa = 1.37 \times 10^{10}$);
-at the canonical oblate operating point the same analysis gives
-$\kappa = 69.4$, an improvement by a factor of $2.0 \times 10^{8}$.  A
+$(a,c,E)$.  Within the Ritz model, the condition number drops from a
+near-spherical floor $\kappa_\mathrm{floor} \approx 269$ (evaluated at
+$\varepsilon = 0.01$ with five modes) to $\kappa = 69.4$ at the canonical
+oblate operating point, an improvement by a factor of approximately $3.9$
+achieved purely through geometric eccentricity.  For comparison, the
+equivalent-sphere model gives $\kappa = 1.37 \times 10^{10}$, reflecting
+algebraic rank deficiency rather than geometric conditioning: the
+equivalent-sphere inverse problem is essentially non-identifiable.  A
 Newton-type inverse solver recovers $(a,c,E)$ to relative errors below
 $10^{-12}$ in round-trip tests, while Cram\'er--Rao bounds at $1\%$ frequency
 noise yield uncertainties of $\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and

@@ -20,8 +20,11 @@ The main findings are:
   \item the equivalent-sphere model is algebraically rank deficient
   ($\kappa = 1.37 \times 10^{10}$), illustrating how model-induced degeneracy
   dwarfs the geometric effect;
-  \item the power law $\kappa\sim C\,\varepsilon^{-\alpha}$ has theoretical
-  exponent $\alpha=2$ and empirical estimates $\hat\alpha\in[2.16,\,2.66]$;
+  \item the condition number follows an approximate power law
+  $\kappa\approx C\,\varepsilon^{-\alpha}$ in the intermediate eccentricity
+  regime, with theoretical exponent $\alpha=2$ and empirical estimates
+  $\hat\alpha\in[2.16,\,2.66]$; as $\varepsilon\to 0$ the curvature channel
+  provides a finite floor at $\kappa_\mathrm{floor}\approx 269$;
   \item round-trip inversion recovers $(a,c,E)$ to machine precision
   ($<10^{-12}$), confirming internal consistency of the forward model and
   solver;
@@ -60,19 +63,24 @@ least five low-order flexural resonances if the goal is parameter inversion
 rather than mere modal description.  Fewer modes may suffice for local tests,
 but they do not provide the same robustness.
 
-The most interesting open mathematical target is the asymptotic law
+The most interesting open mathematical target is the asymptotic expansion
 \begin{equation}
-  \kappa \sim C\,\varepsilon^{-\alpha}
+  \sigma_{\min}(\varepsilon)
+  = \sigma_0 + \lambda_1\,\varepsilon^{2} + O(\varepsilon^4)
   \qquad \text{as } \varepsilon \to 0^+,
 \end{equation}
-which is currently supported numerically (Table~\ref{tab:power_law}) and
-formalised in Conjecture~\ref{conj:power_law}.  The theoretical prediction
-$\alpha=2$ and the fitted prefactor $\hat C\approx24$--$26$ provide
+which implies the intermediate-regime power law
+$\kappa \approx C\,\varepsilon^{-2}$ for $\lambda_1\varepsilon^2 \gg \sigma_0$
+and a finite floor $\kappa_\mathrm{floor} = \sigma_{\max}/\sigma_0 \approx 269$
+as $\varepsilon \to 0$.  This is currently supported numerically
+(Table~\ref{tab:power_law}) and formalised in
+Conjecture~\ref{conj:power_law}.  The fitted prefactor
+$\hat C\approx24$--$26$ and the floor value provide
 quantitative design rules, but a rigorous proof would give the programme its
 cleanest bridge between geometry and inverse conditioning: not merely that
 oblateness helps, but exactly how fast identifiability is restored as one moves
-away from the spherical limit.  That would be the crown jewel.  For the moment,
-the jewel remains in the workshop.
+away from the spherical limit, and exactly where it saturates.  That would be
+the crown jewel.  For the moment, the jewel remains in the workshop.
 
 Future work should therefore proceed in two directions.  First, the
 Ritz approximation should be replaced by a full finite-element oblate shell

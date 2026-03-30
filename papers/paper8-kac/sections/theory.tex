@@ -234,7 +234,8 @@ In the Ritz variational model, the geometric factor
   G(\eta) = a^2 \eta^2 + c^2 (1 - \eta^2)
 \end{equation}
 (where $\eta = \cos\theta$) enters the stiffness and mass integrals
-nonlinearly.  Expanding around the spherical limit $\varepsilon = 0$:
+nonlinearly.  Expanding around the spherical limit $\varepsilon = 0$ at
+\emph{fixed equivalent radius} $R_\mathrm{eq} = (a^2 c)^{1/3}$:
 \begin{enumerate}
   \item The stiffness integral for mode $n$,
   \begin{equation}\label{eq:Ink}
@@ -248,11 +249,14 @@ nonlinearly.  Expanding around the spherical limit $\varepsilon = 0$:
   where
   \begin{equation}\label{eq:Delta_Ink}
     \Delta I_n^{(k)}
-    = k\,a^{2}\!\int_0^1 P_n^2(\eta)\,
-      \frac{\eta^2 - \tfrac{1}{2}}{a^{2k+2}}\,\mathrm{d}\eta.
+    = k\,R_\mathrm{eq}^{2}\!\int_0^1 P_n^2(\eta)\,
+      \frac{\eta^2 - \tfrac{2}{3}}{R_\mathrm{eq}^{2k+2}}\,\mathrm{d}\eta.
   \end{equation}
-  The key observation is that
-  $\int_0^1 P_n^2(\eta)\,(\eta^2 - \tfrac{1}{2})\,\mathrm{d}\eta$ depends on
+  The factor $(\eta^2 - \tfrac{2}{3})$ arises from the constraint that
+  $R_\mathrm{eq}$ is held fixed while $\varepsilon$ varies (i.e., $a$ and
+  $c$ co-vary so that $(a^2 c)^{1/3}$ remains constant).  The key
+  observation is that
+  $\int_0^1 P_n^2(\eta)\,(\eta^2 - \tfrac{2}{3})\,\mathrm{d}\eta$ depends on
   $n$, since $P_n^2(\eta)$ samples the interval $[0,1]$ differently for each
   mode number.
 
@@ -284,11 +288,18 @@ deficiency.
 
 The result leads to a quantitative design rule.  Because the rank-restoring
 correction enters at order $\varepsilon^2$, the condition number rises steeply
-as $\varepsilon \to 0$, following an approximate power law:
+as $\varepsilon \to 0$.  In the intermediate eccentricity regime where the
+shape-channel correction $\lambda_1\varepsilon^2$ dominates the
+curvature-channel floor $\sigma_0$, the condition number follows an
+approximate power law:
 \begin{equation}\label{eq:kappa_powerlaw}
-  \kappa \sim C\,\varepsilon^{-\alpha}
-  \qquad \text{as } \varepsilon \to 0,
+  \kappa \approx C\,\varepsilon^{-\alpha}
+  \qquad \text{for } \lambda_1\varepsilon^2 \gg \sigma_0,
 \end{equation}
 where $C$ and $\alpha > 0$ are constants that depend on the mode set and
-remaining parameters.  Section~\ref{sec:results} confirms this scaling
-numerically and determines the exponent $\alpha$.
+remaining parameters.  As $\varepsilon \to 0$, however, the curvature channel
+provides a finite floor $\sigma_0 > 0$ (cf.\
+Proposition~\ref{prop:eccentricity}), and the condition number saturates at
+$\kappa_\mathrm{floor} = \sigma_{\max}/\sigma_0 \approx 269$ rather than
+diverging.  Section~\ref{sec:results} confirms both the intermediate-regime
+scaling and the finite floor numerically, and determines the exponent $\alpha$.

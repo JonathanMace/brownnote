@@ -11,9 +11,12 @@ The principal result is the dependence of $\kappa$ on eccentricity
 modes $n=2,\ldots,6$, we sweep the aspect ratio $\zeta=c/a$ from near-unity
 (almost spherical) to the canonical value $\zeta=0.667$
 ($\varepsilon=0.745$).  At the near-spherical limit
-($\varepsilon \to 0$) the condition number rises to a floor value
+($\varepsilon \to 0$) the condition number rises to the floor value
 \begin{equation}\label{eq:kappa_floor}
-  \kappa_\mathrm{floor} \approx 269,
+  \kappa_\mathrm{floor} \approx 269
+  \qquad
+  (\text{evaluated at } \varepsilon = 0.01,\;
+  \zeta = 0.99995,\;\text{five modes}),
 \end{equation}
 representing the curvature-channel contribution identified in
 Proposition~\ref{prop:eccentricity}.  At the canonical oblate operating point
@@ -42,7 +45,7 @@ The Ritz eccentricity sweep above isolates the geometric effect alone.
   \includegraphics[width=\linewidth]{fig_sphere_vs_oblate}
   \caption{Frequency spectra comparison between the near-spherical and
   canonical oblate operating points for flexural modes $n=2,\ldots,6$,
-  computed within the oblate Ritz model.  The oblate case produces a
+  computed within the oblate \emph{Ritz} model.  The oblate case produces a
   well-separated spectrum; the near-spherical case shows near-degenerate
   clustering.}
   \label{fig:sphere_vs_oblate}
@@ -70,10 +73,13 @@ point, by contrast, the inverse map is not perfect but it is usable.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.85\linewidth]{fig_singular_values}
-  \caption{Singular value spectrum of the scaled Jacobian at the spherical and
-  oblate operating points.  In the spherical case, the smallest singular value
+  \caption{Singular value spectrum of the scaled Jacobian at the
+  near-spherical (\emph{Ritz} model, $\varepsilon\approx0$) and
+  canonical oblate (\emph{Ritz} model, $\varepsilon=0.745$) operating points,
+  with the \emph{equivalent-sphere} model shown for comparison.
+  In the equivalent-sphere case, the smallest singular value
   collapses to near-zero, rendering the Jacobian numerically rank deficient.
-  In the oblate case, all three singular values remain well separated from
+  In the oblate Ritz case, all three singular values remain well separated from
   zero.}
   \label{fig:singular_values}
 \end{figure}
@@ -243,9 +249,10 @@ operating point.
   \centering
   \includegraphics[width=0.85\linewidth]{fig_condition_map}
   \caption{Condition number $\kappa(\mathbf{J}_s)$ mapped over the
-  $(a,\,\zeta_g)$ parameter plane.  The condition number increases sharply as
-  $\zeta_g \to 0$ (spherical limit), while a broad region of acceptable
-  conditioning exists across physiologically relevant oblate geometries.}
+  $(a,\,\zeta_g)$ parameter plane using the \emph{Ritz} model.  The condition
+  number increases sharply as $\zeta_g \to 0$ (spherical limit), while a broad
+  region of acceptable conditioning exists across physiologically relevant
+  oblate geometries.}
   \label{fig:condition_map}
 \end{figure}
 
@@ -274,17 +281,19 @@ $\varepsilon = \sqrt{1 - c^2/a^2}$, computed by sweeping the aspect ratio
 $\zeta = c/a$ while holding all other parameters at their canonical values.
 All computations use the oblate Ritz model.
 
-As $\varepsilon \to 0$ (spherical limit), $\kappa$ rises steeply to its
-near-spherical floor of approximately $269$ (five modes), consistent with
+As $\varepsilon \to 0$ (spherical limit), $\kappa$ rises steeply towards its
+near-spherical floor of approximately $269$ (five modes, evaluated at
+$\varepsilon = 0.01$, i.e.\ $\zeta = c/a = 0.99995$), consistent with
 the curvature-channel contribution identified in
 Proposition~\ref{prop:eccentricity}.  As
 $\varepsilon$ increases (more oblate), $\kappa$ drops rapidly as the
 mode-dependent curvature sampling of Proposition~\ref{prop:eccentricity}
-restores full rank.  The data are well described by the power law
+restores full rank.  In the intermediate eccentricity regime (where the
+shape-channel correction dominates the curvature-channel floor), the data are
+well described by the power law
 \begin{equation}
-  \kappa \sim C\,\varepsilon^{-\alpha},
+  \kappa \approx C\,\varepsilon^{-\alpha}.
 \end{equation}
-as predicted in~\eqref{eq:kappa_powerlaw}.
 
 The theoretical analysis of Section~\ref{sec:perturbation} predicts
 $\alpha=2$ from the $\varepsilon^2$ expansion of the meridional metric.
@@ -298,17 +307,21 @@ The fitted prefactor is $\hat C\approx24$--$26$ across the tested mode sets,
 while the analytical prediction from the $\sigma_\mathrm{min}$ expansion gives
 $C_\mathrm{analytical}\approx160$.  The discrepancy reflects the limited
 accuracy of the leading-order asymptotic approximation at moderate
-$\varepsilon$.  All power-law fits are computed over the eccentricity range
-$\varepsilon\in[0.1,\,0.95]$; the modest coefficients of determination
-($R^2\approx0.66$--$0.75$, Table~\ref{tab:power_law}) reflect the approximate
-nature of the power-law description rather than a failure of the underlying
-trend.
+$\varepsilon$.  All power-law fits are computed over the aspect-ratio range
+$\zeta = c/a \in [0.1,\,0.95]$, corresponding to eccentricities
+$\varepsilon\in[0.312,\,0.995]$; the modest coefficients of determination
+($R^2\approx0.66$--$0.75$, Table~\ref{tab:power_law}) reflect both the
+approximate nature of the power-law description and the curvature-channel floor
+rounding off the divergence at high $\varepsilon$ (low $\zeta$).
 
 \begin{table}[t]
   \centering
-  \caption{Power-law fit $\kappa\sim C\,\varepsilon^{-\alpha}$ for different
+  \caption{Power-law fit $\kappa\approx C\,\varepsilon^{-\alpha}$ for different
   mode counts $\mathcal{N}$, using modes $n=2,\ldots,\mathcal{N}+1$ in the
-  Ritz model.  The theoretical exponent is $\alpha=2$.}
+  Ritz model.  Fits are over the aspect-ratio range $\zeta\in[0.1,\,0.95]$
+  ($\varepsilon\in[0.312,\,0.995]$).  The theoretical exponent is $\alpha=2$;
+  the modest $R^2$ values reflect the curvature-channel floor rounding off the
+  divergence.}
   \label{tab:power_law}
   \begin{tabular}{cccc}
     \toprule
@@ -338,12 +351,15 @@ approximation error in the forward model.
   \centering
   \includegraphics[width=0.85\linewidth]{fig_kappa_vs_eccentricity}
   \caption{Condition number $\kappa(\mathbf{J}_s)$ as a function of
-  eccentricity $\varepsilon = \sqrt{1 - c^2/a^2}$, computed within the Ritz
-  model for five flexural modes ($n=2,\ldots,6$).  The condition number
-  rises steeply as $\varepsilon \to 0$ (spherical limit), reaching a
-  near-spherical floor of approximately $269$, and is approximately described
-  by a power law $\kappa \sim C\,\varepsilon^{-\alpha}$ (fitted over
-  $\varepsilon\in[0.1,\,0.95]$) with theoretical exponent $\alpha=2$
+  eccentricity $\varepsilon = \sqrt{1 - c^2/a^2}$, computed within the
+  \emph{Ritz} model for five flexural modes ($n=2,\ldots,6$).  The condition
+  number rises steeply as $\varepsilon \to 0$ (spherical limit), reaching a
+  near-spherical floor of approximately $269$ (evaluated at
+  $\varepsilon = 0.01$, i.e.\ $\zeta = 0.99995$, with five modes), and is
+  approximately described by a power law
+  $\kappa \approx C\,\varepsilon^{-\alpha}$ in the intermediate regime
+  (fitted over $\zeta \in [0.1,\,0.95]$, i.e.\
+  $\varepsilon\in[0.312,\,0.995]$) with theoretical exponent $\alpha=2$
   (empirical fit: $\hat\alpha=2.37$, $R^2=0.66$).  The green square marks the
   canonical operating point ($\zeta = 0.667$).  The result confirms the
   analytical predictions of Propositions~\ref{prop:chain_rule}
