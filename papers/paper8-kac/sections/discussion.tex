@@ -37,8 +37,10 @@ modes sample both poles and equator broadly, while higher-order modes
 concentrate energy near the equator where the curvature gradient is steepest.
 This differential sampling breaks the proportionality of the $a$- and $c$-columns
 and restores full rank.  The condition number diverges as
-$\kappa \sim C\,\varepsilon^{-\alpha}$ as $\varepsilon \to 0$, with the
-exponent $\alpha$ confirmed numerically in Section~\ref{sec:results}.
+$\kappa \sim C\,\varepsilon^{-\alpha}$ as $\varepsilon \to 0$, with
+theoretical exponent $\alpha=2$ and empirical estimates
+$\hat\alpha\in[2.16,\,2.66]$ confirmed numerically in Section~\ref{sec:results}
+(Table~\ref{tab:power_law}).
 
 This interpretation is straightforward and does not invoke group-theoretic
 symmetry breaking.  The identifiability transition is not a consequence of
@@ -71,11 +73,15 @@ acceptable for a rough forward estimate of resonance frequency, but it is a poor
 foundation for parameter recovery.  Spherical simplifications are serviceable on
 the blackboard; in inverse problems they become noticeably less cooperative.
 
-At the same time, the present study does \emph{not} rely on a full oblate shell
-theory.  The model analysed here is still an equivalent-sphere approximation.
-That limitation should be kept in view when interpreting the phrase ``hear the
-shape''.  The present results show what is identifiable within the implemented
-model, not what Nature has promised in advance.
+The present study uses the oblate Ritz model for all identifiability results.
+The equivalent-sphere model is retained only to illustrate the algebraic rank
+deficiency of Proposition~\ref{prop:chain_rule}.  The Ritz model is itself an
+approximation --- it truncates the trial function space and incurs $\sim\!8\%$
+error relative to exact spheroidal shell theory --- but the mode-count
+convergence of Table~\ref{tab:mode_count} shows that the identifiability
+transition is robust to this truncation.  A full finite-element oblate shell
+model would provide the definitive answer, but the Ritz results already
+demonstrate the essential geometric mechanism.
 
 \subsection{Relation to existing inverse methods}
 
@@ -125,13 +131,18 @@ Our recommendation is therefore not based on elegance but on behaviour:
 
 Several limitations remain.
 \begin{enumerate}
-  \item The forward model is an equivalent-sphere approximation.  It does not
-  contain explicit $\zeta_g$-dependent shell terms, so the present paper should
-  not be read as a definitive study of full spheroidal shell identifiability.
+  \item The Ritz forward model is a variational approximation, not a full
+  spheroidal shell solution.  It captures the leading eccentricity dependence
+  but incurs $\sim\!8\%$ error relative to exact shell theory.  The mode-count
+  convergence of Table~\ref{tab:mode_count} mitigates this concern but does
+  not eliminate it entirely.
   \item The analysis is local.  We do not prove global injectivity of the map
   $(a,c,E)\mapsto \{f_n\}$.
   \item Synthetic inversion uses the same model for data generation and
-  inversion.  This isolates identifiability, but it avoids model-form error.
+  inversion.  This isolates identifiability from model-form error, but it
+  means that the round-trip recovery (Section~\ref{sec:results}) is a
+  verification of internal consistency, not a demonstration of real-world
+  inversion capability.
   \item The mode numbers are assumed known.  In experiment, mode assignment may
   itself be uncertain.
   \item Only three parameters are estimated.  Allowing $h$, $\nu$, or fluid
@@ -141,14 +152,14 @@ Several limitations remain.
 
 \subsection{Future directions}
 
-The natural next step is a genuine Ritz or finite-element oblate shell model
-with explicit aspect-ratio dependence, followed by the same identifiability
-analysis.  Shape-calculus tools~\cite{DelfourZolesio2011} would allow
+The natural next step is a full finite-element oblate shell model, which would
+eliminate the Ritz truncation error and allow convergence to the exact
+spheroidal solution.  Shape-calculus tools~\cite{DelfourZolesio2011} would allow
 Hadamard-type Fr\'echet derivatives of the eigenvalues with respect to the
 domain boundary, enabling a geometry-aware sensitivity analysis that goes beyond
 the parametric approach taken here.  That would show whether the encouraging
-results reported here strengthen further when the geometry is represented more
-faithfully.  The second
+results reported here strengthen further when the geometry is represented
+exactly.  The second
 priority is experimental validation, ideally first on phantoms of known
 geometry and stiffness and then on biological specimens.  A Bayesian treatment,
 with priors on tissue properties and uncertainty in mode identification, would
@@ -164,8 +175,9 @@ perturbation theory~\cite{Kato1966,Henrot2006}.
 Propositions~\ref{prop:chain_rule} and~\ref{prop:eccentricity} identify the
 mechanism by which the spherical degeneracy is lifted, but they stop short of a
 complete quantitative theory.  To make the outstanding mathematical programme
-explicit, we record three conjectures suggested by the numerical evidence.
-These are stated for the genuine oblate Ritz model, since that is the setting
+explicit, we record two conjectures suggested by the numerical evidence,
+together with an empirical observation on mode-count scaling.
+The conjectures are stated for the oblate Ritz model, since that is the setting
 in which a proof would matter.  Let
 $\mathcal{N}=\{n_1,\ldots,n_N\}$ denote the measured flexural mode set, let
 $\varepsilon=\sqrt{1-c^2/a^2}$ be the eccentricity, and let
@@ -183,7 +195,10 @@ $C(\mathcal{N})>0$, $\alpha(\mathcal{N})>0$, and $\varepsilon_0>0$ such that
   \qquad \text{as } \varepsilon \to 0^+,
 \end{equation}
 where the exponent $\alpha(\mathcal{N})$ depends only on the number of modes
-$N$ and on the selected mode set $\mathcal{N}$.
+$N$ and on the selected mode set $\mathcal{N}$.  The theoretical prediction is
+$\alpha=2$, arising from the $\varepsilon^2$ metric expansion; the empirical
+estimates $\hat\alpha\in[2.16,\,2.66]$ (Table~\ref{tab:power_law}) are
+consistent with this prediction to leading order.
 \end{conjecture}
 
 \begin{conjecture}[Minimum modes for identifiability]
@@ -192,31 +207,42 @@ Consider the four-parameter material map with parameter vector
 \begin{equation}
   \boldsymbol{\vartheta} = (E,h,\rho_w,\rho_f)^\top,
 \end{equation}
-at fixed geometry and fixed $(\nu,K_f,P_\mathrm{iap})$, reduced by the
-one-dimensional similarity scaling identified by the Buckingham--$\Pi$ analysis
-so that the effective parameter dimension is three.  Then three measured
-flexural modes suffice for local identifiability if and only if
-$\varepsilon>0$: equivalently, the reduced scaled Jacobian has full column rank
-for some three-mode set when $\varepsilon>0$, whereas no finite mode set yields
-full column rank when $\varepsilon=0$.
+at fixed geometry and fixed $(\nu,K_f,P_\mathrm{iap})$.  The Ritz forward
+model introduces three independent dimensionless groups that govern the
+frequency spectrum (beyond $\varepsilon$ itself): a stiffness ratio
+$Eh/K_f R$, a density ratio $\rho_w h/\rho_f R$, and a prestress ratio
+$P_\mathrm{iap}/E$.  If these three groups exhaust the independent parameter
+combinations (as the structure of
+equations~\eqref{eq:flexural_forward}--\eqref{eq:req} suggests but we do not
+formally prove), then three measured flexural modes suffice for local
+identifiability if and only if $\varepsilon>0$.  At $\varepsilon=0$, the
+additional proportionality constraint of Proposition~\ref{prop:chain_rule}
+removes one degree of freedom, and no finite mode set yields full column rank.
+This claim remains a conjecture because the completeness of the three-group
+reduction has not been established rigorously; a formal proof would require
+verifying that no hidden similarity scaling further reduces the effective
+parameter dimension.
 \end{conjecture}
 
-\begin{conjecture}[Universality of scaling]
-\label{conj:universality}
-For the nested flexural mode family $\mathcal{N}_N=\{2,\ldots,N+1\}$, the
-Buckingham--$\Pi$ groups induced by the Ritz equations are complete in the sense
-that there exists a universal function $\mathcal{K}$ satisfying
-\begin{equation}
-  \kappa\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N}_N)\bigr)
-  =
-  \mathcal{K}(\varepsilon,N),
-\end{equation}
-independently of the absolute values of
-$a$, $c$, $E$, $h$, $\rho_w$, and $\rho_f$, provided the dimensionless groups
-other than $\varepsilon$ are held fixed.
-\end{conjecture}
+\begin{remark}[Monotone improvement with mode count]
+\label{rem:monotone}
+The numerical evidence of Table~\ref{tab:mode_count} shows that the
+Cram\'er--Rao bounds improve monotonically as the mode count $\mathcal{N}$
+increases from $3$ to $9$, with diminishing marginal returns beyond
+$\mathcal{N}=5$.  This is an expected consequence of overdetermination:
+each additional mode adds an independent row to the Jacobian, reducing the
+covariance bound.  However, we observe no clean power-law decay of $\kappa$
+with $\mathcal{N}$ at fixed $\varepsilon$ --- the condition number is
+non-monotone (Table~\ref{tab:mode_count}), ranging from $69.4$ at
+$\mathcal{N}=5$ to $93.6$ at $\mathcal{N}=9$.  We therefore record the
+improvement as an empirical observation rather than elevating it to a formal
+conjecture.  The practical implication is that five modes capture the bulk
+of the available information for the present three-parameter problem.
+\end{remark}
 
-Conjecture~\ref{conj:power_law} is the most tantalising of the three.  The
-numerics already suggest a clean power law, but a proof would turn a useful
-plot into an asymptotic theorem.  That would be the crown jewel of the present
-identifiability programme; at the time of writing, it remains work in progress.
+Conjecture~\ref{conj:power_law} is the most tantalising of the open questions.
+The numerics already suggest a clean power law with $\alpha\approx2$, but a
+rigorous proof would turn a useful plot into an asymptotic theorem --- and would
+give the exponent and prefactor as closed-form functions of the mode set.
+That would be the crown jewel of the present identifiability programme; at
+the time of writing, it remains work in progress.
