@@ -1,0 +1,168 @@
+\documentclass[review]{elsarticle}
+\usepackage[margin=1in]{geometry}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage{inconsolata}
+\usepackage{amsmath}
+\let\Bbbk\relax
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{microtype}
+\usepackage[pdfencoding=auto,psdextra]{hyperref}
+\usepackage{lineno}
+
+% Fix duplicate page destination warning with elsarticle review mode
+\hypersetup{pageanchor=false}
+\AtBeginDocument{\hypersetup{pageanchor=true}}
+
+% SI units configuration
+\sisetup{
+  per-mode=symbol,
+  group-separator={,},
+}
+
+% Line numbering (required for review submission)
+\linenumbers
+
+% =============================================================================
+% Metadata
+% =============================================================================
+\journal{Postharvest Biology and Technology}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of
+Fruit Maturity via Equivalent-Sphere Shell Resonance Inversion}
+
+\author[msr]{Jonathan Mace\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{jonathanmace@microsoft.com}
+
+\author[auckland]{Brian R.\ Mace}
+\ead{br.mace@auckland.ac.nz}
+
+\affiliation[msr]{
+  organization={Microsoft Research},
+  city={Redmond, WA},
+  country={United States}
+}
+
+\affiliation[auckland]{
+  organization={Acoustics Research Centre, Department of Mechanical and
+    Mechatronics Engineering, University of Auckland},
+  city={Auckland},
+  country={New Zealand}
+}
+
+\begin{abstract}
+The `thump test''---tapping a watermelon and listening for
+ripeness---is practised worldwide but lacks a quantitative physical
+model.  We model the watermelon as a fluid-filled viscoelastic shell
+using an equivalent-sphere approximation: the oblate geometry is
+captured through the equivalent-volume radius
+$R_{\mathrm{eq}} = (a^{2}c)^{1/3}$, and the eigenfrequency is
+derived from classical thin-shell theory applied to a sphere of that
+radius.  Sobol sensitivity analysis
+($N_{\mathrm{base}}(D{+}2) = 5{,}632$ evaluations) reveals that the
+rind elastic modulus $E_{\mathrm{rind}}$ dominates the
+frequency response (total-order index $S_T = 0.54 \pm 0.05$).  Because $f_2^2$
+is exactly linear in $E_{\mathrm{rind}}$ when turgor pressure is
+negligible, the forward model admits a closed-form inversion: a single
+tap-tone measurement yields the rind modulus, which correlates with
+ripeness through pectin degradation.  The condition number of this
+inversion is unity with respect to $f^2$ and approximately~2 with
+respect to measured frequency~$f$.  We construct a dimensionless
+geometric invariant $\Pi_{\mathrm{ripe}}$ that collapses
+predictions across cultivar geometries onto a single calibration
+constant; because $E_{\mathrm{rind}}$
+cancels by construction, $\Pi_{\mathrm{ripe}}$ characterises the
+shell--fluid geometry rather than ripeness \emph{per se}.  Predictions
+are benchmarked against published resonance frequency ranges for
+watermelons.  The framework
+draws on equivalent-sphere shell theory previously applied to
+biological cavities, suggesting a common analytical basis for
+biomedical vibroacoustics and agricultural non-destructive evaluation.
+\end{abstract}
+
+\begin{keyword}
+watermelon \sep acoustic testing \sep non-destructive evaluation \sep
+shell theory \sep ripeness \sep inverse problem
+\end{keyword}
+
+\end{frontmatter}
+
+\graphicspath{{figures/}}
+
+% =============================================================================
+% Section 1: Introduction
+% =============================================================================
+\input{sections/introduction}
+
+% =============================================================================
+% Section 2: Mathematical Formulation
+% =============================================================================
+\input{sections/formulation}
+
+% =============================================================================
+% Section 3: Results
+% =============================================================================
+\input{sections/results}
+
+% =============================================================================
+% Section 4: Validation
+% =============================================================================
+\input{sections/validation}
+
+% =============================================================================
+% Section 5: Discussion
+% =============================================================================
+\input{sections/discussion}
+
+% =============================================================================
+% Section 6: Conclusions
+% =============================================================================
+\input{sections/conclusion}
+
+% =============================================================================
+% References
+% =============================================================================
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+% =============================================================================
+% Data Availability & CRediT
+% =============================================================================
+\section*{Data availability}
+All analytical models and computational scripts used in this study are
+available in the accompanying repository at
+\url{https://github.com/JonathanMace/brownnote}.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Jonathan Mace}: Conceptualization, Methodology, Software, Supervision,
+Writing -- Original Draft, Writing -- Review \& Editing.
+\textbf{Brian R.\ Mace}: Writing -- Review \& Editing, Validation.
+
+\section*{Acknowledgements}
+Portions of the analytical derivation, code development, and manuscript
+drafting were assisted by GitHub Copilot (GitHub, Inc.), a large language
+model operating under human supervision.  All technical content was
+independently verified by the authors.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests
+or personal relationships that could have appeared to influence the work
+reported in this paper.
+
+\end{document}

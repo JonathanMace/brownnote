@@ -70,7 +70,7 @@ Be specific. Cite line numbers, equation numbers, section names. Give actionable
 
 ## Workflow
 1. Work in your assigned worktree
-2. Read the FULL paper (paper/main.tex, all sections/*.tex) and source code (src/analytical/*.py)
+2. Read the FULL paper (papers/paper1-brown-note/main.tex, all sections/*.tex) and source code (src/analytical/*.py)
 3. Write your review to `docs/research-logs/reviewer-b-roundN.md`
 4. Do NOT edit paper or source files — review only
 5. Commit, push, then follow the `/git-checkpoint` skill to PR, merge, and clean up:

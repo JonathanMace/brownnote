@@ -1,5 +1,5 @@
 ---
-applyTo: "projects/borborygmi/paper/**"
+applyTo: "papers/paper5-borborygmi/**"
 ---
 
 # Paper 5 — JASA (Borborygmi)
@@ -8,7 +8,7 @@ When modifying ANY file in this directory:
 
 1. **Recompile** after changes:
    ```powershell
-   cd projects/borborygmi/paper
+   cd papers/paper5-borborygmi
    pdflatex -interaction=nonstopmode main.tex
    bibtex main
    pdflatex -interaction=nonstopmode main.tex
@@ -17,7 +17,7 @@ When modifying ANY file in this directory:
 
 2. **Create a timestamped draft snapshot**:
    ```powershell
-   Copy-Item projects/borborygmi/paper/main.pdf "projects/borborygmi/paper/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
+   Copy-Item papers/paper5-borborygmi/main.pdf "papers/paper5-borborygmi/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
    ```
 
 3. **Update README.md** — change the Paper 5 draft link to point to the new snapshot.

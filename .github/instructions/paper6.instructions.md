@@ -1,5 +1,5 @@
 ---
-applyTo: "paper6-sub-bass/**"
+applyTo: "papers/paper6-sub-bass/**"
 ---
 
 # Paper 6 — Journal of Sound and Vibration (Sub-Bass Coupling)
@@ -8,7 +8,7 @@ When modifying ANY file in this directory:
 
 1. **Recompile** after changes:
    ```powershell
-   cd paper6-sub-bass
+   cd papers/paper6-sub-bass
    pdflatex -interaction=nonstopmode main.tex
    bibtex main
    pdflatex -interaction=nonstopmode main.tex
@@ -17,7 +17,7 @@ When modifying ANY file in this directory:
 
 2. **Create a timestamped draft snapshot**:
    ```powershell
-   Copy-Item paper6-sub-bass/main.pdf "paper6-sub-bass/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
+   Copy-Item papers/paper6-sub-bass/main.pdf "papers/paper6-sub-bass/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
    ```
 
 3. **Update README.md** — change the Paper 6 draft link to point to the new snapshot.

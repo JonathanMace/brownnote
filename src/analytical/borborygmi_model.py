@@ -60,7 +60,7 @@ R_LUMEN = 0.015           # resting lumen radius [m] (small intestine ~3 cm dia)
 NECK_DIAMETER_DEFAULT = 0.005   # constriction diameter [m]
 NECK_LENGTH_DEFAULT = 0.010     # constriction length [m]
 
-FIG_DIR = Path(__file__).resolve().parents[2] / "projects" / "borborygmi" / "paper" / "figures"
+FIG_DIR = Path(__file__).resolve().parents[2] / "papers" / "paper5-borborygmi" / "figures"
 
 
 # ---------------------------------------------------------------------------
@@ -704,7 +704,7 @@ def plot_mode_transition_map(
     save : bool
         If True, save PNG and PDF.
     save_dir : Path or str, optional
-        Output directory.  Default: ``projects/borborygmi/paper/figures/``.
+        Output directory.  Default: ``papers/paper5-borborygmi/figures/``.
     **kwargs
         Passed to :func:`mode_transition_map`.
 

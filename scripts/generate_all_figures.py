@@ -54,7 +54,7 @@ from src.analytical.uncertainty_quantification import (
 )
 
 # ── Output directory ──
-FIG_DIR = os.path.join(ROOT, 'data', 'figures')
+FIG_DIR = os.path.join(ROOT, 'papers', 'paper1-brown-note', 'figures')
 os.makedirs(FIG_DIR, exist_ok=True)
 
 # ── JSV publication style ──

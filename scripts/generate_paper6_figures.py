@@ -48,7 +48,7 @@ plt.rcParams.update({
     'lines.linewidth': 1.5,
 })
 
-OUTDIR = os.path.join(os.path.dirname(__file__), '..', 'paper6-sub-bass', 'figures')
+OUTDIR = os.path.join(os.path.dirname(__file__), '..', 'papers', 'paper6-sub-bass', 'figures')
 os.makedirs(OUTDIR, exist_ok=True)
 
 model = AbdominalModelV2()

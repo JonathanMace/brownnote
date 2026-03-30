@@ -89,7 +89,7 @@ from browntone.postprocess.visualization import plot_convergence
 plot_convergence(
     "data/results/convergence/convergence_data.json",
     qoi_index=0,  # first eigenfrequency
-    save_to="paper/figures/mesh_convergence.pdf",
+    save_to="papers/paper1-brown-note/figures/mesh_convergence.pdf",
 )
 ```
 

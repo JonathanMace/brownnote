@@ -19,11 +19,11 @@ drift, stale numbers, and internal contradictions before reviewers do.
 ### 1. Canonical Parameter Consistency
 The canonical set is defined in `.github/copilot-instructions.md`. Extract those values,
 then verify they appear correctly in:
-- `paper/sections/section2_formulation.tex` (Table 1)
-- `paper/main.tex` (abstract)
-- `paper/sections/results.tex` (all tables)
-- `paper/sections/section4_coupling.tex` (all tables)
-- `paper/sections/discussion.tex` (any in-text values)
+- `papers/paper1-brown-note/sections/section2_formulation.tex` (Table 1)
+- `papers/paper1-brown-note/main.tex` (abstract)
+- `papers/paper1-brown-note/sections/results.tex` (all tables)
+- `papers/paper1-brown-note/sections/section4_coupling.tex` (all tables)
+- `papers/paper1-brown-note/sections/discussion.tex` (any in-text values)
 - `src/analytical/natural_frequency_v2.py` (default parameters)
 
 ### 2. Cross-Table Consistency

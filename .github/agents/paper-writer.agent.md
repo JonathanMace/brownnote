@@ -47,22 +47,22 @@ K_f=2.2 GPa, P_iap=1000 Pa, η=0.25 → Q=4.0, ζ=0.125, R_eq=0.157m, ka=0.0114
 ## Paper Structure (current)
 
 ```
-paper/main.tex              — Master document (elsarticle, review format)
-paper/sections/
+papers/paper1-brown-note/main.tex              — Master document (elsarticle, review format)
+papers/paper1-brown-note/sections/
   introduction.tex          — Historical context, ISO gap, motivation
   section2_formulation.tex  — Shell theory, fluid coupling, Rayleigh-Ritz
   results.tex               — Modal frequencies, parametric sensitivity, UQ
   section4_coupling.tex     — Airborne vs mechanical, energy budget
   discussion.tex            — Limitations, broader applications, experimental
   conclusion.tex            — Measured claims
-paper/references.bib        — BibTeX database
-paper/supplementary.tex     — 16-page supplementary material
+papers/paper1-brown-note/references.bib        — BibTeX database
+papers/paper1-brown-note/supplementary.tex     — 16-page supplementary material
 ```
 
 ## Compilation
 
 ```powershell
-cd paper
+cd papers/paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex

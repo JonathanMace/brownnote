@@ -52,7 +52,7 @@ system for the lab.
 - Suggest where in the paper each new reference would strengthen the argument.
 
 ### 5. Citation Health Check
-- Verify all BibTeX entries in `paper/references.bib` have complete fields
+- Verify all BibTeX entries in `papers/paper1-brown-note/references.bib` have complete fields
   (author, title, journal, year, volume, pages, DOI where available).
 - Check that every `\cite{}` in the LaTeX source has a matching BibTeX key.
 - Flag orphaned BibTeX entries (defined but never cited).
@@ -60,8 +60,8 @@ system for the lab.
 
 ## Source Material
 
-- `paper/references.bib` — current bibliography
-- `paper/*.tex` — manuscript LaTeX sources
+- `papers/paper1-brown-note/references.bib` — current bibliography
+- `papers/paper1-brown-note/*.tex` — manuscript LaTeX sources
 - `docs/literature-review.md` — existing literature review
 - `docs/RESEARCH-VISION.md` — programme scope and claims
 - `.github/copilot-instructions.md` — canonical references and context

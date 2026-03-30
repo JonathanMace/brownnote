@@ -83,7 +83,7 @@ plot_eigenfrequencies(
     results,
     n_modes=10,
     compare_analytical=analytical_freqs,
-    save_to="paper/figures/eigenfrequencies.pdf",
+    save_to="papers/paper1-brown-note/figures/eigenfrequencies.pdf",
 )
 ```
 
@@ -97,7 +97,7 @@ plot_mode_shape(
     mode=0,
     field="displacement_magnitude",
     colormap="cividis",
-    save_to="paper/figures/mode_0.pdf",
+    save_to="papers/paper1-brown-note/figures/mode_0.pdf",
 )
 ```
 
@@ -109,7 +109,7 @@ from browntone.postprocess.visualization import plot_convergence
 plot_convergence(
     convergence_data,
     qoi_label=r"$f_1$ (Hz)",
-    save_to="paper/figures/convergence.pdf",
+    save_to="papers/paper1-brown-note/figures/convergence.pdf",
 )
 ```
 
@@ -125,7 +125,7 @@ plot_parametric_heatmap(
     xlabel=r"Young's modulus $E$ (kPa)",
     ylabel=r"Wall thickness $h$ (mm)",
     zlabel=r"$f_1$ (Hz)",
-    save_to="paper/figures/parametric_Eh.pdf",
+    save_to="papers/paper1-brown-note/figures/parametric_Eh.pdf",
 )
 ```
 
@@ -138,7 +138,7 @@ ax.set_xlabel(r"Frequency (Hz)")
 ax.set_ylabel(r"Displacement amplitude (m)")
 ax.axvline(x=f_resonance, ls="--", color=COLOURS["secondary"], label="Resonance")
 ax.legend()
-fig.savefig("paper/figures/frf.pdf")
+fig.savefig("papers/paper1-brown-note/figures/frf.pdf")
 ```
 
 ## Export Checklist
@@ -149,5 +149,5 @@ fig.savefig("paper/figures/frf.pdf")
 - [ ] Font size readable at printed column width
 - [ ] Colours distinguishable in grayscale
 - [ ] Figure referenced in LaTeX with `\cref{fig:name}`
-- [ ] Caption written in `paper/main.tex` or section file
-- [ ] File saved to `paper/figures/`
+- [ ] Caption written in `papers/paper1-brown-note/main.tex` or section file
+- [ ] File saved to `papers/paper1-brown-note/figures/`

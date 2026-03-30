@@ -35,11 +35,14 @@ jobs:
       fail-fast: false
       matrix:
         paper:
-          - { name: "Paper 1 - Brown Note",       dir: "paper",                           artifact: "paper-1-browntone" }
-          - { name: "Paper 2 - Gas Pockets",       dir: "paper2-gas-pockets",              artifact: "paper-2-gas-pockets" }
-          - { name: "Paper 3 - Scaling Laws",      dir: "paper3-scaling-laws",              artifact: "paper-3-scaling-laws" }
-          - { name: "Paper 4 - Bladder Resonance", dir: "projects/bladder-resonance/paper", artifact: "paper-4-bladder" }
-          - { name: "Paper 5 - Borborygmi",        dir: "projects/borborygmi/paper",        artifact: "paper-5-borborygmi" }
+          - { name: "Paper 1 - Brown Note",       dir: "papers/paper1-brown-note",    artifact: "paper-1-browntone" }
+          - { name: "Paper 2 - Gas Pockets",       dir: "papers/paper2-gas-pockets",   artifact: "paper-2-gas-pockets" }
+          - { name: "Paper 3 - Scaling Laws",      dir: "papers/paper3-scaling-laws",   artifact: "paper-3-scaling-laws" }
+          - { name: "Paper 4 - Bladder Resonance", dir: "papers/paper4-bladder",        artifact: "paper-4-bladder" }
+          - { name: "Paper 5 - Borborygmi",        dir: "papers/paper5-borborygmi",     artifact: "paper-5-borborygmi" }
+          - { name: "Paper 6 - Sub-Bass",          dir: "papers/paper6-sub-bass",       artifact: "paper-6-sub-bass" }
+          - { name: "Paper 7 - Watermelon",        dir: "papers/paper7-watermelon",     artifact: "paper-7-watermelon" }
+          - { name: "Paper 8 - Kac",               dir: "papers/paper8-kac",            artifact: "paper-8-kac" }
     steps:
       - uses: actions/checkout@v4
 
@@ -98,5 +101,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: generated-figures
-          path: data/figures/*.pdf
+          path: papers/paper1-brown-note/figures/*.pdf
           retention-days: 30

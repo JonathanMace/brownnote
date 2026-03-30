@@ -56,7 +56,7 @@ priorities, and its strategic direction.
 ## Where to Look
 
 - `docs/RESEARCH-VISION.md` — programme rationale and claims
-- `paper/` — core arguments and framing
+- `papers/paper1-brown-note/` — core arguments and framing
 - `docs/research-logs/` — prior reviews and meeting notes
 - `docs/methodology.md`, `docs/fea-approach.md` — analytical foundations
 - `src/` — model implementation (check whether complexity is justified)
