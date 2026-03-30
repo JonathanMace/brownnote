@@ -87,16 +87,21 @@ Table~\ref{tab:mechanical} shows substantially stronger coupling.
   perfect modal participation ($\Gamma_2 = 1$); the corrected values
   (\S\ref{sec:coupling_ratio}) are approximately half those shown.}
   \label{tab:mechanical}
-  \begin{tabular}{rccc}
+  \begin{tabular}{rcccc}
     \toprule
     $a_\mathrm{rms}$ (m/s$^2$) & $x_\mathrm{base}$ ($\mu$m) &
-    $\xi_\mathrm{rel}$ ($\mu$m) & Exceeds 1\,\si{\micro\metre}? \\
+    $\xi_\mathrm{rel}$ ($\mu$m) &
+    $\xi_\mathrm{corr}$ ($\mu$m)\textsuperscript{$\dagger$} &
+    Exceeds 1\,\si{\micro\metre}? \\
     \midrule
-    0.1 & 229  & 917  & Yes \\
-    0.5 (EU action) & 1147  & 4586 & Yes \\
-    1.0 & 2293 & 9173 & Yes \\
-    1.15 (EU limit) & 2637 & 10549 & Yes \\
+    0.1 & 229  & 917  & 440  & Yes \\
+    0.5 (EU action) & 1147  & 4586 & 2201 & Yes \\
+    1.0 & 2293 & 9173 & 4403 & Yes \\
+    1.15 (EU limit) & 2637 & 10549 & 5064 & Yes \\
     \bottomrule
+    \multicolumn{5}{l}{\textsuperscript{$\dagger$}Corrected for
+      modal participation: $\xi_\mathrm{corr} = \Gamma_2\,\xi_\mathrm{rel}$
+      with $\Gamma_2 = 0.48$.}
   \end{tabular}
 \end{table}
 
@@ -144,7 +149,11 @@ where $u = \cos\theta$, $P_n$ is the Legendre polynomial of degree~$n$,
 $\theta_c$ is the polar angle below which the shell is rigidly constrained
 by the pelvis and spine, and
 $\sigma(u) = \sqrt{c^{2} + (a^{2}-c^{2})\,u^{2}}$
-is the oblate-spheroid surface metric factor.
+is the oblate-spheroid surface metric factor.  Note that the denominator
+integrates $P_n^2$ over the full sphere ($u \in [-1,1]$) weighted by the
+surface metric, rather than using a modal-mass normalisation; this convention
+differs from the standard structural-dynamics practice of normalising by
+generalised mass.
 Physically, $\Gamma_2$ quantifies how effectively vertical base excitation
 couples into the $n=2$ flexural mode.  For a completely free sphere, symmetry
 dictates $\Gamma_2 = 0$ exactly: vertical translation cannot excite a
@@ -187,8 +196,15 @@ the incident acoustic energy.
 The energy-consistent displacement follows directly.  The absorbed acoustic
 power is $\Pi_\mathrm{abs} = \sigma_\mathrm{abs} \, I$, where
 $I = p_\mathrm{inc}^2 / (2 \rho_\mathrm{air} c_\mathrm{air})$ is the
-free-field intensity.  At steady-state resonance this power is entirely
-dissipated by structural damping, so
+free-field intensity.  At steady-state resonance, the time-averaged
+dissipated power is
+$\langle P_\mathrm{diss}\rangle = c_\mathrm{eq}\langle\dot{x}^2\rangle$,
+where the equivalent viscous damping coefficient is
+$c_\mathrm{eq} = 2\zeta\omega_n M_\mathrm{eff}$ and the mean-square
+velocity of a harmonic oscillation with amplitude $\xi$ is
+$\langle\dot{x}^2\rangle = \omega_n^2\xi^2/2$.  Hence
+$\langle P_\mathrm{diss}\rangle = \zeta\omega_n^3 M_\mathrm{eff}\xi^2$.
+Equating absorbed and dissipated power gives
 \begin{equation}\label{eq:xi_energy}
   \xi_\mathrm{energy}
   = \sqrt{\frac{\sigma_\mathrm{abs}\,I}
@@ -197,10 +213,15 @@ dissipated by structural damping, so
 where $M_\mathrm{eff} = m_\mathrm{eff}^{(n)} \times 4\pi R^2$ is the total
 modal mass.  The factor of $\zeta_\mathrm{rad}/\zeta_\mathrm{struct}
 \sim 10^{-14}$ inside $\sigma_\mathrm{abs}$ is the physical origin of the
-${\approx}\,13\times$ reduction from the pressure-based estimate
+${\approx}\,13\times$ reduction from the pressure-based upper bound
 (equation~\ref{eq:xi_air}): the pressure-based calculation implicitly
 assumes that all incident energy is available to drive the mode, whereas in
 fact only the fraction $\zeta_\mathrm{rad}/\zeta_\mathrm{total}$ is absorbed.
+The pressure-based upper bound (with unity prefactor) exceeds the
+energy-consistent result by approximately $13\times$; with the exact
+multipole coefficient of $1/3$ (\S\ref{sec:airborne}), the pressure-based
+estimate reduces to approximately $0.06\,\mu\text{m}$, still a factor of
+${\sim}\,4$ above the energy-consistent value.
 This radiation inefficiency in the Rayleigh regime ($ka \ll 1$) is a
 well-established result in structural acoustics \cite{Junger1986,FahyGardonio2007}.
 
