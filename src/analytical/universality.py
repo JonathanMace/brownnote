@@ -520,8 +520,10 @@ def prolate_condition_sweep(
 ):
     """Sweep condition number κ over prolate eccentricities.
 
-    For a prolate spheroid: ε_p = √(1 − a²/c²), so a = c·√(1 − ε²).
-    Volume is held constant at (4/3)πR³ by adjusting (a, c) together.
+    For a prolate spheroid: ε_p = √(1 − a²/c²), so c = a/√(1 − ε²).
+    The semi-major axis *a* is held fixed at the canonical value and
+    *c* is derived from the eccentricity, matching the oblate sweep
+    convention (both sweeps fix *a*).
 
     Parameters
     ----------

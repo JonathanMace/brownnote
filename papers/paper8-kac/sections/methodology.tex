@@ -117,18 +117,19 @@ same inverse structure while moving to a very different stiffness scale.
 
 For the prolate comparison, we parameterise the shell with semi-minor axis
 $a < $ semi-major axis $c$, sweeping eccentricity
-$\varepsilon = \sqrt{1 - (a/c)^2}$ over $[0.3, 0.65]$ at fixed
-equivalent-sphere radius $R_\mathrm{eq} = (a^2 c)^{1/3}$.  The same five-mode
+$\varepsilon = \sqrt{1 - (a/c)^2}$ over $[0.3, 0.65]$.  The sweep holds the
+semi-major axis $a$ fixed at the canonical value and varies
+$c = a/\sqrt{1-\varepsilon^2}$.  The same five-mode
 Ritz framework ($n=2,\ldots,6$) and Jacobian analysis are applied.  Because the
 curvature distribution is inverted relative to the oblate case --- maximal at the
 poles rather than the equator --- the prolate sweep tests whether identifiability
 restoration is a universal consequence of symmetry breaking or a property
 specific to the oblate curvature--mode relationship.
 
-We note that the oblate sweep varies the aspect ratio at fixed semi-major axis
-$a$, while the prolate sweep holds $R_\mathrm{eq} = (a^2 c)^{1/3}$ fixed.
-Both paths preserve the essential geometric character of each shell class, but
-direct quantitative comparison of $\kappa$ values between branches should be
-interpreted with this caveat.  The qualitative contrast --- oblate $\kappa$
-varying over two orders of magnitude vs prolate $\kappa$ remaining flat --- is
-robust to the choice of normalisation path.
+Both the oblate and prolate sweeps follow the same parameterisation path: the
+semi-major axis $a$ is held fixed at the canonical value while the polar
+semi-axis $c$ is derived from the eccentricity.  This makes the comparison
+between branches directly commensurable.  The qualitative contrast --- oblate
+$\kappa$ varying over two orders of magnitude vs prolate $\kappa$ remaining
+essentially flat --- therefore reflects a genuine geometric difference in
+identifiability, not an artefact of different normalisation conventions.
