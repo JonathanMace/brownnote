@@ -7,7 +7,10 @@ We have studied the practical identifiability of viscoelastic shell parameters
 from resonant frequencies in the spirit of Kac's spectral question.  For the
 equivalent-sphere flexural model used here, the inverse problem based on the
 parameter triple $(a,c,E)$ is almost singular at the spherical operating point
-but well conditioned at the canonical oblate operating point.
+but well conditioned at the canonical oblate operating point.  In the context
+of the Browntone programme, that makes Paper~8 less a side study than a
+foundation stone: it addresses the inverse question on which the diagnostic
+ambitions of Papers~1--7 depend.
 
 The main findings are:
 \begin{enumerate}
@@ -28,16 +31,41 @@ The main findings are:
 These results suggest a practical answer to the question posed in the title.
 Within the present model, one can hear the shape of an oblate organ in the
 limited but useful sense of practical local identifiability.  One cannot do so
-reliably at the spherical limit.
+reliably at the spherical limit.  That distinction is precisely what determines
+whether a measured resonance is merely interesting or diagnostically useful.
 
-The clearest practical recommendation is straightforward: measure at least five
-low-order flexural resonances if the goal is parameter inversion rather than
-mere modal description.  Fewer modes may suffice for local tests, but they do
-not provide the same robustness.
+The programme-level implication is straightforward.  If flexural resonances can
+be measured reproducibly, and if the relevant parameters are identifiable, then
+the spectrum becomes a non-invasive elastography tool.  For abdominal
+resonance~\cite{BrowntoneCompanion}, this means that a measured modal set could
+in principle constrain effective cavity geometry and wall stiffness rather than
+serving only as a forward prediction.  For the bladder
+problem~\cite{BrowntoneBladder}, it means that fill-dependent resonance could,
+at least in principle, support inference of changing wall properties.  For
+watermelon ripeness~\cite{BrowntoneWatermelon}, it explains why a tap-tone can
+carry recoverable material information rather than folklore alone.
 
-Future work should replace the equivalent-sphere approximation by a true oblate
-Ritz model with explicit aspect-ratio dependence, and should test the inversion
-experimentally on phantoms and biological specimens.  That would move the
-present study from ``practically identifiable in silico'' to ``experimentally
-recoverable in the laboratory'', which is a more demanding and more interesting
-standard.
+The clearest practical recommendation is equally straightforward: measure at
+least five low-order flexural resonances if the goal is parameter inversion
+rather than mere modal description.  Fewer modes may suffice for local tests,
+but they do not provide the same robustness.
+
+The most interesting open mathematical target is the asymptotic law
+\begin{equation}
+  \kappa \sim C\,\varepsilon^{-\alpha}
+  \qquad \text{as } \varepsilon \to 0^+,
+\end{equation}
+which is currently supported numerically and formalised in
+Conjecture~\ref{conj:power_law}.  A rigorous proof would give the programme its
+cleanest bridge between geometry and inverse conditioning: not merely that
+oblateness helps, but exactly how fast identifiability is restored as one moves
+away from the spherical limit.  That would be the crown jewel.  For the moment,
+the jewel remains in the workshop.
+
+Future work should therefore proceed in two directions.  First, the
+equivalent-sphere approximation should be replaced by a true oblate Ritz model
+with explicit aspect-ratio dependence.  Second, the inversion should be tested
+experimentally on phantoms and biological specimens.  Together, those steps
+would move the Browntone programme from ``the resonances can be predicted'' to
+``the material parameters can be recovered'', which is the more consequential
+claim.

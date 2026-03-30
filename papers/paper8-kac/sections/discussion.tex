@@ -158,3 +158,65 @@ The results suggest that geometric asymmetry plays a fundamental role in
 practical identifiability of coupled fluid--shell systems, a connection that
 merits further investigation using the tools of shape calculus and spectral
 perturbation theory~\cite{Kato1966,Henrot2006}.
+
+\subsection{Open Questions and Conjectures}\label{sec:open_questions}
+
+Propositions~\ref{prop:chain_rule} and~\ref{prop:eccentricity} identify the
+mechanism by which the spherical degeneracy is lifted, but they stop short of a
+complete quantitative theory.  To make the outstanding mathematical programme
+explicit, we record three conjectures suggested by the numerical evidence.
+These are stated for the genuine oblate Ritz model, since that is the setting
+in which a proof would matter.  Let
+$\mathcal{N}=\{n_1,\ldots,n_N\}$ denote the measured flexural mode set, let
+$\varepsilon=\sqrt{1-c^2/a^2}$ be the eccentricity, and let
+$\mathbf{J}_s(\varepsilon;\mathcal{N})$ denote the corresponding scaled
+Jacobian of the frequency--parameter map.
+
+\begin{conjecture}[Rate of identifiability restoration]
+\label{conj:power_law}
+For the Ritz model with fixed mode set $\mathcal{N}$, there exist constants
+$C(\mathcal{N})>0$, $\alpha(\mathcal{N})>0$, and $\varepsilon_0>0$ such that
+\begin{equation}
+  \kappa\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N})\bigr)
+  =
+  C(\mathcal{N})\,\varepsilon^{-\alpha(\mathcal{N})}\bigl(1+o(1)\bigr)
+  \qquad \text{as } \varepsilon \to 0^+,
+\end{equation}
+where the exponent $\alpha(\mathcal{N})$ depends only on the number of modes
+$N$ and on the selected mode set $\mathcal{N}$.
+\end{conjecture}
+
+\begin{conjecture}[Minimum modes for identifiability]
+\label{conj:min_modes}
+Consider the four-parameter material map with parameter vector
+\begin{equation}
+  \boldsymbol{\vartheta} = (E,h,\rho_w,\rho_f)^\top,
+\end{equation}
+at fixed geometry and fixed $(\nu,K_f,P_\mathrm{iap})$, reduced by the
+one-dimensional similarity scaling identified by the Buckingham--$\Pi$ analysis
+so that the effective parameter dimension is three.  Then three measured
+flexural modes suffice for local identifiability if and only if
+$\varepsilon>0$: equivalently, the reduced scaled Jacobian has full column rank
+for some three-mode set when $\varepsilon>0$, whereas no finite mode set yields
+full column rank when $\varepsilon=0$.
+\end{conjecture}
+
+\begin{conjecture}[Universality of scaling]
+\label{conj:universality}
+For the nested flexural mode family $\mathcal{N}_N=\{2,\ldots,N+1\}$, the
+Buckingham--$\Pi$ groups induced by the Ritz equations are complete in the sense
+that there exists a universal function $\mathcal{K}$ satisfying
+\begin{equation}
+  \kappa\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N}_N)\bigr)
+  =
+  \mathcal{K}(\varepsilon,N),
+\end{equation}
+independently of the absolute values of
+$a$, $c$, $E$, $h$, $\rho_w$, and $\rho_f$, provided the dimensionless groups
+other than $\varepsilon$ are held fixed.
+\end{conjecture}
+
+Conjecture~\ref{conj:power_law} is the most tantalising of the three.  The
+numerics already suggest a clean power law, but a proof would turn a useful
+plot into an asymptotic theorem.  That would be the crown jewel of the present
+identifiability programme; at the time of writing, it remains work in progress.
