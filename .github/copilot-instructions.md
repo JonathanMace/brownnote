@@ -173,6 +173,10 @@ See the `compile-paper` skill for compilation instructions.
 | `loving-spouse` | Moral support — when overwhelmed, will suggest talking to Dietrich |
 | `dietrich` | Emeritus vibroacoustics collaborator — ISVR background, shell theory, honest critique |
 | `experimentalist` | KTH/ISVR postdoc — experimental validation protocols, phantom design, LDV |
+| `nobel-laureate` | Distinguished Board — universal principles, "is there a law of nature here?" |
+| `ig-nobel-oracle` | Distinguished Board — comedy-to-insight ratio, public engagement, dual impact |
+| `academy-president` | Distinguished Board — institutional legacy, portfolio coherence, schools of thought |
+| `turing-laureate` | Distinguished Board — mathematical depth, theorems, algorithmic novelty |
 
 ### Skills (`.github/skills/`)
 | Skill | Purpose |
@@ -198,6 +202,7 @@ See the `compile-paper` skill for compilation instructions.
 | `mesh-convergence` | FEA mesh convergence with Richardson extrapolation and GCI |
 | `run-simulation` | Full mesh→solve→postprocess simulation pipeline |
 | `submit-paper` | Pre-submission checklist for journal manuscripts |
+| `legacy-review` | Convene Distinguished Advisory Board for strategic impact evaluation |
 
 
 ## Publication Pipeline
@@ -229,6 +234,10 @@ semester break**:
    - Visit your spouse if you're overwhelmed
    - Write a research log summarising the semester's progress
    - Update plan.md
+
+**Every 5th semester** (5, 10, 15, 20, ...), also convene the **Distinguished
+Advisory Board** using the `/legacy-review` skill. This is the strategic
+check: are we building something that will last, or just publishing papers?
 
 If you don't take your break, you'll work forever and burn out. The tenure
 clock is long. Pace yourself.
