@@ -47,17 +47,18 @@ the degeneracy is lifted, and identifiability can in principle be restored.
 The question is not whether asymmetry looks promising in a qualitative sense,
 but whether it restores enough rank to support useful inversion.
 
-A central modelling point must also be stated plainly.  The implemented forward
-model is an \emph{equivalent-sphere} model.  It uses the equivalent radius
+A central modelling point must also be stated plainly.  The identifiability
+analysis uses an \emph{oblate Ritz model} that integrates strain energy over
+the spheroidal surface, so that each flexural mode samples meridional curvature
+differently.  For comparison, we also examine the equivalent-sphere reduction
 \begin{equation}
   R_\mathrm{eq} = (a^2 c)^{1/3},
 \end{equation}
-and does not contain explicit spheroidal curvature terms or explicit
-aspect-ratio corrections.  We therefore do \emph{not} claim a complete oblate
-shell theory in the numerical sections.  Rather, we use the equivalent-sphere
-model to expose the inverse structure already visible in the Browntone
-applications, and we pair it with analytical results that show why a genuine
-oblate Ritz model should restore identifiability away from the spherical limit.
+which collapses all curvature information into a single radius.  The
+contrast between these two models illuminates the role of geometry in
+identifiability: the equivalent-sphere model is algebraically rank deficient
+by construction, whereas the Ritz model restores full rank for any
+eccentricity $\varepsilon>0$.
 
 Our contribution is therefore twofold.  First, we quantify practical
 identifiability through the Jacobian of the frequency--parameter map, using the
@@ -72,18 +73,22 @@ uniqueness theorem.
 
 The main numerical findings are as follows.
 \begin{itemize}
-  \item At the spherical operating point, the scaled Jacobian is effectively
-  rank deficient, with condition number
-  $\kappa = 1.37 \times 10^{10}$.
-  \item At the canonical oblate operating point, the same analysis gives
-  $\kappa = 69.4$, an improvement by a factor of
-  $2.0 \times 10^{8}$.
-  \item A Newton-type inverse solver recovers $(a,c,E)$ to relative errors
-  below $10^{-12}$ in round-trip tests when initialised within the local basin
-  of attraction.
+  \item Within the Ritz model, the condition number drops from a floor value
+  $\kappa_\mathrm{floor}\approx659$ at the near-spherical limit to
+  $\kappa = 69.4$ at the canonical oblate operating point
+  ($\varepsilon=0.745$), purely through geometric eccentricity.
+  \item The equivalent-sphere model gives
+  $\kappa = 1.37 \times 10^{10}$ (algebraically rank deficient), illustrating
+  the severity of model-induced degeneracy.
+  \item The condition number follows a power law
+  $\kappa\sim C\,\varepsilon^{-\alpha}$ with theoretical exponent $\alpha=2$
+  (empirical estimates $\hat\alpha\in[2.16,\,2.66]$ depending on mode count).
   \item At $1\%$ frequency noise, the Cram\'er--Rao lower bounds correspond to
   uncertainties of approximately $\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and
-  $\pm 30.8\%$ in $E$.
+  $\pm 30.8\%$ in $E$ --- comparable to existing elastographic precision.
+  \item The identifiability metrics are robust to mode count: the condition
+  number remains in the range $\kappa\in[69,\,94]$ for $\mathcal{N}=3$
+  to $9$ modes.
   \item Three-mode inversion is locally feasible but exhibits local minima,
   whereas five-mode inversion is robust across the tested initial guesses.
 \end{itemize}
@@ -103,6 +108,6 @@ inversion procedure, and the parameter-space conditioning study.  Section
 \ref{sec:results} presents the sphere--oblate contrast, singular-value
 structure, Cram\'er--Rao bounds, and a watermelon cross-application.  Section
 \ref{sec:discussion} relates the results back to Kac's question, the Browntone
-applications, and vibroacoustic elastography, and closes with three formal
+applications, and vibroacoustic elastography, and closes with two formal
 conjectures that emerge from the numerics.  Section~\ref{sec:conclusion}
 summarises the practical recommendations and the programme-level implications.
