@@ -42,9 +42,12 @@ At \SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
 discomfort, and roughly the level at
 which conversation becomes impossible---the energy-consistent wall
 displacement is \SI{0.014}{\micro\metre}.  This falls two orders of magnitude
-below the $0.5$--$\SI{2.0}{\micro\metre}$ activation range of
-mechanosensitive PIEZO1 and PIEZO2 channels \cite{coste2010piezo1}.  Reaching the
-\SI{1}{\micro\metre} threshold on this energy-consistent basis demands
+below the $0.5$--$\SI{2.0}{\micro\metre}$ cellular activation range of
+mechanosensitive PIEZO1 and PIEZO2 channels \cite{coste2010piezo1}, a
+benchmark derived from cell-culture experiments that provides a useful
+order-of-magnitude reference scale for biological mechanosensitivity.
+Reaching the
+\SI{1}{\micro\metre} cellular benchmark on this energy-consistent basis demands
 approximately \SI{158}{\decibel} (cf.\ \SI{135}{\decibel} using the
 pressure-based displacement of Table~\ref{tab:uq_summary}, which
 overestimates by ${\approx}\,13\times$), a level associated with severe
@@ -68,8 +71,8 @@ disturbance.
 
 \subsection{Mechanical (Whole-Body Vibration) Pathway}
 
-Mechanical vibration, by contrast, does not knock politely at the acoustic
-impedance door---it kicks it open.  Vibration transmitted through the
+Mechanical vibration, by contrast, bypasses the acoustic
+impedance barrier entirely.  Vibration transmitted through the
 skeleton couples directly to the abdominal wall, bypassing the $(ka)^n$
 penalty entirely.  Because the bone--peritoneum impedance contrast is orders
 of magnitude smaller than the air--tissue mismatch, an upper-bound
@@ -99,7 +102,7 @@ Table~\ref{tab:mechanical} tells a very different story.
 \end{table}
 
 At the EU action value of \SI{0.5}{\metre\per\second\squared}, the predicted
-displacement exceeds the PIEZO threshold by more than three orders of
+displacement exceeds the PIEZO cellular benchmark by more than three orders of
 magnitude.  Unlike the airborne case, this is not a theoretical curiosity:
 it is the everyday reality for operators of heavy equipment, long-haul
 drivers, and helicopter pilots---populations in which gastrointestinal
@@ -123,12 +126,7 @@ excitation, defines the headline SDOF upper bound:
 This four-order-of-magnitude gap is robust to parameter uncertainties because
 both pathways excite the \emph{same} modal structure---the ratio depends
 primarily on $(ka)^{-n}$ and the base-excitation transfer function, neither of
-which is sensitive to tissue properties.  One could double the elastic modulus,
-halve the wall thickness, or relocate the subject to Jupiter\footnote{The
-model assumes Earth-normal gravity for the static intra-abdominal-pressure
-term; Jovian surface gravity (\SI{24.8}{\metre\per\second\squared}) would
-substantially alter the pre-stress state.  The point, however, is rhetorical.},
-and the ratio would scarcely budge.
+which is sensitive to tissue properties.
 
 \paragraph{Modal participation.}
 The mechanical displacement in Eq.~\eqref{eq:coupling_ratio} assumes perfect
@@ -160,7 +158,10 @@ $\int_{-1}^{1} u\,P_n(u)\,\mathrm{d}u$, which vanishes for $n \neq 1$ by
 Legendre orthogonality; a free sphere therefore has $\Gamma_2 = 0$ exactly.
 Partial skeletal constraint (canonical value $\theta_c = 2\pi/3$, i.e.\ the
 lower third of the shell is fixed) breaks this orthogonality, giving
-$\Gamma_2 \approx 0.48$ for the canonical model.  Including this correction
+$\Gamma_2 \approx 0.48$ for the canonical model.  The participation factor
+is moderately sensitive to the constraint angle: $\Gamma_2$ ranges from
+approximately 0.3 at $\theta_c = \pi/2$ (lower half constrained) to 0.7 at
+$\theta_c = 5\pi/6$ (only the lowest sixth constrained).  Including this correction
 reduces the mechanical displacement to about 48\% of the SDOF value and the
 coupling ratio to $\sim 3 \times 10^4$.  The qualitative conclusion---a
 four-order-of-magnitude gap---is unaffected, but $\mathcal{R}_\mathrm{full}$ as reported in
@@ -182,8 +183,27 @@ structural damping ratios, respectively.  For the $n=2$ mode in air,
 $\zeta_\mathrm{rad} \approx 10^{-15}$ whereas
 $\zeta_\mathrm{struct} = 0.125$, giving an absorption efficiency of order
 $10^{-14}$.  The shell absorbs roughly one part in a hundred trillion of
-the incident acoustic energy---a figure that puts the brown note hypothesis
-on rather thin thermodynamic ice.
+the incident acoustic energy.
+
+The energy-consistent displacement follows directly.  The absorbed acoustic
+power is $\Pi_\mathrm{abs} = \sigma_\mathrm{abs} \, I$, where
+$I = p_\mathrm{inc}^2 / (2 \rho_\mathrm{air} c_\mathrm{air})$ is the
+free-field intensity.  At steady-state resonance this power is entirely
+dissipated by structural damping, so
+\begin{equation}\label{eq:xi_energy}
+  \xi_\mathrm{energy}
+  = \sqrt{\frac{\sigma_\mathrm{abs}\,I}
+               {2\,\zeta_\mathrm{struct}\,\omega_n^3\,M_\mathrm{eff}}},
+\end{equation}
+where $M_\mathrm{eff} = m_\mathrm{eff}^{(n)} \times 4\pi R^2$ is the total
+modal mass.  The factor of $\zeta_\mathrm{rad}/\zeta_\mathrm{struct}
+\sim 10^{-14}$ inside $\sigma_\mathrm{abs}$ is the physical origin of the
+${\approx}\,13\times$ reduction from the pressure-based estimate
+(equation~\ref{eq:xi_air}): the pressure-based calculation implicitly
+assumes that all incident energy is available to drive the mode, whereas in
+fact only the fraction $\zeta_\mathrm{rad}/\zeta_\mathrm{total}$ is absorbed.
+This radiation inefficiency in the Rayleigh regime ($ka \ll 1$) is a
+well-established result in structural acoustics \cite{Junger1986,FahyGardonio2007}.
 
 \subsection{Comparison with Empirical Evidence}
 
@@ -210,6 +230,6 @@ are studying the same resonance through very different ends of the telescope.
   whole-body vibration at \SI{0.5}{\metre\per\second\squared} (upper curve),
   showing a gap of roughly four orders of magnitude at resonance.
   Right: comparison of all four coupling pathways at the $n=2$ resonance;
-  the horizontal dashed line marks the PIEZO mechanotransduction threshold.}
+  the horizontal dashed line marks the PIEZO cellular mechanosensory reference scale.}
   \label{fig:coupling}
 \end{figure}

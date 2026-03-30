@@ -14,7 +14,7 @@ Whole-body vibration is another matter entirely, which is why we wrote nine pape
 **Modal analysis of a fluid-filled viscoelastic oblate spheroidal shell**  
 **Status:** Submission-ready (~44pp)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0109.pdf)  
+**Latest draft:** [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0106.pdf)  
 **Key result:** coupling ratio R ≈ 6.6 × 10⁴
 
 Can a sufficiently powerful subwoofer ruin your afternoon? We model the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derive its modal spectrum from first principles, and compare airborne acoustic coupling with whole-body mechanical vibration. The resonance is real; the acoustic pathway to it is not.

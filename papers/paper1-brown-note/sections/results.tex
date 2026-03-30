@@ -96,7 +96,7 @@ reflecting the log-normal distribution of $E$.
       because it neglects the extremely low radiation efficiency
       ($\zeta_\mathrm{rad}/\zeta_\mathrm{struct} \sim 10^{-14}$).
       Using the energy-consistent displacement
-      (\S\ref{sec:coupling}), the PIEZO1/2 threshold rises to
+      (\S\ref{sec:coupling}), the PIEZO1/2 benchmark rises to
       ${\approx}\,\SI{158}{\decibel}$---a \SI{23}{\decibel} correction
       that represents the physically realisable SPL.}
       & 135 & [128, 139] & dB \\
@@ -154,12 +154,14 @@ These configurations represent surrogate constraint cases chosen to bracket
 the likely effect of anatomical boundary conditions, rather than a strict
 monotonic continuation of a single geometry.
 
-Table~\ref{tab:bc_results} presents the results.  The boundary-condition study
-uses a slightly different parameter set ($R = \SI{0.162}{\metre}$,
+Table~\ref{tab:bc_results} presents the results.  To assess the sensitivity of
+the modal frequencies to boundary conditions, we performed a comparative
+analysis using representative alternative parameters
+($R = \SI{0.162}{\metre}$,
 $\rho_f = \SI{1000}{\kilo\gram\per\metre\cubed}$,
-$P_\mathrm{iap} = \SI{1500}{\pascal}$) to match the mesh geometry; however, the
-relative frequency shifts between boundary conditions are the parameter of
-interest.  The free-sphere Ritz frequency ($f_2 = \SI{4.13}{\hertz}$) agrees
+$P_\mathrm{iap} = \SI{1500}{\pascal}$) chosen to match a specific mesh
+geometry; these results are presented for relative comparison rather than
+absolute prediction.  The free-sphere Ritz frequency ($f_2 = \SI{4.13}{\hertz}$) agrees
 with the analytical prediction (\SI{4.26}{\hertz}) to within 3\%, providing a
 useful numerical check.  The most constrained case---25\%
 of the shell surface clamped---reduces $f_2$ by only \SI{11.4}{\percent}.  Even
@@ -226,14 +228,14 @@ Applying this correction moves the canonical $n=2$ frequency from
 ISO~2631 band and, if anything, closer to the low end of reported abdominal
 resonance frequencies.
 
-\subsection{ISO~2631 Validation}
+\subsection{Comparison with ISO~2631 Data}
 
 Table~\ref{tab:iso} compares model predictions against published abdominal
-resonance data.  This comparison serves as independent validation: the model,
+resonance data.  This comparison serves as an independent consistency check: the model,
 derived from first principles with no fitted parameters, predicts resonant
 frequencies consistent with empirical whole-body vibration data compiled over
 decades of occupational health research.  Agreement with ISO~2631 therefore
-confirms that the shell model captures the essential physics of abdominal
+provides confidence that the shell model captures the essential physics of abdominal
 resonance.
 
 \begin{table}[htbp]
