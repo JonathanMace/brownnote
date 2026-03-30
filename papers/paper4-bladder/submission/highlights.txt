@@ -1,0 +1,5 @@
+- The bladder n=2 flexural frequency follows a U-shaped fill dependence with a minimum near 222 mL.
+- The minimum emerges from competition between geometric softening and detrusor strain-stiffening.
+- Whole-body vibration excites the bladder primarily in a sub-resonant forced-response regime.
+- Predicted wall displacement in the 4-8 Hz band exceeds the at-resonance displacement because pelvic transmissibility is larger there.
+- Mechanical pelvic coupling is approximately 6.4 x 10^3 stronger than airborne acoustic excitation.

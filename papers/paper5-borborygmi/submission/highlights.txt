@@ -1,0 +1,5 @@
+- A unified four-mechanism analytical framework is proposed for the acoustics of borborygmi.
+- Tissue-constrained bubble resonance predicts 135-440 Hz for 1-50 mL gas pockets without fitted parameters.
+- The predicted constrained-bubble band overlaps the clinically observed healthy bowel-sound range of 200-550 Hz.
+- A mode-transition map identifies when constrained bubble, Helmholtz, axial, or breathing mechanisms should dominate.
+- The framework provides a physical interpretation of spectral shifts associated with bowel obstruction and altered motility.

@@ -1,0 +1,5 @@
+- Buckingham Pi reduction identifies five governing dimensionless groups for flexural modes of fluid-filled shells.
+- A closed-form scaling law reproduces 1458 parametric cases to numerical round-off.
+- Under illustrative mammalian allometry, the dimensionless flexural frequency remains approximately conserved.
+- The scattering coupling ratio remains approximately size-independent under mechanical excitation.
+- The fluid-dominated breathing mode does not enter the infrasonic band for any biological organism.
