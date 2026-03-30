@@ -1,0 +1,5 @@
+- Abdomen modelled as a fluid-filled viscoelastic oblate spheroidal shell
+- Flexural resonances at 4-8 Hz match ISO 2631 abdominal resonance data
+- Airborne coupling is 66,000× weaker than mechanical vibration at resonance
+- Energy-consistent 120 dB response is 0.014 μm, below PIEZO thresholds
+- Monte Carlo UQ confirms the disparity across physiological ranges
