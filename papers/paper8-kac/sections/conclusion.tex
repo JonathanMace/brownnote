@@ -20,11 +20,13 @@ The main findings are:
   \item the equivalent-sphere model is algebraically rank deficient
   ($\kappa = 1.37 \times 10^{10}$), illustrating how model-induced degeneracy
   dwarfs the geometric effect;
-  \item the condition number follows an approximate power law
-  $\kappa\approx C\,\varepsilon^{-\alpha}$ in the intermediate eccentricity
-  regime, with theoretical exponent $\alpha=2$ and empirical estimates
-  $\hat\alpha\in[2.16,\,2.66]$; as $\varepsilon\to 0$ the curvature channel
-  provides a finite floor at $\kappa_\mathrm{floor}\approx 269$;
+  \item the smallest singular value admits a regular two-channel expansion
+  $\sigma_{\min} = \sigma_0 + \lambda_1\varepsilon^2 + O(\varepsilon^4)$
+  with curvature-channel floor $\sigma_0 = 0.01113$ and shape-channel
+  coefficient $\lambda_1 = 0.00507$ (five modes); the crossover
+  $\varepsilon_c = 1.48 > 1$ shows that the curvature channel dominates
+  across the entire physical range, and the condition number saturates at
+  $\kappa_\mathrm{floor}\approx 269$ rather than diverging;
   \item round-trip inversion recovers $(a,c,E)$ to machine precision
   ($<10^{-12}$), confirming internal consistency of the forward model and
   solver;
@@ -63,24 +65,25 @@ least five low-order flexural resonances if the goal is parameter inversion
 rather than mere modal description.  Fewer modes may suffice for local tests,
 but they do not provide the same robustness.
 
-The most interesting open mathematical target is the asymptotic expansion
-\begin{equation}
-  \sigma_{\min}(\varepsilon)
-  = \sigma_0 + \lambda_1\,\varepsilon^{2} + O(\varepsilon^4)
-  \qquad \text{as } \varepsilon \to 0^+,
-\end{equation}
-which implies the intermediate-regime power law
-$\kappa \approx C\,\varepsilon^{-2}$ for $\lambda_1\varepsilon^2 \gg \sigma_0$
-and a finite floor $\kappa_\mathrm{floor} = \sigma_{\max}/\sigma_0 \approx 269$
-as $\varepsilon \to 0$.  This is currently supported numerically
-(Table~\ref{tab:power_law}) and formalised in
-Conjecture~\ref{conj:power_law}.  The fitted prefactor
-$\hat C\approx24$--$26$ and the floor value provide
-quantitative design rules, but a rigorous proof would give the programme its
-cleanest bridge between geometry and inverse conditioning: not merely that
-oblateness helps, but exactly how fast identifiability is restored as one moves
-away from the spherical limit, and exactly where it saturates.  That would be
-the crown jewel.  For the moment, the jewel remains in the workshop.
+The main theoretical contribution is the three-class classification of shell
+inverse problems (Section~\ref{sec:classification}): \emph{singular}
+(equivalent-sphere, rank-deficient), \emph{regular bounded} (oblate Ritz,
+$\kappa$ finite and improving monotonically with eccentricity), and
+\emph{non-lifting} (prolate, $\kappa$ high and flat).  The critical finding is
+that not all shape departures improve identifiability: oblate geometry benefits
+from curvature--mode anti-correlation, while prolate geometry does not, because
+curvature peaks and modal peaks are co-located at the poles.  This asymmetry
+was not anticipated by the original power-law conjecture, which has been
+replaced by the richer two-channel picture.
+
+The most interesting open mathematical target is the closed-form derivation of
+the expansion coefficients $\sigma_0$, $\lambda_1$, and $\lambda_2$ as
+explicit functions of the mode set and canonical parameters
+(Conjecture~\ref{conj:expansion}).  The numerically determined
+values~\eqref{eq:expansion_coeffs} already provide quantitative design rules,
+but a proof would turn them into a theorem connecting geometry, modal
+structure, and inverse conditioning in closed form.  That would be the crown
+jewel.  For the moment, the jewel remains in the workshop.
 
 Future work should therefore proceed in two directions.  First, the
 Ritz approximation should be replaced by a full finite-element oblate shell

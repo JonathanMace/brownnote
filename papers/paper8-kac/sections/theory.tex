@@ -286,20 +286,31 @@ Low-order modes ($n=2$) sample both regions broadly, while higher-order modes
 breaks the proportionality of the $a$- and $c$-columns and lifts the rank
 deficiency.
 
-The result leads to a quantitative design rule.  Because the rank-restoring
-correction enters at order $\varepsilon^2$, the condition number rises steeply
-as $\varepsilon \to 0$.  In the intermediate eccentricity regime where the
-shape-channel correction $\lambda_1\varepsilon^2$ dominates the
-curvature-channel floor $\sigma_0$, the condition number follows an
-approximate power law:
-\begin{equation}\label{eq:kappa_powerlaw}
-  \kappa \approx C\,\varepsilon^{-\alpha}
-  \qquad \text{for } \lambda_1\varepsilon^2 \gg \sigma_0,
+The result leads to a quantitative framework for the condition number.  The
+smallest singular value of the scaled Jacobian admits a regular perturbation
+expansion~\cite{Kato1966,StewartSun1990}:
+\begin{equation}\label{eq:sigma_min_expansion}
+  \sigma_{\min}(\varepsilon)
+  =
+  \sigma_0 + \lambda_1\,\varepsilon^{2} + \lambda_2\,\varepsilon^{4}
+  + O(\varepsilon^6),
 \end{equation}
-where $C$ and $\alpha > 0$ are constants that depend on the mode set and
-remaining parameters.  As $\varepsilon \to 0$, however, the curvature channel
-provides a finite floor $\sigma_0 > 0$ (cf.\
-Proposition~\ref{prop:eccentricity}), and the condition number saturates at
-$\kappa_\mathrm{floor} = \sigma_{\max}/\sigma_0 \approx 269$ rather than
-diverging.  Section~\ref{sec:results} confirms both the intermediate-regime
-scaling and the finite floor numerically, and determines the exponent $\alpha$.
+where $\sigma_0 > 0$ is the \emph{curvature-channel floor} --- the residual
+identifiability contributed by mode-dependent Legendre weights even at the
+spherical limit --- and $\lambda_1\varepsilon^2$ is the \emph{shape-channel}
+correction driven by eccentricity.  Since $\sigma_0 > 0$, the expansion is
+\emph{regular}: the smallest singular value approaches a finite positive
+limit as $\varepsilon \to 0$, and the condition number saturates at
+\begin{equation}\label{eq:kappa_floor_theory}
+  \kappa_\mathrm{floor}
+  =
+  \frac{\sigma_{\max}(0)}{\sigma_0}
+\end{equation}
+rather than diverging.  The crossover eccentricity
+$\varepsilon_c = \sqrt{\sigma_0/\lambda_1}$ separates a curvature-dominated
+regime ($\varepsilon < \varepsilon_c$, where the floor controls conditioning)
+from a shape-dominated regime ($\varepsilon > \varepsilon_c$, where
+eccentricity drives improvement).  Section~\ref{sec:results} determines
+$\sigma_0$, $\lambda_1$, $\lambda_2$, and $\varepsilon_c$ numerically and
+confirms that for the oblate Ritz model, $\varepsilon_c > 1$: the curvature
+channel dominates across the entire physical eccentricity range.
