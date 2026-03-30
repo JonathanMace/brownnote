@@ -83,7 +83,7 @@ If growers can judge a watermelon by tapping it, the obvious question is whether
 **Venue:** *Inverse Problems*  
 **Location:** `papers/paper8-kac/`  
 **Latest draft:** [`draft_2026-03-29_1519.pdf`](papers/paper8-kac/drafts/draft_2026-03-29_1519.pdf)  
-**Key result:** oblate geometry reduces the condition number from 10¹⁰ to 73, making the (a, c, E) parameter triple practically identifiable from resonant frequencies.
+**Key result:** oblate geometry reduces the condition number from 10¹⁰ to 69.4, making the (a, c, E) parameter triple practically identifiable from resonant frequencies.
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.
 
@@ -107,7 +107,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **377 commits**, **208 pull requests merged**, **377 tests passing**, **20 custom agents**, **16 reusable skills**, **77 research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **377 commits**, **208 pull requests merged**, **421 tests passing**, **24 custom agents**, **22 reusable skills**, **77 research logs**, and about **24 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
