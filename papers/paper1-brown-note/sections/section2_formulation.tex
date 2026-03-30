@@ -137,8 +137,14 @@ This result is robust to material property variations because $k_\mathrm{fluid}
 
 Flexural modes involve shape changes (oblate--prolate oscillation for $n = 2$,
 trilobed for $n = 3$, etc.)\ that preserve the enclosed volume to leading
-order.  The fluid therefore does \emph{not} act as a volumetric spring; it
-contributes only added mass.
+order.  The $n = 1$ mode corresponds to rigid-body translation and therefore
+has zero natural frequency for a free shell, so it is excluded from the
+resonance discussion.  The $n = 2$ mode is consequently the lowest physical
+flexural mode and the primary candidate for abdominal resonance; higher modes
+($n = 3, 4, \ldots$) lie at progressively higher frequencies and are retained
+for sensitivity studies, but the $n = 2$ family dominates the physiologically
+relevant \SIrange{4}{8}{\hertz} band.  The fluid therefore does \emph{not} act
+as a volumetric spring; it contributes only added mass.
 
 Following Lamb \cite{lamb1882} and Junger \& Feit
 \cite{Junger1986}, with subsequent validation in modern pressurised-shell
@@ -182,9 +188,8 @@ The natural frequency of flexural mode $n$ is
 \end{equation}
 
 For the baseline parameters (Table~\ref{tab:params}), $f_2 = 4.0$\,Hz,
-$f_3 = 6.3$\,Hz, and $f_4 = 8.9$\,Hz (Figure~\ref{fig:modes}).  (The $n = 1$
-mode corresponds to rigid-body translation and has zero natural frequency for
-a free shell; it is therefore excluded.)  These lie squarely in the 4--10\,Hz
+$f_3 = 6.3$\,Hz, and $f_4 = 8.9$\,Hz (Figure~\ref{fig:modes}).  These lie
+squarely in the 4--10\,Hz
 range reported for abdominal resonance in ISO~2631 \cite{iso2631} and in the
 experimental studies of Kitazaki \& Griffin \cite{Kitazaki1998} and
 Mansfield \cite{mansfield2005human}.
@@ -230,11 +235,15 @@ The displacement at resonance ($\omega = \omega_n$) is
   \xi_\mathrm{air} = \frac{p_\mathrm{eff}^{(n)}}{K_\mathrm{total}^{(n)}} Q,
 \end{equation}
 where $K_\mathrm{total}^{(n)} = K_\mathrm{bend} + K_\mathrm{memb} + K_P$.
+To interpret the biological relevance of this displacement, we compare it with
+mechanotransduction thresholds.  PIEZO1 and PIEZO2 are mechanically activated
+ion channels that convert membrane deformation into cellular signals; reported
+activation begins for deformations of order
+\SIrange{0.5}{2.0}{\micro\metre} \cite{coste2010piezo1}. 
 At 120\,dB SPL ($p_\mathrm{inc} = 20$\,Pa), the energy-consistent reciprocity
 analysis (\S\ref{sec:coupling}) gives
 $\xi_\mathrm{air} \approx 0.014$\,$\mu$m for $n = 2$ --- well below the
-0.5--2.0\,$\mu$m activation threshold of mechanosensitive ion channels
-\cite{coste2010piezo1}.  (The pressure-based estimate of
+\SIrange{0.5}{2.0}{\micro\metre} activation threshold.  (The pressure-based estimate of
 equation~\eqref{eq:xi_air} yields $\approx 0.18$\,$\mu$m, an overestimate
 that violates the energy budget; see \S\ref{sec:coupling}.)
 

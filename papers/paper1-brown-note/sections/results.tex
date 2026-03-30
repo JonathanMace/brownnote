@@ -4,14 +4,20 @@
 
 The $n=2$ flexural mode frequency depends strongly on the wall elastic
 modulus $E$.  Table~\ref{tab:E_sweep} shows the predicted frequency for
-a free shell across the physiologically relevant range.
+a free shell across the physiologically relevant range.  The sweep
+\SIrange{0.05}{2.0}{\mega\pascal} spans reported values from passive
+peritoneum and relaxed abdominal wall tissue to tensed abdominal musculature
+\cite{Deeken2017,Spadoni2024,Sack2023,parker2011imaging}.
 
 \begin{table}[htbp]
   \centering
   \caption{Flexural mode $n=2$ frequency vs.\ elastic modulus
   ($a = \SI{0.18}{\metre}$, $c = \SI{0.12}{\metre}$, $h = \SI{10}{\milli\metre}$,
   $\nu = 0.45$, $\rho_w = \SI{1100}{\kilogram\per\metre\cubed}$,
-  $\rho_f = \SI{1020}{\kilogram\per\metre\cubed}$).}
+  $\rho_f = \SI{1020}{\kilogram\per\metre\cubed}$).  The range
+  \SIrange{0.05}{2.0}{\mega\pascal} is intended to bracket passive to active
+  abdominal-wall stiffness reported in the abdominal mechanics and elastography
+  literature \cite{Deeken2017,Spadoni2024,Sack2023,parker2011imaging}.}
   \label{tab:E_sweep}
   \begin{tabular}{rcc}
     \hline
@@ -124,8 +130,11 @@ Section~\ref{sec:coupling}.
 
 The abdominal wall comprises six distinct tissue layers:
 peritoneum, transversalis fascia, internal oblique muscle, external oblique
-muscle, subcutaneous fat, and skin.  Using classical laminate theory, the
-effective composite modulus for a relaxed wall is
+muscle, subcutaneous fat, and skin.  Using classical laminate theory
+\cite{Jones1999}, with layer thicknesses and relaxed/tensed tissue moduli
+drawn from abdominal-wall measurements and soft-tissue elastography reviews
+\cite{Deeken2017,Spadoni2024,Sack2023}, the effective composite modulus for a
+relaxed wall is
 $E_\mathrm{eff} \approx \SI{0.075}{\mega\pascal}$
 ($h_\mathrm{total} = \SI{25.1}{\milli\metre}$), giving
 $f_2 = \SI{4.6}{\hertz}$---within approximately 16\% of the homogeneous model
@@ -220,7 +229,12 @@ resonance frequencies.
 \subsection{ISO~2631 Validation}
 
 Table~\ref{tab:iso} compares model predictions against published abdominal
-resonance data.
+resonance data.  This comparison serves as independent validation: the model,
+derived from first principles with no fitted parameters, predicts resonant
+frequencies consistent with empirical whole-body vibration data compiled over
+decades of occupational health research.  Agreement with ISO~2631 therefore
+confirms that the shell model captures the essential physics of abdominal
+resonance.
 
 \begin{table}[htbp]
   \centering
