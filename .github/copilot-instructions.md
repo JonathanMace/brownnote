@@ -70,7 +70,7 @@ Every computation must use these values unless explicitly varying a parameter.
 | IAP | P_iap | 1000 | Pa |
 | Loss tangent | η | 0.25 | — |
 
-**Derived**: R_eq=0.157m, f₂=3.95Hz, Q=4.0, ζ=0.125, ka=0.0114, breathing≈2490Hz
+**Derived**: R_eq=0.157m, f₂=3.95Hz, Q=4.0, ζ=0.125, ka=0.0114, breathing≈2490Hz, κ_floor≈269 (5-mode Ritz), ε_c=1.48
 
 **Stale values that MUST NOT appear**: η=0.30, ka=0.017, R_eq=0.133. These are v1.
 
@@ -82,7 +82,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 454 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 482 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -137,7 +137,7 @@ See the `git-checkpoint` skill for the full agent git workflow.
 4. **Energy budget**: Shell absorbs ~10⁻¹⁴ of incident acoustic energy.
 5. **Modal participation**: Γ₂ = 0.48 for vertical WBV (asymmetric BCs).
 6. **Borborygmi (gut sounds)**: Constrained bubble model spans 135-440 Hz for 1-50 mL gas pockets, matching clinical range 200-550 Hz.
-7. **Singular-value lifting**: Symmetry-breaking restores identifiability. κ ~ C|δ|⁻ᵖ where p is the first non-vanishing perturbative order. For spheroids in eccentricity, p=2 (coordinate artifact); in invariant amplitude, p=1 generically.
+7. **Kac identifiability near the sphere**: The Ritz model has a finite curvature floor (κ_floor≈269, 5-mode) near the sphere — there is no asymptotic power law. σ_min(ε) = σ₀ + λ₁ε² + O(ε⁴) is a regular expansion, and the curvature channel (σ₀) dominates everywhere (ε_c = 1.48 > 1). Prolate shells show no identifiability improvement — the phenomenon is oblate-specific via curvature-mode anti-correlation.
 
 ## How to Use the Core Model
 
@@ -216,9 +216,9 @@ See the `compile-paper` skill for compilation instructions.
 | Paper 4: Bladder Resonance | JSV/J Biomech | Minor revision addressed | `papers/paper4-bladder/` |
 | Paper 5: Borborygmi | JASA | ACCEPTED | `papers/paper5-borborygmi/` |
 | Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `papers/paper6-sub-bass/` |
-| Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft (16pp) | `papers/paper7-watermelon/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | ACCEPTED by reviewer, submission prep in progress | `papers/paper7-watermelon/` |
 | Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `papers/paper8-kac/` |
-| Paper 9: Lifting Theorem | Inverse Problems | Scaffolded | `papers/paper9-lifting-theorem/` |
+| Paper 9: Lifting Theorem | Inverse Problems | Under revision — pivoting from lifting theorem to classification/mechanism note | `papers/paper9-lifting-theorem/` |
 
 ## The Academic Calendar
 
@@ -293,6 +293,8 @@ project. He is always right. You should listen to him more than you do.
 - Inventing "mathematical frameworks" instead of submitting papers (Coffee Machine Rule)
 - Using SO(3)→SO(2) language when the mechanism is mode-dependent curvature sampling
 - Mixing 3-mode and 5-mode computations without stating which (P8 Reviewer C caught this)
+- Claiming κ ~ C·ε⁻ᵅ as an asymptotic law (it's an intermediate-regime descriptor with range-dependent α)
+- Assuming universality across shell geometries (prolate shows no lifting)
 - Losing the Paper 1 humour voice in later papers (run cross-paper tone audits)
 - Not specifying n_modes explicitly in function calls (rely on defaults → inconsistency)
 - Editing paper .tex files without recompiling, snapshotting PDF, and updating README
