@@ -320,7 +320,7 @@ if __name__ == "__main__":
     n_modes = (2, 3, 4)
 
     # ── 1. Baseline ──────────────────────────────────────────
-    print("  1. BASELINE: default geometry (a=0.15 m, c=0.10 m, E=0.5 MPa)")
+    print("  1. BASELINE: default geometry (a=0.18 m, c=0.12 m, E=0.1 MPa)")
     print("  " + "-" * 50)
     fs = sphere_approx_frequencies(model, n_modes)
     fr = oblate_ritz_frequencies(model.a, model.c, model.h, model.E,
@@ -352,8 +352,8 @@ if __name__ == "__main__":
     # ── 3. Aspect-ratio sweep ─────────────────────────────────
     aspect_ratios = [0.50, 0.60, 0.667, 0.70, 0.80, 0.90]
 
-    for Ev, label in [(0.5e6, "E = 0.5 MPa (baseline)"),
-                      (0.1e6, "E = 0.1 MPa (soft tissue)")]:
+    for Ev, label in [(0.1e6, "E = 0.1 MPa (baseline)"),
+                      (0.5e6, "E = 0.5 MPa (stiff tissue)")]:
         print(f"  3. ASPECT-RATIO SWEEP — {label}")
         print("  " + "-" * 74)
         hdr = f"  {'c/a':>5}"
@@ -381,7 +381,7 @@ if __name__ == "__main__":
     print("  • The sphere model generally overestimates flexural frequencies")
     print("    compared to the oblate Rayleigh-Ritz model.")
     print("  • At the default geometry (c/a ≈ 0.67), the sphere overestimates")
-    print("    n=2 by ~19% (E=0.5 MPa) and ~11% (E=0.1 MPa).")
+    print("    n=2 by ~11% (E=0.1 MPa baseline) and ~19% (E=0.5 MPa).")
     print("  • At c/a = 0.9, the error is still 12-13% — non-trivial even")
     print("    for mildly oblate shapes.")
     print("  • Physical reasons for the oblate correction:")
