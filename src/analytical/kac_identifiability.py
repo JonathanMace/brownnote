@@ -17,6 +17,7 @@ different modes sample curvature differently.
 from __future__ import annotations
 
 import warnings
+from collections.abc import Callable, Mapping, Sequence
 
 import numpy as np
 from numpy.linalg import cond, inv, svd
@@ -50,12 +51,157 @@ INVERSION_PARAMS = ("a", "c", "E")
 # and spurious zero-residual solutions can exist for poor initial guesses.
 DEFAULT_MODES = (2, 3, 4, 5, 6)
 
+ParameterDict = dict[str, float]
+ForwardModel = Callable[[Mapping[str, float], tuple[int, ...]], np.ndarray]
+
+_EXTERNAL_KEY_MAP = {
+    "rho_rind": "rho_w",
+    "rho_flesh": "rho_f",
+    "K_flesh": "K_f",
+    "P_int": "P_iap",
+}
+
+_DEFAULT_OPTIONAL_PARAMS = {
+    "K_f": CANONICAL_ABDOMEN["K_f"],
+    "loss_tangent": CANONICAL_ABDOMEN["loss_tangent"],
+}
+
+_FORWARD_REQUIRED_KEYS = ("a", "c", "h", "E", "nu", "rho_w", "rho_f", "P_iap")
+
+
+def _normalise_parameter_dict(
+    params: Mapping[str, float],
+    *,
+    require_forward_keys: bool = True,
+) -> ParameterDict:
+    """Normalise abdomen-style and watermelon-style parameter dictionaries.
+
+    Parameters
+    ----------
+    params : mapping of str to float
+        Parameter dictionary using either the internal naming convention
+        (``rho_w``, ``rho_f``, ``K_f``, ``P_iap``) or the watermelon naming
+        convention (``rho_rind``, ``rho_flesh``, ``K_flesh``, ``P_int``).
+    require_forward_keys : bool
+        If True, validate that the returned dictionary contains all keys needed
+        by the forward models.
+
+    Returns
+    -------
+    dict
+        Normalised copy using the internal parameter names.
+
+    Raises
+    ------
+    ValueError
+        If aliased keys conflict or required keys are missing.
+    """
+    normalised: ParameterDict = {}
+    for key, value in params.items():
+        canonical_key = _EXTERNAL_KEY_MAP.get(key, key)
+        numeric_value = float(value)
+        if canonical_key in normalised and not np.isclose(normalised[canonical_key], numeric_value):
+            raise ValueError(
+                f"Conflicting values provided for parameter '{canonical_key}'."
+            )
+        normalised[canonical_key] = numeric_value
+
+    for key, value in _DEFAULT_OPTIONAL_PARAMS.items():
+        normalised.setdefault(key, float(value))
+
+    if require_forward_keys:
+        missing = [key for key in _FORWARD_REQUIRED_KEYS if key not in normalised]
+        if missing:
+            raise ValueError(
+                "Parameter dictionary is missing required keys for the forward model: "
+                + ", ".join(missing)
+            )
+
+    return normalised
+
+
+def _resolve_parameter_bounds(
+    inversion_params: Sequence[str],
+    initial_guess: Mapping[str, float],
+    parameter_bounds: Mapping[str, tuple[float, float]] | None = None,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Validate inversion bounds and return optimiser-ready arrays.
+
+    Parameters
+    ----------
+    inversion_params : sequence of str
+        Parameters being inverted.
+    initial_guess : mapping of str to float
+        Initial guess after key normalisation.
+    parameter_bounds : mapping of str to tuple of float, optional
+        Optional per-parameter override of :data:`_PARAM_BOUNDS`.
+
+    Returns
+    -------
+    tuple of np.ndarray
+        ``(x0_raw, lower_raw, upper_raw)`` in the order of ``inversion_params``.
+
+    Raises
+    ------
+    ValueError
+        If a parameter is missing, non-finite, non-positive, or if its bounds
+        are malformed or inconsistent with the initial guess.
+    """
+    bounds_lookup = dict(_PARAM_BOUNDS)
+    if parameter_bounds is not None:
+        bounds_lookup.update(parameter_bounds)
+
+    x0_raw = np.empty(len(inversion_params), dtype=float)
+    lower_raw = np.empty(len(inversion_params), dtype=float)
+    upper_raw = np.empty(len(inversion_params), dtype=float)
+
+    for idx, param_name in enumerate(inversion_params):
+        if param_name not in initial_guess:
+            raise ValueError(f"Initial guess is missing inversion parameter '{param_name}'.")
+
+        value = float(initial_guess[param_name])
+        if not np.isfinite(value) or value <= 0.0:
+            raise ValueError(
+                f"Initial guess for '{param_name}' must be finite and strictly positive."
+            )
+
+        bounds = bounds_lookup.get(param_name)
+        if bounds is None:
+            raise ValueError(f"No bounds defined for inversion parameter '{param_name}'.")
+        if len(bounds) != 2:
+            raise ValueError(
+                f"Bounds for '{param_name}' must be a (lower, upper) pair."
+            )
+
+        lower, upper = (float(bound) for bound in bounds)
+        if not (np.isfinite(lower) and np.isfinite(upper)):
+            raise ValueError(f"Bounds for '{param_name}' must be finite.")
+        if lower <= 0.0 or upper <= 0.0:
+            raise ValueError(f"Bounds for '{param_name}' must be strictly positive.")
+        if lower >= upper:
+            raise ValueError(
+                f"Bounds for '{param_name}' must satisfy lower < upper."
+            )
+        if not (lower <= value <= upper):
+            raise ValueError(
+                f"Initial guess for '{param_name}'={value:.6g} lies outside bounds "
+                f"[{lower:.6g}, {upper:.6g}]."
+            )
+
+        x0_raw[idx] = value
+        lower_raw[idx] = lower
+        upper_raw[idx] = upper
+
+    return x0_raw, lower_raw, upper_raw
+
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  Forward model wrappers
 # ═══════════════════════════════════════════════════════════════════════════
 
-def _forward_ritz(params: dict, modes: tuple[int, ...] = DEFAULT_MODES) -> np.ndarray:
+def _forward_ritz(
+    params: Mapping[str, float], modes: tuple[int, ...] = DEFAULT_MODES
+) -> np.ndarray:
     """Compute flexural frequencies using the oblate Ritz model.
 
     Parameters
@@ -70,16 +216,19 @@ def _forward_ritz(params: dict, modes: tuple[int, ...] = DEFAULT_MODES) -> np.nd
     np.ndarray
         Frequencies in Hz, one per requested mode.
     """
+    params_norm = _normalise_parameter_dict(params)
     freq_dict = oblate_ritz_frequencies(
-        a=params["a"], c=params["c"], h=params["h"],
-        E=params["E"], nu=params["nu"],
-        rho_w=params["rho_w"], rho_f=params["rho_f"],
-        P_iap=params["P_iap"], n_target=modes,
+        a=params_norm["a"], c=params_norm["c"], h=params_norm["h"],
+        E=params_norm["E"], nu=params_norm["nu"],
+        rho_w=params_norm["rho_w"], rho_f=params_norm["rho_f"],
+        P_iap=params_norm["P_iap"], n_target=modes,
     )
     return np.array([freq_dict[n] for n in modes])
 
 
-def _forward_sphere(params: dict, modes: tuple[int, ...] = DEFAULT_MODES) -> np.ndarray:
+def _forward_sphere(
+    params: Mapping[str, float], modes: tuple[int, ...] = DEFAULT_MODES
+) -> np.ndarray:
     """Compute flexural frequencies using the equivalent-sphere model.
 
     Parameters
@@ -95,19 +244,20 @@ def _forward_sphere(params: dict, modes: tuple[int, ...] = DEFAULT_MODES) -> np.
     np.ndarray
         Frequencies in Hz, one per requested mode.
     """
+    params_norm = _normalise_parameter_dict(params)
     model = AbdominalModelV2(
-        a=params["a"], b=params["a"], c=params["c"],
-        h=params["h"], E=params["E"], nu=params["nu"],
-        rho_wall=params["rho_w"], rho_fluid=params["rho_f"],
-        K_fluid=params.get("K_f", 2.2e9),
-        P_iap=params["P_iap"],
-        loss_tangent=params.get("loss_tangent", 0.25),
+        a=params_norm["a"], b=params_norm["a"], c=params_norm["c"],
+        h=params_norm["h"], E=params_norm["E"], nu=params_norm["nu"],
+        rho_wall=params_norm["rho_w"], rho_fluid=params_norm["rho_f"],
+        K_fluid=params_norm["K_f"],
+        P_iap=params_norm["P_iap"],
+        loss_tangent=params_norm["loss_tangent"],
     )
     freq_dict = sphere_approx_frequencies(model, n_modes=modes)
     return np.array([freq_dict[n] for n in modes])
 
 
-def _get_forward(model: str):
+def _get_forward(model: str) -> ForwardModel:
     """Return the appropriate forward function for *model*."""
     if model == "ritz":
         return _forward_ritz
@@ -122,7 +272,7 @@ def _get_forward(model: str):
 # ═══════════════════════════════════════════════════════════════════════════
 
 def compute_jacobian(
-    params: dict,
+    params: Mapping[str, float],
     model: str = "ritz",
     modes: tuple[int, ...] = DEFAULT_MODES,
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
@@ -159,30 +309,31 @@ def compute_jacobian(
         or dimensionless sensitivity  (∂f_i/∂θ_j)(θ_j/f_i)  when
         ``scaled=True``.
     """
+    params_norm = _normalise_parameter_dict(params)
     forward = _get_forward(model)
     n_freq = len(modes)
     n_param = len(inversion_params)
     J = np.zeros((n_freq, n_param))
 
     for j, pname in enumerate(inversion_params):
-        p0 = params[pname]
+        p0 = params_norm[pname]
         dp = abs(p0) * step_fraction
         if dp == 0:
             dp = step_fraction  # fallback for zero-valued parameters
 
-        params_plus = dict(params)
+        params_plus = dict(params_norm)
         params_plus[pname] = p0 + dp
         f_plus = forward(params_plus, modes)
 
-        params_minus = dict(params)
+        params_minus = dict(params_norm)
         params_minus[pname] = p0 - dp
         f_minus = forward(params_minus, modes)
 
         J[:, j] = (f_plus - f_minus) / (2.0 * dp)
 
     if scaled:
-        f_nom = forward(params, modes)
-        theta = np.array([params[k] for k in inversion_params])
+        f_nom = forward(params_norm, modes)
+        theta = np.array([params_norm[k] for k in inversion_params])
         J = J * theta[np.newaxis, :] / f_nom[:, np.newaxis]
 
     return J
@@ -193,7 +344,7 @@ def compute_jacobian(
 # ═══════════════════════════════════════════════════════════════════════════
 
 def jacobian_condition_number(
-    params: dict,
+    params: Mapping[str, float],
     model: str = "ritz",
     modes: tuple[int, ...] = DEFAULT_MODES,
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
@@ -284,13 +435,14 @@ _PARAM_BOUNDS = {
 
 def invert_frequencies(
     f_observed: np.ndarray | list[float],
-    initial_guess: dict,
+    initial_guess: Mapping[str, float],
     model: str = "ritz",
     modes: tuple[int, ...] = DEFAULT_MODES,
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     tol: float = 1e-10,
     max_iter: int = 200,
     validation_rtol: float = 1e-3,
+    parameter_bounds: Mapping[str, tuple[float, float]] | None = None,
 ) -> dict:
     """Recover physical parameters from observed resonant frequencies.
 
@@ -333,6 +485,10 @@ def invert_frequencies(
     validation_rtol : float
         Relative tolerance for post-inversion validation (default 0.1 %).
         Recovered parameters are checked against this threshold.
+    parameter_bounds : mapping of str to tuple of float, optional
+        Optional per-parameter bounds override.  Bounds are validated before
+        optimisation and must be finite, strictly positive, and satisfy
+        ``lower < upper``.
 
     Returns
     -------
@@ -346,6 +502,14 @@ def invert_frequencies(
         ``'cost_normalized'``
             float, 0.5 × Σ((residual/f_obs)²) — the normalised cost
             that the optimiser actually minimised.
+        ``'predicted_frequencies_hz'``
+            np.ndarray of forward-model frequencies at the recovered point.
+        ``'residual_relative'``
+            np.ndarray of residuals divided by the observed frequencies.
+        ``'residual_percent'``
+            np.ndarray of relative residuals expressed as percentages.
+        ``'diagnostics'``
+            dict with optimiser and validation diagnostics.
         ``'success'``
             bool, True only if the optimiser converged **and**
             post-inversion validation passes (residuals below
@@ -355,6 +519,13 @@ def invert_frequencies(
             Number of function evaluations.
     """
     f_obs = np.asarray(f_observed, dtype=float)
+    if f_obs.shape != (len(modes),):
+        raise ValueError(
+            f"Observed frequencies must have shape ({len(modes)},), got {f_obs.shape}."
+        )
+    if not np.all(np.isfinite(f_obs)) or np.any(f_obs <= 0.0):
+        raise ValueError("Observed frequencies must be finite and strictly positive.")
+
     forward = _get_forward(model)
 
     # Warn on sphere inversion
@@ -378,19 +549,18 @@ def invert_frequencies(
             stacklevel=2,
         )
 
-    # Build working parameter set
-    working = dict(initial_guess)
+    bounds_lookup = dict(_PARAM_BOUNDS)
+    if parameter_bounds is not None:
+        bounds_lookup.update(parameter_bounds)
 
-    # Physically motivated bounds — independent of initial guess
-    lower_raw = np.array([
-        _PARAM_BOUNDS.get(k, (1e-12, np.inf))[0] for k in inversion_params
-    ])
-    upper_raw = np.array([
-        _PARAM_BOUNDS.get(k, (1e-12, np.inf))[1] for k in inversion_params
-    ])
+    working = _normalise_parameter_dict(initial_guess, require_forward_keys=True)
+    x0_raw, lower_raw, upper_raw = _resolve_parameter_bounds(
+        inversion_params,
+        working,
+        parameter_bounds=parameter_bounds,
+    )
 
     # Scale factors: optimise in normalised space x_s = x / x_scale
-    x0_raw = np.array([working[k] for k in inversion_params])
     x_scale = x0_raw.copy()
 
     # Bounds in normalised space
@@ -398,7 +568,7 @@ def invert_frequencies(
     upper_norm = upper_raw / x_scale
     x0_norm = np.ones_like(x0_raw)  # starts at 1.0
 
-    def residuals(x_norm):
+    def residuals(x_norm: np.ndarray) -> np.ndarray:
         x_raw = x_norm * x_scale
         p = dict(working)
         for k, v in zip(inversion_params, x_raw):
@@ -420,6 +590,7 @@ def invert_frequencies(
     f_pred_final = forward(recovered, modes)
     residual_hz = f_pred_final - f_obs
     residual_norm = residual_hz / f_obs
+    residual_percent = 100.0 * residual_norm
 
     cost_hz = float(0.5 * np.sum(residual_hz**2))
     cost_normalized = float(0.5 * np.sum(residual_norm**2))
@@ -429,18 +600,33 @@ def invert_frequencies(
     residuals_ok = bool(np.all(np.abs(residual_norm) < validation_rtol))
     bounds_ok = True
     for k, v in zip(inversion_params, x_final):
-        lo, hi = _PARAM_BOUNDS.get(k, (0.0, np.inf))
+        lo, hi = bounds_lookup[k]
         if v <= 0 or v < lo or v > hi:
             bounds_ok = False
             break
 
     success = optimizer_ok and residuals_ok and bounds_ok
+    diagnostics = {
+        "optimizer_success": optimizer_ok,
+        "optimizer_status": int(result.status),
+        "optimizer_message": result.message,
+        "residuals_within_rtol": residuals_ok,
+        "bounds_within_limits": bounds_ok,
+        "validation_rtol": float(validation_rtol),
+        "max_abs_residual_hz": float(np.max(np.abs(residual_hz))),
+        "max_abs_residual_relative": float(np.max(np.abs(residual_norm))),
+    }
 
     return {
         "params": recovered,
+        "observed_frequencies_hz": f_obs,
+        "predicted_frequencies_hz": f_pred_final,
         "residual_hz": residual_hz,
+        "residual_relative": residual_norm,
+        "residual_percent": residual_percent,
         "cost_hz": cost_hz,
         "cost_normalized": cost_normalized,
+        "diagnostics": diagnostics,
         "success": success,
         "n_iter": int(result.nfev),
     }
@@ -451,7 +637,7 @@ def invert_frequencies(
 # ═══════════════════════════════════════════════════════════════════════════
 
 def identifiability_analysis(
-    params: dict,
+    params: Mapping[str, float],
     noise_level: float = 0.01,
     model: str = "ritz",
     modes: tuple[int, ...] = DEFAULT_MODES,
@@ -491,14 +677,15 @@ def identifiability_analysis(
         ``'singular_values'``
             np.ndarray, singular values of J.
     """
+    params_norm = _normalise_parameter_dict(params)
     forward = _get_forward(model)
-    f_nominal = forward(params, modes)
+    f_nominal = forward(params_norm, modes)
 
     # Raw Jacobian (for Fisher information — dimensional)
-    J = compute_jacobian(params, model, modes, inversion_params)
+    J = compute_jacobian(params_norm, model, modes, inversion_params)
 
     # Scaled Jacobian (for condition number — dimensionless)
-    J_scaled = compute_jacobian(params, model, modes, inversion_params,
+    J_scaled = compute_jacobian(params_norm, model, modes, inversion_params,
                                 scaled=True)
 
     # Noise covariance: diagonal with σ_i = noise_level * f_i
@@ -517,7 +704,7 @@ def identifiability_analysis(
         for i, k in enumerate(inversion_params):
             if cov[i, i] > 0:
                 cr_abs[k] = np.sqrt(cov[i, i])
-                cr_rel[k] = np.sqrt(cov[i, i]) / abs(params[k])
+                cr_rel[k] = np.sqrt(cov[i, i]) / abs(params_norm[k])
             else:
                 cr_abs[k] = np.inf
                 cr_rel[k] = np.inf
@@ -547,7 +734,7 @@ def identifiability_analysis(
 # ═══════════════════════════════════════════════════════════════════════════
 
 def sphere_vs_oblate_comparison(
-    params: dict | None = None,
+    params: Mapping[str, float] | None = None,
     modes: tuple[int, ...] = DEFAULT_MODES,
     noise_level: float = 0.01,
 ) -> dict:
@@ -609,7 +796,7 @@ def sphere_vs_oblate_comparison(
 # ═══════════════════════════════════════════════════════════════════════════
 
 def condition_number_from_params(
-    params_dict: dict,
+    params_dict: Mapping[str, float],
     model: str = "ritz",
     modes: tuple[int, ...] = DEFAULT_MODES,
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
@@ -641,17 +828,7 @@ def condition_number_from_params(
     float
         Condition number κ(J_scaled).
     """
-    # Map external watermelon-style keys to internal names
-    _KEY_MAP = {
-        "rho_rind": "rho_w",
-        "rho_flesh": "rho_f",
-        "K_flesh": "K_f",
-        "P_int": "P_iap",
-    }
-    p = {}
-    for k, v in params_dict.items():
-        p[_KEY_MAP.get(k, k)] = v
-
+    p = _normalise_parameter_dict(params_dict)
     return jacobian_condition_number(p, model=model, modes=modes,
                                      inversion_params=inversion_params)
 
