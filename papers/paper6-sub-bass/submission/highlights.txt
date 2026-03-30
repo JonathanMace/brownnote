@@ -1,0 +1,5 @@
+- Airborne acoustic coupling to the abdomen increases strongly across the 20-80 Hz sub-bass band.
+- Energy-consistent reciprocity predicts airborne displacement about 2.5 orders below perception threshold at peak concert levels.
+- At 40 Hz, the structure-borne pathway exceeds the airborne pathway by approximately 2600.
+- Floor and seat vibration can exceed whole-body vibration perception thresholds at peak EDM levels.
+- The sensation of feeling bass in the gut is governed primarily by structure-borne rather than airborne transmission.

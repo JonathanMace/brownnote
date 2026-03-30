@@ -32,7 +32,7 @@ If the whole abdomen will not cooperate, perhaps the gas trapped inside it will.
 **Dimensional analysis predictions across mammalian scales**  
 **Status:** Under revision (8 pages)  
 **Target venue:** *JSV Short Communication*  
-**Latest draft:** [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-29_1627.pdf)  
+**Latest draft:** [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-29_2120.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
 Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
@@ -41,7 +41,7 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 **Resonance of the human urinary bladder**  
 **Status:** Under development (20+ pages)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](papers/paper4-bladder/drafts/draft_2026-03-29_1626.pdf)  
+**Latest draft:** [PDF](papers/paper4-bladder/drafts/draft_2026-03-29_2120.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
 Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
@@ -50,7 +50,7 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 **Multi-mode acoustic model of bowel sounds**  
 **Status:** First draft complete (17 pages)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-29_1556.pdf)  
+**Latest draft:** [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-29_2120.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
@@ -59,7 +59,7 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
 **Status:** Minor revision (R2 fixes applied)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-29_1626.pdf)  
+**Latest draft:** [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-29_2120.pdf)  
 **Location:** `papers/paper6-sub-bass/`  
 **Key finding:** Airborne acoustic coupling produces tissue displacement ~2.5 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway, with floor displacement reaching 904% of the perception threshold.
 
@@ -190,3 +190,4 @@ python -m pytest tests/ -v
 ## Licence
 
 [MIT](LICENSE)
+
