@@ -325,3 +325,35 @@ class TestLatexOutput:
         latex = proof_latex_summary(modes=(2, 3, 4))
         assert "varepsilon^{-2}" in latex
         assert "lambda_1" in latex
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Default 5-mode consistency
+# ═══════════════════════════════════════════════════════════════════════════
+
+class TestDefaultFiveModes:
+    """Verify that default (no explicit modes arg) uses 5 modes (2,3,4,5,6).
+
+    The paper's headline values (κ_floor, C_analytical) are 5-mode values.
+    Calling functions without arguments must reproduce them.
+    """
+
+    def test_prove_default_uses_five_modes(self):
+        """prove_power_law() default should produce 5-mode curvature integrals."""
+        result = prove_power_law()
+        ci = result["curvature_integrals"]
+        assert 6 in ci, "Default should include n=6 curvature integral"
+        assert 5 in ci, "Default should include n=5 curvature integral"
+
+    def test_default_kappa_floor_differs_from_3mode(self):
+        """Default κ_floor (5-mode) should differ from explicit 3-mode κ_floor."""
+        r_default = ritz_curvature_channel()
+        r_3mode = ritz_curvature_channel(modes=(2, 3, 4))
+        assert r_default["kappa_floor"] != pytest.approx(
+            r_3mode["kappa_floor"], rel=0.01
+        ), "Default should give different κ_floor than 3-mode"
+
+    def test_default_proof_valid(self):
+        """prove_power_law() with default 5-mode set should pass all checks."""
+        result = prove_power_law()
+        assert result["proof_valid"], "5-mode default proof should be valid"
