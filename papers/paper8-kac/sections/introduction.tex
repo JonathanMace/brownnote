@@ -10,34 +10,38 @@ Wolpert~\cite{Gordon1992} later showed that, for planar drums, the answer is
 ``no'': distinct domains can share the same Laplacian spectrum.  That result
 did not close the subject.  It made it more interesting.
 
-The Browntone programme has approached that question from the forward side.
-Paper~1 established that the human abdomen supports low-order flexural
-resonances in the infrasonic band~\cite{BrowntoneCompanion}; Paper~4 extended
-the same fluid--shell framework to the fill-dependent resonance of the urinary
-bladder~\cite{BrowntoneBladder}; and Paper~7 showed that an analogous model can
-invert a watermelon tap-tone into a rind modulus estimate~\cite{BrowntoneWatermelon}.
-Those papers answer variants of the question ``what frequencies does this shell
-produce?''  The present paper asks the inverse question on which all such
-applications ultimately depend: given measured frequencies, can one recover the
-shell's material properties at all?
+We pose an engineering analogue of Kac's question for a fluid-filled elastic
+oblate spheroidal shell --- a class of models relevant to abdominal
+biomechanics~\cite{BrowntoneCompanion}, bladder
+dynamics~\cite{BrowntoneBladder}, and non-destructive fruit
+assessment~\cite{BrowntoneWatermelon}.  Given measured flexural resonances
+$\{f_2,f_3,\ldots,f_N\}$, can one recover the semi-major axis~$a$, the
+semi-minor axis~$c$, and the Young's modulus~$E$?
 
-That identifiability question is the theoretical keystone of the programme.
-Without it, a forward resonance model is descriptive but not diagnostic.  With
-it, the same spectrum can become the basis of non-invasive elastography,
-parameter estimation, and experimental design.  In practical terms, if a small
-set of resonant frequencies determines stiffness and geometry with acceptable
-conditioning, then the abdominal, bladder, and watermelon problems cease to be
-curiosities of shell vibration and become inverse tools.  If not, one merely
-fits a model to a spectrum that never had enough information in the first
-place.
+This is an \emph{identifiability} question, and it is worth being precise
+about what kind.  Following the systems-biology literature on practical
+identifiability~\cite{Raue2009,Wieland2021,Chis2011}, we distinguish between
+\emph{structural} identifiability (whether the model structure admits a
+unique parameter-to-output map in the asymptotic limit of infinite, noise-free
+data) and \emph{practical} identifiability (whether finite, noisy data
+suffice to constrain parameters to useful precision).  Our analysis is the
+latter, evaluated locally around a canonical operating point.  We do not prove
+a global uniqueness theorem; we ask whether small perturbations in the
+measured frequencies can be mapped reliably back to $(a,c,E)$ at a chosen
+parameter set.
 
-Here we therefore study an engineering analogue of Kac's inverse problem for a
-fluid-filled elastic shell.  We focus on low-frequency flexural modes
-$n \geq 2$, rather than the breathing mode $n=0$, which lies near
-\SI{2490}{Hz} and is governed primarily by fluid compressibility.  The inverse
-problem is posed on the measured flexural frequencies
-$\{f_2,f_3,\ldots,f_N\}$, with the aim of recovering the semi-major axis $a$,
-the semi-minor axis $c$, and the Young's modulus $E$.
+The question connects to a rich tradition of inverse vibration problems in
+structural dynamics.  Mottershead and Friswell~\cite{MottersheadFriswell1993}
+surveyed the state of the art in finite element model updating, where measured
+natural frequencies and mode shapes are used to correct uncertain parameters in
+structural models; Friswell and Mottershead~\cite{FriswellMottershead1995}
+developed the systematic framework further.  Gladwell~\cite{Gladwell2004,Gladwell2005}
+established the mathematical foundations of inverse vibration problems, and
+model-based elastography~\cite{Doyley2012} has extended similar ideas to
+soft-tissue characterisation.  Our contribution is more modest but
+complementary: before attempting a sophisticated inversion, we ask whether the
+chosen measurements can, in principle, resolve the chosen parameters with
+acceptable conditioning.
 
 The key geometric point is oblateness.  A spherical shell sits at a spectrally
 degenerate limit: symmetry forces geometric sensitivities to collapse, so the
@@ -60,16 +64,16 @@ identifiability: the equivalent-sphere model is algebraically rank deficient
 by construction, whereas the Ritz model restores full rank for any
 eccentricity $\varepsilon>0$.
 
-Our contribution is therefore twofold.  First, we quantify practical
+Our contribution is therefore twofold.  First, we quantify local practical
 identifiability through the Jacobian of the frequency--parameter map, using the
 dimensionless scaled Jacobian, its singular values, its condition number, and
 the associated Fisher information matrix to assess whether small perturbations
 in the measured frequencies can be mapped reliably back to $(a,c,E)$.  Second,
-we make explicit the programme-level consequence: identifiability, not merely
-forward prediction, is the mathematical foundation on which Papers~1--7 rest.
-This is an analysis of \emph{practical} identifiability in the sense of Raue
-et al.~\cite{Raue2009} and Wieland et al.~\cite{Wieland2021}, not a global
-uniqueness theorem.
+we characterise the identifiability landscape across shell geometries, showing
+that the oblate--prolate asymmetry produces qualitatively different
+conditioning regimes.  This is an analysis of local practical
+identifiability in the sense of Raue et al.~\cite{Raue2009} and Wieland et
+al.~\cite{Wieland2021}, not a global uniqueness theorem.
 
 The main numerical findings are as follows.
 \begin{itemize}
@@ -94,7 +98,8 @@ The main numerical findings are as follows.
   to $9$ modes.
   \item Three-mode inversion is locally feasible but exhibits local minima,
   whereas five-mode inversion is robust across the tested initial guesses.
-  \item A three-class taxonomy emerges: \emph{singular} (equivalent-sphere,
+  \item Three regimes of identifiability behaviour are observed:
+  \emph{singular} (equivalent-sphere,
   rank-deficient), \emph{regular bounded} (oblate, $\kappa$ finite and
   generally favourable, with local non-monotonicity from mode crossings), and
   \emph{non-lifting} (prolate, $\kappa$ high and flat).
@@ -104,11 +109,9 @@ The main numerical findings are as follows.
 These results suggest that, within the present Ritz model, one can in a
 practical sense hear the shape of an
 oblate organ from a modest set of flexural resonances, whereas the same task is
-poorly posed at the spherical limit.  For the Browntone programme, that
-distinction is not a side remark.  It explains why the forward models of Papers
-1--7 are potentially invertible in the first place, and why oblateness rather
-than near-sphericity is the feature that turns resonance from a descriptive
-quantity into a usable diagnostic observable.
+poorly posed at the spherical limit.  That distinction is precisely what
+determines whether a forward resonance model is merely descriptive or
+potentially invertible for parameter estimation.
 
 The paper is organised as follows.  Section~\ref{sec:theory} summarises the
 equivalent-sphere forward model and the inverse formulation.  Section

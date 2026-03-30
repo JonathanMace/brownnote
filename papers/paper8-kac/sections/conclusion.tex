@@ -3,14 +3,12 @@
 % =============================================================================
 \section{Conclusion}\label{sec:conclusion}
 
-We have studied the practical identifiability of elastic shell parameters
+We have studied the local practical identifiability of elastic shell parameters
 from resonant frequencies in the spirit of Kac's spectral question.  For the
 oblate Ritz flexural model used here, the inverse problem based on the
 parameter triple $(a,c,E)$ transitions smoothly from poorly conditioned at the
 near-spherical limit to well conditioned at the canonical oblate operating
-point.  In the context of the Browntone programme, that makes Paper~8 less a
-side study than a foundation stone: it addresses the inverse question on which
-the diagnostic ambitions of Papers~1--7 depend.
+point.
 
 The main findings are:
 \begin{enumerate}
@@ -47,37 +45,33 @@ The main findings are:
 
 These results suggest a practical answer to the question posed in the title.
 Within the present model, one can hear the shape of an oblate organ in the
-limited but useful sense of practical local identifiability.  One cannot do so
+limited but useful sense of local practical identifiability.  One cannot do so
 reliably at the spherical limit.  That distinction is precisely what determines
 whether a measured resonance is merely interesting or diagnostically useful.
 
-The programme-level implication is straightforward.  If flexural resonances can
+The practical implication is that if flexural resonances can
 be measured reproducibly, and if the relevant parameters are identifiable, then
-the spectrum becomes a non-invasive elastography tool.  For abdominal
-resonance~\cite{BrowntoneCompanion}, this means that a measured modal set could
-in principle constrain effective cavity geometry and wall stiffness rather than
-serving only as a forward prediction.  For the bladder
-problem~\cite{BrowntoneBladder}, it means that fill-dependent resonance could,
-at least in principle, support inference of changing wall properties.  For
-watermelon ripeness~\cite{BrowntoneWatermelon}, it explains why a tap-tone can
-carry recoverable material information rather than folklore alone.
+the spectrum becomes a candidate for non-invasive parameter estimation.  For
+oblate fluid-filled shells --- whether biological organs or agricultural
+products --- a measured modal set could in principle constrain effective cavity
+geometry and wall stiffness rather than serving only as a forward
+prediction.
 
 The clearest practical recommendation is equally straightforward: measure at
 least five low-order flexural resonances if the goal is parameter inversion
 rather than mere modal description.  Fewer modes may suffice for local tests,
 but they do not provide the same robustness.
 
-The main theoretical contribution is the three-class classification of shell
-inverse problems (Section~\ref{sec:classification}): \emph{singular}
+The main theoretical contribution is the identification of three regimes of
+identifiability behaviour (Section~\ref{sec:classification}): \emph{singular}
 (equivalent-sphere, rank-deficient), \emph{regular bounded} (oblate Ritz,
 $\kappa$ finite and generally improving with eccentricity, though with local
 non-monotonicity from mode crossings in the Ritz eigenvalue branches), and
-\emph{non-lifting} (prolate, $\kappa$ high and flat).  The critical finding is
+\emph{non-lifting} (prolate, $\kappa$ high and flat).  The critical observation is
 that not all shape departures improve identifiability: oblate geometry benefits
 from curvature--mode anti-correlation, while prolate geometry does not, because
-curvature peaks and modal peaks are co-located at the poles.  This asymmetry
-was not anticipated by the original power-law conjecture, which has been
-replaced by the richer two-channel picture.
+curvature peaks and modal peaks are co-located at the poles.  Whether these
+regimes persist in more general shell theories remains to be established.
 
 The most interesting open mathematical target is the closed-form derivation of
 the expansion coefficients $\sigma_0$, $\lambda_1$, and $\lambda_2$ as
