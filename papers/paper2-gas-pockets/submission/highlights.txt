@@ -1,0 +1,5 @@
+- Constrained-bubble model links bowel gas pockets to infrasonic tissue strain.
+- Predicted susceptibility spans 9 dB across physiological gas-pocket sizes.
+- Sealed pockets are 35-100x more efficient than whole-cavity airborne coupling.
+- Acoustic short-circuiting through the GI air column is the critical limiter.
+- If pockets are sufficiently sealed in vivo, IBS and post-prandial bloating may increase vulnerability.
