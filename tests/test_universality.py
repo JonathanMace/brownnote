@@ -403,14 +403,15 @@ class TestProlateNullResult:
     """
 
     def test_prolate_kappa_is_flat(self):
-        """Prolate κ should be nearly flat over ε ∈ [0.3, 0.65].
+        """Prolate κ should be nearly flat over ε ∈ [0.4, 0.65].
 
         Unlike the oblate where κ ~ ε⁻², prolate κ barely changes
         with eccentricity away from the sphere limit.  We sweep
-        ε ∈ [0.3, 0.65] (avoiding the ε < 0.2 sphere-limit spike
-        and ε > 0.65 numerical stiffening) and require max/min < 3.
+        ε ∈ [0.4, 0.65] (avoiding the ε < 0.35 sphere-limit spillover
+        and ε > 0.65 numerical stiffening) and require max/min < 2.
+        Typical κ ∈ [580, 870], ratio ≈ 1.5.
         """
-        eps_vals = np.linspace(0.3, 0.65, 8)
+        eps_vals = np.linspace(0.4, 0.65, 8)
         result = prolate_condition_sweep(
             eccentricities=eps_vals, modes=(2, 3, 4),
         )
@@ -420,8 +421,8 @@ class TestProlateNullResult:
             f"Expected ≥6 finite κ values, got {len(finite)}"
         )
         ratio = finite.max() / finite.min()
-        assert ratio < 3.0, (
-            f"Prolate κ max/min ratio = {ratio:.2f}, expected < 3.0 "
+        assert ratio < 2.0, (
+            f"Prolate κ max/min ratio = {ratio:.2f}, expected < 2.0 "
             f"(flat null result). min={finite.min():.1f}, max={finite.max():.1f}"
         )
 
