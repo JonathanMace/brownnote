@@ -46,6 +46,36 @@ $\hat\alpha\in[2.16,\,2.66]$ confirmed numerically in Section~\ref{sec:results}
 provides a finite floor, and $\kappa$ saturates at
 $\kappa_\mathrm{floor}\approx 269$ rather than diverging.
 
+Figure~\ref{fig:oblate_prolate_comparison} sharpens that picture by contrasting
+oblate and prolate sweeps computed with the same five-mode set
+$\mathcal{N}=\{2,3,4,5,6\}$.  The oblate branch exhibits bounded but genuine
+identifiability restoration: $\kappa$ falls from the near-spherical floor to
+$\kappa=69.4$ at the canonical operating point $\varepsilon=0.745$, while
+$\sigma_{\min}$ grows above the curvature-channel floor
+$\sigma_0\approx0.011$.  The prolate branch does not show the same lifting.
+Over its informative mid-range, $\kappa$ remains in the range
+$5.6\times10^2$--$7.3\times10^2$ and $\sigma_{\min}$ stays close to zero.  The
+lesson is therefore not that \emph{any} departure from spherical symmetry is
+helpful, but that oblate curvature redistribution creates a usable shape
+channel whereas prolate distortion, at least in the present model class, does
+not.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_oblate_prolate_comparison}
+  \caption{Oblate--prolate identifiability contrast for the scaled Jacobian
+  using flexural modes $n=2,\ldots,6$.  \textbf{(a)} The oblate branch
+  decreases from the near-spherical floor
+  $\kappa_\mathrm{floor}\approx269$ to the canonical oblate point
+  $(\varepsilon,\kappa)=(0.745,69.4)$, whereas the prolate branch remains
+  poorly conditioned over its informative mid-range.  \textbf{(b)} The smallest
+  singular value grows for the oblate branch but remains close to zero for the
+  prolate branch.  This contrast shows that identifiability improvement is
+  geometry-class dependent rather than a universal consequence of symmetry
+  breaking.}
+  \label{fig:oblate_prolate_comparison}
+\end{figure}
+
 This interpretation is straightforward and does not invoke group-theoretic
 symmetry breaking.  The identifiability transition is not a consequence of
 reducing the symmetry group from $\mathrm{SO}(3)$ to $\mathrm{SO}(2)$; it is a
