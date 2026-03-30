@@ -81,21 +81,32 @@ Using an oblate Ritz flexural forward model --- with the equivalent-sphere
 reduction as a degenerate comparator --- we compute the scaled
 Jacobian of the frequency--parameter map, its singular values, its condition
 number, and the associated Fisher information matrix for the parameter triple
-$(a,c,E)$.  Within the Ritz model, the condition number drops from a
-near-spherical floor $\kappa_\mathrm{floor} \approx 269$ (evaluated at
-$\varepsilon = 0.01$ with five modes) to $\kappa = 69.4$ at the canonical
-oblate operating point, an improvement by a factor of approximately $3.9$
-achieved purely through geometric eccentricity.  For comparison, the
-equivalent-sphere model gives $\kappa = 1.37 \times 10^{10}$, reflecting
-algebraic rank deficiency rather than geometric conditioning: the
-equivalent-sphere inverse problem is essentially non-identifiable.  A
-Newton-type inverse solver recovers $(a,c,E)$ to relative errors below
-$10^{-12}$ in round-trip tests, while Cram\'er--Rao bounds at $1\%$ frequency
-noise yield uncertainties of $\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and
-$\pm 30.8\%$ in $E$.  Five-mode inversion is robust; three-mode inversion is
-vulnerable to local minima.  The result has implications for non-invasive
-tissue characterisation and fruit quality assessment: one can ``hear the
-shape'' of an oblate organ, but not a spherical one.
+$(a,c,E)$.  The smallest singular value of the scaled Jacobian admits a
+\emph{two-channel} regular expansion
+$\sigma_{\min}(\varepsilon) = \sigma_0 + \lambda_1\varepsilon^2 +
+O(\varepsilon^4)$, where the \emph{curvature channel} $\sigma_0 > 0$
+reflects mode-dependent Legendre weights that break the $a$/$c$ degeneracy
+even at the sphere, and the \emph{shape channel} $\lambda_1\varepsilon^2$
+captures eccentricity-driven lifting.  Within the Ritz model (five modes),
+the condition number drops from a near-spherical floor
+$\kappa_\mathrm{floor} \approx 269$ to $\kappa = 69.4$ at the canonical
+oblate operating point, an improvement by a factor of approximately $3.9$.
+For comparison, the equivalent-sphere model gives
+$\kappa = 1.37 \times 10^{10}$, reflecting algebraic rank deficiency rather
+than geometric conditioning.  A Newton-type inverse solver recovers
+$(a,c,E)$ to relative errors below $10^{-12}$ in round-trip tests, while
+Cram\'er--Rao bounds at $1\%$ frequency noise yield uncertainties of
+$\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and $\pm 30.8\%$ in $E$ (five
+modes).  The two-channel framework leads to a three-class classification of
+shell inverse problems: \emph{singular} (equivalent-sphere, rank-deficient),
+\emph{regular bounded} (oblate Ritz, $\kappa$ approaches a finite floor and
+improves monotonically with eccentricity), and \emph{non-lifting} (prolate,
+$\kappa$ flat and high).  The oblate--prolate asymmetry arises from
+curvature--mode anti-correlation: in oblate shells, peak curvature and modal
+peaks occupy different latitudes, diversifying the Jacobian columns; in
+prolate shells, both concentrate at the poles, leaving the columns nearly
+proportional.  One can ``hear the shape'' of an oblate organ, but not a
+spherical or prolate one.
 \end{abstract}
 
 \begin{keyword}

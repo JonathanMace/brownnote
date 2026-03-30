@@ -36,15 +36,13 @@ modes $P_n(\eta)$ weight the meridional curvature gradient differently: low-orde
 modes sample both poles and equator broadly, while higher-order modes
 concentrate energy near the equator where the curvature gradient is steepest.
 This differential sampling breaks the proportionality of the $a$- and $c$-columns
-and restores full rank.  In the intermediate eccentricity regime where the
-shape-channel correction dominates the curvature-channel floor, the condition
-number follows an approximate power law
-$\kappa \approx C\,\varepsilon^{-\alpha}$, with
-theoretical exponent $\alpha=2$ and empirical estimates
-$\hat\alpha\in[2.16,\,2.66]$ confirmed numerically in Section~\ref{sec:results}
-(Table~\ref{tab:power_law}).  As $\varepsilon \to 0$, the curvature channel
-provides a finite floor, and $\kappa$ saturates at
-$\kappa_\mathrm{floor}\approx 269$ rather than diverging.
+and restores full rank.  The smallest singular value admits the regular
+expansion~\eqref{eq:sigma_min_expansion}, with a curvature-channel floor
+$\sigma_0 > 0$ that prevents divergence as $\varepsilon \to 0$.  Because the
+crossover eccentricity $\varepsilon_c = 1.48$ lies outside the physical domain,
+the curvature channel dominates at all realisable eccentricities, and the
+condition number saturates at $\kappa_\mathrm{floor}\approx 269$ rather than
+diverging.
 
 Figure~\ref{fig:oblate_prolate_comparison} sharpens that picture by contrasting
 oblate and prolate sweeps computed with the same five-mode set
@@ -204,47 +202,102 @@ practical identifiability of coupled fluid--shell systems, a connection that
 merits further investigation using the tools of shape calculus and spectral
 perturbation theory~\cite{Kato1966,Henrot2006}.
 
-\subsection{Open Questions and Conjectures}\label{sec:open_questions}
+\subsection{Classification of shell inverse problems}\label{sec:classification}
 
-Propositions~\ref{prop:chain_rule} and~\ref{prop:eccentricity} identify the
-mechanism by which the spherical degeneracy is lifted, but they stop short of a
-complete quantitative theory.  To make the outstanding mathematical programme
-explicit, we record two conjectures suggested by the numerical evidence,
-together with an empirical observation on mode-count scaling.
-The conjectures are stated for the oblate Ritz model, since that is the setting
-in which a proof would matter.  Let
-$\mathcal{N}=\{n_1,\ldots,n_N\}$ denote the measured flexural mode set, let
-$\varepsilon=\sqrt{1-c^2/a^2}$ be the eccentricity, and let
+The two-channel expansion~\eqref{eq:sigma_min_expansion} and the
+oblate--prolate comparison together suggest a three-class taxonomy for the
+identifiability of spectral inverse problems on fluid-filled shells.
+
+\begin{enumerate}
+  \item \textbf{Singular} (Jacobian rank-deficient).  The equivalent-sphere
+  model, which depends on $(a,c)$ only through $R_\mathrm{eq}$, gives
+  $\kappa = 1.37 \times 10^{10}$ --- effectively infinite.  This is the
+  degenerate case of Proposition~\ref{prop:chain_rule}: all frequency
+  sensitivities to $a$ and $c$ are proportional, leaving one parameter
+  combination unobservable.
+
+  \item \textbf{Regular bounded} ($\sigma_0 > 0$, $\kappa$ finite and
+  improving).  The oblate Ritz model has a positive curvature-channel floor
+  $\sigma_0 = 0.01113$ (five modes), giving
+  $\kappa_\mathrm{floor} \approx 269$ at the sphere and improving
+  monotonically to $\kappa = 69.4$ at the canonical oblate operating point
+  --- a factor of $3.9$.  Because $\varepsilon_c = 1.48 > 1$, the curvature
+  channel dominates everywhere.  The inverse problem is well posed at all
+  physically realisable eccentricities.
+
+  \item \textbf{Non-lifting} ($\kappa$ high and essentially flat).  For
+  prolate geometries ($c > a$), the condition number remains in the range
+  $580$--$730$ with no systematic improvement as eccentricity increases.
+  The inverse problem is not rank-deficient, but it is poorly conditioned
+  and does not benefit from departure from the sphere.
+\end{enumerate}
+
+The distinction between classes~2 and~3 is the central new finding.
+It replaces an earlier conjecture~\cite[Conjecture~1, first
+draft]{BrowntoneCompanion} that proposed a power-law divergence
+$\kappa \sim C\varepsilon^{-\alpha}$ as $\varepsilon \to 0$.  That
+conjecture was abandoned because the Ritz model has $\sigma_0 > 0$ at the
+sphere: the condition number approaches a finite floor, not infinity.  The
+two-channel expansion provides a richer and more accurate description.
+
+\subsection{Oblate--prolate asymmetry}\label{sec:oblate_prolate}
+
+The three-class taxonomy raises a natural question: \emph{why} does oblate
+geometry improve identifiability while prolate geometry does not?
+
+The answer lies in the spatial relationship between curvature concentration
+and modal displacement peaks --- a mechanism we term
+\emph{curvature--mode anti-correlation}.
+
+For an oblate spheroid, the Gaussian curvature is maximal at the equator and
+minimal at the poles.  The low-order Legendre modes $P_n(\cos\theta)$, by
+contrast, have their largest amplitudes near the poles (where
+$\cos\theta \to 1$).  Different modes therefore sample distinct curvature
+environments: low-order modes weight the low-curvature polar cap, while
+higher-order modes concentrate energy in the high-curvature equatorial belt.
+This spatial diversity means that each mode's sensitivity to $a$ and $c$
+differs, breaking the proportionality of the Jacobian columns and reducing
+$\kappa$.
+
+For a prolate spheroid, the geometry reverses.  Gaussian curvature is now
+maximal at the poles --- exactly where all Legendre modes peak.  Every mode
+therefore samples essentially the same high-curvature region with similar
+weighting.  The Jacobian columns remain nearly proportional regardless of
+eccentricity, and $\kappa$ stays high and flat.
+
+The mechanism is constructive rather than symmetry-theoretic: it identifies
+the specific integrals
+$\int_0^1 P_n^2(\eta)\,G^{-k}(\eta)\,\mathrm{d}\eta$ whose $n$-dependence
+does or does not vary with eccentricity.  In the oblate case, the factor
+$(\eta^2 - \tfrac{2}{3})$ in the perturbation
+integral~\eqref{eq:Delta_Ink} changes sign on $[0,1]$, and different
+$P_n^2$ sample the positive and negative regions differently.  In the
+prolate case, the analogous factor does not produce sufficient
+$n$-dependent variation, because the modal peaks and curvature peaks are
+co-located.
+
+\subsection{Open questions and conjectures}\label{sec:open_questions}
+
+The two-channel expansion and three-class classification organise the
+numerical findings, but several questions remain open.  We record the
+outstanding mathematical programme explicitly.
+
+Let $\mathcal{N}=\{n_1,\ldots,n_N\}$ denote the measured flexural mode set,
+let $\varepsilon=\sqrt{1-c^2/a^2}$ be the eccentricity, and let
 $\mathbf{J}_s(\varepsilon;\mathcal{N})$ denote the corresponding scaled
 Jacobian of the frequency--parameter map.
 
-\begin{conjecture}[Rate of identifiability restoration]
-\label{conj:power_law}
-For the Ritz model with fixed mode set $\mathcal{N}$, the smallest singular
-value of the scaled Jacobian satisfies
-\begin{equation}
-  \sigma_{\min}\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N})\bigr)
-  =
-  \sigma_0(\mathcal{N}) + \lambda_1(\mathcal{N})\,\varepsilon^{2}
-  + O(\varepsilon^4)
-  \qquad \text{as } \varepsilon \to 0^+,
-\end{equation}
-where $\sigma_0 > 0$ is the curvature-channel floor.  In the intermediate
-eccentricity regime where $\lambda_1\varepsilon^2 \gg \sigma_0$, the
-condition number follows an approximate power law
-\begin{equation}
-  \kappa\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N})\bigr)
-  \approx
-  \frac{\sigma_{\max}}{\lambda_1(\mathcal{N})}\,\varepsilon^{-2}\bigl(1+o(1)\bigr).
-\end{equation}
-As $\varepsilon \to 0^+$, however, the condition number saturates at
-$\kappa_\mathrm{floor} = \sigma_{\max}/\sigma_0 \approx 269$ (evaluated at
-$\varepsilon = 0.01$, i.e.\ $\zeta = 0.99995$, with five modes) rather than
-diverging.  The empirical exponents $\hat\alpha\in[2.16,\,2.66]$
-(Table~\ref{tab:power_law}), fitted over the intermediate range, are
-consistent with the theoretical $\alpha = 2$ to leading order; the
-deviation from $2$ reflects the finite curvature-channel floor
-rounding off the divergence.
+\begin{conjecture}[Closed-form expansion coefficients]
+\label{conj:expansion}
+For the Ritz model with fixed mode set $\mathcal{N}$, the expansion
+coefficients $\sigma_0(\mathcal{N})$, $\lambda_1(\mathcal{N})$, and
+$\lambda_2(\mathcal{N})$ in~\eqref{eq:sigma_min_expansion} can be expressed
+in closed form as functions of the curvature-weighted Legendre integrals
+$\int_0^1 P_n^2(\eta)\,(\eta^2 - \tfrac{2}{3})\,\mathrm{d}\eta$ and the
+canonical parameter set.  A proof would turn the numerically determined
+coefficients~\eqref{eq:expansion_coeffs} into design formulae, giving the
+floor, slope, and crossover eccentricity as explicit functions of the mode
+set.
 \end{conjecture}
 
 \begin{conjecture}[Minimum modes for identifiability]
@@ -286,11 +339,11 @@ conjecture.  The practical implication is that five modes capture the bulk
 of the available information for the present three-parameter problem.
 \end{remark}
 
-Conjecture~\ref{conj:power_law} is the most tantalising of the open questions.
-The numerics already suggest a clean intermediate-regime power law with
-$\alpha\approx2$ and a finite curvature-channel floor, but a rigorous proof of
-the $\sigma_{\min}$ expansion would turn a useful plot into an asymptotic
-theorem --- and would give the floor, coefficient, and crossover eccentricity as
-closed-form functions of the mode set.  That would be the crown jewel of the
-present identifiability programme; at the time of writing, it remains work in
+Conjecture~\ref{conj:expansion} is the most tantalising of the open
+questions.  The numerics already determine the expansion coefficients
+to several significant figures~\eqref{eq:expansion_coeffs}, but a
+closed-form derivation would give the floor, slope, and crossover as
+explicit functions of the mode set --- turning a useful fit into an
+asymptotic theorem.  That would be the crown jewel of the present
+identifiability programme; at the time of writing, it remains work in
 progress.
