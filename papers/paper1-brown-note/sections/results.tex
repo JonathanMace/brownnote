@@ -72,7 +72,14 @@ and were excluded; the reported statistics are computed from the remaining
 
 The resulting distribution of $f_2$ has a median of \SI{6.4}{\hertz} with a
 90\% credible interval of \SIrange{3.3}{15.5}{\hertz}
-(Table~\ref{tab:uq_summary}).  The distribution is positively skewed,
+(Table~\ref{tab:uq_summary}).  This interval is deliberately conservative:
+it reflects the simultaneous variation of \emph{all} model parameters across
+their full physiological ranges and is therefore considerably wider than
+any single-parameter sweep.  The canonical prediction $f_2 = \SI{3.95}{\hertz}$
+lies within the credible interval but near its lower bound, corresponding to
+the soft-tissue, relaxed-musculature baseline; the median is higher because
+the log-normal modulus distribution samples stiffer configurations more
+frequently.  The distribution is positively skewed,
 reflecting the log-normal distribution of $E$.
 
 \begin{table}[htbp]
