@@ -22,13 +22,13 @@ The main findings are:
   $\kappa \approx 1.37 \times 10^{10}$ due to the finite-difference step),
   illustrating how model-induced degeneracy
   dwarfs the geometric effect;
-  \item the smallest singular value admits a regular two-channel expansion
-  $\sigma_{\min} = \sigma_0 + \lambda_1\varepsilon^2 + O(\varepsilon^4)$
-  with curvature-channel floor $\sigma_0 = 0.01113$ and shape-channel
-  coefficient $\lambda_1 = 0.00507$ (five modes); the crossover
-  $\varepsilon_c = 1.48 > 1$ shows that the curvature channel dominates
-  across the entire physical range, and the condition number saturates at
-  $\kappa_\mathrm{floor}\approx 269$ rather than diverging;
+  \item the smallest singular value is well described by the polynomial fit
+  $\sigma_{\min} \approx \sigma_0 + \lambda_1\varepsilon^2 + \lambda_2\varepsilon^4$
+  over the intermediate eccentricity range $\varepsilon\in[0.15,\,0.85]$,
+  with regression intercept $\sigma_0 = 0.01113$ and shape coefficient
+  $\lambda_1 = 0.00507$ (five modes); directly computed, the condition
+  number approaches a finite floor $\kappa_\mathrm{floor}\approx 269$
+  at $\varepsilon = 0.01$ rather than diverging;
   \item round-trip inversion recovers $(a,c,E)$ to machine precision
   ($<10^{-12}$), confirming internal consistency of the forward model and
   solver;

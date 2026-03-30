@@ -301,9 +301,14 @@ intra-abdominal pressure is
 \end{equation}
 where $N_1(\eta)$ is the meridional membrane stress resultant under
 uniform internal pressure.
-At $a = c$ the integrands become
-$\eta$-independent and all expressions reduce to the equivalent-sphere
-formulae of Section~\ref{sec:theory}.  Near the spherical limit ($c/a > 0.98$),
+In the spherical limit $a = c$, the integrands become
+$\eta$-independent and the schematic integrals above recover the functional
+structure of the equivalent-sphere expressions, though the truncated
+$2\times2$ Ritz eigenproblem incurs a systematic offset of approximately
+$8\%$ in eigenfrequencies relative to the analytical sphere formula.  This
+offset does not affect the identifiability analysis, which depends on
+sensitivity ratios (Jacobian column directions) rather than absolute
+frequency values.  Near the spherical limit ($c/a > 0.98$),
 the oblate fluid harmonics are blended to sphere-approximated values using a
 $C^2$-continuous smootherstep function over $c/a \in [0.98,\,0.999]$, ensuring
 numerical stability without discontinuous derivatives.
@@ -371,31 +376,24 @@ Low-order modes ($n=2$) sample both regions broadly, while higher-order modes
 breaks the proportionality of the $a$- and $c$-columns and lifts the rank
 deficiency.
 
-The result leads to a quantitative framework for the condition number.  The
-smallest singular value of the scaled Jacobian admits a regular perturbation
-expansion~\cite{Kato1966,StewartSun1990}:
+Over the intermediate eccentricity range $\varepsilon \in [0.15,\,0.85]$,
+the minimum singular value is well described by the polynomial fit
 \begin{equation}\label{eq:sigma_min_expansion}
   \sigma_{\min}(\varepsilon)
-  =
-  \sigma_0 + \lambda_1\,\varepsilon^{2} + \lambda_2\,\varepsilon^{4}
-  + O(\varepsilon^6),
+  \approx
+  \sigma_0 + \lambda_1\,\varepsilon^{2} + \lambda_2\,\varepsilon^{4},
 \end{equation}
-where $\sigma_0 > 0$ is the \emph{curvature-channel floor} --- the residual
-identifiability contributed by mode-dependent Legendre weights even at the
-spherical limit --- and $\lambda_1\varepsilon^2$ is the \emph{shape-channel}
-correction driven by eccentricity.  Since $\sigma_0 > 0$, the expansion is
-\emph{regular}: the smallest singular value approaches a finite positive
-limit as $\varepsilon \to 0$, and the condition number saturates at
-\begin{equation}\label{eq:kappa_floor_theory}
-  \kappa_\mathrm{floor}
-  =
-  \frac{\sigma_{\max}(0)}{\sigma_0}
-\end{equation}
-rather than diverging.  The crossover eccentricity
-$\varepsilon_c = \sqrt{\sigma_0/\lambda_1}$ separates a curvature-dominated
-regime ($\varepsilon < \varepsilon_c$, where the floor controls conditioning)
-from a shape-dominated regime ($\varepsilon > \varepsilon_c$, where
-eccentricity drives improvement).  Section~\ref{sec:results} determines
+where $\sigma_0$, $\lambda_1$, $\lambda_2$ are regression coefficients
+(not asymptotic limits).  The expansion is empirical: $\sigma_0$ is the
+regression intercept extrapolated to $\varepsilon = 0$, not the directly
+computed value at the sphere.  Direct evaluation at $\varepsilon = 0.01$
+(five modes) gives $\kappa_\mathrm{floor} \approx 269$, confirming that
+the condition number saturates at a finite value rather than diverging.
+The crossover eccentricity
+$\varepsilon_c = \sqrt{\sigma_0/\lambda_1}$ separates a regime dominated
+by the regression intercept ($\varepsilon < \varepsilon_c$) from one
+dominated by the eccentricity-driven terms ($\varepsilon > \varepsilon_c$).
+Section~\ref{sec:results} determines
 $\sigma_0$, $\lambda_1$, $\lambda_2$, and $\varepsilon_c$ numerically and
-confirms that for the oblate Ritz model, $\varepsilon_c > 1$: the curvature
-channel dominates across the entire physical eccentricity range.
+confirms that for the oblate Ritz model, $\varepsilon_c > 1$: the intercept
+dominates across the entire physical eccentricity range.
