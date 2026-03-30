@@ -303,7 +303,11 @@ where $N_1(\eta)$ is the meridional membrane stress resultant under
 uniform internal pressure.
 At $a = c$ the integrands become
 $\eta$-independent and all expressions reduce to the equivalent-sphere
-formulae of Section~\ref{sec:theory}.  For $a \neq c$, each mode
+formulae of Section~\ref{sec:theory}.  Near the spherical limit ($c/a > 0.98$),
+the oblate fluid harmonics are blended to sphere-approximated values using a
+$C^2$-continuous smootherstep function over $c/a \in [0.98,\,0.999]$, ensuring
+numerical stability without discontinuous derivatives.
+For $a \neq c$, each mode
 ``sees'' a different effective radius through the $G(\eta)$ weighting,
 which is the mechanism by which eccentricity breaks the rank degeneracy.
 
