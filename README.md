@@ -20,13 +20,13 @@ Whole-body vibration is another matter entirely, which is why we wrote seven pap
 Can a sufficiently powerful subwoofer ruin your afternoon? We model the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derive its modal spectrum from first principles, and compare airborne acoustic coupling with whole-body mechanical vibration. The resonance is real; the acoustic pathway to it is not.
 
 ### Paper 2 — *Gas Pockets*
-**Gas pocket resonance as an alternative acoustic coupling mechanism**  
-**Status:** ACCEPT after internal review; submission-ready (18 pages)  
-**Target venue:** *Journal of the Acoustical Society of America*  
-**Latest draft:** [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-29_1627.pdf)  
+**Gas pocket resonance as an alternative acoustic coupling mechanism**<br>
+**Status:** ACCEPT after internal review; submission-ready (18 pages)<br>
+**Target venue:** *Journal of the Acoustical Society of America*<br>
+**Latest draft:** [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-29_2111.pdf)<br>
 **Key result:** 35-100× more efficient than whole-cavity coupling
 
-If the whole abdomen will not cooperate, perhaps the gas trapped inside it will. We model intestinal gas pockets as tissue-constrained bubbles and show they couple to airborne sound 35–100× more efficiently than the cavity itself — enough, at extreme SPL, to activate mechanosensitive ion channels in nearby tissue.
+If the whole abdomen will not cooperate, perhaps the gas trapped inside it will. We model intestinal gas pockets as tissue-constrained bubbles and show they couple to airborne sound 35–100× more efficiently than the cavity itself under idealised sealed-pocket conditions, while acoustic short-circuiting through the GI air column remains the key limiting uncertainty.
 
 ### Paper 3 — *Scaling Laws*
 **Dimensional analysis predictions across mammalian scales**  
