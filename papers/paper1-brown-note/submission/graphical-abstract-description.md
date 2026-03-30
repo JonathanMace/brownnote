@@ -15,9 +15,9 @@ Create a single clean publication-quality panel with a left-to-right narrative.
 
 - Place two large horizontal arrows aimed at the same resonant shell.
 - The airborne pathway should be thin, cool-coloured, and labelled
-  `Airborne infrasound` with `0.014 μm at 120 dB`.
+  `Airborne infrasound` with `0.028 μm at 120 dB`.
 - The whole-body vibration pathway should be bold, warm-coloured, and labelled
-  `Whole-body vibration` with `~66,000× larger response`.
+  `Whole-body vibration` with `~33,000× larger response`.
 - Put the main quantitative message in the centre:
   `Mechanical coupling >> airborne coupling`.
 
@@ -36,7 +36,7 @@ Create a single clean publication-quality panel with a left-to-right narrative.
   orange/red for mechanical vibration, neutral grey for anatomy.
 - Keep text minimal so the image remains legible at submission-thumbnail size.
 - Prefer vector-style line art, smooth arrows, and one bold numerical callout:
-  `66,000×`.
+  `33,000×`.
 - The overall message should be immediately readable without humour, but the
   juxtaposition should retain a faint sense that the paper knows exactly what
   question it is answering.

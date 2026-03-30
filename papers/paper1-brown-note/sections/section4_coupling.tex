@@ -20,7 +20,7 @@ absorption by low-order shell modes are strongly suppressed
   \centering
   \caption{Energy-consistent airborne displacement at $n=2$ resonance
   ($f_2 = \SI{4.0}{\hertz}$, $Q = 4.0$, canonical parameters).
-  The pressure-based estimate overestimates by a factor of ${\approx}\,13$
+  The pressure-based estimate overestimates by a factor of ${\approx}\,6.5$
   (ratio of $\xi_\mathrm{pressure}$ to $\xi_\mathrm{energy}$).}
   \label{tab:airborne}
   \begin{tabular}{rcccc}
@@ -29,11 +29,11 @@ absorption by low-order shell modes are strongly suppressed
     $\xi_\mathrm{energy}$ ($\mu$m) &
     $\xi_\mathrm{pressure}$ ($\mu$m) & Exceeds 1\,\si{\micro\metre}? \\
     \midrule
-    100 & 2.0  & 0.001 & 0.018 & No \\
-    110 & 6.3  & 0.004 & 0.058 & No \\
-    120 & 20.0 & 0.014 & 0.18  & No \\
-    130 & 63.2 & 0.044 & 0.58  & No \\
-    140 & 200  & 0.14  & 1.84  & No \\
+    100 & 2.0  & 0.003 & 0.018 & No \\
+    110 & 6.3  & 0.009 & 0.058 & No \\
+    120 & 20.0 & 0.028 & 0.18  & No \\
+    130 & 63.2 & 0.087 & 0.58  & No \\
+    140 & 200  & 0.275 & 1.84  & No \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -41,16 +41,16 @@ absorption by low-order shell modes are strongly suppressed
 At \SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
 discomfort, and roughly the level at
 which conversation becomes impossible---the energy-consistent wall
-displacement is \SI{0.014}{\micro\metre}.  This falls two orders of magnitude
+displacement is \SI{0.028}{\micro\metre}.  This falls two orders of magnitude
 below the $0.5$--$\SI{2.0}{\micro\metre}$ cellular activation range of
 mechanosensitive PIEZO1 and PIEZO2 channels \cite{coste2010piezo1}, a
 benchmark derived from cell-culture experiments that provides a useful
 order-of-magnitude reference scale for biological mechanosensitivity.
 Reaching the
 \SI{1}{\micro\metre} cellular benchmark on this energy-consistent basis demands
-approximately \SI{158}{\decibel} (cf.\ \SI{135}{\decibel} using the
+approximately \SI{151}{\decibel} (cf.\ \SI{135}{\decibel} using the
 pressure-based displacement of Table~\ref{tab:uq_summary}, which
-overestimates by ${\approx}\,13\times$), a level associated with severe
+overestimates by ${\approx}\,6.5\times$), a level associated with severe
 acoustic hazards and available only from explosive blasts and rocket launches.
 Modern mechanobiology strengthens rather than weakens that conclusion:
 PIEZO1 gating is tuned by membrane tension in the low-\si{\milli\newton\per\metre}
@@ -124,7 +124,7 @@ $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS mechanical
 excitation, defines the headline SDOF upper bound:
 \begin{equation}
   \mathcal{R}_\mathrm{full} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}
-  \approx \frac{917}{0.014} \approx 6.6 \times 10^4.
+  \approx \frac{917}{0.028} \approx 3.3 \times 10^4.
   \label{eq:coupling_ratio}
 \end{equation}
 This four-order-of-magnitude gap depends primarily on the dimensionless
@@ -171,7 +171,7 @@ is moderately sensitive to the constraint angle: $\Gamma_2$ ranges from
 approximately 0.3 at $\theta_c = \pi/2$ (lower half constrained) to 0.7 at
 $\theta_c = 5\pi/6$ (only the lowest sixth constrained).  Including this correction
 reduces the mechanical displacement to about 48\% of the SDOF value and the
-coupling ratio to $\sim 3 \times 10^4$.  The qualitative conclusion---a
+coupling ratio to $\sim 1.6 \times 10^4$.  The qualitative conclusion---a
 four-order-of-magnitude gap---is unaffected, but $\mathcal{R}_\mathrm{full}$ as reported in
 Eq.~\eqref{eq:coupling_ratio} should be understood as an upper bound
 corresponding to the SDOF idealisation.
@@ -184,14 +184,15 @@ low-order shell modes is vanishingly small when $ka \ll 1$
 \cite{FahyGardonio2007}; formally:
 \begin{equation}
   \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
-  \,\frac{\zeta_\mathrm{rad}}{\zeta_\mathrm{rad} + \zeta_\mathrm{struct}},
+  \,\frac{4\,\zeta_\mathrm{rad}\,\zeta_\mathrm{struct}}{(\zeta_\mathrm{rad} + \zeta_\mathrm{struct})^2},
 \end{equation}
 where $\zeta_\mathrm{rad}$ and $\zeta_\mathrm{struct}$ are the radiation and
 structural damping ratios, respectively.  For the $n=2$ mode in air,
 $\zeta_\mathrm{rad} \approx 10^{-15}$ whereas
-$\zeta_\mathrm{struct} = 0.125$, giving an absorption efficiency of order
-$10^{-14}$.  The shell absorbs roughly one part in a hundred trillion of
-the incident acoustic energy.
+$\zeta_\mathrm{struct} = 0.125$, giving a Breit--Wigner absorption efficiency
+$4\zeta_\mathrm{rad}\zeta_\mathrm{struct}/\zeta_\mathrm{total}^2
+\sim 3 \times 10^{-14}$.  The shell absorbs roughly three parts in a hundred
+trillion of the incident acoustic energy.
 
 The energy-consistent displacement follows directly.  The absorbed acoustic
 power is $\Pi_\mathrm{abs} = \sigma_\mathrm{abs} \, I$, where
@@ -211,17 +212,22 @@ Equating absorbed and dissipated power gives
                {\zeta_\mathrm{struct}\,\omega_n^3\,M_\mathrm{eff}}},
 \end{equation}
 where $M_\mathrm{eff} = m_\mathrm{eff}^{(n)} \times 4\pi R^2$ is the total
-modal mass.  The factor of $\zeta_\mathrm{rad}/\zeta_\mathrm{struct}
-\sim 10^{-14}$ inside $\sigma_\mathrm{abs}$ is the physical origin of the
-${\approx}\,13\times$ reduction from the pressure-based upper bound
+modal mass.  The $(2n+1)$ partial-wave degeneracy in $\sigma_\mathrm{max}$
+and the corresponding $1/(2n+1)$ modal-mass normalisation cancel for the
+single azimuthal order excited by a plane wave.
+The factor of
+$4\zeta_\mathrm{rad}\zeta_\mathrm{struct}/\zeta_\mathrm{total}^2
+\sim 3 \times 10^{-14}$ inside $\sigma_\mathrm{abs}$ is the physical origin of the
+${\approx}\,6.5\times$ reduction from the pressure-based upper bound
 (equation~\ref{eq:xi_air}): the pressure-based calculation implicitly
 assumes that all incident energy is available to drive the mode, whereas in
-fact only the fraction $\zeta_\mathrm{rad}/\zeta_\mathrm{total}$ is absorbed.
+fact only the Breit--Wigner fraction
+$4\zeta_\mathrm{rad}\zeta_\mathrm{struct}/\zeta_\mathrm{total}^2$ is absorbed.
 The pressure-based upper bound (with unity prefactor) exceeds the
-energy-consistent result by approximately $13\times$; with the exact
+energy-consistent result by approximately $6.5\times$; with the exact
 multipole coefficient of $1/3$ (\S\ref{sec:airborne}), the pressure-based
 estimate reduces to approximately $0.06\,\mu\text{m}$, still a factor of
-${\sim}\,4$ above the energy-consistent value.
+${\sim}\,2$ above the energy-consistent value.
 This radiation inefficiency in the Rayleigh regime ($ka \ll 1$) is a
 well-established result in structural acoustics \cite{Junger1986,FahyGardonio2007}.
 

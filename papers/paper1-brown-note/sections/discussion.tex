@@ -7,12 +7,12 @@
 \input{figures/stick_figure}
 
 Figure~\ref{fig:stick_figure} summarises this contrast schematically.  The central result of this study is the upper-bound coupling ratio
-$6.6 \times 10^4$ separating mechanical from airborne coupling efficiency for
+$3.3 \times 10^4$ separating mechanical from airborne coupling efficiency for
 \SI{120}{\decibel} SPL airborne excitation and
 $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
 vibration under the SDOF idealisation ($\Gamma_2 = 1$).  Including the
 canonical participation factor $\Gamma_2 \approx 0.48$ reduces this to
-$\sim 3 \times 10^4$
+$\sim 1.6 \times 10^4$
 (Tables~\ref{tab:airborne}--\ref{tab:mechanical}).  The physical origin of
 this disparity lies in two independent mechanisms: a geometric filtering
 penalty that suppresses modal-pressure content, and an impedance mismatch
@@ -48,7 +48,9 @@ The energy budget analysis (\S\ref{sec:coupling}) confirms this picture from
 an independent perspective.  The radiation damping ratio in air is
 $\zeta_{\mathrm{rad}} \approx 10^{-15}$, whereas the structural damping
 ratio is $\zeta_{\mathrm{struct}} = 0.125$, so the absorption efficiency
-$\zeta_{\mathrm{rad}} / \zeta_{\mathrm{total}} \sim 10^{-14}$.  The shell
+$\zeta_{\mathrm{rad}} / \zeta_{\mathrm{total}} \sim 10^{-14}$, giving a
+Breit--Wigner absorption efficiency
+$4\zeta_\mathrm{rad}\zeta_\mathrm{struct}/\zeta_\mathrm{total}^2 \sim 3 \times 10^{-14}$.  The shell
 is, for practical purposes, acoustically transparent at infrasonic
 frequencies.  By contrast, the upper-bound mechanical model assumes rigid
 skeletal transmission: the bone--peritoneum impedance contrast is orders of
@@ -86,7 +88,7 @@ Where the hypothesis fails is in the \emph{excitation pathway}.  At
 \SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
 discomfort and well above any
 environmental or entertainment exposure---the predicted airborne wall
-displacement is \SI{0.014}{\micro\metre} (Table~\ref{tab:airborne}), roughly
+displacement is \SI{0.028}{\micro\metre} (Table~\ref{tab:airborne}), roughly
 two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\metre} cellular
 activation range of mechanosensitive PIEZO1 and PIEZO2 ion channels
 \cite{coste2010piezo1,Lewis2015,Xiao2024} (a benchmark derived from
@@ -94,7 +96,7 @@ cell-culture experiments; see Limitation~9).  In the modern mechanotransduction
 literature, the more relevant gastrointestinal transducer is probably PIEZO2:
 somatosensory-neuron PIEZO2 signalling has now been shown to regulate gut
 transit directly \cite{ServinVences2023}.  Reaching the \SI{1}{\micro\metre} cellular benchmark on the energy-consistent basis
-requires approximately \SI{158}{\decibel}
+requires approximately \SI{151}{\decibel}
 (cf.\ \SI{135}{\decibel} for the pressure-based estimate;
 Table~\ref{tab:uq_summary}),
 a level associated with severe acoustic hazards and encountered only in
@@ -163,7 +165,7 @@ At \SI{120}{\decibel} SPL ($p_{\mathrm{inc}} = \SI{20}{\pascal}$) and
 $a = \SI{2}{\centi\metre}$, this yields
 $\xi_{\mathrm{gas}} \approx \SI{0.94}{\micro\metre}$---within the PIEZO
 activation range and roughly 67 times the whole-cavity airborne
-displacement of \SI{0.014}{\micro\metre} at the same SPL.  For larger pockets
+displacement of \SI{0.028}{\micro\metre} at the same SPL.  For larger pockets
 ($a = \SI{3}{\centi\metre}$), the displacement rises to approximately
 \SI{1.4}{\micro\metre}, exceeding the lower PIEZO activation threshold.
 
@@ -233,7 +235,7 @@ each coupling mechanism at \SI{120}{\decibel} SPL and \SI{7}{\hertz}.
     \hline
     Mechanism & $\xi$ ($\mu$m) & Exceeds 1\,\si{\micro\metre}? \\
     \hline
-    Cavity resonance ($n{=}2$, airborne) & 0.014 & No \\
+    Cavity resonance ($n{=}2$, airborne) & 0.028 & No \\
     Gas pocket $a = \SI{2}{\centi\metre}$ (airborne) & 0.94 & Marginal \\
     Gas pocket $a = \SI{3}{\centi\metre}$ (airborne) & 1.4 & Yes \\
     Orifice (open mouth $\to$ stomach) & $\sim$0.5 & Marginal \\
@@ -336,7 +338,7 @@ vibration at moderate amplitudes \cite{Alijani2014} and would shift the
 resonance peak to higher frequency while reducing its amplitude---effects that
 are conservative for the brown note argument, since they widen the gap between
 prediction and any putative airborne effect.  The airborne displacement
-($\sim\SI{0.014}{\micro\metre}$) remains deep in the linear regime regardless.
+($\sim\SI{0.028}{\micro\metre}$) remains deep in the linear regime regardless.
 A detailed nonlinear analysis, including the amplitude-dependent frequency
 shift and hysteretic jump phenomena expected at occupational vibration
 levels, is deferred to future work.
