@@ -15,7 +15,6 @@
 
 % Theorem-like environments (elsarticle blocks amsthm, use LaTeX kernel)
 \newtheorem{proposition}{Proposition}
-\newtheorem{conjecture}{Conjecture}
 \newtheorem{remark}[proposition]{Remark}
 \newproof{pf}{Proof}
 
@@ -50,7 +49,7 @@
 \begin{frontmatter}
 
 \title{Can You Hear the Shape of an Organ? Practical Identifiability of
-Viscoelastic Shell Parameters from Resonant Frequencies}
+Elastic Shell Parameters from Resonant Frequencies}
 
 \author[msr]{Jonathan Mace\corref{cor1}}
 \cortext[cor1]{Corresponding author}
@@ -74,7 +73,7 @@ Viscoelastic Shell Parameters from Resonant Frequencies}
 
 \begin{abstract}
 We investigate the practical identifiability of material and geometric
-parameters of a fluid-filled viscoelastic oblate spheroidal shell from its
+parameters of a fluid-filled elastic oblate spheroidal shell from its
 resonant frequencies --- the inverse counterpart of Kac's celebrated question
 ``Can one hear the shape of a drum?'' applied to vibroacoustic organ models.
 Using an oblate Ritz flexural forward model --- with the equivalent-sphere
@@ -92,7 +91,8 @@ the condition number drops from a near-spherical floor
 $\kappa_\mathrm{floor} \approx 269$ to $\kappa = 69.4$ at the canonical
 oblate operating point, an improvement by a factor of approximately $3.9$.
 For comparison, the equivalent-sphere model gives
-$\kappa = 1.37 \times 10^{10}$, reflecting algebraic rank deficiency rather
+$\kappa$ numerically singular ($\kappa > 10^{10}$ in finite-difference
+evaluation with step $\delta = 10^{-6}|\theta_j|$), reflecting algebraic rank deficiency rather
 than geometric conditioning.  A Newton-type inverse solver recovers
 $(a,c,E)$ to relative errors below $10^{-12}$ in round-trip tests, while
 Cram\'er--Rao bounds at $1\%$ frequency noise yield uncertainties of
@@ -110,7 +110,7 @@ spherical or prolate one.
 \end{abstract}
 
 \begin{keyword}
-inverse problem \sep identifiability \sep viscoelastic shell \sep
+inverse problem \sep identifiability \sep elastic shell \sep
 resonant frequency \sep condition number \sep Cram\'er--Rao bound \sep
 oblate spheroid \sep Kac problem
 \end{keyword}

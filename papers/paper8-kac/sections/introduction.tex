@@ -32,7 +32,7 @@ fits a model to a spectrum that never had enough information in the first
 place.
 
 Here we therefore study an engineering analogue of Kac's inverse problem for a
-fluid-filled viscoelastic shell.  We focus on low-frequency flexural modes
+fluid-filled elastic shell.  We focus on low-frequency flexural modes
 $n \geq 2$, rather than the breathing mode $n=0$, which lies near
 \SI{2490}{Hz} and is governed primarily by fluid compressibility.  The inverse
 problem is posed on the measured flexural frequencies
@@ -79,7 +79,9 @@ The main numerical findings are as follows.
   ($\varepsilon=0.745$), purely through geometric eccentricity.
   \item The equivalent-sphere model gives
   $\kappa = 1.37 \times 10^{10}$ (algebraically rank deficient), illustrating
-  the severity of model-induced degeneracy.
+  the severity of model-induced degeneracy.  By
+  Proposition~\ref{prop:chain_rule}, $\kappa$ is formally infinite; the finite
+  value is an artefact of the finite-difference step $\delta = 10^{-6}|\theta_j|$.
   \item The smallest singular value admits a regular two-channel expansion
   $\sigma_{\min} = \sigma_0 + \lambda_1\varepsilon^2 + O(\varepsilon^4)$;
   the curvature channel dominates everywhere ($\varepsilon_c = 1.48 > 1$).
@@ -92,6 +94,10 @@ The main numerical findings are as follows.
   to $9$ modes.
   \item Three-mode inversion is locally feasible but exhibits local minima,
   whereas five-mode inversion is robust across the tested initial guesses.
+  \item A three-class taxonomy emerges: \emph{singular} (equivalent-sphere,
+  rank-deficient), \emph{regular bounded} (oblate, $\kappa$ finite and
+  improving), and \emph{non-lifting} (prolate, $\kappa$ high and flat).
+  The oblate--prolate asymmetry arises from curvature--mode anti-correlation.
 \end{itemize}
 
 These results suggest that one can, in a practical sense, hear the shape of an
@@ -109,6 +115,7 @@ inversion procedure, and the parameter-space conditioning study.  Section
 \ref{sec:results} presents the sphere--oblate contrast, singular-value
 structure, Cram\'er--Rao bounds, and a watermelon cross-application.  Section
 \ref{sec:discussion} relates the results back to Kac's question, the Browntone
-applications, and vibroacoustic elastography, and closes with two formal
-conjectures that emerge from the numerics.  Section~\ref{sec:conclusion}
+applications, and vibroacoustic elastography, and presents a three-class
+taxonomy of shell inverse problems that emerges from the numerics.  Section
+\ref{sec:conclusion}
 summarises the practical recommendations and the programme-level implications.

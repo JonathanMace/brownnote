@@ -3,7 +3,7 @@
 % =============================================================================
 \section{Conclusion}\label{sec:conclusion}
 
-We have studied the practical identifiability of viscoelastic shell parameters
+We have studied the practical identifiability of elastic shell parameters
 from resonant frequencies in the spirit of Kac's spectral question.  For the
 oblate Ritz flexural model used here, the inverse problem based on the
 parameter triple $(a,c,E)$ transitions smoothly from poorly conditioned at the
@@ -18,7 +18,9 @@ The main findings are:
   floor value $\kappa_\mathrm{floor}\approx269$ (five modes) to
   $\kappa = 69.4$ (canonical oblate), purely through geometric eccentricity;
   \item the equivalent-sphere model is algebraically rank deficient
-  ($\kappa = 1.37 \times 10^{10}$), illustrating how model-induced degeneracy
+  (formally $\kappa = \infty$; evaluated numerically as
+  $\kappa \approx 1.37 \times 10^{10}$ due to the finite-difference step),
+  illustrating how model-induced degeneracy
   dwarfs the geometric effect;
   \item the smallest singular value admits a regular two-channel expansion
   $\sigma_{\min} = \sigma_0 + \lambda_1\varepsilon^2 + O(\varepsilon^4)$
@@ -33,10 +35,10 @@ The main findings are:
   \item at $1\%$ frequency noise (five modes), the Cram\'er--Rao bounds are
   approximately $\pm 22.5\%$ for $a$, $\pm 6.0\%$ for $c$, and $\pm 30.8\%$
   for $E$, comparable to existing elastographic measurement precision;
-  \item the condition number is stable across mode counts
-  $\mathcal{N}=3$--$9$ ($\kappa\in[69,\,94]$), confirming that the
-  identifiability improvement is robust and not an artefact of the Ritz
-  truncation;
+  \item the condition number remains in the range $\kappa\in[69,\,94]$ across
+  measured mode counts $\mathcal{N}=3$--$9$, demonstrating robustness to
+  measurement configuration (though this is not Ritz basis convergence
+  evidence, since the trial-function order is held fixed);
   \item three-mode inversion is vulnerable to local minima, whereas five-mode
   inversion is robust across the tested initial guesses;
   \item a ripe-watermelon case remains well conditioned, with
@@ -79,7 +81,7 @@ replaced by the richer two-channel picture.
 The most interesting open mathematical target is the closed-form derivation of
 the expansion coefficients $\sigma_0$, $\lambda_1$, and $\lambda_2$ as
 explicit functions of the mode set and canonical parameters
-(Conjecture~\ref{conj:expansion}).  The numerically determined
+(Open Question~1, Section~\ref{sec:open_questions}).  The numerically determined
 values~\eqref{eq:expansion_coeffs} already provide quantitative design rules,
 but a proof would turn them into a theorem connecting geometry, modal
 structure, and inverse conditioning in closed form.  That would be the crown
