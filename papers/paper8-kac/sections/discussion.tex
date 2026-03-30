@@ -221,14 +221,18 @@ identifiability of spectral inverse problems on fluid-filled shells.
   combination unobservable.
 
   \item \textbf{Regular bounded} ($\sigma_0 > 0$, $\kappa$ finite and
-  improving).  The oblate Ritz model has a positive curvature-channel floor,
+  generally favourable).  The oblate Ritz model has a positive curvature-channel floor,
   with direct evaluation at $\varepsilon = 0.01$ giving
   $\sigma_{\min} = 0.00705$ and
   $\kappa_\mathrm{floor} \approx 269$ (five modes).  At the canonical oblate operating point
-  the condition number improves to $\kappa = 69.4$
-  --- a factor of $3.9$.  Because $\varepsilon_c = 1.48 > 1$, the curvature
+  the condition number generally improves to $\kappa = 69.4$
+  --- a factor of $3.9$.  The improvement is not strictly monotonic:
+  local non-monotonicity attributable to mode crossings in the Ritz eigenvalue
+  branches produces isolated spikes in $\kappa$ at intermediate eccentricities.
+  Because $\varepsilon_c = 1.48 > 1$, the curvature
   channel dominates everywhere.  The inverse problem is well posed at all
-  physically realisable eccentricities.
+  physically realisable eccentricities, though the practitioner should be aware
+  that the condition number may vary non-smoothly along the oblate branch.
 
   \item \textbf{Non-lifting} ($\kappa$ high and essentially flat).  For
   prolate geometries ($c > a$), the condition number remains in the range
