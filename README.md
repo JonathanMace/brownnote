@@ -6,7 +6,7 @@ The hypothesis, known colloquially as the “brown note,” posits that infrasou
 
 This repository models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derives its modal characteristics from first principles, and determines — with what we believe is an unprecedented level of analytical formality — that the answer is almost certainly no. The flexural resonance sits comfortably in the infrasonic band, but the airborne acoustic energy required to drive it meaningfully exceeds anything achievable outside of a Saturn V launch. 
 
-Whole-body vibration is another matter entirely, which is why we wrote seven papers instead of one.
+Whole-body vibration is another matter entirely, which is why we wrote eight papers instead of one.
 
 ## Papers
 
@@ -107,7 +107,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **377 commits**, **208 pull requests merged**, **454 tests passing**, **24 custom agents**, **22 reusable skills**, **77 research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **454 commits**, **241 pull requests merged**, **454 tests passing**, **24 custom agents**, **22 reusable skills**, **82 research logs**, and about **28 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
