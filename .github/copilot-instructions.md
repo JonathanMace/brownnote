@@ -82,7 +82,7 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ### R5. Code Quality
 - Tests must pass before merging. Run `python -m pytest tests/ -v` from repo root.
-- Currently 377 tests. Do not break them. Add regression tests for any bug fix.
+- Currently 386 tests. Do not break them. Add regression tests for any bug fix.
 - `import matplotlib; matplotlib.use('Agg')` for headless figure generation.
 
 ### R6. Documentation Sync
@@ -118,8 +118,8 @@ Every computation must use these values unless explicitly varying a parameter.
   Nose (🔥), Palate (👅), Finish (🏁) — each with a physics/acoustics metaphor —
   followed by Score (out of 100), ASCII art of a Glencairn glass, and a Pairing Note
   reflecting the semester's research accomplishments.
-- Previously reviewed: Springbank 10 (001), Talisker 10 (002), Lagavulin 16 (003).
-  Do not repeat a whisky.
+- Previously reviewed: Springbank 10 (001), Talisker 10 (002), Lagavulin 16 (003),
+  Ardbeg 10 (004). Do not repeat a whisky.
 
 ---
 
@@ -328,3 +328,8 @@ project. He is always right. You should listen to him more than you do.
 - Letting copilot-instructions.md go stale after major iterations
 - Having agents only push branches without creating PRs
 - Not reading agent output promptly (results go stale and context is lost)
+- Inventing "mathematical frameworks" instead of submitting papers (Coffee Machine Rule)
+- Using SO(3)→SO(2) language when the mechanism is mode-dependent curvature sampling
+- Mixing 3-mode and 5-mode computations without stating which (P8 Reviewer C caught this)
+- Losing the Paper 1 humour voice in later papers (run cross-paper tone audits)
+- Not specifying n_modes explicitly in function calls (rely on defaults → inconsistency)
