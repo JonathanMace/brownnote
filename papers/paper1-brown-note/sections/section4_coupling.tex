@@ -123,10 +123,10 @@ excitation, defines the headline SDOF upper bound:
   \approx \frac{917}{0.014} \approx 6.6 \times 10^4.
   \label{eq:coupling_ratio}
 \end{equation}
-This four-order-of-magnitude gap is robust to parameter uncertainties because
-both pathways excite the \emph{same} modal structure---the ratio depends
-primarily on $(ka)^{-n}$ and the base-excitation transfer function, neither of
-which is sensitive to tissue properties.
+This four-order-of-magnitude gap depends primarily on the dimensionless
+frequency parameter $ka$ and the damping ratio, with tissue-property
+variations affecting the absolute magnitudes but not the qualitative
+disparity.
 
 \paragraph{Modal participation.}
 The mechanical displacement in Eq.~\eqref{eq:coupling_ratio} assumes perfect
@@ -193,7 +193,7 @@ dissipated by structural damping, so
 \begin{equation}\label{eq:xi_energy}
   \xi_\mathrm{energy}
   = \sqrt{\frac{\sigma_\mathrm{abs}\,I}
-               {2\,\zeta_\mathrm{struct}\,\omega_n^3\,M_\mathrm{eff}}},
+               {\zeta_\mathrm{struct}\,\omega_n^3\,M_\mathrm{eff}}},
 \end{equation}
 where $M_\mathrm{eff} = m_\mathrm{eff}^{(n)} \times 4\pi R^2$ is the total
 modal mass.  The factor of $\zeta_\mathrm{rad}/\zeta_\mathrm{struct}

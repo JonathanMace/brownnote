@@ -165,14 +165,16 @@ displacement of \SI{0.014}{\micro\metre} at the same SPL.  For larger pockets
 
 Crucially, at \SI{7}{\hertz} the acoustic wavelength (\SI{49}{\metre})
 vastly exceeds the body diameter, so the pressure field inside the body is
-spatially uniform to within $(ka)^2$ corrections.  Although the air--tissue
-interface reflects the vast majority of incident acoustic energy (intensity
-transmission coefficient $T_I \approx 10^{-3}$), the small fraction of
-pressure transmitted into the tissue may still drive local volume changes in
-pre-existing gas pockets, which present a highly compliant inclusion within
-the otherwise nearly incompressible abdominal fluid.  The gas pockets
-therefore respond to the intracorporeal pressure field without the geometric
-filtering penalty that suppresses whole-cavity flexural excitation.  The
+spatially uniform to within $(ka)^2$ corrections.  Although the air--tissue impedance mismatch reflects approximately
+\SI{99.9}{\percent} of incident acoustic intensity
+($T_I \approx 10^{-3}$), the transmitted \emph{pressure} amplitude is of
+order unity owing to the high tissue impedance.  Pre-existing gas pockets
+within the abdomen, presenting a highly compliant inclusion within the
+otherwise nearly incompressible abdominal fluid, may therefore experience
+pressure fluctuations comparable to the incident field, potentially driving
+local volume changes independent of the global cavity resonance.  The gas
+pockets respond to the intracorporeal pressure field without the geometric
+filtering penalty that suppresses whole-cavity flexural excitation; the
 mechanism operates as a local pressure-to-displacement transducer embedded
 within the tissue, rather than as a global shell resonance.
 
@@ -352,9 +354,9 @@ the conclusions.
   \item \textbf{Homogeneous, isotropic wall.}  The abdominal wall is a
     layered anisotropic composite comprising peritoneum, transversalis
     fascia, internal oblique muscle, external oblique muscle, subcutaneous
-    fat, and skin.  Our laminate analysis (not reproduced here)
-    shows that homogenisation introduces less than \SI{5}{\percent} error in
-    the effective bending stiffness.  The isotropic assumption is a
+    fat, and skin.  The homogenisation error in effective bending stiffness
+    is expected to be modest compared with inter-subject variability in
+    wall thickness and elastic modulus.  The isotropic assumption is a
     first-order approximation; anisotropy would split the mode degeneracies
     of the equivalent sphere but would not change the order of magnitude of
     the eigenfrequencies or the coupling ratio.  Recent abdominal-wall
@@ -404,11 +406,13 @@ the conclusions.
     oblate approximation captures the principal feature---anterior--posterior
     flattening---but any spheroid is a simplification.  Crucially, however,
     the equivalent-sphere flexural frequencies depend on $R_{\mathrm{eq}}$
-    alone: at fixed $R_{\mathrm{eq}}$, varying $c/a$ from 0.3 (extremely
-    oblate) to 3.0 (extremely prolate) changes $f_2$ by less than
-    \SI{1}{\percent}.  The geometry enters the coupling ratio only through
-    $R_{\mathrm{eq}}$ and the Ritz correction, so the results are robust to
-    the choice of spheroidal idealisation.
+    alone: under the equivalent-sphere formula, at fixed $R_{\mathrm{eq}}$,
+    varying $c/a$ from 0.3 (extremely oblate) to 3.0 (extremely prolate)
+    changes $f_2$ by less than \SI{1}{\percent}.  The Ritz oblate-spheroid
+    correction introduces additional aspect-ratio dependence (see
+    Section~\ref{sec:formulation}), but the geometry enters the coupling
+    ratio primarily through $R_{\mathrm{eq}}$, so the qualitative results
+    are insensitive to the choice of spheroidal idealisation.
 
   \item \textbf{Inviscid fluid assumption.}  The enclosed fluid is modelled
     as inviscid.  A viscous correction using the Stokes boundary-layer

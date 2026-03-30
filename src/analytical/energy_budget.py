@@ -45,7 +45,7 @@ def radiation_damping_flexural(
     """
     Compute radiation damping for flexural mode n.
 
-    In air: negligible (ζ_rad ~ 10⁻⁶)
+    In air: negligible (ζ_rad ~ 10⁻¹⁵)
     In tissue: much larger but still small compared to structural damping
 
     The radiation resistance for mode n of a sphere in the Rayleigh limit is:
