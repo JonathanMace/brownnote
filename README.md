@@ -77,12 +77,12 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.
 
 ### Paper 8 — *Can You Hear the Shape of an Organ?*
-**Can You Hear the Shape of an Organ? Practical Identifiability of Viscoelastic Shell Parameters from Resonant Frequencies**  
+**Can You Hear the Shape of an Organ? Practical Identifiability of Elastic Shell Parameters from Resonant Frequencies**  
 **Authors:** J. Mace and B.R. Mace  
 **Status:** First complete draft  
 **Venue:** *Inverse Problems*  
 **Location:** `papers/paper8-kac/`  
-**Latest draft:** [`draft_2026-03-30_0002.pdf`](papers/paper8-kac/drafts/draft_2026-03-30_0002.pdf)  
+**Latest draft:** [`draft_2026-03-30_0038.pdf`](papers/paper8-kac/drafts/draft_2026-03-30_0038.pdf)  
 **Key result:** within the Ritz model, the canonical oblate geometry lowers the condition number from the near-spherical floor κ≈269 to 69.4 via a two-channel regular expansion, whereas the prolate branch remains poorly conditioned — revealing a three-class taxonomy (singular/regular bounded/non-lifting) rather than universal lifting.
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.

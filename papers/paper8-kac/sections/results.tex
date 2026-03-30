@@ -19,7 +19,7 @@ modes $n=2,\ldots,6$, we sweep the aspect ratio $\zeta=c/a$ from near-unity
   \zeta = 0.99995,\;\text{five modes}),
 \end{equation}
 representing the curvature-channel contribution identified in
-Proposition~\ref{prop:eccentricity}.  At the canonical oblate operating point
+Remark~\ref{prop:eccentricity}.  At the canonical oblate operating point
 the condition number drops to
 \begin{equation}
   \kappa_\mathrm{oblate} = 69.4,
@@ -31,9 +31,10 @@ geometric eccentricity.  This Ritz-to-Ritz comparison demonstrates that it is
 \begin{remark}[Equivalent-sphere comparison as pedagogical aside]
 For context, the equivalent-sphere model of
 Section~\ref{sec:theory} gives $\kappa_\mathrm{sphere}=1.37\times10^{10}$
-at the same parameter set, reflecting the algebraic rank deficiency of
-Proposition~\ref{prop:chain_rule} rather than the eccentricity of the shell.
-The eight-order-of-magnitude gap between $\kappa_\mathrm{sphere}$ and
+at the same parameter set --- nominally finite only because of the
+finite-difference step ($\delta = 10^{-6}|\theta_j|$); by
+Proposition~\ref{prop:chain_rule} the exact condition number is infinite.
+The gap between $\kappa_\mathrm{sphere}$ and
 $\kappa_\mathrm{oblate}$ is dramatic, but it conflates two effects ---
 model architecture and physical geometry --- and should not be read as
 ``oblateness reduces the condition number by $10^8$''.
@@ -59,7 +60,7 @@ zero, leaving one parameter combination effectively unobservable.  In the
 oblate Ritz model at $\varepsilon=0.745$, all three singular values remain
 finite and well separated from zero.  Even at the near-spherical Ritz limit
 ($\varepsilon\to0$), all three singular values remain non-zero --- the
-curvature-channel floor identified in Proposition~\ref{prop:eccentricity}
+curvature-channel floor identified in Remark~\ref{prop:eccentricity}
 prevents complete rank collapse --- though the smallest value is markedly
 reduced, yielding $\kappa_\mathrm{floor}\approx269$.
 
@@ -165,8 +166,8 @@ uncertainties typically range from $\pm20\%$ to $\pm50\%$, depending on organ,
 technique, and boundary conditions~\cite{Doyley2012}.  Shear-wave
 elastography of the liver, for instance, reports inter-observer coefficients of
 variation of $15$--$25\%$~\cite{Barr2015}, while in vivo mechanical testing of
-the abdominal wall yields variability of $30$--$60\%$ across
-subjects.  The CRB of $\pm30.8\%$ therefore falls within
+soft tissue generally yields inter-subject variability of similar
+magnitude.  The CRB of $\pm30.8\%$ therefore falls within
 the range of existing clinical measurement precision: the spectral inverse
 problem does not promise better resolution than elastography already achieves,
 but neither does it demand unrealistic frequency measurement accuracy.
@@ -315,8 +316,10 @@ $\log\kappa$ versus $\log\varepsilon$ by an effective exponent.  Fitting
 $\kappa \approx C\,\varepsilon^{-\alpha}$ over the aspect-ratio range
 $\zeta = c/a \in [0.1,\,0.95]$ (equivalently
 $\varepsilon\in[0.312,\,0.995]$) yields the values in
-Table~\ref{tab:power_law}.  The theoretical prediction of $\alpha = 2$ from
-the leading $\varepsilon^2$ term is approached as the mode count increases.
+Table~\ref{tab:power_law}.  The effective exponent $\hat\alpha$ clusters
+near $2$, consistent with the leading $\varepsilon^2$ symmetry expectation,
+but the fit is a compact empirical descriptor of the local slope rather
+than a derivation of an asymptotic law.
 The modest coefficients of determination ($R^2 \approx 0.66$--$0.75$) are
 expected: a single power law cannot capture both the curvature-channel floor
 and the shape-channel growth, and this is precisely why the two-channel
@@ -348,15 +351,18 @@ description.
 \paragraph{Ritz approximation error and rank restoration.}
 A natural concern is whether the $\sim\!8\%$ approximation error of the Ritz
 model relative to exact shell theory could itself be what breaks the
-degeneracy, rather than the physical eccentricity.  Table~\ref{tab:mode_count}
-addresses this indirectly.  If the rank restoration were a numerical artefact of
-the Ritz truncation, one would expect the condition number to deteriorate (grow
-towards singularity) as additional measured modes expose the approximation
-error.  Instead, $\kappa$ remains stable across measured mode counts from
-$\mathcal{N}=3$ to $\mathcal{N}=9$, ranging between $69$ and $94$, with no
-trend towards divergence.  We therefore conclude that the identifiability
-improvement is a genuine consequence of geometric eccentricity, not of
-approximation error in the forward model.
+degeneracy, rather than the physical eccentricity.  This concern cannot be
+fully resolved within the present Ritz framework; a finite-element oblate
+shell model would provide a definitive answer.  However, we note that the
+Ritz model is constructed to capture the \emph{geometric} curvature variation
+through the $G(\eta)$ integrals (Remark~\ref{prop:eccentricity}), and the
+rank restoration follows from the $n$-dependence of those integrals, not from
+the truncation error.  The mode-count study of Table~\ref{tab:mode_count}
+shows that $\kappa$ remains in the range $69$--$94$ as the number of
+\emph{measured} modes varies from $3$ to $9$; this demonstrates robustness
+to measurement configuration but should not be read as Ritz basis
+convergence evidence, since it varies the observed mode set rather than the
+trial-function order.
 
 \begin{figure}[t]
   \centering
