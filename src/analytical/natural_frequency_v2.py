@@ -329,9 +329,8 @@ if __name__ == "__main__":
     print("  PARAMETRIC: Soft tissue models")
     print("  " + "-" * 65)
     configs = [
-        ("Baseline (E=0.5, a=15)", AbdominalModelV2()),
-        ("Soft (E=0.1, a=15)", AbdominalModelV2(E=0.1e6)),
-        ("Soft+Large (E=0.1, a=20)", AbdominalModelV2(E=0.1e6, a=0.20, b=0.20, c=0.13)),
+        ("Baseline (E=0.1 MPa, a=0.18 m)", AbdominalModelV2()),
+        ("Soft+Large (E=0.1 MPa, a=0.20 m)", AbdominalModelV2(E=0.1e6, a=0.20, b=0.20, c=0.13)),
         ("Very soft (E=0.05, a=20)", AbdominalModelV2(E=0.05e6, a=0.20, b=0.20, c=0.13)),
         ("No prestress", AbdominalModelV2(E=0.1e6, P_iap=0)),
         ("High prestress (20mmHg)", AbdominalModelV2(E=0.1e6, P_iap=2666)),

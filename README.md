@@ -12,7 +12,7 @@ Whole-body vibration is another matter entirely, which is why we wrote nine pape
 
 ### Paper 1 — *The Brown Note*
 **Modal analysis of a fluid-filled viscoelastic oblate spheroidal shell**  
-**Status:** Submission-ready (30 pages, 5 figures, 9 tables, 52 references)  
+**Status:** Submission-ready (~44pp)  
 **Target venue:** *Journal of Sound and Vibration*  
 **Latest draft:** [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0109.pdf)  
 **Key result:** coupling ratio R ≈ 6.6 × 10⁴
@@ -21,7 +21,7 @@ Can a sufficiently powerful subwoofer ruin your afternoon? We model the human ab
 
 ### Paper 2 — *Gas Pockets*
 **Gas pocket resonance as an alternative acoustic coupling mechanism**<br>
-**Status:** ACCEPT after internal review; submission-ready (18 pages)<br>
+**Status:** ACCEPT, submission-ready (16pp)<br>
 **Target venue:** *Journal of the Acoustical Society of America*<br>
 **Latest draft:** [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-29_2111.pdf)<br>
 **Key result:** 35-100× more efficient than whole-cavity coupling
@@ -39,8 +39,8 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 
 ### Paper 4 — *Bladder Resonance*
 **Resonance of the human urinary bladder**  
-**Status:** Under development (20+ pages)  
-**Target venue:** *Journal of Sound and Vibration*  
+**Status:** Minor revision addressed  
+**Target venue:** *Journal of Sound and Vibration / Journal of Biomechanics*  
 **Latest draft:** [PDF](papers/paper4-bladder/drafts/draft_2026-03-29_2120.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
@@ -48,7 +48,7 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 
 ### Paper 5 — *Borborygmi*
 **Multi-mode acoustic model of bowel sounds**  
-**Status:** First draft complete (17 pages)  
+**Status:** ACCEPTED  
 **Target venue:** *JASA*  
 **Latest draft:** [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-29_2120.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
@@ -57,7 +57,7 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 
 ### Paper 6 — *Can You Feel the Bass?*
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
-**Status:** Minor revision (R2 fixes applied)  
+**Status:** ACCEPT (R2 fixes applied)  
 **Target venue:** *JASA*  
 **Latest draft:** [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-29_2120.pdf)  
 **Location:** `papers/paper6-sub-bass/`  
@@ -68,7 +68,7 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 ### Paper 7 — *Can You Hear the Ripeness?*
 **Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Shell Resonance Inversion**  
 **Authors:** J. Mace and B.R. Mace  
-**Status:** First complete draft (19 pp) — submission-ready  
+**Status:** Submission-ready (32pp)  
 **Venue:** *Postharvest Biology and Technology* / *PNAS*  
 **Location:** `papers/paper7-watermelon/`  
 **Latest draft:** [`draft_2026-03-29_2357.pdf`](papers/paper7-watermelon/drafts/draft_2026-03-29_2357.pdf)  
@@ -90,8 +90,8 @@ The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" 
 ### Paper 9 — *Lifting Theorem*
 **A singular-value lifting theorem for symmetry-broken spectral inverse problems**  
 **Authors:** J. Mace and B.R. Mace  
-**Status:** Scaffolded (2 pp)  
-**Venue:** *Inverse Problems*  
+**Status:** Scaffolded  
+**Venue:** *JSV Short Communication*  
 **Location:** `papers/paper9-lifting-theorem/`  
 **Latest draft:** [`draft_2026-03-29_2301.pdf`](papers/paper9-lifting-theorem/drafts/draft_2026-03-29_2301.pdf)  
 **Key result:** initial manuscript scaffold for singular-value lifting and symmetry-broken spectral identifiability.
@@ -118,7 +118,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **454 commits**, **241 pull requests merged**, **454 tests passing**, **24 custom agents**, **22 reusable skills**, **82 research logs**, and about **28 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **454 commits**, **241 pull requests merged**, **487 tests passing**, **24 custom agents**, **22 reusable skills**, **82 research logs**, and about **28 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
