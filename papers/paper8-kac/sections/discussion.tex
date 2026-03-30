@@ -42,7 +42,7 @@ fit~\eqref{eq:sigma_min_expansion}, whose regression intercept
 $\sigma_0 > 0$ reflects the presence of a finite floor.  Because the
 crossover eccentricity $\varepsilon_c = 1.48$ lies outside the physical domain,
 the intercept dominates at all realisable eccentricities, and the
-condition number saturates at $\kappa_\mathrm{floor}\approx 269$ (directly
+condition number approaches $\kappa_\mathrm{floor}\approx 269$ (directly
 computed at $\varepsilon = 0.01$) rather than diverging.
 
 Figure~\ref{fig:oblate_prolate_comparison} sharpens that picture by contrasting
@@ -110,7 +110,7 @@ The present study uses the oblate Ritz model for all identifiability results.
 The equivalent-sphere model is retained only to illustrate the algebraic rank
 deficiency of Proposition~\ref{prop:chain_rule}.  The Ritz model is itself an
 approximation --- it truncates the trial function space and incurs $\sim\!8\%$
-error relative to exact spheroidal shell theory --- but the rank restoration
+error relative to the analytical sphere formula --- but the rank restoration
 follows from the $n$-dependence of the curvature integrals rather than from
 the approximation error itself.  A full finite-element oblate shell
 model would provide the definitive answer, but the Ritz results already
@@ -168,7 +168,7 @@ Several limitations remain.
 \begin{enumerate}
   \item The Ritz forward model is a variational approximation, not a full
   spheroidal shell solution.  It captures the leading eccentricity dependence
-  but incurs $\sim\!8\%$ error relative to exact shell theory.  Whether the
+  but incurs $\sim\!8\%$ error relative to the analytical sphere formula.  Whether the
   rank restoration persists in a converged finite-element model remains to be
   confirmed.
   \item The analysis is local.  We do not prove global injectivity of the map
@@ -188,8 +188,8 @@ Several limitations remain.
 \subsection{Future directions}
 
 The natural next step is a full finite-element oblate shell model, which would
-eliminate the Ritz truncation error and allow convergence to the exact
-spheroidal solution.  Shape-calculus tools~\cite{DelfourZolesio2011} would allow
+reduce the Ritz truncation error observed in comparison with the analytical
+sphere formula and provide convergence towards the exact spheroidal solution.  Shape-calculus tools~\cite{DelfourZolesio2011} would allow
 Hadamard-type Fr\'echet derivatives of the eigenvalues with respect to the
 domain boundary, enabling a geometry-aware sensitivity analysis that goes beyond
 the parametric approach taken here.  That would show whether the encouraging
