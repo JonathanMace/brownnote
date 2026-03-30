@@ -137,7 +137,7 @@ def compute_all_curvature_integrals(
 
 def verify_sphere_rank_deficiency(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
 ) -> dict:
     """Verify that the sphere model's Jacobian has proportional (a,c) columns.
 
@@ -181,7 +181,7 @@ def verify_sphere_rank_deficiency(
 
 def ritz_curvature_channel(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     zeta_sphere: float = 0.9999,
 ) -> dict:
@@ -229,7 +229,7 @@ def ritz_curvature_channel(
 
 def sigma_min_expansion(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     eps_values: np.ndarray | None = None,
 ) -> dict:
@@ -316,7 +316,7 @@ def sigma_min_expansion(
 
 def fit_power_law(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     zeta_values: np.ndarray | None = None,
 ) -> dict:
@@ -354,7 +354,7 @@ def fit_power_law(
 
 def verify_power_law(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
 ) -> dict:
     """Full verification: compare analytical prediction against numerics.
@@ -420,7 +420,7 @@ def verify_power_law(
 
 def extract_jacobian_perturbation(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     eps_values: np.ndarray | None = None,
 ) -> dict:
@@ -504,7 +504,7 @@ def extract_jacobian_perturbation(
 
 def prove_power_law(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
 ) -> dict:
     """Execute the complete power-law proof.
 
@@ -566,7 +566,7 @@ def prove_power_law(
 
 def proof_latex_summary(
     params: dict | None = None,
-    modes: tuple[int, ...] = (2, 3, 4),
+    modes: tuple[int, ...] = (2, 3, 4, 5, 6),
 ) -> str:
     """Generate a LaTeX-formatted proof for inclusion in Paper 8.
 
