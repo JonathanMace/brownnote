@@ -100,11 +100,11 @@ results = load_modal_results("data/results/modal_001/")
 results.print_summary()
 
 # Eigenfrequency bar chart
-plot_eigenfrequencies(results, save_to="paper/figures/eigenfrequencies.pdf")
+plot_eigenfrequencies(results, save_to="papers/paper1-brown-note/figures/eigenfrequencies.pdf")
 
 # Mode shape visualization
 for i in range(6):
-    plot_mode_shape(results, mode=i, save_to=f"paper/figures/mode_{i}.pdf")
+    plot_mode_shape(results, mode=i, save_to=f"papers/paper1-brown-note/figures/mode_{i}.pdf")
 ```
 
 ### 5. Validate

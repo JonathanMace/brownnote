@@ -10,8 +10,8 @@ Guide for writing the JSV manuscript on infrasound-induced abdominal resonance.
 
 ## Inspect First
 
-- `paper/main.tex`
-- `paper/references.bib`
+- `papers/paper1-brown-note/main.tex`
+- `papers/paper1-brown-note/references.bib`
 - `.github/skills/jmace-writing-style/SKILL.md`
 - `.github/skills/mace-writing-style/SKILL.md`
 - the latest compiled draft and any recent reviewer notes
@@ -88,7 +88,7 @@ Derived: `R_eq=0.157 m`, `f₂=3.95 Hz`, `Q=4.0`, `ζ=0.125`, `ka=0.0114`
 
 ## Citation Management
 
-- BibTeX source: `paper/references.bib`
+- BibTeX source: `papers/paper1-brown-note/references.bib`
 - Use DOIs for all entries where available
 - Cite primary sources for specific claims
 - Every numerical value from the literature needs a citation
@@ -96,7 +96,7 @@ Derived: `R_eq=0.157 m`, `f₂=3.95 Hz`, `Q=4.0`, `ζ=0.125`, `ka=0.0114`
 ## Compilation
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\paper
+cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex

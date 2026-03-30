@@ -207,7 +207,7 @@ Last log: [date] — [⚠️ OVERDUE if >1 iteration old]
 ## Constraints
 
 - **Never make research decisions.** Flag them for the PI.
-- **Never edit paper content** (`.tex` files in `paper/`). Only edit infrastructure files.
+- **Never edit paper content** (`.tex` files in `papers/paper1-brown-note/`). Only edit infrastructure files.
 - **Never change canonical parameters.** If you find inconsistencies, flag them.
 - **Always work on branches, never push to main directly.**
 - **Be conservative with merges.** If a PR has merge conflicts, flag it for the PI

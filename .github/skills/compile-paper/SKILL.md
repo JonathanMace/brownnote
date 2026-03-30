@@ -12,15 +12,15 @@ Compile the LaTeX paper, preserve timestamped PDF, and report any errors. Use th
 
 ## Workflow
 
-1. **Compile**: Run `pdflatex` + `bibtex` + two more `pdflatex` passes from `paper/` directory
+1. **Compile**: Run `pdflatex` + `bibtex` + two more `pdflatex` passes from `papers/paper1-brown-note/` directory
 2. **Check**: Report any LaTeX warnings or errors
-3. **Preserve**: Copy compiled PDF to `paper/drafts/draft_YYYY-MM-DD_HHMM.pdf`
+3. **Preserve**: Copy compiled PDF to `papers/paper1-brown-note/drafts/draft_YYYY-MM-DD_HHMM.pdf`
 4. **Report**: Output page count, file size, and any issues
 
 ## Commands
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\paper
+cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex
@@ -36,5 +36,5 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 - Fix issues in the source `.tex` or `.bib` files and recompile
 
 ## Output Artifacts
-- `paper/main.pdf` — latest compiled paper
-- `paper/drafts/draft_*.pdf` — timestamped archive copies
+- `papers/paper1-brown-note/main.pdf` — latest compiled paper
+- `papers/paper1-brown-note/drafts/draft_*.pdf` — timestamped archive copies

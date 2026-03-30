@@ -15,22 +15,24 @@ browntone/
 │   ├── instructions/            # Path-specific coding and writing instructions
 │   ├── skills/                  # Reusable workflow guides (skills + legacy guides)
 │   └── workflows/               # GitHub Actions
-├── data/                        # Figures, literature, materials, simulation results
+├── data/                        # Literature, materials, simulation results
 ├── docker/                      # Container tooling
 ├── docs/                        # Design notes, methodology, research logs
 ├── notebooks/                   # Exploratory notebooks
-├── paper/                       # Paper 1 (Brown Note) JSV manuscript
-├── paper2-gas-pockets/          # Paper 2 manuscript
-├── paper3-scaling-laws/         # Paper 3 manuscript
-├── projects/                    # Downstream projects (e.g. bladder resonance, borborygmi)
+├── papers/                      # All paper manuscripts
+│   ├── paper1-brown-note/       # Paper 1 (Brown Note) JSV manuscript
+│   ├── paper2-gas-pockets/      # Paper 2 (Gas Pockets) JASA manuscript
+│   ├── paper3-scaling-laws/     # Paper 3 (Scaling Laws) JSV Short
+│   ├── paper4-bladder/          # Paper 4 (Bladder Resonance) JSV
+│   ├── paper5-borborygmi/       # Paper 5 (Borborygmi) JASA
+│   ├── paper6-sub-bass/         # Paper 6 (Sub-Bass) JASA
+│   ├── paper7-watermelon/       # Paper 7 (Watermelon Ripeness)
+│   └── paper8-kac/              # Paper 8 (Kac Identifiability)
 ├── scripts/                     # Utility and automation scripts
 ├── src/
 │   ├── analytical/              # Canonical analytical model code (source of truth)
-│   ├── browntone/               # Legacy installable package and CLI support code
-│   ├── experimental/            # Experimental / exploratory code
-│   ├── fem/                     # Finite-element support modules
-│   └── postprocess/             # Shared post-processing helpers
-└── tests/                       # Pytest suite (203 tests)
+│   └── browntone/               # Legacy installable package and CLI support code
+└── tests/                       # Pytest suite (386 tests)
 ```
 
 ### Directory Purposes
@@ -41,11 +43,9 @@ browntone/
 | `src/analytical/` | Primary physics and acoustics models used by the papers; `natural_frequency_v2.py` is the canonical parameter container |
 | `src/browntone/` | Legacy package layout retained for CLI, mesh, FEM, and compatibility code |
 | `tests/` | Regression and physics sanity checks for analytical, figures, materials, mesh, and extraction code |
-| `paper/` | Submission-ready main manuscript (Paper 1) plus tracked PDFs and drafts |
-| `paper2-gas-pockets/` | Accepted gas-pocket manuscript prepared for submission packaging |
-| `paper3-scaling-laws/` | Short-paper worktree for scaling-law revisions |
-| `projects/` | Follow-on research topics including bladder resonance and borborygmi |
+| `papers/` | All 8 paper manuscripts with per-paper figures, drafts, and references |
 | `docs/research-logs/` | Quantitative session logs and review-cycle history |
+| `docs/project-notes/` | Original project READMEs and literature notes |
 | `data/` | Repository data assets; mesh artefacts have been removed from `data/meshes/` |
 
 ---
@@ -122,18 +122,21 @@ Legacy single-file workflow notes also remain in this folder:
 
 | Paper | Venue | Status | Primary location |
 |-------|-------|--------|------------------|
-| Paper 1: Brown Note | JSV | ~44 pp, ref-updated, final-polished, submission-ready | `paper/` |
-| Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16 pp) | `paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Under revision (8 pp), dimensional error fixed | `paper3-scaling-laws/` |
-| Bladder Resonance | JSV / J Biomech | Under development; all Reviewer A issues addressed | `projects/bladder-resonance/` |
-| Borborygmi | JASA / Acta Acustica | First draft complete (17 pp) | `projects/borborygmi/` |
+| Paper 1: Brown Note | JSV | ~44 pp, submission-ready | `papers/paper1-brown-note/` |
+| Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16 pp) | `papers/paper2-gas-pockets/` |
+| Paper 3: Scaling Laws | JSV Short | Under revision (8 pp) | `papers/paper3-scaling-laws/` |
+| Paper 4: Bladder Resonance | JSV / J Biomech | Minor revision addressed | `papers/paper4-bladder/` |
+| Paper 5: Borborygmi | JASA | ACCEPTED (17 pp) | `papers/paper5-borborygmi/` |
+| Paper 6: Sub-Bass | JASA | ACCEPT (R2 fixes applied) | `papers/paper6-sub-bass/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft | `papers/paper7-watermelon/` |
+| Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `papers/paper8-kac/` |
 
 ---
 
 ## 4. Tests, Outputs, and Tracking
 
 - The main regression command is `python -m pytest tests/ -v`.
-- Current collected test count: **203**.
+- Current collected test count: **386**.
 - LaTeX intermediates are ignored, but PDF outputs are intentionally tracked.
 - `data/meshes/` is no longer part of the working tree; mesh outputs should not be
   recreated there unless the data policy changes.

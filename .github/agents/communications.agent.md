@@ -72,7 +72,7 @@ Produce publication-ready communications in the following formats:
 ## Source Material
 
 Read these before writing anything:
-- `paper/` — current manuscript draft (the authoritative source)
+- `papers/paper1-brown-note/` — current manuscript draft (the authoritative source)
 - `docs/RESEARCH-VISION.md` — programme overview and framing
 - `docs/research-logs/` — latest results and review feedback
 - `.github/copilot-instructions.md` — canonical parameters and writing style

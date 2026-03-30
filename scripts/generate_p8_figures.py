@@ -70,7 +70,7 @@ plt.rcParams.update(JSV_RC)
 SINGLE_COL = 84 / 25.4    # 3.31 inches
 DOUBLE_COL = 174 / 25.4   # 6.85 inches
 
-FIG_DIR = os.path.join(ROOT, 'projects', 'kac-identifiability', 'figures')
+FIG_DIR = os.path.join(ROOT, 'papers', 'paper8-kac', 'figures')
 os.makedirs(FIG_DIR, exist_ok=True)
 
 

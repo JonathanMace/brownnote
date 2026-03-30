@@ -197,7 +197,7 @@ Note: `src/browntone/` is LEGACY. Use `src/analytical/` for all model code.
 ## Paper Compilation
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\paper
+cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex
@@ -260,14 +260,14 @@ Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`
 
 | Paper | Venue | Status | Location |
 |-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | Submission-ready (~44pp) | `paper/` |
-| Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Under revision (8pp) | `paper3-scaling-laws/` |
-| Paper 4: Bladder Resonance | JSV/J Biomech | Minor revision addressed | `projects/bladder-resonance/` |
-| Paper 5: Borborygmi | JASA | ACCEPTED | `projects/borborygmi/` |
-| Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `paper6-sub-bass/` |
-| Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft (16pp) | `projects/watermelon-ripeness/` |
-| Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `projects/kac-identifiability/` |
+| Paper 1: Brown Note | JSV | Submission-ready (~44pp) | `papers/paper1-brown-note/` |
+| Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `papers/paper2-gas-pockets/` |
+| Paper 3: Scaling Laws | JSV Short | Under revision (8pp) | `papers/paper3-scaling-laws/` |
+| Paper 4: Bladder Resonance | JSV/J Biomech | Minor revision addressed | `papers/paper4-bladder/` |
+| Paper 5: Borborygmi | JASA | ACCEPTED | `papers/paper5-borborygmi/` |
+| Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `papers/paper6-sub-bass/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft (16pp) | `papers/paper7-watermelon/` |
+| Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `papers/paper8-kac/` |
 
 ## The Academic Calendar
 

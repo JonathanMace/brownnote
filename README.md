@@ -14,7 +14,7 @@ Whole-body vibration is another matter entirely, which is why we wrote seven pap
 **Modal analysis of a fluid-filled viscoelastic oblate spheroidal shell**  
 **Status:** Submission-ready (30 pages, 5 figures, 9 tables, 52 references)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](paper/drafts/draft_2026-03-29_1536_submission-final.pdf)  
+**Latest draft:** [PDF](papers/paper1-brown-note/drafts/draft_2026-03-29_1536_submission-final.pdf)  
 **Key result:** coupling ratio R ≈ 6.6 × 10⁴
 
 Can a sufficiently powerful subwoofer ruin your afternoon? We model the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derive its modal spectrum from first principles, and compare airborne acoustic coupling with whole-body mechanical vibration. The resonance is real; the acoustic pathway to it is not.
@@ -23,7 +23,7 @@ Can a sufficiently powerful subwoofer ruin your afternoon? We model the human ab
 **Gas pocket resonance as an alternative acoustic coupling mechanism**  
 **Status:** ACCEPT after internal review; submission-ready (18 pages)  
 **Target venue:** *Journal of the Acoustical Society of America*  
-**Latest draft:** [PDF](paper2-gas-pockets/drafts/draft_2026-03-29_1627.pdf)  
+**Latest draft:** [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-29_1627.pdf)  
 **Key result:** 35-100× more efficient than whole-cavity coupling
 
 If the whole abdomen will not cooperate, perhaps the gas trapped inside it will. We model intestinal gas pockets as tissue-constrained bubbles and show they couple to airborne sound 35–100× more efficiently than the cavity itself — enough, at extreme SPL, to activate mechanosensitive ion channels in nearby tissue.
@@ -32,7 +32,7 @@ If the whole abdomen will not cooperate, perhaps the gas trapped inside it will.
 **Dimensional analysis predictions across mammalian scales**  
 **Status:** Under revision (8 pages)  
 **Target venue:** *JSV Short Communication*  
-**Latest draft:** [PDF](paper3-scaling-laws/drafts/draft_2026-03-29_1627.pdf)  
+**Latest draft:** [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-29_1627.pdf)  
 **Key result:** Π₀ ≈ 0.07; the breathing mode wants an organism about 20 m long
 
 Do rats, cats, pigs, and humans all resonate the same way, or is the brown note a uniquely human indignity? Buckingham Pi analysis reduces the ten-parameter shell problem to five governing groups, revealing a quasi-universal dimensionless frequency Π₀ ≈ 0.07 across species and a scattering coupling ratio that is approximately size-independent.
@@ -41,7 +41,7 @@ Do rats, cats, pigs, and humans all resonate the same way, or is the brown note 
 **Resonance of the human urinary bladder**  
 **Status:** Under development (20+ pages)  
 **Target venue:** *Journal of Sound and Vibration*  
-**Latest draft:** [PDF](projects/bladder-resonance/paper/drafts/draft_2026-03-29_1626.pdf)  
+**Latest draft:** [PDF](papers/paper4-bladder/drafts/draft_2026-03-29_1626.pdf)  
 **Key result:** f₂ = 13.5 Hz at 222 mL
 
 Anyone who has endured a long motorway journey on a full bladder has conducted an informal experiment in pelvic vibroacoustics. We apply the fluid-filled shell framework to the urinary bladder, finding a non-monotonic U-shaped frequency curve whose minimum coincides suspiciously with typical driving-posture fill volumes.
@@ -50,7 +50,7 @@ Anyone who has endured a long motorway journey on a full bladder has conducted a
 **Multi-mode acoustic model of bowel sounds**  
 **Status:** First draft complete (17 pages)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](projects/borborygmi/paper/drafts/draft_2026-03-29_1556.pdf)  
+**Latest draft:** [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-29_1556.pdf)  
 **Key result:** 135-440 Hz constrained bubble model
 
 Your stomach growls. What pitch is it, exactly, and why? We develop a five-mechanism acoustic model — from free Minnaert bubbles through tissue-constrained oscillations to Helmholtz orifice resonance — that predicts the clinically observed 200–550 Hz bowel sound band without tuning.
@@ -59,8 +59,8 @@ Your stomach growls. What pitch is it, exactly, and why? We develop a five-mecha
 **Sub-bass perception thresholds and abdominal resonance at concert sound pressure levels**  
 **Status:** Minor revision (R2 fixes applied)  
 **Target venue:** *JASA*  
-**Latest draft:** [PDF](paper6-sub-bass/drafts/draft_2026-03-29_1626.pdf)  
-**Location:** `paper6-sub-bass/`  
+**Latest draft:** [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-29_1626.pdf)  
+**Location:** `papers/paper6-sub-bass/`  
 **Key finding:** Airborne acoustic coupling produces tissue displacement ~2.5 orders below perception thresholds even at concert levels. Structure-borne (floor/seat) vibration is the dominant pathway, with floor displacement reaching 904% of the perception threshold.
 
 If concert bass feels visceral, is the abdomen actually being driven by airborne sound? This paper compares predicted sub-bass-induced tissue motion against perception thresholds and finds the airborne pathway falls roughly 2.5 orders of magnitude short even at concert SPL. The dominant pathway is structure-borne vibration transmitted through floors and seating — floor displacement alone reaches 904% of the vibrotactile perception threshold.
@@ -70,8 +70,8 @@ If concert bass feels visceral, is the abdomen actually being driven by airborne
 **Authors:** J. Mace and B.R. Mace  
 **Status:** First complete draft (19 pp) — submission-ready  
 **Venue:** *Postharvest Biology and Technology* / *PNAS*  
-**Location:** `projects/watermelon-ripeness/`  
-**Latest draft:** [`draft_2026-03-29_1556_post-reviewer-b-r4.pdf`](projects/watermelon-ripeness/paper/drafts/draft_2026-03-29_1556_post-reviewer-b-r4.pdf)  
+**Location:** `papers/paper7-watermelon/`  
+**Latest draft:** [`draft_2026-03-29_1556_post-reviewer-b-r4.pdf`](papers/paper7-watermelon/drafts/draft_2026-03-29_1556_post-reviewer-b-r4.pdf)  
 **Key result:** tap-tone inversion maps measured resonance frequency to rind stiffness and ripeness stage.
 
 If growers can judge a watermelon by tapping it, the obvious question is whether shell theory can formalise the trick. This project recasts the fruit as a fluid-filled viscoelastic spheroidal shell and uses resonance inversion to infer rind modulus — turning folk wisdom into a quantitative ripeness estimator.
@@ -81,8 +81,8 @@ If growers can judge a watermelon by tapping it, the obvious question is whether
 **Authors:** J. Mace and B.R. Mace  
 **Status:** First complete draft  
 **Venue:** *Inverse Problems*  
-**Location:** `projects/kac-identifiability/`  
-**Latest draft:** [`draft_2026-03-29_1519.pdf`](projects/kac-identifiability/paper/drafts/draft_2026-03-29_1519.pdf)  
+**Location:** `papers/paper8-kac/`  
+**Latest draft:** [`draft_2026-03-29_1519.pdf`](papers/paper8-kac/drafts/draft_2026-03-29_1519.pdf)  
 **Key result:** oblate geometry reduces the condition number from 10¹⁰ to 73, making the (a, c, E) parameter triple practically identifiable from resonant frequencies.
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.
@@ -155,16 +155,16 @@ If you only want one number, ask the model for the n=2 flexural mode. If you wan
 
 ```text
 browntone/
-├── paper/                        # Paper 1: brown note manuscript + drafts
-├── paper2-gas-pockets/          # Paper 2: gas-pocket resonance
-├── paper3-scaling-laws/         # Paper 3: dimensional analysis note
-├── projects/
-│   ├── bladder-resonance/       # Paper 4
-│   ├── borborygmi/              # Paper 5
-│   ├── watermelon-ripeness/     # Paper 7
-│   └── kac-identifiability/    # Paper 8
-├── paper6-sub-bass/             # Paper 6: sub-bass coupling
-├── src/analytical/              # Core analytical models, including watermelon_model.py
+├── papers/
+│   ├── paper1-brown-note/           # Paper 1: brown note manuscript + drafts
+│   ├── paper2-gas-pockets/          # Paper 2: gas-pocket resonance
+│   ├── paper3-scaling-laws/         # Paper 3: dimensional analysis note
+│   ├── paper4-bladder/              # Paper 4: bladder resonance
+│   ├── paper5-borborygmi/           # Paper 5: bowel sounds
+│   ├── paper6-sub-bass/             # Paper 6: sub-bass coupling
+│   ├── paper7-watermelon/           # Paper 7: watermelon ripeness
+│   └── paper8-kac/                  # Paper 8: Kac identifiability
+├── src/analytical/              # Core analytical models
 ├── tests/                       # Pytest regression suite
 ├── docs/research-logs/          # Quantitative research logs
 └── .github/                     # Agents, skills, workflows, instructions

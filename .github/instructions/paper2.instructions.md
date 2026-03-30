@@ -1,5 +1,5 @@
 ---
-applyTo: "paper2-gas-pockets/**"
+applyTo: "papers/paper2-gas-pockets/**"
 ---
 
 # Paper 2 — JASA (Gas Pocket Transduction)
@@ -8,7 +8,7 @@ When modifying ANY file in this directory:
 
 1. **Recompile** after changes:
    ```powershell
-   cd paper2-gas-pockets
+   cd papers/paper2-gas-pockets
    pdflatex -interaction=nonstopmode main.tex
    bibtex main
    pdflatex -interaction=nonstopmode main.tex
@@ -17,7 +17,7 @@ When modifying ANY file in this directory:
 
 2. **Create a timestamped draft snapshot**:
    ```powershell
-   Copy-Item paper2-gas-pockets/main.pdf "paper2-gas-pockets/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
+   Copy-Item papers/paper2-gas-pockets/main.pdf "papers/paper2-gas-pockets/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
    ```
 
 3. **Update README.md** — change the Paper 2 draft link to point to the new snapshot.

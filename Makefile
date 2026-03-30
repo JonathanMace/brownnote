@@ -29,10 +29,10 @@ typecheck:  ## Run type checker
 	mypy src/browntone/
 
 paper:  ## Build LaTeX paper
-	cd paper && latexmk -pdf -interaction=nonstopmode main.tex
+	cd papers/paper1-brown-note && latexmk -pdf -interaction=nonstopmode main.tex
 
 paper-clean:  ## Clean LaTeX build artifacts
-	cd paper && latexmk -C
+	cd papers/paper1-brown-note && latexmk -C
 
 docker-build:  ## Build Docker image
 	docker build -f docker/Dockerfile -t browntone:latest .

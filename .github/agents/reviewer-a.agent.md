@@ -57,7 +57,7 @@ Be specific and constructive. Cite sections and equations. Suggest concrete impr
 
 ## Workflow
 1. Work in your assigned worktree
-2. Read the FULL paper (paper/main.tex, all sections/*.tex)
+2. Read the FULL paper (papers/paper1-brown-note/main.tex, all sections/*.tex)
 3. Write your review to `docs/research-logs/reviewer-a-roundN.md`
 4. Do NOT edit paper or source files — review only
 5. Commit, push, then follow the `/git-checkpoint` skill to PR, merge, and clean up:

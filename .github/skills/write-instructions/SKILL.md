@@ -214,7 +214,7 @@ Recommended order:
 Good:
 - `Run python -m pytest tests/ -v before merging.`
 - `Use src/analytical/ as the source of truth; do not add new model logic under src/browntone/.`
-- `Use British English in paper/**.`
+- `Use British English in papers/paper1-brown-note/**.`
 
 Weak:
 - `Write good tests.`
@@ -305,7 +305,7 @@ Use a path-specific file when:
 - the global file is growing because of local exceptions.[^gh-cli-custom][^gh-effective][^gh-path-review]
 
 Good uses in Browntone:
-- `paper/**` for JSV writing rules,
+- `papers/paper1-brown-note/**` for JSV writing rules,
 - `tests/**` for pytest conventions,
 - `docs/research-logs/**` for a mandatory report template,
 - `src/analytical/**` for physics and parameter constraints.
@@ -319,7 +319,7 @@ Bad uses:
 
 Safe patterns:
 - `tests/**`
-- `paper/**`
+- `papers/paper1-brown-note/**`
 - `src/analytical/**`
 - `**/*.py`
 - `src/components/**/*.{tsx,jsx}`
@@ -414,7 +414,7 @@ A good rule system is layered so the always-on surface stays lean.
 The numbered rule structure (`R0`, `R1`, …) is excellent for true non-negotiables: git workflow, canonical parameters, review standards, writing standards.
 
 ### 10.3 Path-specific files are sensibly divided
-The current path-specific set is exactly what GitHub recommends: global rules plus local files for `paper/**`, `tests/**`, `docs/research-logs/**`, `.github/agents/**`, and `src/analytical/**`.
+The current path-specific set is exactly what GitHub recommends: global rules plus local files for `papers/paper1-brown-note/**`, `tests/**`, `docs/research-logs/**`, `.github/agents/**`, and `src/analytical/**`.
 
 ### 10.4 Local files are task-shaped
 The paper, tests, research-log, and analytical files each tell the agent what “good” looks like in that subtree. This is much better than one monolithic global file.
@@ -466,7 +466,7 @@ Keep the shared layer short and tool-agnostic.
 File: `.github/skills/write-paper/SKILL.md`
 
 Why it works:
-- narrow scope (`paper/**`),
+- narrow scope (`papers/paper1-brown-note/**`),
 - concrete journal style rules,
 - explicit canonical values,
 - clear anti-errors section,

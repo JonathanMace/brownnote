@@ -54,7 +54,7 @@ from src.analytical.multilayer_wall import (
 )
 
 # ── Output directory ──
-FIG_DIR = os.path.join(os.path.dirname(__file__), '..', 'data', 'figures')
+FIG_DIR = os.path.join(os.path.dirname(__file__), '..', 'papers', 'paper1-brown-note', 'figures')
 os.makedirs(FIG_DIR, exist_ok=True)
 
 # ── JSV publication style ──

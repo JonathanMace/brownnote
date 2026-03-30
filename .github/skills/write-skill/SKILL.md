@@ -287,7 +287,7 @@ description: >
 # Compile Paper
 
 ## Inspect First
-- `paper/main.tex`
+- `papers/paper1-brown-note/main.tex`
 - latest log if compilation is already failing
 
 ## Workflow
@@ -297,7 +297,7 @@ description: >
 4. Report output artifact details.
 
 ## Done
-- `paper/main.pdf` exists
+- `papers/paper1-brown-note/main.pdf` exists
 - archived draft copy exists
 - errors are reported or cleared
 ```

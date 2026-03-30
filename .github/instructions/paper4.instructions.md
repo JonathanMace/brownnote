@@ -1,5 +1,5 @@
 ---
-applyTo: "projects/bladder-resonance/paper/**"
+applyTo: "papers/paper4-bladder/**"
 ---
 
 # Paper 4 — JSV (Bladder Resonance)
@@ -8,7 +8,7 @@ When modifying ANY file in this directory:
 
 1. **Recompile** after changes:
    ```powershell
-   cd projects/bladder-resonance/paper
+   cd papers/paper4-bladder
    pdflatex -interaction=nonstopmode main.tex
    bibtex main
    pdflatex -interaction=nonstopmode main.tex
@@ -17,7 +17,7 @@ When modifying ANY file in this directory:
 
 2. **Create a timestamped draft snapshot**:
    ```powershell
-   Copy-Item projects/bladder-resonance/paper/main.pdf "projects/bladder-resonance/paper/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
+   Copy-Item papers/paper4-bladder/main.pdf "papers/paper4-bladder/drafts/draft_$(Get-Date -Format 'yyyy-MM-dd_HHmm').pdf"
    ```
 
 3. **Update README.md** — change the Paper 4 draft link to point to the new snapshot.

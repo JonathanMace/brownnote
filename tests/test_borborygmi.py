@@ -418,4 +418,4 @@ class TestPlotModeTransitionMap:
 
 def test_borborygmi_paper_figure_directory_points_to_manuscript_folder():
     """Publication figures should save beside the borborygmi manuscript."""
-    assert FIG_DIR.parts[-3:] == ("borborygmi", "paper", "figures")
+    assert FIG_DIR.parts[-3:] == ("papers", "paper5-borborygmi", "figures")

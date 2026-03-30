@@ -97,11 +97,14 @@ for pattern_str, description in STALE_PATTERNS:
 print("\n== Citation Key Check ==")
 
 PAPERS = [
-    "paper",
-    "paper2-gas-pockets",
-    "paper3-scaling-laws",
-    "projects/bladder-resonance/paper",
-    "projects/borborygmi/paper",
+    "papers/paper1-brown-note",
+    "papers/paper2-gas-pockets",
+    "papers/paper3-scaling-laws",
+    "papers/paper4-bladder",
+    "papers/paper5-borborygmi",
+    "papers/paper6-sub-bass",
+    "papers/paper7-watermelon",
+    "papers/paper8-kac",
 ]
 
 
