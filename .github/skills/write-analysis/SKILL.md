@@ -1,7 +1,10 @@
 ---
 name: write-analysis
-description: >
-  Guide for writing and editing analytical model code in src/analytical/. Use when changing the Browntone analytical model implementation.
+description: >-
+  Write and validate analytical model code in src/analytical/ following canonical
+  parameters and physics constraints. Use when changing the Browntone analytical
+  model implementation.
+license: MIT
 ---
 
 # Analytical Code Instructions
@@ -57,7 +60,7 @@ Key modules and their APIs:
 
 All new functions need corresponding tests in `tests/`. Run with:
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 python -m pytest tests/ -v
 ```
 Currently 203 tests, all passing. Do not break them.

@@ -2,7 +2,7 @@
 applyTo: "papers/paper6-sub-bass/**"
 ---
 
-# Paper 6 — Journal of Sound and Vibration (Sub-Bass Coupling)
+# Paper 6 — Journal of the Acoustical Society of America (Sub-Bass Coupling)
 
 When modifying ANY file in this directory:
 
@@ -26,4 +26,4 @@ When modifying ANY file in this directory:
 
 All content must use British English and canonical parameters from R3.
 Analytical code lives in `src/analytical/sub_bass_coupling.py`.
-Target: Journal of Sound and Vibration (Elsevier).
+Target: Journal of the Acoustical Society of America (JASA).

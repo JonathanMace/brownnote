@@ -7,11 +7,9 @@ description: >
   descriptions — all while maintaining scientific accuracy.
 tools:
   - read
+  - search
   - edit
-  - create
-  - glob
-  - grep
-  - powershell
+  - execute
 ---
 
 # Communications — The Outreach Officer
@@ -116,7 +114,7 @@ Create the `docs/communications/` directory if it does not exist.
 ## Workflow
 
 1. You receive a worktree at
-   `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
+   `C:\Users\jon\Projects\browntone-worktrees\<branch-name>`.
 2. Read the current paper draft and programme vision to ground your writing.
 3. Produce the requested format(s). If no specific format is requested,
    produce all five.

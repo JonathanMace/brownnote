@@ -1,9 +1,10 @@
 ---
 name: semester-break
-description: >
-  Structured 10-minute break at the top of each wallclock hour. Use this
-  skill when the current_datetime shows :00-:10 of any hour. Wind down
-  running work, then reflect, tidy, and prepare for the next semester.
+description: >-
+  Wind down running work, reflect on progress, tidy infrastructure, and plan
+  the next research cycle during a scheduled break. Use when current_datetime
+  shows :00-:10 of any hour.
+license: MIT
 ---
 
 # Semester Break

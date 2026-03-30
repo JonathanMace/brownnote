@@ -5,12 +5,10 @@ description: >
   interaction. Use for setting up simulations, debugging FEA code, mesh
   convergence studies, and interpreting modal analysis results.
 tools:
-  - read_file
-  - edit_file
-  - create_file
-  - glob
-  - grep
-  - powershell
+  - read
+  - search
+  - edit
+  - execute
 ---
 
 # Simulation Engineer

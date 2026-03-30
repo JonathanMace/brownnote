@@ -3,6 +3,7 @@ name: compile-paper
 description: >
   Compile the LaTeX paper, preserve timestamped PDF, and report any errors.
   Use this after any paper content changes.
+license: MIT
 ---
 
 # Paper Compiler Skill
@@ -20,7 +21,7 @@ Compile the LaTeX paper, preserve timestamped PDF, and report any errors. Use th
 ## Commands
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
+cd C:\Users\jon\Projects\browntone\papers\paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex

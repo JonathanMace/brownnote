@@ -17,8 +17,8 @@ vs mechanical (whole-body vibration) coupling.
 
 - **Target venue**: Journal of Sound and Vibration (JSV), Elsevier
 - **Remote**: `https://github.com/JonathanMace/brownnote`
-- **Main worktree**: `C:\Users\jon\OneDrive\Projects\browntone`
-- **Agent worktrees**: `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>`
+- **Main worktree**: `C:\Users\jon\Projects\browntone`
+- **Agent worktrees**: `C:\Users\jon\Projects\browntone-worktrees\<branch>`
 
 ---
 
@@ -123,40 +123,9 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ---
 
-## Agent Git Workflow (copy-paste into every agent prompt)
+## Agent Git Workflow
 
-```powershell
-# 1. Setup (the orchestrator does this before launching the agent)
-cd C:\Users\jon\OneDrive\Projects\browntone
-git checkout main && git pull origin main --rebase
-git checkout -b <branch-name>
-git worktree add ..\browntone-worktrees\<branch-name> <branch-name>
-
-# 2. Work (the agent does all work in the worktree)
-cd C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>
-# ... make changes ...
-
-# 3. Commit + Push + PR + Merge + Cleanup (the agent does this when done)
-git add -A
-git commit -m "[category] Description
-
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
-git push origin <branch-name>
-gh pr create --base main --head <branch-name> --title "[category] Title" --body "Description"
-gh pr merge <N> --merge
-git push origin --delete <branch-name>
-```
-
-If merge fails due to conflicts:
-```powershell
-git fetch origin main
-git rebase origin/main
-# resolve conflicts
-git add -A && git rebase --continue
-git push origin <branch-name> --force-with-lease
-gh pr merge <N> --merge
-git push origin --delete <branch-name>
-```
+See the `git-checkpoint` skill for the full agent git workflow.
 
 ---
 
@@ -171,40 +140,13 @@ git push origin --delete <branch-name>
 
 ## How to Use the Core Model
 
-```python
-from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
-from src.analytical.energy_budget import self_consistent_displacement
-from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
-
-model = AbdominalModelV2(
-    E=0.1e6, a=0.18, c=0.12, h=0.01, nu=0.45,
-    rho_wall=1100, rho_fluid=1020, K_fluid=2.2e9,
-    P_iap=1000, loss_tangent=0.25
-)
-freqs = flexural_mode_frequencies_v2(model, n_max=5)
-disp = self_consistent_displacement(model, mode_n=2, spl_db=120)  # → dict with xi_energy_um
-mech = compare_airborne_vs_mechanical(model)  # → coupling ratio ~66,000
-```
-
-```python
-from src.analytical.borborygmi_model import BorborygmiParams, borborygmi_frequency
-params = BorborygmiParams(V_gas=5e-6)  # 5 mL gas pocket
-f = borborygmi_frequency(params, model='constrained')  # → ~300 Hz
-```
+See `run-analysis` skill and the module docstrings in `src/analytical/`.
 
 Note: `src/browntone/` is LEGACY. Use `src/analytical/` for all model code.
 
 ## Paper Compilation
 
-```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
-pdflatex -interaction=nonstopmode main.tex
-bibtex main
-pdflatex -interaction=nonstopmode main.tex
-pdflatex -interaction=nonstopmode main.tex
-$ts = Get-Date -Format "yyyy-MM-dd_HHmm"
-Copy-Item main.pdf "drafts\draft_$ts.pdf"
-```
+See the `compile-paper` skill for compilation instructions.
 
 ## Lab Structure
 
@@ -244,16 +186,18 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `write-analysis` | Guide for analytical model code in `src/analytical/` |
 | `write-tests` | Guide for pytest tests in `tests/` |
 | `write-research-log` | Guide for research log entries in `docs/research-logs/` |
-| `write-agent` | Guide for authoring Browntone custom agents |
-| `write-skill` | Guide for authoring Copilot CLI skills |
-| `write-instructions` | Guide for authoring `copilot-instructions.md` and related configuration |
+| `write-agent` | Author custom agent definitions (gold-standard reference) |
+| `write-skill` | Author Copilot CLI skills (gold-standard reference) |
+| `write-instructions` | Author copilot-instructions and path-specific instructions |
 | `git-checkpoint` | Branch→PR→merge→cleanup workflow |
 | `jmace-writing-style` | Jonathan Mace's active, confident style |
 | `mace-writing-style` | Brian Mace's JSV structural conventions |
 | `semester-break` | End-of-hour reflection, tidy-up, and planning |
-
-Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`,
-`run-simulation.md`, and `submit-paper.md`.
+| `session-analysis` | Analyse Copilot CLI session logs for debugging and efficiency |
+| `write-hooks` | Author hooks.json for pre/post tool guards and automation |
+| `mesh-convergence` | FEA mesh convergence with Richardson extrapolation and GCI |
+| `run-simulation` | Full mesh→solve→postprocess simulation pipeline |
+| `submit-paper` | Pre-submission checklist for journal manuscripts |
 
 
 ## Publication Pipeline

@@ -6,12 +6,10 @@ description: >
   with matplotlib and numpy. Use when generating or improving figures, analyzing
   parameter sweeps, or creating comparison tables.
 tools:
-  - read_file
-  - edit_file
-  - create_file
-  - glob
-  - grep
-  - powershell
+  - read
+  - search
+  - edit
+  - execute
 ---
 
 # Data Analyst

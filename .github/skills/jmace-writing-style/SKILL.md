@@ -1,8 +1,9 @@
 ---
 name: jmace-writing-style
-description: >
-  Writing style guide based on Jonathan Mace's published works.
-  Use when drafting or editing text to match Jonathan's voice.
+description: >-
+  Apply Jonathan Mace's confident, active-voice academic style when drafting
+  or editing text. Use when writing in Jonathan's voice or blending co-author styles.
+license: MIT
 ---
 
 # Jonathan Mace Academic Writing Style

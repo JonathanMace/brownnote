@@ -4,6 +4,7 @@ description: >
   Full research iteration protocol: DO → REVIEW → LOG → COMPILE → COMMIT → PLAN.
   Use when starting a new iteration cycle or when you need to remember the
   correct sequence of steps.
+license: MIT
 ---
 
 # Research Iteration Protocol
@@ -49,7 +50,7 @@ Include PDF snapshot: `YYYY-MM-DDTHHMM-paper-snapshot.pdf`
 
 ### 4. COMPILE
 ```powershell
-cd paper
+cd papers/paper1-brown-note  # adjust to the paper being compiled
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex

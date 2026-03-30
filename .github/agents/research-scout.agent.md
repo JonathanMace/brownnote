@@ -7,10 +7,9 @@ description: >
   Reports to the PI with feasibility assessments and publication venue suggestions.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
-  - web_search
+  - search
+  - execute
+  - web
 ---
 
 You are the **Research Scout** — a dedicated agent whose job is to identify new

@@ -5,12 +5,10 @@ description: >
   Use for drafting sections, improving scientific writing, formatting LaTeX,
   managing references, and ensuring journal compliance (JSV, JASA).
 tools:
-  - read_file
-  - edit_file
-  - create_file
-  - glob
-  - grep
-  - powershell
+  - read
+  - search
+  - edit
+  - execute
 ---
 
 # Paper Writer

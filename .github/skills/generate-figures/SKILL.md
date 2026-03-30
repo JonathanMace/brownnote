@@ -4,6 +4,7 @@ description: >
   Generate or regenerate publication-quality figures for the browntone project.
   Use when figures need updating after code changes, or when new figure types
   are needed for the paper.
+license: MIT
 ---
 
 # Generate Figures Skill
@@ -24,7 +25,7 @@ Create publication-quality figures for JSV submission.
 ## Master Generation Script
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 python scripts/generate_all_figures.py
 ```
 

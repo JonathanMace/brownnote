@@ -1,7 +1,10 @@
 ---
 name: write-tests
-description: >
-  Guide for writing pytest tests for the browntone analytical suite. Use when adding, editing, or reviewing tests under tests/.
+description: >-
+  Add, edit, or review pytest tests for the browntone analytical suite ensuring
+  canonical values, physical sanity, and regression coverage. Use when working
+  on tests under tests/.
+license: MIT
 ---
 
 # Test Instructions
@@ -37,6 +40,6 @@ You are writing or editing tests for the browntone analytical suite.
 ## Import Pattern
 ```python
 import sys
-sys.path.insert(0, r'C:\Users\jon\OneDrive\Projects\browntone')
+sys.path.insert(0, r'C:\Users\jon\Projects\browntone')
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
 ```

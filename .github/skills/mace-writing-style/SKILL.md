@@ -1,8 +1,9 @@
 ---
 name: mace-writing-style
-description: >
-  Writing style guide based on Brian Mace's published works.
-  Use when drafting or editing text to match Brian's voice.
+description: >-
+  Apply Brian Mace's formal JSV-convention academic style when drafting theory
+  or results sections. Use when writing in Brian's voice for structural dynamics venues.
+license: MIT
 ---
 
 # Mace Academic Writing Style

@@ -6,10 +6,8 @@ description: >
   and "who would cite this?" Use alongside reviewer-b and reviewer-c.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
-  - web_search
+  - search
+  - web
 ---
 
 You are **Reviewer A** — a senior researcher in structural acoustics and
