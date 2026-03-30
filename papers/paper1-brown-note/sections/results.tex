@@ -197,17 +197,25 @@ adequate approximation for the present purposes.
 \subsection{Oblate Spheroid Correction}
 
 The equivalent-sphere approximation used in Section~\ref{sec:formulation}
-introduces a systematic bias.  A Rayleigh--Ritz analysis using oblate
-spheroidal harmonics as basis functions, with proper account of the
-spatially varying curvature and oblate fluid-mass geometry, shows that the
-sphere model \emph{overestimates} flexural frequencies by 4--17\%
-(Table~\ref{tab:oblate_correction}).  The error grows with eccentricity and
-is larger at higher $E$ where bending stiffness (which depends on local
-curvature) contributes a greater share of the restoring force.
+cannot capture the full geometric effect of an oblate shell.  To gauge the
+size and sign of that effect, we also solved an exploratory Rayleigh--Ritz
+model using oblate spheroidal basis functions, with proper account of the
+spatially varying curvature and oblate fluid-mass geometry.  This comparison
+must be interpreted cautiously: the same 2-DOF single-mode Ritz formulation
+lies about \SI{9}{\percent} below the analytical sphere result even in the
+sphere limit ($c/a \to 1$ for the canonical $n=2$ mode), owing to the
+restricted trial-function space.  The 4--17\% differences in
+Table~\ref{tab:oblate_correction} therefore should not be read as a precise
+oblate correction.  Rather, they are exploratory and indicate the direction
+and approximate magnitude of geometric effects: for the canonical oblate
+shape, the more detailed model tends to reduce the flexural frequencies, with
+the reduction becoming more pronounced at higher eccentricity and higher $E$,
+where bending stiffness (which depends on local curvature) contributes a
+greater share of the restoring force.
 
 \begin{table}[htbp]
   \centering
-  \caption{Sphere vs.\ oblate spheroid Rayleigh--Ritz frequencies for $c/a = 0.67$.}
+  \caption{Illustrative equivalent-sphere vs.\ oblate spheroid Ritz frequencies for $c/a = 0.67$.}
   \label{tab:oblate_correction}
   \begin{tabular}{lcccc}
     \toprule
@@ -223,10 +231,10 @@ curvature) contributes a greater share of the restoring force.
   \end{tabular}
 \end{table}
 
-Applying this correction moves the canonical $n=2$ frequency from
-\SI{4.0}{\hertz} to approximately \SI{3.8}{\hertz}---still within the
-ISO~2631 band and, if anything, closer to the low end of reported abdominal
-resonance frequencies.
+Taken indicatively, the exploratory oblate Ritz model moves the canonical
+$n=2$ frequency from \SI{4.0}{\hertz} to approximately \SI{3.8}{\hertz}---still
+within the ISO~2631 band and, if anything, closer to the low end of reported
+abdominal resonance frequencies.
 
 \subsection{Comparison with ISO~2631 Data}
 
