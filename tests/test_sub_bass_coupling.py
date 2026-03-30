@@ -135,10 +135,10 @@ class TestTissueDisplacement:
         assert abs(ratio - 10.0) < 1.0  # within 10% of 10×
 
     def test_on_resonance_matches_paper1(self, default_model):
-        """At n=2 resonance and 120 dB, displacement ≈ 0.014 μm (energy-consistent)."""
+        """At n=2 resonance and 120 dB, displacement ≈ 0.028 μm (energy-consistent)."""
         f2 = flexural_mode_frequencies_v2(default_model)[2]
         result = tissue_displacement(f2, 120.0, model=default_model, mode_n=2)
-        # Paper 1 energy-consistent: ~0.014 μm.
+        # Paper 1 energy-consistent: ~0.028 μm (Breit-Wigner corrected).
         assert 0.001 < result['xi_um'][0] < 0.5
 
     def test_displacement_at_subbass_is_small(self, default_model):
@@ -520,9 +520,9 @@ class TestEnergyConsistentRegression:
         assert 0.001 < ratio < 0.05  # ~0.35%, not the old ~0.003%
 
     def test_not_pressure_based(self, default_model):
-        """Energy-consistent values should be ~13× smaller than old pressure-based."""
+        """Energy-consistent values should be ~6.5× smaller than old pressure-based."""
         # The old pressure-based on-resonance at 120 dB was ~0.18 μm
-        # Energy-consistent should be ~0.014 μm
+        # Energy-consistent should be ~0.028 μm (Breit-Wigner corrected)
         f2 = flexural_mode_frequencies_v2(default_model)[2]
         result = tissue_displacement(f2, 120.0, model=default_model)
         assert result['xi_um'][0] < 0.05  # well below old 0.18 μm

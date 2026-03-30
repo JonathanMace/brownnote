@@ -300,7 +300,7 @@ class TestReciprocity:
         )
 
     def test_efficiency_less_than_unity(self, soft_tissue_model):
-        """Absorption efficiency = ζ_rad/(ζ_rad+ζ_struct) < 1."""
+        """Breit-Wigner absorption efficiency = 4·ζ_rad·ζ_struct/ζ_total² < 1."""
         acs = absorption_cross_section(soft_tissue_model, mode_n=2)
         assert 0 < acs['efficiency'] < 1
 
@@ -478,9 +478,9 @@ class TestRegression:
         assert f2 == pytest.approx(3.95, abs=0.1), f"f2={f2}"
 
     def test_energy_displacement_120dB(self, soft_tissue_model):
-        """Energy-consistent displacement at 120 dB (canonical: 0.014 μm)."""
+        """Energy-consistent displacement at 120 dB (canonical: 0.028 μm)."""
         r = self_consistent_displacement(soft_tissue_model, mode_n=2, spl_db=120)
-        assert r['xi_energy_um'] == pytest.approx(0.0137, abs=0.002), (
+        assert r['xi_energy_um'] == pytest.approx(0.0275, abs=0.004), (
             f"xi_energy={r['xi_energy_um']}"
         )
 
@@ -892,16 +892,16 @@ class TestHelmholtzSealedGI:
         assert 112.0 < spl < 115.0, f"Cylindrical SPL threshold = {spl:.1f} dB"
 
     def test_amplification_ratio_range(self):
-        """Gas pocket / whole-cavity ratio should be 35-100x (Issue 3 fix)."""
-        xi_cavity = 0.014  # um at 120 dB (Paper 1 canonical)
+        """Gas pocket / whole-cavity ratio should be 15-55x (Breit-Wigner corrected)."""
+        xi_cavity = 0.028  # um at 120 dB (Paper 1 canonical, Breit-Wigner corrected)
         ratios = []
         for vol, geom in [(5, "spherical"), (100, "spherical"),
                           (5, "cylindrical"), (100, "cylindrical")]:
             p = GasPocketParams(volume_mL=vol, geometry=geom, wall="elastic")
             r = pocket_response(p, np.array([7.0]), spl_dB=120.0)
             ratios.append(float(r["xi_um"][0]) / xi_cavity)
-        assert min(ratios) >= 30.0, f"Min ratio = {min(ratios):.1f}"
-        assert max(ratios) <= 110.0, f"Max ratio = {max(ratios):.1f}"
+        assert min(ratios) >= 15.0, f"Min ratio = {min(ratios):.1f}"
+        assert max(ratios) <= 55.0, f"Max ratio = {max(ratios):.1f}"
 
     def test_wall_stiffness_fraction_small(self):
         """Wall stiffness should be < 3% of total k_eff (Issue 4)."""

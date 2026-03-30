@@ -5,20 +5,22 @@ Resolves the energy budget inconsistency identified by Reviewer B (Round 2, M1).
 
 The issue: the pressure-based coupling (p_eff = p_inc × (ka)^n) neglects
 radiation inefficiency, yielding ξ_pressure ≈ 0.18 μm at 120 dB — roughly
-13× larger than the energy-consistent estimate ξ_energy ≈ 0.014 μm. The
+6.5× larger than the energy-consistent estimate ξ_energy ≈ 0.028 μm. The
 pressure-based result is an upper bound, not the physically correct value.
 
-Resolution: Use the Junger & Feit reciprocity formulation.
+Resolution: Use the Junger & Feit reciprocity formulation with the correct
+Breit–Wigner resonance formula.
 
 The power absorbed by mode n from an incident plane wave is:
     P_abs = σ_abs × I
-where σ_abs = (2n+1)λ²/(4π) × (Γ_rad / Γ_total)
+where σ_abs = (2n+1)λ²/(4π) × 4·ζ_rad·ζ_struct / (ζ_rad + ζ_struct)²
 
-Γ_rad = radiation damping rate
-Γ_total = Γ_rad + Γ_structural
+This is the standard Breit–Wigner resonance formula for the absorption
+cross-section.  The factor of 4 ensures the correct on-resonance peak:
+maximum absorption occurs when ζ_rad = ζ_struct, giving σ_abs = σ_max.
 
-For a bio-tissue shell at 5 Hz with Γ_rad << Γ_structural:
-    σ_abs ≈ (2n+1)λ²/(4π) × (Γ_rad / Γ_structural)
+For a bio-tissue shell at 5 Hz with ζ_rad << ζ_struct:
+    σ_abs ≈ (2n+1)λ²/(4π) × 4·ζ_rad/ζ_struct
 
 This gives the self-consistent displacement at steady state.
 
@@ -111,10 +113,12 @@ def absorption_cross_section(
     """
     Compute the absorption cross-section for mode n using reciprocity.
 
-    σ_abs(n) = (2n+1)λ²/(4π) × Γ_rad / (Γ_rad + Γ_struct)
+    σ_abs(n) = (2n+1)λ²/(4π) × 4·ζ_rad·ζ_struct / (ζ_rad + ζ_struct)²
 
-    This is the effective area that the mode presents to the incident wave
-    for energy absorption.
+    This is the standard Breit–Wigner resonance formula.  Maximum absorption
+    (σ_abs = σ_max) occurs when ζ_rad = ζ_struct; in our limit
+    ζ_rad ≈ 10⁻¹⁵ << ζ_struct = 0.125, the cross-section reduces to
+    σ_abs ≈ σ_max × 4·ζ_rad/ζ_struct.
     """
     R = model.equivalent_sphere_radius
     freqs = flexural_mode_frequencies_v2(model, n_max=mode_n)
@@ -130,8 +134,8 @@ def absorption_cross_section(
     # Maximum possible absorption cross-section (at resonance)
     sigma_max = (2 * mode_n + 1) * lam**2 / (4 * np.pi)
 
-    # Actual absorption (limited by radiation coupling)
-    sigma_abs = sigma_max * (zeta_rad / zeta_total)
+    # Actual absorption: Breit–Wigner resonance formula
+    sigma_abs = sigma_max * (4 * zeta_rad * zeta_struct / zeta_total**2)
 
     # Geometric cross-section for comparison
     sigma_geo = np.pi * R**2
@@ -146,7 +150,7 @@ def absorption_cross_section(
         'sigma_ratio': sigma_abs / sigma_geo,
         'zeta_rad': zeta_rad,
         'zeta_struct': zeta_struct,
-        'efficiency': zeta_rad / zeta_total,
+        'efficiency': 4 * zeta_rad * zeta_struct / zeta_total**2,
     }
 
 
@@ -294,14 +298,14 @@ if __name__ == "__main__":
     print()
     print("  The pressure-based estimate is an upper bound (~0.18 μm at")
     print("  120 dB) that neglects radiation inefficiency. The energy-")
-    print("  consistent estimate (~0.014 μm) is ~13× smaller and is the")
+    print("  consistent estimate (~0.028 μm) is ~6.5× smaller and is the")
     print("  physically correct value. Both are far below the PIEZO")
     print("  threshold, so conclusions are unchanged.")
     print()
     print("  For the paper, we:")
     print("  1. Use the energy-consistent displacement as the PRIMARY result")
     print("  2. Report the pressure-based estimate as an upper bound that")
-    print("     overestimates by ~13× due to neglected radiation inefficiency")
+    print("     overestimates by ~6.5× due to neglected radiation inefficiency")
     print("  3. The energy budget is the self-consistent calculation, not")
     print("     merely a cross-check")
     print()
