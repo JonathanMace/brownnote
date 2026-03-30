@@ -1,8 +1,12 @@
 \section{Conclusions}
 \label{sec:conclusion}
 
-We have developed a physics-based model for the acoustic `thump test''
-used to assess watermelon ripeness.  The principal findings are:
+We have developed a mechanics-based model for the acoustic `thump test''
+used to assess watermelon ripeness.  The model delivers an estimate of
+the \emph{effective rind stiffness parameter}; the subsequent inference
+from stiffness to biological ripeness requires cultivar-specific
+calibration that is beyond the scope of this work.  The principal
+findings are:
 
 \begin{enumerate}
   \item The watermelon is modelled as a fluid-filled viscoelastic shell
@@ -10,32 +14,35 @@ used to assess watermelon ripeness.  The principal findings are:
     captured through $R_{\mathrm{eq}} = (a^2 c)^{1/3}$, and the
     eigenfrequency is derived from classical thin-shell theory for a
     sphere of that radius.  The dominant tap-tone corresponds to the
-    $n = 2$ flexural mode.
+    $n = 2$ flexural mode, identifiable as the lowest spectral peak
+    in the impulse response.
 
-  \item The squared frequency $f_2^2$ is exactly linear in the rind
+  \item The squared frequency $f_2^2$ is linear in the rind
     elastic modulus $E_{\mathrm{rind}}$ when turgor pressure is
     negligible.  This linearity enables a closed-form inversion
-    (Eq.~\ref{eq:inversion}) from a single tap-tone measurement to the
-    rind modulus.  The condition number of this inversion is unity with
-    respect to~$f^2$ and approximately~2 with respect to~$f$.
+    (Eq.~\ref{eq:inversion}) from a single tap-tone measurement to an
+    estimate of the effective rind stiffness.  The condition number of
+    this inversion is unity with respect to~$f^2$ and
+    approximately~2 with respect to~$f$.
 
   \item Sobol sensitivity analysis confirms that
     $E_{\mathrm{rind}}$ dominates the frequency response
     ($S_T = 0.54 \pm 0.05$), with fruit size as the second most influential
     parameter.
 
-  \item The dimensionless group $\Pi_{\mathrm{ripe}}$
-    (Eq.~\ref{eq:Pi_ripe}) is a geometric invariant: $E_{\mathrm{rind}}$
-    cancels by construction at fixed geometry, making it independent of
-    the elastic modulus.
-    Its practical value lies in collapsing different cultivar geometries
-    onto a single calibration constant
-    ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ across four cultivars).
+  \item As a secondary result, the dimensionless group
+    $\Pi_{\mathrm{ripe}}$ (Eq.~\ref{eq:Pi_ripe}) collapses different
+    cultivar geometries onto a narrow band
+    ($\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ across four cultivars),
+    although its biological validity as a ripeness index across
+    cultivars has not been established.
 
   \item Model predictions are benchmarked against published resonance
     measurements on watermelons \cite{Yamamoto1980} and are consistent
     with frequency--stiffness correlations reported for other fruits
-    \cite{DeBelieetal2000, ChenDeBaerdemaeker1993}.
+    \cite{DeBelieetal2000, ChenDeBaerdemaeker1993}.  These comparisons
+    are consistency checks against literature data, not controlled
+    experimental validation.
 \end{enumerate}
 
 The equivalent-sphere approximation is adequate for the inversion
@@ -49,13 +56,9 @@ $\zeta$-dependent basis functions would be needed to capture genuine
 curvature effects and could improve accuracy for strongly oblate
 cultivars ($\zeta < 0.6$).
 
-The framework generalises directly from prior work on biological
-cavities, confirming that classical shell theory provides a unified
-language for fluid-filled biological structures---whether the application
-is clinical diagnostics or selecting the perfect watermelon.
-
-Future work will pursue experimental validation on instrumented
-watermelons, extension of the model to include explicit oblate curvature
-corrections via a Ritz variational formulation, application to other
-fruits (cantaloupe, coconut, pumpkin), and development of a
-smartphone-based measurement tool.
+Future work will pursue: (i)~experimental validation on instrumented
+watermelons with destructive reference measurements to establish the
+modulus--ripeness calibration chain; (ii)~extension of the model to
+include explicit oblate curvature corrections via a Ritz variational
+formulation; (iii)~application to other fruits (cantaloupe, coconut,
+pumpkin); and (iv)~development of a smartphone-based measurement tool.
