@@ -70,6 +70,12 @@ def watermelon_params():
 
 
 @pytest.fixture
+def watermelon_external_params():
+    """Ripe watermelon parameters using the Paper 7 public API naming."""
+    return watermelon_canonical_params("ripe")
+
+
+@pytest.fixture
 def abdomen_frequencies(abdomen_params):
     """Forward-model frequencies for canonical abdomen (Ritz)."""
     return _forward_ritz(abdomen_params, DEFAULT_MODES)
@@ -192,23 +198,21 @@ class TestRoundTripInversion:
                 f"true {true_val:.6g}, error {rel_err:.2%}"
             )
 
-    def test_watermelon_roundtrip(self, watermelon_params):
-        """Recover watermelon params to < 1 % error."""
-        f_obs = _forward_ritz(watermelon_params, DEFAULT_MODES)
+    def test_watermelon_roundtrip(self, watermelon_external_params):
+        """Recover watermelon params to < 1 % error from the raw Paper 7 API."""
+        f_obs = _forward_ritz(watermelon_external_params, DEFAULT_MODES)
 
-        guess = dict(watermelon_params)
+        guess = dict(watermelon_external_params)
         guess["a"] *= 1.08
         guess["c"] *= 0.92
         guess["E"] *= 1.12
 
-        result = invert_frequencies(
-            f_obs, initial_guess=guess, model="ritz"
-        )
+        result = invert_frequencies(f_obs, initial_guess=guess, model="ritz")
         assert result["success"], f"Watermelon inversion failed"
 
         for pname in INVERSION_PARAMS:
             recovered = result["params"][pname]
-            true_val = watermelon_params[pname]
+            true_val = watermelon_external_params[pname]
             rel_err = abs(recovered - true_val) / abs(true_val)
             assert rel_err < 0.01, (
                 f"Watermelon {pname}: error {rel_err:.2%}"
@@ -223,6 +227,30 @@ class TestRoundTripInversion:
             abdomen_frequencies, initial_guess=guess, model="ritz"
         )
         assert np.all(np.abs(result["residual_hz"]) < 0.001)
+
+    def test_residual_diagnostics_report_clearly(self, abdomen_params, abdomen_frequencies):
+        """Residual diagnostics should expose absolute and relative convergence."""
+        guess = dict(abdomen_params)
+        guess["a"] *= 1.03
+
+        result = invert_frequencies(
+            abdomen_frequencies, initial_guess=guess, model="ritz"
+        )
+
+        np.testing.assert_allclose(
+            result["predicted_frequencies_hz"] - result["observed_frequencies_hz"],
+            result["residual_hz"],
+        )
+        np.testing.assert_allclose(
+            result["residual_relative"] * 100.0,
+            result["residual_percent"],
+        )
+        assert result["diagnostics"]["optimizer_success"] is True
+        assert result["diagnostics"]["residuals_within_rtol"] is True
+        assert result["diagnostics"]["bounds_within_limits"] is True
+        assert result["diagnostics"]["max_abs_residual_hz"] == pytest.approx(
+            float(np.max(np.abs(result["residual_hz"])))
+        )
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -306,6 +334,13 @@ class TestWatermelonIdentifiability:
         result = identifiability_analysis(watermelon_params, model="ritz")
         for pname in INVERSION_PARAMS:
             assert np.isfinite(result["cr_bounds"][pname])
+
+    def test_watermelon_external_interface_supported(self, watermelon_external_params):
+        """Paper 8 helpers should accept raw Paper 7 watermelon parameter keys."""
+        kappa = condition_number_from_params(watermelon_external_params, model="ritz")
+        analysis = identifiability_analysis(watermelon_external_params, model="ritz")
+        assert np.isfinite(kappa)
+        assert np.isfinite(analysis["condition_number"])
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -403,6 +438,30 @@ class TestEdgeCases:
         guess["E"] *= 1.05
         result = invert_frequencies(f_obs, initial_guess=guess, model="ritz")
         assert result["success"]
+
+    def test_invalid_initial_guess_zero_rejected(self):
+        """Zero-valued inversion guesses should fail with a clear bounds error."""
+        params = dict(CANONICAL_ABDOMEN)
+        f_obs = _forward_ritz(params, DEFAULT_MODES)
+        guess = dict(params)
+        guess["a"] = 0.0
+
+        with pytest.raises(ValueError, match="strictly positive"):
+            invert_frequencies(f_obs, initial_guess=guess, model="ritz")
+
+    def test_invalid_custom_bounds_rejected(self):
+        """Malformed custom bounds should be validated before optimisation."""
+        params = dict(CANONICAL_ABDOMEN)
+        f_obs = _forward_ritz(params, DEFAULT_MODES)
+        guess = dict(params)
+
+        with pytest.raises(ValueError, match="lower < upper"):
+            invert_frequencies(
+                f_obs,
+                initial_guess=guess,
+                model="ritz",
+                parameter_bounds={"a": (0.25, 0.20)},
+            )
 
 
 # ═══════════════════════════════════════════════════════════════════════════
