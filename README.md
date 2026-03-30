@@ -107,7 +107,7 @@ The abdomen does have a low-order flexural resonance near 4 Hz, so the folk intu
 
 ## How It Was Made
 
-This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **377 commits**, **208 pull requests merged**, **421 tests passing**, **24 custom agents**, **22 reusable skills**, **77 research logs**, and about **24 hours of wall-clock interaction time**.  
+This repository was built with **GitHub Copilot CLI** and a small bureaucracy of autonomous AI agents handling analysis, drafting, review, figure generation, and repo maintenance. The current tally is roughly **377 commits**, **208 pull requests merged**, **454 tests passing**, **24 custom agents**, **22 reusable skills**, **77 research logs**, and about **24 hours of wall-clock interaction time**.  
 
 The active agent roster lives in [`.github/agents/`](.github/agents/) and currently includes the review panel (`reviewer-a`, `reviewer-b`, `reviewer-c`), infrastructure roles (`chief-of-staff`, `lab-manager`, `lab-meeting`), editorial triage via `journal-editor`, production roles (`paper-writer`, `simulation-engineer`, `data-analyst`, `communications`, `bibliographer`), and specialist characters such as `pop-culture-verifier`, `provocateur`, `research-scout`, `coffee-machine-guru`, `loving-spouse`, `dietrich`, and `experimentalist`.
 
@@ -172,7 +172,7 @@ browntone/
 
 ## Tests
 
-The analytical suite currently has **377 passing tests**. From the repository root:
+The analytical suite currently has **454 passing tests**. From the repository root:
 
 ```bash
 python -m pytest tests/ -v
@@ -190,4 +190,3 @@ python -m pytest tests/ -v
 ## Licence
 
 [MIT](LICENSE)
-
