@@ -21,10 +21,11 @@ First, the air--tissue impedance mismatch is severe.  The specific acoustic
 impedance of air is $Z_{\mathrm{air}} = \rho_{\mathrm{air}} c_{\mathrm{air}}
 \approx \SI{420}{\pascal\second\per\metre}$, while that of soft tissue is
 $Z_{\mathrm{tissue}} \approx \SI{1.6e6}{\pascal\second\per\metre}$, giving
-a pressure transmission coefficient $T = 2Z_{\mathrm{air}} /
-(Z_{\mathrm{air}} + Z_{\mathrm{tissue}}) \approx 5 \times 10^{-4}$.  At the
-body surface, more than \SI{99.9}{\percent} of the incident acoustic energy is
-reflected.  This general suppression of transmission across large biological
+an intensity transmission coefficient
+$T_I = 4 Z_{\mathrm{air}} Z_{\mathrm{tissue}} /
+(Z_{\mathrm{air}} + Z_{\mathrm{tissue}})^2 \approx 1.1 \times 10^{-3}$.
+At the body surface, approximately \SI{99.9}{\percent} of the incident
+acoustic power is reflected.  This general suppression of transmission across large biological
 impedance contrasts is consistent with modern frequency-dependent analyses of
 bone--soft tissue interfaces \cite{Gupta2021}.
 
@@ -127,7 +128,8 @@ each in turn.
 
 The human intestine normally contains \SIrange{100}{200}{\milli\litre} of
 gas distributed in pockets with effective radii ranging from
-\SIrange{1}{10}{\centi\metre}.  Unlike the surrounding tissue, these gas
+\SIrange{1}{3}{\centi\metre} (corresponding to volumes of approximately
+\SIrange{4}{110}{\milli\litre}).  Unlike the surrounding tissue, these gas
 volumes are compressible, and they respond to incident pressure by
 expanding and contracting their bounding walls.  If such local deformation is
 biologically transduced, PIEZO2-dependent gut afferents are the most plausible
@@ -141,9 +143,9 @@ a fluid of density $\rho_f$ is \cite{lamb1882}
 \end{equation}
 where $\gamma = 1.4$ is the ratio of specific heats and $P_0$ is the
 ambient pressure.  For physiological pocket radii of
-\SIrange{1}{10}{\centi\metre}, this yields Minnaert frequencies in the range
-\SIrange{33}{330}{\hertz}---well above the infrasonic band of interest.  At
-\SI{7}{\hertz}, the frequency ratio $f / f_M \approx 0.02$--$0.2$, so gas
+\SIrange{1}{3}{\centi\metre}, this yields Minnaert frequencies in the range
+\SIrange{110}{330}{\hertz}---well above the infrasonic band of interest.  At
+\SI{7}{\hertz}, the frequency ratio $f / f_M \approx 0.02$--$0.06$, so gas
 pockets are driven far below resonance and experience no resonant
 amplification ($H \approx 1.0$).
 
@@ -156,18 +158,23 @@ which scales linearly with pocket radius and is independent of frequency.
 At \SI{120}{\decibel} SPL ($p_{\mathrm{inc}} = \SI{20}{\pascal}$) and
 $a = \SI{2}{\centi\metre}$, this yields
 $\xi_{\mathrm{gas}} \approx \SI{0.94}{\micro\metre}$---within the PIEZO
-activation range and roughly seven times the whole-cavity airborne
+activation range and roughly 67 times the whole-cavity airborne
 displacement of \SI{0.014}{\micro\metre} at the same SPL.  For larger pockets
-($a = \SI{5}{\centi\metre}$), the displacement rises to approximately
-\SI{2.4}{\micro\metre}, exceeding the threshold with a modest margin.
+($a = \SI{3}{\centi\metre}$), the displacement rises to approximately
+\SI{1.4}{\micro\metre}, exceeding the lower PIEZO activation threshold.
 
 Crucially, at \SI{7}{\hertz} the acoustic wavelength (\SI{49}{\metre})
 vastly exceeds the body diameter, so the pressure field inside the body is
-spatially uniform to within $(ka)^2$ corrections.  The gas pockets therefore
-experience the full incident pressure, without the geometric filtering
-penalty that suppresses whole-cavity flexural excitation.  The mechanism
-operates as a local pressure-to-displacement transducer embedded within
-the tissue, rather than as a global shell resonance.
+spatially uniform to within $(ka)^2$ corrections.  Although the air--tissue
+interface reflects the vast majority of incident acoustic energy (intensity
+transmission coefficient $T_I \approx 10^{-3}$), the small fraction of
+pressure transmitted into the tissue may still drive local volume changes in
+pre-existing gas pockets, which present a highly compliant inclusion within
+the otherwise nearly incompressible abdominal fluid.  The gas pockets
+therefore respond to the intracorporeal pressure field without the geometric
+filtering penalty that suppresses whole-cavity flexural excitation.  The
+mechanism operates as a local pressure-to-displacement transducer embedded
+within the tissue, rather than as a global shell resonance.
 
 This gas pocket pathway has two important implications.  First, it may
 explain the well-documented inter-individual variability in infrasound
@@ -219,7 +226,7 @@ each coupling mechanism at \SI{120}{\decibel} SPL and \SI{7}{\hertz}.
     \hline
     Cavity resonance ($n{=}2$, airborne) & 0.014 & No \\
     Gas pocket $a = \SI{2}{\centi\metre}$ (airborne) & 0.94 & Marginal \\
-    Gas pocket $a = \SI{5}{\centi\metre}$ (airborne) & 2.4 & Yes \\
+    Gas pocket $a = \SI{3}{\centi\metre}$ (airborne) & 1.4 & Yes \\
     Orifice (open mouth $\to$ stomach) & $\sim$0.5 & Marginal \\
     WBV at \SI{0.5}{\metre\per\second\squared} (mech.) & 4{,}586 & Yes \\
     WBV at \SI{1.15}{\metre\per\second\squared} (mech.) & 10{,}549 & Yes \\
@@ -227,8 +234,8 @@ each coupling mechanism at \SI{120}{\decibel} SPL and \SI{7}{\hertz}.
   \end{tabular}
 \end{table}
 
-Even with the most favourable alternative pathway (a large,
-\SI{5}{\centi\metre}-radius gas pocket at \SI{120}{\decibel}), the airborne
+Even with the most favourable alternative pathway (a
+\SI{3}{\centi\metre}-radius gas pocket at \SI{120}{\decibel}), the airborne
 displacement remains two to three orders of magnitude below what mechanical
 coupling achieves at the EU Whole-Body Vibration Directive action value of
 \SI{0.5}{\metre\per\second\squared}.  The alternative pathways therefore do
@@ -442,7 +449,7 @@ the conclusions.
     membrane-tension experiments and may not directly translate to
     tissue-scale effects, where strain concentrations around cells are
     modulated by the extracellular matrix.  We therefore treat these values as
-    cellular mechanosensory reference scales rather than validated tissue-scale
+    cellular mechanosensory reference scales rather than experimentally confirmed tissue-scale
     thresholds.  In gastrointestinal tissue the
     relevant transduction pathway is also likely to involve PIEZO2-expressing
     afferents rather than PIEZO1 alone \cite{ServinVences2023}.  This
