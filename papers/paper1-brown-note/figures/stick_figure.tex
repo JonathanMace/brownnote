@@ -1,5 +1,4 @@
-% Deliberately crude stick-figure diagram comparing excitation pathways
-% Intended to be charming rather than professional
+% Schematic comparison of excitation pathways
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
@@ -9,7 +8,7 @@
 ]
 
 % =========================================================
-% LEFT: Airborne pathway (no effect)
+% LEFT: Airborne pathway
 % =========================================================
 \begin{scope}[shift={(-3.5,0)}]
   % Speaker
@@ -20,37 +19,24 @@
   % Sound waves
   \draw[wave, ->] (-1.7,1.0) -- (-0.5,1.0);
 
-  % Stick figure - standing, unbothered
-  % Head
+  % Stick figure
   \draw (0,2.2) circle (0.25);
-  % Smiley face
-  \draw (-0.08,2.28) arc (220:320:0.1);
-  \fill (-0.08,2.28) circle (0.03);
-  \fill (0.08,2.28) circle (0.03);
-  % Body
   \draw (0,1.95) -- (0,1.0);
-  % Abdomen (circle to represent cavity)
   \draw[dashed] (0,1.3) ellipse (0.25 and 0.2);
   \node[right, font=\tiny, fill=white, inner sep=1pt] at (0.45,1.45)
     {$\xi = \SI{0.014}{\micro\metre}$};
-  % Arms
   \draw (0,1.7) -- (-0.4,1.3);
   \draw (0,1.7) -- (0.4,1.3);
-  % Legs
   \draw (0,1.0) -- (-0.3,0.3);
   \draw (0,1.0) -- (0.3,0.3);
-  % Ground
   \draw[thin] (-1.0,0.3) -- (1.0,0.3);
 
-  % Thought bubble
-  \node[draw, rounded corners, fill=white, font=\tiny, align=center]
-    at (0.95,2.85) {perfectly\\fine};
-
-  \node[below, font=\small\bfseries, align=center] at (0,-0.02) {(a) Airborne\\[1pt]``Nothing happens''};
+  \node[below, font=\small\bfseries, align=center] at (0,-0.02)
+    {(a) Airborne acoustic\\[1pt]excitation};
 \end{scope}
 
 % =========================================================
-% RIGHT: Mechanical pathway (considerable effect)
+% RIGHT: Mechanical pathway
 % =========================================================
 \begin{scope}[shift={(3.5,0)}]
   % Vibrating platform
@@ -64,39 +50,25 @@
   \draw[->, thick] (0.5,0.5) -- (0.5,0.8);
   \draw[->, thick] (0,0.5) -- (0,0.8);
 
-  % Stick figure - distressed
-  % Head
+  % Stick figure
   \draw (0,2.2) circle (0.25);
-  % Distressed face
-  \draw (-0.08,2.28) arc (140:40:0.1);
-  \fill (-0.08,2.28) circle (0.03);
-  \fill (0.08,2.28) circle (0.03);
-  \draw (0,2.12) arc (220:320:0.06);
-  % Body (slightly wavy to suggest vibration)
   \draw (0,1.95) -- (0.05,1.5) -- (-0.05,1.2) -- (0,0.8);
-  % Abdomen (larger, distressed)
   \draw[dashed, thick] (0,1.3) ellipse (0.3 and 0.25);
   \node[right, font=\tiny, fill=white, inner sep=1pt] at (0.48,1.48)
     {$\xi = \SI{0.9}{\milli\metre}$};
-  % Arms (thrown up in distress)
-  \draw (0,1.7) -- (-0.5,2.2);
-  \draw (0,1.7) -- (0.5,2.2);
-  % Legs
+  \draw (0,1.7) -- (-0.4,1.3);
+  \draw (0,1.7) -- (0.4,1.3);
   \draw (0,0.8) -- (-0.3,0.5);
   \draw (0,0.8) -- (0.3,0.5);
 
-  % Distress indicators
-  \node[font=\tiny, rotate=15] at (-0.7,2.5) {!};
-  \node[font=\tiny, rotate=-10] at (0.7,2.5) {!};
-
-  % The brown note consequence (subtle)
+  % Relative wall motion indicator
   \draw[->, decorate, decoration={snake, amplitude=1pt, segment length=3pt}]
-    (0.15,0.7) -- (0.4,0.4);
-  \node[right, font=\tiny, align=left, fill=white, inner sep=1pt] at (0.58,0.55)
-    {bowel\\[-1pt]response};
+    (0.55,1.7) -- (0.92,1.95);
+  \node[right, font=\tiny, align=left, fill=white, inner sep=1pt] at (1.00,1.95)
+    {enhanced\\[-1pt]wall motion};
 
   \node[below, font=\small\bfseries, align=center] at (0,-0.02)
-    {(b) Whole-body vibration\\[1pt]``The resonance is real''};
+    {(b) Whole-body\\[1pt]vibration excitation};
 \end{scope}
 
 % =========================================================
@@ -109,11 +81,9 @@
 \end{tikzpicture}
 \caption{Schematic comparison of the two excitation pathways.  (a)~Airborne
 infrasound at \SI{120}{\decibel} SPL produces wall displacements of
-\SI{0.014}{\micro\metre}---far below any conceivable physiological effect.
-The subject is entirely unperturbed.  (b)~Whole-body vibration at occupational
-levels produces displacements roughly $6.6 \times 10^4$ times larger, comfortably
-exceeding cellular mechanotransduction benchmarks and---as the occupational health
-literature attests---occasionally exceeding the subject's composure as well.
-Diagram intentionally not to scale, anatomically, or artistically.}
+\SI{0.014}{\micro\metre}, well below cellular mechanotransduction benchmarks.
+(b)~Whole-body vibration at occupational levels produces displacements roughly
+$6.6 \times 10^4$ times larger and readily exceeds those benchmarks.
+Schematic not to scale.}
 \label{fig:stick_figure}
 \end{figure}
