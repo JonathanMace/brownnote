@@ -82,13 +82,13 @@ Jacobian of the frequency--parameter map, its singular values, its condition
 number, and the associated Fisher information matrix for the parameter triple
 $(a,c,E)$.  The smallest singular value of the scaled Jacobian admits a
 \emph{two-channel} regular expansion
-$\sigma_{\min}(\varepsilon) = \sigma_0 + \lambda_1\varepsilon^2 +
-O(\varepsilon^4)$, where the \emph{curvature channel} $\sigma_0 > 0$
-reflects mode-dependent Legendre weights that break the $a$/$c$ degeneracy
-even at the sphere, and the \emph{shape channel} $\lambda_1\varepsilon^2$
-captures eccentricity-driven lifting.  Within the Ritz model (five modes),
-the condition number drops from a near-spherical floor
-$\kappa_\mathrm{floor} \approx 269$ to $\kappa = 69.4$ at the canonical
+$\sigma_{\min}(\varepsilon) \approx \sigma_0 + \lambda_1\varepsilon^2 +
+\lambda_2\varepsilon^4$, where $\sigma_0$, $\lambda_1$, $\lambda_2$ are
+regression coefficients (not asymptotic limits) obtained over the
+intermediate eccentricity range $\varepsilon\in[0.15,\,0.85]$.  The
+condition number approaches a finite floor
+$\kappa_\mathrm{floor} \approx 269$ (at $\varepsilon = 0.01$, five modes)
+rather than diverging, and drops to $\kappa = 69.4$ at the canonical
 oblate operating point, an improvement by a factor of approximately $3.9$.
 For comparison, the equivalent-sphere model gives
 $\kappa$ numerically singular ($\kappa > 10^{10}$ in finite-difference

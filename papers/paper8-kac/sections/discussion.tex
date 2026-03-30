@@ -7,7 +7,8 @@
 
 Kac's original problem asked whether one could infer geometry from a spectrum.
 Our answer is deliberately narrower and more practical.  For the present
-elastic shell model, the results suggest that one \emph{can} hear the shape
+elastic shell model, the results suggest that, within the present Ritz model,
+one \emph{can} hear the shape
 of an oblate organ, in the sense that the local inverse problem for
 $(a,c,E)$ is well conditioned and statistically finite.  At the spherical
 limit, one cannot: the Jacobian becomes rank deficient and the Fisher matrix
@@ -36,20 +37,20 @@ modes $P_n(\eta)$ weight the meridional curvature gradient differently: low-orde
 modes sample both poles and equator broadly, while higher-order modes
 concentrate energy near the equator where the curvature gradient is steepest.
 This differential sampling breaks the proportionality of the $a$- and $c$-columns
-and restores full rank.  The smallest singular value admits the regular
-expansion~\eqref{eq:sigma_min_expansion}, with a curvature-channel floor
-$\sigma_0 > 0$ that prevents divergence as $\varepsilon \to 0$.  Because the
+and restores full rank.  The smallest singular value is well described by the polynomial
+fit~\eqref{eq:sigma_min_expansion}, whose regression intercept
+$\sigma_0 > 0$ reflects the presence of a finite floor.  Because the
 crossover eccentricity $\varepsilon_c = 1.48$ lies outside the physical domain,
-the curvature channel dominates at all realisable eccentricities, and the
-condition number saturates at $\kappa_\mathrm{floor}\approx 269$ rather than
-diverging.
+the intercept dominates at all realisable eccentricities, and the
+condition number saturates at $\kappa_\mathrm{floor}\approx 269$ (directly
+computed at $\varepsilon = 0.01$) rather than diverging.
 
 Figure~\ref{fig:oblate_prolate_comparison} sharpens that picture by contrasting
 oblate and prolate sweeps computed with the same five-mode set
 $\mathcal{N}=\{2,3,4,5,6\}$.  The oblate branch exhibits bounded but genuine
 identifiability restoration: $\kappa$ falls from the near-spherical floor to
 $\kappa=69.4$ at the canonical operating point $\varepsilon=0.745$, while
-$\sigma_{\min}$ grows above the curvature-channel floor
+$\sigma_{\min}$ grows above the regression intercept
 $\sigma_0\approx0.011$.  The prolate branch does not show the same lifting.
 Over its informative mid-range, $\kappa$ remains in the range
 $5.6\times10^2$--$7.3\times10^2$ and $\sigma_{\min}$ stays close to zero.  The
@@ -221,16 +222,17 @@ identifiability of spectral inverse problems on fluid-filled shells.
   combination unobservable.
 
   \item \textbf{Regular bounded} ($\sigma_0 > 0$, $\kappa$ finite and
-  generally favourable).  The oblate Ritz model has a positive curvature-channel floor,
+  generally favourable).  The oblate Ritz model has a positive regression
+  intercept $\sigma_0 > 0$ in the polynomial fit~\eqref{eq:sigma_min_expansion},
   with direct evaluation at $\varepsilon = 0.01$ giving
   $\sigma_{\min} = 0.00705$ and
   $\kappa_\mathrm{floor} \approx 269$ (five modes).  At the canonical oblate operating point
   the condition number generally improves to $\kappa = 69.4$
-  --- a factor of $3.9$.  The improvement is not strictly monotonic:
-  local non-monotonicity attributable to mode crossings in the Ritz eigenvalue
+  --- a factor of $3.9$.  The improvement is generally favourable but not
+  uniform: local variability attributable to mode crossings in the Ritz eigenvalue
   branches produces isolated spikes in $\kappa$ at intermediate eccentricities.
-  Because $\varepsilon_c = 1.48 > 1$, the curvature
-  channel dominates everywhere.  The inverse problem is well posed at all
+  Because $\varepsilon_c = 1.48 > 1$, the intercept
+  dominates everywhere.  The inverse problem is well posed at all
   physically realisable eccentricities, though the practitioner should be aware
   that the condition number may vary non-smoothly along the oblate branch.
 
@@ -329,10 +331,10 @@ The completeness of the three-group reduction has not been established
 rigorously; a formal proof would require verifying that no hidden similarity
 scaling further reduces the effective parameter dimension.
 
-\begin{remark}[Monotone improvement with mode count]
+\begin{remark}[Improvement with mode count]
 \label{rem:monotone}
 The numerical evidence of Table~\ref{tab:mode_count} shows that the
-Cram\'er--Rao bounds improve monotonically as the mode count $\mathcal{N}$
+Cram\'er--Rao bounds generally improve as the mode count $\mathcal{N}$
 increases from $3$ to $9$, with diminishing marginal returns beyond
 $\mathcal{N}=5$.  This is an expected consequence of overdetermination:
 each additional mode adds an independent row to the Jacobian, reducing the
