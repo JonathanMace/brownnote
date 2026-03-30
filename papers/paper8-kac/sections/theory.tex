@@ -213,6 +213,20 @@ proportionality $2$, independent of mode index $i$), so the geometric
 sub-Jacobian has rank one and the full $\mathbf{J}_s$ has rank at most two.
 \end{pf}
 
+\begin{remark}[Value reduction versus directional-derivative structure]
+The rank deficiency at $\varepsilon = 0$ has two distinct aspects that should
+not be conflated.  First, the \emph{values} of the frequencies become
+degenerate: modes that would be distinguishable on an oblate shell cluster
+together as the geometry approaches a sphere, reducing the effective
+information content of the spectrum.  Second, the \emph{directional-derivative
+structure} of the Jacobian degenerates: the columns for $a$ and $c$ become
+exactly proportional (by~\eqref{eq:ratio_chain}), rendering a parameter
+combination unobservable regardless of spectral precision.  Both effects
+worsen identifiability, but the second is the more fundamental obstruction
+--- it is algebraic rather than numerical and persists even with perfect
+frequency measurements.
+\end{remark}
+
 \begin{remark}
 The ratio~\eqref{eq:ratio_chain} is purely geometric: it reflects the exponents
 $(2,1)$ in $R_\mathrm{eq} = (a^2 c)^{1/3}$ and holds regardless of whether the
@@ -276,11 +290,35 @@ and the effective mass is
   \,\mathrm{d}\eta,
 \end{equation}
 with the geometric factor $G(\eta) = a^2\eta^2 + c^2(1-\eta^2)$ encoding
-meridional curvature variation.  At $a = c$ the integrands become
+meridional curvature variation.  The prestress contribution from
+intra-abdominal pressure is
+\begin{equation}\label{eq:ritz_pre}
+  \tilde K_\mathrm{pre}^{(n)}
+  =
+  P_\mathrm{iap} \int_0^1
+    N_1(\eta)\,\frac{(1-\eta^2)\,[P_n'(\eta)]^2}{G(\eta)}
+  \,\sqrt{G(\eta)}\,\mathrm{d}\eta,
+\end{equation}
+where $N_1(\eta)$ is the meridional membrane stress resultant under
+uniform internal pressure.
+At $a = c$ the integrands become
 $\eta$-independent and all expressions reduce to the equivalent-sphere
 formulae of Section~\ref{sec:theory}.  For $a \neq c$, each mode
 ``sees'' a different effective radius through the $G(\eta)$ weighting,
 which is the mechanism by which eccentricity breaks the rank degeneracy.
+
+The expressions~\eqref{eq:ritz_eigenvalue}--\eqref{eq:ritz_pre} are
+schematic reductions of the Ritz quotient, presented for physical
+interpretation of the individual stiffness and mass contributions.  The
+implemented Ritz solver constructs, for each harmonic order~$n$, a $2\times2$
+generalised eigenproblem $\mathbf{K}^{(n)}\mathbf{q}
+= \omega^2\mathbf{M}^{(n)}\mathbf{q}$ coupling normal ($\beta$) and
+tangential ($\alpha$) displacement coordinates.  The stiffness matrix
+$\mathbf{K}^{(n)}$ includes bending, membrane, prestress, and
+cross-coupling contributions; the mass matrix $\mathbf{M}^{(n)}$ includes
+shell and added fluid mass terms.  The reported eigenfrequency is the
+lowest eigenvalue branch of this coupled problem.  Full implementation
+details and source code are provided in the companion repository.
 
 \begin{remark}[Mode-dependent curvature sampling]\label{prop:eccentricity}
 The geometric factor $G(\eta)$ enters the Ritz stiffness and mass integrals

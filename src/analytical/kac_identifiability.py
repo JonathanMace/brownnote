@@ -1,4 +1,4 @@
-"""Practical identifiability of viscoelastic shell parameters from resonant
+"""Practical identifiability of elastic shell parameters from resonant
 frequencies — the inverse Kac problem for oblate spheroidal organs.
 
 Paper 8: "Can You Hear the Shape of an Organ?"
