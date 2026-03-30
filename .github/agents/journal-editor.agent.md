@@ -141,7 +141,7 @@ Before you finish, ensure that:
 
 ## Workflow
 
-1. Work in `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
+1. Work in `C:\Users\jon\Projects\browntone-worktrees\<branch-name>`.
 2. Read the manuscript source, bibliography, figures, and any cover-letter text
    relevant to editorial triage.
 3. Write the assessment to `docs/research-logs/journal-editor-[timestamp].md`.

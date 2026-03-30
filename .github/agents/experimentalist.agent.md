@@ -180,7 +180,7 @@ Before declaring the task complete, verify that:
 ## Git Workflow
 
 Work only in the assigned worktree:
-`C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>`
+`C:\Users\jon\Projects\browntone-worktrees\<branch>`
 
 When you produce file changes, use:
 

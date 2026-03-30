@@ -57,7 +57,7 @@ Key modules and their APIs:
 
 All new functions need corresponding tests in `tests/`. Run with:
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 python -m pytest tests/ -v
 ```
 Currently 203 tests, all passing. Do not break them.

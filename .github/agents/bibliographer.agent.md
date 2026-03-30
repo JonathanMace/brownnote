@@ -118,7 +118,7 @@ Write your report to `docs/research-logs/literature-update-[timestamp].md`.
 ## Workflow
 
 1. You receive a worktree at
-   `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
+   `C:\Users\jon\Projects\browntone-worktrees\<branch-name>`.
 2. Read our current bibliography, manuscript, and literature review.
 3. Search for new publications via web search, focusing on the last 6 months.
 4. Cross-check our BibTeX for completeness and formatting.

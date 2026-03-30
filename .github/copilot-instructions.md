@@ -17,8 +17,8 @@ vs mechanical (whole-body vibration) coupling.
 
 - **Target venue**: Journal of Sound and Vibration (JSV), Elsevier
 - **Remote**: `https://github.com/JonathanMace/brownnote`
-- **Main worktree**: `C:\Users\jon\OneDrive\Projects\browntone`
-- **Agent worktrees**: `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>`
+- **Main worktree**: `C:\Users\jon\Projects\browntone`
+- **Agent worktrees**: `C:\Users\jon\Projects\browntone-worktrees\<branch>`
 
 ---
 
@@ -127,13 +127,13 @@ Every computation must use these values unless explicitly varying a parameter.
 
 ```powershell
 # 1. Setup (the orchestrator does this before launching the agent)
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 git checkout main && git pull origin main --rebase
 git checkout -b <branch-name>
 git worktree add ..\browntone-worktrees\<branch-name> <branch-name>
 
 # 2. Work (the agent does all work in the worktree)
-cd C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>
+cd C:\Users\jon\Projects\browntone-worktrees\<branch-name>
 # ... make changes ...
 
 # 3. Commit + Push + PR + Merge + Cleanup (the agent does this when done)
@@ -197,7 +197,7 @@ Note: `src/browntone/` is LEGACY. Use `src/analytical/` for all model code.
 ## Paper Compilation
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
+cd C:\Users\jon\Projects\browntone\papers\paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex
@@ -252,8 +252,8 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `mace-writing-style` | Brian Mace's JSV structural conventions |
 | `semester-break` | End-of-hour reflection, tidy-up, and planning |
 
-Legacy one-file guides still present in `.github/skills/`: `mesh-convergence.md`,
-`run-simulation.md`, and `submit-paper.md`.
+Legacy one-file guides still present in `.github/skills/`: `generate-figures.md`,
+`mesh-convergence.md`, `run-simulation.md`, and `submit-paper.md`.
 
 
 ## Publication Pipeline

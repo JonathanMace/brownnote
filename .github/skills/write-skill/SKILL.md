@@ -238,7 +238,7 @@ Why it works:
 - failure branch for merge conflicts
 - concrete done-state rules
 
-See: `C:\Users\jon\OneDrive\Projects\browntone\.github\skills\git-checkpoint\SKILL.md:1-80`
+See: `C:\Users\jon\Projects\browntone\.github\skills\git-checkpoint\SKILL.md:1-80`
 
 #### Example B: `research-iteration`
 
@@ -249,7 +249,7 @@ Why it works:
 - contains sequencing, artifacts, and maintenance expectations
 - gives the agent a full loop rather than a single command
 
-See: `C:\Users\jon\OneDrive\Projects\browntone\.github\skills\research-iteration\SKILL.md:1-72`
+See: `C:\Users\jon\Projects\browntone\.github\skills\research-iteration\SKILL.md:1-72`
 
 ### 8.2 Weak or legacy local examples
 
@@ -261,7 +261,7 @@ Why it is weak as a Copilot skill:
 - frontmatter omits `name`
 - behaves more like a reference note than a discoverable skill package
 
-See: `C:\Users\jon\OneDrive\Projects\browntone\.github\skills\mesh-convergence.md:1-120`
+See: `C:\Users\jon\Projects\browntone\.github\skills\mesh-convergence.md:1-120`
 
 #### Example D: `critique-results`
 
@@ -270,7 +270,7 @@ Why it is risky:
 - duplicated YAML frontmatter (`---` block repeated twice)
 - extra duplicated metadata creates ambiguity and looks malformed to maintainers
 
-See: `C:\Users\jon\OneDrive\Projects\browntone\.github\skills\critique-results\SKILL.md:1-15`
+See: `C:\Users\jon\Projects\browntone\.github\skills\critique-results\SKILL.md:1-15`
 
 ## 9. Good and bad patterns
 

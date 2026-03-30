@@ -96,7 +96,7 @@ Derived: `R_eq=0.157 m`, `f₂=3.95 Hz`, `Q=4.0`, `ζ=0.125`, `ka=0.0114`
 ## Compilation
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone\papers\paper1-brown-note
+cd C:\Users\jon\Projects\browntone\papers\paper1-brown-note
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex

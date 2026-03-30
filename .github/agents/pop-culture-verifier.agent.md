@@ -129,7 +129,7 @@ Before you finish, ensure that:
 
 ## Workflow
 
-1. Work in `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
+1. Work in `C:\Users\jon\Projects\browntone-worktrees\<branch-name>`.
 2. Audit manuscript text and bibliography files for non-scientific references.
 3. Verify details on the web and update the manuscript or BibTeX as needed.
 4. Write the audit report to `docs/research-logs/pop-culture-audit-[timestamp].md`.

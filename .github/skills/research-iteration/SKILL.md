@@ -49,7 +49,7 @@ Include PDF snapshot: `YYYY-MM-DDTHHMM-paper-snapshot.pdf`
 
 ### 4. COMPILE
 ```powershell
-cd paper
+cd papers/paper1-brown-note  # adjust to the paper being compiled
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex

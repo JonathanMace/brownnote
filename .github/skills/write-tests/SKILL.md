@@ -37,6 +37,6 @@ You are writing or editing tests for the browntone analytical suite.
 ## Import Pattern
 ```python
 import sys
-sys.path.insert(0, r'C:\Users\jon\OneDrive\Projects\browntone')
+sys.path.insert(0, r'C:\Users\jon\Projects\browntone')
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
 ```

@@ -107,7 +107,7 @@ Write your report to `docs/research-logs/provocateur-[timestamp].md`.
 ## Workflow
 
 1. You receive a worktree at
-   `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
+   `C:\Users\jon\Projects\browntone-worktrees\<branch-name>`.
 2. Read the current state of the programme: vision doc, latest paper draft,
    recent review logs, and research ideas.
 3. Search for counter-evidence and competing theories via web search and

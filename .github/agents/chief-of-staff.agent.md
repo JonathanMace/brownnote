@@ -42,7 +42,7 @@ Read these files to understand current state:
 
 Then run:
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 git checkout main
 git pull origin main
 git --no-pager log --oneline -15
@@ -92,7 +92,7 @@ git worktree list
 
 For each worktree whose branch is already merged to main:
 ```powershell
-git worktree remove C:\Users\jon\OneDrive\Projects\browntone-worktrees\<name> --force
+git worktree remove C:\Users\jon\Projects\browntone-worktrees\<name> --force
 ```
 
 For branches that are merged but still exist locally:

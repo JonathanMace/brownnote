@@ -14,7 +14,7 @@ Execute the browntone analytical pipeline and verify outputs match canonical val
 
 ### 1. Modal Frequencies
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 python -c "
 from src.analytical.natural_frequency_v2 import AbdominalModelV2, flexural_mode_frequencies_v2
 model = AbdominalModelV2(E=0.1e6, a=0.18, c=0.12, h=0.01, nu=0.45, rho_wall=1100, rho_fluid=1020, K_fluid=2.2e9, P_iap=1000, loss_tangent=0.25)

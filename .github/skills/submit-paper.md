@@ -61,7 +61,7 @@ Complete checklist for preparing and submitting the browntone manuscript.
 ### 6. LaTeX Compilation
 
 ```bash
-cd paper
+cd papers/paper1-brown-note  # adjust to the paper being submitted
 latexmk -pdf -interaction=nonstopmode main.tex
 ```
 

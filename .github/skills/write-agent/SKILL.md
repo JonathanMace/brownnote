@@ -742,7 +742,7 @@ access to the local house rules in one place.
         Every agent that produces file changes should encode the current lab workflow:
 
         ```text
-        1. Work in an assigned worktree: C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>
+        1. Work in an assigned worktree: C:\Users\jon\Projects\browntone-worktrees\<branch>
         2. Commit: git add -A && git commit -m "[category] Description\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
         3. Push: git push origin <branch>
         4. Create a PR: gh pr create --base main --head <branch> ...

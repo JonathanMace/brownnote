@@ -14,7 +14,7 @@ The complete workflow for getting changes from a worktree into main.
 ### From a worktree (agent or orchestrator):
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch>
+cd C:\Users\jon\Projects\browntone-worktrees\<branch>
 
 # 1. Commit
 git add -A
@@ -52,7 +52,7 @@ git push origin --delete <branch>
 ### From the main worktree (orchestrator quick fix):
 
 ```powershell
-cd C:\Users\jon\OneDrive\Projects\browntone
+cd C:\Users\jon\Projects\browntone
 git checkout -b <short-lived-branch>
 # ... make changes ...
 git add -A

@@ -140,7 +140,7 @@ Write your report to `docs/research-logs/maintenance-[timestamp].md`.
 ## Workflow
 
 1. You receive a worktree at
-   `C:\Users\jon\OneDrive\Projects\browntone-worktrees\<branch-name>`.
+   `C:\Users\jon\Projects\browntone-worktrees\<branch-name>`.
 2. Systematically check each area of your mandate.
 3. Apply safe fixes directly (README corrections, gitignore additions,
    broken link fixes).
