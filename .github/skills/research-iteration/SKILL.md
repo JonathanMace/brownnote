@@ -4,6 +4,7 @@ description: >
   Full research iteration protocol: DO → REVIEW → LOG → COMPILE → COMMIT → PLAN.
   Use when starting a new iteration cycle or when you need to remember the
   correct sequence of steps.
+license: MIT
 ---
 
 # Research Iteration Protocol

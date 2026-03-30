@@ -3,6 +3,7 @@ name: compile-paper
 description: >
   Compile the LaTeX paper, preserve timestamped PDF, and report any errors.
   Use this after any paper content changes.
+license: MIT
 ---
 
 # Paper Compiler Skill

@@ -3,6 +3,7 @@ name: mace-writing-style
 description: >
   Writing style guide based on Brian Mace's published works.
   Use when drafting or editing text to match Brian's voice.
+license: MIT
 ---
 
 # Mace Academic Writing Style

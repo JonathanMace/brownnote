@@ -4,6 +4,7 @@ description: >
   Structured 10-minute break at the top of each wallclock hour. Use this
   skill when the current_datetime shows :00-:10 of any hour. Wind down
   running work, then reflect, tidy, and prepare for the next semester.
+license: MIT
 ---
 
 # Semester Break

@@ -2,6 +2,7 @@
 name: write-paper
 description: >
   Guide for writing and formatting the journal paper. Use when drafting sections, managing references, or preparing for submission to the Journal of Sound and Vibration.
+license: MIT
 ---
 
 # Write Paper Skill

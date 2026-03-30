@@ -4,6 +4,7 @@ description: >
   Run the full analytical computation pipeline: modal frequencies, parametric
   sweeps, mechanotransduction analysis, and figure generation. Use when you
   need to regenerate results after code changes.
+license: MIT
 ---
 
 # Run Analysis Skill

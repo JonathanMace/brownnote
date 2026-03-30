@@ -244,16 +244,18 @@ Copy-Item main.pdf "drafts\draft_$ts.pdf"
 | `write-analysis` | Guide for analytical model code in `src/analytical/` |
 | `write-tests` | Guide for pytest tests in `tests/` |
 | `write-research-log` | Guide for research log entries in `docs/research-logs/` |
-| `write-agent` | Guide for authoring Browntone custom agents |
-| `write-skill` | Guide for authoring Copilot CLI skills |
-| `write-instructions` | Guide for authoring `copilot-instructions.md` and related configuration |
+| `write-agent` | Author custom agent definitions (gold-standard reference) |
+| `write-skill` | Author Copilot CLI skills (gold-standard reference) |
+| `write-instructions` | Author copilot-instructions and path-specific instructions |
 | `git-checkpoint` | Branch→PR→merge→cleanup workflow |
 | `jmace-writing-style` | Jonathan Mace's active, confident style |
 | `mace-writing-style` | Brian Mace's JSV structural conventions |
 | `semester-break` | End-of-hour reflection, tidy-up, and planning |
-
-Legacy one-file guides still present in `.github/skills/`: `generate-figures.md`,
-`mesh-convergence.md`, `run-simulation.md`, and `submit-paper.md`.
+| `session-analysis` | Analyse Copilot CLI session logs for debugging and efficiency |
+| `writing-hooks` | Author hooks.json for pre/post tool guards and automation |
+| `mesh-convergence` | FEA mesh convergence with Richardson extrapolation and GCI |
+| `run-simulation` | Full mesh→solve→postprocess simulation pipeline |
+| `submit-paper` | Pre-submission checklist for journal manuscripts |
 
 
 ## Publication Pipeline

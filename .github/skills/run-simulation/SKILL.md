@@ -1,7 +1,10 @@
 ---
-description: >
-  Step-by-step guide for running a simulation from mesh generation through
-  solving to post-processing. Covers the full mesh → solve → postprocess pipeline.
+name: run-simulation
+description: >-
+  Run a complete browntone simulation from mesh generation through solving to
+  post-processing.  Use when running the full mesh → solve → postprocess
+  pipeline or setting up a new simulation.
+license: MIT
 ---
 
 # Skill: Run Simulation

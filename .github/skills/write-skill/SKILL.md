@@ -1,441 +1,294 @@
 ---
 name: write-skill
-description: >
-  Guide for writing effective Copilot CLI skill files. Use when creating, reviewing, or restructuring skills under .github/skills/.
+description: >-
+  Skills teach agents reusable procedures, workflows, and domain expertise
+  they can invoke by name or that auto-activate from context.  Use this skill
+  to author a SKILL.md, package a repeatable workflow, or set up a
+  .github/skills directory.
+license: MIT
 ---
 
-# Skill Author Reference
+# Authoring Agent Skills for GitHub Copilot CLI
 
-Practical guidance for writing reusable skill files for GitHub Copilot CLI and adjacent agentic coding tools.
+Agent skills are folders of instructions, scripts, and resources that Copilot loads on-demand to improve its performance on specialized tasks. Each skill is a self-contained directory with a `SKILL.md` file and optional supporting assets.
 
-## 1. What a skill is
+A well-authored skill should let a future contributor repeat the same workflow without relying on session history or tribal knowledge.
 
-In GitHub Copilot, an **agent skill** is a folder of instructions, scripts, and resources that Copilot loads **only when relevant to the task**. Officially, skills live in `.github/skills/<skill-name>/SKILL.md` (or the equivalent `.claude/skills/` / `.agents/skills/` locations), and Copilot chooses them by matching the task against the skill description.  
-Sources: GitHub Docs — create skills: <https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-skills>; customization cheat sheet: <https://docs.github.com/en/copilot/reference/customization-cheat-sheet>
+## Procedure: Authoring a Skill
 
-**Use a skill when** you want reusable, on-demand workflow guidance.  
-**Do not use a skill when** the rule should always apply, when you need a dedicated persona/tool budget, or when the output should become a durable seeded file.
+1. **Decide whether a skill is the right mechanism** (see [When to Author a Skill](#when-to-author-a-skill-vs-other-customization) below).
+2. **Inspect neighboring skills first** — if the repository already has skills in `.github/skills/`, match their frontmatter shape, tone, and structural conventions for consistency.
+3. **Define the trigger before authoring** — articulate the kind of request or task that should cause Copilot to load this skill. This becomes your `description` field and sets the scope boundary for the entire skill.
+4. **Choose a placement** — for Copilot CLI, prefer project-level (`.github/skills/`) or personal (`~/.copilot/skills/`).
+5. **Create a directory** named in lowercase with hyphens (e.g., `github-actions-debugging`).
+6. **Author the `SKILL.md`** — author YAML frontmatter (`name`, `description`, optional `license`) followed by a Markdown body with instructions. Keep the body narrowly scoped to the trigger you defined in step 3. If the domain is broad, use the dispatcher pattern (see [Scaling Skills: The Dispatcher Pattern](#scaling-skills-the-dispatcher-pattern)) — keep the SKILL.md thin and point to deeper content files.
+7. **Add supporting files** (optional) — scripts, templates, or examples in the skill directory.
+8. **Review as if new to the repo** — re-read the skill from the perspective of someone who has never seen the repository. It should clearly explain when to use it, what steps to follow, what "done" looks like, and which related docs or validations must accompany the change.
+9. **Test the skill** — run `/skills reload`, then prompt Copilot with a task that should trigger it. Verify it activates and produces good results.
 
-## 2. Canonical GitHub Copilot skill layout
+## When to Author a Skill (vs Other Customization)
 
-Official layout:
+- **Author a skill** for repeatable, task-specific instructions that Copilot should only load when relevant (e.g., debugging CI failures, generating tests, reviewing PRs).
+- **Author custom instructions** (`.github/copilot-instructions.md`) for broad, always-on guidance like coding standards that apply to every task (see the `writing-custom-instructions` skill).
+- **Author a custom agent** (`.agent.md`) when you need a specialized persona with constrained tools or a distinct approach (see the `writing-custom-agents` skill).
 
-```text
-.github/
-  skills/
-    my-skill/
-      SKILL.md
-      scripts/        # optional
-      examples/       # optional
-      assets/         # optional
+Skills are the right choice when you want "just-in-time" expertise without permanently enlarging the context window.
+
+## Directory Structure
+
+```
+.github/skills/
+└── my-skill-name/
+    ├── SKILL.md              # Required — skill definition
+    ├── scripts/              # Optional — helper scripts
+    │   └── run-checks.sh
+    └── templates/            # Optional — templates, examples
+        └── checklist.md
 ```
 
-Officially supported locations include:
+### Placement Options
 
-- project: `.github/skills/`, `.claude/skills/`, `.agents/skills/`
-- personal: `~/.copilot/skills/`, `~/.claude/skills/`, `~/.agents/skills/`
+| Scope | Location |
+|-------|----------|
+| **Project skills** (single repo) | `.github/skills/` in repo root |
+| **Personal skills** (all repos) | `~/.copilot/skills/` in your home directory |
 
-The subdirectory name should be lowercase and use hyphens. `SKILL.md` is required and must be named exactly `SKILL.md`.  
-Source: <https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills>
+Copilot CLI can also read `.claude/skills/`, `.agents/skills/`, and their home-directory equivalents for compatibility. For Copilot-focused repositories, prefer `.github/skills/` and `~/.copilot/skills/`.
 
-## 3. YAML frontmatter: what is actually supported
+### Naming Rules
 
-### 3.1 Official GitHub fields
+- Directory name: **lowercase, hyphens for spaces** (e.g., `github-actions-debugging`)
+- The directory name should match the `name` field in the YAML frontmatter
+- Use descriptive, specific names that convey the skill's purpose
 
-GitHub’s current public docs for Copilot skills document:
+## SKILL.md Format
+
+Every skill requires a `SKILL.md` file (the filename must be exactly `SKILL.md`). It consists of **YAML frontmatter** followed by a **Markdown body**.
+
+### YAML Frontmatter
 
 ```yaml
 ---
-name: my-skill
-description: >
-  What the skill does, and when Copilot should use it.
-license: MIT   # optional
+name: release-notes
+description: >-
+  Produce consistent, well-structured release notes by summarizing changes,
+  categorizing features and fixes, and applying repository-specific checks.
+  Use when drafting release notes, changelog entries, or release summaries.
+license: MIT
 ---
 ```
 
-Field guidance:
+Include `license` only when you want to declare the license for the skill; otherwise omit it.
 
-| Field | Status | Notes |
-| --- | --- | --- |
-| `name` | Required | Lowercase, hyphens, usually matches directory name. |
-| `description` | Required | Must say both **what** the skill does and **when to use it**. |
-| `license` | Optional | Useful for portable/public skills; often omitted in repo-local skills. |
+| Property | Required | Description |
+|----------|----------|-------------|
+| `name` | **Yes** | Unique identifier. Lowercase, hyphens for spaces. It should match the directory name, and in this repo you should keep them identical. |
+| `description` | **Yes** | Explains what the skill does AND when to use it. This is critical — Copilot matches user prompts against this text to decide whether to load the skill. |
+| `license` | No | License that applies to the skill. |
 
-Source: <https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-skills>
+### Writing an Effective Description
 
-### 3.2 About `tools`
+The `description` is the single most important field. Copilot uses it to decide when to auto-invoke the skill. Write **purpose-first** descriptions:
 
-For **GitHub Copilot skills**, `tools` is **not** part of the public official skill schema. GitHub documents `tools` for **custom agents**, not for skills.  
-Sources: custom agents config: <https://docs.github.com/en/copilot/reference/custom-agents-configuration>; create custom agents: <https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents>
+1. **Lead with what the artifact achieves** — the first sentence should explain the capability or outcome so agents discover the skill even when they don't know the Copilot CLI term for it.
+2. **State when to use it** — include trigger phrases and keywords that users would naturally type.
+3. **Be specific** — vague descriptions cause false matches or missed invocations.
+4. **Keep it concise** — 1–3 short sentences is usually enough.
 
-Some community material and the broader Agent Skills ecosystem mention extra fields such as `allowed-tools`, `compatibility`, or `metadata`, but these are not the safest portable default for Copilot CLI skills. For this repository, prefer **only**:
+**Good examples (purpose-first):**
 
-- `name`
-- `description`
-- optional `license`
-
-Unless GitHub’s official docs change, do **not** invent a `tools` field in `SKILL.md`.
-
-## 4. Recommended body structure
-
-The Markdown body is free-form, but the best skills are structured as an executable workflow rather than as prose.
-
-Recommended template:
-
-```md
----
-name: my-skill
-description: >
-  One-sentence trigger. Use when ...
----
-
-# My Skill
-
-One-sentence purpose.
-
-## Inspect First
-
-- Related file or doc
-- Relevant tests or manifest
-- Existing examples to copy
-
-## Workflow
-
-1. First action.
-2. Next decision.
-3. Validation step.
-4. Docs-sync or follow-up step.
-
-## Output / Done Criteria
-
-- Expected artifact(s)
-- What must be true before stopping
-
-## Related Assets
-
-- Link to agents, instructions, prompts, commands, or docs
+```yaml
+# First sentence explains what the skill achieves, not what it is
+description: >-
+  Diagnose and fix failing GitHub Actions workflows by analyzing logs,
+  reproducing failures locally, and applying targeted fixes.  Use when
+  asked to debug, fix, or investigate CI/CD failures or broken builds.
 ```
 
-Useful sections:
-
-| Section | Why include it |
-| --- | --- |
-| `Inspect First` | Prevents the skill from acting without reading the local source of truth. |
-| `Workflow` | Core ordered steps. This is the most important section. |
-| `Decision points` | Helps the agent branch correctly instead of guessing. |
-| `Output` / `Done Criteria` | Makes completion verifiable. |
-| `Constraints` | Good when the skill must stay read-only or avoid certain files. |
-| `Validation` | Prevents “write and hope” behaviour. |
-| `Related Assets` | Avoids duplicating large documents or agent definitions. |
-
-`Identity`, `procedure`, `output format`, `constraints`, and `quality gates` are excellent sections when they genuinely help execution; they are good **design patterns**, not GitHub-required syntax.
-
-## 5. What makes a skill effective
-
-Good Copilot skills have five properties:
-
-1. **Clear trigger**  
-   The description should say when the skill should load.
-2. **Narrow scope**  
-   One reusable workflow per skill.
-3. **Ordered actions**  
-   The body should tell the agent what to inspect, decide, do, and validate.
-4. **Cross-references instead of duplication**  
-   Link to the durable source of truth.
-5. **Verifiable done state**  
-   End with validation, output expectations, or docs-sync.
-
-This matches both GitHub’s official “description decides relevance” model and the CopilotCLInit guidance for writing skills as reusable workflows rather than short reminders.  
-Sources: GitHub skill docs above; CopilotCLInit plugin asset guide: `C:\Users\jon\.copilot\installed-plugins\_direct\JonathanMace--CopilotCLInit\docs\guides\plugin-assets.md:26-37`
-
-## 6. Skill vs agent vs instructions vs prompt vs hook
-
-For GitHub Copilot, use the smallest correct surface:
-
-| Need | Use | Why |
-| --- | --- | --- |
-| Always-on project rules | Instructions | They apply automatically to broad work. |
-| Reusable on-demand workflow | Skill | Loaded only when relevant. |
-| Explicit one-shot task template | Prompt file / command | Manual entrypoint. |
-| Specialist persona or restricted tools | Custom agent | Better isolation and specialization. |
-| Deterministic lifecycle automation | Hook | Runs at fixed lifecycle events. |
-
-Official Copilot comparison: <https://docs.github.com/en/copilot/reference/customization-cheat-sheet>
-
-Repo-specific guidance from CopilotCLInit says the same in operational terms: instructions are broad policy, skills are on-demand workflow guidance, agents are specialized delegated work, and seed-pack artifacts are durable files copied into target repositories.  
-Source: `C:\Users\jon\.copilot\installed-plugins\_direct\JonathanMace--CopilotCLInit\docs\guides\plugin-assets.md:5-15`
-
-## 7. Cross-tool comparison
-
-There is no perfect one-to-one mapping across tools.
-
-| Tool | Closest equivalent to a Copilot skill | Notes |
-| --- | --- | --- |
-| **GitHub Copilot CLI / coding agent** | `.github/skills/<name>/SKILL.md` | True skill system; relevance-based loading. |
-| **Claude Code** | No exact direct equivalent; combine `CLAUDE.md`, `.claude/rules/*.md`, and commands/agents | `CLAUDE.md` is always-on memory, not on-demand skill loading. |
-| **Cursor** | `.cursor/rules/*.mdc` or `AGENTS.md` | Rules are persistent/scoped instructions, not true “skills”. |
-| **Windsurf** | Workflows plus rules | Workflows are the closest match for multi-step reusable procedures; rules are more like instructions. |
-
-### 7.1 Claude Code
-
-Claude Code’s main primitives are:
-
-- `CLAUDE.md` for persistent shared or personal instructions
-- `.claude/rules/*.md` for modular or path-scoped rules
-- optional agents/commands under `.claude/`
-
-Important difference: `CLAUDE.md` is loaded at session start and should stay concise; it is **not** a relevance-triggered skill file.  
-Source: official Claude Code memory docs: <https://code.claude.com/docs/en/memory>
-
-Practical mapping:
-
-- Copilot **instruction** ↔ Claude `CLAUDE.md` or unconditional `.claude/rules/*.md`
-- Copilot **path-specific instruction** ↔ Claude `.claude/rules/*.md` with `paths:` frontmatter
-- Copilot **skill** ↔ Claude command/agent + referenced workflow doc, not a single native file type
-
-### 7.2 Cursor
-
-Cursor’s modern rule system lives in `.cursor/rules/` and supports persistent project, user, and team rules, with `AGENTS.md` also recognized. This is closer to Copilot **instructions** than to Copilot **skills**.  
-Source: Cursor docs: <https://cursor.com/docs/rules>
-
-Practical mapping:
-
-- Put always-on conventions in Cursor rules.
-- For a “skill-like” reusable workflow, create a focused rule file plus a command or explicit invocation convention.
-- Avoid using deprecated `.cursorrules` for new work unless a legacy repo already relies on it.
-
-### 7.3 Windsurf
-
-Windsurf distinguishes:
-
-- **Rules** for persistent guidance
-- **Workflows** for reusable multi-step automation
-- **Memories** for retained context
-
-That makes Windsurf **workflows** the closest conceptual match to Copilot skills.  
-Source: official Windsurf overview: <https://windsurf.com/university/general-education/intro-rules-memories>
-
-## 8. Repo-local patterns found in `browntone`
-
-This repository currently contains **two patterns**:
-
-1. **Modern, GitHub-compliant folder skills**  
-   Example: `.github/skills/git-checkpoint/SKILL.md`
-2. **Legacy flat Markdown notes in `.github/skills/*.md`**  
-   Example: `.github/skills/mesh-convergence.md`
-
-Only the first pattern matches GitHub’s documented skill layout.
-
-### 8.1 Good local examples
-
-#### Example A: `git-checkpoint`
-
-Why it works:
-
-- clean official frontmatter
-- explicit trigger in description
-- numbered operational workflow
-- failure branch for merge conflicts
-- concrete done-state rules
-
-See: `C:\Users\jon\Projects\browntone\.github\skills\git-checkpoint\SKILL.md:1-80`
-
-#### Example B: `research-iteration`
-
-Why it works:
-
-- strong reuse trigger
-- workflow broken into named phases
-- contains sequencing, artifacts, and maintenance expectations
-- gives the agent a full loop rather than a single command
-
-See: `C:\Users\jon\Projects\browntone\.github\skills\research-iteration\SKILL.md:1-72`
-
-### 8.2 Weak or legacy local examples
-
-#### Example C: `mesh-convergence.md`
-
-Why it is weak as a Copilot skill:
-
-- lives at `.github/skills\mesh-convergence.md`, not `.github/skills/mesh-convergence/SKILL.md`
-- frontmatter omits `name`
-- behaves more like a reference note than a discoverable skill package
-
-See: `C:\Users\jon\Projects\browntone\.github\skills\mesh-convergence.md:1-120`
-
-#### Example D: `critique-results`
-
-Why it is risky:
-
-- duplicated YAML frontmatter (`---` block repeated twice)
-- extra duplicated metadata creates ambiguity and looks malformed to maintainers
-
-See: `C:\Users\jon\Projects\browntone\.github\skills\critique-results\SKILL.md:1-15`
-
-## 9. Good and bad patterns
-
-### Good
-
-```md
----
-name: compile-paper
-description: >
-  Compile the LaTeX paper, preserve timestamped PDF, and report any errors.
-  Use this after any paper content changes.
----
-
-# Compile Paper
-
-## Inspect First
-- `papers/paper1-brown-note/main.tex`
-- latest log if compilation is already failing
-
-## Workflow
-1. Run the standard compile sequence.
-2. Check for errors and warnings.
-3. Preserve a timestamped PDF.
-4. Report output artifact details.
-
-## Done
-- `papers/paper1-brown-note/main.pdf` exists
-- archived draft copy exists
-- errors are reported or cleared
+```yaml
+description: >-
+  Hooks automatically run commands before or after agent actions —
+  logging activity, blocking unsafe commands, or triggering side effects.
+  Use this skill to author hooks.json files or add pre/post tool guards.
 ```
 
-Why it is good:
+**Bad examples:**
 
-- short trigger
-- inspect-first guidance
-- ordered steps
-- verifiable end state
+```yaml
+# Tautological — requires the user to already know the term
+description: Guide for authoring GitHub Actions debugging skills.
 
-### Bad
+# Too vague — when would Copilot use this?
+description: Helps with code stuff.
 
-```md
----
-description: Helps with papers.
----
-
-Write the paper well. Check everything. Use the right style.
+# Too narrow — misses many valid prompts
+description: Use only when user types exactly "run the test helper".
 ```
 
-Why it is bad:
+### Markdown Body
 
-- missing `name`
-- trigger is vague
-- no ordered workflow
-- no inspection points
-- no validation
+The body contains the actual instructions Copilot will follow when the skill is loaded. Author these instructions as if you are onboarding a skilled developer who has never seen your project.
 
-## 10. Anti-patterns
+**Structure your instructions with:**
 
-Avoid these:
+1. **Context** — brief background on what the skill addresses
+2. **Step-by-step procedure** — numbered steps Copilot should follow
+3. **Rules and constraints** — what to do and what to avoid
+4. **Cross-references** — call out related agents, docs, hooks, or other skills rather than duplicating their content
+5. **Examples** — concrete input/output samples when helpful
+6. **Done criteria** — what "done" looks like, including any validation or documentation steps
 
-1. **Vague description**  
-   “Helps with docs” is too broad. Say what task should trigger the skill.
-2. **Background dump instead of workflow**  
-   Skills are operational. Long essays belong in docs.
-3. **Duplicating agent logic**  
-   If the work needs specialized delegation or a restricted tool budget, write an agent.
-4. **Policy in a skill that should be always-on**  
-   Repository-wide coding standards belong in instructions.
-5. **Missing validation**  
-   Every workflow should state what to run or check at the end.
-6. **Malformed frontmatter**  
-   Missing `name`, duplicate YAML blocks, or ad hoc fields reduce portability.
-7. **Flat legacy placement**  
-   `.github/skills/foo.md` is not the documented GitHub format.
-8. **No “inspect first” step**  
-   Skills should point the agent at the source of truth before acting.
-9. **Hidden assumptions**  
-   If a workflow depends on another doc, manifest, script, or agent, say so.
+The instructions should tell Copilot what to do, when to use supporting files, and how to recognize completion without relying on session history.
 
-## 11. Best-practice authoring rules for this repository
+For **procedural skills** (e.g., "debug CI failures"), use a numbered step-by-step workflow. For **reference skills** (e.g., "how to author X"), organize by topic with sections and tables, but still include a top-level procedure summarizing the authoring workflow.
 
-When authoring a new skill in `browntone`:
+Prefer cross-references over duplication — link to the durable doc, agent, or skill that owns deeper context instead of embedding long background sections.
 
-1. Use `.github/skills/<skill-name>/SKILL.md`.
-2. Keep frontmatter to `name` + `description` (+ optional `license`).
-3. Start by naming the trigger: “Use when...”
-4. Lead with what the reader should inspect first.
-5. Write numbered workflow steps.
-6. Add validation or completion criteria.
-7. Cross-reference related docs/agents instead of pasting their full contents.
-8. If the content is durable repository scaffolding, consider a seed-pack instead.
-9. If the task needs a persona or bounded tools, consider an agent instead.
-
-This matches both the official GitHub skill model and the CopilotCLInit `write-skills` guidance.
-
-## 12. Seed-pack note (CopilotCLInit)
-
-`CopilotCLInit` appears to define a **repo-specific** seed-pack system. This is **not** a GitHub-native Copilot skill format; it is plugin-specific scaffolding.
-
-In that plugin, each `seed-packs/*/manifest.json` contains:
-
-- `name`
-- `version`
-- `entries[]`
-  - `id`
-  - `source`
-  - `target`
-  - `modes` (`init`, `enrich`)
-  - `strategy` (`create-if-missing`)
-  - optional `description`
-  - optional `conflict_hint`
-
-Sources:
-
-- `C:\Users\jon\.copilot\installed-plugins\_direct\JonathanMace--CopilotCLInit\docs\architecture\seed-pack-contract.md:5-18`
-- `C:\Users\jon\.copilot\installed-plugins\_direct\JonathanMace--CopilotCLInit\seed-packs\core\manifest.json`
-
-Treat this as **plugin-local infrastructure**, not as part of GitHub Copilot’s official skill syntax.
-
-## 13. Review checklist before committing a skill
-
-- [ ] File is at `.github/skills/<skill-name>/SKILL.md`
-- [ ] Directory name is lowercase kebab-case
-- [ ] `name` exists and matches directory name
-- [ ] `description` says both **what it does** and **when to use it**
-- [ ] No unsupported frontmatter fields added casually
-- [ ] Body starts with purpose and/or inspect-first guidance
-- [ ] Workflow is ordered and actionable
-- [ ] Related docs/agents/scripts are referenced
-- [ ] Completion or validation criteria are explicit
-- [ ] Skill does not duplicate broad project policy better kept in instructions
-- [ ] Skill does not pretend to be an agent with hidden specialization requirements
-- [ ] If the workflow produces durable repo scaffolding, you evaluated seed-pack/command alternatives
-
-## 14. Minimal starter template
-
-```md
+```markdown
 ---
-name: example-skill
-description: >
-  Briefly say what this skill does. Use when the task is ...
+name: github-actions-failure-debugging
+description: >-
+  Diagnose and fix failing GitHub Actions workflows by analyzing logs,
+  reproducing failures locally, and applying targeted fixes.  Use when
+  asked to debug, fix, or investigate CI/CD failures or broken builds.
 ---
 
-# Example Skill
+To debug failing GitHub Actions workflows, follow this process:
 
-One-sentence purpose.
-
-## Inspect First
-
-- `path/to/source-of-truth`
-- neighboring skill or doc
-
-## Workflow
-
-1. Read the source of truth.
-2. Decide which branch of the workflow applies.
-3. Perform the change or analysis.
-4. Validate the result.
-5. Update related docs if the behaviour changed.
-
-## Done
-
-- Expected artifact exists
-- Validation has run
-- Related docs are synchronized
+1. Use `list_workflow_runs` to look up recent workflow runs and their status
+2. Use `summarize_job_log_failures` to get an AI summary of the failure logs
+3. If more detail is needed, use `get_job_logs` for full logs
+4. Try to reproduce the failure locally
+5. Fix the failing build and verify the fix before committing
 ```
 
-This template is the default starting point for new Copilot skills in this repository.
+## Referencing Supporting Files
+
+You can include scripts, templates, and other assets in the skill directory and reference them in the instructions. Reference them by relative path and explain when Copilot should use them:
+
+```markdown
+When creating a new test file, use the template at `templates/test-template.md`
+as a starting point.
+
+To run the validation checks, execute `scripts/validate.sh` from the skill
+directory.
+```
+
+Copilot can read and execute files within the skill directory when instructed to do so.
+
+## Scaling Skills: The Dispatcher Pattern
+
+### The Problem
+
+Copilot auto-loads every skill's `description` into context on every LLM call to decide which skills are relevant. At scale (dozens or hundreds of skills), this description overhead becomes significant. Additionally, complex domains may need far more content than fits comfortably in a single SKILL.md body without bloating the context when the skill fires.
+
+### The Solution: Thin Dispatchers with Deep Content
+
+Keep the `SKILL.md` thin — just a purpose-first description and a short body that **points the agent to deeper content files**. The agent is intelligent enough to open and follow any file you reference. Only the description is always loaded; the body is loaded only on match; and the referenced files are loaded only when the agent reads them.
+
+```
+.github/skills/
+└── ci-workflows/
+    ├── SKILL.md              # Thin dispatcher: description + routing logic
+    └── guides/
+        ├── debugging.md      # Deep content: CI debugging procedure
+        ├── authoring.md      # Deep content: writing new workflows
+        └── optimization.md   # Deep content: speeding up slow pipelines
+```
+
+### Dispatcher SKILL.md Example
+
+```markdown
+---
+name: ci-workflows
+description: >-
+  Diagnose failing CI pipelines, author new GitHub Actions workflows, and
+  optimize slow builds.  Use when asked to debug CI, fix broken builds,
+  write or edit GitHub Actions workflows, or speed up pipelines.
+---
+
+# CI Workflows
+
+This skill covers CI/CD with GitHub Actions. Read the guide that matches
+the task:
+
+- **Debugging a failure** — read and follow `guides/debugging.md`
+- **Authoring a new workflow** — read and follow `guides/authoring.md`
+- **Optimizing pipeline speed** — read and follow `guides/optimization.md`
+
+If the task spans multiple areas, read the relevant guides in order.
+```
+
+### When to Use the Dispatcher Pattern
+
+- The domain is broad enough that a single SKILL.md body would exceed ~200 lines or cover distinct sub-tasks.
+- You want a single description to cover several related capabilities without registering each as a separate skill.
+- Multiple skills or agents need to reference the same deep content — put the content in a shared location and point to it from each.
+
+### When NOT to Use It
+
+- The skill is simple enough to fit comfortably in a single SKILL.md body (~50-150 lines). Don't over-engineer.
+- The sub-topics are unrelated enough that they deserve separate descriptions for auto-matching. In that case, author separate skills.
+
+### Guidelines for Dispatcher Skills
+
+1. **Keep the dispatcher body short** — its job is routing, not teaching. A list of sub-topics with file references is enough.
+2. **Make routing unambiguous** — the agent should be able to pick the right file from the task description without guessing.
+3. **Deep content files follow the same structure as a SKILL.md body** — procedure, rules, examples, done criteria. They just lack frontmatter.
+4. **Use conditional routing when needed** — "If the project uses Python, read `guides/python.md`; if TypeScript, read `guides/typescript.md`."
+5. **Cross-reference freely** — deep content files can reference other files, scripts, templates, or even other skills.
+
+## How Skills Are Invoked (Context for Authors)
+
+Understanding how skills are invoked helps you author better descriptions and instructions.
+
+### Automatic Invocation
+
+Copilot automatically loads a skill when it determines the skill is relevant to the current task, based on the skill's `description` matching the user's prompt. When that happens, the `SKILL.md` body is added to the agent's context. This is why the `description` field is critical — it controls discoverability, while the body supplies the working instructions.
+
+### Manual Invocation
+
+Users can invoke a skill explicitly by prefixing its name with `/` in their prompt:
+
+```
+Use the /github-actions-failure-debugging skill to fix the CI failures.
+```
+
+### Skills Management Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/skills list` | List all available skills |
+| `/skills` | Toggle skills on/off interactively |
+| `/skills info` | View detailed info about a skill (including location) |
+| `/skills reload` | Reload skills without restarting the CLI |
+| `/skills add` | Add an alternative skills directory |
+| `/skills remove SKILL-DIR` | Remove a directly-added skill |
+
+## Done Criteria
+
+- Skill directory created with lowercase-hyphen name matching `name` frontmatter field
+- `SKILL.md` has valid YAML frontmatter (`name`, `description`, and optionally `license`)
+- Description is purpose-first — first sentence explains what the skill achieves, not what it is
+- Description includes trigger phrases for auto-invocation
+- Body includes a numbered procedure with an "Inspect First" opening step
+- Cross-references to related skills, agents, or docs present (no unnecessary duplication)
+- Examples included where helpful
+- Done criteria section defined
+- Skill tested with `/skills reload` and verified via both auto-invocation and explicit `/skill-name` prompt
+
+## Best Practices for Authoring Skills
+
+1. **One skill per task domain** — keep skills focused and modular.
+2. **Define the trigger first** — articulate what kind of request should load this skill before writing the body. The body should be narrowly scoped to that trigger.
+3. **Write purpose-first descriptions** — lead with what the skill achieves, not what it is. Agents discover skills by intent; a tautological description like "Guide for authoring X" only matches if the user already knows the term.
+4. **Prefer cross-references over duplication** — link to related agents, docs, hooks, or other skills that own deeper context rather than embedding long background sections.
+5. **Prefer skills over bloated instructions** — move task-specific guidance out of `copilot-instructions.md` and into skills to keep the base context lean.
+6. **Include concrete examples** — Copilot performs better when instructions include examples of expected behavior.
+7. **Test your skill** — after authoring a skill, run `/skills reload`, then try both a natural prompt that should auto-invoke the skill and an explicit `/skill-name` prompt. Verify it activates and produces good results.
+8. **Keep instructions actionable** — author numbered steps, not vague aspirations. Tell Copilot what to do, what to check, and when to use supporting files.
+9. **Match existing conventions** — if the repository already has skills, match their tone, frontmatter shape, and structural patterns.
+10. **Reference scripts for complex logic** — if a procedure involves complex shell commands or multi-step automation, include a script in the skill directory rather than embedding long code blocks in the Markdown.
+11. **Open with an "Inspect First" step** — start your procedure by listing the specific files, configs, or state the agent should read before making any changes. This grounds the agent in current reality and prevents stale-context mistakes or assumptions that drift from what's actually in the repo.
+12. **Use the dispatcher pattern for broad domains** — when a skill covers multiple sub-tasks or would exceed ~200 lines, keep the SKILL.md thin and route to deeper content files. This keeps description overhead low and avoids context bloat.
+13. **Consider packaging as a plugin** — if you want to distribute a collection of skills (plus agents, hooks, and MCP configs), package them as a plugin for easy installation via `/plugin install`.

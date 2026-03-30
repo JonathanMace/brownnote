@@ -1,7 +1,10 @@
 ---
-description: >
-  Pre-submission checklist for the browntone paper. Covers manuscript
-  preparation, figure checks, supplementary material, and journal requirements.
+name: submit-paper
+description: >-
+  Prepare a manuscript for journal submission by checking content, figures,
+  references, and journal-specific requirements.  Use when finalising a paper
+  for submission to JSV, JASA, or other target venues.
+license: MIT
 ---
 
 # Skill: Submit Paper

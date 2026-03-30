@@ -2,6 +2,7 @@
 name: write-analysis
 description: >
   Guide for writing and editing analytical model code in src/analytical/. Use when changing the Browntone analytical model implementation.
+license: MIT
 ---
 
 # Analytical Code Instructions

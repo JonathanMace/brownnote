@@ -1,7 +1,10 @@
 ---
-description: >
-  How to perform a mesh convergence study to verify that FEA results are
-  mesh-independent. Includes Richardson extrapolation and GCI calculation.
+name: mesh-convergence
+description: >-
+  Verify that FEA results are mesh-independent using Richardson extrapolation
+  and GCI calculation.  Use when performing a mesh convergence study or
+  validating simulation accuracy.
+license: MIT
 ---
 
 # Skill: Mesh Convergence Study
