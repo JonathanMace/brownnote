@@ -239,7 +239,7 @@ irrelevant to the brown-note hypothesis.
 \label{sec:energy_budget}
 
 The pressure-based estimate of airborne coupling displacement
-(main text, Section~4) is approximately $13\times$ larger than the
+(main text, Section~4) is approximately $6.5\times$ larger than the
 energy-consistent value because it does not enforce energy conservation.  The
 self-consistent derivation, following the reciprocity formulation of
 Junger \& Feit (1986),
@@ -257,7 +257,7 @@ where $\lambda = c_{\mathrm{air}}/f_{n}$ is the acoustic wavelength.  The actual
 cross-section is limited by the ratio of radiation damping to total damping:
 \begin{equation}
   \sigma_{\mathrm{abs}}^{(n)} = \sigma_{\max}^{(n)}
-    \times\frac{\zeta_{\mathrm{rad}}}{\zeta_{\mathrm{rad}} + \zeta_{\mathrm{struct}}} \,.
+    \times\frac{4\,\zeta_{\mathrm{rad}}\,\zeta_{\mathrm{struct}}}{(\zeta_{\mathrm{rad}} + \zeta_{\mathrm{struct}})^2} \,.
   \tag{S14}
   \label{eq:sigma_abs}
 \end{equation}
@@ -302,12 +302,12 @@ Solving for the energy-consistent displacement:
 \paragraph{Comparison with the pressure-based estimate.}
 At \SI{120}{\decibel} SPL and $n=2$:
 \begin{align*}
-  \xi_{\mathrm{energy}} &\approx \SI{0.014}{\micro\metre}, \\
+  \xi_{\mathrm{energy}} &\approx \SI{0.028}{\micro\metre}, \\
   \xi_{\mathrm{pressure}} &\approx \SI{0.18}{\micro\metre}.
 \end{align*}
-The pressure-based estimate is approximately $13\times$ larger because it
+The pressure-based estimate is approximately $6.5\times$ larger because it
 does not account for the extremely low radiation efficiency
-($\zeta_{\mathrm{rad}}/\zeta_{\mathrm{struct}} \sim 10^{-14}$).  Both values
+($4\zeta_{\mathrm{rad}}\zeta_{\mathrm{struct}}/\zeta_{\mathrm{total}}^2 \sim 3 \times 10^{-14}$).  Both values
 are far below the PIEZO1 and PIEZO2 mechanotransduction threshold range
 (\SIrange{0.5}{2.0}{\micro\metre}), so the overestimate does not affect any
 conclusions.

@@ -159,7 +159,7 @@ draw_spheroid(ax_air, 0.15, 0.0, a=0.52, b=0.35)
 
 # Tiny displacement indicator
 ax_air.plot(0.15, 0.42, "o", color=COL_DISP_AIR, ms=3, zorder=5)
-ax_air.text(0.15, 0.52, "0.014 μm", fontsize=7, color=COL_DISP_AIR,
+ax_air.text(0.15, 0.52, "0.028 μm", fontsize=7, color=COL_DISP_AIR,
             ha="center", va="bottom", fontweight="bold", zorder=6)
 ax_air.text(0.15, 0.44, "(sub-threshold)", fontsize=5.5, color="#999999",
             ha="center", va="bottom", zorder=6)

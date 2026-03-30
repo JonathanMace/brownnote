@@ -87,8 +87,8 @@ reflecting the log-normal distribution of $E$.
   \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).
   Airborne displacement $\xi_\mathrm{air}$ and the ratio $\mathcal{R}_\mathrm{full}$ use the
   pressure-based airborne upper bound at \SI{120}{\decibel}; the
-  energy-consistent airborne displacement is ${\sim}13\times$ smaller, so the
-  corresponding ratio at fixed mechanical loading is ${\sim}13\times$ larger.}
+  energy-consistent airborne displacement is ${\sim}6.5\times$ smaller, so the
+  corresponding ratio at fixed mechanical loading is ${\sim}6.5\times$ larger.}
   \label{tab:uq_summary}
   \begin{tabular}{lccc}
     \hline
@@ -99,16 +99,16 @@ reflecting the log-normal distribution of $E$.
     $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
     $\mathcal{R}_\mathrm{full}$ (pressure-based airborne) & $10^4$ & [$2 \times 10^3$, $3 \times 10^4$] & --- \\
     SPL for PIEZO1/2 activation (pressure-based, 1\,$\mu$m)\footnote{The pressure-based displacement
-      overestimates the true wall motion by a factor of ${\approx}\,13$
+      overestimates the true wall motion by a factor of ${\approx}\,6.5$
       because it neglects the extremely low radiation efficiency
-      ($\zeta_\mathrm{rad}/\zeta_\mathrm{struct} \sim 10^{-14}$).
+      ($4\zeta_\mathrm{rad}\zeta_\mathrm{struct}/\zeta_\mathrm{total}^2 \sim 3 \times 10^{-14}$).
       Using the energy-consistent displacement
       (\S\ref{sec:coupling}), the PIEZO1/2 benchmark rises to
-      ${\approx}\,\SI{158}{\decibel}$---a \SI{23}{\decibel} correction
+      ${\approx}\,\SI{151}{\decibel}$---a \SI{16}{\decibel} correction
       that represents the physically realisable SPL.}
       & 135 & [128, 139] & dB \\
     \hline
-    \textbf{SPL for PIEZO1/2 activation (energy-consistent)} & $\mathbf{\approx\,158}$ & --- & dB \\
+    \textbf{SPL for PIEZO1/2 activation (energy-consistent)} & $\mathbf{\approx\,151}$ & --- & dB \\
     \hline
   \end{tabular}
 \end{table}
@@ -122,7 +122,7 @@ single parameter dominates the uncertainty budget (Figure~\ref{fig:sobol}).
 Because Table~\ref{tab:uq_summary} uses the pressure-based airborne upper bound
 and $a_\mathrm{rms} = \SI{0.5}{\metre\per\second\squared}$ for the mechanical
 loading, its $\mathcal{R}_\mathrm{full}$ row should not be confused with the headline
-energy-consistent SDOF upper bound of $6.6 \times 10^4$ quoted in
+energy-consistent SDOF upper bound of $3.3 \times 10^4$ quoted in
 Section~\ref{sec:coupling}.
 
 \begin{figure}[htbp]
