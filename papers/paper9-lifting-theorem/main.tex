@@ -1,0 +1,64 @@
+% Path-specific instructions: after editing this manuscript, recompile with the
+% pdflatex/bibtex/pdflatex/pdflatex cycle, snapshot main.pdf into drafts/, and
+% update README.md to point to the latest draft.
+\newif\ifiopclass
+\IfFileExists{iopart.cls}{\iopclasstrue\documentclass{iopart}}{\iopclassfalse\documentclass[12pt]{article}}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\ifiopclass\else
+  \usepackage[margin=1in]{geometry}
+\fi
+
+\sisetup{
+  per-mode=symbol,
+  group-separator={,}
+}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+\ifiopclass
+  \title{A singular-value lifting theorem for symmetry-broken spectral inverse problems}
+  \author{J. Mace}
+  \address{Microsoft Research, Redmond, Washington, United States of America}
+  \author{B.R. Mace}
+  \address{University of Auckland, Auckland, New Zealand}
+  \begin{abstract}
+  Placeholder abstract. This manuscript will formulate a singular-value lifting
+  theorem for symmetry-broken spectral inverse problems and connect it to shell
+  families arising in the Browntone programme.
+  \end{abstract}
+\else
+  \title{A singular-value lifting theorem for symmetry-broken spectral inverse problems}
+  \author{J.~Mace\\Microsoft Research \and B.R.~Mace\\University of Auckland}
+  \date{}
+  \maketitle
+  \begin{abstract}
+  Placeholder abstract. This manuscript will formulate a singular-value lifting
+  theorem for symmetry-broken spectral inverse problems and connect it to shell
+  families arising in the Browntone programme.
+  \end{abstract}
+\fi
+
+\input{sections/introduction.tex}
+\input{sections/setup.tex}
+\input{sections/theorem.tex}
+\input{sections/spectral.tex}
+\input{sections/application.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusion.tex}
+
+\nocite{*}
+\IfFileExists{iopart-num.bst}{\bibliographystyle{iopart-num}}{\bibliographystyle{unsrt}}
+\bibliography{references}
+
+\end{document}
