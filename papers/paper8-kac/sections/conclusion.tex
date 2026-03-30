@@ -14,9 +14,9 @@ the diagnostic ambitions of Papers~1--7 depend.
 
 The main findings are:
 \begin{enumerate}
-  \item within the Ritz model, the condition number drops from a floor value
-  $\kappa_\mathrm{floor}\approx659$ (near-spherical) to $\kappa = 69.4$
-  (canonical oblate), purely through geometric eccentricity;
+  \item within the Ritz model, the condition number drops from a near-spherical
+  floor value $\kappa_\mathrm{floor}\approx269$ (five modes) to
+  $\kappa = 69.4$ (canonical oblate), purely through geometric eccentricity;
   \item the equivalent-sphere model is algebraically rank deficient
   ($\kappa = 1.37 \times 10^{10}$), illustrating how model-induced degeneracy
   dwarfs the geometric effect;
@@ -25,9 +25,9 @@ The main findings are:
   \item round-trip inversion recovers $(a,c,E)$ to machine precision
   ($<10^{-12}$), confirming internal consistency of the forward model and
   solver;
-  \item at $1\%$ frequency noise, the Cram\'er--Rao bounds are approximately
-  $\pm 22.5\%$ for $a$, $\pm 6.0\%$ for $c$, and $\pm 30.8\%$ for $E$,
-  comparable to existing elastographic measurement precision;
+  \item at $1\%$ frequency noise (five modes), the Cram\'er--Rao bounds are
+  approximately $\pm 22.5\%$ for $a$, $\pm 6.0\%$ for $c$, and $\pm 30.8\%$
+  for $E$, comparable to existing elastographic measurement precision;
   \item the condition number is stable across mode counts
   $\mathcal{N}=3$--$9$ ($\kappa\in[69,\,94]$), confirming that the
   identifiability improvement is robust and not an artefact of the Ritz
