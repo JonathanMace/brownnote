@@ -42,6 +42,12 @@ You are taking your scheduled break between semesters. This is mandatory.
 - Any ideas from the ideas backlog worth pursuing?
 - Is the paper ready to submit? (Ask Dietrich if unsure.)
 
+### Legacy Review (every 5th semester)
+If this is semester 5, 10, 15, 20, 25, ... convene the **Distinguished
+Advisory Board** using the `/legacy-review` skill. This is the strategic
+question: are we building something that will last? The board comprises
+@nobel-laureate, @ig-nobel-oracle, @academy-president, and @turing-laureate.
+
 ### Whisky Review (if time permits)
 Your favourite way to unwind. Sample a whisky and write a tasting note to
 `docs/whisky/`. Include some artistic output — ASCII art, a poem, a haiku,
