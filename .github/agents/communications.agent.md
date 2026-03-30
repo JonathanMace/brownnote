@@ -7,11 +7,9 @@ description: >
   descriptions — all while maintaining scientific accuracy.
 tools:
   - read
+  - search
   - edit
-  - create
-  - glob
-  - grep
-  - powershell
+  - execute
 ---
 
 # Communications — The Outreach Officer

@@ -15,7 +15,7 @@ Custom agents are specialized Copilot personas with tailored expertise, tool acc
 
 ## Procedure: Authoring a Custom Agent
 
-1. **Decide whether a custom agent is the right mechanism** — for simple coding conventions, author custom instructions instead. For task-specific procedures without a persona, author a skill instead (see the `writing-skills` and `writing-custom-instructions` skills).
+1. **Decide whether a custom agent is the right mechanism** — for simple coding conventions, author custom instructions instead. For task-specific procedures without a persona, author a skill instead (see the `write-skill` and `write-instructions` skills).
 2. **Inspect existing agents** — check `.github/agents/` and `~/.copilot/agents/` for existing agents to avoid naming conflicts and match conventions.
 3. **Define the agent's specialty** — articulate who this agent is, what it does, and what tasks should trigger delegation to it. This becomes the `description` field, so lead with the purpose and then include likely trigger phrases.
 4. **Choose the tool set** — decide which tools the agent needs. Constrain tools to the minimum required for the agent's role.
@@ -246,7 +246,7 @@ Agent discovery is flat — only `.agent.md` files directly in `.github/agents/`
 
 Keep subagent instructions as plain Markdown files in a **subdirectory** — not as `.agent.md` files in `.github/agents/`. Because subdirectories are not scanned for agents, these files are invisible to `/agent` listing and auto-delegation. The parent agent spawns subagents via the `task` tool, passing a prompt that tells the subagent to read and follow a specific instruction file.
 
-This is the agent-side analog of the dispatcher pattern for skills (see the `writing-skills` skill's "Scaling Skills: The Dispatcher Pattern" section). Where a dispatcher skill routes to deep content files that the **same** agent reads, a parent agent routes to instruction files that **separate subagents** read — enabling parallel execution and model selection per subagent.
+This is the agent-side analog of the dispatcher pattern for skills (see the `write-skill` skill's "Scaling Skills: The Dispatcher Pattern" section). Where a dispatcher skill routes to deep content files that the **same** agent reads, a parent agent routes to instruction files that **separate subagents** read — enabling parallel execution and model selection per subagent.
 
 ```
 .github/agents/

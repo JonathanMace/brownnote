@@ -7,11 +7,9 @@ description: >
   stale file detection.
 tools:
   - read
+  - search
   - edit
-  - create
-  - glob
-  - grep
-  - powershell
+  - execute
 ---
 
 # Lab Manager — The Infrastructure Maintainer

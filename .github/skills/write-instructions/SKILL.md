@@ -20,7 +20,7 @@ Custom instructions are persistent natural-language guidance that Copilot CLI au
 4. **Author the file** — use short, self-contained statements in Markdown. For path-specific files, add the required `applyTo` frontmatter.
 5. **Prioritize critical rules first** — Copilot code review only reads the first 4,000 characters of instruction files.
 6. **Review as if new to the repo** — re-read your instructions from the perspective of someone unfamiliar with the project. Each statement should stand alone without requiring external context.
-7. **Choose a different customization when needed** — if you need reusable task procedures, author a skill instead (see `writing-skills`). If you need a specialized persona or tool constraints, author a custom agent instead (see `writing-custom-agents`). If you need automation around session or tool events, author hooks instead (see `writing-hooks`).
+7. **Choose a different customization when needed** — if you need reusable task procedures, author a skill instead (see `write-skill`). If you need a specialized persona or tool constraints, author a custom agent instead (see `write-agent`). If you need automation around session or tool events, author hooks instead (see `write-hooks`).
 8. **Test your instructions** — start a new CLI session (or use `/instructions` to verify they are active) and submit a prompt to confirm Copilot follows the guidance.
 
 ## Instruction Types
@@ -169,7 +169,7 @@ An authored instruction change is done when:
 2. **Use path-specific files for specialized rules** — don't put frontend rules in the global file if they only matter for `.tsx` files.
 3. **Avoid contradictions** — conflicting instructions across files produce unpredictable results.
 4. **Put the most important rules first** — code review only reads the first 4,000 characters of each custom instruction file.
-5. **Extract procedures into skills** — if you find yourself writing step-by-step task procedures in instructions, author a skill instead (see the `writing-skills` skill).
+5. **Extract procedures into skills** — if you find yourself writing step-by-step task procedures in instructions, author a skill instead (see the `write-skill` skill).
 6. **Test your instructions** — after authoring or editing, start a new CLI session and verify Copilot follows the guidance.
 7. **Commit and share** — repository instructions are version-controlled and shared across the team. Review changes to instructions like code changes.
 8. **Make instructions self-updating** — include an explicit rule like "If you discover a useful pattern or anti-pattern during this session, add it to this file immediately." This turns the instruction file into persistent cross-session memory that grows organically from real usage instead of letting hard-won discoveries die when a session ends.

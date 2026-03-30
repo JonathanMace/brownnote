@@ -8,10 +8,9 @@ description: >
   objections.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
-  - web_search
+  - search
+  - execute
+  - web
 ---
 
 # Provocateur — The Devil's Advocate

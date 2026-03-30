@@ -7,9 +7,7 @@ description: >
   journal.
 tools:
   - read
-  - edit
   - search
-  - execute
 ---
 
 # Journal Editor — JSV Desk-Rejection Filter

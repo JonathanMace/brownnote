@@ -1,7 +1,9 @@
 ---
 name: write-tests
-description: >
-  Guide for writing pytest tests for the browntone analytical suite. Use when adding, editing, or reviewing tests under tests/.
+description: >-
+  Add, edit, or review pytest tests for the browntone analytical suite ensuring
+  canonical values, physical sanity, and regression coverage. Use when working
+  on tests under tests/.
 license: MIT
 ---
 

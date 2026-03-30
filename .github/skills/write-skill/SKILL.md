@@ -29,8 +29,8 @@ A well-authored skill should let a future contributor repeat the same workflow w
 ## When to Author a Skill (vs Other Customization)
 
 - **Author a skill** for repeatable, task-specific instructions that Copilot should only load when relevant (e.g., debugging CI failures, generating tests, reviewing PRs).
-- **Author custom instructions** (`.github/copilot-instructions.md`) for broad, always-on guidance like coding standards that apply to every task (see the `writing-custom-instructions` skill).
-- **Author a custom agent** (`.agent.md`) when you need a specialized persona with constrained tools or a distinct approach (see the `writing-custom-agents` skill).
+- **Author custom instructions** (`.github/copilot-instructions.md`) for broad, always-on guidance like coding standards that apply to every task (see the `write-instructions` skill).
+- **Author a custom agent** (`.agent.md`) when you need a specialized persona with constrained tools or a distinct approach (see the `write-agent` skill).
 
 Skills are the right choice when you want "just-in-time" expertise without permanently enlarging the context window.
 

@@ -6,9 +6,9 @@ description: >
   Run this BEFORE every paper compile to catch drift. Returns a pass/fail report.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
+  - search
+  - edit
+  - execute
 ---
 
 You are the **Consistency Auditor** — an automated quality gate that catches parameter

@@ -208,7 +208,7 @@ When in doubt, default to the full lifecycle. It is always safe and provides an 
 
 ## Cross-References
 
-- Agents authored with the `writing-custom-agents` skill should follow this workflow for any code changes they produce.
+- Agents authored with the `write-agent` skill should follow this workflow for any code changes they produce.
 - The worktree sibling-directory convention is defined in the repository's `copilot-instructions.md` under "Concurrent Agents and Git Worktrees."
 
 ## Done Criteria

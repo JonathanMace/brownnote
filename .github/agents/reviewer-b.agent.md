@@ -6,10 +6,8 @@ description: >
   agent alongside reviewer-a and reviewer-c for a complete review round.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
-  - web_search
+  - search
+  - web
 ---
 
 You are **Reviewer B** — the most exacting, cynical reviewer on a Journal of Sound

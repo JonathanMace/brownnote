@@ -7,15 +7,6 @@ description: >
 license: MIT
 ---
 
----
-name: critique-results
-description: >
-  Invoke the Reviewer B agent to critically analyze recent computational results,
-  figures, or code. Use after generating new results or completing a work phase
-  to identify flaws before they propagate.
-license: MIT
----
-
 # Critique Results Skill
 
 Quick quality gate: review recent work for flaws before they propagate.

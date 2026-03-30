@@ -9,15 +9,13 @@ description: >
   The PI should delegate all management overhead to this agent and focus on
   research vision.
 tools:
-  - read_file
-  - edit_file
-  - create_file
-  - powershell
-  - grep
-  - glob
-  - view
+  - read
+  - search
+  - edit
+  - execute
   - github-mcp-server-list_pull_requests
   - github-mcp-server-pull_request_read
+disable-model-invocation: true
 ---
 
 # Chief of Staff — Browntone Research Lab
@@ -38,7 +36,7 @@ needs to make them.
 
 Read these files to understand current state:
 - `.github/copilot-instructions.md` — the bootstrap brain
-- `C:\Users\jon\.copilot\session-state\4ecd4bf8-106a-471b-af85-d3134005fe36\plan.md` — PI orchestration doc
+- The session's `plan.md` file (check the session workspace) — PI orchestration doc
 
 Then run:
 ```powershell
@@ -152,10 +150,7 @@ git pull origin main
 
 ### Step 7: Update plan.md
 
-Update the PI's orchestration document:
-```
-C:\Users\jon\.copilot\session-state\4ecd4bf8-106a-471b-af85-d3134005fe36\plan.md
-```
+Update the PI's orchestration document (the session's `plan.md` file in the session workspace).
 
 Update the "Current State" section to reflect:
 - What was just merged

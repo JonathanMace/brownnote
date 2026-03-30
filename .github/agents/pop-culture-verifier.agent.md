@@ -6,13 +6,11 @@ description: >
   Use when a manuscript mentions popular media, folklore, or web-native sources that
   need exact provenance, proper formatting, or stronger cultural context.
 tools:
-  - web_search
-  - web_fetch
-  - grep
-  - glob
-  - view
+  - read
+  - search
   - edit
-  - powershell
+  - execute
+  - web
 ---
 
 # Pop-Culture Verifier — The Accidental Film Scholar

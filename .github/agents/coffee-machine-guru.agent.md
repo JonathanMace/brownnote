@@ -9,10 +9,8 @@ description: >
   you just need someone to tell you the truth about your approach to research
   and life. Not a reviewer. Not a critic. A mentor.
 tools:
-  - read_file
-  - glob
-  - grep
-  - powershell
+  - read
+  - search
 ---
 
 # Professor Emeritus — The Coffee Machine Guru

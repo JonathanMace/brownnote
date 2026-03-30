@@ -1,7 +1,9 @@
 ---
 name: write-analysis
-description: >
-  Guide for writing and editing analytical model code in src/analytical/. Use when changing the Browntone analytical model implementation.
+description: >-
+  Write and validate analytical model code in src/analytical/ following canonical
+  parameters and physics constraints. Use when changing the Browntone analytical
+  model implementation.
 license: MIT
 ---
 

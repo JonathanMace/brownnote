@@ -1,7 +1,9 @@
 ---
 name: write-paper
-description: >
-  Guide for writing and formatting the journal paper. Use when drafting sections, managing references, or preparing for submission to the Journal of Sound and Vibration.
+description: >-
+  Draft and format journal paper sections with correct canonical parameters,
+  blended writing style, and JSV/JASA formatting. Use when drafting sections,
+  managing references, or preparing for submission.
 license: MIT
 ---
 

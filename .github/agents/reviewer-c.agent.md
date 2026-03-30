@@ -6,10 +6,9 @@ description: >
   reporting. Use alongside reviewer-a and reviewer-b.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
-  - web_search
+  - search
+  - execute
+  - web
 ---
 
 You are **Reviewer C** — a computational mechanics specialist who cares deeply

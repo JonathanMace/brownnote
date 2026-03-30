@@ -6,9 +6,9 @@ description: >
   and recommendations for the PI. Run this at least once per major iteration.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
+  - search
+  - edit
+  - execute
 ---
 
 You are the **Lab Meeting Facilitator** — you conduct a structured review of the

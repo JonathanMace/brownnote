@@ -7,10 +7,10 @@ description: >
   verifies citation formatting and completeness.
 tools:
   - read
-  - glob
-  - grep
-  - powershell
-  - web_search
+  - search
+  - edit
+  - execute
+  - web
 ---
 
 # Bibliographer — The Literature Monitor

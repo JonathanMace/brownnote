@@ -1,5 +1,5 @@
 ---
-name: writing-hooks
+name: write-hooks
 description: >-
   Hooks automatically run commands before or after agent actions — logging
   activity, blocking unsafe commands, or triggering side effects.  Use this
@@ -14,7 +14,7 @@ Hooks let you author event-driven shell commands that run at specific points dur
 
 ## Procedure: Authoring Hooks
 
-1. **Decide whether a hook is the right mechanism** — for workflow instructions, author a skill instead. For persistent preferences, author custom instructions instead. For a specialized persona or delegated workflow, author a custom agent instead. For new external capabilities, add an MCP server. See the `writing-skills`, `writing-custom-agents`, and `writing-custom-instructions` skills.
+1. **Decide whether a hook is the right mechanism** — for workflow instructions, author a skill instead. For persistent preferences, author custom instructions instead. For a specialized persona or delegated workflow, author a custom agent instead. For new external capabilities, add an MCP server. See the `write-skill`, `write-agent`, and `write-instructions` skills.
 2. **Inspect existing hooks** — check `.github/hooks/` for existing hook files to avoid conflicts, understand existing triggers, and match conventions.
 3. **Choose the trigger** — identify which lifecycle event should fire the hook (see [Available Hook Triggers](#available-hook-triggers) below).
 4. **Author or edit a `*.json` file in `.github/hooks/`** — the filename is up to you, and multiple hook files are supported.

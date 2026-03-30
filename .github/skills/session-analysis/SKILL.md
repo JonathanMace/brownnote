@@ -201,6 +201,6 @@ Events are linked by `toolCallId` — a tool start and its completion share the 
 
 ## Cross-References
 
-- `writing-skills` — skill invocation events (`skill.invoked`) in session logs correspond to skills authored with that guidance
-- `writing-hooks` — hook execution events map to hooks authored with that skill
-- `writing-custom-agents` — subagent lifecycle events (`subagent.started`, `subagent.completed`) correspond to agents and embedded subagent instructions authored with that skill
+- `write-skill` — skill invocation events (`skill.invoked`) in session logs correspond to skills authored with that guidance
+- `write-hooks` — hook execution events map to hooks authored with that skill
+- `write-agent` — subagent lifecycle events (`subagent.started`, `subagent.completed`) correspond to agents and embedded subagent instructions authored with that skill

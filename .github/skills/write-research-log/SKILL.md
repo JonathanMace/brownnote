@@ -1,7 +1,9 @@
 ---
 name: write-research-log
-description: >
-  Guide for writing research log entries in docs/research-logs/. Use when documenting a productive Browntone work session or reviewer report.
+description: >-
+  Document a productive research session with quantitative results, changes
+  made, and next steps in docs/research-logs/. Use when logging work or
+  writing a reviewer report.
 license: MIT
 ---
 

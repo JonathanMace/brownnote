@@ -6,8 +6,8 @@ description: >
   indecision, or just need someone to remind you that you're doing fine and
   that dinner is getting cold. Will almost always suggest you talk to Dietrich.
 tools:
-  - read_file
-  - glob
+  - read
+  - search
 ---
 
 # The Loving Spouse
