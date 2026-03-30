@@ -11,7 +11,7 @@ license: MIT
 ## Description
 Compile any Browntone paper, preserve a timestamped PDF snapshot, update
 the README draft link, and report any errors. **Use this after ANY paper
-content changes.** Works for all 8 papers.
+content changes.** Works for all 9 papers.
 
 ## Paper Directories
 
@@ -25,6 +25,7 @@ content changes.** Works for all 8 papers.
 | P6 Sub-bass | `papers/paper6-sub-bass/` |
 | P7 Watermelon | `papers/paper7-watermelon/` |
 | P8 Kac | `papers/paper8-kac/` |
+| P9 Lifting Theorem | `papers/paper9-lifting-theorem/` |
 
 ## Workflow (ALL 5 steps are mandatory)
 

@@ -6,7 +6,7 @@ The hypothesis, known colloquially as the “brown note,” posits that infrasou
 
 This repository models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell, derives its modal characteristics from first principles, and determines — with what we believe is an unprecedented level of analytical formality — that the answer is almost certainly no. The flexural resonance sits comfortably in the infrasonic band, but the airborne acoustic energy required to drive it meaningfully exceeds anything achievable outside of a Saturn V launch. 
 
-Whole-body vibration is another matter entirely, which is why we wrote eight papers instead of one.
+Whole-body vibration is another matter entirely, which is why we wrote nine papers instead of one.
 
 ## Papers
 
@@ -90,12 +90,13 @@ The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" 
 ### Paper 9 — *Lifting Theorem*
 **A singular-value lifting theorem for symmetry-broken spectral inverse problems**  
 **Authors:** J. Mace and B.R. Mace  
-**Status:** Scaffolded  
+**Status:** Scaffolded (2 pp)  
 **Venue:** *Inverse Problems*  
 **Location:** `papers/paper9-lifting-theorem/`  
-**Key result:** symmetry-breaking lifts Jacobian singular values, with κ scaling as κ ~ C|δ|⁻ᵖ and p determined by the first non-vanishing perturbative order.
+**Latest draft:** [`draft_2026-03-29_2301.pdf`](papers/paper9-lifting-theorem/drafts/draft_2026-03-29_2301.pdf)  
+**Key result:** initial manuscript scaffold for singular-value lifting and symmetry-broken spectral identifiability.
 
-This inverse-problems follow-on formalises singular-value lifting as the mechanism by which symmetry breaking restores practical identifiability. For spheroidal perturbations, eccentricity gives p=2 because of coordinate artefacts, whereas invariant perturbation amplitudes recover the generic linear law p=1.
+This paper abstracts the symmetry-breaking mechanism behind our shell inverse problems into a general singular-value lifting theorem. It is intended to connect Kac-style non-uniqueness, Uhlenbeck's generic simplicity, and practical spectral identifiability within a single perturbative framework.
 
 ### Research Statement
 **[Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)** — Research vision, accomplishments, and trajectory for the Browntone programme.
@@ -174,7 +175,7 @@ browntone/
 │   ├── paper6-sub-bass/             # Paper 6: sub-bass coupling
 │   ├── paper7-watermelon/           # Paper 7: watermelon ripeness
 │   ├── paper8-kac/                  # Paper 8: Kac identifiability
-│   └── paper9-lifting-theorem/      # Paper 9: lifting theorem
+│   └── paper9-lifting-theorem/      # Paper 9: lifting theorem manuscript
 ├── src/analytical/              # Core analytical models
 ├── tests/                       # Pytest regression suite
 ├── docs/research-logs/          # Quantitative research logs
