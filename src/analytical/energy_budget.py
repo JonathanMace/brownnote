@@ -1,12 +1,12 @@
 """
 Self-consistent energy budget for airborne acoustic coupling.
 
-Resolves the 2× energy budget violation identified by Reviewer B (Round 2, M1).
+Resolves the energy budget inconsistency identified by Reviewer B (Round 2, M1).
 
-The issue: our pressure-based coupling (p_eff = p_inc × (ka)^n) and the
-energy-based coupling (P_avail = I × πR² × (ka)^{2n}) give inconsistent
-results. The displacement from the pressure approach dissipates ~2× more
-power than is available from the energy approach.
+The issue: the pressure-based coupling (p_eff = p_inc × (ka)^n) neglects
+radiation inefficiency, yielding ξ_pressure ≈ 0.18 μm at 120 dB — roughly
+13× larger than the energy-consistent estimate ξ_energy ≈ 0.014 μm. The
+pressure-based result is an upper bound, not the physically correct value.
 
 Resolution: Use the Junger & Feit reciprocity formulation.
 
@@ -292,15 +292,18 @@ if __name__ == "__main__":
     print("  constant factor because it doesn't account for the radiation")
     print("  efficiency. The energy-based approach is self-consistent.")
     print()
-    print("  However, BOTH approaches give displacements far below the")
-    print("  PIEZO threshold at all realistic SPL. The factor of ~1.4")
-    print("  difference does not change any conclusions.")
+    print("  The pressure-based estimate is an upper bound (~0.18 μm at")
+    print("  120 dB) that neglects radiation inefficiency. The energy-")
+    print("  consistent estimate (~0.014 μm) is ~13× smaller and is the")
+    print("  physically correct value. Both are far below the PIEZO")
+    print("  threshold, so conclusions are unchanged.")
     print()
-    print("  For the paper, we should:")
-    print("  1. Use the pressure-based approach (simpler, easier to explain)")
-    print("  2. Note the ~1.4× overestimate as a known approximation")
-    print("  3. The energy budget serves as a consistency CHECK, not the")
-    print("     primary calculation")
+    print("  For the paper, we:")
+    print("  1. Use the energy-consistent displacement as the PRIMARY result")
+    print("  2. Report the pressure-based estimate as an upper bound that")
+    print("     overestimates by ~13× due to neglected radiation inefficiency")
+    print("  3. The energy budget is the self-consistent calculation, not")
+    print("     merely a cross-check")
     print()
 
     # Quick summary for paper
