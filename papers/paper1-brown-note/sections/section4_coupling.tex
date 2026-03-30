@@ -124,8 +124,11 @@ This four-order-of-magnitude gap is robust to parameter uncertainties because
 both pathways excite the \emph{same} modal structure---the ratio depends
 primarily on $(ka)^{-n}$ and the base-excitation transfer function, neither of
 which is sensitive to tissue properties.  One could double the elastic modulus,
-halve the wall thickness, or relocate the subject to Jupiter, and the ratio
-would scarcely budge.
+halve the wall thickness, or relocate the subject to Jupiter\footnote{The
+model assumes Earth-normal gravity for the static intra-abdominal-pressure
+term; Jovian surface gravity (\SI{24.8}{\metre\per\second\squared}) would
+substantially alter the pre-stress state.  The point, however, is rhetorical.},
+and the ratio would scarcely budge.
 
 \paragraph{Modal participation.}
 The mechanical displacement in Eq.~\eqref{eq:coupling_ratio} assumes perfect
@@ -145,6 +148,13 @@ $\theta_c$ is the polar angle below which the shell is rigidly constrained
 by the pelvis and spine, and
 $\sigma(u) = \sqrt{c^{2} + (a^{2}-c^{2})\,u^{2}}$
 is the oblate-spheroid surface metric factor.
+Physically, $\Gamma_2$ quantifies how effectively vertical base excitation
+couples into the $n=2$ flexural mode.  For a completely free sphere, symmetry
+dictates $\Gamma_2 = 0$ exactly: vertical translation cannot excite a
+quadrupolar deformation.  Partial skeletal constraint at the pelvis
+($\theta_c = 2\pi/3$) breaks that symmetry, yielding $\Gamma_2 \approx 0.48$,
+so roughly half of the vertical excitation feeds into the oblate--prolate
+oscillation.
 For a free sphere ($\theta_c = \pi$), the numerator reduces to
 $\int_{-1}^{1} u\,P_n(u)\,\mathrm{d}u$, which vanishes for $n \neq 1$ by
 Legendre orthogonality; a free sphere therefore has $\Gamma_2 = 0$ exactly.
