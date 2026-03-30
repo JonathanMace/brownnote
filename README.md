@@ -82,7 +82,7 @@ If growers can judge a watermelon by tapping it, the obvious question is whether
 **Status:** First complete draft  
 **Venue:** *Inverse Problems*  
 **Location:** `papers/paper8-kac/`  
-**Latest draft:** [`draft_2026-03-30_0002.pdf`](papers/paper8-kac/drafts/draft_2026-03-30_0002.pdf)  
+**Latest draft:** [`draft_2026-03-30_0045.pdf`](papers/paper8-kac/drafts/draft_2026-03-30_0045.pdf)  
 **Key result:** within the Ritz model, the canonical oblate geometry lowers the condition number from the near-spherical floor κ≈269 to 69.4 via a two-channel regular expansion, whereas the prolate branch remains poorly conditioned — revealing a three-class taxonomy (singular/regular bounded/non-lifting) rather than universal lifting.
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.
@@ -202,4 +202,5 @@ python -m pytest tests/ -v
 ## Licence
 
 [MIT](LICENSE)
+
 
