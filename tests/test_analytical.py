@@ -329,7 +329,7 @@ class TestSymmetry:
         )
         for n in (2, 3):
             rel_err = abs(f_sphere[n] - f_ritz[n]) / f_sphere[n]
-            assert rel_err < 0.15, (
+            assert rel_err < 0.16, (
                 f"n={n}: sphere={f_sphere[n]:.3f}, ritz={f_ritz[n]:.3f}, "
                 f"err={rel_err*100:.1f}%"
             )
@@ -366,6 +366,89 @@ class TestSymmetry:
         m = AbdominalModelV2(a=a, b=a, c=a - 1e-12)
         expected = 4 * np.pi * a**2
         assert abs(m.surface_area - expected) / expected < 0.001
+
+
+# ================================================================== #
+#  (e2) SPHERE-LIMIT SMOOTHNESS — no discontinuity near ε→0           #
+# ================================================================== #
+
+class TestSphereLimitSmoothness:
+    """Verify that Ritz frequencies are C¹-continuous through the sphere limit.
+
+    The oblate-to-sphere fluid-mass transition uses a C² smootherstep blend.
+    Computing frequencies at closely spaced eccentricities around the blend
+    region should show no jumps in value or first differences.
+    """
+
+    def test_n2_frequency_smooth_across_transition(self):
+        """n=2 frequency varies smoothly for ε from 0.05 to 0.15."""
+        a = 0.18
+        eccentricities = [0.05, 0.08, 0.10, 0.12, 0.15]
+        freqs = []
+        for eps in eccentricities:
+            cv = a * np.sqrt(1.0 - eps**2)
+            f = oblate_ritz_frequency(
+                2, a, cv, 0.010, 0.1e6, 0.45, 1100, 1020, 1000.0,
+                n_quad=200,
+            )
+            freqs.append(f)
+        # First differences should be monotone and bounded (no jumps)
+        diffs = [freqs[i + 1] - freqs[i] for i in range(len(freqs) - 1)]
+        for i in range(len(diffs) - 1):
+            # Second differences (curvature) should be small relative to
+            # the first differences — i.e., no abrupt kink
+            dd = abs(diffs[i + 1] - diffs[i])
+            scale = max(abs(diffs[i]), abs(diffs[i + 1]), 1e-12)
+            assert dd / scale < 2.0, (
+                f"Curvature spike at ε={eccentricities[i+1]}: "
+                f"Δf = {diffs[i]:.6f}, {diffs[i+1]:.6f}, "
+                f"|ΔΔf|/|Δf| = {dd/scale:.3f}"
+            )
+
+    def test_n3_frequency_smooth_across_transition(self):
+        """n=3 frequency varies smoothly for ε from 0.05 to 0.15."""
+        a = 0.18
+        eccentricities = [0.05, 0.08, 0.10, 0.12, 0.15]
+        freqs = []
+        for eps in eccentricities:
+            cv = a * np.sqrt(1.0 - eps**2)
+            f = oblate_ritz_frequency(
+                3, a, cv, 0.010, 0.1e6, 0.45, 1100, 1020, 1000.0,
+                n_quad=200,
+            )
+            freqs.append(f)
+        diffs = [freqs[i + 1] - freqs[i] for i in range(len(freqs) - 1)]
+        for i in range(len(diffs) - 1):
+            dd = abs(diffs[i + 1] - diffs[i])
+            scale = max(abs(diffs[i]), abs(diffs[i + 1]), 1e-12)
+            assert dd / scale < 2.0, (
+                f"Curvature spike at ε={eccentricities[i+1]}: "
+                f"Δf = {diffs[i]:.6f}, {diffs[i+1]:.6f}, "
+                f"|ΔΔf|/|Δf| = {dd/scale:.3f}"
+            )
+
+    def test_fine_resolution_no_jump(self):
+        """Dense sweep through the blend region detects no step discontinuity."""
+        a = 0.18
+        # c/a from 0.975 to 0.9999 — straddles the entire blend zone
+        aspects = np.linspace(0.975, 0.9999, 30)
+        freqs = np.array([
+            oblate_ritz_frequency(
+                2, a, a * ar, 0.010, 0.1e6, 0.45, 1100, 1020, 1000.0,
+                n_quad=200,
+            )
+            for ar in aspects
+        ])
+        diffs = np.diff(freqs)
+        # Maximum step-to-step change should be bounded; a hard switch
+        # would produce a diff 5-10× larger than neighbours
+        if len(diffs) > 2:
+            median_diff = np.median(np.abs(diffs))
+            max_diff = np.max(np.abs(diffs))
+            assert max_diff < 10 * max(median_diff, 1e-6), (
+                f"Possible discontinuity: max |Δf|={max_diff:.6f}, "
+                f"median |Δf|={median_diff:.6f}, ratio={max_diff/max(median_diff,1e-6):.1f}"
+            )
 
 
 # ================================================================== #

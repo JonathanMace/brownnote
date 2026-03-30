@@ -140,20 +140,30 @@ def _build_KM(n, a, c, h, E, nu, P_iap, rho_w, rho_f, eta_q, w_q):
 # Fluid added mass via oblate spheroidal harmonics
 # ============================================================
 
-def _fluid_mass(n, a, c, rho_f, eta_q, w_q):
-    """Scalar fluid added-mass for mode n (contribution to M[0,0])."""
-    if n < 1:
-        return 0.0
+def _smootherstep(t):
+    """C²-continuous interpolation on [0, 1]: 6t⁵ − 15t⁴ + 10t³."""
+    t = max(0.0, min(1.0, t))
+    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
 
-    Pn = _legendre_poly(n)(eta_q)
-    sqG = np.sqrt(a**2 * eta_q**2 + c**2 * (1.0 - eta_q**2))
-    dSw = 2.0 * np.pi * a * sqG
 
-    aspect = c / a
-    if aspect > 0.995:
-        R = (a * a * c) ** (1.0 / 3.0)
-        return rho_f * R / n * np.dot(w_q, Pn**2 * dSw)
+# Transition region for sphere blending (C² via smootherstep)
+_BLEND_LO = 0.98    # below: pure oblate harmonics
+_BLEND_HI = 0.999   # above: pure sphere approximation
 
+
+def _sphere_fluid_mass(n, a, c, rho_f, Pn, dSw, w_q):
+    """Equivalent-sphere fluid added mass (Lamb's formula)."""
+    R = (a * a * c) ** (1.0 / 3.0)
+    return rho_f * R / n * np.dot(w_q, Pn**2 * dSw)
+
+
+def _oblate_fluid_harmonics(n, a, c, rho_f, eta_q, w_q, Pn, dSw):
+    """
+    Full oblate spheroidal harmonics fluid mass.
+
+    Returns the fluid added-mass scalar, or *None* if the computation
+    fails numerically (e.g., singular system near the sphere limit).
+    """
     d = np.sqrt(a**2 - c**2)
     xi0 = c / d
     z0 = 1j * xi0
@@ -177,20 +187,46 @@ def _fluid_mass(n, a, c, rho_f, eta_q, w_q):
     if n in lap:
         b[lap.index(n)] = 2.0 / (2 * n + 1)
     else:
-        R = (a * a * c) ** (1.0 / 3.0)
-        return rho_f * R / n * np.dot(w_q, Pn**2 * dSw)
+        return None
 
     try:
         A = np.linalg.solve(C, b)
     except np.linalg.LinAlgError:
-        R = (a * a * c) ** (1.0 / 3.0)
-        return rho_f * R / n * np.dot(w_q, Pn**2 * dSw)
+        return None
 
     Phi = np.zeros_like(eta_q)
     for idx, m in enumerate(lap):
         Phi += np.real(A[idx] * Pz[idx]) * Plap[idx]
 
     return rho_f * np.dot(w_q, Phi * Pn * dSw)
+
+
+def _fluid_mass(n, a, c, rho_f, eta_q, w_q):
+    """Scalar fluid added-mass for mode n (contribution to M[0,0])."""
+    if n < 1:
+        return 0.0
+
+    Pn = _legendre_poly(n)(eta_q)
+    sqG = np.sqrt(a**2 * eta_q**2 + c**2 * (1.0 - eta_q**2))
+    dSw = 2.0 * np.pi * a * sqG
+
+    aspect = c / a
+    m_sphere = _sphere_fluid_mass(n, a, c, rho_f, Pn, dSw, w_q)
+
+    if aspect >= _BLEND_HI:
+        return m_sphere
+
+    m_oblate = _oblate_fluid_harmonics(n, a, c, rho_f, eta_q, w_q, Pn, dSw)
+
+    if m_oblate is None:
+        return m_sphere
+
+    if aspect <= _BLEND_LO:
+        return m_oblate
+
+    # Smooth C² blend through the transition region
+    w = _smootherstep((aspect - _BLEND_LO) / (_BLEND_HI - _BLEND_LO))
+    return (1.0 - w) * m_oblate + w * m_sphere
 
 
 # ============================================================
