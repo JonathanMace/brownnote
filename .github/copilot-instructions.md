@@ -137,6 +137,7 @@ See the `git-checkpoint` skill for the full agent git workflow.
 4. **Energy budget**: Shell absorbs ~10⁻¹⁴ of incident acoustic energy.
 5. **Modal participation**: Γ₂ = 0.48 for vertical WBV (asymmetric BCs).
 6. **Borborygmi (gut sounds)**: Constrained bubble model spans 135-440 Hz for 1-50 mL gas pockets, matching clinical range 200-550 Hz.
+7. **Singular-value lifting**: Symmetry-breaking restores identifiability. κ ~ C|δ|⁻ᵖ where p is the first non-vanishing perturbative order. For spheroids in eccentricity, p=2 (coordinate artifact); in invariant amplitude, p=1 generically.
 
 ## How to Use the Core Model
 
@@ -217,6 +218,7 @@ See the `compile-paper` skill for compilation instructions.
 | Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `papers/paper6-sub-bass/` |
 | Paper 7: Watermelon Ripeness | Postharvest B&T | First complete draft (16pp) | `papers/paper7-watermelon/` |
 | Paper 8: Kac Identifiability | Inverse Problems | First complete draft | `papers/paper8-kac/` |
+| Paper 9: Lifting Theorem | Inverse Problems | Scaffolded | `papers/paper9-lifting-theorem/` |
 
 ## The Academic Calendar
 

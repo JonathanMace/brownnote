@@ -87,6 +87,16 @@ If growers can judge a watermelon by tapping it, the obvious question is whether
 
 The inverse counterpart of Kac's celebrated "Can one hear the shape of a drum?" applied to vibroacoustic organ models. At the spherical operating point the scaled Jacobian is effectively rank-deficient; oblate geometry restores identifiability, enabling Newton-type inversion to recover shell parameters to sub-percent accuracy.
 
+### Paper 9 — *Lifting Theorem*
+**A singular-value lifting theorem for symmetry-broken spectral inverse problems**  
+**Authors:** J. Mace and B.R. Mace  
+**Status:** Scaffolded  
+**Venue:** *Inverse Problems*  
+**Location:** `papers/paper9-lifting-theorem/`  
+**Key result:** symmetry-breaking lifts Jacobian singular values, with κ scaling as κ ~ C|δ|⁻ᵖ and p determined by the first non-vanishing perturbative order.
+
+This inverse-problems follow-on formalises singular-value lifting as the mechanism by which symmetry breaking restores practical identifiability. For spheroidal perturbations, eccentricity gives p=2 because of coordinate artefacts, whereas invariant perturbation amplitudes recover the generic linear law p=1.
+
 ### Research Statement
 **[Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)** — Research vision, accomplishments, and trajectory for the Browntone programme.
 
@@ -163,7 +173,8 @@ browntone/
 │   ├── paper5-borborygmi/           # Paper 5: bowel sounds
 │   ├── paper6-sub-bass/             # Paper 6: sub-bass coupling
 │   ├── paper7-watermelon/           # Paper 7: watermelon ripeness
-│   └── paper8-kac/                  # Paper 8: Kac identifiability
+│   ├── paper8-kac/                  # Paper 8: Kac identifiability
+│   └── paper9-lifting-theorem/      # Paper 9: lifting theorem
 ├── src/analytical/              # Core analytical models
 ├── tests/                       # Pytest regression suite
 ├── docs/research-logs/          # Quantitative research logs
