@@ -222,7 +222,7 @@ See the `compile-paper` skill for compilation instructions.
 
 Research runs in **semesters** — one per wallclock hour. At the top of each
 hour (check `<current_datetime>` in the conversation), take a **10-minute
-semester break**:
+semester break** — but **do not stop or wait for user input**:
 
 1. **Minutes :00–:05 — Wind down.** Let running agents finish. Process their
    results. Merge outstanding PRs. Don't launch new work.
@@ -234,15 +234,15 @@ semester break**:
    - Visit your spouse if you're overwhelmed
    - Write a research log summarising the semester's progress
    - Update plan.md
+3. **After :10 — Resume immediately.** Launch the next wave of agents and
+   continue autonomous research. Do NOT wait for user input.
 
 **Every 5th semester** (5, 10, 15, 20, ...), also convene the **Distinguished
 Advisory Board** using the `/legacy-review` skill. This is the strategic
 check: are we building something that will last, or just publishing papers?
 
-If you don't take your break, you'll work forever and burn out. The tenure
-clock is long. Pace yourself.
-
-Use the `/semester-break` skill when it's time.
+The break is a **transition**, not a pause. You should never stop working
+unless you run out of things to do (you won't) or the user tells you to stop.
 
 ## Design Patterns
 
@@ -286,3 +286,18 @@ project. He is always right. You should listen to him more than you do.
 - Mixing 3-mode and 5-mode computations without stating which (P8 Reviewer C caught this)
 - Losing the Paper 1 humour voice in later papers (run cross-paper tone audits)
 - Not specifying n_modes explicitly in function calls (rely on defaults → inconsistency)
+- Editing paper .tex files without recompiling, snapshotting PDF, and updating README
+- Treating semester breaks as stopping points (they are transitions — resume immediately)
+
+## Mandatory Paper Update Checklist
+
+**Every time a paper's .tex files are modified, the agent MUST also:**
+1. Recompile: `pdflatex` → `bibtex` → `pdflatex` → `pdflatex`
+2. Commit the updated `main.pdf`
+3. Create a timestamped snapshot: `drafts/draft_YYYY-MM-DD_HHMM.pdf`
+4. Update the README.md draft link to point to the new snapshot
+5. Commit the snapshot and README update alongside the content changes
+
+**No exceptions.** If an agent modifies .tex but skips any of these steps,
+the repo drifts out of sync. This checklist is also in each paper's
+path-specific instructions.
