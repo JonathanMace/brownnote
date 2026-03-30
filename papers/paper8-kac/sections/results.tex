@@ -234,7 +234,8 @@ available information for the present three-parameter problem.
 \subsection{Condition-number map in parameter space}
 
 Condition-number maps over $(a,\zeta_g)$ show a broad region of acceptable
-conditioning across physiologically relevant oblate geometries.  The condition
+conditioning across physiologically relevant oblate geometries, computed at
+fixed $E = \SI{0.1}{MPa}$ (the canonical value).  The condition
 number increases steadily as $\zeta_g \rightarrow 0$, that is, as the geometry
 approaches a sphere.  This trend is physically and numerically consistent with
 the singular spherical limit.  Away from that limit, the inverse problem
@@ -272,6 +273,24 @@ orders of magnitude larger than in soft tissue, yet the inverse problem remains
 tractable.  The conditioning therefore reflects the structure of the
 frequency--parameter map rather than a peculiarity of one very soft shell.
 
+\subsection{Prolate comparison}\label{sec:prolate_results}
+
+The prolate shell exhibits qualitatively different identifiability behaviour.
+Over $\varepsilon \in [0.3,\,0.65]$, the condition number remains
+essentially flat at $\kappa \approx 580$--$730$
+(Figure~\ref{fig:oblate_prolate_comparison}), in stark contrast to the
+oblate case where $\kappa$ varies by a factor of approximately four across
+the swept eccentricity range.  Singular-value decomposition reveals that
+the minimum singular vector is persistently aligned with the $E$-direction
+($\sigma_3 \approx 0.003$), indicating that the prolate bottleneck is
+modulus identifiability rather than geometric degeneracy.  This confirms
+the curvature--mode anti-correlation mechanism discussed in
+Section~\ref{sec:oblate_prolate}: in the prolate geometry, maximum curvature
+and modal amplitude peaks coincide at the poles, preventing the differential
+sampling that drives oblate identifiability improvement.  The prolate class
+is therefore classified as \emph{non-lifting}: the condition number is finite
+but high, and does not benefit systematically from increasing eccentricity.
+
 \subsection{Eccentricity dependence and two-channel expansion}
 
 The analytical predictions of Propositions~\ref{prop:chain_rule}
@@ -284,18 +303,36 @@ All computations use the oblate Ritz model.
 
 \paragraph{Regular expansion coefficients.}
 Fitting the smallest singular value to the
-expansion~\eqref{eq:sigma_min_expansion} yields (five modes,
+expansion~\eqref{eq:sigma_min_expansion} over $\varepsilon\in[0.15,\,0.85]$
+(15 uniformly spaced points) yields (five modes,
 $n=2,\ldots,6$):
 \begin{equation}\label{eq:expansion_coeffs}
   \sigma_0 = 0.01113, \qquad
   \lambda_1 = 0.00507, \qquad
   \lambda_2 = 0.02401,
 \end{equation}
-with $\sigma_{\max}(0) = 1.894$.  The curvature-channel floor gives
-$\kappa_\mathrm{floor} = \sigma_{\max}(0)/\sigma_0 \approx 170$ from the
-expansion fit, consistent with the directly computed value of approximately
-$269$ at $\varepsilon = 0.01$ (the discrepancy reflects higher-order terms
-not captured by the truncated expansion).  The crossover eccentricity is
+with $\sigma_{\max}(0) = 1.894$.  The regression intercept $\sigma_0$ is a
+compact empirical descriptor of the expansion over the intermediate
+eccentricity range; it should not be conflated with the directly computed
+$\sigma_{\min}$ at the near-spherical limit.  Direct evaluation at
+$\varepsilon = 0.01$ ($\zeta = 0.99995$, five modes) gives
+$\sigma_{\min} = 0.00705$ and
+\begin{equation}\label{eq:kappa_floor_direct}
+  \kappa_\mathrm{floor}
+  = \frac{\sigma_{\max}}{\sigma_{\min}}\bigg|_{\varepsilon=0.01}
+  \approx 269,
+\end{equation}
+which is the value reported elsewhere in this paper.  The difference between
+the directly computed $\sigma_{\min}(0.01) = 0.00705$ and the regression
+intercept $\sigma_0 = 0.01113$ arises because the polynomial fit is
+evaluated over the wider window $\varepsilon\in[0.15,\,0.85]$, not near
+the sphere.  The regression intercept extrapolates the intermediate-range
+trend to $\varepsilon = 0$; at the actual near-spherical limit, the
+smootherstep blend in the Ritz model's fluid mass term modifies the
+$\sigma_{\min}$ landscape, producing a lower directly computed floor than
+the extrapolated fit suggests.
+
+The crossover eccentricity is
 \begin{equation}\label{eq:crossover}
   \varepsilon_c = \sqrt{\sigma_0 / \lambda_1} = 1.48,
 \end{equation}

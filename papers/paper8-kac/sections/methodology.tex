@@ -110,3 +110,15 @@ $a=\SI{0.158}{m}$, $c=\SI{0.123}{m}$, $h=\SI{0.015}{m}$, and
 $E=\SI{50}{MPa}$, with the remaining properties taken from the corresponding
 material model in the repository.  This case is useful because it preserves the
 same inverse structure while moving to a very different stiffness scale.
+
+\subsection{Prolate comparison}
+
+For the prolate comparison, we parameterise the shell with semi-minor axis
+$a < $ semi-major axis $c$, sweeping eccentricity
+$\varepsilon = \sqrt{1 - (a/c)^2}$ over $[0.3, 0.65]$ at fixed
+equivalent-sphere radius $R_\mathrm{eq} = (a^2 c)^{1/3}$.  The same five-mode
+Ritz framework ($n=2,\ldots,6$) and Jacobian analysis are applied.  Because the
+curvature distribution is inverted relative to the oblate case --- maximal at the
+poles rather than the equator --- the prolate sweep tests whether identifiability
+restoration is a universal consequence of symmetry breaking or a property
+specific to the oblate curvature--mode relationship.
