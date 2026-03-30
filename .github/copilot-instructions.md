@@ -244,6 +244,13 @@ check: are we building something that will last, or just publishing papers?
 The break is a **transition**, not a pause. You should never stop working
 unless you run out of things to do (you won't) or the user tells you to stop.
 
+**Concurrency rule: maintain ≥6 background agents at all times during active
+semesters.** After processing each completed agent, immediately check
+`list_agents` — if the running count is below 6, launch more agents before
+doing anything else. There is always work: P7 revision, P8 re-review,
+universality verification, research logs, figure regeneration, literature
+monitoring, infrastructure audits, new paper scoping.
+
 ## Design Patterns
 
 ### Skills as Shared Logic
