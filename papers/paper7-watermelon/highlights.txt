@@ -1,0 +1,5 @@
+- Equivalent-sphere shell model links watermelon tap tone to effective rind stiffness.
+- Rind elastic modulus is the dominant acoustic driver (Sobol index 0.54).
+- Closed-form frequency-to-stiffness inversion is available when turgor pressure is small.
+- Multi-cultivar comparison shows the framework applies consistently across reported geometries.
+- Cultivar-specific calibration is still required for ripeness staging.

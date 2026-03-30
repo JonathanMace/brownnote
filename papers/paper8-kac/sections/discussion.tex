@@ -7,7 +7,7 @@
 
 Kac's original problem asked whether one could infer geometry from a spectrum.
 Our answer is deliberately narrower and more practical.  For the present
-viscoelastic shell model, the results suggest that one \emph{can} hear the shape
+elastic shell model, the results suggest that one \emph{can} hear the shape
 of an oblate organ, in the sense that the local inverse problem for
 $(a,c,E)$ is well conditioned and statistically finite.  At the spherical
 limit, one cannot: the Jacobian becomes rank deficient and the Fisher matrix
@@ -27,7 +27,7 @@ The analytical results in Section~\ref{sec:theory} clarify why oblate geometry
 restores identifiability.  Proposition~\ref{prop:chain_rule} shows that \emph{any}
 model built on $R_\mathrm{eq} = (a^2 c)^{1/3}$ alone has a rank-deficient
 Jacobian, because the chain rule forces the $a$- and $c$-columns to be exactly
-proportional for all modes.  Proposition~\ref{prop:eccentricity} then shows
+proportional for all modes.  Remark~\ref{prop:eccentricity} then shows
 that the Ritz model, which integrates strain energy over the actual spheroidal
 surface, introduces mode-dependent corrections at order $\varepsilon^2$.
 
@@ -109,9 +109,9 @@ The present study uses the oblate Ritz model for all identifiability results.
 The equivalent-sphere model is retained only to illustrate the algebraic rank
 deficiency of Proposition~\ref{prop:chain_rule}.  The Ritz model is itself an
 approximation --- it truncates the trial function space and incurs $\sim\!8\%$
-error relative to exact spheroidal shell theory --- but the measured-mode
-sensitivity analysis of Table~\ref{tab:mode_count} shows that the identifiability
-transition is robust to this truncation.  A full finite-element oblate shell
+error relative to exact spheroidal shell theory --- but the rank restoration
+follows from the $n$-dependence of the curvature integrals rather than from
+the approximation error itself.  A full finite-element oblate shell
 model would provide the definitive answer, but the Ritz results already
 demonstrate the essential geometric mechanism.
 
@@ -120,9 +120,11 @@ demonstrate the essential geometric mechanism.
 Inverse vibration problems have long been studied in structural
 dynamics~\cite{Gladwell2004,Gladwell2005}, and model-based elastography has
 developed a wide range of optimisation and regularisation
-strategies~\cite{Doyley2012}.  In acoustics and biomechanics, several studies
-have estimated material parameters by fitting dynamic response models to
-spectral data~\cite{Aernouts2012}.  The present contribution is more modest but
+strategies~\cite{Doyley2012}.  In acoustics, Aernouts et
+al.~\cite{Aernouts2012} demonstrated inverse estimation of tympanic membrane
+material properties by fitting a dynamic response model to spectral data ---
+a problem structurally analogous to the present one, though in a different
+organ system.  The present contribution is more modest but
 useful: before attempting a sophisticated inversion, we ask whether the chosen
 measurements can, in principle, resolve the chosen parameters with acceptable
 conditioning.
@@ -165,9 +167,9 @@ Several limitations remain.
 \begin{enumerate}
   \item The Ritz forward model is a variational approximation, not a full
   spheroidal shell solution.  It captures the leading eccentricity dependence
-  but incurs $\sim\!8\%$ error relative to exact shell theory.  The measured-mode
-  sensitivity analysis of Table~\ref{tab:mode_count} mitigates this concern but does
-  not eliminate it entirely.
+  but incurs $\sim\!8\%$ error relative to exact shell theory.  Whether the
+  rank restoration persists in a converged finite-element model remains to be
+  confirmed.
   \item The analysis is local.  We do not prove global injectivity of the map
   $(a,c,E)\mapsto \{f_n\}$.
   \item Synthetic inversion uses the same model for data generation and
@@ -210,9 +212,11 @@ identifiability of spectral inverse problems on fluid-filled shells.
 
 \begin{enumerate}
   \item \textbf{Singular} (Jacobian rank-deficient).  The equivalent-sphere
-  model, which depends on $(a,c)$ only through $R_\mathrm{eq}$, gives
-  $\kappa = 1.37 \times 10^{10}$ --- effectively infinite.  This is the
-  degenerate case of Proposition~\ref{prop:chain_rule}: all frequency
+  model, which depends on $(a,c)$ only through $R_\mathrm{eq}$, has a
+  formally infinite condition number by Proposition~\ref{prop:chain_rule}
+  (evaluated numerically as $\kappa \approx 1.37 \times 10^{10}$ with
+  finite-difference step $\delta = 10^{-6}|\theta_j|$).  This is the
+  degenerate case: all frequency
   sensitivities to $a$ and $c$ are proportional, leaving one parameter
   combination unobservable.
 
@@ -270,13 +274,13 @@ the specific integrals
 $\int_0^1 P_n^2(\eta)\,G^{-k}(\eta)\,\mathrm{d}\eta$ whose $n$-dependence
 does or does not vary with eccentricity.  In the oblate case, the factor
 $(\eta^2 - \tfrac{2}{3})$ in the perturbation
-integral~\eqref{eq:Delta_Ink} changes sign on $[0,1]$, and different
+integral changes sign on $[0,1]$, and different
 $P_n^2$ sample the positive and negative regions differently.  In the
 prolate case, the analogous factor does not produce sufficient
 $n$-dependent variation, because the modal peaks and curvature peaks are
 co-located.
 
-\subsection{Open questions and conjectures}\label{sec:open_questions}
+\subsection{Open questions}\label{sec:open_questions}
 
 The two-channel expansion and three-class classification organise the
 numerical findings, but several questions remain open.  We record the
@@ -287,20 +291,19 @@ let $\varepsilon=\sqrt{1-c^2/a^2}$ be the eccentricity, and let
 $\mathbf{J}_s(\varepsilon;\mathcal{N})$ denote the corresponding scaled
 Jacobian of the frequency--parameter map.
 
-\begin{conjecture}[Closed-form expansion coefficients]
+\paragraph{Open question 1: closed-form expansion coefficients.}
 \label{conj:expansion}
-For the Ritz model with fixed mode set $\mathcal{N}$, the expansion
+For the Ritz model with fixed mode set $\mathcal{N}$, can the expansion
 coefficients $\sigma_0(\mathcal{N})$, $\lambda_1(\mathcal{N})$, and
-$\lambda_2(\mathcal{N})$ in~\eqref{eq:sigma_min_expansion} can be expressed
+$\lambda_2(\mathcal{N})$ in~\eqref{eq:sigma_min_expansion} be expressed
 in closed form as functions of the curvature-weighted Legendre integrals
 $\int_0^1 P_n^2(\eta)\,(\eta^2 - \tfrac{2}{3})\,\mathrm{d}\eta$ and the
-canonical parameter set.  A proof would turn the numerically determined
+canonical parameter set?  A derivation would turn the numerically determined
 coefficients~\eqref{eq:expansion_coeffs} into design formulae, giving the
 floor, slope, and crossover eccentricity as explicit functions of the mode
 set.
-\end{conjecture}
 
-\begin{conjecture}[Minimum modes for identifiability]
+\paragraph{Open question 2: minimum modes for identifiability.}
 \label{conj:min_modes}
 Consider the four-parameter material map with parameter vector
 \begin{equation}
@@ -317,11 +320,9 @@ formally prove), then three measured flexural modes suffice for local
 identifiability if and only if $\varepsilon>0$.  At $\varepsilon=0$, the
 additional proportionality constraint of Proposition~\ref{prop:chain_rule}
 removes one degree of freedom, and no finite mode set yields full column rank.
-This claim remains a conjecture because the completeness of the three-group
-reduction has not been established rigorously; a formal proof would require
-verifying that no hidden similarity scaling further reduces the effective
-parameter dimension.
-\end{conjecture}
+The completeness of the three-group reduction has not been established
+rigorously; a formal proof would require verifying that no hidden similarity
+scaling further reduces the effective parameter dimension.
 
 \begin{remark}[Monotone improvement with mode count]
 \label{rem:monotone}
@@ -339,8 +340,8 @@ conjecture.  The practical implication is that five modes capture the bulk
 of the available information for the present three-parameter problem.
 \end{remark}
 
-Conjecture~\ref{conj:expansion} is the most tantalising of the open
-questions.  The numerics already determine the expansion coefficients
+Open Question~1 is the most tantalising of these.  The numerics already
+determine the expansion coefficients
 to several significant figures~\eqref{eq:expansion_coeffs}, but a
 closed-form derivation would give the floor, slope, and crossover as
 explicit functions of the mode set --- turning a useful fit into an
