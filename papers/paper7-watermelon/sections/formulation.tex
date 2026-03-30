@@ -64,27 +64,41 @@ throughout this study are given in Table~\ref{tab:canonical}.
 \begin{table}[t]
   \centering
   \caption{Canonical parameters for the Crimson Sweet watermelon at
-    optimal ripeness.  Values are drawn from Sadrnia et
-    al.~\cite{Sadrnia2008}, De Belie et al.~\cite{DeBelieetal2000},
-    and established tissue mechanics compilations.}
+    optimal ripeness.  Geometry ($a$, $c$, $h$) and densities are
+    representative values drawn from Sadrnia et
+    al.~\cite{Sadrnia2008} and De Belie et al.~\cite{DeBelieetal2000}.
+    The rind modulus is an assumed mid-range value for ripe fruit based
+    on the ranges reported in those sources.  Poisson's ratio and turgor
+    pressure are assumed from the literature range for soft biological
+    tissues.  The flesh bulk modulus is taken as a standard value for
+    water-like media.  The loss tangent is representative of ripe
+    rind tissue.}
   \label{tab:canonical}
-  \begin{tabular}{llcc}
+  \begin{tabular}{llccc}
     \toprule
-    Parameter & Symbol & Value & Unit \\
+    Parameter & Symbol & Value & Unit & Provenance \\
     \midrule
-    Semi-major axis    & $a$                 & 0.158 & m \\
-    Semi-minor axis    & $c$                 & 0.123 & m \\
-    Aspect ratio       & $\zeta = c/a$       & 0.78  & --- \\
-    Equivalent radius  & $R_{\mathrm{eq}}$   & 0.145 & m \\
-    Rind thickness     & $h$                 & 15    & mm \\
-    Rind modulus (ripe) & $E_{\mathrm{rind}}$ & 50   & MPa \\
-    Poisson's ratio    & $\nu$               & 0.40  & --- \\
-    Rind density       & $\rho_w$            & 1050  & kg/m$^3$ \\
-    Flesh density      & $\rho_f$            & 950   & kg/m$^3$ \\
-    Flesh bulk modulus  & $K_f$              & 2.2   & GPa \\
-    Turgor pressure     & $P_{\mathrm{int}}$ & 500   & Pa \\
-    Loss tangent        & $\eta$             & 0.15  & --- \\
+    Semi-major axis    & $a$                 & 0.158 & m & Lit.$^a$ \\
+    Semi-minor axis    & $c$                 & 0.123 & m & Lit.$^a$ \\
+    Aspect ratio       & $\zeta = c/a$       & 0.78  & --- & Derived \\
+    Equivalent radius  & $R_{\mathrm{eq}}$   & 0.145 & m & Derived \\
+    Rind thickness     & $h$                 & 15    & mm & Lit.$^a$ \\
+    Rind modulus (ripe) & $E_{\mathrm{rind}}$ & 50   & MPa & Assumed$^b$ \\
+    Poisson's ratio    & $\nu$               & 0.40  & --- & Assumed$^c$ \\
+    Rind density       & $\rho_w$            & 1050  & kg/m$^3$ & Lit.$^a$ \\
+    Flesh density      & $\rho_f$            & 950   & kg/m$^3$ & Lit.$^a$ \\
+    Flesh bulk modulus  & $K_f$              & 2.2   & GPa & Standard$^d$ \\
+    Turgor pressure     & $P_{\mathrm{int}}$ & 500   & Pa & Assumed$^c$ \\
+    Loss tangent        & $\eta$             & 0.15  & --- & Assumed$^c$ \\
     \bottomrule
+    \multicolumn{5}{l}{\footnotesize $^a$\,Measured from literature
+      \cite{Sadrnia2008, DeBelieetal2000}.} \\
+    \multicolumn{5}{l}{\footnotesize $^b$\,Assumed mid-range value
+      for ripe fruit from reported literature ranges.} \\
+    \multicolumn{5}{l}{\footnotesize $^c$\,Assumed from literature
+      range for soft biological tissues.} \\
+    \multicolumn{5}{l}{\footnotesize $^d$\,Standard value for
+      water-like media.}
   \end{tabular}
 \end{table}
 
