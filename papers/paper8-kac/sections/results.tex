@@ -436,3 +436,33 @@ trial-function order.
   regular perturbation rather than a singular limit.}
   \label{fig:kappa_vs_eccentricity}
 \end{figure}
+
+\subsection{Summary of identifiability regimes}
+
+Figure~\ref{fig:summary_identifiability} consolidates the main numerical
+findings into a single view.  The oblate Ritz branch (blue) shows $\kappa$
+decreasing monotonically from the near-spherical floor toward the canonical
+operating point, while the prolate branch (orange) remains flat and poorly
+conditioned.  The equivalent-sphere model ($\kappa > 10^{10}$, off scale)
+occupies the singular regime at $\varepsilon = 0$.  The three annotated
+regions --- singular, non-lifting, and regular bounded --- summarise the
+identifiability landscape observed across the computations presented above.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_summary_identifiability}
+  \caption{Summary of identifiability regimes for fluid-filled elastic
+  shells.  Condition number $\kappa(\mathbf{J}_s)$ is shown as a function
+  of eccentricity $\varepsilon$ for both oblate (blue circles) and prolate
+  (orange squares) Ritz models, using five flexural modes
+  ($n=2,\ldots,6$).  Three regimes are observed: \emph{singular}
+  (equivalent-sphere, $\kappa > 10^{10}$, red shading near
+  $\varepsilon = 0$); \emph{non-lifting} (prolate, $\kappa$ flat at
+  $580$--$730$, orange band); and \emph{regular bounded} (oblate, $\kappa$
+  decreasing from $\kappa_\mathrm{floor} \approx 269$ to $69.4$ at the
+  canonical operating point, green star).  The dashed line marks
+  $\kappa_\mathrm{floor}$.  The mode-crossing spikes near
+  $\varepsilon \approx 0.8$ are a real feature of the Ritz eigenvalue
+  branches (see text).}
+  \label{fig:summary_identifiability}
+\end{figure}

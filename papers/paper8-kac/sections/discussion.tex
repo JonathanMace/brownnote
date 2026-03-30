@@ -18,9 +18,10 @@ The analogy with Kac should therefore be handled with care.  We do not prove a
 global uniqueness theorem of the kind established by Sylvester and
 Uhlmann~\cite{SylvesterUhlmann1987} for the Calder\'on inverse conductivity
 problem, nor do we exclude the possibility of remote isospectral parameter sets.
-Our claim is about \emph{practical identifiability} in a finite-dimensional
-model relevant to measurement and inversion.  That is a less grand claim, but
-also the one an experimentalist can actually use.
+Our claim is about \emph{local practical identifiability} --- whether, at a
+given operating point, finite noisy measurements contain enough independent
+information to constrain the parameters to useful precision.  That is a less
+grand claim, but also the one an experimentalist can actually use.
 
 \subsection{Mechanism: mode-dependent curvature sampling}
 
@@ -119,16 +120,28 @@ demonstrate the essential geometric mechanism.
 \subsection{Relation to existing inverse methods}
 
 Inverse vibration problems have long been studied in structural
-dynamics~\cite{Gladwell2004,Gladwell2005}, and model-based elastography has
-developed a wide range of optimisation and regularisation
-strategies~\cite{Doyley2012}.  In acoustics, Aernouts et
+dynamics.  Mottershead and Friswell~\cite{MottersheadFriswell1993} surveyed
+finite element model updating techniques, in which measured natural
+frequencies and mode shapes are used to correct uncertain structural
+parameters --- a problem structurally similar to the present one, though
+typically applied to metal structures with well-separated modes rather than
+soft-tissue shells in the infrasonic band.  Their
+textbook~\cite{FriswellMottershead1995} developed the systematic framework
+for sensitivity-based updating, of which the Jacobian analysis presented
+here is a natural extension.  Gladwell~\cite{Gladwell2004,Gladwell2005}
+established the mathematical foundations of inverse vibration, and
+model-based elastography~\cite{Doyley2012} has extended similar ideas to
+soft-tissue characterisation.  In acoustics, Aernouts et
 al.~\cite{Aernouts2012} demonstrated inverse estimation of tympanic membrane
 material properties by fitting a dynamic response model to spectral data ---
 a problem structurally analogous to the present one, though in a different
-organ system.  The present contribution is more modest but
-useful: before attempting a sophisticated inversion, we ask whether the chosen
-measurements can, in principle, resolve the chosen parameters with acceptable
-conditioning.
+organ system.
+
+The present contribution focuses on a preliminary but
+useful step: before attempting a sophisticated inversion, we ask whether the
+chosen measurements can, in principle, resolve the chosen parameters with
+acceptable conditioning.  That is a question of local practical
+identifiability rather than of algorithmic inversion.
 
 That perspective is valuable because poor inverse performance is often blamed on
 optimisers, priors, or noise models when the underlying issue is simpler: the
@@ -208,8 +221,11 @@ perturbation theory~\cite{Kato1966,Henrot2006}.
 \subsection{Classification of shell inverse problems}\label{sec:classification}
 
 The two-channel expansion~\eqref{eq:sigma_min_expansion} and the
-oblate--prolate comparison together suggest a three-class taxonomy for the
-identifiability of spectral inverse problems on fluid-filled shells.
+oblate--prolate comparison together suggest three regimes of identifiability
+behaviour for spectral inverse problems on fluid-filled shells.  We present
+these as observed patterns in the numerics rather than as a definitive
+taxonomy; the classification may evolve as more shell geometries and model
+classes are examined.
 
 \begin{enumerate}
   \item \textbf{Singular} (Jacobian rank-deficient).  The equivalent-sphere
@@ -240,16 +256,23 @@ identifiability of spectral inverse problems on fluid-filled shells.
   prolate geometries ($c > a$), the condition number remains in the range
   $580$--$730$ with no systematic improvement as eccentricity increases.
   The inverse problem is not rank-deficient, but it is poorly conditioned
-  and does not benefit from departure from the sphere.
+  and does not appear to benefit from departure from the sphere within the
+  present model and parameter range.
 \end{enumerate}
 
-The distinction between classes~2 and~3 is the central new finding.
+The distinction between regimes~2 and~3 is the central new observation.
 It replaces an earlier conjecture~\cite[Conjecture~1, first
 draft]{BrowntoneCompanion} that proposed a power-law divergence
 $\kappa \sim C\varepsilon^{-\alpha}$ as $\varepsilon \to 0$.  That
 conjecture was abandoned because the Ritz model has $\sigma_0 > 0$ at the
 sphere: the condition number approaches a finite floor, not infinity.  The
 two-channel expansion provides a richer and more accurate description.
+
+Whether these three regimes persist in more general shell theories (e.g.\
+higher-order Ritz bases, full finite-element models, or non-axisymmetric
+geometries) remains to be established.  We therefore present them as
+empirical observations from the present model class, not as universal
+categories.
 
 \subsection{Oblate--prolate asymmetry}\label{sec:oblate_prolate}
 
@@ -289,7 +312,7 @@ co-located.
 
 \subsection{Open questions}\label{sec:open_questions}
 
-The two-channel expansion and three-class classification organise the
+The two-channel expansion and the three identifiability regimes organise the
 numerical findings, but several questions remain open.  We record the
 outstanding mathematical programme explicitly.
 

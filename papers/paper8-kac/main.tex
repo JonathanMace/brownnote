@@ -72,16 +72,16 @@ Elastic Shell Parameters from Resonant Frequencies}
 }
 
 \begin{abstract}
-We investigate the practical identifiability of material and geometric
-parameters of a fluid-filled elastic oblate spheroidal shell from its
-resonant frequencies --- the inverse counterpart of Kac's celebrated question
-``Can one hear the shape of a drum?'' applied to vibroacoustic organ models.
-Using an oblate Ritz flexural forward model --- with the equivalent-sphere
-reduction as a degenerate comparator --- we compute the scaled
-Jacobian of the frequency--parameter map, its singular values, its condition
-number, and the associated Fisher information matrix for the parameter triple
-$(a,c,E)$.  The smallest singular value of the scaled Jacobian admits a
-\emph{two-channel} regular expansion
+We investigate the \emph{local practical identifiability} of material and
+geometric parameters of a fluid-filled elastic oblate spheroidal shell from
+its resonant frequencies --- the inverse counterpart of Kac's celebrated
+question ``Can one hear the shape of a drum?'' applied to vibroacoustic
+organ models.  Using an oblate Ritz flexural forward model --- with the
+equivalent-sphere reduction as a degenerate comparator --- we compute the
+scaled Jacobian of the frequency--parameter map, its singular values, its
+condition number, and the associated Fisher information matrix for the
+parameter triple $(a,c,E)$.  The smallest singular value of the scaled
+Jacobian admits a \emph{two-channel} regular expansion
 $\sigma_{\min}(\varepsilon) \approx \sigma_0 + \lambda_1\varepsilon^2 +
 \lambda_2\varepsilon^4$, where $\sigma_0$, $\lambda_1$, $\lambda_2$ are
 regression coefficients (not asymptotic limits) obtained over the
@@ -92,29 +92,28 @@ rather than diverging, and drops to $\kappa = 69.4$ at the canonical
 oblate operating point, an improvement by a factor of approximately $3.9$.
 For comparison, the equivalent-sphere model gives
 $\kappa$ numerically singular ($\kappa > 10^{10}$ in finite-difference
-evaluation with step $\delta = 10^{-6}|\theta_j|$), reflecting algebraic rank deficiency rather
-than geometric conditioning.  A Newton-type inverse solver recovers
-$(a,c,E)$ to relative errors below $10^{-12}$ in round-trip tests, while
-Cram\'er--Rao bounds at $1\%$ frequency noise yield uncertainties of
-$\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and $\pm 30.8\%$ in $E$ (five
-modes).  The two-channel framework leads to a three-class classification of
-shell inverse problems: \emph{singular} (equivalent-sphere, rank-deficient),
+evaluation with step $\delta = 10^{-6}|\theta_j|$), reflecting algebraic
+rank deficiency rather than geometric conditioning.  A Newton-type inverse
+solver recovers $(a,c,E)$ to relative errors below $10^{-12}$ in round-trip
+tests, while Cram\'er--Rao bounds at $1\%$ frequency noise yield
+uncertainties of $\pm 22.5\%$ in $a$, $\pm 6.0\%$ in $c$, and $\pm 30.8\%$
+in $E$ (five modes).  The numerics suggest three regimes of identifiability
+behaviour: \emph{singular} (equivalent-sphere, rank-deficient),
 \emph{regular bounded} (oblate Ritz, $\kappa$ approaches a finite floor and
 generally improves with eccentricity, exhibiting local non-monotonicity from
-mode crossings), and \emph{non-lifting} (prolate,
-$\kappa$ flat and high).  The oblate--prolate asymmetry arises from
-curvature--mode anti-correlation: in oblate shells, peak curvature and modal
-peaks occupy different latitudes, diversifying the Jacobian columns; in
-prolate shells, both concentrate at the poles, leaving the columns nearly
-proportional.  Within the present Ritz model and local identifiability framework,
-one can ``hear the shape'' of an oblate organ, but not a
-spherical or prolate one.
+mode crossings), and \emph{non-lifting} (prolate, $\kappa$ flat and high).
+The oblate--prolate asymmetry arises from curvature--mode anti-correlation:
+in oblate shells, peak curvature and modal peaks occupy different latitudes,
+diversifying the Jacobian columns; in prolate shells, both concentrate at
+the poles, leaving the columns nearly proportional.  Within the present Ritz
+model and local identifiability framework, one can ``hear the shape'' of an
+oblate organ, but not a spherical or prolate one.
 \end{abstract}
 
 \begin{keyword}
-inverse problem \sep identifiability \sep elastic shell \sep
+inverse problem \sep local practical identifiability \sep elastic shell \sep
 resonant frequency \sep condition number \sep Cram\'er--Rao bound \sep
-oblate spheroid \sep Kac problem
+oblate spheroid \sep Kac problem \sep finite element model updating
 \end{keyword}
 
 \end{frontmatter}
