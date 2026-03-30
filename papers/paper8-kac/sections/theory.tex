@@ -148,7 +148,11 @@ covariance of any unbiased local estimator satisfies
   \mathbf{F}^{-1},
 \end{equation}
 with the diagonal entries of $\mathbf{F}^{-1}$ giving the minimum achievable
-variances under the assumed noise model.
+variances under the assumed noise model.  Note that since $\mathbf{F}$ is
+defined using the scaled Jacobian $\mathbf{J}_s$, the diagonal elements of
+$\mathbf{F}^{-1}$ yield lower bounds on the \emph{relative} (fractional)
+parameter variances; the corresponding absolute bounds are obtained by
+multiplying by $|\theta_j|^2$.
 
 This framework does not prove global uniqueness.  It answers a more practical
 question: at a chosen operating point, do the measured resonances contain enough
