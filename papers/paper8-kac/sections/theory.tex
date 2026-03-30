@@ -73,10 +73,11 @@ and
   \rho_w h + \frac{\rho_f R_\mathrm{eq}}{n}.
 \end{equation}
 
-Equation~\eqref{eq:flexural_forward} is the model analysed throughout this
-paper.  It is important to emphasise again that it is \emph{not} a full oblate
-spheroidal shell theory: explicit aspect-ratio terms do not appear.  The model
-depends on $(a,c)$ only through $R_\mathrm{eq}$.
+Equation~\eqref{eq:flexural_forward} defines the equivalent-sphere reduction
+used as a degenerate comparator throughout the paper.  It depends on $(a,c)$
+only through $R_\mathrm{eq}$ and is therefore algebraically rank deficient
+(Proposition~\ref{prop:chain_rule}).  The oblate Ritz model introduced in
+Section~\ref{sec:perturbation} is the forward model used for all main results.
 
 \subsection{Inverse problem}
 
@@ -282,8 +283,8 @@ breaks the proportionality of the $a$- and $c$-columns and lifts the rank
 deficiency.
 
 The result leads to a quantitative design rule.  Because the rank-restoring
-correction enters at order $\varepsilon^2$, the condition number diverges as
-$\varepsilon \to 0$ according to a power law:
+correction enters at order $\varepsilon^2$, the condition number rises steeply
+as $\varepsilon \to 0$, following an approximate power law:
 \begin{equation}\label{eq:kappa_powerlaw}
   \kappa \sim C\,\varepsilon^{-\alpha}
   \qquad \text{as } \varepsilon \to 0,
