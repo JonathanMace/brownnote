@@ -24,7 +24,7 @@ the condition number drops to
 \begin{equation}
   \kappa_\mathrm{oblate} = 69.4,
 \end{equation}
-an improvement by a factor of approximately four achieved purely through
+an improvement by a factor of approximately $3.9$ achieved purely through
 geometric eccentricity.  This Ritz-to-Ritz comparison demonstrates that it is
 \emph{geometry}, not model choice, that drives the identifiability transition.
 
@@ -281,7 +281,7 @@ The prolate shell exhibits qualitatively different identifiability behaviour.%
 Over $\varepsilon \in [0.3,\,0.65]$, the condition number remains
 essentially flat at $\kappa \approx 580$--$730$
 (Figure~\ref{fig:oblate_prolate_comparison}), in stark contrast to the
-oblate case where $\kappa$ varies by a factor of approximately four across
+oblate case where $\kappa$ varies by a factor of approximately $3.9$ across
 the swept eccentricity range.  Singular-value decomposition reveals that
 the minimum singular vector is persistently aligned with the $E$-direction
 ($\sigma_3 \approx 0.003$), indicating that the prolate bottleneck is
@@ -296,7 +296,7 @@ Both the oblate and prolate sweeps follow the same parameterisation
 path: the semi-major axis~$a$ is held fixed at the canonical value while the
 polar semi-axis~$c$ is derived from the eccentricity
 (Section~\ref{sec:methodology}).  The qualitative contrast --- oblate $\kappa$
-varying by a factor of four vs prolate $\kappa$ remaining flat --- therefore
+varying by a factor of approximately $3.9$ vs prolate $\kappa$ remaining flat --- therefore
 reflects a genuine geometric difference in identifiability, not an artefact of
 different normalisation conventions.
 
@@ -336,9 +336,9 @@ the directly computed $\sigma_{\min}(0.01) = 0.00705$ and the regression
 intercept $\sigma_0 = 0.01113$ arises because the polynomial fit is
 evaluated over the wider window $\varepsilon\in[0.15,\,0.85]$, not near
 the sphere.  At $\varepsilon = 0.01$ the aspect ratio $\zeta = 0.99995$
-exceeds the blend threshold $\zeta_\mathrm{hi} = 0.999$, so the model uses
-the pure sphere approximation for fluid added mass rather than the
-smootherstep interpolation.  Even with sphere-approximated fluid mass,
+exceeds the blend threshold $\zeta_\mathrm{hi} = 0.999$, so the fluid added
+mass reduces to the sphere approximation while the structural stiffness
+integrals retain the oblate geometry.  Even with sphere-approximated fluid mass,
 however, the $2\times 2$ Ritz eigenproblem retains sensitivity structure
 that prevents exact rank deficiency, yielding a $\kappa$ that is large
 but finite.  The regression intercept extrapolates the intermediate-range
