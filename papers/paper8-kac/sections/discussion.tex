@@ -36,11 +36,15 @@ modes $P_n(\eta)$ weight the meridional curvature gradient differently: low-orde
 modes sample both poles and equator broadly, while higher-order modes
 concentrate energy near the equator where the curvature gradient is steepest.
 This differential sampling breaks the proportionality of the $a$- and $c$-columns
-and restores full rank.  The condition number rises steeply as
-$\kappa \sim C\,\varepsilon^{-\alpha}$ as $\varepsilon \to 0$, with
+and restores full rank.  In the intermediate eccentricity regime where the
+shape-channel correction dominates the curvature-channel floor, the condition
+number follows an approximate power law
+$\kappa \approx C\,\varepsilon^{-\alpha}$, with
 theoretical exponent $\alpha=2$ and empirical estimates
 $\hat\alpha\in[2.16,\,2.66]$ confirmed numerically in Section~\ref{sec:results}
-(Table~\ref{tab:power_law}).
+(Table~\ref{tab:power_law}).  As $\varepsilon \to 0$, the curvature channel
+provides a finite floor, and $\kappa$ saturates at
+$\kappa_\mathrm{floor}\approx 269$ rather than diverging.
 
 This interpretation is straightforward and does not invoke group-theoretic
 symmetry breaking.  The identifiability transition is not a consequence of
@@ -186,19 +190,31 @@ Jacobian of the frequency--parameter map.
 
 \begin{conjecture}[Rate of identifiability restoration]
 \label{conj:power_law}
-For the Ritz model with fixed mode set $\mathcal{N}$, there exist constants
-$C(\mathcal{N})>0$, $\alpha(\mathcal{N})>0$, and $\varepsilon_0>0$ such that
+For the Ritz model with fixed mode set $\mathcal{N}$, the smallest singular
+value of the scaled Jacobian satisfies
 \begin{equation}
-  \kappa\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N})\bigr)
+  \sigma_{\min}\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N})\bigr)
   =
-  C(\mathcal{N})\,\varepsilon^{-\alpha(\mathcal{N})}\bigl(1+o(1)\bigr)
+  \sigma_0(\mathcal{N}) + \lambda_1(\mathcal{N})\,\varepsilon^{2}
+  + O(\varepsilon^4)
   \qquad \text{as } \varepsilon \to 0^+,
 \end{equation}
-where the exponent $\alpha(\mathcal{N})$ depends only on the number of modes
-$N$ and on the selected mode set $\mathcal{N}$.  The theoretical prediction is
-$\alpha=2$, arising from the $\varepsilon^2$ metric expansion; the empirical
-estimates $\hat\alpha\in[2.16,\,2.66]$ (Table~\ref{tab:power_law}) are
-consistent with this prediction to leading order.
+where $\sigma_0 > 0$ is the curvature-channel floor.  In the intermediate
+eccentricity regime where $\lambda_1\varepsilon^2 \gg \sigma_0$, the
+condition number follows an approximate power law
+\begin{equation}
+  \kappa\bigl(\mathbf{J}_s(\varepsilon;\mathcal{N})\bigr)
+  \approx
+  \frac{\sigma_{\max}}{\lambda_1(\mathcal{N})}\,\varepsilon^{-2}\bigl(1+o(1)\bigr).
+\end{equation}
+As $\varepsilon \to 0^+$, however, the condition number saturates at
+$\kappa_\mathrm{floor} = \sigma_{\max}/\sigma_0 \approx 269$ (evaluated at
+$\varepsilon = 0.01$, i.e.\ $\zeta = 0.99995$, with five modes) rather than
+diverging.  The empirical exponents $\hat\alpha\in[2.16,\,2.66]$
+(Table~\ref{tab:power_law}), fitted over the intermediate range, are
+consistent with the theoretical $\alpha = 2$ to leading order; the
+deviation from $2$ reflects the finite curvature-channel floor
+rounding off the divergence.
 \end{conjecture}
 
 \begin{conjecture}[Minimum modes for identifiability]
@@ -241,8 +257,10 @@ of the available information for the present three-parameter problem.
 \end{remark}
 
 Conjecture~\ref{conj:power_law} is the most tantalising of the open questions.
-The numerics already suggest a clean power law with $\alpha\approx2$, but a
-rigorous proof would turn a useful plot into an asymptotic theorem --- and would
-give the exponent and prefactor as closed-form functions of the mode set.
-That would be the crown jewel of the present identifiability programme; at
-the time of writing, it remains work in progress.
+The numerics already suggest a clean intermediate-regime power law with
+$\alpha\approx2$ and a finite curvature-channel floor, but a rigorous proof of
+the $\sigma_{\min}$ expansion would turn a useful plot into an asymptotic
+theorem --- and would give the floor, coefficient, and crossover eccentricity as
+closed-form functions of the mode set.  That would be the crown jewel of the
+present identifiability programme; at the time of writing, it remains work in
+progress.
