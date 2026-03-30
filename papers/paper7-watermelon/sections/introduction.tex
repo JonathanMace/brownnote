@@ -103,6 +103,10 @@ The common weakness of prior work is that the
 observable is informative but not explained: frequency or spectral
 features are correlated with firmness or maturity, yet the governing
 structural mechanics remain implicit.
+Note that ``Train?~$= $~no'' for the present work indicates that our
+physics-based inversion does not require cultivar-specific training
+data to estimate the rind modulus; the model derives $E_{\mathrm{rind}}$
+from first principles given the fruit geometry.
 
 % --- The gap: no physics-based shell model -----------------------------------
 
@@ -123,20 +127,16 @@ established here; the subsequent chain from modulus to biological
 ripeness stage requires cultivar-specific calibration against
 destructive reference measurements (e.g.\ penetrometry, sugar content),
 which has not yet been performed.
+The immediate output of the model is therefore a stiffness estimate;
+its long-term value is to provide a mechanistic basis for future
+cultivar-specific ripeness calibration.
 
 % --- Connection to prior work on biological cavities -------------------------
 
-The mathematical ingredients for this problem are standard.  Classical
-shell theory provides the flexural scaling and modal structure
-\cite{Leissa1973, Soedel2004}, while fluid-loaded acoustics supplies the
-added-mass interpretation for a shell coupled to an enclosed fluid
-\cite{MorseIngard1968, Junger1986}.  In our companion papers, we modelled
-the human abdomen as a fluid-filled shell using an equivalent-sphere
-approximation and derived
-closed-form expressions for its modal frequencies.  The watermelon
-presents a structurally analogous problem---a thin elastic rind
-enclosing a near-incompressible fluid---albeit with
-different material parameters and a far more appetising motivation.
+The shell--fluid framework used here is structurally identical to
+the model applied to the human abdomen in our companion
+work~\cite{MaceAndMace2026}; the governing equations are unchanged,
+only the material parameters differ.
 
 % --- Mark Kac and the inverse problem ----------------------------------------
 

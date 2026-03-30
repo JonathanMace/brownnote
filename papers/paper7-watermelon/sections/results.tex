@@ -76,7 +76,7 @@ exact within the model framework.
   \caption{Predicted tap-tone frequency~$f_2$ as a function of rind
     elastic modulus~$E_{\mathrm{rind}}$ for the canonical watermelon
     geometry ($a = \SI{0.158}{\metre}$, $\zeta = 0.78$,
-    $h = \SI{15}{\milli\metre}$).  The squared frequency is exactly
+    $h = \SI{15}{\milli\metre}$).  The squared frequency is approximately
     linear in~$E_{\mathrm{rind}}$ (inset shows $f_2^2$ vs.\
     $E_{\mathrm{rind}}$ with $R^2 > 0.9999$), confirming that the
     inversion formula~\eqref{eq:inversion} is well-posed.}
@@ -125,7 +125,7 @@ total-order ($S_T$) Sobol indices with bootstrap confidence intervals.
 The rind elastic modulus dominates
 the frequency response with $S_1 = 0.49 \pm 0.04$ and
 $S_T = 0.54 \pm 0.05$, confirming
-that the rind stiffness---and hence ripeness---is the primary
+that the rind stiffness is the primary
 determinant of the tap-tone frequency.  The semi-major axis~$a$ is the
 second most influential parameter ($S_1 = 0.33 \pm 0.03$,
 $S_T = 0.38 \pm 0.04$),
@@ -200,7 +200,8 @@ Table~\ref{tab:Pi_ripe} presents the results.
   \centering
   \caption{Dimensionless geometric invariant~$\Pi_{\mathrm{ripe}}$ for
     four cultivars evaluated at each cultivar's canonical geometry
-    (fixed~$a$, $c$, $h$) with varying~$E_{\mathrm{rind}}$.  The
+    (fixed~$a$, $c$, $h$) with $E_{\mathrm{rind}}$ set to four
+    illustrative modulus levels (column headers, in~MPa).  The
     near-constant value per cultivar
     ($\overline{\Pi}_{\mathrm{ripe}} = 0.062$, CoV~$= \SI{3.3}{\percent}$)
     confirms that $E_{\mathrm{rind}}$ cancels by construction at fixed
@@ -209,7 +210,7 @@ Table~\ref{tab:Pi_ripe} presents the results.
   \label{tab:Pi_ripe}
   \begin{tabular}{lcccc}
     \toprule
-    Cultivar & Unripe & Turning & Ripe & Overripe \\
+    Cultivar & $E{=}200$ & $E{=}120$ & $E{=}50$ & $E{=}15$ \textrm{[MPa]} \\
     \midrule
     Crimson Sweet      & 0.0601 & 0.0601 & 0.0601 & 0.0601 \\
     Sugar Baby         & 0.0655 & 0.0655 & 0.0654 & 0.0655 \\
@@ -284,7 +285,10 @@ frequencies.
     frequency~$f_2$ at the canonical ripe modulus
     $E_{\mathrm{rind}} = \SI{50}{\mega\pascal}$.  All four cultivars
     use $\nu = 0.40$, $\rho_w = \SI{1050}{\kilogram\per\metre\cubed}$,
-    $\rho_f = \SI{950}{\kilogram\per\metre\cubed}$.}
+    $\rho_f = \SI{950}{\kilogram\per\metre\cubed}$.
+    Cultivar geometries are representative values assembled from
+    published dimensions \cite{Sadrnia2008, DeBelieetal2000}; they do
+    not derive from a single controlled cultivar trial.}
   \label{tab:cultivar}
   \begin{tabular}{lccccc}
     \toprule
@@ -320,7 +324,8 @@ geometry.
   \label{fig:cultivar_comparison}
 \end{figure}
 
-We also compute the full ripening trajectory for the Crimson Sweet
+We also compute a \textbf{constructed scenario} representing the full
+ripening trajectory for the Crimson Sweet
 cultivar by sweeping the rind modulus from
 $\SI{250}{\mega\pascal}$ (very unripe) to $\SI{10}{\mega\pascal}$
 (very overripe) in 20~stages, simultaneously thinning the rind from
@@ -346,7 +351,9 @@ measurements on the same fruit.
     reduces $E_{\mathrm{rind}}$ from \SI{250}{\mega\pascal} (unripe)
     to \SI{10}{\mega\pascal} (overripe), the frequency drops
     monotonically from \SI{239}{\hertz} to \SI{36}{\hertz}.  The
-    shaded region indicates the optimal ripeness window
-    ($f_2 \approx \SIrange{84}{108}{\hertz}$).}
+    shaded region indicates a heuristic, provisional ripeness window
+    ($f_2 \approx \SIrange{84}{108}{\hertz}$) based on literature
+    modulus ranges; it has not been validated against destructive
+    reference measurements.}
   \label{fig:ripening_sweep}
 \end{figure}
