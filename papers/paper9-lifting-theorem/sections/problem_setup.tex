@@ -22,6 +22,25 @@ The corresponding aspect ratio is $\zeta=c/a=\num{0.667}$ and the
 equivalent-sphere radius is
 $R_\mathrm{eq}=(a^2c)^{1/3}=\SI{0.157}{\metre}$ \cite{BrowntoneP1,BrowntoneP8}.
 
+The coupled shell--fluid model is treated by a Rayleigh--Ritz approximation.
+With Ritz coefficients $\mathbf{q}$, the discrete potential and kinetic
+energies are
+\[
+  \Pi=\tfrac{1}{2}\mathbf{q}^\mathsf{T}K(a,c,E)\mathbf{q},
+  \qquad
+  T=\tfrac{1}{2}\mathbf{q}^\mathsf{T}M(a,c)\mathbf{q},
+\]
+where $K$ collects the shell stiffness and fluid-compression contributions, and
+$M$ collects the shell and added-fluid inertia terms.  Stationarity of
+$\Pi-\omega^2T$ gives the generalised eigenproblem
+\[
+  K(a,c,E)\mathbf{q}=\omega^2 M(a,c)\mathbf{q},
+\]
+from which the resonance frequencies follow as $f_n=\omega_n/(2\pi)$.
+Papers~1 and 8 give the full derivations of $K$ and $M$
+\cite{BrowntoneP1,BrowntoneP8}, but these equations define the forward model
+used here.
+
 The inverse variable is the parameter vector
 $\boldsymbol{\theta}=[a,c,E]^\mathsf{T}$.  The spectral data vector is formed
 from the first five flexural resonances,
@@ -38,13 +57,21 @@ this inverse map.
 Local practical identifiability is measured through the dimensionless scaled
 Jacobian
 \[
+  \widetilde{J}
+  =
+  \operatorname{diag}(\mathbf{f})^{-1}
+  J
+  \operatorname{diag}(\boldsymbol{\theta}),
+  \qquad
   \widetilde{J}_{ij}
   =
-  \frac{\theta_j}{f_i}\,
+  \frac{\theta_j}{f_i}
   \frac{\partial f_i}{\partial \theta_j},
+  \qquad
+  J_{ij}=\frac{\partial f_i}{\partial \theta_j},
 \]
-with singular values
-$\sigma_1\geq\sigma_2\geq\sigma_3\geq 0$.  The conditioning metric is
+with singular values $\sigma_1\geq\sigma_2\geq\sigma_3\geq 0$.  The
+conditioning metric is
 \[
   \kappa=\frac{\sigma_1}{\sigma_3},
 \]
@@ -59,27 +86,14 @@ Three geometry classes are compared.
   sense \cite{BrowntoneP7,BrowntoneP8}.
   \item \textbf{Oblate Ritz family.}  The full spheroidal curvature field is
   retained.  For the oblate branch we use the eccentricity
-  $\varepsilon=\sqrt{1-c^2/a^2}$ and examine the near-spherical limit
-  $\varepsilon\to 0$ together with the canonical oblate point.
+  $\varepsilon=\sqrt{1-c^2/a^2}$ and the aspect-ratio offset
+  $\delta=1-c/a$, and examine the near-spherical limit together with the
+  canonical oblate point.
   \item \textbf{Prolate Ritz family.}  The same five-mode diagnostic is applied
   to a prolate continuation away from the sphere, so that the effect of
   geometry class can be separated from the mere fact of leaving
-  $\mathrm{SO}(3)$ symmetry behind.
+  $\mathrm{SO}(3)$ symmetry behind.  Along this branch $c>a$, the enclosed
+  volume and wall thickness are fixed, and the path is parameterised by
+  $c/a\in[\num{1.0},\num{1.5}]$ with $a$ decreasing and $c$ increasing subject
+  to $a^2c=\text{const}=R_\mathrm{eq}^3$.
 \end{enumerate}
-
-For the oblate family, the smallest singular value is well represented near the
-spherical limit by
-\begin{equation}
-  \sigma_{\min}(\varepsilon)
-  =
-  \sigma_0 + \lambda_1 \varepsilon^2 + O(\varepsilon^4),
-  \label{eq:sigma-min-expansion}
-\end{equation}
-where $\sigma_0>0$ is the fitted intercept and $\lambda_1$ is the leading
-curvature coefficient \cite{BrowntoneP8}.  The associated crossover parameter
-is
-\[
-  \varepsilon_c=\sqrt{\sigma_0/\lambda_1}=\num{1.48}.
-\]
-Because $\varepsilon_c>1$, the fitted intercept remains influential throughout
-the physical oblate range considered here.
