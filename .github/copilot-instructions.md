@@ -231,7 +231,7 @@ See the `compile-paper` skill for compilation instructions.
 | Paper 6: Sub-bass Perception | JASA | Submission-ready (18pp) | 0 | ✅ | `papers/paper6-sub-bass/` |
 | Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ✅ | `papers/paper7-watermelon/` |
 | Paper 8: Kac Identifiability | IPSE/JSV (TBD) | Submission-ready (29pp) | 0 | ✅ | `papers/paper8-kac/` |
-| Paper 9: Lifting Theorem | JSV Short | Skeleton — reframe pending | 0 | ❌ | `papers/paper9-lifting-theorem/` |
+| Paper 9: Identifiability Asymmetry | JSV Short | Draft complete (6pp) | 0 | ❌ | `papers/paper9-lifting-theorem/` |
 | Paper 10: Capstone | Proc Roy Soc A | Skeleton only | 0 | ❌ | `papers/paper10-capstone/` |
 
 **Stale values** are pre-Breit-Wigner numbers that must be corrected before
@@ -295,4 +295,3 @@ delegation, agent management).
 **No exceptions.** If an agent modifies .tex but skips any of these steps,
 the repo drifts out of sync. This checklist is also in each paper's
 path-specific instructions.
-

@@ -1,6 +1,41 @@
 \section{Introduction}
 
-% Kac's question, practical identifiability, symmetry-induced
-% non-identifiability, and Uhlenbeck's generic simplicity provide the
-% conceptual bridge for the paper's inverse-problem framing.
-% TODO: Draft this section
+Kac's famous question --- can one hear the shape of a drum? --- remains a
+useful way to frame inverse spectral problems, provided one resists the urge to
+promise more than the data support \cite{Kac1966}.  In structural acoustics and
+vibroelasticity, the practical issue is usually local rather than global: given
+a finite set of measured resonances, can nearby changes in geometry and
+stiffness be separated reliably?  That is a practical-identifiability question
+in the usual inverse-problem sense \cite{Raue2009,Wieland2021}.  For that
+purpose, the singular values of a scaled frequency--parameter Jacobian are more
+informative than a grand theorem with nowhere sensible to land.
+
+The Browntone companion papers established the ingredients needed for this
+narrower question.  Paper~1 introduced the canonical fluid-filled oblate shell
+used as an abdominal benchmark \cite{BrowntoneP1}.  Paper~7 showed that an
+equivalent-sphere reduction can be very effective for a forward problem in
+which one seeks a dominant stiffness indicator rather than full geometric
+recovery \cite{BrowntoneP7}.  Paper~8 then mapped local practical
+identifiability across oblate and prolate shell families \cite{BrowntoneP8}.
+The present short communication distils the one result that survives close
+inspection: \emph{oblateness lifts a weak spectral inverse direction, whereas
+prolateness does not provide a comparable improvement}.
+
+That distinction matters because ``symmetry breaking helps'' is false in the
+form in which it is usually repeated.  The five-mode flexural map considered
+here does not reward every departure from spherical geometry.  Instead, the
+improvement is tied to how the perturbed geometry redistributes curvature across
+the modal strain field.  Oblate shells separate the geometric sensitivity
+directions enough to improve conditioning; prolate shells, in the same
+framework, remain stubbornly unhelpful.
+
+We therefore replace the dead universal-theorem framing with a focused
+statement.  Using the canonical fluid-loaded shell and the flexural modes
+$n=2,\ldots,6$ derived from thin-shell theory and fluid--structure coupling
+\cite{Lamb1882,JungerFeit1986}, we show that the inverse map moves from an
+equivalent-sphere singular limit to a finite oblate floor and then to a useful
+oblate operating point, while the prolate branch remains poorly conditioned.
+The lowest flexural resonance in that map is
+$f_2=\SI{3.95}{\hertz}$ at the canonical oblate point \cite{BrowntoneP1}, so
+the discussion concerns the low-frequency flexural spectrum only; the much
+higher breathing branch is a different animal entirely.

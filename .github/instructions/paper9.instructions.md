@@ -2,7 +2,7 @@
 applyTo: "papers/paper9-lifting-theorem/**"
 ---
 
-# Paper 9 — Inverse Problems (Lifting Theorem)
+# Paper 9 — JSV Short Communication (Identifiability Asymmetry)
 
 When modifying ANY file in this directory:
 
@@ -25,4 +25,4 @@ When modifying ANY file in this directory:
 4. **Commit the snapshot PDF** alongside your content changes.
 
 All content must use British English. Use `\SI{value}{unit}` for quantities.
-Target: Inverse Problems (IOP Publishing).
+Target: Journal of Sound and Vibration — Short Communication.

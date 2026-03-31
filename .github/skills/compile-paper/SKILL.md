@@ -25,7 +25,7 @@ content changes.** Works for all 9 papers.
 | P6 Sub-bass | `papers/paper6-sub-bass/` |
 | P7 Watermelon | `papers/paper7-watermelon/` |
 | P8 Kac | `papers/paper8-kac/` |
-| P9 Lifting Theorem | `papers/paper9-lifting-theorem/` |
+| P9 Identifiability Asymmetry | `papers/paper9-lifting-theorem/` |
 
 ## Workflow (ALL 5 steps are mandatory)
 

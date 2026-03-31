@@ -43,7 +43,7 @@ jobs:
           - { name: "Paper 6 - Sub-Bass",          dir: "papers/paper6-sub-bass",       artifact: "paper-6-sub-bass" }
           - { name: "Paper 7 - Watermelon",        dir: "papers/paper7-watermelon",     artifact: "paper-7-watermelon" }
           - { name: "Paper 8 - Kac",               dir: "papers/paper8-kac",            artifact: "paper-8-kac" }
-          - { name: "Paper 9 - Lifting Theorem",   dir: "papers/paper9-lifting-theorem", artifact: "paper-9-lifting-theorem" }
+          - { name: "Paper 9 - Identifiability Asymmetry", dir: "papers/paper9-lifting-theorem", artifact: "paper-9-lifting-theorem" }
     steps:
       - uses: actions/checkout@v4
 
