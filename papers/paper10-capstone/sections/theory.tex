@@ -5,17 +5,18 @@
 \section{Theory}
 \label{sec:theory}
 
-The companion papers established the ingredients that we now place in a common
-mathematical frame.  Paper~1 distinguished the low-frequency flexural family
-from the much higher breathing mode in a fluid-filled soft shell, and showed
-that geometry controls not only resonance but also the efficiency with which
-forcing projects onto those modes~\cite{BrowntoneP1}.  Paper~7 showed that an
-equivalent-sphere model can nevertheless be operationally useful when the
-inverse task is deliberately narrow and the geometry is known
-independently~\cite{BrowntoneP7}.  Paper~8 then exposed the inverse price of
-that reduction: once geometry and material must be inferred simultaneously, the
-same equivalent-radius simplification becomes structurally
-defective~\cite{BrowntoneP8}.  The present section upgrades that programme to
+The programme developed thus far supplies three ingredients that are required in
+the present section.  First, the abdominal analysis separates the low-frequency
+flexural family from the much higher breathing mode in a fluid-filled soft shell
+and identifies geometry as the quantity that controls not only resonance but
+also the efficiency with which forcing projects onto those modes~\cite{BrowntoneP1}.
+Secondly, the watermelon inversion provides a case in which an equivalent-sphere
+model remains useful because the inferential target is deliberately narrow and
+the geometry is known independently~\cite{BrowntoneP7}.  Thirdly, the
+identifiability analysis shows the inverse cost of that reduction: once
+geometry and material must be inferred simultaneously, the same
+equivalent-radius simplification becomes structurally defective~\cite{BrowntoneP8}.  The
+present section upgrades that programme to
 formal statements: one proposition for excitation filtering and four proved
 results for the inverse problem.
 
@@ -46,7 +47,7 @@ $P_\mathrm{iap}=\SI{1000}{\pascal}$, and $\eta=0.25$
 $n \geq 2$, since the breathing mode $n=0$ is fluid-compressibility dominated
 and lies in the kilohertz range for the canonical abdomen rather than the
 single-digit-hertz range of interest~\cite{BrowntoneP1}.  That distinction is
-not decorative; it keeps the physics honest.
+essential for physical consistency.
 
 Let the unknown parameter vector be
 \begin{equation}
@@ -96,8 +97,8 @@ When $\sigma_3=0$, the inverse problem is locally rank deficient.  When
 $\sigma_3>0$ but small, the inverse is formally possible but practically
 fragile: small frequency errors may be amplified into large parameter errors.
 Thus the smallest singular value identifies the least observable parameter
-combination, while $\kappa$ measures how badly the geometry conspires against
-the experimentalist.
+combination, while $\kappa$ measures how strongly observational errors may be
+amplified in the inferred parameters.
 
 \subsection{Excitation filtering as a geometric statement}
 
@@ -182,8 +183,8 @@ scalar descriptor, typically the equivalent radius
 \end{equation}
 or, more generally, some smooth scalar reduction $g(a,c)$.  Such reductions can
 be entirely sensible for forward estimates of resonance magnitude or scaling,
-and indeed they are useful in Papers~1 and~7 for precisely that purpose
-~\cite{BrowntoneP1,BrowntoneP7}.  The inverse consequence is less cheerful.
+and they are used in~\cite{BrowntoneP1,BrowntoneP7} for precisely that purpose.
+Their inverse implication is considerably less favourable.
 
 \begin{theorem}[Rank collapse under scalar geometric reduction]
 \label{thm:p10_scalar_reduction}
@@ -293,7 +294,8 @@ well.  At the canonical oblate operating point
   =
   \bigl(\SI{0.18}{\metre},\SI{0.12}{\metre},\SI{0.1}{\mega\pascal}\bigr),
 \end{equation}
-Paper~8 reports $\kappa(\widetilde{J}(\boldsymbol{\theta}_*))=69.4$ for the
+The numerical study in~\cite{BrowntoneP8} reports
+$\kappa(\widetilde{J}(\boldsymbol{\theta}_*))=69.4$ for the
 five-mode inverse using modes $n=2,\ldots,6$~\cite{BrowntoneP8}.  Therefore
 $\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))>0$, so
 $\operatorname{rank}(\widetilde{J}(\boldsymbol{\theta}_*))=3$.
@@ -339,7 +341,8 @@ smallest singular value of the scaled Jacobian satisfies
   \qquad \varepsilon \to 0,
   \label{eq:p10_sigma_asymptotic}
 \end{equation}
-with $\lambda_1>0$ for the canonical oblate family of Papers~8--10.  In
+with $\lambda_1>0$ for the canonical oblate family considered
+in~\cite{BrowntoneP8,BrowntoneP9}.  In
 particular,
 \begin{equation}
   \sigma_3(0)=0.
@@ -441,18 +444,18 @@ dominant frequencies to within \SI{10}{\percent}.  By
 Theorem~\ref{thm:p10_scalar_reduction}, however, the equivalent-sphere inverse
 map is structurally rank deficient, so
 $\operatorname{rank}(\widetilde{J}_\mathrm{sphere})\leq 2$.  The finite-difference
-evaluation in Paper~8 gives the associated numerical condition number
+evaluation reported in~\cite{BrowntoneP8} gives the associated numerical condition number
 $\kappa(\widetilde{J}_\mathrm{sphere})\approx 1.37\times10^{10}$.
 
 On the same parameter domain, Theorem~\ref{thm:p10_lifting} shows that the
 oblate Ritz model has full rank on an open neighbourhood of the canonical
-point, and Paper~8 gives the concrete value
+point, and~\cite{BrowntoneP8} gives the concrete value
 $\kappa(\widetilde{J}_\mathrm{oblate})=69.4$ for the five-mode inverse
 ~\cite{BrowntoneP8}.  The two models are therefore close as forward predictors
-yet radically different as inverse operators.  Paper~7 is the benign companion
-example: there the equivalent-sphere watermelon model succeeds precisely because
-geometry is fixed independently and the inverse target is effectively
-one-dimensional~\cite{BrowntoneP7}.  Forward adequacy is not false; it is simply
+yet radically different as inverse operators.  An instructive companion
+example is provided by the watermelon model in~\cite{BrowntoneP7}: there the
+equivalent-sphere reduction succeeds precisely because geometry is fixed
+independently and the inverse target is effectively one-dimensional.  Forward adequacy is not false; it is simply
 insufficient for multivariate spectral inversion.
 \end{proof}
 
@@ -461,5 +464,5 @@ Theorem~\ref{thm:p10_lifting}, Proposition~\ref{prop:p10_asymptotics}, and
 Lemma~\ref{lem:p10_forward_inverse} define the capstone thesis in mathematical
 form.  Scalar geometric reductions collapse one inverse direction; oblate
 curvature can restore it; the restoration vanishes quadratically at the exact
-sphere; and forward success is not a licence for inverse use.  The results
+sphere; and forward success does not justify inverse use.  The results
 section tests these formal statements against the cross-paper evidence.
