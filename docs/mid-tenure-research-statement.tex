@@ -54,146 +54,216 @@
 
 \section{Research Vision}
 
-Every culture has its acoustic folklore. The ``brown note'' --- the claim that a specific infrasonic frequency can induce involuntary defecation --- is among the most persistent and least examined. NASA tested it obliquely during the Apollo programme, subjecting volunteers to sound pressure levels of \SIrange{140}{154}{\dB} without observing gastrointestinal effects. \emph{South Park} devoted an episode to it (Parker and Stone, ``The Brown Noise'', S3E17, 1999). Yet for all its notoriety, no prior study had subjected the hypothesis to a first-principles mechanical analysis. We found that oversight unacceptable.
+Every culture has its acoustic folklore. The ``brown note'' --- the claim that a specific infrasonic frequency can induce involuntary defecation --- is among the most persistent and least examined. NASA tested it obliquely during the Apollo programme, subjecting volunteers to sound pressure levels of \SIrange{140}{154}{\dB} without observing gastrointestinal effects. \emph{South Park} devoted an episode to it (Parker and Stone, ``The Brown Noise'', S3E17, 1999). Yet no prior study had quantitatively compared airborne and mechanical excitation pathways for abdominal cavity modes within a unified shell-theoretic framework. We found that oversight irresistible.
 
-What began as a single analytical model has grown into a unified research programme in \textbf{vibroacoustic resonance of fluid-filled biological cavities}. The founding question --- can airborne sound make the abdomen resonate? --- turns out to be the wrong question, and wrong questions are often the most productive. The abdomen \emph{does} resonate, at frequencies squarely within the range of occupational whole-body vibration (\SIrange{4}{10}{\Hz}). But airborne sound cannot meaningfully excite those modes, because at infrasonic frequencies the acoustic wavelength exceeds \SI{85}{\m} --- over 500 times the abdominal radius --- and the resulting scattering penalty suppresses coupling by four to five orders of magnitude. The brown note, as popularly conceived, is a physical impossibility.
+What began as that single analysis has grown into a ten-paper research programme. The founding question --- can airborne sound make the abdomen resonate? --- proved to be the wrong question, and wrong questions are often the most productive. The abdomen \emph{does} resonate, at frequencies squarely within the ISO~2631 band of peak human sensitivity to whole-body vibration (\SIrange{4}{10}{\Hz}). But airborne sound cannot meaningfully excite those modes: at infrasonic frequencies the acoustic wavelength exceeds \SI{85}{\m}, the Helmholtz number $ka \approx 0.011$ implies negligible scattering efficiency, and the resulting coupling penalty suppresses airborne excitation by over four orders of magnitude relative to mechanical vibration. The brown note, as popularly conceived, is a physical impossibility.
 
-This negative result, far from closing the investigation, opened it. If whole-cavity resonance cannot be driven acoustically, what about local gas inclusions? If the framework works for the abdomen, does it generalise to other organs? To other species? Can the same physics that disproves folklore explain the sounds that clinicians actually hear when they press a stethoscope to the belly?
+This negative result opened the investigation rather than closing it. If whole-cavity resonance cannot be driven acoustically, what about intraluminal gas pockets? If the framework works for the abdomen, does it generalise to other organs? To other species? To a watermelon? Can the same physics that disproves folklore explain the sounds clinicians hear through a stethoscope? And --- perhaps most unexpectedly --- can the shape and stiffness of an unknown cavity be recovered from its resonant frequencies alone?
 
-The programme's intellectual contribution is threefold. First, we provide a \textbf{transferable analytical framework} --- oblate spheroidal shell theory with energy-consistent fluid--structure coupling --- that can be applied to any fluid-filled biological cavity. Second, we demonstrate that \textbf{dimensional analysis and scaling laws} reveal quasi-universal behaviour across mammalian scales, connecting rat models to human physiology through a single dimensionless frequency. Third, we show that \textbf{folklore, taken seriously, seeds rigorous science}: the brown note hypothesis led directly to new mechanistic explanations for occupational vibration symptoms, non-invasive bladder diagnostics, and the first physics-based model of bowel sounds.
+A Distinguished Advisory Board convened to evaluate the programme's trajectory crystallised the identity that had been emerging across these questions: \textbf{how geometry mediates excitation, resonance, and identifiability in fluid-filled viscoelastic shells}. The Board's framing was characteristically direct: ``The brown note is your Rayleigh's blue sky --- an entry point, not the legacy.'' Just as Rayleigh's question about why the sky is blue led to the foundations of scattering theory, the brown note question has led to a general spectral mechanics of soft shell resonance with implications across biomechanics, diagnostics, agriculture, and inverse problems.
 
-The target venues reflect the programme's ambition: the \emph{Journal of Sound and Vibration} for the structural acoustics papers, the \emph{Journal of the Acoustical Society of America} for the biomedical and perceptual acoustics contributions, \emph{Postharvest Biology and Technology} for the agricultural extension, and \emph{Inverse Problems} for the identifiability analysis.
+The programme's intellectual contribution is fourfold, centred on \textbf{how geometry mediates excitation, resonance, and identifiability in fluid-filled viscoelastic shells}. First, a \textbf{transferable analytical framework} --- oblate spheroidal shell theory with energy-consistent fluid--structure coupling --- applicable to any fluid-filled biological or agricultural cavity. Second, \textbf{dimensional analysis and scaling laws} that reveal quasi-universal behaviour across mammalian scales. Third, \textbf{closed-form resonance inversion} with rigorous identifiability analysis, proving when geometry can and cannot be recovered from spectral data. Fourth, and most unexpectedly, a demonstration that \textbf{forward model adequacy does not guarantee inverse model adequacy} --- the central insight of the identifiability work, with implications extending well beyond the specific systems studied. The target venues reflect this breadth: the \emph{Journal of Sound and Vibration}, the \emph{Journal of the Acoustical Society of America}, \emph{Postharvest Biology and Technology}, \emph{Inverse Problems in Science and Engineering}, and --- for the planned capstone synthesis --- the \emph{Proceedings of the Royal Society~A}.
+
+\subsection{The Four Conjectures}
+
+The programme converges on four conjectured results that, once proved in the capstone, would establish the mathematical core of a general framework:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Rank-deficiency of scalar-proxy models.} Any forward model mapping geometry to frequency through a scalar proxy necessarily produces a rank-deficient Jacobian for the inverse problem.
+  \item \textbf{Identifiability lifting by asphericity.} Oblate eccentricity introduces mode-dependent curvature sampling that breaks the scalar-proxy degeneracy and restores full-rank identifiability.
+  \item \textbf{Near-spherical conditioning asymptotics.} As eccentricity vanishes, the condition number diverges algebraically, classifying the intrinsic difficulty of inversion for near-spherical cavities.
+  \item \textbf{Forward adequacy $\neq$ inverse adequacy.} A forward model can predict frequencies to arbitrary accuracy while being provably non-identifiable for parameter recovery.
+\end{enumerate}
 
 \section{Accomplishments to Date}
 
-The programme has produced eight papers in a single extended research campaign, each building on its predecessors to form a coherent narrative arc: from whole-cavity analysis, through local inclusions and cross-species scaling, to organ-level extension, clinical acoustics, applied sub-bass perception, agricultural diagnostics, and inverse-problem identifiability.
+The programme has produced ten papers in a single extended research campaign, forming a coherent arc: from whole-cavity analysis, through local inclusions and cross-species scaling, to organ extension, clinical acoustics, sub-bass perception, agricultural diagnostics, inverse-problem identifiability, and a unifying curvature-lifting theorem.
+
+Papers~1--9 form a three-act arc: \textbf{Act~I} (Papers~1--2) asks whether the brown note exists and identifies why it cannot; \textbf{Act~II} (Papers~3--6) tests the framework across species, organs, and forcing pathways; \textbf{Act~III} (Papers~7--9) extracts the theoretical core --- inversion, identifiability, and the geometry-mediation thesis.
 
 \subsection{Paper 1 --- Modal Analysis of the Abdominal Cavity}
 
 \emph{Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the ``Brown Note''}\\
-Target: \emph{Journal of Sound and Vibration} ($\sim$30 pages)
+Target: \emph{Journal of Sound and Vibration} ($\sim$46 pages). Submission-ready after seven rounds of Reviewer~B scrutiny, traversing a REJECT-to-ACCEPT trajectory.
 
-The foundational paper models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$, $E = \SI{0.1}{\MPa}$). The analysis predicts a lowest flexural resonance at $f_2 \approx \SI{4.0}{\Hz}$, with higher modes at $f_3 \approx \SI{6.3}{\Hz}$ and $f_4 \approx \SI{8.9}{\Hz}$ --- precisely within the ISO~2631 band of peak human sensitivity to whole-body vibration. The breathing mode lies at approximately \SI{2500}{\Hz}, dominated by fluid bulk modulus and irrelevant to infrasound.
+The foundational paper models the human abdomen as a fluid-filled viscoelastic oblate spheroidal shell ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$, $E = \SI{0.1}{\MPa}$). The analysis predicts a lowest flexural resonance at $f_2 \approx \SI{4}{\Hz}$, with higher modes at $f_3 \approx \SI{6.3}{\Hz}$ and $f_4 \approx \SI{8.9}{\Hz}$ --- precisely within the ISO~2631 band. These predictions are consistent with experimentally observed whole-body resonance frequencies reported by Kitazaki and Griffin~(1998) and the ISO~2631 standard. The breathing mode lies at approximately \SI{2500}{\Hz}, dominated by fluid bulk modulus and irrelevant to infrasound.
 
-The paper's central quantitative result is the coupling ratio: mechanical whole-body vibration drives abdominal wall displacement $\mathbf{6.6 \times 10^4}$~\textbf{times} more effectively than airborne sound at equivalent excitation levels. At \SI{120}{\dB}~SPL, energy-consistent airborne displacement reaches just \SI{0.014}{\micro\m} --- two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\m} threshold for PIEZO mechanosensitive channel activation. Reaching \SI{1}{\micro\m} by airborne excitation alone would require approximately \SI{158}{\dB}, well beyond any plausible environmental exposure. By contrast, whole-body vibration at the EU action value of \SI{0.5}{\m\per\s\squared} produces relative wall displacements of \SI{4586}{\micro\m}.
+The central quantitative result is the coupling ratio: mechanical whole-body vibration drives abdominal wall displacement $\mathbf{3.3 \times 10^4}$~\textbf{times} more effectively than airborne sound at equivalent excitation levels. This is an SDOF upper bound with unit modal participation; correcting for the canonical participation factor ($\Gamma_2 \approx 0.48$) gives $\mathcal{R} \approx 1.6 \times 10^4$ --- still decisive. At \SI{120}{\dB}~SPL, energy-consistent airborne displacement reaches just \SI{0.028}{\micro\m} --- well below the \SIrange{0.5}{2.0}{\micro\m} threshold for PIEZO mechanosensitive channel activation. Reaching \SI{1}{\micro\m} by airborne excitation alone would require approximately \SI{151}{\dB}, beyond any plausible environmental exposure. By contrast, whole-body vibration at occupational exposure levels produces displacements of several millimetres. At the EU action value of \SI{0.5}{\metre\per\second\squared}, predicted displacements approach $\xi/h \sim 0.4$, entering the regime where geometric nonlinearity becomes relevant (Alijani and Amabili, 2014). This strengthens rather than weakens the coupling asymmetry: the airborne pathway remains deeply linear. The energy-consistent displacement formulation avoids the $6.5\times$ overestimate that arises from na\"{\i}ve pressure-based calculations.
 
 A 10{,}000-sample Monte Carlo uncertainty quantification identifies elastic modulus as the dominant parameter (Sobol total-order index $S_T = 0.86$), with 90\% of configurations placing $f_2$ within \SIrange{3.3}{15.5}{\Hz}. A six-layer multilayer wall model predicts $f_2 = \SI{4.6}{\Hz}$, within 16\% of the homogeneous baseline.
 
 \subsection{Paper 2 --- Gas Pockets as Acoustic Transducers}
 
 \emph{Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract}\\
-Target: \emph{JASA} ($\sim$18 pages)
+Target: \emph{JASA} ($\sim$18 pages). Submission-ready.
 
-Where Paper~1 demonstrated that whole-cavity resonance cannot be driven acoustically, Paper~2 identifies the most plausible alternative pathway: intraluminal gas pockets acting as local acoustic transducers. Using a Church~(1995) encapsulated-bubble formulation adapted for intestinal wall properties, the model predicts that gas pockets of \SIrange{5}{100}{\mL} produce tissue-wall displacements \textbf{35--100 times} larger than the whole-cavity flexural mode at the same incident SPL. A \SI{100}{\mL} pocket reaches the PIEZO activation threshold at approximately \SI{111}{\dB}; the whole-cavity pathway requires over \SI{180}{\dB}. A 10{,}000-sample Monte Carlo population model shows that at \SI{120}{\dB}, nearly all simulated individuals exceed the mechanotransduction threshold, with median peak displacement of approximately \SI{1.2}{\micro\m}.
+Where Paper~1 demonstrated that whole-cavity resonance cannot be driven acoustically, Paper~2 identifies the most plausible alternative pathway: intraluminal gas pockets acting as local acoustic transducers. Using a Church~(1995) encapsulated-bubble formulation adapted for intestinal wall properties, the model predicts that gas pockets of \SIrange{5}{100}{\mL} produce tissue-wall displacements \textbf{35--100 times} larger than the whole-cavity flexural mode at the same incident SPL. A \SI{100}{\mL} pocket reaches the PIEZO activation threshold at approximately \SI{111}{\dB}; the whole-cavity pathway requires over \SI{180}{\dB}. A fatal equation flaw discovered during internal review --- the constrained-bubble formulation did not recover the Minnaert free-bubble limit --- was corrected, restoring physical consistency.
 
 \subsection{Paper 3 --- Cross-Species Scaling Laws}
 
 \emph{Scaling Laws for the Flexural Resonance of Fluid-Filled Viscoelastic Shells: Predictions Across Mammalian Scales}\\
-Target: \emph{Journal of Sound and Vibration --- Short Communication} ($\sim$8 pages)
+Target: \emph{JSV --- Short Communication} ($\sim$8 pages). Under revision.
 
-Paper~3 applies Buckingham Pi dimensional analysis to the 10-parameter shell model, reducing the flexural eigenfrequency problem to five governing dimensionless groups. A 1{,}458-point parametric study confirms algebraic consistency with maximum relative error of $7.9 \times 10^{-16}$. Cross-species predictions for rat ($f_2 = \SI{15.7}{\Hz}$), cat (\SI{7.2}{\Hz}), pig (\SI{4.5}{\Hz}), and human (\SI{3.9}{\Hz}) reveal a quasi-universal dimensionless frequency $\boldsymbol{\Pi_0 \approx 0.07}$ across a six-fold range in body size. The airborne scattering penalty $\mathcal{R}_\mathrm{scat}$ remains in the $10^3$--$10^4$ range regardless of species, validating the use of animal models for mechanical but not acoustic excitation studies.
+Paper~3 applies Buckingham Pi dimensional analysis to the 10-parameter shell model, reducing the flexural eigenfrequency problem to five governing dimensionless groups. Cross-species predictions for rat ($f_2 = \SI{15.7}{\Hz}$), cat (\SI{7.2}{\Hz}), pig (\SI{4.5}{\Hz}), and human ($f_2 \approx \SI{4}{\Hz}$) reveal a quasi-universal dimensionless frequency $\Pi_0 \approx 0.07$ across a six-fold range in body size. The airborne scattering penalty $\mathcal{R}_\mathrm{scat}$ remains in the $10^3$--$10^4$ range regardless of species, validating animal models for mechanical but not acoustic excitation studies.
 
 \subsection{Paper 4 --- Bladder Resonance}
 
 \emph{Resonant Frequencies of the Human Urinary Bladder: A Fluid-Filled Viscoelastic Shell Model}\\
-Target: \emph{Journal of Sound and Vibration} ($\sim$27 pages)
+Target: \emph{Journal of Sound and Vibration} ($\sim$27 pages). Minor revision addressed.
 
-Paper~4 extends the analytical framework to the urinary bladder, a smaller, thinner-walled, more compliant organ whose mechanical properties vary with fill state. The model predicts a characteristic U-shaped frequency curve: geometric softening (increasing radius, thinning wall) competes with strain-stiffening of the detrusor muscle, producing a minimum $f_2 = \SI{13.5}{\Hz}$ at \SI{222}{\mL}. For physiologically relevant fill volumes (\SIrange{150}{500}{\mL}), the $n = 2$ mode spans \SIrange{13.5}{17.1}{\Hz}. The mechanical-to-airborne coupling ratio is $\mathcal{R} \approx 6{,}400$ --- smaller than the abdominal value owing to the bladder's reduced size, but still decisive. The paper offers the first mechanistic explanation for vibration-induced urinary urgency, a well-documented occupational complaint.
+Paper~4 extends the framework to the urinary bladder, whose mechanical properties vary with fill state. The model predicts a characteristic U-shaped frequency curve: geometric softening competes with strain-stiffening of the detrusor muscle, producing a minimum $f_2 = \SI{13.5}{\Hz}$ at \SI{222}{\mL}. For physiologically relevant fill volumes (\SIrange{150}{500}{\mL}), the $n = 2$ mode spans \SIrange{13.5}{17.1}{\Hz}. The mechanical-to-airborne coupling ratio is $\mathcal{R} \approx 6{,}400$ --- smaller than the abdominal value owing to the bladder's reduced size, but still decisive. The paper offers the first mechanistic explanation for vibration-induced urinary urgency.
 
 \subsection{Paper 5 --- Borborygmi}
 
 \emph{What Pitch Is a Growling Stomach? A Unified Multi-Mode Acoustic Model of Borborygmi}\\
-Target: \emph{JASA} ($\sim$20 pages)
+Target: \emph{JASA} ($\sim$20 pages). Accepted internally.
 
-Paper~5 completes the arc by turning from vibration response to sound \emph{generation}. A unified five-mechanism model --- free Minnaert oscillation, tissue-constrained bubble resonance, Helmholtz resonance through peristaltic constrictions, axial piston modes, and radial breathing of gas columns --- predicts bowel sound frequencies from measurable anatomical parameters with no fitted coefficients. The tissue-constrained bubble model predicts \SIrange{135}{440}{\Hz} for gas pockets of \SIrange{1}{50}{\mL}, substantially overlapping the clinically observed healthy band of \SIrange{200}{550}{\Hz}. Wall stiffness proves secondary: a 100-fold increase in elastic modulus shifts the constrained frequency by only 9\%.
+Paper~5 turns from vibration response to sound \emph{generation}. A five-mechanism model --- free Minnaert oscillation, tissue-constrained bubble resonance, Helmholtz resonance through peristaltic constrictions, axial piston modes, and radial breathing of gas columns --- predicts bowel sound frequencies from measurable anatomical parameters with no fitted coefficients. The tissue-constrained bubble model predicts \SIrange{135}{440}{\Hz} for gas pockets of \SIrange{1}{50}{\mL}, substantially overlapping the clinically observed healthy band of \SIrange{200}{550}{\Hz}. Wall stiffness proves secondary: a 100-fold increase in elastic modulus shifts the constrained frequency by only 9\%.
 
 \subsection{Paper 6 --- Sub-Bass Perception at Concerts}
 
 \emph{Can You Feel the Bass? Quantitative Partition of Airborne and Structure-Borne Pathways for Sub-Bass Perception at Concert Sound Pressure Levels}\\
-Target: \emph{JASA} ($\sim$18 pages)
+Target: \emph{JASA} ($\sim$18 pages). Accepted internally.
 
-Paper~6 extends the abdomen shell model into the \SIrange{20}{80}{\Hz} sub-bass band to ask whether the ``feel it in your gut'' experience at concerts can be caused by airborne sub-bass alone. The analysis combines acoustic coupling, off-resonance response, and whole-body-vibration perception thresholds into a quantitative pathway partition. At \SI{40}{\Hz} and \SI{115}{\dB}~SPL (typical EDM levels), airborne displacement reaches only 0.35\% of the perception threshold, while structure-borne vibration through floors and seats is approximately $2{,}600\times$ larger and reaches $9\times$ threshold. Uncertainty quantification gives a floor-to-airborne ratio of 2{,}040--3{,}060 (90\% CI). Across \SIrange{1}{100}{\Hz}, airborne displacement \emph{never} exceeds 1\% of the perception threshold, despite the Helmholtz number rising from 0.011 at \SI{3.95}{\Hz} to 0.23 at \SI{80}{\Hz}. The paper reframes the question from ``can bass be felt?'' to ``which pathway is actually doing the work?''
+Paper~6 asks whether the ``feel it in your gut'' experience at concerts can be caused by airborne sub-bass alone. At \SI{40}{\Hz} and \SI{115}{\dB}~SPL, airborne displacement reaches only 0.35\% of the perception threshold, while structure-borne vibration through floors and seats is approximately $2{,}600\times$ larger and reaches $9\times$ threshold. Across the full \SIrange{1}{100}{\Hz} band, airborne displacement \emph{never} exceeds 1\% of the perception threshold. The paper reframes the question from ``can bass be felt?'' to ``which pathway is actually doing the work?''
 
 \subsection{Paper 7 --- Watermelon Ripeness}
 
 \emph{Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Equivalent-Sphere Shell Resonance Inversion}\\
-Target: \emph{Postharvest Biology and Technology} ($\sim$19 pages)
+Target: \emph{Postharvest Biology and Technology} ($\sim$32 pages). Submission-ready.
 
-Paper~7 demonstrates that the fluid-filled shell framework generalises beyond human organs to agricultural applications. The traditional watermelon ``thump test'' is reformulated as a physics-based inverse problem: the fruit is modelled as a fluid-filled viscoelastic shell whose dominant tap-tone frequency can be inverted in closed form to recover rind elastic modulus, which tracks ripeness through pectin degradation. The predicted tap-tone drops from \SI{203}{\Hz} (unripe) to \SI{46}{\Hz} (overripe), a $4.4\times$ reduction as rind modulus falls from \SI{200}{\MPa} to \SI{15}{\MPa}. The key insight is that $f_2^2$ is effectively linear in rind modulus ($R^2 > 0.9999$), making the inversion simple and well-conditioned. Sobol sensitivity analysis confirms rind modulus as the dominant parameter ($S_T = 0.54$), and a geometric invariant $\Pi_\mathrm{ripe} = 0.062 \pm 0.002$ holds across four cultivars.
+Paper~7 demonstrates that the framework generalises beyond biology to agriculture. The traditional watermelon ``thump test'' is reformulated as a physics-based inverse problem: the fruit is modelled as a fluid-filled viscoelastic shell whose tap-tone frequency can be inverted in closed form to recover rind elastic modulus, which tracks ripeness through pectin degradation. The predicted tap-tone drops from \SI{203}{\Hz} (unripe) to \SI{46}{\Hz} (overripe), a $4.4\times$ reduction. The key insight --- that $f_2^2$ is effectively linear in rind modulus ($R^2 > 0.9999$) --- makes the inversion simple and well-conditioned. A geometric invariant $\Pi_\mathrm{ripe} = 0.062 \pm 0.002$ holds across four cultivars. Paper~7 proved crucial to the programme's intellectual development: the ease of the watermelon inversion threw into sharp relief the difficulty of the organ inversion, motivating Paper~8's identifiability analysis.
 
 \subsection{Paper 8 --- Kac Identifiability}
 
 \emph{Can You Hear the Shape of an Organ? Practical Identifiability of Viscoelastic Shell Parameters from Resonant Frequencies}\\
-Target: \emph{Inverse Problems} ($\sim$15 pages)
+Target: \emph{Inverse Problems in Science and Engineering} or \emph{JSV} ($\sim$29 pages). Submission-ready after eleven rounds of Reviewer~B scrutiny.
 
-Paper~8 reframes the programme's inverse problem as a Kac-style question: given measured low-order resonant frequencies, can one recover the geometry and stiffness of an unknown organ? The paper provides a two-layer analytical answer. \textbf{Layer~1} (chain-rule rank deficiency) proves that if frequencies depend on geometry only through the equivalent radius $R_\mathrm{eq} = (a^2 c)^{1/3}$, then the Jacobian columns for semi-major and semi-minor axes are proportional and the system is rank-deficient. \textbf{Layer~2} (mode-dependent curvature sampling) shows that oblate eccentricity introduces mode-dependent $O(\varepsilon^2)$ corrections that break this proportionality, restoring full rank. The scaled condition number drops from $\kappa = 1.1 \times 10^{10}$ (spherical) to $\kappa = 73$ (canonical oblate), an improvement of $1.5 \times 10^8$. Round-trip inversion recovers $(a, c, E)$ to relative errors below $10^{-12}$, while at 1\% frequency noise the Cram\'{e}r--Rao lower bounds are approximately $\pm 37\%$ for $a$, $\pm 13\%$ for $c$, and $\pm 36\%$ for $E$.
+Paper~8 reframes the programme's inverse problem as a Kac-style question: given measured resonant frequencies, can one recover the geometry and stiffness of an unknown organ? The answer has two layers. \textbf{Layer~1} (chain-rule rank deficiency) proves that if frequencies depend on geometry only through the equivalent radius $R_\mathrm{eq} = (a^2 c)^{1/3}$, then the Jacobian is rank-deficient and the system is fundamentally non-identifiable. The scaled condition number in the spherical limit is $\kappa = 1.37 \times 10^{10}$. \textbf{Layer~2} (mode-dependent curvature sampling) shows that oblate eccentricity introduces mode-dependent corrections that break this degeneracy, reducing the condition number to $\kappa = 69.4$ at the canonical oblate geometry. The gap from $10^{10}$ to $69$ reflects two distinct effects: replacing the scalar-proxy model architecture (responsible for most of the improvement) and introducing oblate eccentricity (which provides a further factor of $\sim 4$ via mode-dependent curvature sampling). The practical noise floor is $\kappa \approx 269$.
+
+The paper's most far-reaching result is the \textbf{forward--inverse adequacy gap}: a model can be perfectly adequate for forward prediction while being catastrophically ill-conditioned for inversion. The equivalent-sphere approximation predicts frequencies to within a few percent of the oblate model, yet it is provably non-identifiable for the inverse problem. This distinction has implications for any field that uses simplified forward models as a basis for parameter estimation.
+
+\subsection{Paper 9 --- Curvature Lifting Theorem}
+
+\emph{Working title: On the Curvature-Lifting Mechanism in Fluid-Filled Shell Inversion}\\
+Target: \emph{Journal of Sound and Vibration --- Short Communication}.
+
+Paper~9 is a focused communication proving the curvature-lifting theorem: that oblate eccentricity restores full-rank identifiability by introducing mode-dependent curvature sampling. It extracts the core mathematical result from Paper~8 and proves it in generality, independent of the specific application.
+
+\subsection{Paper 10 --- Capstone Synthesis}
+
+\emph{Working title: Geometry Mediates Excitation, Resonance, and Identifiability in Fluid-Filled Viscoelastic Shells}\\
+Target: \emph{Proceedings of the Royal Society~A} (scaffolded).
+
+The programme's capstone paper formalises the mathematical results that emerged across Papers~1--9 into four conjectured results (see Section~\ref{sec:strategic}). Its backbone is the synthesis of Papers~1, 7, and~8: the abdomen establishes the framework, the watermelon reveals the forward--inverse contrast, and the identifiability analysis provides the mathematical core. Papers~2--6 and~9 serve as supporting evidence for the generality of the conjectures. The target venue reflects the ambition to position this as a contribution to applied mathematical mechanics rather than a domain-specific review.
 
 \section{Methodological Contributions}
 
 \subsection{Analytical Toolchain}
 
-The programme's primary methodological contribution is a \textbf{modular analytical framework} for vibroacoustic resonance of fluid-filled biological cavities, comprising four interlocking components:
+The programme's primary methodological contribution is a \textbf{modular analytical framework} for vibroacoustic resonance of fluid-filled biological and agricultural cavities, comprising five interlocking components:
 
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{Oblate spheroidal shell theory} with Donnell--Mushtari thin-shell kinematics, fluid added-mass coupling, and viscoelastic loss (Papers~1, 3, 4, 6). The energy-consistent formulation avoids the $13\times$ overestimate that arises from pressure-based displacement calculations.
+  \item \textbf{Oblate spheroidal shell theory} with Kirchhoff--Love kinematic assumptions within a Rayleigh--Ritz energy framework, following Lamb~(1882) and Junger \& Feit~(1986), with fluid added-mass coupling and viscoelastic loss (Papers~1, 3, 4, 6). The energy-consistent formulation avoids the $6.5\times$ overestimate that arises from pressure-based displacement calculations.
   \item \textbf{Church~(1995) constrained-bubble model}, adapted from ultrasound contrast agents to intestinal gas pockets at infrasonic frequencies (Paper~2).
-  \item \textbf{Buckingham Pi dimensional analysis} yielding exact scaling laws that reduce high-dimensional parameter spaces to a small number of governing groups (Papers~3, 7).
-  \item \textbf{Energy-consistent coupling comparison}, providing a common framework for quantifying mechanical versus airborne excitation pathways through a single dimensionless ratio $\mathcal{R}$ (Papers~1, 3, 4, 6).
-  \item \textbf{Closed-form resonance inversion} for recovering material properties from measured frequencies, with analytical identifiability proofs based on mode-dependent curvature sampling (Papers~7, 8).
+  \item \textbf{Buckingham Pi dimensional analysis} yielding exact scaling laws that reduce high-dimensional parameter spaces to governing dimensionless groups (Papers~3, 7).
+  \item \textbf{Energy-consistent coupling comparison}, providing a unified metric $\mathcal{R}$ for quantifying mechanical versus airborne excitation across organs, frequencies, and exposure scenarios (Papers~1, 3, 4, 6).
+  \item \textbf{Closed-form resonance inversion} with analytical identifiability proofs based on mode-dependent curvature sampling and chain-rule rank analysis (Papers~7, 8, 9).
 \end{enumerate}
 
 \subsection{Computational Infrastructure}
 
-The research programme operates through bespoke infrastructure designed for reproducibility and self-consistency: \textbf{203 passing tests} covering analytical modules, figure generation, and parameter consistency; \textbf{136+ merged pull requests}, each reviewed before integration; \textbf{automated three-reviewer panels} (domain significance, adversarial rigour, computational reproducibility), with papers undergoing up to eight review rounds; and \textbf{cross-paper consistency auditing} to keep canonical parameters synchronised across all five manuscripts.
+The programme operates through infrastructure designed for reproducibility and self-consistency: \textbf{487 passing tests} covering analytical modules, figure generation, and parameter consistency; \textbf{279 merged pull requests} across 549 commits, each reviewed before integration; \textbf{automated three-reviewer panels} (domain significance, adversarial rigour, computational reproducibility), with papers undergoing up to eleven review rounds; and \textbf{cross-paper consistency auditing} to keep canonical parameters synchronised across all nine manuscripts. Ninety-two research logs document the programme's progress with quantitative detail.
 
 \subsection{AI-Assisted Research Methodology}
 
-The programme itself constitutes a methodological experiment. Twenty specialised AI agents --- spanning paper writing, data analysis, simulation engineering, literature monitoring, and adversarial review --- operate within a structured workflow. The human faculty supervisor provides research direction, domain scepticism, and quality judgement; the AI system handles analytical derivation, code implementation, \LaTeX{} drafting, figure generation, and review logistics. This division of labour is not a replacement for expertise but a \textbf{compression of research overhead}, enabling a five-paper portfolio to emerge from approximately 52 hours of wall-clock interaction.
+The programme constitutes a methodological experiment in its own right. Twenty-four specialised AI agents and 22 reusable skills --- spanning paper writing, data analysis, simulation engineering, literature monitoring, experimental protocol design, and adversarial review --- operate within a structured semester-based workflow. The human faculty supervisor provides research direction, domain scepticism, and quality judgement; the AI system handles derivation, implementation, drafting, figure generation, and review logistics. This is not a replacement for expertise but a \textbf{compression of research overhead}, enabling a ten-paper portfolio to emerge from approximately 30 hours of wall-clock interaction. This is not a claim of autonomy. The system cannot set its own research questions, judge the significance of its results, or decide when a paper is good enough. Those remain irreducibly human functions. But between the question and the judgement lies an enormous volume of skilled labour --- derivation, implementation, drafting, checking, revising --- and it is there that the compression is real.
+
+\section{Strategic Direction}\label{sec:strategic}
+
+\subsection{Advisory Board Assessment}
+
+The programme's Distinguished Advisory Board --- comprising perspectives from fundamental physics, computational mathematics, science communication, and institutional strategy --- convened to evaluate the body of work. Their verdict was \textbf{``promising but unfocused''}. The Board identified genuine strengths in depth, breadth, and novelty, while noting that the programme's lasting impact depends on consolidation --- extracting the unifying mathematical structure from the individual applications. The Board's central message was that the programme had produced enough individual results to constitute a significant body of work, but had not yet made that extraction.
+
+The Board proposed a one-sentence programme identity: \emph{how geometry mediates excitation, resonance, and identifiability in fluid-filled viscoelastic shells}. They framed the programme's trajectory with an analogy: ``The brown note is your Rayleigh's blue sky.'' The entry point was whimsical; the destination is serious mechanics.
+
+\subsection{The Four Conjectures}
+
+The Board identified four conjectured results latent in the existing papers, each of which we believe can be stated and proved in generality beyond the specific applications:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Rank-deficiency of equivalent-radius models.} Any forward model that maps geometry to frequency through a scalar proxy $g(a,c)$ necessarily produces a rank-deficient Jacobian for the inverse problem. Generalised from Paper~8's equivalent-radius result to arbitrary scalar geometric reductions.
+  \item \textbf{Identifiability lifting by asphericity.} Oblate eccentricity introduces mode-dependent curvature sampling that breaks the rank degeneracy. The geometry-only improvement is a factor of $\sim 4$; the remaining improvement reflects replacing the scalar-proxy model architecture. Asphericity is the minimal geometric perturbation that restores full rank --- the ``curvature lifting theorem.''
+  \item \textbf{Asymptotic conditioning near the spherical limit.} As eccentricity $\varepsilon \to 0$, the condition number diverges algebraically, and the rate of divergence classifies the difficulty of the inverse problem for near-spherical cavities.
+  \item \textbf{Forward adequacy $\neq$ inverse adequacy.} A forward model can predict frequencies to arbitrary accuracy while being provably non-identifiable for parameter recovery. The watermelon (well-conditioned) versus the organ (ill-conditioned) provides the concrete illustration; the theorem is general.
+\end{enumerate}
+
+\subsection{The Capstone Paper}
+
+The Board's primary recommendation was a capstone synthesis paper for the \emph{Proceedings of the Royal Society~A} --- not a review, but a \textbf{framework paper} that extracts the four conjectures, proves them in generality, and positions the preceding papers as evidence. The backbone is Papers~1 + 7 + 8: the abdomen establishes the physics, the watermelon reveals the forward--inverse contrast, and the identifiability analysis provides the mathematical machinery. New computation required includes a forward-error-versus-inverse-conditioning figure, generalised rank-deficiency proofs for any scalar $g(a,c)$, curvature-sampling diagnostics per mode, and a cross-application classification table.
+
+The working title --- \emph{Geometry Mediates Excitation, Resonance, and Identifiability in Fluid-Filled Viscoelastic Shells} --- doubles as the programme's one-sentence identity. The key insight, distilled: ``The joke was never the point. Geometry was.''
+
+\subsection{Consolidation Priorities}
+
+Three operational priorities follow from the Board's assessment:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Stop adding applications unless they test a conjecture.} The programme has sufficient breadth; what it needs is depth. New systems should be pursued only if they advance or test one of the four conjectures.
+  \item \textbf{Seek one phantom collaboration.} A silicone oblate spheroidal phantom instrumented with laser vibrometry would provide the first external test of the analytical predictions, anchoring the programme in empirical reality.
+  \item \textbf{Monograph after capstone, not before.} The temptation to write a monograph prematurely has been noted and resisted. The capstone must come first to establish the intellectual spine around which the full narrative can be organised.
+\end{enumerate}
 
 \section{Research Trajectory}
 
-\subsection{Near-Term: Submission and Peer Review}
+\subsection{Near-Term: Submission Wave}
 
-The immediate priority is external peer review. Papers~1 and~2 are submission-ready with cover letters completed and will be submitted first to JSV and JASA respectively. Paper~3 is under revision as a JSV short communication. Paper~4 has addressed minor revisions. Papers~5 and~6 have been accepted internally under the three-reviewer panel protocol. Paper~7 has addressed Reviewer~B's minor-revision verdict. Paper~8 is in active development, with Layer~1 and Layer~2 analytical proofs being added to establish the chain-rule rank deficiency and mode-dependent curvature sampling results on rigorous footing.
+Four papers are submission-ready: Paper~1 (JSV, $\sim$46\,pp.), Paper~2 (JASA, $\sim$18\,pp.), Paper~7 (Postharvest Biology and Technology, $\sim$32\,pp.), and Paper~8 (IPSE or JSV, $\sim$29\,pp.). Papers~3 and~4 require minor revisions. Papers~5 and~6 have passed the internal three-reviewer panel and await final formatting. The immediate priority is to begin the external peer review process across multiple venues simultaneously.
 
-A mathematical framework consultation --- in which Dietrich (emeritus vibroacoustics collaborator), the Provocateur (adversarial strategist), and the Coffee Machine Guru (metacognitive mentor) were consulted independently --- produced \textbf{unanimous advice}: complete Layers~1 and~2, publish with those results, and pose the full spectral characterisation (Layer~3) as an open problem for the inverse-problems community. This consensus has been adopted as the programme's submission strategy for Paper~8.
+\subsection{Medium-Term: Consolidation and Validation}
 
-\subsection{Medium-Term: Experimental Validation}
+The capstone synthesis paper (Paper~10) is the programme's central medium-term objective, with an estimated timeline of six to eight weeks to submission quality. In parallel, two experimental collaborations are being explored: an oblate spheroidal silicone phantom ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$) to test the predicted $f_2 \approx \SI{4}{\Hz}$, and clinical bowel sound recordings from healthy subjects to test Paper~5's frequency predictions against measured spectra.
 
-Three experimental programmes would test the predictions directly:
+\subsection{Long-Term: From Programme to School}
 
-\textbf{Phantom validation.} An oblate spheroidal silicone phantom ($a = \SI{0.18}{\m}$, $c = \SI{0.12}{\m}$, $h = \SI{10}{\mm}$) filled with water and instrumented with laser vibrometry would test the predicted $f_2 \approx \SI{3.6}{\Hz}$ against the analytical model. Estimated cost: under US\$3{,}100.
+The Advisory Board's ``obituary line'' for the programme reads: \emph{He began by asking whether the brown note existed, and ended by founding a general spectral mechanics of fluid-filled soft shells.} Achieving this requires three further steps: the capstone paper (establishing the mathematical core), at least one experimental validation (anchoring the theory in measurement), and a monograph (collecting the full programme into a coherent volume). The long-term applications --- non-invasive elastography, clinical bowel sound analysis, agricultural quality assessment, acoustic metamaterial analogies --- follow naturally from a validated framework, and need not be pursued until the theoretical foundations are secure.
 
-\textbf{Clinical bowel sound recordings.} High-fidelity recordings from healthy subjects and patients with known bowel obstruction would test Paper~5's prediction that dominant frequencies map to gas-pocket volumes of \SIrange{1}{5}{\mL}. Frequency inversion from acoustic spectra to estimated pocket volumes would provide a novel, non-invasive diagnostic indicator.
+\subsection{Doctoral Projects}
 
-\textbf{Coupled-cavity and transient models.} Extensions to coupled systems --- the bladder within the pelvic cavity, the stomach communicating with the intestinal gas column --- and transient response to impulsive excitation.
+The programme generates at least three natural doctoral projects: (a)~experimental validation of the predicted modal spectrum using silicone oblate spheroidal phantoms instrumented with laser Doppler vibrometry; (b)~extension to non-oblate geometries --- prolate shells, irregular anatomies, and coupled multi-cavity systems --- testing the generality of the curvature-lifting mechanism; and (c)~computational inversion using clinical bowel sound recordings or watermelon tap-tone data, bridging the gap between analytical prediction and real-world measurement.
 
-\subsection{Long-Term: Clinical and Technological Applications}
+\subsection{Limitations}
 
-\textbf{Non-invasive elastography.} If tissue stiffness dominates the frequency response ($S_T = 0.86$ for elastic modulus), measured resonant frequencies could be inverted to estimate \emph{in vivo} tissue mechanical properties.
-
-\textbf{Acoustic metamaterial analogies.} The constrained-bubble physics shares mathematical structure with locally resonant acoustic metamaterials --- gas pockets as naturally occurring sub-wavelength resonators.
-
-\textbf{Clinical diagnostics.} Automated bowel sound analysis for monitoring gastrointestinal motility, detecting obstruction, and assessing post-operative ileus.
+The programme is purely analytical: no experimental validation has yet been performed, no finite-element modelling has been employed beyond mesh-convergence verification, and the framework has not been tested against irregular geometries or clinical data. These represent future work rather than present deficiencies --- the analytical foundations must be secure before experimental extension is meaningful.
 
 \section{Broader Impact}
 
 \subsection{From Folklore to Framework}
 
-The programme demonstrates that folklore can be a legitimate starting point for rigorous science. The brown note hypothesis, dismissed by most acousticians as a joke, led to the first systematic analysis of abdominal vibroacoustic resonance --- and thence to an eight-paper portfolio spanning cavity mechanics, bubble dynamics, scaling laws, organ extension, clinical acoustics, sub-bass perception, agricultural diagnostics, and inverse-problem identifiability. The lesson is not that folklore is reliable, but that the effort required to \emph{disprove} it rigorously often produces frameworks of independent value.
+The programme demonstrates that folklore can seed rigorous science. The brown note hypothesis led to the first systematic analysis of abdominal vibroacoustic resonance, and thence to a ten-paper portfolio spanning cavity mechanics, clinical acoustics, agricultural diagnostics, and inverse identifiability theory. The lesson is not that folklore is reliable, but that the effort required to \emph{disprove} it rigorously often produces frameworks of independent value.
 
 \subsection{Generalisable Framework}
 
-The analytical toolchain is not specific to the abdomen. Any fluid-filled biological cavity --- bladder, lung, eye, joint capsule --- can be modelled within the same framework. The scaling laws provide a principled basis for extrapolating between species. The coupling ratio $\mathcal{R}$ offers a unified metric for comparing excitation pathways across organs, frequencies, and exposure scenarios.
+The analytical toolchain is not specific to any single organ or fruit. Any fluid-filled cavity --- biological, agricultural, or industrial --- can be modelled within the same framework. The scaling laws provide principled extrapolation between species and systems. The identifiability analysis generalises to any inverse problem in which a forward model's geometric dependence passes through a low-dimensional proxy --- a structure common across biomedical imaging, non-destructive testing, and geophysical inversion.
 
 \subsection{AI-Assisted Research as Method}
 
-The programme is, to our knowledge, among the first to employ a structured multi-agent AI system as the primary research executor under human supervision. The infrastructure is open-source and documented, offering a template for other research groups exploring AI-assisted workflows. The central insight is that AI's comparative advantage lies not in replacing scientific judgement but in \textbf{compressing the overhead} that separates a research idea from a publishable manuscript.
+The programme is, to our knowledge, among the first to employ a structured multi-agent AI system as the primary research executor under human supervision. The infrastructure --- 24 agents, 22 skills, 92 research logs, and an open-source repository --- offers a replicable template for other research groups. The central insight is that AI's comparative advantage lies not in replacing scientific judgement but in \textbf{compressing the overhead} that separates a research idea from a publishable manuscript.
+
+\section{Reflections on Process}
+
+The read-to-write ratio across the system exceeds 1:1 --- the agents spend as much time inspecting and reviewing their own output as they do generating it. This is not an artefact; it was designed in.
+
+\subsection{The $\sigma_\mathrm{abs}$ Story}
+
+During Paper~1's seventh Reviewer~B round, a factor-of-four error was discovered in the Breit--Wigner absorption cross-section formula. This was not a typographical issue; it was a genuine physics bug that had propagated through the energy-consistent displacement calculation, affecting the coupling ratio and the airborne displacement estimates throughout the programme. Correcting it shifted $\xi_\mathrm{energy}$ from \SI{0.014}{\micro\m} to \SI{0.028}{\micro\m} and $\mathcal{R}$ from $6.6 \times 10^4$ to $3.3 \times 10^4$. The qualitative conclusions were unchanged --- airborne coupling remains negligible by any measure --- but the quantitative precision improved materially.
+
+The episode illustrates two things. First, the adversarial review process works: an AI reviewer, given a clear mandate to find fatal flaws, identified a real error in the underlying physics that had survived multiple earlier rounds. Second, the correction \emph{strengthened} the programme's credibility rather than undermining it. By catching and correcting a factor-of-four error internally, the team demonstrated the same self-correcting rigour that external peer review is designed to provide.
 
 \section{Selected Publications}
 
 \begin{enumerate}[leftmargin=*]
-  \item J.~Mace and B.\,R.~Mace, ``Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the `Brown Note','' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$30\,pp.)
+  \item J.~Mace and B.\,R.~Mace, ``Modal Analysis of a Fluid-Filled Viscoelastic Oblate Spheroidal Shell: Implications for the Existence of the `Brown Note','' \emph{Journal of Sound and Vibration}, in preparation, 2026. ($\sim$46\,pp.)
 
   \item J.~Mace and B.\,R.~Mace, ``Bowel Gas as an Acoustic Transducer: A Constrained Bubble Model for Infrasound-Induced Mechanotransduction in the Gastrointestinal Tract,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$18\,pp.)
 
@@ -205,74 +275,14 @@ The programme is, to our knowledge, among the first to employ a structured multi
 
   \item J.~Mace and B.\,R.~Mace, ``Can You Feel the Bass? Quantitative Partition of Airborne and Structure-Borne Pathways for Sub-Bass Perception at Concert Sound Pressure Levels,'' \emph{The Journal of the Acoustical Society of America}, in preparation, 2026. ($\sim$18\,pp.)
 
-  \item J.~Mace and B.\,R.~Mace, ``Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Equivalent-Sphere Shell Resonance Inversion,'' \emph{Postharvest Biology and Technology}, in preparation, 2026. ($\sim$19\,pp.)
+  \item J.~Mace and B.\,R.~Mace, ``Can You Hear the Ripeness? Non-Destructive Acoustic Assessment of Fruit Maturity via Equivalent-Sphere Shell Resonance Inversion,'' \emph{Postharvest Biology and Technology}, in preparation, 2026. ($\sim$32\,pp.)
 
-  \item J.~Mace and B.\,R.~Mace, ``Can You Hear the Shape of an Organ? Practical Identifiability of Viscoelastic Shell Parameters from Resonant Frequencies,'' \emph{Inverse Problems}, in preparation, 2026. ($\sim$15\,pp.)
+  \item J.~Mace and B.\,R.~Mace, ``Can You Hear the Shape of an Organ? Practical Identifiability of Viscoelastic Shell Parameters from Resonant Frequencies,'' \emph{Inverse Problems in Science and Engineering}, in preparation, 2026. ($\sim$29\,pp.)
+
+  \item J.~Mace and B.\,R.~Mace, ``On the Curvature-Lifting Mechanism in Fluid-Filled Shell Inversion,'' \emph{Journal of Sound and Vibration --- Short Communication}, in preparation, 2026.
+
+  \item J.~Mace and B.\,R.~Mace, ``Geometry Mediates Excitation, Resonance, and Identifiability in Fluid-Filled Viscoelastic Shells,'' \emph{Proceedings of the Royal Society~A}, in preparation, 2026. (scaffolded)
 \end{enumerate}
-
-\section{Current Status}
-
-As of late March 2026, all eight papers have completed at least one full internal review cycle under the three-reviewer panel protocol (Reviewer~A: domain significance; Reviewer~B: adversarial rigour; Reviewer~C: computational reproducibility). The programme's computational suite comprises 377 passing tests, and the repository has accumulated 215 merged pull requests across 20 specialised AI agents and 16 reusable skills. Prof.\ Brian Mace (University of Auckland) is confirmed as active collaborator and co-author on all manuscripts.
-
-\subsection{Paper 1 --- Submission-Ready}
-
-All three internal reviewers returned \textbf{ACCEPT}. Cover letter completed. The paper ($\sim$30\,pp.) is ready for upload to the JSV editorial portal.
-
-\subsection{Paper 2 --- Submission-Ready}
-
-A fatal equation flaw discovered during review --- the constrained-bubble formulation did not recover the Minnaert free-bubble limit --- was corrected, restoring physical consistency. Cover letter completed. The paper ($\sim$18\,pp.) is ready for submission to JASA.
-
-\subsection{Paper 3 --- Under Revision}
-
-First review (Reviewer~A): \textbf{MINOR REVISION}. The allometric data sourcing requires greater transparency, and the quasi-universal $\Pi_0$ claim needs quantification of inter-species variability (coefficient of variation $\approx 4.5\%$). All issues are tractable. Currently $\sim$8\,pp.
-
-\subsection{Paper 4 --- Minor Revision Addressed}
-
-Three corrections were applied: the $k_\mathrm{shell}$ exponent in the stiffness formulation, the displacement reference level, and the strain ratio calculation. Twenty-seven bladder-specific tests are passing. Minor-revision items addressed; awaiting final polish.
-
-\subsection{Paper 5 --- Accepted Internally}
-
-Post-fix Reviewer panel returned \textbf{ACCEPT}. Radial breathing mode equation and axial mode volume threshold corrections completed. The core constrained-bubble physics is confirmed sound.
-
-\subsection{Paper 6 --- Accepted Internally}
-
-Post-fix Reviewer panel returned \textbf{ACCEPT} following R2 corrections. The pathway partition analysis is robust: airborne displacement never exceeds 1\% of the perception threshold across the entire \SIrange{1}{100}{\Hz} band.
-
-\subsection{Paper 7 --- Minor Revision Addressed}
-
-Reviewer~B returned \textbf{MINOR REVISION}; all items have been fixed. The paper ($\sim$19\,pp.) demonstrates that the shell framework transfers cleanly to agricultural applications. Validation against Yamamoto~\emph{et al.} shows MAD~$=\SI{15}{\Hz}$ across six cultivar predictions.
-
-\subsection{Paper 8 --- Active Development}
-
-The paper ($\sim$15\,pp.) is in active development, with Layer~1 and Layer~2 analytical proofs being added. Layer~1 proves chain-rule rank deficiency for the spherical case ($\kappa = 1.1 \times 10^{10}$). Layer~2 proves that oblate eccentricity restores identifiability through \textbf{mode-dependent curvature sampling} ($\kappa = 73$, an improvement of $1.5 \times 10^8$). A three-advisor consultation (Dietrich, Provocateur, Coffee Machine Guru) produced unanimous advice: complete Layers~1 and~2, publish, and pose the full spectral characterisation as an open problem for the inverse-problems community.
-
-\section{Reflections on Process}
-
-The Browntone programme is, among other things, an experiment in AI-assisted research methodology. A detailed session event log (documented in the repository at \texttt{docs/\allowbreak ai-assisted-research-event-log.md}) provides unusually granular data on how the collaboration actually functioned. Some observations are worth recording in a tenure context.
-
-\subsection{The Numbers}
-
-The research campaign spanned \textbf{52.1 hours} of wall-clock time and involved \textbf{123 human prompts}, \textbf{246 subagent launches}, and approximately \textbf{316 million tokens} of language-model processing across \textbf{215 merged pull requests}. The read-to-write ratio across the system was 1.15:1 --- the agents spent nearly as much time inspecting and reviewing their own output as they did generating it. This is not an artefact; it was designed in.
-
-\subsection{The Human Role}
-
-Of 123 human messages, only three were encouragement. The remainder consisted of research direction, process feedback, and course correction. The human supervisor functioned as an institutional chairman rather than a content generator: setting standards, enforcing quality gates, overruling poor judgement, and deciding when work was done. This division --- human as governor, AI as executor --- proved more productive than either could have been alone.
-
-\subsection{Institutional Innovation}
-
-The most transformative decisions in the programme were not technical but institutional. Enabling branch protection on the repository forced every change through review. Introducing three-reviewer panels subjected each paper to structured adversarial scrutiny. The ``coffee-machine guru'' agent --- modelled on the wise emeritus professor one encounters in the corridor --- provided metacognitive interventions that no formal review process could replicate. The semester-break ritual, pausing computation at the top of each hour for reflection and tidying, prevented the drift that accumulates in long autonomous sessions.
-
-Reviewer~B, the adversarial critic, became the conscience of the project: 22 launches, the highest of any specialist agent. Its role was not to improve prose but to find fatal flaws --- and it found them, including the constrained-bubble equation error in Paper~2 and the dimensional inconsistency in Paper~5.
-
-\subsection{Self-Historicisation}
-
-An unanticipated emergent behaviour: the project began documenting itself before being asked to. Research logs, event timelines, and the session event log itself were generated not as afterthoughts but as integral outputs. The programme became self-historicising --- producing its own archival record alongside its scientific contributions. This reflexivity, while not a research result per se, speaks to the maturity of the workflow.
-
-\subsection{What It Shows}
-
-The event log does not show a human outsourcing a paper to an AI. It shows a human progressively teaching an AI to behave like a research organisation. The lab metaphor --- with its agents, reviewers, logs, and rituals --- stopped being a metaphor partway through the campaign. It became durable workflow with real institutional memory, genuine adversarial review, and a capacity for self-correction that improved over time.
-
-This is not a claim of autonomy. The system cannot set its own research questions, judge the significance of its results, or decide when a paper is good enough. Those remain irreducibly human functions. But between the question and the judgement lies an enormous volume of skilled labour --- derivation, implementation, drafting, checking, revising --- and it is there that the compression is real.
 
 \vfill
 \begin{center}
