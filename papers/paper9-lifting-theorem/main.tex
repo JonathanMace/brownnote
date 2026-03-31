@@ -20,21 +20,21 @@
 \maketitle
 
 \begin{abstract}
-We revisit the spectral inverse problem for fluid-loaded elastic shells in a
-shorter and narrower form than the earlier ``lifting theorem'' draft.  The
-supported result is not a universal statement that symmetry breaking improves
-identifiability.  It is an asymmetry result.  For the five-mode flexural map
-used in the Browntone companion studies, the equivalent-sphere reduction is
-rank deficient, the oblate Ritz family develops a finite near-spherical floor
-and then improves substantially, whereas the prolate branch remains poorly
-conditioned.  Using the canonical abdominal-shell parameters, the numerical
-condition number changes from
-$\kappa_\mathrm{sphere}\approx\num{1.37e10}$ to
-$\kappa_\mathrm{floor}\approx\num{269}$ and then to
-$\kappa_\mathrm{oblate}=\num{69.4}$, while
-$\kappa_\mathrm{prolate}=\numrange{561}{729}$.  The conclusion is plain: the
-recoverability of geometry from spectra depends on how curvature is
-redistributed, not merely on the fact that spherical symmetry has been broken.
+We consider the spectral inverse problem for fluid-loaded elastic shells using
+the five-mode flexural map $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.  The
+equivalent-sphere reduction is rank deficient ($\sigma_3=0$), and at the exact
+sphere this rank deficiency persists because spherical symmetry forces the two
+geometric Jacobian columns to be proportional.  The positive $\sigma_3$ returned
+by a finite Ritz computation at $a=c$ is a discretisation artefact that grows
+with basis size; the correct near-sphere expansion is
+$\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$ with
+$\lambda_1>0$.  The oblate branch therefore shows quadratic growth in the
+weakest sensitivity direction, reaching
+$\kappa_\mathrm{oblate}=\num{69.4}$ at the canonical geometry, whereas a
+prolate continuation at $c/a=\num{1.5}$ gives $\kappa_\mathrm{prolate}=156$
+with no systematic improvement across the tested range.  Identifiability
+therefore depends on how curvature is redistributed, not merely on the loss of
+spherical symmetry.
 \end{abstract}
 
 \input{sections/introduction.tex}

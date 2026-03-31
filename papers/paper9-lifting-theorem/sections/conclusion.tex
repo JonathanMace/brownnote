@@ -1,19 +1,20 @@
 \section{Conclusion}
 
-We have rewritten this paper around the result that is actually supported.
 Within the five-mode spectral inverse problem for a fluid-filled shell, the
-equivalent-sphere reduction is singular in exact arithmetic and appears
-numerically as
-$\kappa_\mathrm{sphere}\approx\num{1.37e10}$.  Retaining the oblate curvature
-field produces a finite near-spherical floor
-$\kappa_\mathrm{floor}\approx\num{269}$ because $\sigma_0>0$, and the canonical
-oblate geometry improves that further to
-$\kappa_\mathrm{oblate}=\num{69.4}$.  A prolate continuation does not provide a
-matching benefit, remaining at
-$\kappa_\mathrm{prolate}=\numrange{561}{729}$.
+equivalent-sphere reduction is singular ($\sigma_3=0$), and this rank deficiency
+persists at the exact sphere because spherical symmetry forces the geometric
+Jacobian columns to be proportional.  The positive $\sigma_3$ returned by a
+finite Ritz basis at $a=c$ is a discretisation artefact that grows with basis
+size.  The correct near-sphere expansion is
+$\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$, so the oblate
+branch increases $\sigma_3$ quadratically and reaches
+$\kappa_\mathrm{oblate}=\num{69.4}$ at the canonical geometry.  A prolate
+continuation at $c/a=\num{1.5}$ gives $\kappa_\mathrm{prolate}=156$, with
+$\kappa_\mathrm{prolate}$ remaining in the range 156--244 across the tested
+prolate branch and showing no systematic improvement with increasing
+asphericity.
 
 The conclusion is therefore specific rather than universal: identifiability in
 this spectral inverse problem is geometry-dependent.  Oblate curvature
 redistribution lifts the weak inverse direction; prolate distortion does not
-deliver the same improvement.  That is a useful result, and unlike the abandoned
-universal theorem, it survives contact with the calculations.
+deliver the same improvement.

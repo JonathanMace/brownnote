@@ -1,67 +1,103 @@
 \section{Results}
 
-Table~\ref{tab:conditioning-summary} collects the conditioning results that
-matter for the present argument.  The first point is a baseline: the
-equivalent-sphere model is singular because it collapses two geometric degrees
-of freedom into the single radius $R_\mathrm{eq}$.  Its reported numerical value
-$\kappa_\mathrm{sphere}\approx\num{1.37e10}$ is therefore not a meaningful
-finite condition number; it is the floating-point shadow of an exact rank
-defect \cite{BrowntoneP8}.
+Table~\ref{tab:singular-values} reports the singular values of the scaled
+Jacobian for the five-mode map
+$\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$, using central differences with
+relative step $\Delta\theta_j/\theta_j=\num{1e-4}$.  The equivalent-sphere row
+is the baseline: because that model depends on $a$ and $c$ only through
+$R_\mathrm{eq}$, the exact Jacobian is rank deficient and the reported
+$\sigma_3=\num{1.54e-10}$ is only the floating-point residue of a zero singular
+value.  The Ritz sphere is therefore a distinct calculation.  It retains the
+same parameter vector and mode set, but evaluates the full spheroidal Ritz
+model at $a=c$.
 
-The second point is the genuine lifting result.  Within the \emph{same} Ritz
-model, moving from the near-spherical oblate limit to the canonical oblate
-geometry improves conditioning from
-$\kappa_\mathrm{floor}\approx\num{269}$ to
-$\kappa_\mathrm{oblate}=\num{69.4}$.  That is a reduction by a factor of about
-\num{3.9}, achieved without changing the inverse variables or the measured mode
-set.  It is therefore a geometric effect rather than a bookkeeping effect.
+The oblate branch then shows the relevant lifting behaviour.  Moving from the
+Ritz sphere to the near-oblate point at $\delta=1-c/a=\num{0.1}$ raises the
+weakest singular value from $\sigma_3=\num{0.00806}$ to
+$\sigma_3=\num{0.01274}$, and the canonical oblate point
+$(c/a=2/3,\ \delta\approx\num{0.333})$ raises it further to
+$\sigma_3=\num{0.02643}$.  The corresponding condition number falls from
+$\kappa_\mathrm{Ritz}=244$ to $\kappa=145$ and then to
+$\kappa_\mathrm{oblate}=\num{69.4}$.  Since the inverse variables and measured
+mode set are unchanged, that improvement is geometric rather than procedural.
 
-The third point is the asymmetry.  A prolate continuation does not show a
-comparable gain.  Across the informative part of the prolate branch, the
-condition number remains in the range
-$\kappa_\mathrm{prolate}=\numrange{561}{729}$, substantially worse than both
-the oblate floor and the canonical oblate point.  In plain terms, oblate
-lifting exists, but there is no matching prolate improvement waiting politely on
-the other side of the sphere.
+The prolate continuation does not show systematic improvement.  Along this
+branch the volume and wall thickness are fixed (see Section~2), with $a$
+decreasing and $c$ increasing so that $a^2c=\text{const}$.  Across the tested
+range $c/a\in[\num{1.0},\num{1.5}]$, $\kappa_\mathrm{prolate}$ remains in the
+range 156--244, showing no monotonic decrease with increasing asphericity.  At
+the representative endpoint $c/a=\num{1.5}$ the scaled Jacobian gives
+$\sigma_3=\num{0.01636}$ and $\kappa=156$, still markedly worse than the
+canonical oblate configuration ($\kappa=\num{69.4}$).
 
 \begin{table}[t]
   \centering
-  \caption{Conditioning summary for the five-mode inverse map
-  $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.}
-  \label{tab:conditioning-summary}
-  \begin{tabular}{@{}p{0.27\linewidth}p{0.24\linewidth}p{0.35\linewidth}@{}}
+  \small
+  \caption{Singular values of the scaled Jacobian
+  $\widetilde{J}=\operatorname{diag}(\mathbf{f})^{-1}J
+  \operatorname{diag}(\boldsymbol{\theta})$ for the five-mode inverse map
+  $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.  Central differences use
+  $\Delta\theta_j/\theta_j=\num{1e-4}$.  The Ritz-sphere $\sigma_3$ is a
+  discretisation artefact; $\sigma_3=0$ in the continuous limit (see text).}
+  \label{tab:singular-values}
+  \begin{tabular}{@{}lcccccc@{}}
     \toprule
-    Geometry class & Condition number & Interpretation \\
+    Case & $c/a$ & $\delta$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\kappa$ \\
     \midrule
-    Equivalent sphere &
-    $\kappa_\mathrm{sphere}\approx\num{1.37e10}$ &
-    Numerically finite, algebraically singular \\
-    Oblate Ritz (near sphere) &
-    $\kappa_\mathrm{floor}\approx\num{269}$ &
-    Finite floor caused by $\sigma_0>0$ \\
-    Canonical oblate Ritz &
-    $\kappa_\mathrm{oblate}=\num{69.4}$ &
-    Best conditioning in the tested family \\
-    Prolate Ritz branch &
-    $\kappa_\mathrm{prolate}=\numrange{561}{729}$ &
-    No useful lifting observed \\
+    Equivalent sphere & \num{1.0} & \num{0} &
+    \num{1.893} & \num{0.112} & \num{1.54e-10} & \num{1.23e10} \\
+    Ritz sphere & \num{1.0} & \num{0} &
+    \num{1.971} & \num{0.573} & \num{0.00806} & \num{244} \\
+    Near oblate & \num{0.9} & \num{0.1} &
+    \num{1.854} & \num{0.436} & \num{0.01274} & \num{145} \\
+    Canonical oblate & $2/3$ & \num{0.333} &
+    \num{1.835} & \num{0.130} & \num{0.02643} & \num{69.4} \\
+    Prolate endpoint & \num{1.5} & --- &
+    \num{2.551} & \num{0.382} & \num{0.01636} & \num{156} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The singular-value fit in \eqref{eq:sigma-min-expansion} explains why the
-near-spherical oblate branch has a floor rather than a divergence.  Since
-$\sigma_0>0$, the smallest singular value does not collapse to zero as
-$\varepsilon\to 0$ within the Ritz model.  Since
-$\varepsilon_c=\num{1.48}>1$, the intercept remains important over the physical
-oblate range, so the conditioning is bounded before it improves.  The canonical
-oblate geometry then pushes $\sigma_{\min}$ far enough upward to reach
-$\kappa_\mathrm{oblate}=\num{69.4}$.
+The near-sphere behaviour of the weakest singular value is governed by
+\begin{equation}
+  \sigma_3(\varepsilon)
+  =
+  \lambda_1 \varepsilon^2 + O(\varepsilon^4),
+  \qquad \lambda_1>0.
+  \label{eq:sigma3-expansion}
+\end{equation}
+At the exact sphere ($\varepsilon=0$), spherical symmetry requires
+$\sigma_3=0$: the two geometric columns of $\widetilde{J}$ both reduce to
+derivatives with respect to $R_\mathrm{eq}$ alone and are therefore
+proportional.  A finite Ritz computation at $a=c$ does return a small positive
+value ($\sigma_3=\num{0.00806}$ in Table~\ref{tab:singular-values}); however,
+this is a discretisation artefact.  The Ritz trial functions break
+$a\leftrightarrow c$ exchange symmetry through the oblate-spheroidal
+integration metric and the fluid-mass blending coefficients, and the resulting
+intercept \emph{grows} rather than converges with basis size: $\sigma_0\approx
+\num{0.006}$, \num{0.011}, and \num{0.018} for the three-, five-, and
+seven-mode bases respectively.  The physically meaningful regime is
+$\varepsilon>\num{0.2}$ (equivalently $\delta\gtrsim\num{0.02}$), where the
+$\lambda_1\varepsilon^2$ term dominates and the artefact is negligible.
+
+A least-squares fit of $\sigma_3(\delta)=\sigma_0+\lambda_1\delta^2$ to the
+oblate data yields $\sigma_0=\num{0.0107}$ and $\lambda_1=\num{0.137}$; the
+non-zero intercept in this fit is the same discretisation effect described
+above, not a physical floor.
+
+The scientific conclusion therefore rests on the deformation-dependent quadratic
+growth in \eqref{eq:sigma3-expansion}.  Once the oblate deformation exceeds the
+immediate near-sphere interval ($\varepsilon>\num{0.2}$), the oblate branch
+separates the weak inverse direction more effectively than either the
+equivalent-sphere model or the prolate continuation.  Because the artefactual
+intercept raises the near-spherical baseline, the reported conditioning
+improvement at the canonical oblate point is conservative: it understates the
+true gain relative to the correct $\sigma_3(0)=0$ baseline.
 
 The practical meaning is straightforward.  The second flexural mode
 $f_2=\SI{3.95}{\hertz}$ already lies in the low-frequency band used by the
 companion studies, and the higher modes in the set respond differently to the
 same curvature perturbation.  That differential response separates the
 sensitivity directions for $a$, $c$, and $E$ in the oblate family.  The
-prolate family does not deliver the same separation, so ``non-spherical'' is
-not, by itself, a useful identifiability category.
+prolate family does not deliver the same separation, so loss of spherical
+symmetry is not, by itself, a useful identifiability category.
