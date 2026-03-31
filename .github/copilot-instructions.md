@@ -223,15 +223,15 @@ See the `compile-paper` skill for compilation instructions.
 
 | Paper | Venue | Status | Stale Values | Submission Pkg | Location |
 |-------|-------|--------|:---:|:---:|----------|
-| Paper 1: Brown Note | JSV | Submission-ready (46pp) | 0 | ⚠️ | `papers/paper1-brown-note/` |
-| Paper 2: Gas Pockets | JASA | Submission-ready (16pp) | 0 | ❌ | `papers/paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Submission-ready (8pp) | 0 | ❌ | `papers/paper3-scaling-laws/` |
-| Paper 4: Bladder Resonance | JSV | Submission-ready (27pp) | 0 | ❌ | `papers/paper4-bladder/` |
+| Paper 1: Brown Note | JSV | Submission-ready (46pp) | 0 | ✅ | `papers/paper1-brown-note/` |
+| Paper 2: Gas Pockets | JASA | Submission-ready (16pp) | 0 | ✅ | `papers/paper2-gas-pockets/` |
+| Paper 3: Scaling Laws | JSV Short | Submission-ready (8pp) | 0 | ✅ | `papers/paper3-scaling-laws/` |
+| Paper 4: Bladder Resonance | JSV | Submission-ready (27pp) | 0 | ✅ | `papers/paper4-bladder/` |
 | Paper 5: Borborygmi | JASA | Submission-ready (14pp) | 0 | ✅ | `papers/paper5-borborygmi/` |
-| Paper 6: Sub-bass Perception | JASA | Submission-ready (18pp) | 0 | ❌ | `papers/paper6-sub-bass/` |
-| Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ⚠️ | `papers/paper7-watermelon/` |
+| Paper 6: Sub-bass Perception | JASA | Submission-ready (18pp) | 0 | ✅ | `papers/paper6-sub-bass/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ✅ | `papers/paper7-watermelon/` |
 | Paper 8: Kac Identifiability | IPSE/JSV (TBD) | Submission-ready (29pp) | 0 | ✅ | `papers/paper8-kac/` |
-| Paper 9: Lifting Theorem | JSV Short | Skeleton only | 0 | ❌ | `papers/paper9-lifting-theorem/` |
+| Paper 9: Lifting Theorem | JSV Short | Skeleton — reframe pending | 0 | ❌ | `papers/paper9-lifting-theorem/` |
 | Paper 10: Capstone | Proc Roy Soc A | Skeleton only | 0 | ❌ | `papers/paper10-capstone/` |
 
 **Stale values** are pre-Breit-Wigner numbers that must be corrected before
