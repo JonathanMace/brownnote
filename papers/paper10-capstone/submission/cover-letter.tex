@@ -1,0 +1,102 @@
+\documentclass[12pt]{letter}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\signature{Jonathan Mace\\Microsoft Research, Redmond, WA\\[4pt]
+Brian R.\ Mace\\University of Auckland, New Zealand}
+
+\address{Jonathan Mace\\Microsoft Research\\Redmond, WA 98052\\United States\\
+jonathanmace@microsoft.com}
+
+\date{\today}
+
+\begin{document}
+
+\begin{letter}{The Editor\\
+Proceedings of the Royal Society A:\\
+Mathematical, Physical and Engineering Sciences\\
+The Royal Society\\
+6--9 Carlton House Terrace\\
+London SW1Y 5AG\\
+United Kingdom}
+
+\opening{Dear Editor,}
+
+We wish to submit the enclosed manuscript, \emph{Geometry Mediates Excitation,
+Resonance, and Identifiability in Fluid-Filled Viscoelastic Shells}, for
+consideration as a Research Article in \emph{Proceedings of the Royal Society~A}.
+
+The paper advances a unifying thesis for the mechanics of fluid-filled
+viscoelastic shells: shell geometry simultaneously filters the forcing field,
+organises the modal spectrum, and determines the invertibility of the
+corresponding parameter-estimation problem.  These three roles --- excitation
+filtering, spectral organisation, and inverse identifiability --- have
+previously been studied in isolation across disparate application domains.  The
+present work establishes them as logically connected consequences of the same
+geometric structure.
+
+The manuscript contributes five formal results within a reduced analytical
+framework:
+\begin{enumerate}
+  \item \textbf{Theorem~1 (Rank Collapse).} Equivalent-radius reductions of
+    non-spherical fluid-filled shells are generically rank deficient: collapsing
+    independent geometric parameters into a single scalar size descriptor
+    confounds geometry and material stiffness, rendering independent parameter
+    recovery impossible.
+
+  \item \textbf{Theorem~2 (Identifiability Lifting).} Oblate asphericity lifts
+    this rank deficiency by introducing curvature-dependent mode splitting that
+    provides the additional spectral information needed for locally identifiable
+    inversion.
+
+  \item \textbf{Proposition (Near-Spherical Asymptotics).} The transition to the
+    spherical limit follows a regular expansion,
+    $\sigma_3(\varepsilon) = \lambda_1 \varepsilon^2 + O(\varepsilon^4)$,
+    confirming that the exact sphere is a singular point in the inverse problem
+    and that any previously reported finite identifiability floor is a
+    discretisation artefact.
+
+  \item \textbf{Lemma (Forward $\neq$ Inverse Adequacy).} A counterexample
+    demonstrates that forward-model adequacy does not imply inverse-model
+    adequacy: an equivalent-sphere reduction may predict resonant frequencies
+    within engineering tolerance yet fail catastrophically when used for
+    parameter estimation.
+
+  \item \textbf{Proposition (Breit--Wigner Absorption).} The energy fraction
+    absorbed by the shell from an incident acoustic field follows a
+    Breit--Wigner resonance profile, providing a rigorous basis for the
+    excitation-filtering role of geometry.
+\end{enumerate}
+
+The formal results are supported by cross-application evidence drawn from three
+distinct physical systems: the human abdomen (infrasound resonance and
+whole-body vibration coupling), the watermelon (acoustic ripeness assessment via
+shell stiffness gradients), and the urinary bladder (fill-dependent resonance
+tracking).  Additional supporting evidence spans gas-pocket transduction,
+scaling-law analysis, borborygmi modelling, and sub-bass perception pathways.
+
+This capstone paper synthesises the results of nine companion papers developed
+within the Browntone research programme, each of which addresses a specific
+aspect of the geometry--spectrum--inference nexus.  We believe the unifying
+framework, the formal inverse-problem results, and the breadth of
+cross-application evidence make the manuscript well suited to the
+interdisciplinary readership of \emph{Proceedings of the Royal Society~A}.
+
+The manuscript has not been published previously and is not under consideration
+elsewhere.  All authors have approved the manuscript and agree with its
+submission to \emph{Proceedings of the Royal Society~A}.
+
+We confirm that all necessary ethical approvals have been obtained.  The study
+is purely analytical and computational and involves no human or animal subjects.
+
+We have included suggested reviewers with expertise spanning inverse problems
+in structural dynamics, shell vibration, spectral geometry, and biomedical
+acoustics.
+
+\closing{Yours sincerely,}
+
+\end{letter}
+\end{document}
