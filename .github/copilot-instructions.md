@@ -31,6 +31,12 @@ vs mechanical (whole-body vibration) coupling.
   `model` parameter set to either `claude-opus-4.6` or `gpt-5.4`.
 - Never leave `model` blank, omitted, or defaulted. Haiku and other lightweight
   models produce unacceptable quality for this project.
+- **Prefer `gpt-5.4`** for text-heavy tasks: paper writing, reviews, research
+  statements, README drafting, research logs, advisory board consultations,
+  and any task where the primary output is prose.
+- **Prefer `claude-opus-4.6`** for coding tasks: writing Python modules, fixing
+  tests, debugging code, figure generation scripts, and any task where the
+  primary output is source code.
 - This rule applies **recursively**: if a subagent itself launches further
   subagents (e.g., via the `task` tool), it must also specify the model.
 - When in doubt, use `gpt-5.4`.
