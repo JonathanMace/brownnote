@@ -26,7 +26,8 @@ an intensity transmission coefficient
 $T_I = 4 Z_{\mathrm{air}} Z_{\mathrm{tissue}} /
 (Z_{\mathrm{air}} + Z_{\mathrm{tissue}})^2 \approx 1.1 \times 10^{-3}$.
 At the body surface, approximately \SI{99.9}{\percent} of the incident
-acoustic power is reflected.  This general suppression of transmission across large biological
+acoustic power is reflected, before the still smaller mode-specific resonant
+absorption is accounted for.  This general suppression of transmission across large biological
 impedance contrasts is consistent with modern frequency-dependent analyses of
 bone--soft tissue interfaces \cite{Gupta2021}.
 
@@ -88,7 +89,8 @@ Where the hypothesis fails is in the \emph{excitation pathway}.  At
 \SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
 discomfort and well above any
 environmental or entertainment exposure---the predicted airborne wall
-displacement is \SI{0.028}{\micro\metre} (Table~\ref{tab:airborne}), roughly
+displacement is the energy-consistent value
+\SI{0.028}{\micro\metre} (Table~\ref{tab:airborne}), roughly
 two orders of magnitude below the \SIrange{0.5}{2.0}{\micro\metre} cellular
 activation range of mechanosensitive PIEZO1 and PIEZO2 ion channels
 \cite{coste2010piezo1,Lewis2015,Xiao2024} (a benchmark derived from
@@ -97,7 +99,7 @@ literature, the more relevant gastrointestinal transducer is probably PIEZO2:
 somatosensory-neuron PIEZO2 signalling has now been shown to regulate gut
 transit directly \cite{ServinVences2023}.  Reaching the \SI{1}{\micro\metre} cellular benchmark on the energy-consistent basis
 requires approximately \SI{151}{\decibel}
-(cf.\ \SI{135}{\decibel} for the pressure-based estimate;
+(cf.\ \SI{135}{\decibel} for the pressure-based upper-bound estimate;
 Table~\ref{tab:uq_summary}),
 a level associated with severe acoustic hazards and encountered only in
 explosive blasts and rocket launches.  Even at
@@ -119,143 +121,18 @@ amplitude---is precisely what a resonance-driven mechanism predicts.
 \label{sec:disc:alternatives}
 
 The whole-cavity resonance model of \S\ref{sec:formulation} treats the
-abdominal wall as a homogeneous fluid-filled shell.  In reality, two
-additional mechanisms provide alternative pathways for airborne sound to
-produce tissue displacement: (i)~compression of intestinal gas pockets, and
-(ii)~orifice coupling through the upper gastrointestinal tract.  We note
-that the estimates below are preliminary and order-of-magnitude in nature;
-they are intended to identify plausible mechanisms for future investigation
-rather than to make quantitative predictions.  We consider each in turn.
-
-\subsubsection{Intestinal gas pocket response}
-
-The human intestine normally contains \SIrange{100}{200}{\milli\litre} of
-gas distributed in pockets with effective radii ranging from
-\SIrange{1}{3}{\centi\metre} (corresponding to volumes of approximately
-\SIrange{4}{110}{\milli\litre}).  Unlike the surrounding tissue, these gas
-volumes are compressible, and they respond to incident pressure by
-expanding and contracting their bounding walls.  If such local deformation is
-biologically transduced, PIEZO2-dependent gut afferents are the most plausible
-candidate pathway rather than generic abdominal-wall strain sensing
-\cite{ServinVences2023}.
-
-The classical Minnaert frequency of a spherical gas bubble of radius $a$ in
-a fluid of density $\rho_f$ is \cite{minnaert1933}
-\begin{equation}
-  f_M = \frac{1}{2\pi a} \sqrt{\frac{3\gamma P_0}{\rho_f}},
-\end{equation}
-where $\gamma = 1.4$ is the ratio of specific heats (we use $\gamma = 1.4$
-for a diatomic ideal gas; a more representative value for the typical
-intestinal mixture of CO$_2$/CH$_4$/N$_2$ would be
-$\gamma \approx 1.35$, introducing a ${\sim}\,2\%$ correction to the
-Minnaert frequency) and $P_0$ is the ambient pressure.  For physiological pocket radii of
-\SIrange{1}{3}{\centi\metre}, this yields Minnaert frequencies in the range
-\SIrange{110}{330}{\hertz}---well above the infrasonic band of interest.  At
-\SI{7}{\hertz}, the frequency ratio $f / f_M \approx 0.02$--$0.06$, so gas
-pockets are driven far below resonance and experience no resonant
-amplification ($H \approx 1.0$).
-
-Nevertheless, in the sub-resonant regime the gas pocket wall displacement
-is governed by the quasi-static compliance of the trapped gas:
-\begin{equation}
-  \xi_{\mathrm{gas}} \approx \frac{p_{\mathrm{inc}} \, a}{3 \gamma P_0},
-\end{equation}
-which scales linearly with pocket radius and is independent of frequency.
-At \SI{120}{\decibel} SPL ($p_{\mathrm{inc}} = \SI{20}{\pascal}$) and
-$a = \SI{2}{\centi\metre}$, this yields
-$\xi_{\mathrm{gas}} \approx \SI{0.94}{\micro\metre}$---within the PIEZO
-activation range and roughly 67 times the whole-cavity airborne
-displacement of \SI{0.028}{\micro\metre} at the same SPL.  For larger pockets
-($a = \SI{3}{\centi\metre}$), the displacement rises to approximately
-\SI{1.4}{\micro\metre}, exceeding the lower PIEZO activation threshold.
-
-Crucially, at \SI{7}{\hertz} the acoustic wavelength (\SI{49}{\metre})
-vastly exceeds the body diameter, so the pressure field inside the body is
-spatially uniform to within $(ka)^2$ corrections.  Although the air--tissue impedance mismatch reflects approximately
-\SI{99.9}{\percent} of incident acoustic intensity
-($T_I \approx 10^{-3}$), in the acoustically compact limit ($ka \ll 1$)
-the body is too small to scatter the incident wave, and the interior
-pressure equilibrates quasi-statically with the incident field to leading
-order.  Pre-existing gas pockets
-within the abdomen, presenting a highly compliant inclusion within the
-otherwise nearly incompressible abdominal fluid, may therefore experience
-pressure fluctuations comparable to the incident field, potentially driving
-local volume changes independent of the global cavity resonance.  The gas
-pockets respond to the intracorporeal pressure field without the geometric
-filtering penalty that suppresses whole-cavity flexural excitation; the
-mechanism operates as a local pressure-to-displacement transducer embedded
-within the tissue, rather than as a global shell resonance.
-
-We note speculatively that this gas pocket pathway has two potentially
-important implications.  First, it may
-explain the well-documented inter-individual variability in infrasound
-sensitivity: bowel gas content varies enormously
-(\SIrange{50}{500}{\milli\litre}) with diet, gut motility, and
-microbiome composition, and individuals with greater gas volume would present
-more sites for pressure--displacement conversion.  Second, the mechanism does
-not require resonance and operates at any frequency in the sub-wavelength
-regime, broadening the range of potentially relevant exposures.
-
-\subsubsection{Orifice coupling through the upper GI~tract}
-
-The mouth and nose provide a low-impedance air pathway to the pharynx
-and---when the esophagus is patent---to the stomach.  At \SI{7}{\hertz},
-the total path length from mouth to stomach
-($L \approx \SI{40}{\centi\metre}$) satisfies $kL \approx 0.05 \ll 1$, so
-pressure is transmitted through the air column with negligible
-viscothermal attenuation.
-
-With the mouth open and esophagus patent, the pressure reaching the gastric
-air bubble is approximately equal to the incident pressure, representing a
-transmission ratio of order unity compared with the $(ka)^2 \approx 1.3
-\times 10^{-4}$ penalty for body-surface coupling---an enhancement factor
-of roughly $7{,}700\times$.  Compression of the gastric gas bubble then
-produces wall displacements by the same mechanism described above for
-intestinal pockets.
-
-However, this pathway is severely limited by anatomy.  The esophagus is a
-collapsible muscular tube that is closed at rest; it opens only during
-swallowing (approximately \SIrange{0.5}{1.0}{\second} per event), belching,
-or pathological gastroesophageal reflux.  At rest with the mouth open, the
-air column terminates at the upper esophageal sphincter, and pressure reaches
-only the supraglottic space.  The orifice pathway is therefore
-\emph{intermittent}, dependent on the state of the upper GI sphincters, and
-cannot be relied upon as a continuous coupling mechanism.
-
-\subsubsection{Assessment of alternative pathways}
-
-Table~\ref{tab:pathway_summary} summarises the predicted displacement for
-each coupling mechanism at \SI{120}{\decibel} SPL and \SI{7}{\hertz}.
-\begin{table}[htbp]
-  \centering
-  \caption{Comparison of coupling mechanisms at \SI{120}{\decibel} SPL,
-  \SI{7}{\hertz}.}
-  \label{tab:pathway_summary}
-  \begin{tabular}{lcc}
-    \hline
-    Mechanism & $\xi$ ($\mu$m) & Exceeds 1\,\si{\micro\metre}? \\
-    \hline
-    Cavity resonance ($n{=}2$, airborne) & 0.028 & No \\
-    Gas pocket $a = \SI{2}{\centi\metre}$ (airborne) & 0.94 & Marginal \\
-    Gas pocket $a = \SI{3}{\centi\metre}$ (airborne) & 1.4 & Yes \\
-    Orifice (open mouth $\to$ stomach) & $\sim$0.5 & Marginal \\
-    WBV at \SI{0.5}{\metre\per\second\squared} (mech.) & 4{,}586 & Yes \\
-    WBV at \SI{1.15}{\metre\per\second\squared} (mech.) & 10{,}549 & Yes \\
-    \hline
-  \end{tabular}
-\end{table}
-
-Even with the most favourable alternative pathway (a
-\SI{3}{\centi\metre}-radius gas pocket at \SI{120}{\decibel}), the airborne
-displacement remains two to three orders of magnitude below what mechanical
-coupling achieves at the EU Whole-Body Vibration Directive action value of
-\SI{0.5}{\metre\per\second\squared}.  The alternative pathways therefore do
-not alter the principal conclusion of this work---that airborne infrasound is
-an ineffective excitation route compared with mechanical vibration---but they
-provide a physically grounded explanation for why rare, sporadic
-gastrointestinal responses to extreme infrasound (\SI{>120}{\decibel}) are
-not entirely implausible, and why such responses exhibit large
-inter-individual variability.
+abdominal wall as a homogeneous fluid-filled shell.  In reality, alternative
+local coupling mechanisms may also exist, notably compressible intestinal gas
+pockets and intermittent orifice coupling through the upper
+gastrointestinal tract.  These mechanisms would operate through local
+compliance and transient boundary conditions rather than through the global
+$n=2$ cavity resonance analysed here.  We therefore treat them only as
+hypotheses for future study, not as co-equal conclusions of the present paper:
+the result established here is the severe weakness of airborne coupling to the
+global abdominal flexural mode relative to mechanical excitation.  Assessing
+whether any local pathway can become biologically relevant under extreme
+conditions would require a dedicated model that resolves gas--tissue
+interactions, anatomical intermittency, and local mechanotransduction.
 
 \subsection{Clinical and Occupational Relevance}
 \label{sec:disc:clinical}
@@ -446,15 +323,11 @@ the conclusions.
     network.  The homogeneous fluid model is therefore adequate for the
     present purposes.
 
-  \item \textbf{Gas pocket model simplifications.}  The gas pocket analysis
-    (\S\ref{sec:disc:alternatives}) treats intestinal gas as spherical
-    bubbles in an infinite homogeneous fluid, neglecting the cylindrical
-    geometry of the gut lumen, viscoelastic wall loading, and the
-    surrounding organ structure.  These simplifications likely
-    \emph{overestimate} gas pocket displacement, because intestinal wall
-    mass loading and stiffness would reduce the effective compliance.  A
-    coupled gas--tissue finite-element model is needed to refine these
-    estimates.
+    \item \textbf{Speculative local-coupling hypotheses.}  The brief discussion
+    in \S\ref{sec:disc:alternatives} is intentionally schematic.  Any
+    realistic assessment of gas pockets or orifice coupling would require a
+    coupled gas--tissue model with anatomical confinement, wall loading, and
+    transient boundary conditions, all of which are omitted here.
 
   \item \textbf{Mechanotransduction benchmarks.}  The
     \SIrange{0.5}{2.0}{\micro\metre} PIEZO activation range
@@ -482,45 +355,13 @@ occupationally relevant conditions.
 \subsection{Proposed Experimental Validation}
 \label{sec:disc:validation}
 
-We propose a two-stage experimental programme to validate the key
-predictions of the analytical model.  The first stage employs a
-tissue-mimicking phantom: an oblate spheroidal silicone shell
-($a = \SI{0.18}{\metre}$, $c = \SI{0.12}{\metre}$, $h = \SI{10}{\milli\metre}$)
-filled with degassed water, matching the canonical geometry of
-\S\ref{sec:formulation}.  The shell material is platinum-cure silicone
-(Ecoflex~00-30 to Dragon~Skin~10A), whose Young's modulus spans
-\SIrange{0.07}{0.15}{\mega\pascal}---bracketing the relaxed abdominal wall
-estimate of $E = \SI{0.1}{\mega\pascal}$.  By casting phantoms at several
-mixing ratios, the $f_2 \propto \sqrt{E}$ dependence can be tested
-directly.  Modal frequencies are measurable with an instrumented impact
-hammer or a low-frequency shaker sweep, and mode shapes can be
-reconstructed with a scanning laser vibrometer (Polytec PSV-500).
-The predicted $n = 2$ frequency for the recommended Ecoflex~00-30
-formulation is \SI{2.5}{\hertz}; for Dragon~Skin~10A,
-\SI{3.6}{\hertz}; the model predicts \SI{4.0}{\hertz} for the
-canonical human case.
-
-The critical measurement is the coupling-ratio comparison.  By mounting
-the phantom on an electrodynamic shaker (mechanical pathway) and
-separately exposing it to a subwoofer-generated infrasound field at
-\SI{120}{\decibel} (airborne pathway), the displacement ratio
-$\xi_{\mathrm{mech}} / \xi_{\mathrm{air}}$ can be measured in a single
-experimental session.  The model predicts ratios of order $10^4$--$10^5$
-across the silicone formulation range (Table~\ref{tab:pathway_summary}).
-Non-detection of the airborne response at the vibrometer noise floor
-($\sim\SI{0.01}{\micro\metre}$) would itself constitute a positive
-validation of the weak-coupling prediction.  The total cost of consumables
-(silicone, molds, sensors) is estimated at less than US\$\,3\,100, assuming
-access to shared laboratory equipment (shaker, laser vibrometer, DAQ).
-
-The second stage extends to in~vivo human subjects.  Subject-specific
-abdominal wall moduli would be obtained via magnetic resonance elastography
-or shear-wave ultrasound elastography, and whole-body vibration
-transmissibility measured on an ISO~2631-compliant platform at sub-action-value
-amplitudes (\SI{0.3}{\metre\per\second\squared}).  A sample of 15 subjects,
-spanning a range of body habitus, is sufficient (power $= 0.80$,
-$\alpha = 0.05$) to detect a paired-test effect size $d = 1.0$ between
-measured and predicted peak-transmissibility frequencies.  This programme
-requires Institutional Review Board approval and is estimated at
-8--12~months, with the phantom study serving as a prerequisite validation of
-the model physics under controlled conditions.
+A useful validation sequence begins with a tissue-mimicking phantom having
+the canonical spheroidal geometry and stiffness scale of
+\S\ref{sec:formulation}.  Modal testing of such a phantom would check the
+predicted flexural frequencies and mode shapes directly, while paired
+mechanical and airborne loading would test the central claim of this paper:
+that the coupling disparity between whole-body vibration and airborne
+infrasound is orders of magnitude rather than marginal.  A natural in~vivo
+extension would then combine subject-specific elastography with measured
+abdominal transmissibility, allowing the same framework to be assessed
+against human variability without changing the underlying model structure.
