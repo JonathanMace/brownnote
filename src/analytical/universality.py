@@ -1,21 +1,21 @@
-"""Computational verification of the universality conjecture for inverse
-identifiability scaling in fluid-filled elastic shells.
+"""Comparative analysis of inverse identifiability scaling across shell
+geometries: oblate spheroids, prolate spheroids, and triaxial ellipsoids.
 
-The conjecture: for ANY smooth one-parameter family of fluid-filled elastic
-shells interpolating between a sphere (ε=0) and a non-spherical shape (ε>0),
-the Jacobian condition number for the inverse problem satisfies
+An earlier version of this module claimed a "universality conjecture" asserting
+that κ(ε) ~ C·ε⁻² as ε → 0 for ANY smooth shell family.  Computational
+investigation found this is NOT universal: prolate spheroids show no
+identifiability improvement with increasing eccentricity, demonstrating that
+the oblate curvature-mode anti-correlation is geometry-specific.
 
-    κ(ε) ~ C · ε⁻²    as ε → 0.
+The module retains tools for:
+  1. Prolate spheroid frequency and condition-number computation
+  2. Triaxial ellipsoid perturbation model
+  3. Side-by-side oblate vs prolate vs triaxial κ(ε) sweeps
+  4. Empirical power-law fitting (for characterisation, not proof)
 
-This has been proved analytically for oblate spheroids (see power_law_proof.py).
-Here we verify the scaling computationally for:
-  1. Prolate spheroids (c > a, elongated along z)
-  2. Triaxial ellipsoids (a ≠ b ≠ c)
-  3. Arbitrary Legendre perturbations of a sphere
-
-Physical mechanism: the ε⁻² scaling arises because the metric tensor of any
-smooth shell family expands as G = G₀ + ε²·G₂ + O(ε⁴), and the
-mode-dependent curvature weights in G₂ are what break the sphere degeneracy.
+The key result is the ABSENCE of universality: the oblate identifiability
+advantage arises from curvature-mode anti-correlation that has no prolate
+analogue.
 
 References
 ----------
@@ -695,7 +695,7 @@ def triaxial_condition_sweep(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  5. Power-law fitting
+#  5. Empirical power-law fitting (characterisation, not proof)
 # ═══════════════════════════════════════════════════════════════════════════
 
 def fit_power_law(eccentricities, kappas):
@@ -824,7 +824,7 @@ def oblate_condition_sweep(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  7. Universal comparison
+#  7. Oblate–prolate–triaxial comparison (universality test)
 # ═══════════════════════════════════════════════════════════════════════════
 
 def universality_comparison(
@@ -834,8 +834,10 @@ def universality_comparison(
 ):
     """Run oblate, prolate, and triaxial sweeps side-by-side.
 
-    Fits the power-law exponent α for each geometry type and reports
-    whether the conjecture κ ~ C·ε⁻² holds universally.
+    Fits an empirical power-law exponent α for each geometry type and
+    tests whether the oblate identifiability advantage extends to other
+    geometries.  The result demonstrates that it does NOT: prolate shells
+    show no comparable improvement, falsifying the universality conjecture.
 
     Parameters
     ----------
@@ -908,7 +910,7 @@ def universality_comparison(
     if verbose:
         print()
         print("=" * 70)
-        print("  UNIVERSALITY CONJECTURE: κ(ε) ~ C · ε⁻ᵅ")
+        print("  UNIVERSALITY TEST: κ(ε) ~ C · ε⁻ᵅ")
         print("=" * 70)
         print(f"  {'Geometry':<12} {'α':>8} {'C':>12} {'R²':>8}")
         print("  " + "-" * 44)
@@ -917,8 +919,8 @@ def universality_comparison(
             print(f"  {name:<12} {r['alpha']:>8.3f} {r['C']:>12.1f}"
                   f" {r['R_squared']:>8.4f}")
         print("  " + "-" * 44)
-        conj = "SUPPORTED" if results["universal"] else "NOT SUPPORTED"
-        print(f"  Conjecture (α ∈ [1, 4] for all): {conj}")
+        conj = "SUPPORTED" if results["universal"] else "NOT SUPPORTED (oblate-specific)"
+        print(f"  Universality (α ∈ [1, 4] for all): {conj}")
         print()
 
     return results
