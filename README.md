@@ -12,9 +12,9 @@ The brown note was the entry point. Geometry was the destination.
 
 **Browntone** is an analytical research programme investigating the vibroacoustics of fluid-filled soft shells. We model organs (and fruit) as viscoelastic oblate spheroids, derive modal spectra from first principles, and study how shape governs everything: which modes respond to forcing, where resonances sit, and whether you can invert the spectrum to recover the parameters that generated it. The shell theory is Love–Kirchhoff with Lamb's (1882) membrane expression for the equivalent sphere, and a Rayleigh–Ritz treatment for the full oblate geometry.
 
-The programme's central thesis: **in fluid-filled viscoelastic shells, geometry does three jobs — it filters external forcing, it organises the modal spectrum, and it determines whether the spectrum can be inverted to recover the parameters that generated it.** Nine papers and a capstone establish this thesis across human organs, animal models, and agricultural products.
+The programme's central thesis: **in fluid-filled viscoelastic shells, geometry does three jobs — it filters external forcing, it organises the modal spectrum, and it determines whether the spectrum can be inverted to recover the parameters that generated it.** Ten papers establish this thesis across human organs, animal models, and agricultural products.
 
-Nine papers. Four target journals. One capstone in preparation for *Proceedings of the Royal Society A*. All built by a human PI, an emeritus co-author, and a small bureaucracy of AI agents who take their work far too seriously.
+Ten papers. Four target journals. Eight submission-ready with complete packages, one skeleton being reframed, and a capstone in preparation for *Proceedings of the Royal Society A*. All built by a human PI, an emeritus co-author, and a small bureaucracy of AI agents who take their work far too seriously.
 
 ## Papers
 
@@ -23,25 +23,25 @@ Nine papers. Four target journals. One capstone in preparation for *Proceedings 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
 | 1 | **The Brown Note** | *JSV* | Submission-ready (46 pp) | R ≈ 3.3 × 10⁴ — the resonance is real; the acoustic path to it is not | [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0339.pdf) |
-| 2 | **Gas Pockets** | *JASA* | Submission-ready (16 pp) | Tissue-constrained bubbles couple 35–100× better than the whole cavity | [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-29_2111.pdf) |
+| 2 | **Gas Pockets** | *JASA* | Submission-ready (16 pp) | Tissue-constrained bubbles couple 35–100× better than the whole cavity | [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-30_2332.pdf) |
 
 ### Act II — The Evidence
 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
-| 3 | **Scaling Laws** | *JSV Short* | Under revision (8 pp) | Π₀ ≈ 0.07 across species — the brown note is not a uniquely human indignity | [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-30_2332.pdf) |
-| 4 | **Bladder Resonance** | *JSV* | Draft complete | f₂ = 13.5 Hz at 222 mL; the U-curve minimum is suspiciously at driving-posture fill | [PDF](papers/paper4-bladder/drafts/draft_2026-03-29_2120.pdf) |
+| 3 | **Scaling Laws** | *JSV Short* | Submission-ready (8 pp) | Π₀ ≈ 0.07 across species — the brown note is not a uniquely human indignity | [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-30_2332.pdf) |
+| 4 | **Bladder Resonance** | *JSV* | Submission-ready (27 pp) | f₂ = 13.5 Hz at 222 mL; the U-curve minimum is suspiciously at driving-posture fill | [PDF](papers/paper4-bladder/drafts/draft_2026-03-30_2332.pdf) |
 | 5 | **Borborygmi** | *JASA* | Submission-ready | Five mechanisms, 135–440 Hz — your stomach growls in a predictable key | [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-30_2336.pdf) |
-| 6 | **Can You Feel the Bass?** | *JASA* | Submission-ready | Airborne sub-bass falls 2.5 orders short; the floor does the work | [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-29_2120.pdf) |
+| 6 | **Can You Feel the Bass?** | *JASA* | Submission-ready (18 pp) | Airborne sub-bass falls 2.5 orders short; the floor does the work | [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-30_2332.pdf) |
 
 ### Act III — The Theory
 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
 | 7 | **Can You Hear the Ripeness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to rind stiffness — folk wisdom formalised | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-30_0014.pdf) |
-| 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-30_2336.pdf) |
-| 9 | **Lifting Theorem** | *JSV Short* | In preparation | Singular-value lifting for symmetry-broken spectral inverse problems | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-29_2301.pdf) |
-| 🎓 | **Capstone** | *Proc. R. Soc. A* | Planned | *Geometry mediates excitation, resonance, and identifiability* | — |
+| 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-31_0854.pdf) |
+| 9 | **Oblate–Prolate Asymmetry** | *JSV Short* | Skeleton (reframing as short note) | Why identifiability lifting is oblate-specific — curvature–mode anti-correlation | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-29_2301.pdf) |
+| 🎓 | **Capstone** | *Proc. R. Soc. A* | Skeleton | *Geometry mediates excitation, resonance, and identifiability* | `papers/paper10-capstone/` |
 
 See also: [Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)
 
@@ -69,7 +69,7 @@ What we didn't expect: the same framework that explains why sound can't shake yo
 
 ## The Bigger Picture
 
-Papers 1–6 are evidence. Papers 7–9 and the capstone are synthesis. The programme converges on four conjectures (theorems, once the capstone is written):
+Papers 1–6 are evidence. Papers 7–10 are synthesis. All eight principal papers (P1–P8) are submission-ready with complete packages; zero stale values remain. The programme converges on four conjectures (theorems, once the capstone is written):
 
 1. **Rank-deficiency conjecture.** The equivalent-radius model of a fluid-filled shell is generically ill-conditioned for spectral inversion (κ ∝ 10¹⁰ for the sphere).
 2. **Identifiability lifting.** Breaking spherical symmetry — introducing asphericity — lifts the Jacobian rank deficiency because different flexural modes sample curvature differently.
@@ -145,7 +145,8 @@ browntone/
 │   ├── paper6-sub-bass/         # Can you feel the bass?
 │   ├── paper7-watermelon/       # The fruit that brought it together
 │   ├── paper8-kac/              # Can you hear the shape of an organ?
-│   └── paper9-lifting-theorem/  # The theorem underneath
+│   ├── paper9-lifting-theorem/  # Oblate–prolate asymmetry
+│   └── paper10-capstone/        # Geometry mediates everything
 ├── src/analytical/              # Core analytical models
 ├── tests/                       # 487 regression tests
 ├── docs/research-logs/          # 92 quantitative session logs
