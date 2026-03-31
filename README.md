@@ -41,7 +41,7 @@ Ten papers. Four target journals. Eight submission-ready with complete packages,
 | 7 | **Can You Hear Rind Stiffness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to effective rind stiffness — folk wisdom formalised with restrained claims | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-31_0939.pdf) |
 | 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-31_0854.pdf) |
 | 9 | **Geometry-dependent identifiability** | *JSV Short* | Draft complete (6 pp) | Oblate shells lift the inverse degeneracy; prolate shells do not | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-31_0917.pdf) |
-| 🎓 | **Capstone** | *Proc. R. Soc. A* | Results drafted | *Geometry mediates excitation, resonance, and identifiability* | [PDF](papers/paper10-capstone/drafts/draft_2026-03-31_0954.pdf) |
+| 🎓 | **Capstone** | *Proc. R. Soc. A* | Results drafted | *Geometry mediates excitation, resonance, and identifiability* | [PDF](papers/paper10-capstone/drafts/draft_2026-03-31_0958.pdf) |
 
 See also: [Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)
 
@@ -171,4 +171,9 @@ python -m pytest tests/ -v   # 487 tests
 ## Licence
 
 [MIT](LICENSE)
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 
