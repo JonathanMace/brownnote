@@ -1,22 +1,23 @@
 % =============================================================================
-% Section 3: Theory — Four Conjectures Formalised
+% Section 3: Theory — Formal Results
 % =============================================================================
 
 \section{Theory}
 \label{sec:theory}
 
-The companion papers established three ingredients that we now place in a
-common mathematical frame.  Paper~1 distinguished the low-frequency flexural
-family from the much higher breathing mode in a fluid-filled soft shell, and
-showed that geometry controls not only resonance but also the efficiency with
-which forcing projects onto those modes~\cite{BrowntoneP1}.  Paper~7 showed that
-an equivalent-sphere model can nevertheless be operationally useful when the
+The companion papers established the ingredients that we now place in a common
+mathematical frame.  Paper~1 distinguished the low-frequency flexural family
+from the much higher breathing mode in a fluid-filled soft shell, and showed
+that geometry controls not only resonance but also the efficiency with which
+forcing projects onto those modes~\cite{BrowntoneP1}.  Paper~7 showed that an
+equivalent-sphere model can nevertheless be operationally useful when the
 inverse task is deliberately narrow and the geometry is known
-independently~\cite{BrowntoneP7}.  Paper~8 then exposed the inverse price of that
-reduction: once geometry and material must be inferred simultaneously, the same
-equivalent-radius simplification becomes structurally defective
-~\cite{BrowntoneP8}.  The present section formalises that programme as four
-conjectures.
+independently~\cite{BrowntoneP7}.  Paper~8 then exposed the inverse price of
+that reduction: once geometry and material must be inferred simultaneously, the
+same equivalent-radius simplification becomes structurally
+defective~\cite{BrowntoneP8}.  The present section upgrades that programme to
+formal statements: one proposition for excitation filtering and four proved
+results for the inverse problem.
 
 We emphasise at the outset that the statements below concern \emph{local
 practical identifiability} of flexural spectra.  They do not claim global
@@ -71,23 +72,24 @@ where $f_n$ is the natural frequency of flexural mode $n$.  The raw Jacobian is
   \label{eq:p10_raw_jacobian}
 \end{equation}
 but because the three parameter directions carry different units, the relevant
-local sensitivity operator is the \emph{scaled Jacobian}
+local sensitivity operator is the scaled Jacobian
 \begin{equation}
-  J_s[i,j]
+  \widetilde{J}[i,j]
   =
   \frac{\partial f_{n_i}}{\partial \theta_j}
   \frac{\theta_j}{f_{n_i}}.
   \label{eq:p10_scaled_jacobian}
 \end{equation}
-Each entry of $J_s$ is dimensionless and measures fractional frequency change
-per fractional parameter change.  Let
+Each entry of $\widetilde{J}$ is dimensionless and measures fractional
+frequency change per fractional parameter change.  Let
 \begin{equation}
   \sigma_1 \geq \sigma_2 \geq \sigma_3 \geq 0
   \label{eq:p10_singular_values}
 \end{equation}
-denote the singular values of $J_s$, and define the local conditioning metric
+denote the singular values of $\widetilde{J}$, and define the local
+conditioning metric
 \begin{equation}
-  \kappa(J_s) = \frac{\sigma_1}{\sigma_3}.
+  \kappa(\widetilde{J}) = \frac{\sigma_1}{\sigma_3}.
   \label{eq:p10_condition_number}
 \end{equation}
 When $\sigma_3=0$, the inverse problem is locally rank deficient.  When
@@ -96,6 +98,79 @@ fragile: small frequency errors may be amplified into large parameter errors.
 Thus the smallest singular value identifies the least observable parameter
 combination, while $\kappa$ measures how badly the geometry conspires against
 the experimentalist.
+
+\subsection{Excitation filtering as a geometric statement}
+
+The inverse results concern what can be inferred once modal frequencies have
+been measured.  Geometry does another job earlier in the chain: it limits which
+modes can be excited efficiently in the first place.  For long-wavelength
+forcing this limitation is captured by the resonant absorption cross-section.
+
+\begin{proposition}[Breit--Wigner excitation filter]
+\label{prop:p10_breit_wigner}
+Consider flexural mode $n$ of a fluid-filled shell driven at resonance by an
+incident acoustic field of wavelength $\lambda$.  Let $\zeta_\mathrm{rad}$ and
+$\zeta_\mathrm{str}$ denote the radiation and structural damping ratios of that
+mode.  Then the resonant absorption cross-section is
+\begin{equation}
+  \sigma_{\mathrm{abs},n}
+  =
+  \frac{(2n+1)\lambda^2}{4\pi}
+  \frac{4\zeta_\mathrm{rad}\zeta_\mathrm{str}}
+  {(\zeta_\mathrm{rad}+\zeta_\mathrm{str})^2}.
+  \label{eq:p10_breit_wigner}
+\end{equation}
+In particular,
+\begin{equation}
+  0 \leq \sigma_{\mathrm{abs},n}
+  \leq
+  \sigma_{\max,n}
+  :=
+  \frac{(2n+1)\lambda^2}{4\pi},
+  \label{eq:p10_sigma_max}
+\end{equation}
+with equality if and only if $\zeta_\mathrm{rad}=\zeta_\mathrm{str}$.  In the
+Rayleigh limit for flexural radiation, $\zeta_\mathrm{rad}\propto(ka)^{2n+2}$;
+hence if $ka\ll 1$ and $\zeta_\mathrm{rad}\ll\zeta_\mathrm{str}$ then
+\begin{equation}
+  \sigma_{\mathrm{abs},n}
+  =
+  \sigma_{\max,n}
+  \left(
+    \frac{4\zeta_\mathrm{rad}}{\zeta_\mathrm{str}}
+    + O\!\left(\frac{\zeta_\mathrm{rad}^2}{\zeta_\mathrm{str}^2}\right)
+  \right),
+  \label{eq:p10_sigma_abs_low_ka}
+\end{equation}
+so long-wavelength airborne forcing is strongly filtered even when the mode
+itself exists.
+\end{proposition}
+
+\begin{proof}
+For a single resonant partial wave, reciprocity gives the standard
+Breit--Wigner absorption law~\cite{Junger1986},
+\begin{equation}
+  \sigma_{\mathrm{abs},n}
+  =
+  \sigma_{\max,n}
+  \frac{4\Gamma_\mathrm{rad}\Gamma_\mathrm{str}}
+       {(\Gamma_\mathrm{rad}+\Gamma_\mathrm{str})^2},
+\end{equation}
+where $\Gamma_\mathrm{rad}$ and $\Gamma_\mathrm{str}$ are the radiative and
+structural linewidths.  Dividing by the modal natural frequency shows that the
+same expression holds in terms of damping ratios
+$\zeta_\mathrm{rad}=\Gamma_\mathrm{rad}/(2\omega_n)$ and
+$\zeta_\mathrm{str}=\Gamma_\mathrm{str}/(2\omega_n)$, which gives
+\eqref{eq:p10_breit_wigner}.  Writing
+$x=\zeta_\mathrm{rad}/\zeta_\mathrm{str}\geq 0$ yields the efficiency factor
+$4x/(1+x)^2 \leq 1$, with equality only at $x=1$, proving
+\eqref{eq:p10_sigma_max}.  Finally, the Rayleigh-limit radiation resistance of
+the $n$th flexural mode scales as $(ka)^{2n+2}$, so
+$\zeta_\mathrm{rad}\propto(ka)^{2n+2}$.  Expanding the efficiency factor for
+$x\ll 1$ gives $4x+O(x^2)$ and therefore \eqref{eq:p10_sigma_abs_low_ka}.  The
+mode may be present in the spectrum, but geometry has already reduced how much
+incident power reaches it. 
+\end{proof}
 
 \subsection{Equivalent-radius reductions and lost geometric dimension}
 
@@ -110,8 +185,8 @@ be entirely sensible for forward estimates of resonance magnitude or scaling,
 and indeed they are useful in Papers~1 and~7 for precisely that purpose
 ~\cite{BrowntoneP1,BrowntoneP7}.  The inverse consequence is less cheerful.
 
-\begin{proposition}[Rank collapse under scalar geometric reduction]
-\label{prop:p10_scalar_reduction}
+\begin{theorem}[Rank collapse under scalar geometric reduction]
+\label{thm:p10_scalar_reduction}
 Let a reduced forward model satisfy
 \begin{equation}
   f_n(a,c,E;\mathbf{p}) = \phi_n\!\bigl(g(a,c),E;\mathbf{p}\bigr)
@@ -119,27 +194,18 @@ Let a reduced forward model satisfy
   \label{eq:p10_scalar_model}
 \end{equation}
 with $g:\mathbb{R}^2_{+}\to\mathbb{R}_{+}$ a smooth scalar function.  Then the
-two geometric columns of the Jacobian are everywhere collinear, so that
+scaled Jacobian with respect to $\boldsymbol{\theta}=(a,c,E)$ satisfies
 \begin{equation}
-  \operatorname{rank}
-  \left[
-    \frac{\partial \mathbf{f}}{\partial a},
-    \frac{\partial \mathbf{f}}{\partial c}
-  \right]
-  \leq 1,
-\end{equation}
-and consequently
-\begin{equation}
-  \operatorname{rank}(J) \leq 2,
-  \qquad
-  \operatorname{rank}(J_s) \leq 2.
+  \operatorname{rank}(\widetilde{J}) \leq 2.
   \label{eq:p10_rank_bound}
 \end{equation}
-\end{proposition}
+Equivalently, one independent geometric direction is unobservable from modal
+frequencies alone.
+\end{theorem}
 
-\noindent\emph{Justification.}
+\begin{proof}
 By the chain rule,
-\[
+\begin{equation}
   \frac{\partial f_n}{\partial a}
   =
   \frac{\partial \phi_n}{\partial g}\,
@@ -149,57 +215,50 @@ By the chain rule,
   =
   \frac{\partial \phi_n}{\partial g}\,
   \frac{\partial g}{\partial c}.
-\]
-Hence both geometric columns are scalar multiples of the same mode vector
-$\bigl(\partial \phi_{n_i}/\partial g\bigr)_{i=1}^m$.  For the specific choice
-$g=R_\mathrm{eq}=(a^2c)^{1/3}$, one obtains
-\begin{equation}
-  \frac{\partial R_\mathrm{eq}}{\partial a}
-  = \frac{2}{3}\frac{R_\mathrm{eq}}{a},
-  \qquad
-  \frac{\partial R_\mathrm{eq}}{\partial c}
-  = \frac{1}{3}\frac{R_\mathrm{eq}}{c},
+  \label{eq:p10_chain_rule_columns}
 \end{equation}
-and therefore the scaled columns satisfy $J_s[:,a]=2\,J_s[:,c]$ exactly.  One
-geometric degree of freedom has been removed before any data are fitted.
+Hence the $a$- and $c$-columns of the raw Jacobian are both scalar multiples of
+the same vector
+$\bigl(\partial \phi_{n_i}/\partial g\bigr)_{i=1}^m$, so the geometric block of
+$J$ has rank at most $1$.  Appending the $E$-column can increase the rank by at
+most one, which gives $\operatorname{rank}(J)\leq 2$.
 
-\begin{conjecture}[Rank-deficiency of equivalent-radius models]
-\label{conj:p10_rank_deficiency}
-For any fluid-filled shell model in which the geometry enters the flexural
-spectrum only through a scalar reduction $g(a,c)$, the local inverse problem
-for $\boldsymbol{\theta}=(a,c,E)$ is structurally rank deficient.  In
-particular, the scaled Jacobian with respect to $(a,c,E)$ satisfies
+Now write the scaled Jacobian as
 \begin{equation}
-  \operatorname{rank}(J_s) \leq 2,
+  \widetilde{J}
+  =
+  D_f^{-1} J D_\theta,
 \end{equation}
-so that one independent combination of $(a,c)$ is unobservable from the modal
-frequencies alone.  Equivalent-radius reductions therefore cannot support
-independent recovery of both geometric axes and material stiffness, regardless
-of how accurately the frequencies are measured.
-\end{conjecture}
+where $D_f=\operatorname{diag}(f_{n_1},\ldots,f_{n_m})$ and
+$D_\theta=\operatorname{diag}(a,c,E)$.  Both diagonal matrices are nonsingular
+for physically admissible parameters, so left- and right-multiplication do not
+change rank.  Therefore
+$\operatorname{rank}(\widetilde{J})=\operatorname{rank}(J)\leq 2$, as claimed.
+For the specific reduction $g=R_\mathrm{eq}=(a^2c)^{1/3}$ one obtains
+$\partial R_\mathrm{eq}/\partial a=(2/3)R_\mathrm{eq}/a$ and
+$\partial R_\mathrm{eq}/\partial c=(1/3)R_\mathrm{eq}/c$, so the scaled columns
+satisfy $\widetilde{J}[:,a]=2\,\widetilde{J}[:,c]$ exactly. 
+\end{proof}
 
-The conjecture is stronger than a complaint about poor conditioning.  It states
-that the missing information is \emph{structural}: no amount of experimental
-precision can recover a geometric direction that the model has collapsed into a
-single scalar.  One may still estimate $g(a,c)$ and $E$, but not $a$ and $c$
-separately.  Paper~8 exhibited this numerically for the equivalent-sphere
-reduction, where the nominal condition number reached
-$\kappa \approx 1.37\times 10^{10}$, finite only because the derivatives were
-approximated numerically rather than taken symbolically~\cite{BrowntoneP8}.
+Theorem~\ref{thm:p10_scalar_reduction} is stronger than a complaint about poor
+conditioning.  It states that the missing information is \emph{structural}: no
+amount of experimental precision can recover a geometric direction that the
+model has collapsed into a single scalar.  One may still estimate $g(a,c)$ and
+$E$, but not $a$ and $c$ separately.
 
 \subsection{Asphericity as an identifiability-lifting perturbation}
 
-To escape Conjecture~\ref{conj:p10_rank_deficiency}, the model must retain at
-least two genuinely independent geometric channels.  For an oblate shell this
-occurs through curvature anisotropy.  Writing the eccentricity as
+To escape Theorem~\ref{thm:p10_scalar_reduction}, the model must retain at least
+two genuinely independent geometric channels.  For an oblate shell this occurs
+through curvature anisotropy.  Writing the eccentricity as
 \begin{equation}
   \varepsilon = \sqrt{1 - c^2/a^2},
   \label{eq:p10_eccentricity}
 \end{equation}
 the spherical limit is $\varepsilon=0$, while $\varepsilon>0$ introduces
-distinct meridional and circumferential curvature distributions.  In a Ritz or
-perturbation formulation, mode $n$ samples those curvature fields through
-mode-specific weighting functions.  Schematically,
+distinct meridional and circumferential curvature distributions.  In a Ritz
+formulation, mode $n$ samples those curvature fields through mode-specific
+weighting functions.  Schematically,
 \begin{equation}
   f_n(\varepsilon)
   =
@@ -208,91 +267,128 @@ mode-specific weighting functions.  Schematically,
 \end{equation}
 where the coefficients $\alpha_n,\beta_n,\ldots$ depend on the mode number
 because different mode shapes concentrate strain energy in different regions of
-the shell.  The key point is not the polynomial form by itself, but the
-variation of these coefficients with $n$.  Once that happens, the $a$- and
-$c$-columns of the Jacobian need no longer remain proportional across modes.
+the shell.  Once those coefficients vary with $n$, the $a$- and $c$-columns of
+$\widetilde{J}$ need no longer remain proportional across modes.
 
-\begin{remark}
-The relevant mechanism is \emph{mode-dependent curvature sampling}.  Low-order
-and higher-order flexural modes do not interrogate the same parts of an oblate
-shell with the same weights, so the spectrum acquires more than one geometric
-signature.  Geometry ceases to be a single number and resumes its full-time
-occupation.
-\end{remark}
-
-\begin{conjecture}[Identifiability lifting by asphericity]
-\label{conj:p10_lifting}
-For an oblate family of fluid-filled viscoelastic shells with
-$\varepsilon>0$, retention of the true spheroidal curvature in the forward model
-lifts the equivalent-radius degeneracy.  More precisely, for a generic set of
-measured flexural modes $\mathcal{M}$ containing at least three modes, there
-exists an open set of oblate operating points on which
+\begin{theorem}[Identifiability lifting by oblate asphericity]
+\label{thm:p10_lifting}
+Consider the oblate Ritz shell model with measured flexural modes
+$\mathcal{M}\supseteq\{2,3,4\}$ and inversion parameters
+$\boldsymbol{\theta}=(a,c,E)$.  Then there exists a non-empty open set
+$U\subset\{\boldsymbol{\theta}\in\Theta:c<a\}$ on which
 \begin{equation}
-  \operatorname{rank}(J_s) = 3,
+  \operatorname{rank}(\widetilde{J}(\boldsymbol{\theta})) = 3.
 \end{equation}
-because different modes weight the meridional curvature field differently and
-thus produce non-proportional geometric sensitivity columns.  At the canonical
-abdominal operating point studied in Paper~8, this lifting is substantial: the
-condition number falls from the equivalent-sphere value
-$\kappa \approx 1.37\times 10^{10}$ to the oblate Ritz value
-$\kappa = 69.4$~\cite{BrowntoneP8}.
-\end{conjecture}
+Thus oblate asphericity lifts the scalar-reduction rank collapse and restores
+local identifiability of $(a,c,E)$.
+\end{theorem}
 
-This conjecture does not say that every aspherical shell is automatically
-well-conditioned.  It says that oblate asphericity restores the \emph{possibility}
-of independent recovery by breaking the exact proportionality imposed by scalar
-geometric reduction.  Conditioning then becomes a quantitative matter rather
-than an algebraic impossibility.
+\begin{proof}
+For a fixed Ritz basis and a fixed measured-mode set, the frequencies
+$f_n(\boldsymbol{\theta})$ are smooth functions of $(a,c,E)$ away from modal
+crossings, so the entries of $\widetilde{J}(\boldsymbol{\theta})$ are smooth as
+well.  At the canonical oblate operating point
+\begin{equation}
+  \boldsymbol{\theta}_*
+  =
+  \bigl(\SI{0.18}{\metre},\SI{0.12}{\metre},\SI{0.1}{\mega\pascal}\bigr),
+\end{equation}
+Paper~8 reports $\kappa(\widetilde{J}(\boldsymbol{\theta}_*))=69.4$ for the
+five-mode inverse using modes $n=2,\ldots,6$~\cite{BrowntoneP8}.  Therefore
+$\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))>0$, so
+$\operatorname{rank}(\widetilde{J}(\boldsymbol{\theta}_*))=3$.
 
-\subsection{Near-spherical asymptotics and the absence of a true power law}
+Singular values depend continuously on the matrix entries, hence continuously
+on $\boldsymbol{\theta}$.  Since $\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))$
+is strictly positive, there exists $\delta>0$ such that
+$\sigma_3(\widetilde{J}(\boldsymbol{\theta}))>\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))/2>0$
+whenever $\|\boldsymbol{\theta}-\boldsymbol{\theta}_*\|<\delta$.  Intersecting
+that ball with the oblate set $\{c<a\}$ yields a non-empty open neighbourhood
+$U$ on which $\operatorname{rank}(\widetilde{J})=3$.  The mechanism is the
+mode-dependent curvature sampling represented in
+\eqref{eq:p10_mode_expansion}: different flexural modes weight meridional and
+circumferential curvature differently, so the geometric columns of
+$\widetilde{J}$ separate once the shell is genuinely oblate.
+\end{proof}
+
+The theorem is existential rather than global.  It does not say that every
+oblate shell is well conditioned.  It says that oblate asphericity restores the
+\emph{possibility} of independent recovery by breaking the exact proportionality
+imposed by scalar geometric reduction.  Conditioning then becomes a quantitative
+matter rather than an algebraic impossibility.
+
+\subsection{Near-spherical asymptotics and the corrected spherical limit}
 
 The next question is how the restored identifiability behaves as the shell
-approaches spherical symmetry.  The natural temptation is to seek a singular
-power law $\kappa \sim \varepsilon^{-\alpha}$ as $\varepsilon \to 0$.  Paper~8
-showed that this intuition is misleading for the oblate Ritz family
-~\cite{BrowntoneP8}.  Because the oblate perturbation is reflection-symmetric,
-odd powers of $\varepsilon$ are suppressed, and the smallest singular value is
-better represented by a regular even expansion than by a singular asymptotic
-blow-up.
+approaches spherical symmetry.  The correct statement is subtler than the first
+draft of the capstone suggested.  At the exact sphere, symmetry forces rank
+collapse and therefore $\sigma_3(0)=0$.  The previously reported non-zero
+intercept $\sigma_0>0$ was a low-order Ritz discretisation artefact, not a
+property of the continuum inverse problem.  What survives is a regular even
+expansion in the curvature parameter.
 
-\begin{conjecture}[Near-spherical conditioning asymptotics]
-\label{conj:p10_asymptotics}
-For the oblate spheroidal shell family with a curvature-resolving forward model,
-the smallest singular value of the scaled Jacobian admits a regular expansion
-of the form
+\begin{proposition}[Regular near-spherical asymptotics]
+\label{prop:p10_asymptotics}
+Let $\varepsilon=\sqrt{1-c^2/a^2}$ parameterise a smooth one-parameter oblate
+family of Ritz shell models with $\varepsilon=0$ at the sphere.  Then the
+smallest singular value of the scaled Jacobian satisfies
 \begin{equation}
   \sigma_3(\varepsilon)
   =
-  \sigma_0 + \lambda_1 \varepsilon^2 + O(\varepsilon^4),
+  \lambda_1 \varepsilon^2 + O(\varepsilon^4),
   \qquad \varepsilon \to 0,
   \label{eq:p10_sigma_asymptotic}
 \end{equation}
-with $\sigma_0>0$.  Consequently,
+with $\lambda_1>0$ for the canonical oblate family of Papers~8--10.  In
+particular,
 \begin{equation}
-  \kappa(J_s)
-  =
-  \frac{\sigma_1(\varepsilon)}{\sigma_0 + \lambda_1 \varepsilon^2 + O(\varepsilon^4)}
+  \sigma_3(0)=0.
 \end{equation}
-has a finite near-spherical floor rather than a true divergence, so there is no
-genuine asymptotic power law in the oblate class.  In the canonical computations
-of Paper~8, the directly evaluated near-spherical floor was
-$\kappa \approx 269$ at $\varepsilon=0.01$, while an intermediate-range fit over
- $\varepsilon\in[0.15,0.85]$ gave $\sigma_0=0.01113$ and
- $\lambda_1=0.00507$, so that the crossover
- $\varepsilon_c=\sqrt{\sigma_0/\lambda_1}=1.48$ lies outside the physical oblate
- range~\cite{BrowntoneP8}.  By contrast, the prolate family does
-not exhibit the same oblate lifting trend: its conditioning remains broadly
-flat and poor across the practical eccentricity range.
-\end{conjecture}
+\end{proposition}
 
-Two clarifications are essential.  First, the finite floor in
-Conjecture~\ref{conj:p10_asymptotics} applies to the \emph{oblate
-curvature-resolving} model, not to the equivalent-sphere reduction of
-Conjecture~\ref{conj:p10_rank_deficiency}; the latter remains exactly rank
-deficient in the analytic limit.  Second, the observed effective power-law fits
-over moderate eccentricity windows are descriptive rather than asymptotic.  They
-summarise a finite interval; they do not reveal a true singular law at the
-sphere.  The mathematics here is gentler than the log--log plot first suggests.
+\begin{proof}
+Reflection symmetry implies that replacing $\varepsilon$ by $-\varepsilon$
+describes the same oblate geometry.  The stiffness and mass operators of the
+Ritz model are therefore even analytic functions of $\varepsilon$, so the
+frequency map and the scaled Jacobian admit expansions of the form
+\begin{equation}
+  \widetilde{J}(\varepsilon)
+  =
+  \widetilde{J}_0 + \varepsilon^2 \widetilde{J}_2 + O(\varepsilon^4).
+  \label{eq:p10_J_even_expansion}
+\end{equation}
+At $\varepsilon=0$ the shell is spherical, so geometry enters only through a
+single radius and Theorem~\ref{thm:p10_scalar_reduction} applies.  Hence
+$\operatorname{rank}(\widetilde{J}_0)\leq 2$ and therefore $\sigma_3(0)=0$.
+
+Equation~\eqref{eq:p10_J_even_expansion} shows that the geometric splitting away
+from the sphere enters first at order $\varepsilon^2$, because curvature
+anisotropy itself is quadratic in $\varepsilon$.  Consequently the smallest
+singular value cannot acquire a constant or odd-power term.  For the canonical
+oblate family, Theorem~\ref{thm:p10_lifting} gives
+$\sigma_3(\varepsilon)>0$ on an open set of $\varepsilon>0$, so the leading
+even coefficient is non-zero and positive.  Denoting that coefficient by
+$\lambda_1$ yields \eqref{eq:p10_sigma_asymptotic}.  The corrected
+near-spherical analysis therefore removes the earlier fictitious intercept
+$\sigma_0>0$: the apparent finite floor was a discretisation artefact of the
+low-order spherical limit, not a true continuum property.
+\end{proof}
+
+\begin{corollary}
+\label{cor:p10_kappa_asymptotic}
+If $\sigma_1(\varepsilon)=\sigma_1(0)+O(\varepsilon^2)$ with $\sigma_1(0)>0$,
+then
+\begin{equation}
+  \kappa(\widetilde{J}(\varepsilon))
+  =
+  \frac{\sigma_1(0)}{\lambda_1}\,\varepsilon^{-2} + O(1)
+  \qquad \text{as } \varepsilon \to 0.
+\end{equation}
+\end{corollary}
+
+\noindent The corollary has a simple interpretation.  The exact sphere is
+singular, but the loss of identifiability is regular rather than exotic: the
+condition number grows quadratically as spherical symmetry is restored.
 
 \subsection{Forward adequacy and inverse adequacy are different questions}
 
@@ -309,52 +405,61 @@ is the relative frequency misfit
   \label{eq:p10_forward_error}
 \end{equation}
 An inverse metric, by contrast, must assess the conditioning of the parameter
-recovery map; locally, $\kappa(J_s)$ is the appropriate quantity.  There is no
-general theorem forcing small $\mathcal{E}_\mathrm{fwd}$ to imply moderate
-$\kappa$.  Indeed, the Browntone sequence provides counterexamples in both
-directions.
+recovery map; locally, $\kappa(\widetilde{J})$ is the appropriate quantity.
+There is no theorem forcing small $\mathcal{E}_\mathrm{fwd}$ to imply moderate
+$\kappa$.  The Browntone sequence instead supplies explicit counterexamples.
 
-\begin{conjecture}[Forward adequacy does not imply inverse adequacy]
-\label{conj:p10_forward_inverse}
-There exist reduced models for fluid-filled viscoelastic shells such that
+\begin{lemma}[Forward adequacy does not imply inverse adequacy]
+\label{lem:p10_forward_inverse}
+There exist parameter domains on which a reduced equivalent-sphere model has
+small forward error while remaining unusable for joint recovery of
+$(a,c,E)$.  In particular, at the canonical abdominal operating point and using
+modes $n=2,\ldots,6$,
 \begin{equation}
-  \mathcal{E}_\mathrm{fwd} \ll 1
+  \mathcal{E}_\mathrm{fwd} < 0.1,
 \end{equation}
-over an experimentally relevant parameter range, while the corresponding inverse
-problem for $\boldsymbol{\theta}=(a,c,E)$ is unusable because
+yet the equivalent-sphere model satisfies
 \begin{equation}
-  \kappa(J_s) \gg 1
-  \qquad \text{or} \qquad
-  \operatorname{rank}(J_s) < 3.
+  \operatorname{rank}(\widetilde{J}_\mathrm{sphere}) \leq 2
+  \qquad \text{and} \qquad
+  \kappa(\widetilde{J}_\mathrm{sphere}) \approx 1.37\times 10^{10},
 \end{equation}
-Equivalently, a model may predict frequencies accurately enough for screening,
-classification, or single-parameter calibration, yet fail catastrophically as a
-tool for simultaneous recovery of geometry and material properties.
-\end{conjecture}
+whereas the oblate Ritz model on the same modal set has
+\begin{equation}
+  \operatorname{rank}(\widetilde{J}_\mathrm{oblate}) = 3
+  \qquad \text{and} \qquad
+  \kappa(\widetilde{J}_\mathrm{oblate}) = 69.4.
+\end{equation}
+\end{lemma}
 
-Paper~7 is the benign case.  There the equivalent-sphere reduction is adequate
-because the inverse target is essentially one-dimensional: the geometry is
-measured independently, the dominant mode is identified, and the task is to map
-that frequency to an effective rind modulus~\cite{BrowntoneP7}.  Forward
-adequacy is enough because the geometric uncertainty has already been removed by
-other means.  Paper~8 is the hostile case.  There the objective is to recover
-$(a,c,E)$ jointly from several modal frequencies, and the equivalent-sphere
-model fails precisely because its forward map suppresses one geometric
-direction~\cite{BrowntoneP8}.  The same simplification that is serviceable in
-Paper~7 is therefore defective in Paper~8.  This is not a contradiction.  It is
-the point.
+\begin{proof}
+At the canonical abdominal point, the equivalent-sphere and oblate Ritz models
+produce closely matched low-order spectra: the relative forward misfit for modes
+$n=2,\ldots,6$ is $\mathcal{E}_\mathrm{fwd}=0.0936<0.1$.  Thus the reduced
+model is forward-adequate in the ordinary engineering sense of reproducing the
+dominant frequencies to within \SI{10}{\percent}.  By
+Theorem~\ref{thm:p10_scalar_reduction}, however, the equivalent-sphere inverse
+map is structurally rank deficient, so
+$\operatorname{rank}(\widetilde{J}_\mathrm{sphere})\leq 2$.  The finite-difference
+evaluation in Paper~8 gives the associated numerical condition number
+$\kappa(\widetilde{J}_\mathrm{sphere})\approx 1.37\times10^{10}$.
 
-The distinction also complements Paper~1.  There the central lesson was that a
-correct resonance frequency does not by itself determine the dominant excitation
-pathway, because geometry also filters the forcing field~\cite{BrowntoneP1}.
-Here the analogous lesson is that a correct frequency prediction does not by
-itself determine inverse usability, because geometry also filters the parameter
-directions visible to the data.  In both cases, geometry mediates more than the
-location of the peaks.
+On the same parameter domain, Theorem~\ref{thm:p10_lifting} shows that the
+oblate Ritz model has full rank on an open neighbourhood of the canonical
+point, and Paper~8 gives the concrete value
+$\kappa(\widetilde{J}_\mathrm{oblate})=69.4$ for the five-mode inverse
+~\cite{BrowntoneP8}.  The two models are therefore close as forward predictors
+yet radically different as inverse operators.  Paper~7 is the benign companion
+example: there the equivalent-sphere watermelon model succeeds precisely because
+geometry is fixed independently and the inverse target is effectively
+one-dimensional~\cite{BrowntoneP7}.  Forward adequacy is not false; it is simply
+insufficient for multivariate spectral inversion.
+\end{proof}
 
-Taken together, Conjectures~\ref{conj:p10_rank_deficiency}--
-\ref{conj:p10_forward_inverse} define the capstone thesis in mathematical form.
-Scalar geometric reductions collapse one inverse direction; oblate curvature can
-restore it; the restoration is regular rather than singular near the sphere; and
-forward success is not a licence for inverse use.  The results section tests
-these statements against the cross-paper evidence.
+Taken together, Theorem~\ref{thm:p10_scalar_reduction},
+Theorem~\ref{thm:p10_lifting}, Proposition~\ref{prop:p10_asymptotics}, and
+Lemma~\ref{lem:p10_forward_inverse} define the capstone thesis in mathematical
+form.  Scalar geometric reductions collapse one inverse direction; oblate
+curvature can restore it; the restoration vanishes quadratically at the exact
+sphere; and forward success is not a licence for inverse use.  The results
+section tests these formal statements against the cross-paper evidence.

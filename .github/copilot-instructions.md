@@ -81,7 +81,7 @@ Every computation must use these values unless explicitly varying a parameter.
 | IAP | P_iap | 1000 | Pa |
 | Loss tangent | η | 0.25 | — |
 
-**Derived**: R_eq=0.157m, f₂=3.95Hz, Q=4.0, ζ=0.125, ka=0.0114, breathing≈2490Hz, κ_floor≈269 (5-mode Ritz), ε_c=1.48
+**Derived**: R_eq=0.157m, f₂=3.95Hz, Q=4.0, ζ=0.125, ka=0.0114, breathing≈2490Hz, canonical 5-mode κ=69.4, exact-sphere σ₃(0)=0
 
 **Stale values that MUST NOT appear**: η=0.30, ka=0.017, R_eq=0.133, ξ=0.014μm, R=66000, R=6.6×10⁴. These are v1.
 
@@ -148,7 +148,7 @@ See the `git-checkpoint` skill for the full agent git workflow.
 4. **Energy budget**: Shell absorbs ~3×10⁻¹⁴ of incident acoustic energy (Breit-Wigner).
 5. **Modal participation**: Γ₂ = 0.48 for vertical WBV (asymmetric BCs).
 6. **Borborygmi (gut sounds)**: Constrained bubble model spans 135-440 Hz for 1-50 mL gas pockets, matching clinical range 200-550 Hz.
-7. **Kac identifiability near the sphere**: The Ritz model has a finite curvature floor (κ_floor≈269, 5-mode) near the sphere — there is no asymptotic power law. σ_min(ε) = σ₀ + λ₁ε² + O(ε⁴) is a regular expansion, and the curvature channel (σ₀) dominates everywhere (ε_c = 1.48 > 1). Prolate shells show no identifiability improvement — the phenomenon is oblate-specific via curvature-mode anti-correlation.
+7. **Kac identifiability near the sphere**: At the exact sphere, symmetry restores rank collapse, so σ₃(0)=0. The corrected near-spherical law is σ₃(ε)=λ₁ε²+O(ε⁴), hence κ(ε)~Cε⁻² as ε→0; the previously reported finite floor was a low-order Ritz discretisation artefact. Prolate shells show no comparable identifiability improvement — the lifting is oblate-specific via curvature-mode separation.
 
 ## How to Use the Core Model
 

@@ -7,9 +7,9 @@
 %       coupling ratio R ~ 33,000.
 %     - Watermelon (Paper 7): acoustic ripeness inversion, sensitivity to
 %       shell stiffness gradients.
-%     - Kac identifiability (Paper 8): kappa_floor ~ 269 (5-mode Ritz),
-%       epsilon_c = 1.48, oblate-specific curvature-mode anti-correlation.
-%   Show how each application instantiates the four conjectures.
+%     - Kac identifiability (Paper 8): oblate lifting to kappa = 69.4,
+%       singular spherical limit, oblate-specific curvature-mode separation.
+%   Show how each application instantiates the four formal results.
 %   Include supporting evidence from Papers 2--6 (gas pockets, scaling
 %   laws, bladder resonance, borborygmi, sub-bass perception).
 % =============================================================================
@@ -17,7 +17,7 @@
 \section{Results}
 \label{sec:results}
 
-We now test the four conjectures against the cross-application record assembled
+We now test the four formal results against the cross-application record assembled
 in Papers~1, 4, 5, 7, and~8.  The point of the comparison is not that every
 application solves the same inverse problem.  Quite the opposite.  Some cases
 are dominated by excitation filtering, some by spectral organisation, and some
@@ -145,12 +145,12 @@ The abdominal, bladder, watermelon, and borborygmi studies occupy different
 frequency bands and involve different observables, yet they all distinguish
 between a forward spectral pattern and the stronger claim that parameters can be
 recovered independently from that pattern.  That distinction becomes explicit
-once the four conjectures are read as a sequence rather than as isolated
+once the four formal results are read as a sequence rather than as isolated
 claims.
 
-\subsection{Conjecture 1: equivalent-radius reductions are rank deficient}
+\subsection{Rank collapse under scalar geometric reduction}
 
-The first conjecture is the cleanest mathematically and, for that reason, the
+The first theorem is the cleanest mathematically and, for that reason, the
 least forgiving.  If the flexural spectrum depends on the geometry only through
 the scalar reduction
 \begin{equation}
@@ -191,9 +191,9 @@ it by reducing the inverse target.  Once one asks for joint recovery of
 $(a,c,E)$ from spectra alone, the equivalent-radius reduction has already spent
 too much of the available information.
 
-\subsection{Conjecture 2: oblate asphericity lifts identifiability}
+\subsection{Identifiability lifting by oblate asphericity}
 
-The second conjecture asks whether this degeneracy is merely diagnosed or
+The second theorem asks whether this degeneracy is merely diagnosed or
 actually repairable.  The evidence says that it is repairable, but only when
 the model retains genuine curvature information.  In the oblate Ritz family of
 Paper~8, we may sweep continuously from the spherical limit toward the canonical
@@ -254,34 +254,30 @@ learn.
   \label{fig:kappa_sweep}
 \end{figure}
 
-\subsection{Conjecture 3: near-spherical asymptotics classify the inverse problem}
+\subsection{Regular near-spherical asymptotics}
 
-The third conjecture concerns the approach to the sphere.  A tempting but
-incorrect intuition is that the oblate inverse problem should obey a singular
-power law all the way to $\varepsilon = 0$.  The Paper~8 computations show
-something milder and more informative.  In the oblate Ritz family, the smallest
-singular value follows the regular even expansion
+The third formal result concerns the approach to the sphere.  A tempting but
+incorrect intuition is that the near-spherical oblate inverse problem should
+retain a finite condition-number floor because early low-order Ritz fits
+appeared to give a positive intercept $\sigma_0$.  The corrected analysis is
+stricter.  At the exact sphere, restored symmetry forces rank collapse, so
+$\sigma_3(0)=0$.  What remains is the regular even expansion
 \begin{equation}
-  \sigma_{\min}(\varepsilon) = \sigma_0 + \lambda_1 \varepsilon^2 + O(\varepsilon^4),
+  \sigma_3(\varepsilon) = \lambda_1 \varepsilon^2 + O(\varepsilon^4),
 \end{equation}
-with a positive intercept $\sigma_0>0$ over the fitted near-spherical regime
-~\cite{BrowntoneP8}.  The immediate consequence is that the oblate branch has a
-finite conditioning floor rather than a genuine asymptotic blow-up.  Direct
-evaluation at $\varepsilon=0.01$ gives
-\begin{equation}
-  \kappa_\mathrm{floor} \approx 269.
-\end{equation}
-This is still awkward enough to make an experimentalist sigh, but it is not the
-same thing as algebraic singularity.
+with $\lambda_1>0$ for the canonical oblate family.  The previously reported
+finite floor was therefore a discretisation artefact of the low-order Ritz
+spherical limit, not a property of the continuum inverse problem.
 
 The resulting classification has three numerically distinct classes, as
 sketched in Figure~\ref{fig:near_spherical_classes}.  The first class is the
 \emph{singular sphere}: the equivalent-sphere reduction has
 $\kappa_\mathrm{sphere}\approx 1.37\times 10^{10}$ because the inverse map is
-rank deficient.  The second is the \emph{regular bounded oblate} class: the
-curvature-resolving oblate family remains finite near the sphere, with
-$\kappa_\mathrm{floor}\approx 269$, and improves to $69.4$ at the canonical
-oblate point.  The third is the \emph{non-lifting prolate} class: breaking
+rank deficient.  The second is the \emph{regular oblate} class: the
+curvature-resolving oblate family is full rank for $\varepsilon>0$, with
+conditioning that deteriorates like $\varepsilon^{-2}$ as the sphere is
+approached and improves to $69.4$ at the canonical oblate point.  The third is
+the \emph{non-lifting prolate} class: breaking
 spherical symmetry in the wrong geometric direction does not help much, and the
 condition number stays in the range
 \begin{equation}
@@ -304,17 +300,17 @@ the same question.
   \centering
   \fbox{\parbox{0.84\linewidth}{\centering
     Placeholder for the near-spherical taxonomy figure.\\
-    Planned content: singular sphere, regular bounded oblate branch, and
+    Planned content: singular sphere, regular oblate branch, and
     non-lifting prolate branch shown on the same conditioning plot.}}
   \caption{Placeholder for the near-spherical conditioning taxonomy.  The final
-  figure will distinguish the singular equivalent sphere, the regular bounded
+  figure will distinguish the singular equivalent sphere, the regular
   oblate branch, and the non-lifting prolate branch.}
   \label{fig:near_spherical_classes}
 \end{figure}
 
-\subsection{Conjecture 4: forward adequacy does not imply inverse adequacy}
+\subsection{Forward adequacy does not imply inverse adequacy}
 
-The fourth conjecture is the most practical, and Paper~7 supplies the most
+The fourth formal result is the most practical, and Paper~7 supplies the most
 useful cautionary example.  The equivalent-sphere watermelon model predicts
 tap-tone frequencies quite reasonably over the relevant stiffness range:
 $f_2$ spans \SIrange{46.4}{203.2}{\hertz}, and at the canonical reference point
@@ -362,10 +358,11 @@ licence to ignore identifiability.
   \label{fig:forward_inverse_adequacy}
 \end{figure}
 
-Taken together, the four conjectures survive the cross-application synthesis.
-Equivalent-radius reductions are structurally rank deficient; oblate curvature
-can lift that defect; the lifting is regular rather than singular near the
-sphere; and forward predictive success does not guarantee inverse usefulness.
+Taken together, the four formal results survive the cross-application
+synthesis.  Equivalent-radius reductions are structurally rank deficient;
+oblate curvature can lift that defect; the lifting vanishes regularly at the
+exact sphere; and forward predictive success does not guarantee inverse
+usefulness.
 That is why the same research programme can contain, without contradiction, a
 successful equivalent-sphere watermelon model and a strong warning against
 equivalent-sphere inversion.  The models answer different questions.  Geometry,
