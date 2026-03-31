@@ -17,4 +17,356 @@
 \section{Results}
 \label{sec:results}
 
-% TODO: Draft cross-application evidence table and supporting analysis
+We now test the four conjectures against the cross-application record assembled
+in Papers~1, 4, 5, 7, and~8.  The point of the comparison is not that every
+application solves the same inverse problem.  Quite the opposite.  Some cases
+are dominated by excitation filtering, some by spectral organisation, and some
+by parameter recovery.  What persists across them is that geometry decides which
+of those questions can be asked sensibly in the first place.
+Figure~\ref{fig:cross_application} is intended to visualise this comparison,
+while Table~\ref{tab:cross_application_evidence} collects the principal
+application-level evidence used below.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering
+    Placeholder for the cross-application comparison figure.\\
+    Planned content: abdomen, bladder, watermelon, and borborygmi arranged on a
+    common geometry--frequency--inference map.}}
+  \caption{Placeholder for the cross-application synthesis figure.  The final
+  version will place the four applications on a common geometry--spectrum--
+  inference diagram.}
+  \label{fig:cross_application}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \small
+  \caption{Cross-application evidence for the geometry--spectrum--inference
+  thesis.  Here $f_2$ denotes the lowest flexural mode, $R_\mathrm{eq}$ the
+  equivalent radius where used, and $\kappa$ the condition number of the scaled
+  Jacobian for the local inverse problem.}
+  \label{tab:cross_application_evidence}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}p{0.14\linewidth}p{0.27\linewidth}p{0.26\linewidth}p{0.26\linewidth}@{}}
+    \toprule
+    Application & Geometry and key parameters & Characteristic frequencies & Coupling / inference takeaway \\
+    \midrule
+    Abdomen
+    &
+    Canonical oblate shell:
+    $a=\SI{0.18}{\metre}$,
+    $c=\SI{0.12}{\metre}$,
+    $h=\SI{0.01}{\metre}$,
+    $E=\SI{0.1}{\mega\pascal}$,
+    $\nu=0.45$,
+    $\rho_f=\SI{1020}{\kilogram\per\metre\cubed}$,
+    $R_\mathrm{eq}=\SI{0.157}{\metre}$
+    &
+    $f_2=\SI{3.95}{\hertz}$;
+    higher flexural modes in the \SIrange{4}{10}{\hertz} band;
+    breathing mode $n=0$ near \SI{2490}{\hertz}
+    &
+    Geometry filters forcing as well as spectra:
+    the reported mechanical-to-airborne displacement ratio is
+    $R \approx 3.3\times 10^4$ in the canonical comparison;
+    the same geometry underpins the identifiability study with
+    $\kappa_\mathrm{oblate}=69.4$
+    \\
+    \addlinespace
+    Bladder
+    &
+    Fill-dependent near-spherical shell over
+    \SIrange{50}{500}{\milli\litre};
+    representative \SI{300}{\milli\litre} state:
+    $R=\SI{4.15}{\centi\metre}$,
+    $h=\SI{1.79}{\milli\metre}$,
+    $E=\SI{70.9}{\kilo\pascal}$
+    &
+    U-shaped $f_2(V)$ curve with a minimum
+    $f_2=\SI{13.5}{\hertz}$ at \SI{222}{\milli\litre};
+    representative \SI{300}{\milli\litre} value
+    $f_2=\SI{13.9}{\hertz}$
+    &
+    Geometry and strain-stiffening jointly organise the spectrum;
+    mechanical coupling exceeds airborne coupling by
+    $\mathcal{R}_\mathrm{bladder}\approx 6{,}400$;
+    useful fill-state inference is possible, but no full
+    geometry--material inversion is claimed
+    \\
+    \addlinespace
+    Watermelon
+    &
+    Oblate fruit approximated by an equivalent sphere:
+    $a=\SI{0.158}{\metre}$,
+    $c=\SI{0.123}{\metre}$,
+    $h=\SI{15}{\milli\metre}$,
+    $R_\mathrm{eq}=\SI{0.1453}{\metre}$,
+    $E_\mathrm{rind}=\SIrange{10}{250}{\mega\pascal}$
+    &
+    Tap-tone flexural frequency
+    $f_2=\SIrange{46.4}{203.2}{\hertz}$ across the constructed stiffness
+    sweep; canonical example
+    $f_2=\SI{89.9}{\hertz}$ at
+    $E_\mathrm{rind}=\SI{50}{\mega\pascal}$
+    &
+    Equivalent-sphere reduction is forward-useful when geometry is measured
+    independently and the inverse target is one effective stiffness parameter;
+    that same reduction is unsuitable for joint recovery of $(a,c,E)$
+    \\
+    \addlinespace
+    Borborygmi
+    &
+    Quasi-spherical or slug-like gas pockets in a
+    \SI{30}{\milli\metre} lumen;
+    canonical constrained-bubble parameters:
+    $V=\SIrange{1}{50}{\milli\litre}$,
+    $E=\SI{10}{\kilo\pascal}$,
+    $h=\SI{3}{\milli\metre}$
+    &
+    Constrained-bubble resonance
+    \SIrange{135}{440}{\hertz};
+    canonical \SI{10}{\milli\litre} pocket:
+    \SI{223}{\hertz};
+    healthy spectral peak near \SI{340}{\hertz} implies
+    $V\sim\SI{3}{\milli\litre}$
+    &
+    Geometry selects the active resonance family;
+    narrow inference about pocket size or mechanism is plausible, but only
+    because the inverse task is low-dimensional rather than a full shell
+    identification problem
+    \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:cross_application_evidence} already hints at the main result.
+The abdominal, bladder, watermelon, and borborygmi studies occupy different
+frequency bands and involve different observables, yet they all distinguish
+between a forward spectral pattern and the stronger claim that parameters can be
+recovered independently from that pattern.  That distinction becomes explicit
+once the four conjectures are read as a sequence rather than as isolated
+claims.
+
+\subsection{Conjecture 1: equivalent-radius reductions are rank deficient}
+
+The first conjecture is the cleanest mathematically and, for that reason, the
+least forgiving.  If the flexural spectrum depends on the geometry only through
+the scalar reduction
+\begin{equation}
+  R_\mathrm{eq} = (a^2 c)^{1/3},
+\end{equation}
+then the two geometric sensitivity directions cannot remain independent.  By
+the chain rule, every modal derivative with respect to the equatorial semi-axis
+$a$ is proportional to the corresponding derivative with respect to the polar
+semi-axis $c$.  In the scaled Jacobian $J_s$, the two geometry columns are
+therefore collinear.  At the sphere this becomes physically transparent: a
+small perturbation in $a$ and a small perturbation in $c$ both act only by
+changing the same radius, so the geometry columns become proportional and one
+geometric direction disappears from the inverse map.
+
+Paper~8 made that loss concrete for the canonical abdominal parameter set.  The
+reported condition number for the equivalent-sphere inverse problem is
+\begin{equation}
+  \kappa_\mathrm{sphere} \approx 1.37 \times 10^{10},
+\end{equation}
+numerically finite only because the derivatives were estimated with a finite
+difference rather than evaluated symbolically~\cite{BrowntoneP8}.  The true
+statement is stronger than ``poorly conditioned'': the model architecture has
+already removed one independent geometric degree of freedom before any data are
+fitted.  Figure~\ref{fig:cross_application} is intended to make this point
+visually by placing the equivalent-sphere reductions beside the curvature-aware
+models that follow.
+
+The cross-application evidence supports this interpretation rather than weakens
+it.  In Paper~7 the equivalent-sphere watermelon model works because the inverse
+task is deliberately narrow: the fruit geometry is measured separately, and the
+frequency is used to infer one effective stiffness scale
+$E_\mathrm{rind}$~\cite{BrowntoneP7}.  In Paper~5 the constrained-bubble
+borborygmi model is similarly successful only because the dominant unknown is
+effectively the gas-pocket size or mode family, not the simultaneous recovery
+of two shape axes and a wall modulus~\cite{BrowntoneP5}.  These are not
+counterexamples to rank deficiency.  They are examples of problems that avoid
+it by reducing the inverse target.  Once one asks for joint recovery of
+$(a,c,E)$ from spectra alone, the equivalent-radius reduction has already spent
+too much of the available information.
+
+\subsection{Conjecture 2: oblate asphericity lifts identifiability}
+
+The second conjecture asks whether this degeneracy is merely diagnosed or
+actually repairable.  The evidence says that it is repairable, but only when
+the model retains genuine curvature information.  In the oblate Ritz family of
+Paper~8, we may sweep continuously from the spherical limit toward the canonical
+abdominal geometry by decreasing the aspect ratio $\zeta=c/a$ from near unity
+to $\zeta=0.667$, equivalently increasing the eccentricity
+$\varepsilon=\sqrt{1-c^2/a^2}$ from almost zero to the canonical oblate value
+$\varepsilon=0.745$~\cite{BrowntoneP8}.  Figure~\ref{fig:kappa_sweep} is
+intended to show this sweep directly.
+
+Two comparisons matter.  The first is the broad conceptual one: the condition
+number drops from the \num{1e10}-scale equivalent-sphere pathology to
+\begin{equation}
+  \kappa_\mathrm{oblate} = 69.4
+\end{equation}
+once the geometry is treated as oblate rather than spherical.  The second is
+the stricter like-for-like comparison within the same oblate Ritz model: the
+conditioning improves from the near-spherical floor to the canonical oblate
+point without changing the inverse variables or the measured mode set.  In both
+comparisons the message is the same.  Asphericity is not merely decorative; it
+reintroduces a second geometric sensitivity channel.
+
+The physical reason is mode-dependent curvature sampling.  The lowest abdominal
+flexural mode already sits at
+\begin{equation}
+  f_2 = \SI{3.95}{\hertz},
+\end{equation}
+so the improvement in identifiability does not arise because the resonance is
+dragged into a more convenient frequency band.  It arises because the higher
+flexural modes do \emph{not} sample the oblate shell in the same way.  Meridional
+and circumferential curvature changes are weighted differently by different
+mode shapes, so the $a$- and $c$-columns of $J_s$ cease to be parallel.  The
+bladder study provides a useful supporting contrast here.  Its fill-dependent
+U-shaped curve shows that geometry and stiffness can compete strongly in the
+forward spectrum~\cite{BrowntoneP4}; Paper~8 shows what is additionally needed
+for inversion, namely that different modes must separate those effects rather
+than merely combine them.
+
+This is also where the abdominal coupling result matters conceptually.  In
+Paper~1 the same oblate geometry that yields the canonical
+$f_2=\SI{3.95}{\hertz}$ also produces a severe excitation asymmetry, with a
+reported mechanical-to-airborne displacement ratio
+$R \approx 3.3\times 10^4$ in the canonical comparison~\cite{BrowntoneP1}.  The
+same geometry therefore controls both whether a mode is efficiently excited and
+whether it is diagnostically informative.  That is the capstone thesis in one
+line: geometry decides what the system feels and what the experimenter can
+learn.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.82\linewidth}{\centering
+    Placeholder for the conditioning sweep figure.\\
+    Planned content: $\kappa$ versus aspect ratio or eccentricity, showing the
+    descent from the spherical limit to the canonical oblate shell.}}
+  \caption{Placeholder for the conditioning sweep from the near-spherical limit
+  to the canonical oblate geometry.  The final figure will show how retaining
+  curvature information lifts the conditioning from the equivalent-sphere
+  pathology to $\kappa_\mathrm{oblate}=69.4$.}
+  \label{fig:kappa_sweep}
+\end{figure}
+
+\subsection{Conjecture 3: near-spherical asymptotics classify the inverse problem}
+
+The third conjecture concerns the approach to the sphere.  A tempting but
+incorrect intuition is that the oblate inverse problem should obey a singular
+power law all the way to $\varepsilon = 0$.  The Paper~8 computations show
+something milder and more informative.  In the oblate Ritz family, the smallest
+singular value follows the regular even expansion
+\begin{equation}
+  \sigma_{\min}(\varepsilon) = \sigma_0 + \lambda_1 \varepsilon^2 + O(\varepsilon^4),
+\end{equation}
+with a positive intercept $\sigma_0>0$ over the fitted near-spherical regime
+~\cite{BrowntoneP8}.  The immediate consequence is that the oblate branch has a
+finite conditioning floor rather than a genuine asymptotic blow-up.  Direct
+evaluation at $\varepsilon=0.01$ gives
+\begin{equation}
+  \kappa_\mathrm{floor} \approx 269.
+\end{equation}
+This is still awkward enough to make an experimentalist sigh, but it is not the
+same thing as algebraic singularity.
+
+The resulting classification has three numerically distinct classes, as
+sketched in Figure~\ref{fig:near_spherical_classes}.  The first class is the
+\emph{singular sphere}: the equivalent-sphere reduction has
+$\kappa_\mathrm{sphere}\approx 1.37\times 10^{10}$ because the inverse map is
+rank deficient.  The second is the \emph{regular bounded oblate} class: the
+curvature-resolving oblate family remains finite near the sphere, with
+$\kappa_\mathrm{floor}\approx 269$, and improves to $69.4$ at the canonical
+oblate point.  The third is the \emph{non-lifting prolate} class: breaking
+spherical symmetry in the wrong geometric direction does not help much, and the
+condition number stays in the range
+\begin{equation}
+  \kappa_\mathrm{prolate} \approx 561\text{--}729
+\end{equation}
+across the tested prolate branch~\cite{BrowntoneP8,BrowntoneP9}.
+
+This three-class picture matters because it replaces a vague slogan ---
+``non-spherical is better'' --- with a more precise statement.  Some departures
+from the sphere restore useful inverse information; some do not; and some model
+reductions remain singular regardless of numerical precision.  The borborygmi
+and bladder papers again provide supporting context.  Both show that spectra in
+soft, fluid-loaded biological systems can change strongly with geometry, fill
+state, or confinement~\cite{BrowntoneP4,BrowntoneP5}.  The near-spherical
+analysis tells us when such spectral variation should also be expected to carry
+independent inverse information.  Those are related questions, but they are not
+the same question.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.84\linewidth}{\centering
+    Placeholder for the near-spherical taxonomy figure.\\
+    Planned content: singular sphere, regular bounded oblate branch, and
+    non-lifting prolate branch shown on the same conditioning plot.}}
+  \caption{Placeholder for the near-spherical conditioning taxonomy.  The final
+  figure will distinguish the singular equivalent sphere, the regular bounded
+  oblate branch, and the non-lifting prolate branch.}
+  \label{fig:near_spherical_classes}
+\end{figure}
+
+\subsection{Conjecture 4: forward adequacy does not imply inverse adequacy}
+
+The fourth conjecture is the most practical, and Paper~7 supplies the most
+useful cautionary example.  The equivalent-sphere watermelon model predicts
+tap-tone frequencies quite reasonably over the relevant stiffness range:
+$f_2$ spans \SIrange{46.4}{203.2}{\hertz}, and at the canonical reference point
+the model gives $f_2=\SI{89.9}{\hertz}$ with a clean monotonic relation between
+$f_2^2$ and the effective rind modulus $E_\mathrm{rind}$~\cite{BrowntoneP7}.
+For that task the reduced model is perfectly sensible.  Geometry is measured
+independently; the inverse target is essentially one-dimensional; and the model
+therefore serves as a practical forward predictor and calibration law.
+
+The trouble begins only when that forward success is promoted into a general
+inversion claim.  If the same equivalent-sphere architecture is asked to recover
+$(a,c,E)$ jointly from modal data, the condition number returns to the
+\num{1e10} scale, because the geometry has again been collapsed into a single
+radius.  The curvature-resolving oblate model, by contrast, yields broadly
+similar low-order frequencies while restoring a usable inverse map with
+\begin{equation}
+  \kappa = 69.4.
+\end{equation}
+Figure~\ref{fig:forward_inverse_adequacy} is intended to show this distinction:
+small forward spectral error and good inverse conditioning are related only
+loosely, and sometimes not at all.
+
+The other applications reinforce the same lesson from different angles.  The
+bladder model predicts a clear forward phenomenon --- a minimum
+$f_2=\SI{13.5}{\hertz}$ at \SI{222}{\milli\litre} --- and a clear coupling
+phenomenon --- $\mathcal{R}_\mathrm{bladder}\approx 6{,}400$ in favour of
+mechanical excitation~\cite{BrowntoneP4}.  Neither result, by itself, certifies
+that a joint inverse problem for geometry and material parameters would be well
+conditioned.  The borborygmi model similarly supports narrow inferences, such as
+mapping a peak near \SI{340}{\hertz} to a pocket volume of order
+\SI{3}{\milli\litre}, without claiming that bowel geometry and wall elasticity
+can be reconstructed uniquely from the sound alone~\cite{BrowntoneP5}.  Forward
+adequacy is often enough for diagnosis, classification, or design.  It is not a
+licence to ignore identifiability.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.84\linewidth}{\centering
+    Placeholder for the forward-versus-inverse adequacy figure.\\
+    Planned content: comparable low-order frequency predictions for reduced and
+    oblate models alongside sharply different condition numbers.}}
+  \caption{Placeholder for the distinction between forward adequacy and inverse
+  adequacy.  The final figure will compare frequency prediction error against
+  inverse conditioning for the reduced and curvature-aware models.}
+  \label{fig:forward_inverse_adequacy}
+\end{figure}
+
+Taken together, the four conjectures survive the cross-application synthesis.
+Equivalent-radius reductions are structurally rank deficient; oblate curvature
+can lift that defect; the lifting is regular rather than singular near the
+sphere; and forward predictive success does not guarantee inverse usefulness.
+That is why the same research programme can contain, without contradiction, a
+successful equivalent-sphere watermelon model and a strong warning against
+equivalent-sphere inversion.  The models answer different questions.  Geometry,
+as ever, decides which answers are trustworthy.
