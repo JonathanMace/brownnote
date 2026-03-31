@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage{inconsolata}
+\usepackage{amsmath}
+\let\Bbbk\relax
+\usepackage{amssymb}
+
+% Theorem-like environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage[pdfencoding=auto,psdextra]{hyperref}
+\usepackage{lineno}
+
+% SI units configuration
+\sisetup{
+  per-mode=symbol,
+  group-separator={,},
+}
+
+% Line numbering (required for review submission)
+\linenumbers
+
+% =============================================================================
+% Metadata
+% =============================================================================
+\title{Geometry Mediates Excitation, Resonance, and Identifiability\\
+in Fluid-Filled Viscoelastic Shells}
+
+\author{
+  Jonathan Mace\thanks{Corresponding author. E-mail: jonathanmace@microsoft.com}\\
+  \small Microsoft Research, Redmond, WA, United States
+  \and
+  Brian R.\ Mace\\
+  \small Acoustics Research Centre, Department of Mechanical and
+    Mechatronics Engineering,\\
+  \small University of Auckland, Auckland, New Zealand
+}
+
+\date{}
+
+% =============================================================================
+\begin{document}
+% =============================================================================
+
+\maketitle
+
+\begin{abstract}
+The resonant behaviour of fluid-filled viscoelastic shells arises
+repeatedly in biomechanics, postharvest sensing, and non-destructive
+evaluation, yet each application is typically treated in isolation.
+This paper advances a unifying thesis: \emph{shell geometry simultaneously
+filters the forcing field, organises the modal spectrum, and determines
+the invertibility of the corresponding parameter-estimation problem.}
+
+We formalise this thesis through four results.
+First, we prove that equivalent-radius (spherical) reductions of
+non-spherical shells are \emph{rank-deficient} in the sense of
+structural identifiability: geometry and material parameters become
+confounded, rendering independent recovery impossible.
+Second, we show that asphericity lifts this rank deficiency through
+curvature-dependent mode splitting, providing the additional spectral
+information needed for unique inversion.
+Third, we derive the near-spherical conditioning asymptotics that
+govern the transition from identifiable to non-identifiable regimes,
+classifying shells by their curvature parameter~$\varepsilon$.
+Fourth, we demonstrate that forward-model adequacy does not imply
+inverse-model adequacy: an equivalent-sphere model may predict
+resonant frequencies within engineering tolerance yet fail
+catastrophically when used for parameter estimation.
+
+These four results are supported by cross-application evidence drawn
+from the human abdomen (infrasound resonance), the watermelon
+(acoustic ripeness assessment), and the urinary bladder (fill-dependent
+resonance), demonstrating that geometry is the hidden variable
+unifying apparently disparate vibroacoustic phenomena.
+\end{abstract}
+
+\bigskip
+\noindent\textbf{Keywords:}
+fluid-filled shells;
+viscoelastic resonance;
+structural identifiability;
+inverse problems;
+asphericity;
+Kac problem
+
+% =============================================================================
+% Sections
+% =============================================================================
+\input{sections/introduction}
+\input{sections/background}
+\input{sections/theory}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% =============================================================================
+% References
+% =============================================================================
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
