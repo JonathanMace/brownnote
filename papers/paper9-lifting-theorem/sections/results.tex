@@ -21,12 +21,14 @@ $\kappa_\mathrm{Ritz}=244$ to $\kappa=145$ and then to
 $\kappa_\mathrm{oblate}=\num{69.4}$.  Since the inverse variables and measured
 mode set are unchanged, that improvement is geometric rather than procedural.
 
-The prolate continuation remains less informative.  Along this branch the
-volume and wall thickness are fixed, with $a$ decreasing and $c$ increasing so
-that $a^2c=\text{const}$.  At the representative endpoint $c/a=\num{1.5}$ the
-scaled Jacobian gives $\sigma_3=\num{0.01636}$ and $\kappa=156$, which is
-better than the Ritz sphere but still markedly worse than the canonical oblate
-configuration.
+The prolate continuation does not show systematic improvement.  Along this
+branch the volume and wall thickness are fixed (see Section~2), with $a$
+decreasing and $c$ increasing so that $a^2c=\text{const}$.  Across the tested
+range $c/a\in[\num{1.0},\num{1.5}]$, $\kappa_\mathrm{prolate}$ remains in the
+range 156--244, showing no monotonic decrease with increasing asphericity.  At
+the representative endpoint $c/a=\num{1.5}$ the scaled Jacobian gives
+$\sigma_3=\num{0.01636}$ and $\kappa=156$, still markedly worse than the
+canonical oblate configuration ($\kappa=\num{69.4}$).
 
 \begin{table}[t]
   \centering
@@ -35,7 +37,8 @@ configuration.
   $\widetilde{J}=\operatorname{diag}(\mathbf{f})^{-1}J
   \operatorname{diag}(\boldsymbol{\theta})$ for the five-mode inverse map
   $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.  Central differences use
-  $\Delta\theta_j/\theta_j=\num{1e-4}$.}
+  $\Delta\theta_j/\theta_j=\num{1e-4}$.  The Ritz-sphere $\sigma_3$ is a
+  discretisation artefact; $\sigma_3=0$ in the continuous limit (see text).}
   \label{tab:singular-values}
   \begin{tabular}{@{}lcccccc@{}}
     \toprule
@@ -55,39 +58,41 @@ configuration.
   \end{tabular}
 \end{table}
 
-For the five-mode oblate map parameterised by $\delta=1-c/a$, the near-sphere
-fit
-\[
-  \sigma_{\min}(\delta)=\sigma_0+\lambda_1\delta^2
-\]
-gives $\sigma_0=\num{0.0107}$ with 95\% confidence interval
-$[\num{0.0098},\num{0.0117}]$ and $\lambda_1=\num{0.137}$ with 95\% confidence
-interval $[\num{0.120},\num{0.155}]$.  This compact fit summarises the oblate
-trend in Table~\ref{tab:singular-values}; its intercept is an extrapolated
-parameter of the quadratic fit, not a replacement for the directly computed
-Ritz-sphere value $\sigma_3=\num{0.00806}$ listed in the table.
+The near-sphere behaviour of the weakest singular value is governed by
+\begin{equation}
+  \sigma_3(\varepsilon)
+  =
+  \lambda_1 \varepsilon^2 + O(\varepsilon^4),
+  \qquad \lambda_1>0.
+  \label{eq:sigma3-expansion}
+\end{equation}
+At the exact sphere ($\varepsilon=0$), spherical symmetry requires
+$\sigma_3=0$: the two geometric columns of $\widetilde{J}$ both reduce to
+derivatives with respect to $R_\mathrm{eq}$ alone and are therefore
+proportional.  A finite Ritz computation at $a=c$ does return a small positive
+value ($\sigma_3=\num{0.00806}$ in Table~\ref{tab:singular-values}); however,
+this is a discretisation artefact.  The Ritz trial functions break
+$a\leftrightarrow c$ exchange symmetry through the oblate-spheroidal
+integration metric and the fluid-mass blending coefficients, and the resulting
+intercept \emph{grows} rather than converges with basis size: $\sigma_0\approx
+\num{0.006}$, \num{0.011}, and \num{0.018} for the three-, five-, and
+seven-mode bases respectively.  The physically meaningful regime is
+$\varepsilon>\num{0.2}$ (equivalently $\delta\gtrsim\num{0.02}$), where the
+$\lambda_1\varepsilon^2$ term dominates and the artefact is negligible.
 
-The positive intercept at the Ritz sphere is not interpreted as a physical
-effect.  At $a=c$ the underlying continuous problem is symmetric under
-$a\leftrightarrow c$, but the finite Ritz basis breaks that symmetry through
-the spheroidal integration metric and the near-sphere fluid blending used in
-the added-fluid terms.  The intercept also grows rather than converges away in
-the tested truncations, with $\sigma_0\approx\num{0.006}$, \num{0.011}, and
-\num{0.018} for the three-, five-, and seven-mode models, respectively, which
-is the opposite of convergence.  We therefore treat $\sigma_0$ as a
-discretisation artefact and not as a genuine spherical lifting mechanism.
+A least-squares fit of $\sigma_3(\delta)=\sigma_0+\lambda_1\delta^2$ to the
+oblate data yields $\sigma_0=\num{0.0107}$ and $\lambda_1=\num{0.137}$; the
+non-zero intercept in this fit is the same discretisation effect described
+above, not a physical floor.
 
-The scientific conclusion rests on the deformation-dependent growth away from
-the immediate spherical neighbourhood.  Once the shape moves into the regime in
-which the quadratic shape term governs the change in $\sigma_{\min}$---for the
-present branch, outside the immediate near-sphere interval and in practice for
-oblate deformations with $\varepsilon>\num{0.2}$, equivalently
-$\delta\gtrsim\num{0.02}$---the oblate branch separates the weak inverse
-direction more effectively than either the equivalent-sphere model or the
-representative prolate continuation.  In that sense the reported oblate floor
-is conservative: the artificial positive intercept raises the near-spherical
-baseline and therefore understates the gain obtained at the canonical oblate
-point.
+The scientific conclusion therefore rests on the deformation-dependent quadratic
+growth in \eqref{eq:sigma3-expansion}.  Once the oblate deformation exceeds the
+immediate near-sphere interval ($\varepsilon>\num{0.2}$), the oblate branch
+separates the weak inverse direction more effectively than either the
+equivalent-sphere model or the prolate continuation.  Because the artefactual
+intercept raises the near-spherical baseline, the reported conditioning
+improvement at the canonical oblate point is conservative: it understates the
+true gain relative to the correct $\sigma_3(0)=0$ baseline.
 
 The practical meaning is straightforward.  The second flexural mode
 $f_2=\SI{3.95}{\hertz}$ already lies in the low-frequency band used by the
