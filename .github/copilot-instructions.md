@@ -227,7 +227,7 @@ See the `compile-paper` skill for compilation instructions.
 | Paper 2: Gas Pockets | JASA | Needs stale fix (16pp) | 1 | ❌ | `papers/paper2-gas-pockets/` |
 | Paper 3: Scaling Laws | JSV Short | Needs stale fix (8pp) | 1 | ❌ | `papers/paper3-scaling-laws/` |
 | Paper 4: Bladder Resonance | JSV | Needs stale fix (27pp) | 3 | ❌ | `papers/paper4-bladder/` |
-| Paper 5: Borborygmi | JASA | Text clean, needs pkg | 0 | ❌ | `papers/paper5-borborygmi/` |
+| Paper 5: Borborygmi | JASA | Submission-ready (14pp) | 0 | ✅ | `papers/paper5-borborygmi/` |
 | Paper 6: Sub-bass Perception | JASA | Needs stale fix (18pp) | 3 | ❌ | `papers/paper6-sub-bass/` |
 | Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ⚠️ | `papers/paper7-watermelon/` |
 | Paper 8: Kac Identifiability | IPSE/JSV (TBD) | Needs submission pkg (29pp) | 0 | ❌ | `papers/paper8-kac/` |
@@ -295,3 +295,4 @@ delegation, agent management).
 **No exceptions.** If an agent modifies .tex but skips any of these steps,
 the repo drifts out of sync. This checklist is also in each paper's
 path-specific instructions.
+
