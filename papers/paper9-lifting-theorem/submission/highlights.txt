@@ -1,0 +1,5 @@
+- Spectral inverse problem for fluid-filled elastic shells using five flexural modes (n=2,...,6)
+- Equivalent-sphere reduction is rank deficient; positive sigma_3 at the Ritz sphere is a discretisation artefact
+- Oblate branch lifts the weak singular value quadratically: sigma_3 ~ lambda_1 * epsilon^2, reaching kappa = 69.4
+- Prolate continuation yields kappa = 156 at c/a = 1.5 with no systematic improvement across the tested range
+- Identifiability improvement is geometry-dependent: oblate curvature redistribution helps, prolate does not

@@ -1,0 +1,70 @@
+\documentclass[11pt]{letter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{siunitx}
+\urlstyle{same}
+
+\sisetup{per-mode=symbol, group-separator={,}}
+
+\signature{Jonathan Mace\\Microsoft Research}
+\address{Jonathan Mace\\Microsoft Research\\Redmond, WA\\jonathanmace@microsoft.com}
+\date{\today}
+
+\begin{document}
+
+\begin{letter}{Editor\\Journal of Sound and Vibration\\Elsevier}
+
+\opening{Dear Editor,}
+
+\small
+
+Please consider our manuscript, ``Geometry-dependent identifiability in spectral
+inverse problems: oblate lifting without prolate improvement,'' for publication
+in the \emph{Journal of Sound and Vibration} as a Short Communication.
+
+The paper addresses a precise question in spectral inverse problems for
+fluid-loaded elastic shells: does breaking spherical symmetry always improve
+parameter recoverability?  Using a five-mode flexural frequency map and the
+scaled Jacobian formalism, we show that the answer depends on the
+\emph{direction} of the symmetry breaking.  The equivalent-sphere reduction is
+rank deficient ($\sigma_3=0$), and this singularity persists at the exact
+sphere.  Along the oblate branch, the weakest singular value grows
+quadratically, $\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$,
+reducing the condition number from $\kappa=244$ (Ritz sphere) to
+$\kappa_\mathrm{oblate}=\num{69.4}$ at the canonical geometry.  The prolate
+continuation, by contrast, yields $\kappa_\mathrm{prolate}=156$ at $c/a=1.5$
+with no systematic improvement across the tested range.
+
+This result is concise but non-trivial: it shows that ``symmetry breaking
+helps'' is false as a general rule for spectral inverse problems, and that the
+identifiability gain is tied to how curvature redistribution separates the
+geometric sensitivity directions.  The finding has direct implications for
+inverse problems in biomedical acoustics (where abdominal organs are
+characteristically oblate) and non-destructive evaluation of thin-walled
+vessels.
+
+The manuscript is part of a broader research programme on the vibration
+mechanics of fluid-filled shells.  The companion Paper~1 (submitted to JSV)
+establishes the canonical oblate shell model and its flexural spectrum, while
+Paper~8 (submitted to Inverse Problems) provides the full identifiability
+analysis including Newton inversion and Cram\'er--Rao bounds.  The present Short
+Communication distils the oblate-versus-prolate asymmetry result into a
+self-contained form suitable for the JSV readership.
+
+We believe the manuscript fits JSV because the journal regularly publishes work
+on structural dynamics, inverse problems, and fluid--structure interaction, and
+the Short Communication format is appropriate for the focused nature of this
+contribution.
+
+The manuscript is original, has not been published previously, and is not under
+consideration elsewhere.  Both authors have approved the submission.  Brian R.\
+Mace's contact email is \texttt{b.mace@auckland.ac.nz}.
+
+\closing{Yours sincerely,}
+
+\end{letter}
+
+\end{document}
