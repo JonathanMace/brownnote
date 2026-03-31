@@ -2,37 +2,38 @@
 \label{sec:discussion}
 
 % =============================================================================
-% 5.1  Physical interpretation: why frequency drops with ripening
+% 5.1  Physical interpretation: why frequency drops as the rind softens
 % =============================================================================
-\subsection{Why the tap-tone drops with ripening}
+\subsection{Why the tap-tone drops as the rind softens}
 \label{sec:physical_interp}
 
-The monotonic decrease in tap-tone frequency during ripening
+The monotonic decrease in tap-tone frequency during progressive rind softening
 has a straightforward physical
 explanation.  As the fruit ripens, enzymatic degradation of pectin in the
 rind cell walls reduces the effective Young's modulus
 $E_{\mathrm{rind}}$.  Since $f_2 \propto \sqrt{E_{\mathrm{rind}}}$
 (Eq.~\ref{eq:f2_squared}), the frequency falls.  For the canonical
-Crimson Sweet geometry, $f_2$ drops from \SI{203}{\hertz} (unripe,
-$E = \SI{200}{\mega\pascal}$) to \SI{46}{\hertz} (overripe,
-$E = \SI{15}{\mega\pascal}$)---a factor of~4.4 reduction.  This is
-precisely the information that experienced shoppers extract
-unconsciously: a lower pitch signals a softer, riper melon.
+Crimson Sweet geometry, $f_2$ drops from \SI{203}{\hertz} (high
+stiffness, $E = \SI{200}{\mega\pascal}$) to \SI{46}{\hertz} (low
+stiffness, $E = \SI{15}{\mega\pascal}$)---a factor of~4.4 reduction.
+This is precisely the information that experienced shoppers extract
+unconsciously: a lower pitch signals a softer melon, even though the
+biological interpretation still requires calibration.
 
 The frequency shift is not driven by changes in fluid density or fruit
 geometry, both of which vary by less than $\SI{5}{\percent}$ over the
-ripening window.  The Sobol analysis (\S\ref{sec:sobol}) confirms that
+illustrative softening range.  The Sobol analysis (\S\ref{sec:sobol}) confirms that
 $E_{\mathrm{rind}}$ is the dominant parameter, contributing
 \SI{54}{\percent} of the total variance ($S_T = 0.54$), whereas flesh
 density and turgor pressure contribute less than \SI{0.1}{\percent}
 each.  The secondary contribution of fruit size ($S_T = 0.38$) is
-relevant across cultivars but approximately constant during ripening of
+relevant across cultivars but approximately constant during softening of
 a single fruit.
 
-The quality factor also decreases during ripening---from $Q = 12.5$
-(unripe) to $Q = 5.0$ (overripe)---as the loss tangent increases from
+The quality factor also decreases during softening---from $Q = 12.5$
+(high stiffness) to $Q = 5.0$ (low stiffness)---as the loss tangent increases from
 0.08 to~0.20 with pectin degradation.  In practice, this means that an
-overripe melon produces a duller, more heavily damped thump, consistent
+over-softened melon produces a duller, more heavily damped thump, consistent
 with the subjective experience of a `mushy' sound.
 
 % =============================================================================
@@ -67,9 +68,9 @@ estimate~$E_{\mathrm{rind}}$.
   \caption{Envisaged practical workflow for acoustic rind stiffness
     estimation.  The closed-form inversion requires only the
     tap-tone frequency~$f_2$ and approximate fruit geometry.
-    The subsequent mapping from $E_{\mathrm{rind}}$ to a ripeness
-    classification (dashed) requires cultivar-specific calibration
-    data not developed in this study.}
+    The subsequent mapping from $E_{\mathrm{rind}}$ to a firmness- or
+    ripeness-related quality indicator (dashed) requires
+    cultivar-specific calibration data not developed in this study.}
   \label{fig:workflow}
 \end{figure}
 
@@ -145,7 +146,7 @@ Several simplifications deserve acknowledgement:
     effects on the eigenfrequency in the inversion.  The Sobol analysis
     confirms that $P_{\mathrm{int}}$ contributes less than
     \SI{0.1}{\percent} of the total variance in $f_2$, validating this
-    simplification.  For very unripe fruit with intact cell walls,
+    simplification.  For very stiff, minimally softened fruit with intact cell walls,
     turgor may contribute a correction of order $\SI{10}{\percent}$,
     but this falls within the geometric uncertainty band.
 
@@ -155,13 +156,13 @@ Several simplifications deserve acknowledgement:
     controlled geometry and material characterisation.  Such validation
     is a priority for future work.
 
-  \item \textbf{Frequency-to-ripeness chain.}  The model establishes
+  \item \textbf{Frequency-to-quality chain.}  The model establishes
     the link from tap-tone frequency to effective rind modulus.  The
-    further link from modulus to biological ripeness (eating quality,
+    further link from modulus to biological quality (eating quality,
     sugar content, texture) requires cultivar-specific calibration
     against destructive reference measurements, which has not been
     performed here.  The model therefore delivers a \emph{stiffness
-    parameter}, not a ripeness classification.
+    parameter}, not a biological quality classification.
 \end{itemize}
 
 % =============================================================================
@@ -175,13 +176,13 @@ trivial and could be implemented in a smartphone application.  A
 microphone records the tap-tone, a fast Fourier transform extracts
 $f_2$, and the inversion formula returns $E_{\mathrm{rind}}$ given
 approximate fruit dimensions (obtainable from a photograph).  The
-dimensionless geometric invariant $\Pi_{\mathrm{ripe}}$ then provides
+dimensionless geometric invariant $\Pi_{\mathrm{geom}}$ then provides
 an approximate cultivar-independent calibration constant that maps the
 result onto a modulus scale, although the \SI{5.4}{\percent} spread
-across cultivars (Table~\ref{tab:Pi_ripe}) means that cultivar-specific
+across cultivars (Table~\ref{tab:Pi_geom}) means that cultivar-specific
 calibration would be preferable in practice.  We reiterate that
-$\Pi_{\mathrm{ripe}}$ collapses geometries, not ripeness stages;
-its utility as a ripeness predictor has not been biologically validated.
+$\Pi_{\mathrm{geom}}$ collapses geometries, not biological quality stages;
+its utility as a biological quality predictor has not been validated.
 
 The Monte Carlo uncertainty analysis (\S\ref{sec:geom_uncertainty})
 demonstrates that even with $\pm\SI{10}{\percent}$ geometric
@@ -189,7 +190,7 @@ measurement error, the inverted modulus has a coefficient of variation
 of only \SI{13.5}{\percent} ($\SI{95}{\percent}$ CI:
 $[\SI{38.5}{\mega\pascal}, \SI{64.1}{\mega\pascal}]$ for a true value
 of \SI{50}{\mega\pascal}).  This uncertainty is well within the
-factor-of-four modulus difference between ripeness categories
+factor-of-four modulus difference between the constructed stiffness scenarios
 (Table~\ref{tab:forward_results}), suggesting that
 \emph{stiffness discrimination} may be achievable pending
 cultivar-specific calibration, even with imprecise geometry.
@@ -217,12 +218,12 @@ honeydew, pumpkin), drupes (coconut), and even non-biological systems
 such as pressurised tanks and sporting goods.  The multi-cultivar
 comparison (\S\ref{sec:cultivar}) demonstrates that cultivar-specific
 geometry is easily accommodated by adjusting three parameters ($a$, $c$,
-$h$), and the dimensionless geometric invariant~$\Pi_{\mathrm{ripe}}$
+$h$), and the dimensionless geometric invariant~$\Pi_{\mathrm{geom}}$
 provides a natural framework for cross-species calibration.
 
-The collapse of $\Pi_{\mathrm{ripe}}$ to within
+The collapse of $\Pi_{\mathrm{geom}}$ to within
 \SI{3.3}{\percent} across four geometrically distinct watermelon
-cultivars (Table~\ref{tab:Pi_ripe}) suggests that extension to other
+cultivars (Table~\ref{tab:Pi_geom}) suggests that extension to other
 fruit species requires only measurement of the species-specific
 shell geometry ($a$, $c$, $h$), which determines~$R_{\mathrm{eq}}$
 and thereby the frequency scaling.

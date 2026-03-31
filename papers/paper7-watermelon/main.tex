@@ -43,8 +43,8 @@
 
 \begin{frontmatter}
 
-\title{Can You Hear the Ripeness? An Equivalent-Sphere Shell Model for
-Acoustic Estimation of Rind Stiffness in Watermelons}
+\title{Can You Hear Rind Stiffness? A Shell-Mechanics Model Linking
+Watermelon Tap Tone to Effective Rind Stiffness}
 
 \author[msr]{Jonathan Mace\corref{cor1}}
 \cortext[cor1]{Corresponding author}
@@ -67,41 +67,40 @@ Acoustic Estimation of Rind Stiffness in Watermelons}
 }
 
 \begin{abstract}
-The `thump test''---tapping a watermelon and listening for
-ripeness---is practised worldwide but lacks a quantitative physical
-model linking the tap-tone to measurable mechanical properties.
-We model the watermelon as a fluid-filled viscoelastic shell
-using an equivalent-sphere approximation: the oblate geometry is
-captured through the equivalent-volume radius
-$R_{\mathrm{eq}} = (a^{2}c)^{1/3}$, and the eigenfrequency is
-derived from classical thin-shell theory applied to a sphere of that
-radius.  Sobol sensitivity analysis
-($N_{\mathrm{base}}(D{+}2) = 5{,}632$ evaluations) reveals that the
-rind elastic modulus $E_{\mathrm{rind}}$ dominates the
-frequency response (total-order index $S_T = 0.54 \pm 0.05$).  Because $f_2^2$
-is linear in $E_{\mathrm{rind}}$ when turgor pressure is
-negligible, the forward model admits a closed-form inversion: a single
-tap-tone measurement, combined with knowledge of fruit geometry,
-yields an estimate of the \emph{effective rind stiffness parameter}.
-This is a mechanics-based modulus estimate, not a direct measure of
-ripeness; the subsequent link from modulus to maturity stage requires
+The `thump test''---tapping a watermelon and listening for a
+characteristic tone---is practised worldwide as an informal guide to
+eating quality, but its directly observable output is mechanical rather
+than biological.  We model the watermelon as a fluid-filled
+viscoelastic shell using an equivalent-sphere approximation: the oblate
+geometry is captured through the equivalent-volume radius
+$R_{\mathrm{eq}} = (a^{2}c)^{1/3}$, and the eigenfrequency is derived
+from classical thin-shell theory applied to a sphere of that radius.
+Sobol sensitivity analysis ($N_{\mathrm{base}}(D{+}2) = 5{,}632$
+evaluations) reveals that the rind elastic modulus
+$E_{\mathrm{rind}}$ dominates the frequency response (total-order
+index $S_T = 0.54 \pm 0.05$).  Because $f_2^2$ is linear in
+$E_{\mathrm{rind}}$ when turgor pressure is negligible, the forward
+model admits a closed-form inversion: a single tap-tone measurement,
+combined with knowledge of fruit geometry, yields an estimate of the
+\emph{effective rind stiffness parameter}.  This is a mechanics-based
+modulus estimate, not a direct biological quality label; any mapping from
+stiffness to maturity, eating quality, or commercial grading requires
 cultivar-specific calibration against destructive reference data, which
-has not yet been demonstrated experimentally.
-The condition number of the frequency-to-modulus inversion
-is unity with respect to $f^2$ and approximately~2 with
-respect to measured frequency~$f$.  As a secondary result,
-a dimensionless geometric invariant $\Pi_{\mathrm{ripe}}$ collapses
-predictions across cultivar geometries onto a narrow band
-($0.062 \pm 0.002$), although its biological validity across cultivars
-remains to be established.  Predictions
-are benchmarked against published resonance frequency ranges for
+has not yet been demonstrated experimentally.  The condition number of
+the frequency-to-modulus inversion is unity with respect to $f^2$ and
+approximately~2 with respect to measured frequency~$f$.  As a
+secondary result, a dimensionless geometric invariant
+$\Pi_{\mathrm{geom}}$ collapses predictions across cultivar geometries
+onto a narrow band ($0.062 \pm 0.002$), supporting cultivar-independent
+stiffness calibration within the model assumptions.  Predictions are
+benchmarked against published resonance frequency ranges for
 watermelons; these comparisons represent consistency checks against
 literature data rather than controlled experimental validation.
 \end{abstract}
 
 \begin{keyword}
 watermelon \sep acoustic impulse response \sep non-destructive quality assessment \sep
-firmness \sep ripening \sep postharvest quality
+firmness \sep rind stiffness \sep postharvest quality
 \end{keyword}
 
 \end{frontmatter}

@@ -38,7 +38,7 @@ Ten papers. Four target journals. Eight submission-ready with complete packages,
 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
-| 7 | **Can You Hear the Ripeness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to rind stiffness — folk wisdom formalised | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-30_0014.pdf) |
+| 7 | **Can You Hear Rind Stiffness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to effective rind stiffness — folk wisdom formalised with restrained claims | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-31_0939.pdf) |
 | 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-31_0854.pdf) |
 | 9 | **Geometry-dependent identifiability** | *JSV Short* | Draft complete (6 pp) | Oblate shells lift the inverse degeneracy; prolate shells do not | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-31_0917.pdf) |
 | 🎓 | **Capstone** | *Proc. R. Soc. A* | Skeleton | *Geometry mediates excitation, resonance, and identifiability* | [PDF](papers/paper10-capstone/drafts/draft_2026-03-31_0924.pdf) |
@@ -49,7 +49,7 @@ See also: [Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf
 
 The human abdomen has a flexural resonance near 4 Hz, so the folk intuition is not completely mad. But at 120 dB SPL the energy-consistent airborne displacement is only 0.028 μm — roughly 1.5 orders of magnitude below PIEZO mechanotransduction thresholds (0.5–2.0 μm). Whole-body vibration at 0.1 m/s² RMS produces millimetre-scale excitation of the same mode, a coupling ratio R ≈ 3.3 × 10⁴. The "brown note" is a mechanical story misremembered as an acoustic one.
 
-What we didn't expect: the same framework that explains why sound can't shake your insides also explains why you can tap a watermelon to check if it's ripe, why your stomach growls at a predictable frequency, and why geometry — not material properties — determines whether you can invert a resonance spectrum at all. The joke was never the point. Geometry was.
+What we didn't expect: the same framework that explains why sound can't shake your insides also explains why you can tap a watermelon to estimate rind stiffness, why your stomach growls at a predictable frequency, and why geometry — not material properties — determines whether you can invert a resonance spectrum at all. The joke was never the point. Geometry was.
 
 ## Key Results
 
@@ -145,12 +145,8 @@ browntone/
 │   ├── paper6-sub-bass/         # Can you feel the bass?
 │   ├── paper7-watermelon/       # The fruit that brought it together
 │   ├── paper8-kac/              # Can you hear the shape of an organ?
-<<<<<<< HEAD
-│   ├── paper9-lifting-theorem/  # Oblate–prolate asymmetry
+│   ├── paper9-lifting-theorem/  # Oblate-prolate identifiability asymmetry
 │   └── paper10-capstone/        # Geometry mediates everything
-=======
-│   └── paper9-lifting-theorem/  # Oblate-prolate identifiability asymmetry
->>>>>>> 744e0cb ([paper] Rewrite P9 as JSV Short Communication on oblate-prolate identifiability asymmetry)
 ├── src/analytical/              # Core analytical models
 ├── tests/                       # 487 regression tests
 ├── docs/research-logs/          # 92 quantitative session logs
@@ -175,3 +171,4 @@ python -m pytest tests/ -v   # 487 tests
 ## Licence
 
 [MIT](LICENSE)
+
