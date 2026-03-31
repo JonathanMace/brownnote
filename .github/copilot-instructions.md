@@ -232,7 +232,7 @@ See the `compile-paper` skill for compilation instructions.
 | Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ⚠️ | `papers/paper7-watermelon/` |
 | Paper 8: Kac Identifiability | IPSE/JSV (TBD) | Submission-ready (29pp) | 0 | ✅ | `papers/paper8-kac/` |
 | Paper 9: Lifting Theorem | JSV Short | Skeleton only | 0 | ❌ | `papers/paper9-lifting-theorem/` |
-| Paper 10: Capstone | Proc Roy Soc A | Not started | — | — | (does not exist yet) |
+| Paper 10: Capstone | Proc Roy Soc A | Skeleton only | 0 | ❌ | `papers/paper10-capstone/` |
 
 **Stale values** are pre-Breit-Wigner numbers that must be corrected before
 submission. See the `track-papers` skill for the full list of stale patterns.
