@@ -38,7 +38,9 @@ canonical oblate configuration ($\kappa=\num{69.4}$).
   \operatorname{diag}(\boldsymbol{\theta})$ for the five-mode inverse map
   $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.  Central differences use
   $\Delta\theta_j/\theta_j=\num{1e-4}$.  The Ritz-sphere $\sigma_3$ is a
-  discretisation artefact; $\sigma_3=0$ in the continuous limit (see text).}
+  discretisation artefact; $\sigma_3=0$ in the continuous limit (see text).
+  $\varepsilon$ denotes oblate eccentricity; the prolate endpoint is
+  parameterised by $c/a$ as defined in Section~2.}
   \label{tab:singular-values}
   \begin{tabular}{@{}lcccccc@{}}
     \toprule
@@ -71,14 +73,21 @@ $\sigma_3=0$: the two geometric columns of $\widetilde{J}$ both reduce to
 derivatives with respect to $R_\mathrm{eq}$ alone and are therefore
 proportional.  A finite Ritz computation at $a=c$ does return a small positive
 value ($\sigma_3=\num{0.00806}$ in Table~\ref{tab:singular-values}); however,
-this is a discretisation artefact.  The Ritz trial functions break
-$a\leftrightarrow c$ exchange symmetry through the oblate-spheroidal
-integration metric and the fluid-mass blending coefficients, and the resulting
-intercept \emph{grows} rather than converges with basis size: $\sigma_0\approx
-\num{0.006}$, \num{0.011}, and \num{0.018} for the three-, five-, and
-seven-mode bases respectively.  The physically meaningful regime is
-$\varepsilon>\num{0.2}$, where the
-$\lambda_1\varepsilon^2$ term dominates and the artefact is negligible.
+this is a discretisation artefact.  The present Ritz basis does not preserve the
+exact $a\leftrightarrow c$ exchange symmetry of the sphere; accordingly, the
+spherical rank degeneracy $\sigma_3(0)=0$ must be inferred from the continuous
+model rather than from the discrete intercept.  Concretely, the
+oblate-spheroidal integration metric and the fluid-mass blending coefficients
+break that symmetry, and the resulting intercept \emph{grows} rather than
+converges with basis size: $\sigma_0\approx\num{0.006}$, \num{0.011}, and
+\num{0.018} for the three-, five-, and seven-mode Ritz bases respectively (here
+the number refers to the Legendre-polynomial trial functions retained; see
+Section~2).  The quadratic onset $\sigma_3\sim\lambda_1\varepsilon^2$ is a
+symmetry-based expectation consistent with the oblate trend.  In the present
+discrete implementation, the artefactual intercept remains comparable to the
+quadratic term for $\varepsilon\lesssim\num{0.5}$, so the clean asymptotic
+regime is the canonical operating range ($\varepsilon\approx\num{0.75}$) rather
+than the near-sphere neighbourhood.
 
 A least-squares fit of $\sigma_3(\varepsilon)=\sigma_0+\lambda_1\varepsilon^2$ to the
 oblate data yields $\sigma_0=\num{0.0074}$ and $\lambda_1=\num{0.034}$; the
@@ -86,13 +95,13 @@ non-zero intercept in this fit is the same discretisation effect described
 above, not a physical floor.
 
 The scientific conclusion therefore rests on the deformation-dependent quadratic
-growth in \eqref{eq:sigma3-expansion}.  Once the oblate deformation exceeds the
-immediate near-sphere interval ($\varepsilon>\num{0.2}$), the oblate branch
-separates the weak inverse direction more effectively than either the
-equivalent-sphere model or the prolate continuation.  Because the artefactual
-intercept raises the near-spherical baseline, the reported conditioning
-improvement at the canonical oblate point is conservative: it understates the
-true gain relative to the correct $\sigma_3(0)=0$ baseline.
+growth in \eqref{eq:sigma3-expansion}.  At the canonical oblate operating point
+($\varepsilon\approx\num{0.745}$), the quadratic term is well above the
+artefactual intercept, so the oblate branch separates the weak inverse direction
+more effectively than either the equivalent-sphere model or the prolate
+continuation.  The reported condition numbers at the canonical oblate point
+($\kappa\approx 69$) are computed directly and are not affected by the
+near-sphere artefact.
 
 The practical meaning is straightforward.  The second flexural mode
 $f_2=\SI{3.95}{\hertz}$ already lies in the low-frequency band used by the
