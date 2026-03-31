@@ -22,19 +22,19 @@
 \begin{abstract}
 We consider the spectral inverse problem for fluid-loaded elastic shells using
 the five-mode flexural map $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.  The
-equivalent-sphere reduction is rank deficient, while the corresponding
-five-mode Ritz discretisation produces a positive near-spherical intercept in
-the smallest singular value that is a numerical artefact rather than a physical
-effect.  Away from the immediate spherical neighbourhood, the oblate branch
-shows clear growth in the weakest sensitivity direction, whereas a prolate
-continuation remains less informative.  For the canonical parameters, the
-equivalent-sphere model gives the numerical shadow
-$\kappa_\mathrm{eq}\approx\num{1.23e10}$, the Ritz sphere gives
-$\kappa_\mathrm{Ritz}=244$, the canonical oblate point gives
-$\kappa_\mathrm{oblate}=\num{69.4}$, and a representative prolate endpoint at
-$c/a=\num{1.5}$ gives $\kappa_\mathrm{prolate}=156$.  Identifiability therefore
-depends on how curvature is redistributed, not merely on the loss of spherical
-symmetry.
+equivalent-sphere reduction is rank deficient ($\sigma_3=0$), and at the exact
+sphere this rank deficiency persists because spherical symmetry forces the two
+geometric Jacobian columns to be proportional.  The positive $\sigma_3$ returned
+by a finite Ritz computation at $a=c$ is a discretisation artefact that grows
+with basis size; the correct near-sphere expansion is
+$\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$ with
+$\lambda_1>0$.  The oblate branch therefore shows quadratic growth in the
+weakest sensitivity direction, reaching
+$\kappa_\mathrm{oblate}=\num{69.4}$ at the canonical geometry, whereas a
+prolate continuation at $c/a=\num{1.5}$ gives $\kappa_\mathrm{prolate}=156$
+with no systematic improvement across the tested range.  Identifiability
+therefore depends on how curvature is redistributed, not merely on the loss of
+spherical symmetry.
 \end{abstract}
 
 \input{sections/introduction.tex}

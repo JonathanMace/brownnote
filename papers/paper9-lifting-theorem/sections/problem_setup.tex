@@ -39,7 +39,9 @@ $\Pi-\omega^2T$ gives the generalised eigenproblem
 from which the resonance frequencies follow as $f_n=\omega_n/(2\pi)$.
 Papers~1 and 8 give the full derivations of $K$ and $M$
 \cite{BrowntoneP1,BrowntoneP8}, but these equations define the forward model
-used here.
+used here.  The Ritz basis comprises five Legendre-polynomial trial functions in
+oblate spheroidal coordinates, one per flexural mode $n=2,\ldots,6$; full
+construction details are given in \cite{BrowntoneP1}.
 
 The inverse variable is the parameter vector
 $\boldsymbol{\theta}=[a,c,E]^\mathsf{T}$.  The spectral data vector is formed
@@ -76,7 +78,10 @@ conditioning metric is
   \kappa=\frac{\sigma_1}{\sigma_3},
 \]
 provided $\sigma_3>0$.  Large $\kappa$ indicates a weakly observable parameter
-combination; $\sigma_3=0$ implies local rank deficiency.
+combination; $\sigma_3=0$ implies local rank deficiency.  In practice, the
+partial derivatives $\partial f_i/\partial\theta_j$ are evaluated by central
+finite differences with relative step
+$\Delta\theta_j/\theta_j=\num{e-4}$.
 
 Three geometry classes are compared.
 \begin{enumerate}
@@ -89,11 +94,14 @@ Three geometry classes are compared.
   $\varepsilon=\sqrt{1-c^2/a^2}$ and the aspect-ratio offset
   $\delta=1-c/a$, and examine the near-spherical limit together with the
   canonical oblate point.
-  \item \textbf{Prolate Ritz family.}  The same five-mode diagnostic is applied
-  to a prolate continuation away from the sphere, so that the effect of
-  geometry class can be separated from the mere fact of leaving
-  $\mathrm{SO}(3)$ symmetry behind.  Along this branch $c>a$, the enclosed
-  volume and wall thickness are fixed, and the path is parameterised by
-  $c/a\in[\num{1.0},\num{1.5}]$ with $a$ decreasing and $c$ increasing subject
-  to $a^2c=\text{const}=R_\mathrm{eq}^3$.
+  \item \textbf{Prolate Ritz family.}  The prolate continuation holds volume
+  $V=(4\pi/3)a^2c$ and wall thickness $h$ fixed while increasing $c/a$ beyond
+  unity.  Given the canonical values $a_0=\SI{0.18}{\metre}$ and
+  $c_0=\SI{0.12}{\metre}$, the prolate branch sets
+  $a=a_0(c_0/c)^{1/2}$ with $c$ ranging from $c_0$ to
+  $\num{1.5}\,a_0=\SI{0.27}{\metre}$, yielding $c/a$ from \num{1.0} (sphere
+  limit, approached from below) to approximately \num{1.5}.  All material
+  parameters ($E$, $\nu$, $\rho_w$, $\rho_f$, $K_f$, $\eta$) remain at
+  canonical values.  This construction separates the effect of geometry class
+  from the mere fact of leaving $\mathrm{SO}(3)$ symmetry behind.
 \end{enumerate}
