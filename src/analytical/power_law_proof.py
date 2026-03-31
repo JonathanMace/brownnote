@@ -1,11 +1,12 @@
-"""Analytical proof that κ(J_s) scales as a power law in eccentricity.
+"""Numerical tools for analysing near-spherical sensitivity behaviour (σ_min
+vs eccentricity) of the Ritz Jacobian condition number.
 
-**Theorem** (Power-law conditioning of the scaled Ritz Jacobian):
-
-    κ(J_s) ≈ C · ε^{-α}
-
-over the practical eccentricity range, with the **theoretical exponent
-α = 2** arising from the ε² expansion of the oblate spheroid metric.
+Note: an earlier version of this module claimed an analytical power-law proof
+(κ ~ C·ε⁻²).  That claim has been **disproved**: the Ritz model exhibits a
+finite curvature floor (κ_floor ≈ 269 for 5-mode Ritz) that prevents true
+power-law divergence.  The correct picture is a regular expansion
+σ_min(ε) = σ₀ + λ₁ε² + O(ε⁴), where σ₀ (the curvature-channel floor)
+dominates everywhere because ε_c ≈ 1.48 > 1.
 
 Physical mechanism
 ------------------
@@ -31,11 +32,9 @@ At small ε > 0:
   - σ_min(ε) = σ_min^curv + λ₁ε² + O(ε⁴), where σ_min^curv is the
     curvature channel floor and λ₁ε² is the shape correction.
 
-In the regime where λ₁ε² ≫ σ_min^curv:
-    κ(ε) ≈ σ_max / (λ₁ε²) = C · ε^{-2}
-
-The empirical fitted α over any finite range may differ from 2 due to the
-curvature floor (which rounds off the divergence) and mode crossings.
+Because the crossover eccentricity ε_c = √(σ₀/λ₁) ≈ 1.48 exceeds unity,
+the curvature channel (σ₀) dominates at all physically realisable
+eccentricities and no asymptotic power-law regime is accessible.
 
 References
 ----------
@@ -239,8 +238,9 @@ def sigma_min_expansion(
         σ_min(ε) = σ₀ + λ₁ε² + λ₂ε⁴
 
     The curvature-channel floor σ₀ and shape-channel coefficient λ₁
-    determine the crossover eccentricity ε_c = √(σ₀/λ₁) and the
-    asymptotic power law κ ~ (σ_max/λ₁)·ε^{-2}.
+    determine the crossover eccentricity ε_c = √(σ₀/λ₁).  Because
+    ε_c ≈ 1.48 > 1, the curvature floor dominates at all physical
+    eccentricities and no power-law regime is reached.
 
     Parameters
     ----------
@@ -311,7 +311,7 @@ def sigma_min_expansion(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  Numerical power-law fit and verification
+#  Numerical power-law fit (empirical; does not imply true power-law scaling)
 # ═══════════════════════════════════════════════════════════════════════════
 
 def fit_power_law(
@@ -320,15 +320,15 @@ def fit_power_law(
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
     zeta_values: np.ndarray | None = None,
 ) -> dict:
-    """Fit κ vs ε to power law using the existing kappa_vs_eccentricity.
+    """Fit κ vs ε to a power-law form using the existing kappa_vs_eccentricity.
 
-    Uses the same fitting methodology as the existing code for
-    consistency with Paper 8's numerical results.
+    This is an empirical log-log regression, not evidence of true power-law
+    scaling.  The curvature floor prevents genuine ε⁻² divergence.
 
     Returns
     -------
     dict
-        'alpha_fit', 'C_fit', 'r_squared': fitted power law parameters
+        'alpha_fit', 'C_fit', 'r_squared': fitted power-law parameters
         'eps', 'kappa': raw sweep data
     """
     if params is None:
@@ -357,12 +357,12 @@ def verify_power_law(
     modes: tuple[int, ...] = (2, 3, 4, 5, 6),
     inversion_params: tuple[str, ...] = INVERSION_PARAMS,
 ) -> dict:
-    """Full verification: compare analytical prediction against numerics.
+    """Compare the σ_min expansion model against full numerical κ(ε).
 
-    Combines the σ_min expansion analysis with the numerical power-law
-    fit to provide a complete picture:
-    1. Analytical α = 2 from ε² expansion
-    2. Fitted α from log-log regression
+    Combines the σ_min expansion analysis with an empirical power-law
+    fit to quantify the role of the curvature floor:
+    1. Theoretical α = 2 from ε² expansion (would hold if σ₀ = 0)
+    2. Fitted α from log-log regression (attenuated by curvature floor)
     3. Predicted κ(ε) = σ_max(0) / (σ₀ + λ₁ε²)
     4. Relative errors between prediction and numerical data
 
@@ -429,7 +429,7 @@ def extract_jacobian_perturbation(
     Fits  J_s(ε) = J_s(0) + ε² · δJ_s + ε⁴ · δ²J_s  entry-by-entry.
 
     The perturbation δJ_s breaks the sphere proportionality at rate ε²,
-    which is the mechanism for the power law.  The projection of δJ_s
+    providing the shape channel of identifiability.  The projection of δJ_s
     onto the null space of J_s(0) determines the recovery of σ_min.
 
     Returns
@@ -499,23 +499,24 @@ def extract_jacobian_perturbation(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  Complete analytical proof
+#  Complete near-spherical sensitivity analysis
 # ═══════════════════════════════════════════════════════════════════════════
 
 def prove_power_law(
     params: dict | None = None,
     modes: tuple[int, ...] = (2, 3, 4, 5, 6),
 ) -> dict:
-    """Execute the complete power-law proof.
+    """Run the complete near-spherical sensitivity analysis.
 
-    Assembles all four propositions:
+    Assembles all four components:
     1. Sphere rank deficiency
-    2. Ritz curvature channel
+    2. Ritz curvature channel (finite floor)
     3. ε² expansion of σ_min
-    4. Power-law assembly κ ~ C·ε^{-2}
+    4. Empirical power-law fit (attenuated by curvature floor)
 
-    Returns a dict with all intermediate results and the final
-    proof parameters (α, C).
+    Returns a dict with all intermediate results.  Note: 'proof_valid'
+    is retained for backward compatibility but indicates consistency of
+    the numerical analysis, not validity of any power-law theorem.
     """
     if params is None:
         params = dict(CANONICAL_ABDOMEN)
@@ -561,17 +562,19 @@ def prove_power_law(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  LaTeX-formatted proof summary
+#  LaTeX-formatted analysis summary
 # ═══════════════════════════════════════════════════════════════════════════
 
 def proof_latex_summary(
     params: dict | None = None,
     modes: tuple[int, ...] = (2, 3, 4, 5, 6),
 ) -> str:
-    """Generate a LaTeX-formatted proof for inclusion in Paper 8.
+    """Generate a LaTeX-formatted analysis summary for inclusion in Paper 8.
 
-    Returns a string containing a complete Proposition + Proof environment
-    with all numerical values filled in from the computation.
+    Returns a string containing a Proposition + discussion environment
+    with all numerical values filled in from the computation.  The
+    proposition describes the curvature-floor–dominated conditioning,
+    not a power-law theorem.
     """
     result = prove_power_law(params, modes)
     ci = result["curvature_integrals"]
