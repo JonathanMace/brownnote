@@ -1,6 +1,41 @@
 \section{Discussion}
 
-% Relate the theorem back to Kac's question, clarify the local and finite-mode
-% limits of the inverse-problem claim, and discuss broader applicability beyond
-% the Browntone shell family.
-% TODO: Draft this section
+The main lesson is geometric and local.  We are not proving that spectral data
+globally determine shell shape, nor even that every non-spherical perturbation
+helps.  We are showing that, for the present five-mode inverse map, the
+recoverability of $(a,c,E)$ depends strongly on \emph{which} geometry family is
+used to leave the spherical limit.  The difference between
+$\kappa_\mathrm{oblate}=\num{69.4}$ and
+$\kappa_\mathrm{prolate}=\numrange{561}{729}$ is too large to dismiss as a
+numerical quirk.
+
+The physical explanation is mode-dependent curvature sampling.  In the Ritz
+model, different flexural modes weight the equatorial and polar regions
+differently in the strain-energy integrals.  Oblate deformation redistributes
+curvature in a way that makes the $a$- and $c$-sensitivity columns less nearly
+parallel, so the smallest singular value grows.  The equivalent-sphere reduction
+suppresses that mechanism completely because both geometric variables are routed
+through $R_\mathrm{eq}$ alone.  The prolate family preserves the formal break
+from spherical symmetry but does not generate an equally useful separation of
+sensitivity directions.  Symmetry breaking, in short, is not a universal
+charity.
+
+This asymmetry also clarifies the relation between the companion papers.
+Paper~1 motivates the abdominal shell as an oblate, fluid-loaded structure whose
+low-order flexural modes sit in the infrasonic band \cite{BrowntoneP1}.  Paper~7
+shows why an equivalent-sphere model can still be serviceable when the
+engineering question is dominated by one effective stiffness scale
+\cite{BrowntoneP7}.  Paper~8 demonstrates that the moment one asks for joint
+recovery of geometry and material parameters, that reduction can become the
+problem rather than the cure \cite{BrowntoneP8}.  The present note merely trims
+the rhetoric to match the evidence.
+
+Several limits should be kept in view.  The analysis is local, based on the
+Jacobian at a chosen operating point.  It uses five low-order flexural modes,
+not a complete spectrum.  It is tied to the present shell parameterisation and
+to the fluid-loaded Ritz formulation grounded in classical shell and
+fluid--structure theory \cite{Lamb1882,JungerFeit1986}.  None of this implies
+that prolate bodies are unrecoverable under all measurements, only that the
+current spectral map does not improve appreciably when the geometry is made
+prolate.  If one insists on inverting such cases, additional observables or
+external priors will need to do some honest work.

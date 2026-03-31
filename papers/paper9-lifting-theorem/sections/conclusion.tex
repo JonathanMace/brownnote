@@ -1,6 +1,19 @@
 \section{Conclusion}
 
-% Summarise the theorem, its corollaries, and the shell-family interpretation,
-% together with the paper's implications for symmetry-broken spectral
-% identifiability.
-% TODO: Draft this section
+We have rewritten this paper around the result that is actually supported.
+Within the five-mode spectral inverse problem for a fluid-filled shell, the
+equivalent-sphere reduction is singular in exact arithmetic and appears
+numerically as
+$\kappa_\mathrm{sphere}\approx\num{1.37e10}$.  Retaining the oblate curvature
+field produces a finite near-spherical floor
+$\kappa_\mathrm{floor}\approx\num{269}$ because $\sigma_0>0$, and the canonical
+oblate geometry improves that further to
+$\kappa_\mathrm{oblate}=\num{69.4}$.  A prolate continuation does not provide a
+matching benefit, remaining at
+$\kappa_\mathrm{prolate}=\numrange{561}{729}$.
+
+The conclusion is therefore specific rather than universal: identifiability in
+this spectral inverse problem is geometry-dependent.  Oblate curvature
+redistribution lifts the weak inverse direction; prolate distortion does not
+deliver the same improvement.  That is a useful result, and unlike the abandoned
+universal theorem, it survives contact with the calculations.
