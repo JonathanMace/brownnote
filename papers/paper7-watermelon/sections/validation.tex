@@ -11,7 +11,7 @@ We benchmark the forward model against published acoustic measurements
 on watermelons and other fruits.  These comparisons are
 \emph{consistency checks}, not controlled experimental validation:
 the published studies report resonant frequencies for fruits of varied
-and often incompletely documented geometry and ripeness, and the model
+and often incompletely documented geometry and postharvest condition, and the model
 parameters used here are assumed from literature ranges rather than
 measured on the same specimens.  We therefore
 construct model predictions using the reported fruit dimensions where
@@ -21,13 +21,13 @@ available, supplemented by canonical material properties
 \subsubsection{Yamamoto et al.\ (1980): watermelon tap-tones}
 
 Yamamoto et al.~\cite{Yamamoto1980} measured tap-tone frequencies for
-intact watermelons spanning a range of sizes and ripeness states.  They
+intact watermelons spanning a range of sizes and quality states.  They
 reported resonant frequencies in the range
 \SIrange{80}{180}{\hertz} for fruit with equatorial diameters of
 \SIrange{20}{34}{\centi\metre}.  We evaluate the forward model for
-three representative sizes at the ripe modulus
+three representative sizes at a lower-stiffness modulus
 ($E_{\mathrm{rind}} = \SI{50}{\mega\pascal}$) and three at an
-unripe modulus ($E_{\mathrm{rind}} = \SI{150}{\mega\pascal}$),
+higher-stiffness modulus ($E_{\mathrm{rind}} = \SI{150}{\mega\pascal}$),
 using geometry consistent with their reported dimensions
 (Table~\ref{tab:yamamoto}).
 
@@ -37,8 +37,8 @@ using geometry consistent with their reported dimensions
     reported by Yamamoto et al.~\cite{Yamamoto1980}.  Model geometry is
     chosen to match reported fruit sizes (\emph{measured from literature});
     material properties are set to
-    canonical ripe ($E = \SI{50}{\mega\pascal}$) or unripe
-    ($E = \SI{150}{\mega\pascal}$) values (\emph{assumed from literature
+    a lower-stiffness reference level ($E = \SI{50}{\mega\pascal}$) or a higher-stiffness
+    reference level ($E = \SI{150}{\mega\pascal}$) (\emph{assumed from literature
     range}).  This is a consistency check, not a point-by-point
     validation.}
   \label{tab:yamamoto}
@@ -47,37 +47,37 @@ using geometry consistent with their reported dimensions
     Description & $a$ [m] & $c$ [m] & $h$ [mm] & $E$ [MPa]
       & $f_2^{\mathrm{model}}$ [Hz] & Yamamoto range [Hz] \\
     \midrule
-    Small, ripe     & 0.110 & 0.100 & 13 & 50  & 132 & \multirow{3}{*}{80--120} \\
-    Medium, ripe    & 0.140 & 0.120 & 15 & 50  & 102 & \\
-    Large, ripe     & 0.170 & 0.140 & 17 & 50  &  83 & \\[3pt]
-    Small, unripe   & 0.110 & 0.100 & 15 & 150 & 245 & \multirow{3}{*}{120--180} \\
-    Medium, unripe  & 0.140 & 0.120 & 18 & 150 & 192 & \\
-    Large, unripe   & 0.170 & 0.140 & 20 & 150 & 155 & \\
+    Small, lower stiffness  & 0.110 & 0.100 & 13 & 50  & 132 & \multirow{3}{*}{80--120} \\
+    Medium, lower stiffness & 0.140 & 0.120 & 15 & 50  & 102 & \\
+    Large, lower stiffness  & 0.170 & 0.140 & 17 & 50  &  83 & \\[3pt]
+    Small, higher stiffness & 0.110 & 0.100 & 15 & 150 & 245 & \multirow{3}{*}{120--180} \\
+    Medium, higher stiffness & 0.140 & 0.120 & 18 & 150 & 192 & \\
+    Large, higher stiffness & 0.170 & 0.140 & 20 & 150 & 155 & \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 Three of six predicted frequencies fall within the reported
 experimental range (Table~\ref{tab:yamamoto}): the medium and large
-ripe cases (\SI{102}{\hertz} and \SI{83}{\hertz}, both within
-\SIrange{80}{120}{\hertz}) and the large unripe case
+lower-stiffness cases (\SI{102}{\hertz} and \SI{83}{\hertz}, both within
+\SIrange{80}{120}{\hertz}) and the large higher-stiffness case
 (\SI{155}{\hertz}, within \SIrange{120}{180}{\hertz}).  The remaining
 three predictions systematically overshoot the upper experimental
-bound---the small ripe prediction (\SI{132}{\hertz}) exceeds the
-ripe range by \SI{12}{\hertz}, while the small and medium unripe
+bound---the small lower-stiffness prediction (\SI{132}{\hertz}) exceeds the
+lower-frequency band by \SI{12}{\hertz}, while the small and medium higher-stiffness
 predictions (\SI{245}{\hertz} and \SI{192}{\hertz}) exceed the
-unripe range by \SI{65}{\hertz} and \SI{12}{\hertz}, respectively.
+higher-frequency band by \SI{65}{\hertz} and \SI{12}{\hertz}, respectively.
 The mean absolute deviation from the nearest experimental bound is
 \SI{15}{\hertz} across all six cases (zero for points within range).
 The systematic overprediction for smaller and stiffer fruit suggests
 that the canonical moduli assumed here
-($E = \SI{150}{\mega\pascal}$ for unripe) may exceed the actual
+($E = \SI{150}{\mega\pascal}$ for the higher-stiffness cases) may exceed the actual
 values for the cultivars studied by Yamamoto et al.\ in 1980, or
 that the equivalent-sphere approximation introduces a size-dependent
 bias.  Nevertheless, the qualitative scaling---larger fruit yields
 lower frequency, stiffer rind yields higher frequency---is captured
 correctly, and the model reproduces the correct order of magnitude
-across the full size--ripeness matrix.
+across the full size--stiffness matrix.
 
 \subsubsection{Sadrnia et al.\ (2008): vibration-based quality prediction in watermelon}
 
@@ -88,7 +88,7 @@ performance rather than the full geometric and material information
 needed for a point-by-point inversion.  A strict quantitative overlay is
 therefore not possible from the published data alone.  Even so, their
 central observation---that low-frequency structural vibration of the
-intact fruit carries ripeness information---is entirely consistent with
+intact fruit carries firmness-related information---is entirely consistent with
 the present model, which identifies the informative observable as the
 lowest flexural resonance of a fluid-loaded shell.
 
@@ -128,7 +128,7 @@ In practice, fruit geometry is measured approximately---for example, with
 callipers, from a photograph, or by mass--density inference.  We quantify
 the effect of geometric measurement error on the inverted modulus through
 a Monte Carlo simulation.  The true tap-tone frequency~$f_2$ is computed
-from the canonical ripe parameters
+from the canonical reference parameters
 ($E_{\mathrm{rind}} = \SI{50}{\mega\pascal}$, yielding
 $f_2 = \SI{89.9}{\hertz}$), and then the inversion is performed
 10\,000~times with each geometric parameter ($a$, $c$, $h$) independently
@@ -140,16 +140,16 @@ modulus is unbiased
 a standard deviation of \SI{6.8}{\mega\pascal}
 (CoV~$= \SI{13.5}{\percent}$), with a \SI{95}{\percent} confidence
 interval of $[\SI{38.5}{\mega\pascal}, \SI{64.1}{\mega\pascal}]$.  This
-level of uncertainty is acceptable for ripeness classification: the
+level of uncertainty is acceptable for stiffness discrimination pending calibration: the
 $\pm\SI{10}{\percent}$ geometric error maps to a $\pm\SI{14}{\percent}$
 modulus uncertainty, which is smaller than the factor-of-four modulus
-change between ripeness categories (Table~\ref{tab:forward_results}).
+change between the constructed high- and low-stiffness scenarios (Table~\ref{tab:forward_results}).
 
 \begin{table}[t]
   \centering
   \caption{Effect of $\pm\SI{10}{\percent}$ geometric measurement
     uncertainty on the inverted rind modulus, evaluated by Monte Carlo
-    simulation ($n = 10{,}000$) for two ripeness stages.}
+    simulation ($n = 10{,}000$) for two representative stiffness levels.}
   \label{tab:geom_uncertainty}
   \begin{tabular}{lccccc}
     \toprule
@@ -158,14 +158,14 @@ change between ripeness categories (Table~\ref{tab:forward_results}).
       $\sigma_E$ [MPa] & CoV [\%] &
       \SI{95}{\percent} CI [MPa] \\
     \midrule
-    Ripe   &  50 &  50.3 &  6.8 & 13.5 & [38.5, 64.1] \\
-    Unripe & 200 & 201.3 & 27.7 & 13.7 & --- \\
+    Reference stiffness &  50 &  50.3 &  6.8 & 13.5 & [38.5, 64.1] \\
+    High stiffness      & 200 & 201.3 & 27.7 & 13.7 & --- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 We also examine the individual sensitivity of $f_2$ to each geometric
-parameter.  For the canonical ripe watermelon
+parameter.  For the canonical reference watermelon
 ($f_2 = \SI{89.9}{\hertz}$), a $\pm\SI{10}{\percent}$ perturbation in
 each parameter yields:
 \begin{itemize}

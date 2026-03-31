@@ -63,15 +63,16 @@ throughout this study are given in Table~\ref{tab:canonical}.
 
 \begin{table}[t]
   \centering
-  \caption{Canonical parameters for the Crimson Sweet watermelon at
-    optimal ripeness.  Geometry ($a$, $c$, $h$) and densities are
+  \caption{Canonical parameters for the Crimson Sweet watermelon at the
+    reference stiffness state used throughout this paper.  Geometry ($a$, $c$, $h$) and densities are
     representative values drawn from Sadrnia et
     al.~\cite{Sadrnia2008} and De Belie et al.~\cite{DeBelieetal2000}.
-    The rind modulus is an assumed mid-range value for ripe fruit based
+    The rind modulus is an assumed mid-range value for a representative
+    market-ready fruit based
     on the ranges reported in those sources.  Poisson's ratio and turgor
     pressure are assumed from the literature range for soft biological
     tissues.  The flesh bulk modulus is taken as a standard value for
-    water-like media.  The loss tangent is representative of ripe
+    water-like media.  The loss tangent is representative of moderately softened
     rind tissue.}
   \label{tab:canonical}
   \begin{tabular}{llccc}
@@ -83,7 +84,7 @@ throughout this study are given in Table~\ref{tab:canonical}.
     Aspect ratio       & $\zeta = c/a$       & 0.78  & --- & Derived \\
     Equivalent radius  & $R_{\mathrm{eq}}$   & 0.145 & m & Derived \\
     Rind thickness     & $h$                 & 15    & mm & Lit.$^a$ \\
-    Rind modulus (ripe) & $E_{\mathrm{rind}}$ & 50   & MPa & Assumed$^b$ \\
+    Rind modulus (reference) & $E_{\mathrm{rind}}$ & 50   & MPa & Assumed$^b$ \\
     Poisson's ratio    & $\nu$               & 0.40  & --- & Assumed$^c$ \\
     Rind density       & $\rho_w$            & 1050  & kg/m$^3$ & Lit.$^a$ \\
     Flesh density      & $\rho_f$            & 950   & kg/m$^3$ & Lit.$^a$ \\
@@ -94,7 +95,7 @@ throughout this study are given in Table~\ref{tab:canonical}.
     \multicolumn{5}{l}{\footnotesize $^a$\,Measured from literature
       \cite{Sadrnia2008, DeBelieetal2000}.} \\
     \multicolumn{5}{l}{\footnotesize $^b$\,Assumed mid-range value
-      for ripe fruit from reported literature ranges.} \\
+      for a representative market-ready fruit from reported literature ranges.} \\
     \multicolumn{5}{l}{\footnotesize $^c$\,Assumed from literature
       range for soft biological tissues.} \\
     \multicolumn{5}{l}{\footnotesize $^d$\,Standard value for
@@ -133,7 +134,7 @@ where the second term represents the added mass of the entrained fluid
 for mode~$n$ \cite{Junger1986, lamb1882}.  Note that
 $\rho_{\mathrm{eff}}$ has units of
 \si{\kilogram\per\metre\squared} (mass per unit area).  To construct a
-dimensionless group (\S\ref{sec:Pi_ripe}), we instead use
+dimensionless group (\S\ref{sec:Pi_geom}), we instead use
 the volumetric effective density
 \begin{equation}
   \tilde{\rho}_{\mathrm{eff}} = \frac{\rho_w\, h}{R_{\mathrm{eq}}} + \rho_f,
@@ -141,7 +142,7 @@ the volumetric effective density
 \end{equation}
 which has units of \si{\kilogram\per\metre\cubed}.  All occurrences of
 $\rho_{\mathrm{eff}}$ in the dimensionless analysis
-(Eqs.~\ref{eq:Pi_ripe}--\ref{eq:Pi_ripe_universal}) refer to this
+(Eqs.~\ref{eq:Pi_geom}--\ref{eq:Pi_geom_universal}) refer to this
 volumetric form.
 
 The dominant tap-tone mode is the lowest flexural mode, $n = 2$.  The
@@ -199,7 +200,7 @@ shell elongates along one axis while contracting along the
 perpendicular axis.  Experimentally, this mode would be identified as
 the lowest-frequency spectral peak in the impulse response of the
 tapped fruit (typically obtained via FFT of a microphone or
-accelerometer signal).  For watermelons in the ripe range, this
+accelerometer signal).  For watermelons in the reference stiffness range, this
 corresponds to a frequency of approximately \SIrange{80}{110}{\hertz}
 (Table~\ref{tab:forward_results}).  Higher flexural modes ($n = 3, 4$)
 produce additional spectral peaks at higher frequencies but carry less
@@ -208,7 +209,7 @@ would require multi-point vibration measurement (e.g.\ scanning laser
 Doppler vibrometry), which is beyond the scope of the present
 analytical study.
 
-For the canonical ripe watermelon ($n = 2$, $h = \SI{15}{\milli\metre}$,
+For the canonical reference watermelon ($n = 2$, $h = \SI{15}{\milli\metre}$,
 $R_{\mathrm{eq}} = \SI{0.145}{\metre}$), the bending and membrane
 terms both scale linearly with~$E_{\mathrm{rind}}$, whereas the
 pre-stress term is independent of~$E$.  This separation underpins the
@@ -254,8 +255,8 @@ Equation~\eqref{eq:inversion} is algebraically exact within the
 equivalent-sphere model (which itself is an approximation to the true
 oblate geometry): the
 round-trip error $|E_{\mathrm{inv}} - E_{\mathrm{true}}| /
-E_{\mathrm{true}}$ is less than \SI{0.01}{\percent} for all ripeness
-stages tested (\S\ref{sec:forward}).
+E_{\mathrm{true}}$ is less than \SI{0.01}{\percent} for all constructed
+stiffness scenarios tested (\S\ref{sec:forward}).
 
 The condition number of this inversion with respect to~$f_2^2$ is unity,
 since the mapping $f_2^2 \mapsto E_{\mathrm{rind}}$ is linear.  The
@@ -266,60 +267,60 @@ amplification is inherent to any square-law inversion and is confirmed
 numerically in the Monte Carlo analysis of \S\ref{sec:geom_uncertainty}.
 
 % =============================================================================
-% 2.4  Dimensional analysis and the ripeness parameter
+% 2.4  Dimensional analysis and the geometric invariant
 % =============================================================================
 \subsection{Dimensionless geometric invariant}
-\label{sec:Pi_ripe}
+\label{sec:Pi_geom}
 
 To collapse predictions across cultivars, we define the dimensionless
 group
 \begin{equation}
-  \Pi_{\mathrm{ripe}} = f_2 \, R_{\mathrm{eq}}
+  \Pi_{\mathrm{geom}} = f_2 \, R_{\mathrm{eq}}
     \sqrt{\frac{\tilde{\rho}_{\mathrm{eff}}}{E_{\mathrm{rind}}}},
-  \label{eq:Pi_ripe}
+  \label{eq:Pi_geom}
 \end{equation}
 where $\tilde{\rho}_{\mathrm{eff}} = \rho_w h / R_{\mathrm{eq}} +
 \rho_f$ is the volumetric effective density
 (Eq.~\ref{eq:rho_eff_vol}; units \si{\kilogram\per\metre\cubed}),
-ensuring that $\Pi_{\mathrm{ripe}}$ is dimensionless.
+ensuring that $\Pi_{\mathrm{geom}}$ is dimensionless.
 From Eq.~\eqref{eq:f2_squared}, this parameter evaluates to
 \begin{equation}
-  \Pi_{\mathrm{ripe}} = \frac{1}{2\pi}
+  \Pi_{\mathrm{geom}} = \frac{1}{2\pi}
     \sqrt{\frac{(K_{\mathrm{bend}}^{(0)} + K_{\mathrm{memb}}^{(0)})
     \cdot R_{\mathrm{eq}}^2 \cdot \tilde{\rho}_{\mathrm{eff}}}
     {\rho_{\mathrm{eff}}}}
-  \label{eq:Pi_ripe_universal}
+  \label{eq:Pi_geom_universal}
 \end{equation}
 for fixed geometry (neglecting the pre-stress contribution).
 
 A key observation is that $E_{\mathrm{rind}}$ cancels from
-$\Pi_{\mathrm{ripe}}$ \emph{by construction}: since $f_2 \propto
+$\Pi_{\mathrm{geom}}$ \emph{by construction}: since $f_2 \propto
 \sqrt{E_{\mathrm{rind}}}$, the modulus appears in both the numerator
 ($f_2$) and denominator ($\sqrt{E_{\mathrm{rind}}}$) and divides out.
 This cancellation is exact only when the geometry---including the rind
 thickness~$h$---is held fixed while $E_{\mathrm{rind}}$ varies.
-Consequently, $\Pi_{\mathrm{ripe}}$ is \emph{not} invariant across
-ripeness stages in which both~$E$ and~$h$ change simultaneously
-(as occurs during biological ripening;
+Consequently, $\Pi_{\mathrm{geom}}$ is \emph{not} invariant across
+constructed softening scenarios in which both~$E$ and~$h$ change simultaneously
+(as may occur during biological ripening;
 Table~\ref{tab:forward_results}).
-Rather, $\Pi_{\mathrm{ripe}}$ is a
+Rather, $\Pi_{\mathrm{geom}}$ is a
 \emph{geometric invariant} that characterises the shell--fluid system
 at a given geometry, independently of the elastic modulus.
 
-The practical utility of $\Pi_{\mathrm{ripe}}$ lies in
+The practical utility of $\Pi_{\mathrm{geom}}$ lies in
 cultivar-independent calibration: it collapses different cultivar
 \emph{geometries} onto a single calibration constant.  Once its value is
 known for a given geometry, any measured $f_2$ can be mapped to
-$E_{\mathrm{rind}}$ via rearrangement of Eq.~\eqref{eq:Pi_ripe},
+$E_{\mathrm{rind}}$ via rearrangement of Eq.~\eqref{eq:Pi_geom},
 without detailed knowledge of the flesh properties or internal pressure.
 The universality is across cultivars (different geometries collapsing
-onto a common constant), not across ripeness states---the latter would
-require that the geometry remain fixed during ripening, which is only
+onto a common constant), not across biological quality states---the latter would
+require that the geometry remain fixed during softening, which is only
 approximately true for $a$ and~$c$ but not for~$h$.
 
 For the four cultivars considered in this study (Crimson Sweet, Sugar
 Baby, Charleston Gray, and Seedless Tri-X~313),
-$\Pi_{\mathrm{ripe}} = 0.062 \pm 0.002$ (CoV~$= \SI{3.3}{\percent}$;
-see Table~\ref{tab:Pi_ripe} in \S\ref{sec:universal_curve}).  This
+$\Pi_{\mathrm{geom}} = 0.062 \pm 0.002$ (CoV~$= \SI{3.3}{\percent}$;
+see Table~\ref{tab:Pi_geom} in \S\ref{sec:universal_curve}).  This
 tight collapse confirms that the dimensionless group effectively
 normalises out the dominant cultivar-specific geometric variation.
