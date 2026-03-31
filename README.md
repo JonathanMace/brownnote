@@ -22,7 +22,7 @@ Ten papers. Four target journals. Eight submission-ready with complete packages,
 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
-| 1 | **The Brown Note** | *JSV* | Submission-ready (46 pp) | R ≈ 3.3 × 10⁴ — the resonance is real; the acoustic path to it is not | [PDF](papers/paper1-brown-note/drafts/draft_2026-03-30_0339.pdf) |
+| 1 | **The Brown Note** | *JSV* | Submission-ready (46 pp) | R ≈ 3.3 × 10⁴ — the resonance is real; the acoustic path to it is not | [PDF](papers/paper1-brown-note/drafts/draft_2026-03-31_0940.pdf) |
 | 2 | **Gas Pockets** | *JASA* | Submission-ready (16 pp) | Tissue-constrained bubbles couple 35–100× better than the whole cavity | [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-30_2332.pdf) |
 
 ### Act II — The Evidence
