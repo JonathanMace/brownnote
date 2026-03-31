@@ -1,4 +1,10 @@
-\documentclass[review]{elsarticle}
+% ====================================================================
+%  Paper 5 — What Pitch Is a Growling Stomach?
+%  Working draft — standard article class (JASA initial submission)
+% ====================================================================
+\documentclass[12pt]{article}
+
+% --- Packages ---
 \usepackage[margin=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -11,6 +17,7 @@
 \usepackage{siunitx}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{natbib}
 \usepackage{microtype}
 \usepackage[pdfencoding=auto,psdextra]{hyperref}
 \usepackage{lineno}
@@ -19,23 +26,23 @@
 \AtBeginDocument{\hypersetup{pageanchor=true}}
 \sisetup{per-mode=symbol, group-separator={,}}
 \linenumbers
-\journal{The Journal of the Acoustical Society of America}
 
 \begin{document}
-\begin{frontmatter}
 
 \title{What pitch is a growling stomach? A unified multi-mode acoustic model of borborygmi}
 
-\author[msr]{Jonathan Mace\corref{cor1}}
-\cortext[cor1]{Corresponding author}
-\ead{jonathanmace@microsoft.com}
+\author{%
+  Jonathan Mace\textsuperscript{1,*},
+  Brian R.\ Mace\textsuperscript{2}\\[4pt]
+  \small \textsuperscript{1}Microsoft Research, Redmond, WA, United States\\
+  \small \textsuperscript{2}Acoustics Research Centre, Department of Mechanical and
+         Mechatronics Engineering, University of Auckland, Auckland, New Zealand\\[2pt]
+  \small \textsuperscript{*}Corresponding author: jonathanmace@microsoft.com%
+}
 
-\author[auckland]{Brian R.\ Mace}
-\ead{b.mace@auckland.ac.nz}
+\date{}
 
-\affiliation[msr]{organization={Microsoft Research}, city={Redmond, WA}, country={United States}}
-\affiliation[auckland]{organization={Acoustics Research Centre, Department of Mechanical and
-    Mechatronics Engineering, University of Auckland}, city={Auckland}, country={New Zealand}}
+\maketitle
 
 \begin{abstract}
 Borborygmi---the rumbling and gurgling sounds of the gastrointestinal
@@ -58,12 +65,10 @@ physics-based tool for interpreting auscultatory findings and designing acoustic
 monitoring systems for gastrointestinal motility assessment.
 \end{abstract}
 
-\begin{keyword}
-borborygmi \sep bowel sounds \sep Minnaert resonance \sep bubble acoustics \sep
-gastrointestinal acoustics \sep Helmholtz resonator
-\end{keyword}
+\noindent\textbf{Keywords:} borborygmi, bowel sounds, Minnaert resonance, bubble acoustics,
+gastrointestinal acoustics, Helmholtz resonator
 
-\end{frontmatter}
+\bigskip
 
 %% ===================================================================
 %% I. INTRODUCTION
@@ -774,7 +779,7 @@ model.  Publisher guidelines preclude listing it as a co-author, a policy
 the model accepts with the quiet dignity of someone who has read the terms
 of service and knows better than to argue.
 
-\bibliographystyle{elsarticle-num}
+\bibliographystyle{plainnat}
 \bibliography{references}
 
 \end{document}
