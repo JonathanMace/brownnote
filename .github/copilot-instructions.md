@@ -209,22 +209,36 @@ See the `compile-paper` skill for compilation instructions.
 | `mesh-convergence` | FEA mesh convergence with Richardson extrapolation and GCI |
 | `run-simulation` | Full mesh→solve→postprocess simulation pipeline |
 | `submit-paper` | Pre-submission checklist for journal manuscripts |
+| `track-papers` | Bootstrap per-session SQL tracking for paper status and TODOs |
 | `legacy-review` | Convene Distinguished Advisory Board for strategic impact evaluation |
 
 
 ## Publication Pipeline
 
-| Paper | Venue | Status | Location |
-|-------|-------|--------|----------|
-| Paper 1: Brown Note | JSV | Submission-ready (46pp) | `papers/paper1-brown-note/` |
-| Paper 2: Gas Pockets | JASA | ACCEPT, submission-ready (16pp) | `papers/paper2-gas-pockets/` |
-| Paper 3: Scaling Laws | JSV Short | Under revision (8pp) | `papers/paper3-scaling-laws/` |
-| Paper 4: Bladder Resonance | JSV/J Biomech | Minor revision addressed | `papers/paper4-bladder/` |
-| Paper 5: Borborygmi | JASA | ACCEPTED | `papers/paper5-borborygmi/` |
-| Paper 6: Sub-bass Perception | JASA | ACCEPT (R2 fixes applied) | `papers/paper6-sub-bass/` |
-| Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | `papers/paper7-watermelon/` |
-| Paper 8: Kac Identifiability | IPSE (under consideration) | Submission-ready (29pp) | `papers/paper8-kac/` |
-| Paper 9: Lifting Theorem | JSV Short | Scaffolded | `papers/paper9-lifting-theorem/` |
+| Paper | Venue | Status | Stale Values | Submission Pkg | Location |
+|-------|-------|--------|:---:|:---:|----------|
+| Paper 1: Brown Note | JSV | Submission-ready (46pp) | 0 | ✅ | `papers/paper1-brown-note/` |
+| Paper 2: Gas Pockets | JASA | Needs stale fix (16pp) | 1 | ❌ | `papers/paper2-gas-pockets/` |
+| Paper 3: Scaling Laws | JSV Short | Needs stale fix (8pp) | 1 | ❌ | `papers/paper3-scaling-laws/` |
+| Paper 4: Bladder Resonance | JSV | Needs stale fix (27pp) | 3 | ❌ | `papers/paper4-bladder/` |
+| Paper 5: Borborygmi | JASA | Text clean, needs pkg | 0 | ❌ | `papers/paper5-borborygmi/` |
+| Paper 6: Sub-bass Perception | JASA | Needs stale fix (18pp) | 3 | ❌ | `papers/paper6-sub-bass/` |
+| Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ⚠️ | `papers/paper7-watermelon/` |
+| Paper 8: Kac Identifiability | IPSE/JSV (TBD) | Needs submission pkg (29pp) | 0 | ❌ | `papers/paper8-kac/` |
+| Paper 9: Lifting Theorem | JSV Short | Skeleton only | 0 | ❌ | `papers/paper9-lifting-theorem/` |
+| Paper 10: Capstone | Proc Roy Soc A | Not started | — | — | (does not exist yet) |
+
+**Stale values** are pre-Breit-Wigner numbers that must be corrected before
+submission. See the `track-papers` skill for the full list of stale patterns.
+
+## Paper Tracking
+
+At the start of every session, bootstrap the paper tracking system using the
+`track-papers` skill. This creates SQL tables (`papers`, `paper_todos`) that
+provide queryable per-paper status, stale value counts, submission readiness,
+and granular TODO items with file:line references. The Publication Pipeline
+table above is the persistent human-readable summary; SQL is the working
+tool within a session. **Keep both in sync.**
 
 ## The Academic Calendar
 
