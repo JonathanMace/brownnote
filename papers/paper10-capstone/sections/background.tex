@@ -13,4 +13,193 @@
 \section{Background}
 \label{sec:background}
 
-% TODO: Draft contribution summary for Papers 1--8 as a coherent narrative
+\subsection{Shell-model overview}
+
+The companion papers share a common forward model: a fluid-filled
+viscoelastic shell whose undeformed midsurface is represented, to leading
+order, as an oblate spheroid with semi-major axis $a$ and semi-minor axis
+$c$.  The modelling strategy follows the classical shell-acoustics tradition
+from Lamb's treatment of elastic-shell modal families~\cite{lamb1882},
+through Love--Kirchhoff shell theory~\cite{Love1927}, to later
+fluid--structure formulations in which structural inertia, fluid loading, and
+curvature appear on equal footing~\cite{Junger1986}.  Paper~1 adapted that
+framework to the human abdomen and used a Rayleigh--Ritz approximation to
+retain the features that matter for the present programme: curvature, wall
+compliance, internal loading, and mode shape~\cite{BrowntoneP1}.  The
+capstone does not repeat that derivation.  It uses the resulting structure as
+the common language in which the subsequent applications can be compared.
+
+In schematic form, if $\mathbf{q}$ denotes the vector of Ritz amplitudes, the
+kinetic and potential energies are written as
+\begin{equation}
+T = \frac{1}{2}\dot{\mathbf{q}}^{\mathsf T}
+\left(\mathbf{M}_{s} + \mathbf{M}_{f}\right)\dot{\mathbf{q}},
+\qquad
+V = \frac{1}{2}\mathbf{q}^{\mathsf T}\mathbf{K}\mathbf{q},
+\label{eq:background-energies}
+\end{equation}
+where $\mathbf{M}_{s}$ is the shell inertia matrix, $\mathbf{M}_{f}$ is the
+added-mass contribution from the entrained fluid, and $\mathbf{K}$ is the
+effective stiffness matrix arising from membrane strain, bending, and any
+prestress retained in the model.  Stationarity of the Rayleigh quotient then
+leads to the generalised eigenvalue problem
+\begin{equation}
+\left[\mathbf{K} - \omega^{2}\left(\mathbf{M}_{s} + \mathbf{M}_{f}\right)\right]
+\mathbf{q} = 0,
+\label{eq:background-eigenproblem}
+\end{equation}
+where $\omega$ is the angular natural frequency.  For nearly spherical shells
+this structure reduces to the classical modal families identified by
+Lamb~\cite{lamb1882}; for the more general fluid-loaded case, it fits squarely
+within the coupled shell--acoustic framework described by Junger and
+Feit~\cite{Junger1986}.  The important point for the present paper is that
+geometry enters twice.  It shapes the admissible deformation fields through the
+basis itself, and it enters the energetic balance through curvature-dependent
+stiffness and fluid coupling.  The same geometric ingredients later control
+both forcing efficiency and inverse conditioning.
+
+\subsection{Companion papers: Act I --- the question}
+
+\emph{Act~I} asked whether the notorious brown-note claim contained any
+physically respectable core, and the answer turned out to be more interesting
+than the folklore.  Paper~1 showed that the abdomen, modelled as a fluid-filled
+oblate shell, does possess a genuine low-frequency flexural resonance, with the
+second mode occurring at
+\begin{equation}
+f_{2} = \SI{3.95}{\hertz}.
+\label{eq:background-f2}
+\end{equation}
+That result mattered because it separated two questions that are often
+conflated: whether a resonance exists, and whether any realistic forcing path
+can excite it appreciably.  The modal calculation answered the first question
+in the affirmative.  The coupling analysis answered the second in the negative
+for airborne infrasound.  Because the acoustic field is both long-wavelength
+and weakly matched to the relevant flexural deformation, the airborne pathway
+does little work on the shell.  Mechanical forcing through whole-body vibration
+projects onto the same mode family far more effectively, producing a coupling
+ratio of approximately $R \approx 3.3 \times 10^{4}$ between the mechanical and
+airborne responses~\cite{BrowntoneP1}.  The resonance was real; the direct
+acoustic route to it was not.
+
+Paper~2 supplied the first important refinement~\cite{BrowntoneP2}.  Instead of
+treating the abdominal cavity as the only relevant resonant structure, it
+considered tissue-constrained gas pockets as local compliant inclusions capable
+of much stronger pressure-to-motion transduction.  This did not contradict the
+whole-cavity result of Paper~1.  It clarified it.  If one seeks a global
+flexural response of the abdominal shell, airborne excitation is ineffective.
+If one asks whether smaller substructures embedded within the abdomen might
+respond locally, gas pockets are more plausible candidates.  The programme
+therefore began with a division that remains useful throughout the capstone:
+global shell resonance organises the large-scale spectrum, but local resonant
+substructures may dominate transduction when coupling efficiency is the
+relevant physiological question.
+
+\subsection{Act II --- evidence across scales, organs, and pathways}
+
+\emph{Act~II} tested whether the same shell-theoretic logic survived changes in
+scale, organ, and excitation pathway.  Paper~3 recast the abdominal resonance
+problem in dimensionless form and derived scaling laws that made the low-order
+flexural behaviour comparable across species~\cite{BrowntoneP3}.  Its point was
+not merely zoological.  By showing that the governing frequency scales can be
+expressed through a compact set of geometric and mechanical groups, the paper
+demonstrated that the infrasonic shell problem is structured by similarity,
+rather than by the contingencies of one anatomical example.
+
+Paper~4 transferred the framework to the urinary bladder and thereby tested it
+on an organ whose geometry changes substantially with physiological
+state~\cite{BrowntoneP4}.  The bladder calculations showed that fill-dependent
+resonance cannot be interpreted as a simple size effect.  Increasing volume
+changes characteristic length scales, but it also alters wall tension and
+effective stiffness.  The resulting modal trajectory therefore reflects a
+competition between geometry and stiffening, not a monotonic geometric trend.
+This was the first clear sign, outside the original abdominal problem, that a
+single scalar reduction of shape is unlikely to preserve the physically
+relevant sensitivities.
+
+Paper~5 shifted attention from infrasonic flexure to an audible internal
+phenomenon: borborygmi~\cite{BrowntoneP5}.  Its constrained-bubble model
+produced characteristic frequencies in the range
+\SIrange{135}{440}{\hertz}, matching the clinical band of gut sounds.  The
+mechanism was distinct from whole-cavity flexure, but the shell still mattered.
+It set the confinement and loading conditions within which local gas pockets
+oscillate.  The paper therefore broadened the programme without abandoning its
+central theme: geometry continues to mediate what kind of spectrum is possible,
+even when the relevant source is local rather than global.
+
+Paper~6 returned to low frequencies and extended the coupling question to the
+sub-bass regime, where concert exposures and whole-body vibration are often
+discussed together despite acting through rather different pathways
+~\cite{BrowntoneP6}.  The conclusion was consistent with Paper~1.  Airborne
+sub-bass remains a poor driver of substantial abdominal motion, whereas
+structure-borne excitation can couple much more efficiently.  By the end of
+Act~II, the programme had assembled a coherent evidential base: across species,
+organs, audible and infrasonic ranges, and airborne and mechanical forcing,
+geometry continued to organise the modal spectrum while filtering how energy
+enters it.
+
+\subsection{Act III --- from forward adequacy to inverse structure}
+
+\emph{Act~III} turned from forward resonance prediction to the inverse question
+of what one can infer from a measured spectrum.  Paper~7, on watermelon
+tap-tone assessment, provided the constructive example~\cite{BrowntoneP7}.  It
+showed that an equivalent-sphere shell model can be forward-adequate for a
+practical inversion task when the inferential target is narrow and the
+geometric uncertainty is limited.  In that context the model need only map a
+measured resonance to an effective rind stiffness with useful fidelity.  The
+watermelon paper therefore demonstrated that reduced geometry can be serviceable
+when the application asks for classification or approximate property recovery,
+rather than full geometric disentanglement.
+
+Paper~8 exposed the inverse price of that simplification~\cite{BrowntoneP8}.
+Asked in Kac-like language whether one can ``hear'' the shape of an organ, the
+programme's answer became conditional rather than categorical.  If the shell is
+reduced to a single equivalent radius, material and geometric sensitivities
+become strongly correlated, and the inverse map is nearly singular.  The
+condition-number analysis showed that the equivalent-sphere model is
+catastrophically ill-conditioned, whereas the full oblate-shell model restores
+practical separation of parameter effects.  Just as importantly, Paper~8
+revealed an oblate--prolate asymmetry: breaking spherical symmetry is not, by
+itself, enough.  What matters is whether the perturbation changes how different
+modes sample curvature.
+
+Paper~9 condensed that observation into a short theorem-oriented note on
+identifiability lifting~\cite{BrowntoneP9}.  Its contribution was to show that
+oblate deformations lift the near-spherical inverse degeneracy in a way that
+prolate deformations do not improve comparably.  This matters to the capstone
+because it rules out an easy but misleading slogan.  One cannot simply say that
+``asphericity helps''.  Some geometric departures from the sphere decorrelate
+the spectral sensitivities that matter for inversion; others do not.  The
+programme's theoretical turn therefore culminated in a sharper claim:
+forward adequacy and inverse adequacy are distinct, and their separation is
+governed by geometry.
+
+\subsection{Broader context}
+
+The Browntone series sits at the meeting point of several established
+literatures.  One is classical shell acoustics, in which curvature, modal
+families, and fluid loading have long been treated as inseparable elements of
+the forward problem~\cite{Love1927,Leissa1973,Soedel2004,Junger1986}.  Another
+is spectral inverse theory, from Kac's celebrated question and the
+Gordon--Webb--Wolpert counterexample to engineering treatments of vibration
+inversion and model updating~\cite{Kac1966,Gordon1992,Gladwell2004,Gladwell2005,
+MottersheadFriswell1993,FriswellMottershead1995}.  A third is the practical
+language of identifiability, familiar from inverse elasticity and biomedical
+imaging, in which the issue is not merely uniqueness in principle but whether
+the measured observables contain enough independent information to distinguish
+the parameters of interest under realistic sensitivity and noise structures
+~\cite{Raue2009,Doyley2012,parker2011imaging,Sack2023}.
+
+What the present programme adds is a concrete family of case studies in which
+these literatures can be read together.  The same geometric framework explains
+why a soft organ can possess a low-frequency shell resonance yet remain almost
+immune to direct airborne excitation; why local gas pockets and gut sounds are
+better interpreted as shell-constrained substructures than as whole-cavity
+breathing modes; why a reduced model can succeed as a forward surrogate for
+fruit-ripeness assessment; and why that same reduction can fail badly when used
+for multi-parameter inversion.  In biomedical and engineering settings alike,
+the practical question is rarely whether resonance exists in the abstract.  It
+is whether the observable spectrum contains geometry-specific information that
+survives modelling reduction and experimental uncertainty.  The companion
+papers suggest that this question is best answered not by separating shell
+mechanics, acoustics, and inversion into different problems, but by treating
+geometry as the common mediator of all three.
