@@ -2,8 +2,8 @@
 
 We consider a fluid-filled elastic shell with equatorial semi-axis $a$, polar
 semi-axis $c$, thickness $h$, Young's modulus $E$, Poisson ratio $\nu$, wall
-density $\rho_w$, fluid density $\rho_f$, fluid bulk modulus $K_f$, and
-internal pressure $P_\mathrm{iap}$.  The canonical parameter set is that used in
+density $\rho_w$, fluid density $\rho_f$, fluid bulk modulus $K_f$,
+internal pressure $P_\mathrm{iap}$, and loss tangent $\eta$.  The canonical parameter set is that used in
 the Browntone abdominal-shell studies:
 \[
   a=\SI{0.18}{\metre},\quad
@@ -16,7 +16,8 @@ the Browntone abdominal-shell studies:
   \rho_w=\SI{1100}{\kilo\gram\per\metre\cubed},\quad
   \rho_f=\SI{1020}{\kilo\gram\per\metre\cubed},\quad
   K_f=\SI{2.2}{\giga\pascal},\quad
-  P_\mathrm{iap}=\SI{1000}{\pascal}.
+  P_\mathrm{iap}=\SI{1000}{\pascal},\quad
+  \eta=\num{0.25}.
 \]
 The corresponding aspect ratio is $\zeta=c/a=\num{0.667}$ and the
 equivalent-sphere radius is
@@ -90,18 +91,18 @@ Three geometry classes are compared.
   therefore linearly dependent, so the map is singular in the strict algebraic
   sense \cite{BrowntoneP7,BrowntoneP8}.
   \item \textbf{Oblate Ritz family.}  The full spheroidal curvature field is
-  retained.  For the oblate branch we use the eccentricity
-  $\varepsilon=\sqrt{1-c^2/a^2}$ and the aspect-ratio offset
-  $\delta=1-c/a$, and examine the near-spherical limit together with the
-  canonical oblate point.
-  \item \textbf{Prolate Ritz family.}  The prolate continuation holds volume
-  $V=(4\pi/3)a^2c$ and wall thickness $h$ fixed while increasing $c/a$ beyond
-  unity.  Given the canonical values $a_0=\SI{0.18}{\metre}$ and
-  $c_0=\SI{0.12}{\metre}$, the prolate branch sets
-  $a=a_0(c_0/c)^{1/2}$ with $c$ ranging from $c_0$ to
-  $\num{1.5}\,a_0=\SI{0.27}{\metre}$, yielding $c/a$ from \num{1.0} (sphere
-  limit, approached from below) to approximately \num{1.5}.  All material
-  parameters ($E$, $\nu$, $\rho_w$, $\rho_f$, $K_f$, $\eta$) remain at
-  canonical values.  This construction separates the effect of geometry class
-  from the mere fact of leaving $\mathrm{SO}(3)$ symmetry behind.
+  retained.  The asphericity is measured by the eccentricity
+  $\varepsilon=\sqrt{1-c^2/a^2}$.  The near-spherical limit and the
+  canonical oblate point ($\varepsilon=\num{0.745}$) are both examined.
+  \item \textbf{Prolate Ritz family.}  The prolate continuation holds the
+  equatorial semi-axis $a=a_0=\SI{0.18}{\metre}$ fixed and increases the
+  polar semi-axis $c$ beyond $a_0$, so that $c/a>1$.  The prolate
+  eccentricity is $\varepsilon_\mathrm{p}=\sqrt{1-a^2/c^2}$, and
+  $c=a_0/\sqrt{1-\varepsilon_\mathrm{p}^2}$.  The tested range is
+  $c/a\in[\num{1.0},\num{1.5}]$, corresponding to
+  $c\in[\SI{0.18}{\metre},\SI{0.27}{\metre}]$.  At $c=a_0$ the geometry
+  reduces to a sphere of radius $a_0$, which is distinct from the
+  canonical oblate equivalent-sphere radius
+  $R_\mathrm{eq}=\SI{0.157}{\metre}$.  All material parameters ($E$,
+  $\nu$, $\rho_w$, $\rho_f$, $K_f$, $\eta$) remain at canonical values.
 \end{enumerate}

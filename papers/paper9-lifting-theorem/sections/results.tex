@@ -12,18 +12,18 @@ same parameter vector and mode set, but evaluates the full spheroidal Ritz
 model at $a=c$.
 
 The oblate branch then shows the relevant lifting behaviour.  Moving from the
-Ritz sphere to the near-oblate point at $\delta=1-c/a=\num{0.1}$ raises the
+Ritz sphere to the near-oblate point at $\varepsilon=\num{0.436}$
+($c/a=\num{0.9}$) raises the
 weakest singular value from $\sigma_3=\num{0.00806}$ to
 $\sigma_3=\num{0.01274}$, and the canonical oblate point
-$(c/a=2/3,\ \delta\approx\num{0.333})$ raises it further to
+$(c/a=2/3,\ \varepsilon\approx\num{0.745})$ raises it further to
 $\sigma_3=\num{0.02643}$.  The corresponding condition number falls from
 $\kappa_\mathrm{Ritz}=244$ to $\kappa=145$ and then to
 $\kappa_\mathrm{oblate}=\num{69.4}$.  Since the inverse variables and measured
 mode set are unchanged, that improvement is geometric rather than procedural.
 
 The prolate continuation does not show systematic improvement.  Along this
-branch the volume and wall thickness are fixed (see Section~2), with $a$
-decreasing and $c$ increasing so that $a^2c=\text{const}$.  Across the tested
+branch $a=a_0$ is held fixed while $c$ increases (see Section~2).  Across the tested
 range $c/a\in[\num{1.0},\num{1.5}]$, $\kappa_\mathrm{prolate}$ remains in the
 range 156--244, showing no monotonic decrease with increasing asphericity.  At
 the representative endpoint $c/a=\num{1.5}$ the scaled Jacobian gives
@@ -42,15 +42,15 @@ canonical oblate configuration ($\kappa=\num{69.4}$).
   \label{tab:singular-values}
   \begin{tabular}{@{}lcccccc@{}}
     \toprule
-    Case & $c/a$ & $\delta$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\kappa$ \\
+    Case & $c/a$ & $\varepsilon$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\kappa$ \\
     \midrule
     Equivalent sphere & \num{1.0} & \num{0} &
     \num{1.893} & \num{0.112} & \num{1.54e-10} & \num{1.23e10} \\
     Ritz sphere & \num{1.0} & \num{0} &
     \num{1.971} & \num{0.573} & \num{0.00806} & \num{244} \\
-    Near oblate & \num{0.9} & \num{0.1} &
+    Near oblate & \num{0.9} & \num{0.436} &
     \num{1.854} & \num{0.436} & \num{0.01274} & \num{145} \\
-    Canonical oblate & $2/3$ & \num{0.333} &
+    Canonical oblate & $2/3$ & \num{0.745} &
     \num{1.835} & \num{0.130} & \num{0.02643} & \num{69.4} \\
     Prolate endpoint & \num{1.5} & --- &
     \num{2.551} & \num{0.382} & \num{0.01636} & \num{156} \\
@@ -77,11 +77,11 @@ integration metric and the fluid-mass blending coefficients, and the resulting
 intercept \emph{grows} rather than converges with basis size: $\sigma_0\approx
 \num{0.006}$, \num{0.011}, and \num{0.018} for the three-, five-, and
 seven-mode bases respectively.  The physically meaningful regime is
-$\varepsilon>\num{0.2}$ (equivalently $\delta\gtrsim\num{0.02}$), where the
+$\varepsilon>\num{0.2}$, where the
 $\lambda_1\varepsilon^2$ term dominates and the artefact is negligible.
 
-A least-squares fit of $\sigma_3(\delta)=\sigma_0+\lambda_1\delta^2$ to the
-oblate data yields $\sigma_0=\num{0.0107}$ and $\lambda_1=\num{0.137}$; the
+A least-squares fit of $\sigma_3(\varepsilon)=\sigma_0+\lambda_1\varepsilon^2$ to the
+oblate data yields $\sigma_0=\num{0.0074}$ and $\lambda_1=\num{0.034}$; the
 non-zero intercept in this fit is the same discretisation effect described
 above, not a physical floor.
 
