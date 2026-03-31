@@ -18,7 +18,7 @@
 \label{sec:discussion}
 
 The capstone claim of this paper is not simply that geometry matters.  That
-would be a statement of taste, not of mechanism.  The stronger conclusion is
+would be a qualitative observation rather than a mechanistic one.  The stronger conclusion is
 that geometry enters the problem of fluid-filled viscoelastic shells in three
 logically distinct ways, and that confusing those roles obscures both the
 forward physics and the inverse problem.  Geometry filters how forcing is
@@ -35,12 +35,12 @@ applications.
 Of the four formal results, the deepest is the fourth: forward adequacy does not
 imply inverse adequacy.  A reduced model may reproduce the dominant resonance
 frequencies of a shell to within a tolerance that is entirely acceptable for
-classification, screening, or first-pass design, yet remain unusable for
+classification, screening, or preliminary design, yet remain unusable for
 parameter recovery because the inverse map is ill-conditioned or effectively
 singular.  The present programme suggests that this decoupling is not an
-incidental numerical inconvenience.  It is geometry mediated.
+incidental numerical inconvenience.  It is geometry-mediated.
 
-Equivalent-radius reductions explain the temptation.  If the observable of
+Equivalent-radius reductions explain the practical appeal.  If the observable of
 interest is a small set of low-order frequencies, a scalar geometric surrogate
 can often preserve the leading scale of the answer.  Such models compress the
 problem without obviously destroying the forward spectrum, and that economy is
@@ -52,22 +52,21 @@ remain small while the inverse uncertainty becomes enormous.  A model may
 therefore look persuasive in prediction and still be defective in inference.
 
 This distinction is the most important conceptual result to emerge from the
-Browntone sequence.  The abdominal and sub-bass studies showed that the
-existence of a resonance is not enough to establish an effective excitation
-pathway~\cite{BrowntoneP1,BrowntoneP6}.  The watermelon and Kac papers then
-showed the corresponding inverse statement: the existence of a good spectral fit
-is not enough to establish a recoverable parameter map~\cite{BrowntoneP7,BrowntoneP8}.
+Browntone sequence.  The existence of a resonance is not enough to establish an
+effective excitation pathway~\cite{BrowntoneP1,BrowntoneP6}.  Nor is the
+existence of a good spectral fit enough to establish a recoverable parameter
+map~\cite{BrowntoneP7,BrowntoneP8}.
 These are parallel lessons.  In both cases, geometry selects what can be seen.
 On the excitation side, it selects which forcing fields project efficiently onto
 the mode family of interest.  On the inverse side, it selects which parameter
 directions remain distinguishable once those modes are measured.  A reduced
-model that is forward-useful may therefore be inverse-fragile for reasons that
+model that is useful in forward prediction may therefore be unstable for inversion for reasons that
 are not accidental but structural.
 
 \subsection{Why geometry does three jobs}
 
 The first job of geometry is filtering.  The original brown-note problem made
-this plain.  A fluid-filled oblate shell can support a genuine low-frequency
+this clear.  A fluid-filled oblate shell can support a genuine low-frequency
 flexural mode near \SI{4}{\hertz}, yet airborne infrasound couples to that mode
 vanishingly weakly because the long-wavelength forcing field is itself filtered
 by the geometry of the enclosure~\cite{BrowntoneP1}.  The same mode is far more
@@ -86,7 +85,7 @@ effective stiffness, producing a resonance trajectory that is not captured by a
 single monotonic size law~\cite{BrowntoneP4}.  In the gas-pocket and
 borborygmi papers, confinement and cavity geometry organise a different but
 related band of observable oscillations~\cite{BrowntoneP2,BrowntoneP5}.  Across
-applications, geometry is the quiet organiser of what the spectrum is allowed to
+applications, geometry is the principal organiser of what the spectrum is allowed to
 look like before any inversion begins.
 
 The third job is inversion, and this is the capstone contribution.  Geometry
@@ -129,28 +128,30 @@ problems, model reduction is justified \emph{a posteriori} by a small mismatch i
 the predicted observables.  The present results suggest a stricter criterion.  A
 reduction is acceptable only if it preserves the geometry-induced information
 structure required by the inference task.  That is a harder requirement, but it
-is the honest one.
+is the more appropriate one.
 
 \subsection{What the cross-application evidence establishes}
 
-Taken individually, the Browntone papers addressed local questions.  Could a
+Taken individually, the Browntone studies addressed local questions.  Could a
 human abdominal cavity possess a low-frequency flexural resonance?  Could a
 tissue-constrained gas pocket radiate in the audible band?  How does bladder
 fill state alter resonance?  Can tap-tone data support inversion in a
 watermelon?  Does asphericity lift inverse degeneracy?  The capstone claim is
-that these are not merely entertaining detours.  They instantiate a common
+that these are not merely isolated case studies.  They instantiate a common
 mechanism in which geometry governs forcing pathways, spectral structure, and
 identifiability in tandem.
 
 The evidence, however, is not uniform, and it should not be presented as though
-it were.  Papers~1, 2, and~6 speak most directly to filtering: excitation is
-geometry selective, and the same resonance can be practically invisible to one
-forcing pathway yet accessible to another~\cite{BrowntoneP1,BrowntoneP2,BrowntoneP6}.
-Papers~3, 4, and~5 speak most clearly to organisation: geometric scaling, fill
-state, and confinement sort the spectrum into coherent families
-~\cite{BrowntoneP3,BrowntoneP4,BrowntoneP5}.  Papers~7 and~8 bear most directly
-on inversion, because they expose the tension between a satisfactory forward fit
-and a recoverable parameter map~\cite{BrowntoneP7,BrowntoneP8}.  What the
+it were.  The filtering evidence is clearest in the abdominal, gas-pocket, and
+sub-bass studies: excitation is geometry selective, and the same resonance can
+be practically invisible to one forcing pathway yet accessible to another
+~\cite{BrowntoneP1,BrowntoneP2,BrowntoneP6}.  The organisational evidence is
+clearest in the scaling, bladder, and borborygmi studies: geometric scaling,
+fill state, and confinement sort the spectrum into coherent families
+~\cite{BrowntoneP3,BrowntoneP4,BrowntoneP5}.  The inverse evidence is clearest
+in the watermelon and Kac-style studies, because they expose the tension between
+a satisfactory forward fit and a recoverable parameter map
+~\cite{BrowntoneP7,BrowntoneP8}.  What the
 programme establishes, then, is not merely a collection of isolated case
 studies but a coherent synthesis: apparently disparate vibroacoustic phenomena
 in fluid-filled shells can be read as manifestations of one
@@ -226,6 +227,6 @@ rank-deficiency and identifiability-lifting claims should be carried to higher
 order shell theories, the near-spherical asymptotics should be re-derived for
 layered and non-axisymmetric geometries, and the oblate--prolate selectivity
 should be characterised beyond the regimes so far examined.  If the programme
-began with a question that nobody was obliged to take seriously, it ends in a
-rather more respectable place: a set of tractable mathematical problems about
+began with an unconventional motivating question, it now defines a tractable set
+of mathematical problems about
 symmetry, curvature, and information in shell spectra.
