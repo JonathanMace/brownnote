@@ -26,7 +26,9 @@ the condition number drops to
 \end{equation}
 an improvement by a factor of approximately $3.9$ achieved purely through
 geometric eccentricity.  This Ritz-to-Ritz comparison demonstrates that it is
-\emph{geometry}, not model choice, that drives the identifiability transition.
+\emph{geometry}, not model choice, that drives the identifiability transition;
+Figure~\ref{fig:sphere_vs_oblate} contrasts the frequency spectra at the two
+endpoints of the sweep.
 
 \begin{remark}[Equivalent-sphere comparison as pedagogical aside]
 For context, the equivalent-sphere model of
@@ -58,7 +60,7 @@ The singular value decomposition provides the clearest picture.  In the
 equivalent-sphere model, one singular value collapses to a value near machine
 zero, leaving one parameter combination effectively unobservable.  In the
 oblate Ritz model at $\varepsilon=0.745$, all three singular values remain
-finite and well separated from zero.  Even at the near-spherical Ritz limit
+finite and well separated from zero (Figure~\ref{fig:singular_values}).  Even at the near-spherical Ritz limit
 ($\varepsilon\to0$), all three singular values remain non-zero --- the
 floor identified in Remark~\ref{prop:eccentricity}
 prevents complete rank collapse --- though the smallest value is markedly
@@ -179,7 +181,8 @@ independent information at that operating point.
 
 As expected from \eqref{eq:fisher}, the bounds scale linearly with noise level.
 Halving the frequency noise from $2\%$ to $1\%$ halves the minimum-achievable
-parameter standard deviations.  The uncertainty budget is therefore governed by
+parameter standard deviations, a scaling confirmed by the Monte Carlo results
+in Figure~\ref{fig:inversion_noise}.  The uncertainty budget is therefore governed by
 two levers: the intrinsic conditioning of the operating point and the
 experimental precision of the measured resonances.
 
@@ -233,9 +236,9 @@ available information for the present three-parameter problem.
 
 \subsection{Condition-number map in parameter space}
 
-Condition-number maps over $(a,\zeta_g)$ show a broad region of acceptable
-conditioning across physiologically relevant oblate geometries, computed at
-fixed $E = \SI{0.1}{MPa}$ (the canonical value).  The condition
+The condition-number map in Figure~\ref{fig:condition_map} shows a broad region
+of acceptable conditioning across physiologically relevant oblate geometries,
+computed at fixed $E = \SI{0.1}{MPa}$ (the canonical value).  The condition
 number increases steadily as $\zeta_g \rightarrow 0$, that is, as the geometry
 approaches a sphere.  This trend is physically and numerically consistent with
 the singular spherical limit.  Away from that limit, the inverse problem
