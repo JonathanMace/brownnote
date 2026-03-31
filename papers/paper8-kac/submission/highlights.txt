@@ -1,0 +1,5 @@
+- Equivalent-sphere models are fundamentally non-identifiable for spectral inversion (κ ≈ 10¹⁰)
+- Oblate eccentricity introduces mode-dependent curvature sampling that restores identifiability (κ = 69.4)
+- Forward model adequacy does not guarantee inverse model adequacy
+- Three-class taxonomy: singular, regular bounded, and non-lifting identifiability regimes
+- Practical noise floor κ ≈ 269 sets a lower bound on achievable conditioning

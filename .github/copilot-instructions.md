@@ -230,7 +230,7 @@ See the `compile-paper` skill for compilation instructions.
 | Paper 5: Borborygmi | JASA | Submission-ready (14pp) | 0 | ✅ | `papers/paper5-borborygmi/` |
 | Paper 6: Sub-bass Perception | JASA | Needs stale fix (18pp) | 3 | ❌ | `papers/paper6-sub-bass/` |
 | Paper 7: Watermelon Ripeness | Postharvest B&T | Submission-ready (32pp) | 0 | ⚠️ | `papers/paper7-watermelon/` |
-| Paper 8: Kac Identifiability | IPSE/JSV (TBD) | Needs submission pkg (29pp) | 0 | ❌ | `papers/paper8-kac/` |
+| Paper 8: Kac Identifiability | IPSE | Submission-ready (29pp) | 0 | ✅ | `papers/paper8-kac/` |
 | Paper 9: Lifting Theorem | JSV Short | Skeleton only | 0 | ❌ | `papers/paper9-lifting-theorem/` |
 | Paper 10: Capstone | Proc Roy Soc A | Not started | — | — | (does not exist yet) |
 

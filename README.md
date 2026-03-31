@@ -39,7 +39,7 @@ Nine papers. Four target journals. One capstone in preparation for *Proceedings 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
 | 7 | **Can You Hear the Ripeness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to rind stiffness — folk wisdom formalised | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-30_0014.pdf) |
-| 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-30_0253.pdf) |
+| 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-30_2336.pdf) |
 | 9 | **Lifting Theorem** | *JSV Short* | In preparation | Singular-value lifting for symmetry-broken spectral inverse problems | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-29_2301.pdf) |
 | 🎓 | **Capstone** | *Proc. R. Soc. A* | Planned | *Geometry mediates excitation, resonance, and identifiability* | — |
 
