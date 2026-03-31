@@ -1,0 +1,76 @@
+\documentclass[11pt]{letter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{siunitx}
+
+\signature{Jonathan Mace\\for the authors}
+\address{Jonathan Mace\\Microsoft Research\\Redmond, WA, USA\\jonathanmace@microsoft.com}
+\date{\today}
+
+\begin{document}
+
+\begin{letter}{%
+  The Editor\\
+  \textit{Inverse Problems in Science and Engineering}\\
+  Taylor \& Francis}
+
+\opening{Dear Editor,}
+
+We respectfully submit the enclosed manuscript, ``Can You Hear the Shape of an
+Organ? Practical Identifiability of Elastic Shell Parameters from Resonant
+Frequencies,'' by Jonathan Mace and Brian R.\ Mace, for consideration in
+\textit{Inverse Problems in Science and Engineering}.
+
+The paper studies a practically important inverse question: what shell
+parameters can be recovered from measured resonant frequencies, and when does
+geometry make that recovery possible?  Using a fluid-filled oblate-shell Ritz
+model together with its equivalent-sphere reduction as a degenerate comparator,
+we show that the equivalent-sphere formulation is fundamentally
+non-identifiable for spectral inversion, with
+$\kappa \approx 1.37 \times 10^{10}$, whereas oblate eccentricity rescues
+identifiability through mode-dependent curvature sampling, reducing the
+condition number to $\kappa = 69.4$ at the canonical operating point.
+
+We believe the manuscript fits \textit{Inverse Problems in Science and
+Engineering} particularly well because its main contribution lies at the
+interface of inverse-problems theory and engineering mechanics.  The paper is
+not only about predicting shell resonances; it is about diagnosing when a
+forward model that appears perfectly adequate for resonance prediction becomes
+catastrophically ill-conditioned when used in reverse.  This
+\emph{forward--inverse adequacy gap} is, in our view, the central result:
+forward adequacy does not guarantee inverse adequacy.  That distinction should
+be relevant to readers working on model updating, structural acoustics,
+parameter estimation, and practical identifiability across applied inverse
+problems.
+
+The manuscript makes four linked contributions.  First, it establishes that the
+equivalent-sphere reduction is not merely poorly conditioned but algebraically
+rank-deficient for the inverse task.  Second, it shows that oblate geometry
+lifts that degeneracy by diversifying modal curvature sampling across latitude.
+Third, it organises the numerics into a three-class taxonomy of identifiability
+regimes: singular, regular bounded, and non-lifting.  Fourth, it demonstrates a
+practical conditioning floor, $\kappa_{\mathrm{floor}} \approx 269$, which sets
+a noise-limited lower bound on achievable inversion quality within the present
+Ritz framework.
+
+More broadly, the manuscript connects a classical spectral question in inverse
+problems to a concrete engineering setting: fluid-filled shell structures whose
+frequencies may be easy to predict but difficult to invert reliably.  We hope
+this combination of conceptual clarity and application relevance will make the
+paper of interest to the journal's readership.
+
+The manuscript is original, has not been published previously, is not under
+consideration elsewhere, and has been approved by both authors.  The authors
+declare no competing financial interests or personal relationships that could
+have influenced the work.  All analysis code and manuscript sources are
+available in the accompanying repository for reproducibility.
+
+Thank you for your consideration.
+
+\closing{Yours sincerely,}
+
+\end{letter}
+\end{document}
