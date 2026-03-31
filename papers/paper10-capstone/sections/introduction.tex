@@ -6,7 +6,7 @@
 %   Frame the problem: fluid-filled viscoelastic shells appear throughout
 %   biomechanics and postharvest science, yet practitioners treat each
 %   application in isolation, missing the common geometric structure.
-%   State the four-conjecture thesis and outline the paper.
+%   State the four-result thesis and outline the paper.
 % =============================================================================
 
 \section{Introduction}
@@ -84,21 +84,21 @@ invertibility requires more than a good forward fit.  It requires modal data in
 which different modes sample curvature differently.  That requirement is
 geometric before it is statistical.
 
-The capstone develops this programme around four conjectures, each of which
-captures one aspect of the geometry--spectrum--inversion relation.  The first
-is a \emph{rank-deficiency conjecture}: equivalent-radius models of non-spherical
-fluid-filled shells generically collapse independent geometric information and
-therefore produce ill-posed spectral inversion problems.  The second is an
-\emph{identifiability-lifting conjecture}: asphericity restores invertibility
-because distinct modes respond differently to distinct curvature channels.  The
-third is a \emph{near-spherical conditioning conjecture}: the transition from
-recoverable to unrecoverable inversion is controlled by regular asymptotics near
-the spherical limit, where symmetry suppresses the very sensitivities on which
-inference depends.  The fourth is a \emph{forward--inverse adequacy
-conjecture}: a model may be adequate for predicting resonant frequencies while
-remaining inadequate for parameter recovery.  Taken together, these conjectures
-recast several apparently separate Browntone results as instances of one
-general statement about how geometry governs both excitation and inference.
+The capstone develops this programme around four formal results --- two
+theorems, one proposition, and one lemma --- each of which captures one aspect
+of the geometry--spectrum--inversion relation.  The first theorem shows that
+equivalent-radius models of non-spherical fluid-filled shells generically
+collapse independent geometric information and therefore produce ill-posed
+spectral inversion problems.  The second theorem shows that oblate asphericity
+can restore invertibility because distinct modes respond differently to
+distinct curvature channels.  The proposition establishes the corrected
+near-spherical asymptotics: the exact sphere is singular, and the restored
+identifiability grows regularly as $\sigma_3(\varepsilon)=\lambda_1
+\varepsilon^2+O(\varepsilon^4)$.  The lemma then shows that a model may be
+adequate for predicting resonant frequencies while remaining inadequate for
+parameter recovery.  Taken together, these formal results recast several
+apparently separate Browntone results as instances of one general statement
+about how geometry governs both excitation and inference.
 
 The evidence for that statement was assembled in three acts.  Act~I,
 Papers~1--2, posed the question.  The brown-note analysis established the
@@ -121,7 +121,7 @@ geometry-mediated theory of excitation, resonance, and identifiability.
 
 Our aim is therefore synthetic rather than merely archival.  We do not repeat
 the detailed derivations of the companion papers.  Instead, we extract the
-shared mathematical structure, state the four conjectures in a common language,
+shared mathematical structure, prove four formal results in a common language,
 and show how the examples together support a general picture of fluid-filled
 shells as systems in which symmetry and curvature govern both what can be
 excited and what can be inferred.  The intended scope is wider than the original
@@ -132,11 +132,12 @@ inverse problems.
 
 The paper is organised as follows.  Section~\ref{sec:background} summarises the
 programme-level evidence from Papers~1--8 and identifies the common geometric
-structure that links them.  Section~\ref{sec:theory} formulates the four
-conjectures precisely and relates them to the underlying shell and inverse
-problem theory.  Section~\ref{sec:results} gathers the principal cross-paper
-results into a unified comparative account, emphasising where excitation,
-spectral organisation, and identifiability align or diverge.  Section
+structure that links them.  Section~\ref{sec:theory} states and proves the
+four formal results, together with a supporting proposition for excitation
+filtering, and relates them to the underlying shell and inverse problem
+theory.  Section~\ref{sec:results} gathers the principal cross-paper results
+into a unified comparative account, emphasising where excitation, spectral
+organisation, and identifiability align or diverge.  Section
 \ref{sec:discussion} considers the broader implications for spectral inference
 in fluid-filled shells and for the use of reduced models in inverse settings.
 Section~\ref{sec:conclusion} closes with the capstone claim: geometry is not a
