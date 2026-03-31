@@ -42,7 +42,9 @@ Papers~1 and 8 give the full derivations of $K$ and $M$
 \cite{BrowntoneP1,BrowntoneP8}, but these equations define the forward model
 used here.  The Ritz basis comprises five Legendre-polynomial trial functions in
 oblate spheroidal coordinates, one per flexural mode $n=2,\ldots,6$; full
-construction details are given in \cite{BrowntoneP1}.
+construction details are given in \cite{BrowntoneP1}.  The number $N$ of trial
+functions in the displacement expansion is varied in Section~4 ($N=3,5,7$) to
+test sensitivity to basis size; all main results use $N=5$.
 
 The inverse variable is the parameter vector
 $\boldsymbol{\theta}=[a,c,E]^\mathsf{T}$.  The spectral data vector is formed
@@ -100,7 +102,10 @@ Three geometry classes are compared.
   eccentricity is $\varepsilon_\mathrm{p}=\sqrt{1-a^2/c^2}$, and
   $c=a_0/\sqrt{1-\varepsilon_\mathrm{p}^2}$.  The tested range is
   $c/a\in[\num{1.0},\num{1.5}]$, corresponding to
-  $c\in[\SI{0.18}{\metre},\SI{0.27}{\metre}]$.  At $c=a_0$ the geometry
+  $c\in[\SI{0.18}{\metre},\SI{0.27}{\metre}]$.  Prolate geometries are
+  evaluated by parameter continuation within the same algebraic Ritz
+  formulation defined in oblate spheroidal coordinates; no switch to
+  prolate spheroidal coordinates is performed.  At $c=a_0$ the geometry
   reduces to a sphere of radius $a_0$, which is distinct from the
   canonical oblate equivalent-sphere radius
   $R_\mathrm{eq}=\SI{0.157}{\metre}$.  All material parameters ($E$,
