@@ -40,7 +40,7 @@ Ten papers. Four target journals. Eight submission-ready with complete packages,
 |---|-------|-------|--------|-----------------|-------|
 | 7 | **Can You Hear the Ripeness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to rind stiffness — folk wisdom formalised | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-30_0014.pdf) |
 | 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-31_0854.pdf) |
-| 9 | **Oblate–Prolate Asymmetry** | *JSV Short* | Skeleton (reframing as short note) | Why identifiability lifting is oblate-specific — curvature–mode anti-correlation | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-29_2301.pdf) |
+| 9 | **Geometry-dependent identifiability** | *JSV Short* | Draft complete (6 pp) | Oblate shells lift the inverse degeneracy; prolate shells do not | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-31_0917.pdf) |
 | 🎓 | **Capstone** | *Proc. R. Soc. A* | Skeleton | *Geometry mediates excitation, resonance, and identifiability* | [PDF](papers/paper10-capstone/drafts/draft_2026-03-31_0936.pdf) |
 
 See also: [Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)
@@ -73,7 +73,7 @@ Papers 1–6 are evidence. Papers 7–10 are synthesis. All eight principal pape
 
 1. **Rank-deficiency conjecture.** The equivalent-radius model of a fluid-filled shell is generically ill-conditioned for spectral inversion (κ ∝ 10¹⁰ for the sphere).
 2. **Identifiability lifting.** Breaking spherical symmetry — introducing asphericity — lifts the Jacobian rank deficiency because different flexural modes sample curvature differently.
-3. **Near-spherical conditioning asymptotics.** As eccentricity ε → 0, the condition number follows κ ~ C·ε⁻² with a finite floor set by the curvature channel.
+3. **Geometry-selective lifting.** Oblate perturbations decorrelate the Jacobian columns and improve conditioning, whereas prolate perturbations can leave the inverse problem poorly conditioned.
 4. **Forward adequacy ≠ inverse adequacy.** A model that predicts frequencies well (Paper 7's watermelon) may be catastrophically ill-conditioned for parameter recovery (Paper 8's sphere), and vice versa.
 
 A Distinguished Advisory Board review scored the programme 7–8/10 across coherence, depth, breadth, and novelty, with lasting impact at 6/10 — *"could be 8–9 with consolidation."* The capstone, targeting *Proceedings of the Royal Society A*, is that consolidation. Papers 1, 7, and 8 form the backbone; papers 2–6 supply evidence.
@@ -145,8 +145,12 @@ browntone/
 │   ├── paper6-sub-bass/         # Can you feel the bass?
 │   ├── paper7-watermelon/       # The fruit that brought it together
 │   ├── paper8-kac/              # Can you hear the shape of an organ?
+<<<<<<< HEAD
 │   ├── paper9-lifting-theorem/  # Oblate–prolate asymmetry
 │   └── paper10-capstone/        # Geometry mediates everything
+=======
+│   └── paper9-lifting-theorem/  # Oblate-prolate identifiability asymmetry
+>>>>>>> 744e0cb ([paper] Rewrite P9 as JSV Short Communication on oblate-prolate identifiability asymmetry)
 ├── src/analytical/              # Core analytical models
 ├── tests/                       # 487 regression tests
 ├── docs/research-logs/          # 92 quantitative session logs

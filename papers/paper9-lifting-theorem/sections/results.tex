@@ -1,0 +1,67 @@
+\section{Results}
+
+Table~\ref{tab:conditioning-summary} collects the conditioning results that
+matter for the present argument.  The first point is a baseline: the
+equivalent-sphere model is singular because it collapses two geometric degrees
+of freedom into the single radius $R_\mathrm{eq}$.  Its reported numerical value
+$\kappa_\mathrm{sphere}\approx\num{1.37e10}$ is therefore not a meaningful
+finite condition number; it is the floating-point shadow of an exact rank
+defect \cite{BrowntoneP8}.
+
+The second point is the genuine lifting result.  Within the \emph{same} Ritz
+model, moving from the near-spherical oblate limit to the canonical oblate
+geometry improves conditioning from
+$\kappa_\mathrm{floor}\approx\num{269}$ to
+$\kappa_\mathrm{oblate}=\num{69.4}$.  That is a reduction by a factor of about
+\num{3.9}, achieved without changing the inverse variables or the measured mode
+set.  It is therefore a geometric effect rather than a bookkeeping effect.
+
+The third point is the asymmetry.  A prolate continuation does not show a
+comparable gain.  Across the informative part of the prolate branch, the
+condition number remains in the range
+$\kappa_\mathrm{prolate}=\numrange{561}{729}$, substantially worse than both
+the oblate floor and the canonical oblate point.  In plain terms, oblate
+lifting exists, but there is no matching prolate improvement waiting politely on
+the other side of the sphere.
+
+\begin{table}[t]
+  \centering
+  \caption{Conditioning summary for the five-mode inverse map
+  $\mathbf{f}=[f_2,\ldots,f_6]^\mathsf{T}$.}
+  \label{tab:conditioning-summary}
+  \begin{tabular}{@{}p{0.27\linewidth}p{0.24\linewidth}p{0.35\linewidth}@{}}
+    \toprule
+    Geometry class & Condition number & Interpretation \\
+    \midrule
+    Equivalent sphere &
+    $\kappa_\mathrm{sphere}\approx\num{1.37e10}$ &
+    Numerically finite, algebraically singular \\
+    Oblate Ritz (near sphere) &
+    $\kappa_\mathrm{floor}\approx\num{269}$ &
+    Finite floor caused by $\sigma_0>0$ \\
+    Canonical oblate Ritz &
+    $\kappa_\mathrm{oblate}=\num{69.4}$ &
+    Best conditioning in the tested family \\
+    Prolate Ritz branch &
+    $\kappa_\mathrm{prolate}=\numrange{561}{729}$ &
+    No useful lifting observed \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The singular-value fit in \eqref{eq:sigma-min-expansion} explains why the
+near-spherical oblate branch has a floor rather than a divergence.  Since
+$\sigma_0>0$, the smallest singular value does not collapse to zero as
+$\varepsilon\to 0$ within the Ritz model.  Since
+$\varepsilon_c=\num{1.48}>1$, the intercept remains important over the physical
+oblate range, so the conditioning is bounded before it improves.  The canonical
+oblate geometry then pushes $\sigma_{\min}$ far enough upward to reach
+$\kappa_\mathrm{oblate}=\num{69.4}$.
+
+The practical meaning is straightforward.  The second flexural mode
+$f_2=\SI{3.95}{\hertz}$ already lies in the low-frequency band used by the
+companion studies, and the higher modes in the set respond differently to the
+same curvature perturbation.  That differential response separates the
+sensitivity directions for $a$, $c$, and $E$ in the oblate family.  The
+prolate family does not deliver the same separation, so ``non-spherical'' is
+not, by itself, a useful identifiability category.

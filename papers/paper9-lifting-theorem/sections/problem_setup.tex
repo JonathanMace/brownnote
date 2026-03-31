@@ -1,0 +1,85 @@
+\section{Problem Setup}
+
+We consider a fluid-filled elastic shell with equatorial semi-axis $a$, polar
+semi-axis $c$, thickness $h$, Young's modulus $E$, Poisson ratio $\nu$, wall
+density $\rho_w$, fluid density $\rho_f$, fluid bulk modulus $K_f$, and
+internal pressure $P_\mathrm{iap}$.  The canonical parameter set is that used in
+the Browntone abdominal-shell studies:
+\[
+  a=\SI{0.18}{\metre},\quad
+  c=\SI{0.12}{\metre},\quad
+  h=\SI{0.01}{\metre},\quad
+  E=\SI{0.1}{\mega\pascal},
+\]
+\[
+  \nu=\num{0.45},\quad
+  \rho_w=\SI{1100}{\kilo\gram\per\metre\cubed},\quad
+  \rho_f=\SI{1020}{\kilo\gram\per\metre\cubed},\quad
+  K_f=\SI{2.2}{\giga\pascal},\quad
+  P_\mathrm{iap}=\SI{1000}{\pascal}.
+\]
+The corresponding aspect ratio is $\zeta=c/a=\num{0.667}$ and the
+equivalent-sphere radius is
+$R_\mathrm{eq}=(a^2c)^{1/3}=\SI{0.157}{\metre}$ \cite{BrowntoneP1,BrowntoneP8}.
+
+The inverse variable is the parameter vector
+$\boldsymbol{\theta}=[a,c,E]^\mathsf{T}$.  The spectral data vector is formed
+from the first five flexural resonances,
+\[
+  \mathbf{f}(\boldsymbol{\theta})
+  =
+  [f_2,f_3,f_4,f_5,f_6]^\mathsf{T},
+\]
+where $f_n$ is the resonance frequency of flexural mode $n$.  At the canonical
+oblate point, the lowest member of this set is
+$f_2=\SI{3.95}{\hertz}$ \cite{BrowntoneP1}.  We do not use the breathing mode in
+this inverse map.
+
+Local practical identifiability is measured through the dimensionless scaled
+Jacobian
+\[
+  \widetilde{J}_{ij}
+  =
+  \frac{\theta_j}{f_i}\,
+  \frac{\partial f_i}{\partial \theta_j},
+\]
+with singular values
+$\sigma_1\geq\sigma_2\geq\sigma_3\geq 0$.  The conditioning metric is
+\[
+  \kappa=\frac{\sigma_1}{\sigma_3},
+\]
+provided $\sigma_3>0$.  Large $\kappa$ indicates a weakly observable parameter
+combination; $\sigma_3=0$ implies local rank deficiency.
+
+Three geometry classes are compared.
+\begin{enumerate}
+  \item \textbf{Equivalent sphere.}  The forward model depends on $a$ and $c$
+  only through $R_\mathrm{eq}$.  The geometry columns of the exact Jacobian are
+  therefore linearly dependent, so the map is singular in the strict algebraic
+  sense \cite{BrowntoneP7,BrowntoneP8}.
+  \item \textbf{Oblate Ritz family.}  The full spheroidal curvature field is
+  retained.  For the oblate branch we use the eccentricity
+  $\varepsilon=\sqrt{1-c^2/a^2}$ and examine the near-spherical limit
+  $\varepsilon\to 0$ together with the canonical oblate point.
+  \item \textbf{Prolate Ritz family.}  The same five-mode diagnostic is applied
+  to a prolate continuation away from the sphere, so that the effect of
+  geometry class can be separated from the mere fact of leaving
+  $\mathrm{SO}(3)$ symmetry behind.
+\end{enumerate}
+
+For the oblate family, the smallest singular value is well represented near the
+spherical limit by
+\begin{equation}
+  \sigma_{\min}(\varepsilon)
+  =
+  \sigma_0 + \lambda_1 \varepsilon^2 + O(\varepsilon^4),
+  \label{eq:sigma-min-expansion}
+\end{equation}
+where $\sigma_0>0$ is the fitted intercept and $\lambda_1$ is the leading
+curvature coefficient \cite{BrowntoneP8}.  The associated crossover parameter
+is
+\[
+  \varepsilon_c=\sqrt{\sigma_0/\lambda_1}=\num{1.48}.
+\]
+Because $\varepsilon_c>1$, the fitted intercept remains influential throughout
+the physical oblate range considered here.
