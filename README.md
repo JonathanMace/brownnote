@@ -31,7 +31,7 @@ Nine papers. Four target journals. One capstone in preparation for *Proceedings 
 |---|-------|-------|--------|-----------------|-------|
 | 3 | **Scaling Laws** | *JSV Short* | Under revision (8 pp) | Π₀ ≈ 0.07 across species — the brown note is not a uniquely human indignity | [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-30_2332.pdf) |
 | 4 | **Bladder Resonance** | *JSV* | Draft complete | f₂ = 13.5 Hz at 222 mL; the U-curve minimum is suspiciously at driving-posture fill | [PDF](papers/paper4-bladder/drafts/draft_2026-03-29_2120.pdf) |
-| 5 | **Borborygmi** | *JASA* | Submission-ready | Five mechanisms, 135–440 Hz — your stomach growls in a predictable key | [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-29_2120.pdf) |
+| 5 | **Borborygmi** | *JASA* | Submission-ready | Five mechanisms, 135–440 Hz — your stomach growls in a predictable key | [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-30_2336.pdf) |
 | 6 | **Can You Feel the Bass?** | *JASA* | Submission-ready | Airborne sub-bass falls 2.5 orders short; the floor does the work | [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-29_2120.pdf) |
 
 ### Act III — The Theory
@@ -170,3 +170,4 @@ python -m pytest tests/ -v   # 487 tests
 ## Licence
 
 [MIT](LICENSE)
+
