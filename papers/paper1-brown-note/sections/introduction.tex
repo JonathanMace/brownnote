@@ -38,9 +38,9 @@ compounds the deficit from the energy side: at the interface, approximately
 much smaller mode-specific resonant absorption is considered, so the energy
 available to drive flexural modes is negligible.  Mechanical
 vibration, transmitted through the skeleton and abdominal wall, suffers
-neither penalty.  The ratio between these two pathways---the \emph{coupling
-disparity}---is the central quantity we derive and the principal contribution
-of this paper.
+neither penalty.  The resulting separation between the airborne and mechanical
+transfer functions is the central system property we derive and the principal
+contribution of this paper.
 
 Scientific discussion of infrasound predates later popular-media portrayals,
 including the \emph{South Park} episode ``World Wide Recorder Concert'' (also
@@ -77,7 +77,8 @@ energy-consistent comparison of airborne and mechanical coupling pathways:
   \item quantified the airborne acoustic coupling coefficient for flexural
     modes in the long-wavelength limit; or
   \item compared airborne and mechanical excitation pathways within a common
-    energy-budget framework to obtain a single, quantitative coupling ratio.
+    energy-budget framework to obtain the governing transfer functions and the
+    exposure-pair displacement ratios derived from them.
 \end{enumerate}
 
 We address all three gaps.  We model the abdomen as a fluid-filled
@@ -91,20 +92,22 @@ fluid-loaded compliant structures.  The same framework identifies when
 geometry, impedance mismatch, and modal participation make one forcing route
 dominant over another even when both act on the same target mode.
 
-The headline result is an upper-bound coupling disparity of approximately
-$3.3 \times 10^4$ between mechanical and airborne pathways for
-\SI{120}{\decibel} SPL airborne excitation and
+The headline result is therefore not a single scenario-specific number but a
+large separation between transfer functions.  At the canonical $n=2$
+resonance, $H_\mathrm{mech}/H_\mathrm{air}
+\approx 6.5 \times 10^6\,\si{\pascal\second\squared\per\metre}$ before the
+modal-participation correction, and the corresponding reference-pair
+displacement ratio for \SI{120}{\decibel} SPL airborne excitation and
 $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
-vibration under the SDOF idealisation ($\Gamma_2 = 1$).  Including the
-canonical participation factor $\Gamma_2 \approx 0.48$ reduces this to
-$\sim 1.6 \times 10^4$.  This qualitative ordering persists across
-physiologically realistic parameter ranges, as we confirm through Monte
-Carlo uncertainty quantification, and resolves the empirical asymmetry
-cleanly.  It
-explains why whole-body vibration at \SIrange{4}{8}{\hertz} produces
-well-documented gastrointestinal effects, why airborne infrasound at
-comparable frequencies does not, and why claims of a brown note are not
-supported by the physics of airborne acoustic coupling.
+vibration is approximately $3.3 \times 10^4$ under the SDOF idealisation
+($\Gamma_2 = 1$).  Including the canonical participation factor
+$\Gamma_2 \approx 0.48$ reduces this to $\sim 1.6 \times 10^4$.  Monte Carlo
+uncertainty quantification confirms that the transfer-function contrast
+persists across physiologically realistic parameter ranges and resolves the
+empirical asymmetry cleanly.  It explains why whole-body vibration at
+\SIrange{4}{8}{\hertz} produces well-documented gastrointestinal effects, why
+airborne infrasound at comparable frequencies does not, and why claims of a
+brown note are not supported by the physics of airborne acoustic coupling.
 
 The remainder of this paper is organised as follows.
 Section~\ref{sec:formulation} develops the mathematical formulation.

@@ -265,13 +265,13 @@ activation in cell-culture experiments begins for deformations of order
 cell-scale values cannot be directly translated to tissue-scale abdominal
 wall displacements, they provide a useful order-of-magnitude reference.
 At 120\,dB SPL ($p_\mathrm{inc} = 20$\,Pa), the energy-consistent reciprocity
-analysis (\S\ref{sec:coupling}) gives
+analysis (derived in \S\ref{sec:energy_budget}) gives
 an energy-consistent wall displacement of approximately
 $0.028$\,$\mu$m for $n = 2$ --- well below the
 \SIrange{0.5}{2.0}{\micro\metre} cellular activation benchmark.  (The pressure-based upper-bound
 modal-displacement estimate from equation~\eqref{eq:xi_air} yields
 approximately $0.18$\,$\mu$m, an overestimate
-that violates the energy budget; see \S\ref{sec:coupling}.)
+that violates the energy budget; see \S\ref{sec:energy_budget}.)
 
 
 \subsection{Mechanical (Whole-Body Vibration) Coupling}\label{sec:wbv}
@@ -314,22 +314,22 @@ of magnitude.
 \subsection{Coupling Ratio}\label{sec:ratio}
 
 The ratio of mechanical to airborne displacement at the same excitation
-conditions provides a dimensionless measure of the full coupling disparity:
+conditions provides a dimensionless measure for any chosen exposure pair:
 \begin{equation}\label{eq:coupling_ratio_def}
   \mathcal{R}_\mathrm{full} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}.
 \end{equation}
 
 This ratio depends primarily on $ka$ and the excitation level, and
 the qualitative ordering persists across plausible parameter ranges
-because both pathways excite the same modal structure.  The full coupling ratio
-is the central result of this work: it provides a quantitative explanation for why
-whole-body vibration at 4--8\,Hz is associated with gastrointestinal effects in
-the epidemiological literature \cite{Griffin1990}, whereas airborne
-infrasound at comparable frequencies is not.  Section~\ref{sec:coupling}
-shows that, for \SI{120}{\decibel} SPL airborne excitation and
+because both pathways excite the same modal structure.  Section~\ref{sec:coupling}
+shows that the underlying system property is the large separation between the
+transfer functions $H_\mathrm{mech}$ and $H_\mathrm{air}$; the corresponding
+dimensionless ratio then follows once a reference pressure and acceleration are
+chosen.  For \SI{120}{\decibel} SPL airborne excitation and
 $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
-vibration, the SDOF upper bound is $\mathcal{R}_\mathrm{full} \approx 3.3 \times 10^4$
-($\Gamma_2 = 1$).  However, vertical base excitation does not couple
+vibration, the resulting SDOF upper bound is
+$\mathcal{R}_\mathrm{full} \approx 3.3 \times 10^4$ ($\Gamma_2 = 1$).  However,
+vertical base excitation does not couple
 perfectly into the $n = 2$ mode: the modal participation factor
 $\Gamma_2 \approx 0.48$ (\S\ref{sec:coupling_ratio}) reduces the effective
 mechanical displacement to about half the SDOF value, giving a corrected

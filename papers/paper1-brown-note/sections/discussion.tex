@@ -6,13 +6,20 @@
 
 \input{figures/stick_figure}
 
-Figure~\ref{fig:stick_figure} summarises this contrast schematically.  The central result of this study is the upper-bound coupling ratio
-$3.3 \times 10^4$ separating mechanical from airborne coupling efficiency for
-\SI{120}{\decibel} SPL airborne excitation and
+Figure~\ref{fig:stick_figure} summarises this contrast schematically.  The
+central result of this study is the separation between the airborne and
+mechanical transfer functions, not any single exposure-pair ratio.
+Canonically, $H_\mathrm{mech}/H_\mathrm{air}
+\approx 6.5 \times 10^6\,\si{\pascal\second\squared\per\metre}$ before the
+modal-participation correction, and Monte Carlo analysis shows that this
+transfer-function contrast remains decisive across physiologically plausible
+parameter ranges.  For the commonly quoted reference pair
+(\SI{120}{\decibel} SPL airborne excitation and
 $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS whole-body
-vibration under the SDOF idealisation ($\Gamma_2 = 1$).  Including the
-canonical participation factor $\Gamma_2 \approx 0.48$ reduces this to
-$\sim 1.6 \times 10^4$
+vibration), the same transfer-function separation implies the SDOF upper-bound
+displacement ratio $\mathcal{R}_\mathrm{full} \approx 3.3 \times 10^4$;
+including the canonical participation factor $\Gamma_2 \approx 0.48$ reduces
+this to $\sim 1.6 \times 10^4$
 (Tables~\ref{tab:airborne}--\ref{tab:mechanical}).  The physical origin of
 this disparity lies in two independent mechanisms: a geometric filtering
 penalty that suppresses modal-pressure content, and an impedance mismatch
@@ -97,10 +104,11 @@ activation range of mechanosensitive PIEZO1 and PIEZO2 ion channels
 cell-culture experiments; see Limitation~9).  In the modern mechanotransduction
 literature, the more relevant gastrointestinal transducer is probably PIEZO2:
 somatosensory-neuron PIEZO2 signalling has now been shown to regulate gut
-transit directly \cite{ServinVences2023}.  Reaching the \SI{1}{\micro\metre} cellular benchmark on the energy-consistent basis
-requires approximately \SI{151}{\decibel}
-(cf.\ \SI{135}{\decibel} for the pressure-based upper-bound estimate;
-Table~\ref{tab:uq_summary}),
+transit directly \cite{ServinVences2023}.  Reaching the \SI{1}{\micro\metre}
+cellular benchmark on the energy-consistent basis requires approximately
+\SI{151}{\decibel} (Table~\ref{tab:uq_summary} gives a median of
+\SI{152}{\decibel} with a 90\% credible interval of
+\SIrange{145}{156}{\decibel}),
 a level associated with severe acoustic hazards and encountered only in
 explosive blasts and rocket launches.  Even at
 this extreme, the displacement remains three
@@ -137,7 +145,7 @@ interactions, anatomical intermittency, and local mechanotransduction.
 \subsection{Clinical and Occupational Relevance}
 \label{sec:disc:clinical}
 
-The coupling disparity has direct implications for occupational exposure
+The transfer-function disparity has direct implications for occupational exposure
 standards.  ISO~2631-1 specifies frequency-weighted acceleration limits for
 whole-body vibration, with the highest sensitivity weighting in the
 \SIrange{4}{8}{\hertz} band---precisely the range where our model predicts
@@ -258,14 +266,15 @@ the conclusions.
     sensitivity study}: it shows the range of possible frequencies under
     progressively constrained assumptions, from a free sphere
     ($f_2 = \SI{4.13}{\hertz}$) to 25\% surface clamped
-    ($f_2 = \SI{3.66}{\hertz}$, $-11.4\%$).  That clamping
-    \emph{lowers} $f_2$ is a consequence of the fluid-dominated inertia:
-    the added mass ($7.4\times$ the shell mass for $n=2$) means that
-    constraining the wall reduces the effective modal stiffness more than
-    it reduces the kinetic energy.  The entire bracketed range lies well
-    within the material-property uncertainty band, and the coupling
-    ratio is unaffected because both excitation pathways address the same
-    modal structure.
+    ($f_2 = \SI{3.66}{\hertz}$, $-11.4\%$).  Within the limited resolution
+    of the present Ritz basis, these shifts suggest that fluid-dominated
+    inertia may blunt the frequency impact of partial clamping, but that
+    interpretation should be treated as illustrative rather than definitive
+    until a formal convergence study is performed.  The entire bracketed range
+    lies well within the material-property uncertainty band.  Boundary
+    conditions do, however, affect the mechanical pathway through the modal
+    participation factor $\Gamma_2$ (\S\ref{sec:coupling_ratio}), so the
+    transfer-function separation remains large but is not literally unchanged.
 
   \item \textbf{Thin-shell approximation.}  The wall-thickness-to-radius
     ratio ($h/R \approx 0.06$) lies near the conventional upper bound of
@@ -296,7 +305,7 @@ the conclusions.
     varying $c/a$ from 0.3 (extremely oblate) to 3.0 (extremely prolate)
     changes $f_2$ by less than \SI{1}{\percent}.  The Ritz oblate-spheroid
     correction introduces additional aspect-ratio dependence (see
-    Section~\ref{sec:formulation}), but the geometry enters the coupling
+    Table~\ref{tab:oblate_correction}), but the geometry enters the coupling
     ratio primarily through $R_{\mathrm{eq}}$, so the qualitative results
     are insensitive to the choice of spheroidal idealisation.
 
