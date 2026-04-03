@@ -85,30 +85,22 @@ reflecting the log-normal distribution of $E$.
 \begin{table}[htbp]
   \centering
   \caption{Monte Carlo uncertainty quantification results ($N = 10{,}000$).
-  Airborne displacement $\xi_\mathrm{air}$ and the ratio $\mathcal{R}_\mathrm{full}$ use the
-  pressure-based airborne upper bound at \SI{120}{\decibel}; the
-  energy-consistent airborne displacement is ${\sim}6.5\times$ smaller, so the
-  corresponding ratio at fixed mechanical loading is ${\sim}6.5\times$ larger.}
+  The airborne displacement and reference-pair displacement ratio
+  $\mathcal{R}_\mathrm{full}$ use the energy-consistent formulation at
+  \SI{120}{\decibel}; the pressure-based value is retained elsewhere only as a
+  labelled upper bound for comparison.  The mechanical row uses the same
+  reference loading as Section~\ref{sec:coupling}:
+  $a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$.}
   \label{tab:uq_summary}
   \begin{tabular}{lccc}
     \hline
     Quantity & Median & 90\% CI & Units \\
     \hline
     $f_2$ & 6.4 & [3.3, 15.5] & Hz \\
-    $\xi_\mathrm{air}$ (120 dB, pressure-based upper bound) & 0.18 & [0.11, 0.39] & $\mu$m \\
-    $\xi_\mathrm{mech}$ (0.5 m/s$^2$) & 1800 & [300, 8200] & $\mu$m \\
-    $\mathcal{R}_\mathrm{full}$ (pressure-based airborne) & $10^4$ & [$2 \times 10^3$, $3 \times 10^4$] & --- \\
-    SPL for PIEZO1/2 activation (pressure-based, 1\,$\mu$m)\footnote{The pressure-based displacement
-      overestimates the true wall motion by a factor of ${\approx}\,6.5$
-      because it neglects the extremely low radiation efficiency
-      ($4\zeta_\mathrm{rad}\zeta_\mathrm{struct}/\zeta_\mathrm{total}^2 \sim 3 \times 10^{-14}$).
-      Using the energy-consistent displacement
-      (\S\ref{sec:coupling}), the PIEZO1/2 benchmark rises to
-      ${\approx}\,\SI{151}{\decibel}$---a \SI{16}{\decibel} correction
-      that represents the physically realisable SPL.}
-      & 135 & [128, 139] & dB \\
-    \hline
-    \textbf{SPL for PIEZO1/2 activation (energy-consistent)} & $\mathbf{\approx\,151}$ & --- & dB \\
+    $\xi_\mathrm{air}$ (\SI{120}{\decibel}, energy-consistent) & 0.027 & [0.016, 0.059] & $\mu$m \\
+    $\xi_\mathrm{mech}$ (\SI{0.1}{\metre\per\second\squared}) & 360 & [59, 1640] & $\mu$m \\
+    $\mathcal{R}_\mathrm{full}$ (\SI{120}{\decibel} vs.\ \SI{0.1}{\metre\per\second\squared}) & $1.3 \times 10^4$ & [$2.4 \times 10^3$, $4.6 \times 10^4$] & --- \\
+    SPL for PIEZO1/2 activation (energy-consistent, 1\,$\mu$m) & 152 & [145, 156] & dB \\
     \hline
   \end{tabular}
 \end{table}
@@ -119,11 +111,11 @@ All other parameters contribute less than 10\% individually.  This result
 has important experimental implications: any future verification effort should
 prioritise \emph{in vivo} measurement of abdominal wall stiffness, as this
 single parameter dominates the uncertainty budget (Figure~\ref{fig:sobol}).
-Because Table~\ref{tab:uq_summary} uses the pressure-based airborne upper bound
-and $a_\mathrm{rms} = \SI{0.5}{\metre\per\second\squared}$ for the mechanical
-loading, its $\mathcal{R}_\mathrm{full}$ row should not be confused with the headline
-energy-consistent SDOF upper bound of $3.3 \times 10^4$ quoted in
-Section~\ref{sec:coupling}.
+Table~\ref{tab:uq_summary} now uses the same energy-consistent airborne
+displacement and the same \SI{120}{\decibel}/\SI{0.1}{\metre\per\second\squared}
+reference pair as Section~\ref{sec:coupling}, so its
+$\mathcal{R}_\mathrm{full}$ row is directly comparable with the canonical SDOF
+upper bound of $3.3 \times 10^4$ quoted there.
 
 \begin{figure}[htbp]
   \centering
@@ -187,7 +179,12 @@ analysis using representative alternative parameters
 $\rho_f = \SI{1000}{\kilo\gram\per\metre\cubed}$,
 $P_\mathrm{iap} = \SI{1500}{\pascal}$) chosen to match a specific mesh
 geometry; these results are presented for relative comparison rather than
-absolute prediction.  The free-sphere Ritz frequency ($f_2 = \SI{4.13}{\hertz}$) agrees
+absolute prediction.  These boundary-condition frequency shifts are
+illustrative; the two-degree-of-freedom Ritz basis provides upper bounds on
+natural frequencies but has not been subjected to a formal convergence study.
+The shifts should therefore be interpreted as order-of-magnitude estimates
+rather than precise predictions.  The free-sphere Ritz frequency ($f_2 =
+\SI{4.13}{\hertz}$) agrees
 with the analytical prediction (\SI{4.26}{\hertz}) to within 3\%, providing a
 useful numerical check.  The most constrained case---25\%
 of the shell surface clamped---reduces $f_2$ by only \SI{11.4}{\percent}.  Even
@@ -210,22 +207,24 @@ the hemisphere-clamped case shifts the frequency by a mere \SI{5.8}{\percent}.
   \end{tabular}
 \end{table}
 
-The insensitivity to boundary conditions has a clear physical origin: the fluid
-added mass for the $n=2$ mode is $7.4\times$ the shell mass, so the system
-inertia is dominated by the enclosed fluid rather than the wall.  In a dry
-(empty) shell, the same boundary conditions would shift the frequency by
+Within the limited resolution of the present Ritz basis, the frequency appears
+relatively insensitive to boundary conditions.  A plausible physical reason is
+that the fluid added mass for the $n=2$ mode is $7.4\times$ the shell mass, so
+the system inertia is dominated by the enclosed fluid rather than the wall.  In
+a dry (empty) shell, the same boundary conditions would shift the frequency by
 approximately \SI{33}{\percent}---but once the cavity is fluid-filled, the
-added mass swamps the boundary stiffening effect.
+added mass appears to swamp much of the boundary stiffening effect.
 Clamping part of the shell forces the incompressible fluid to redistribute
 through a smaller aperture, increasing the effective modal mass.  When this
 kinetic-energy increase exceeds the additional potential energy from the
-constraint, the net effect is a frequency decrease.  We note that the 2-DOF
-Ritz basis, which carries a ${\sim}\,9\%$ bias at the sphere limit, may also
-contribute to this effect.
-The \SI{6}{\percent} shift
+constraint, the net effect is a frequency decrease.  We also note that reduced
+2-DOF Ritz bases can carry several-percent sphere-limit bias; the exploratory
+oblate calculation below shows a ${\sim}\,9\%$ offset, and comparable
+discretisation error may also contribute here.
+The illustrative \SI{6}{\percent} shift
 is well within the $\pm 50$--$100\%$ uncertainty band set by material property
-variability (\S\ref{sec:results}), confirming that the free-shell model is an
-adequate approximation for the present purposes.
+variability (\S\ref{sec:results}), suggesting that the free-shell model is an
+adequate first approximation for the present purposes.
 
 \subsection{Oblate Spheroid Correction}
 
