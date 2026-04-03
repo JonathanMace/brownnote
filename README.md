@@ -22,7 +22,7 @@ Ten papers. Four target journals. Eight submission-ready with complete packages,
 
 | # | Title | Venue | Status | One-Line Result | Draft |
 |---|-------|-------|--------|-----------------|-------|
-| 1 | **The Brown Note** | *JSV* | Submission-ready (46 pp) | R ≈ 3.3 × 10⁴ — the resonance is real; the acoustic path to it is not | [PDF](papers/paper1-brown-note/drafts/draft_2026-04-02_2227.pdf) |
+| 1 | **The Brown Note** | *JSV* | Submission-ready (46 pp) | R ≈ 3.3 × 10⁴ — the resonance is real; the acoustic path to it is not | [PDF](papers/paper1-brown-note/drafts/draft_2026-04-02_2301.pdf) |
 | 2 | **Gas Pockets** | *JASA* | Submission-ready (16 pp) | Tissue-constrained bubbles couple 35–100× better than the whole cavity | [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-30_2332.pdf) |
 
 ### Act II — The Evidence
@@ -40,7 +40,7 @@ Ten papers. Four target journals. Eight submission-ready with complete packages,
 |---|-------|-------|--------|-----------------|-------|
 | 7 | **Can You Hear Rind Stiffness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to effective rind stiffness — folk wisdom formalised with restrained claims | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-31_0939.pdf) |
 | 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-31_0854.pdf) |
-| 9 | **Geometry-dependent identifiability** | *JSV Short* | Submission-ready (6 pp) | Oblate shells lift the inverse degeneracy; prolate shells do not | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-03-31_1117.pdf) |
+| 9 | **Geometry-dependent identifiability** | *JSV Short* | Submission-ready (6 pp) | Oblate shells lift the inverse degeneracy; prolate shells do not | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-04-02_2301.pdf) |
 | 🎓 | **Capstone** | *Proc. R. Soc. A* | Submission-ready (26 pp) | *Geometry mediates excitation, resonance, and identifiability* | [PDF](papers/paper10-capstone/drafts/draft_2026-03-31_1134.pdf) |
 
 See also: [Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)
