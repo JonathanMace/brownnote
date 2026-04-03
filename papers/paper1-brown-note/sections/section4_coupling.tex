@@ -10,18 +10,21 @@ exposure conditions, the answer is effectively no.
 At \SI{4}{\hertz}, the acoustic wavelength in air exceeds \SI{85}{\metre}---
 some 500 times the abdominal radius.  In this regime the abdomen is
 acoustically compact.  Table~\ref{tab:airborne} quantifies the resulting weak
-coupling using the energy-consistent reciprocity analysis developed in
-\S\ref{sec:formulation}.  Modern analyses of scattering by pressurised elastic
-shells reach the same qualitative conclusion: long-wavelength radiation and
-absorption by low-order shell modes are strongly suppressed
-\cite{Godin2023}.
+coupling.  The energy-consistent displacement in column~3 is derived from the
+absorption cross-section (Eq.~\ref{eq:sigma_abs} below); the reciprocity
+argument is developed fully in \S\ref{sec:energy_budget}.  Modern analyses of
+scattering by pressurised elastic shells reach the same qualitative
+conclusion: long-wavelength radiation and absorption by low-order shell modes
+are strongly suppressed \cite{Godin2023}.
 
 \begin{table}[htbp]
   \centering
   \caption{Energy-consistent airborne displacement at $n=2$ resonance
   ($f_2 = \SI{4.0}{\hertz}$, $Q = 4.0$, canonical parameters).
-  The pressure-based upper-bound estimate overestimates by a factor of ${\approx}\,6.5$
-  (ratio of $\xi_\mathrm{pressure}$ to $\xi_\mathrm{energy}$).}
+  Displacements scale linearly with incident pressure; intermediate values may
+  be interpolated.  The pressure-based upper-bound estimate overestimates by a
+  factor of ${\approx}\,6.5$ (ratio of $\xi_\mathrm{pressure}$ to
+  $\xi_\mathrm{energy}$).}
   \label{tab:airborne}
   \begin{tabular}{rcccc}
     \toprule
@@ -29,14 +32,21 @@ absorption by low-order shell modes are strongly suppressed
     $\xi_\mathrm{energy}$ ($\mu$m) &
     $\xi_\mathrm{pressure}$ upper bound ($\mu$m) & Energy-consistent $>\SI{1}{\micro\metre}$? \\
     \midrule
-    100 & 2.0  & 0.003 & 0.018 & No \\
-    110 & 6.3  & 0.009 & 0.058 & No \\
     120 & 20.0 & 0.028 & 0.18  & No \\
-    130 & 63.2 & 0.087 & 0.58  & No \\
-    140 & 200  & 0.275 & 1.84  & No \\
+    151 & 710  & 0.99  & 6.4   & Nearly \\
     \bottomrule
   \end{tabular}
 \end{table}
+
+At the $n = 2$ resonance, the energy-consistent airborne transfer function is
+\begin{equation}
+  H_\mathrm{air}(\omega_2)
+  = \frac{\xi}{p_\mathrm{inc}}
+  \approx 1.4 \times 10^{-9}\,\si{\metre\per\pascal}.
+  \label{eq:H_air}
+\end{equation}
+The displacements in Table~\ref{tab:airborne} therefore scale linearly with
+incident pressure.
 
 At \SI{120}{\decibel} SPL---a level exceeding the conventional threshold of
 discomfort, and roughly the level at
@@ -83,9 +93,9 @@ Table~\ref{tab:mechanical} shows substantially stronger coupling.
   \centering
   \caption{Mechanical coupling at $n=2$ resonance
   ($f_2 = \SI{4.0}{\hertz}$, $Q = 4.0$, $\Gamma_2 = 1$).  The EU Directive 2002/44/EC
-  action value is \SI{0.5}{\metre\per\second\squared}.  Displacements assume
-  perfect modal participation ($\Gamma_2 = 1$); the corrected values
-  (\S\ref{sec:coupling_ratio}) are approximately half those shown.}
+  action value is \SI{0.5}{\metre\per\second\squared}.  Displacements scale
+  linearly with base acceleration; intermediate values may be interpolated.
+  The corrected values (\S\ref{sec:coupling_ratio}) use $\Gamma_2 = 0.48$.}
   \label{tab:mechanical}
   \begin{tabular}{rcccc}
     \toprule
@@ -96,14 +106,21 @@ Table~\ref{tab:mechanical} shows substantially stronger coupling.
     \midrule
     0.1 & 229  & 917  & 440  & Yes \\
     0.5 (EU action) & 1147  & 4586 & 2201 & Yes \\
-    1.0 & 2293 & 9173 & 4403 & Yes \\
-    1.15 (EU limit) & 2637 & 10549 & 5064 & Yes \\
     \bottomrule
     \multicolumn{5}{l}{\textsuperscript{$\dagger$}Corrected for
       modal participation: $\xi_\mathrm{corr} = \Gamma_2\,\xi_\mathrm{rel}$
       with $\Gamma_2 = 0.48$.}
   \end{tabular}
 \end{table}
+
+At the same resonance, the corresponding SDOF mechanical transfer function is
+\begin{equation}
+  H_\mathrm{mech}(\omega_2)
+  = \frac{\xi}{a_\mathrm{rms}}
+  \approx 9.17 \times 10^{-3}\,\mathrm{m}/(\mathrm{m\,s^{-2}}).
+  \label{eq:H_mech}
+\end{equation}
+before the modal-participation correction discussed below.
 
 At the EU action value of \SI{0.5}{\metre\per\second\squared}, the predicted
 displacement exceeds the PIEZO cellular benchmark by more than three orders of
@@ -118,71 +135,127 @@ abdominally relevant modes in this same band \cite{Zheng2012,Gao2021}.
 \subsection{The Coupling Ratio}
 \label{sec:coupling_ratio}
 
-The ratio of mechanical to airborne displacement, evaluated for
-\SI{120}{\decibel} SPL airborne excitation and
-$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ RMS mechanical
-excitation, defines the headline SDOF upper bound:
+The system property of interest is the pair of transfer functions in
+Eqs.~\eqref{eq:H_air} and \eqref{eq:H_mech}, not a single universal
+dimensionless number.  For any chosen airborne pressure and mechanical
+acceleration, the corresponding displacement ratio is
 \begin{equation}
-  \mathcal{R}_\mathrm{full} = \frac{\xi_\mathrm{mech}}{\xi_\mathrm{air}}
-  \approx \frac{917}{0.028} \approx 3.3 \times 10^4.
+  \mathcal{R}(\omega)
+  = \frac{H_\mathrm{mech}(\omega)\,a_\mathrm{rms}}
+         {H_\mathrm{air}(\omega)\,p_\mathrm{inc}}.
   \label{eq:coupling_ratio}
 \end{equation}
-This four-order-of-magnitude gap depends primarily on the dimensionless
-frequency parameter $ka$ and the damping ratio; the qualitative ordering
-persists across plausible parameter ranges, although tissue-property
-variations affect the absolute magnitudes.
+Equation~\eqref{eq:coupling_ratio} is therefore pair-specific: the dimensionless
+ratio depends on the selected exposure levels.  At the $n = 2$ resonance, the
+transfer-function ratio itself,
+\[
+  \frac{H_\mathrm{mech}}{H_\mathrm{air}}
+  \approx 6.5 \times 10^{6}\,\si{\pascal\second\squared\per\metre},
+\]
+is a property of the shell--fluid system.  Using
+$p_\mathrm{inc} = \SI{20}{\pascal}$ (\SI{120}{\decibel} SPL) and
+$a_\mathrm{rms} = \SI{0.1}{\metre\per\second\squared}$ gives the headline SDOF
+upper bound
+\[
+  \mathcal{R}_\mathrm{full}
+  \approx \frac{9.17 \times 10^{-3}\times 0.1}
+                {1.4 \times 10^{-9}\times 20}
+  \approx 3.3 \times 10^{4}.
+\]
+Equivalently, to produce the same abdominal-wall displacement as
+\SI{120}{\decibel} SPL airborne exposure, the required mechanical acceleration
+is only
+\begin{equation}
+  a_\mathrm{eq}
+  = \frac{H_\mathrm{air}\,p_\mathrm{inc}}{H_\mathrm{mech}}
+  \approx 3.1 \times 10^{-6}\,\si{\metre\per\second\squared},
+  \label{eq:a_eq}
+\end{equation}
+which is 5.2 orders of magnitude below the EU occupational action value of
+\SI{0.5}{\metre\per\second\squared}.  The precise dimensionless ratio changes
+with the chosen reference pressure and acceleration, but the qualitative
+ordering---mechanical coupling far exceeding airborne coupling---is independent
+of that choice because it rests on the large transfer-function ratio
+$H_\mathrm{mech}/H_\mathrm{air}$.  The ratio carries units of
+\si{\pascal\second\squared\per\metre}; obtaining a dimensionless comparison at
+any frequency requires choosing a reference pressure and acceleration, but the
+enormous gap persists for all realistic exposure pairings.
 
 \paragraph{Modal participation.}
-The mechanical displacement in Eq.~\eqref{eq:coupling_ratio} assumes perfect
+Vertical base excitation displaces the constrained portion rigidly, imposing a
+velocity boundary condition on the free shell at $\theta = \theta_c$.
+Figure~\ref{fig:constraint_geometry} defines the corresponding geometry.  The
+mechanical displacement in Eq.~\eqref{eq:coupling_ratio} assumes perfect
 coupling of vertical base excitation into the $n=2$ mode (modal participation
 factor $\Gamma_2 = 1$).  The participation factor for mode~$n$ under vertical
 base excitation of the oblate spheroid is
 \begin{equation}
   \Gamma_n
   = \frac{a\,\displaystyle\left|\int_{\cos\theta_c}^{1}
-      u\,P_n(u)\,\mathrm{d}u\right|}
+      \eta\,P_n(\eta)\,\mathrm{d}\eta\right|}
     {\displaystyle\int_{-1}^{1}
-      P_n^{2}(u)\,\sigma(u)\,\mathrm{d}u},
+      P_n^{2}(\eta)\,\sigma(\eta)\,\mathrm{d}\eta},
   \label{eq:participation_factor}
 \end{equation}
-where $u = \cos\theta$, $P_n$ is the Legendre polynomial of degree~$n$,
+where $\eta = \cos\theta$, $P_n$ is the Legendre polynomial of degree~$n$,
 $\theta_c$ is the polar angle below which the shell is rigidly constrained
 by the pelvis and spine, and
-$\sigma(u) = \sqrt{c^{2} + (a^{2}-c^{2})\,u^{2}}$
-is the oblate-spheroid surface metric factor.  Note that the denominator
-integrates $P_n^2$ over the full sphere ($u \in [-1,1]$) weighted by the
-surface metric, rather than using a modal-mass normalisation; this convention
-differs from the standard structural-dynamics practice of normalising by
-generalised mass.
-Physically, $\Gamma_2$ quantifies how effectively vertical base excitation
-couples into the $n=2$ flexural mode.  For a completely free sphere, symmetry
-dictates $\Gamma_2 = 0$ exactly: vertical translation cannot excite a
-quadrupolar deformation.  Partial skeletal constraint at the pelvis
-($\theta_c = 2\pi/3$) breaks that symmetry, yielding $\Gamma_2 \approx 0.48$,
-so roughly half of the vertical excitation feeds into the oblate--prolate
-oscillation.
-For a free sphere ($\theta_c = \pi$), the numerator reduces to
-$\int_{-1}^{1} u\,P_n(u)\,\mathrm{d}u$, which vanishes for $n \neq 1$ by
-Legendre orthogonality; a free sphere therefore has $\Gamma_2 = 0$ exactly.
-Partial skeletal constraint (canonical value $\theta_c = 2\pi/3$, i.e.\ the
-lower third of the shell is fixed) breaks this orthogonality, giving
-$\Gamma_2 \approx 0.48$ for the canonical model.  The participation factor
-is moderately sensitive to the constraint angle: $\Gamma_2$ ranges from
-approximately 0.3 at $\theta_c = \pi/2$ (lower half constrained) to 0.7 at
-$\theta_c = 5\pi/6$ (only the lowest sixth constrained).  Including this correction
-reduces the mechanical displacement to about 48\% of the SDOF value and the
-coupling ratio to $\sim 1.6 \times 10^4$.  The qualitative conclusion---a
-four-order-of-magnitude gap---is unaffected, but $\mathcal{R}_\mathrm{full}$ as reported in
-Eq.~\eqref{eq:coupling_ratio} should be understood as an upper bound
-corresponding to the SDOF idealisation.
+$\sigma(\eta) = \sqrt{c^{2} + (a^{2}-c^{2})\,\eta^{2}}$
+is the oblate-spheroid surface metric factor.  The numerator integral
+quantifies the overlap between the vertical base-displacement pattern
+($\propto \cos\theta = \eta$) and the mode shape $P_n(\eta)$ over the
+unconstrained cap; the denominator normalises that overlap by the corresponding
+modal mass on the full oblate surface.  In this convention, $\Gamma_n$ measures
+how efficiently rigid vertical support motion projects onto the $n$th shell
+mode.
 
-\subsection{Energy Budget}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.58\textwidth]{figures/fig_constraint_geometry.pdf}
+  \caption{Constraint geometry for vertical base excitation.  The inferior
+  portion of the shell is rigidly supported below the polar angle $\theta_c$,
+  representing pelvic and spinal attachment, while the superior cap remains
+  free to deform.}
+  \label{fig:constraint_geometry}
+\end{figure}
+
+For a free sphere ($\theta_c = \pi$), the numerator reduces to
+$\int_{-1}^{1} \eta\,P_n(\eta)\,\mathrm{d}\eta$, which vanishes for $n \neq 1$
+by Legendre orthogonality; a free sphere therefore has $\Gamma_2 = 0$ exactly.
+At the opposite extreme, $\theta_c \rightarrow 0$ leaves no unconstrained cap,
+so the overlap integral also vanishes.  Partial skeletal constraint breaks the
+free-sphere orthogonality and yields finite coupling into the $n=2$ mode.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\textwidth]{figures/fig_gamma2_thetac.pdf}
+  \caption{Modal participation factor $\Gamma_2$ as a function of constraint
+  angle $\theta_c$ for the canonical oblate shell ($a = \SI{0.18}{\metre}$,
+  $c = \SI{0.12}{\metre}$).  The factor vanishes at both extremes: fully
+  clamped ($\theta_c = 0$) and free ($\theta_c = \pi$).  The canonical pelvic
+  constraint ($\theta_c = 2\pi/3$, dashed line) gives $\Gamma_2 \approx 0.48$.}
+  \label{fig:gamma2}
+\end{figure}
+
+The participation factor is non-monotonic in the constraint angle
+(Fig.~\ref{fig:gamma2}): it vanishes at both extremes (fully clamped,
+$\theta_c \rightarrow 0$, and free, $\theta_c = \pi$) and reaches a maximum
+$\Gamma_2 \approx 0.49$ near $\theta_c \approx 125^\circ$.  At the canonical
+pelvic constraint ($\theta_c = 2\pi/3$), $\Gamma_2 \approx 0.48$, close to the
+peak; at $\theta_c = \pi/2$ (lower half constrained), $\Gamma_2 \approx 0.37$.
+Including this correction reduces the mechanical displacement to about 48\% of
+the SDOF value and the coupling ratio to $\sim 1.6 \times 10^4$.  The
+qualitative conclusion---a four-order-of-magnitude gap---is unaffected, but
+the uncorrected $\mathcal{R}_\mathrm{full}$ reported above should be understood
+as an upper bound corresponding to the SDOF idealisation.
+
+\subsection{Energy Budget}\label{sec:energy_budget}
 
 We verify self-consistency through the absorption cross-section derived from
 reciprocity \cite{Junger1986,Godin2023}.  The radiation efficiency of
 low-order shell modes is vanishingly small when $ka \ll 1$
 \cite{FahyGardonio2007}; formally:
-\begin{equation}
+\begin{equation}\label{eq:sigma_abs}
   \sigma_\mathrm{abs} = \frac{(2n+1)\lambda^2}{4\pi}
   \,\frac{4\,\zeta_\mathrm{rad}\,\zeta_\mathrm{struct}}{(\zeta_\mathrm{rad} + \zeta_\mathrm{struct})^2},
 \end{equation}

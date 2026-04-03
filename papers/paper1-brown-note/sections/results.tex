@@ -162,6 +162,24 @@ These configurations represent surrogate constraint cases chosen to bracket
 the likely effect of anatomical boundary conditions, rather than a strict
 monotonic continuation of a single geometry.
 
+The Rayleigh--Ritz analysis employs a two-degree-of-freedom trial displacement
+for each mode order $n$:
+\begin{equation}
+  w(\eta) = \beta\, P_n(\eta), \qquad
+  u(\theta) = \alpha\, \sin\theta\, P_n'(\cos\theta),
+\end{equation}
+where $w$ is the normal (radial) displacement, $u$ is the tangential
+(meridional) displacement, $P_n$ denotes the Legendre polynomial of degree
+$n$, $\eta = \cos\theta$, and $\alpha$, $\beta$ are the Ritz coefficients
+determined by minimising the Rayleigh quotient.  The basis functions are
+chosen from the Lamb-mode family of free-sphere displacements; for partially
+constrained configurations, the boundary conditions are enforced weakly through
+the energy functional rather than strongly at discrete points.  In a strict
+variational setting, such admissible trial functions provide upper bounds on
+the natural frequencies; in the present reduced two-parameter implementation,
+the free-shell Ritz frequency remains within 3\% of the closed-form Lamb value
+(Table~\ref{tab:bc_results}).
+
 Table~\ref{tab:bc_results} presents the results.  To assess the sensitivity of
 the modal frequencies to boundary conditions, we performed a comparative
 analysis using representative alternative parameters
