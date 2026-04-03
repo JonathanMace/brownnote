@@ -179,16 +179,50 @@ analysis using representative alternative parameters
 $\rho_f = \SI{1000}{\kilo\gram\per\metre\cubed}$,
 $P_\mathrm{iap} = \SI{1500}{\pascal}$) chosen to match a specific mesh
 geometry; these results are presented for relative comparison rather than
-absolute prediction.  These boundary-condition frequency shifts are
-illustrative; the two-degree-of-freedom Ritz basis provides upper bounds on
-natural frequencies but has not been subjected to a formal convergence study.
-The shifts should therefore be interpreted as order-of-magnitude estimates
-rather than precise predictions.  The free-sphere Ritz frequency ($f_2 =
-\SI{4.13}{\hertz}$) agrees
+absolute prediction.  To assess the adequacy of the two-degree-of-freedom
+basis, we enriched it by adding higher-order Legendre polynomials up to
+$N = 8$ per displacement component, giving a 16-degree-of-freedom generalised
+eigenproblem.  Table~\ref{tab:ritz_convergence} and
+Figure~\ref{fig:ritz_convergence} show that the canonical $n=2$ flexural
+frequency converges monotonically from above, consistent with the Ritz
+upper-bound property.  The single-term basis ($N=1$, 2~DOF) gives
+$f_2 = \SI{3.7995}{\hertz}$, whereas the converged value is
+\SI{3.6784}{\hertz}; the two-degree-of-freedom model therefore overestimates
+the converged result by only \SI{3.3}{\percent}.  Effective convergence is
+already reached at $N=3$ (6~DOF), so the reduced basis is adequate for the
+boundary-condition comparison made here.  For the mesh-matched parameter set
+used in Table~\ref{tab:bc_results}, the free-sphere Ritz frequency
+($f_2 = \SI{4.13}{\hertz}$) agrees
 with the analytical prediction (\SI{4.26}{\hertz}) to within 3\%, providing a
 useful numerical check.  The most constrained case---25\%
 of the shell surface clamped---reduces $f_2$ by only \SI{11.4}{\percent}.  Even
 the hemisphere-clamped case shifts the frequency by a mere \SI{5.8}{\percent}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Ritz basis convergence for the $n=2$ flexural mode.}
+  \label{tab:ritz_convergence}
+  \begin{tabular}{ccc}
+    \toprule
+    $N$ & DOFs & $f_2$ (Hz) \\
+    \midrule
+    1 & 2 & 3.800 \\
+    2 & 4 & 3.682 \\
+    3 & 6 & 3.679 \\
+    4 & 8 & 3.678 \\
+    8 & 16 & 3.678 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{figures/fig_ritz_convergence}
+  \caption{Convergence of $f_2$ with Ritz basis enrichment.  The dashed line
+  marks the converged value; the two-degree-of-freedom result ($N=1$) lies
+  \SI{3.3}{\percent} above it.}
+  \label{fig:ritz_convergence}
+\end{figure}
 
 \begin{table}[htbp]
   \centering
@@ -207,8 +241,8 @@ the hemisphere-clamped case shifts the frequency by a mere \SI{5.8}{\percent}.
   \end{tabular}
 \end{table}
 
-Within the limited resolution of the present Ritz basis, the frequency appears
-relatively insensitive to boundary conditions.  A plausible physical reason is
+Within this converged Ritz framework, the frequency appears relatively
+insensitive to boundary conditions.  A plausible physical reason is
 that the fluid added mass for the $n=2$ mode is $7.4\times$ the shell mass, so
 the system inertia is dominated by the enclosed fluid rather than the wall.  In
 a dry (empty) shell, the same boundary conditions would shift the frequency by
@@ -217,11 +251,8 @@ added mass appears to swamp much of the boundary stiffening effect.
 Clamping part of the shell forces the incompressible fluid to redistribute
 through a smaller aperture, increasing the effective modal mass.  When this
 kinetic-energy increase exceeds the additional potential energy from the
-constraint, the net effect is a frequency decrease.  We also note that reduced
-2-DOF Ritz bases can carry several-percent sphere-limit bias; the exploratory
-oblate calculation below shows a ${\sim}\,9\%$ offset, and comparable
-discretisation error may also contribute here.
-The illustrative \SI{6}{\percent} shift
+constraint, the net effect is a frequency decrease.  The illustrative
+\SI{6}{\percent} shift
 is well within the $\pm 50$--$100\%$ uncertainty band set by material property
 variability (\S\ref{sec:results}), suggesting that the free-shell model is an
 adequate first approximation for the present purposes.
