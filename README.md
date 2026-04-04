@@ -2,33 +2,33 @@
 
 Can sound make you soil yourself? No — but the reason why leads somewhere unexpected.
 
-The abdomen does have a real low-frequency flexural resonance near 4 Hz. The problem for the "brown note" is not resonance; it is coupling. Airborne sound couples so weakly to that mode that the story collapses as acoustics and becomes more interesting as shell mechanics, vibration, and inverse theory.
+The abdomen does have a real low-frequency flexural resonance near 4 Hz. The problem for the "brown note" is not resonance; it is coupling. Airborne sound couples so weakly to that mode that the story becomes less a myth to chase than a useful problem in shell mechanics, vibration, and inverse theory.
 
-The same shell model that explains why sound can't shake your insides also explains when you can (and can't) invert a resonance spectrum to recover the parameters that generated it.
+**Purely analytical at present.**
+
+The same shell model that explains why sound cannot shake your insides also explains when you can, and cannot, invert a resonance spectrum to recover the parameters that generated it.
 
 ## The Short Version
 
-At 120 dB SPL, the energy-consistent airborne displacement of the abdominal wall is only 0.028 μm. That is well below the roughly 1-2 μm PIEZO mechanotransduction range. The resonance is real; the airborne path to it is not.
+At 120 dB SPL, the energy-consistent airborne displacement of the abdominal wall is only 0.028 μm. That sits below the 0.5-2.0 μm cellular activation range usually associated with PIEZO mechanotransduction. The resonance is real; the airborne coupling to it is not.
 
-The transfer-function ratio makes the same point more formally: H_mech/H_air ≈ 6.5 × 10^6. Paper 1 is the definitive physics-based debunking. Paper 7 shows why the framework survived the debunking: the same shell mechanics can formalise the watermelon thump test as a rind-stiffness problem rather than folklore.
+A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1 resolves the mechanical-vs-airborne asymmetry. Paper 7 shows why the framework matters after that result: the same shell mechanics can map a watermelon tap tone to effective rind stiffness, which in turn leads directly to the identifiability questions taken up in Papers 8-10.
 
 ## If You Read Two Papers
 
-If you read only one paper, read Paper 1. If you want to know why the framework is useful beyond the joke, read Paper 7.
+If you read only one paper, read Paper 1. If you want to see why the framework is useful beyond the original question, read Paper 7.
 
 ### [Paper 1: The Brown Note](papers/paper1-brown-note/) — *Journal of Sound and Vibration*
 
 This is the paper that answers the question. It starts from a simple empirical asymmetry: whole-body vibration in the 4-8 Hz range can produce gastrointestinal effects, while airborne sound at the same frequencies does not. The model explains that asymmetry from first principles.
 
-At the n = 2 flexural resonance, ka is only about 0.01. The wavelength is enormous compared with the body, the air-tissue mismatch is severe, and the incident acoustic field barely drives the mode at all. Mechanical excitation transmitted through the body wall does not suffer those penalties.
-
-The conclusion is deliberately unglamorous and therefore trustworthy: there is a genuine abdominal resonance near 4 Hz, but the "brown note" is a mechanical story misremembered as an acoustic one.
+At the n = 2 flexural resonance, ka is only about 0.01. The wavelength is enormous compared with the body, the air-tissue mismatch is severe, and the incident acoustic field barely drives the mode at all. Mechanical excitation transmitted through the body wall does not suffer those penalties. The result is not that abdominal resonance is fictional; it is that the resonance is real while the airborne coupling is not.
 
 ### [Paper 7: The Watermelon Thump Test](papers/paper7-watermelon/) — *Postharvest Biology and Technology*
 
-This is the unexpected application. People really do tap watermelons and listen for a deep, resonant thump, but the practice has mostly lived as anecdote and market lore. Paper 7 turns that intuition into a quantitative shell model linking tap-tone frequency to effective rind stiffness.
+This is the unexpected bridge paper. People really do tap watermelons and listen for a deep, resonant thump, but the practice has mostly lived as anecdote and market lore. Paper 7 turns that intuition into a quantitative shell model that maps tap-tone frequency to effective rind stiffness.
 
-The claim is intentionally narrower than "ripeness prediction". The model supports stiffness and firmness inference, not validated eating-ripeness prediction, and the step from firmness to consumer ripeness still needs cultivar-specific calibration. What the paper does show is that the shell framework can formalise a practical nondestructive measurement problem.
+That is a narrower claim than "ripeness prediction". Inference to eating ripeness requires cultivar-specific calibration not yet demonstrated. What Paper 7 contributes is a forward model that works well enough to make the inverse question unavoidable: when does a resonance spectrum actually identify the parameters you care about?
 
 ## Supporting Analyses
 
@@ -42,17 +42,16 @@ Papers 2-6 are supporting analyses, not five unrelated grand claims. They test t
 | [P5 Borborygmi](papers/paper5-borborygmi/) | Gut sounds | Bubble-shell acoustics can account for clinically realistic stomach-growl frequencies. |
 | [P6 Sub-Bass Coupling](papers/paper6-sub-bass/) | Airborne vs structural bass | Reinforces that the floor and seat matter far more than the air. |
 
-## The Mathematics
+## Formal Results
 
-The later papers ask a harder question than "what resonates?": can you work backwards from a spectrum to the parameters that produced it?
+The theoretical spine of the programme is compact enough to state plainly:
 
-| Paper | Role |
-|---|---|
-| [P8 Kac Identifiability](papers/paper8-kac/) | Shows that the equivalent-sphere inverse problem is catastrophically ill-conditioned, and that oblate geometry can rescue identifiability. |
-| [P9 Lifting Theorem](papers/paper9-lifting-theorem/) | Sharpens the result: not all symmetry breaking helps equally; oblate shells lift the degeneracy, prolate shells do not. |
-| [P10 Capstone](papers/paper10-capstone/) | Intended synthesis of excitation, resonance, and identifiability across the programme; the synthesis is still in progress. |
+1. **Rank deficiency of equivalent-radius models.** Sphere-like equivalent-radius formulations are badly ill-conditioned for spectral inversion (P8, *Inverse Problems*).
+2. **Identifiability lifting by oblate asphericity.** Breaking spherical symmetry in the oblate direction decorrelates the inverse problem and improves conditioning (P8-P9).
+3. **Near-spherical conditioning asymptotics.** As spherical symmetry is restored, conditioning worsens sharply; the apparent finite floor in earlier low-order Ritz calculations was an artefact (P8-P10).
+4. **Forward adequacy ≠ inverse adequacy.** A model can predict resonance frequencies well and still fail as a parameter-identification tool; P7 is the motivating example, P8-P10 make the point formal.
 
-P8-P9 contain the current mathematical backbone. P10 is the synthesis in progress.
+P10 currently contains the formal results for the axisymmetric case; extension to non-axisymmetric geometries and experimental validation are the next steps.
 
 ## Key Results
 
@@ -61,7 +60,7 @@ P8-P9 contain the current mathematical backbone. P10 is the synthesis in progres
 | Flexural frequency f₂ (n = 2) | 3.95 Hz |
 | Breathing mode (n = 0) | 2490 Hz |
 | Airborne displacement ξ_air at 120 dB | 0.028 μm |
-| PIEZO threshold range | 1-2 μm |
+| PIEZO cellular activation range | 0.5-2.0 μm |
 | Transfer-function ratio H_mech/H_air | ≈ 6.5 × 10^6 |
 | Mechanical displacement ξ_mech at 0.1 m/s² RMS (SDOF upper bound) | 917 μm |
 | Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10^4 |
@@ -74,8 +73,8 @@ P8-P9 contain the current mathematical backbone. P10 is the synthesis in progres
 ## What This Repo Is and Isn't
 
 - **An analytical programme, not an experimental one.** The papers and code are modelling work; an experimental validation protocol exists, but it has not yet been executed.
-- **A rind-stiffness framework, not a magic ripeness oracle.** The watermelon application supports firmness-related stiffness inference; cultivar-specific calibration is still needed for ripeness claims.
-- **A mostly finished arc, not a closed book.** P1-P9 contain the current core results; P10 is the synthesis still being written.
+- **A rind-stiffness framework, not a ripeness oracle.** Paper 7 maps tap-tone frequency to effective rind stiffness; inference to eating ripeness requires cultivar-specific calibration not yet demonstrated.
+- **A mostly finished arc, not a closed book.** Papers 1-9 contain the current core results. Paper 10 extends them into a still-expanding synthesis.
 
 ## For Researchers
 
@@ -123,22 +122,22 @@ ratio = compare_airborne_vs_mechanical(model)
 ```text
 browntone/
 ├── papers/
-│   ├── paper1-brown-note/       # Definitive debunking
+│   ├── paper1-brown-note/       # Resolves the mechanical-vs-airborne asymmetry
 │   ├── paper2-gas-pockets/      # Supporting analysis
 │   ├── paper3-scaling-laws/     # Supporting analysis
 │   ├── paper4-bladder/          # Supporting analysis
 │   ├── paper5-borborygmi/       # Supporting analysis
 │   ├── paper6-sub-bass/         # Supporting analysis
-│   ├── paper7-watermelon/       # Watermelon thump-test / rind-stiffness application
+│   ├── paper7-watermelon/       # Watermelon thump-test / rind-stiffness bridge
 │   ├── paper8-kac/              # Identifiability theory
 │   ├── paper9-lifting-theorem/  # Oblate-prolate asymmetry
-│   └── paper10-capstone/        # Synthesis in progress
+│   └── paper10-capstone/        # Axisymmetric synthesis, extensions next
 ├── src/analytical/              # Core shell models and coupling calculations
 ├── tests/                       # Regression suite
 └── docs/                        # Research logs, validation plans, and notes
 ```
 
-The repository also contains the Copilot workflow used to produce the papers, but that infrastructure matters only insofar as it serves the science.
+This work was produced with AI assistance; for methodology and disclosure details, see [docs/ai-assisted-research.md](docs/ai-assisted-research.md).
 
 ## Licence
 
