@@ -154,7 +154,7 @@ the scalar reduction
 then the two geometric sensitivity directions cannot remain independent.  By
 the chain rule, every modal derivative with respect to the equatorial semi-axis
 $a$ is proportional to the corresponding derivative with respect to the polar
-semi-axis $c$.  In the scaled Jacobian $J_s$, the two geometry columns are
+semi-axis $c$.  In the scaled Jacobian $\widetilde{J}$, the two geometry columns are
 therefore collinear.  At the sphere this becomes physically transparent: a
 small perturbation in $a$ and a small perturbation in $c$ both act only by
 changing the same radius, so the geometry columns become proportional and one
@@ -217,7 +217,7 @@ so the improvement in identifiability does not arise because the resonance is
 dragged into a more convenient frequency band.  It arises because the higher
 flexural modes do \emph{not} sample the oblate shell in the same way.  Meridional
 and circumferential curvature changes are weighted differently by different
-mode shapes, so the $a$- and $c$-columns of $J_s$ cease to be parallel.  The
+mode shapes, so the $a$- and $c$-columns of $\widetilde{J}$ cease to be parallel.  The
 bladder study provides a useful supporting contrast here.  Its fill-dependent
 U-shaped curve shows that geometry and stiffness can compete strongly in the
 forward spectrum~\cite{BrowntoneP4}; the identifiability analysis in~\cite{BrowntoneP8}
@@ -310,15 +310,6 @@ similar low-order frequencies while restoring a usable inverse map with
 \end{equation}
 Small forward spectral error and good inverse conditioning are related only
 loosely, and sometimes not at all.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.85\textwidth]{figures/fig_forward_neq_inverse.pdf}
-  \caption{Forward adequacy does not imply inverse adequacy:
-    (a)~forward frequency errors remain small ($<$10\%) for both models,
-    (b)~condition numbers differ by eight orders of magnitude.}
-  \label{fig:forward_neq_inverse}
-\end{figure}
 
 The other applications reinforce the same lesson from different angles.  The
 bladder model predicts a clear forward phenomenon --- a minimum
