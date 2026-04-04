@@ -173,6 +173,18 @@ mode may be present in the spectrum, but geometry has already reduced how much
 incident power reaches it. 
 \end{proof}
 
+\noindent\textbf{Scope of Proposition~\ref{prop:p10_breit_wigner}.}
+Proposition~\ref{prop:p10_breit_wigner} is stated for the spherical
+partial-wave expansion and is exact only in the spherical limit.  For the
+oblate geometries considered here ($\varepsilon \approx 0.745$), the
+partial-wave cross-sections acquire correction terms involving oblate
+spheroidal harmonics.  However, the qualitative conclusion --- that low-order
+flexural modes couple inefficiently to airborne sound in the Rayleigh regime
+--- is robust: the $(ka)^{2n}$ suppression reflects the general multipole
+scaling and is not an artefact of spherical symmetry.  A quantitative
+treatment for oblate scattering would require the $T$-matrix formalism
+~\cite{MorseIngard1968} and is beyond the present scope.
+
 \subsection{Equivalent-radius reductions and lost geometric dimension}
 
 Equivalent-sphere models replace the two-parameter geometry $(a,c)$ by a single
@@ -331,8 +343,10 @@ expansion in the curvature parameter.
 
 \begin{proposition}[Regular near-spherical asymptotics]
 \label{prop:p10_asymptotics}
-Let $\varepsilon=\sqrt{1-c^2/a^2}$ parameterise a smooth one-parameter oblate
-family of Ritz shell models with $\varepsilon=0$ at the sphere.  Then the
+Consider a smooth one-parameter oblate family of Ritz shell models
+parameterised by the eccentricity
+$\varepsilon=\sqrt{1-c^2/a^2}$,
+with $\varepsilon=0$ at the sphere.  Then the
 smallest singular value of the scaled Jacobian satisfies
 \begin{equation}
   \sigma_3(\varepsilon)
@@ -342,7 +356,9 @@ smallest singular value of the scaled Jacobian satisfies
   \label{eq:p10_sigma_asymptotic}
 \end{equation}
 with $\lambda_1>0$ for the canonical oblate family considered
-in~\cite{BrowntoneP8,BrowntoneP9}.  In
+in~\cite{BrowntoneP8,BrowntoneP9}.  The analytic regularity of the eigenvalue
+perturbation is guaranteed by Kato's perturbation theory for linear
+operators~\cite{Kato1966}.  In
 particular,
 \begin{equation}
   \sigma_3(0)=0.
@@ -483,7 +499,10 @@ lives in the image space $\mathbb{R}^m$ whereas the inverse problem concerns
 the preimage structure in~$\Theta$.  A model can therefore reproduce measured
 frequencies well yet be wholly unable to distinguish the parameter
 combinations that produced them.
+\end{proof}
 
+\begin{remark}[Watermelon model as supporting example]
+\label{rem:p10_watermelon_example}
 An instructive companion example is provided by the watermelon model
 in~\cite{BrowntoneP7}: there the equivalent-sphere reduction succeeds precisely
 because geometry is fixed independently and the inverse target is effectively
@@ -492,7 +511,7 @@ long-standing distinction between residual minimisation and parameter
 observability~\cite{MottersheadFriswell1993,FriswellMottershead1995}.
 Forward adequacy is not false; it is simply insufficient for
 multivariate spectral inversion.
-\end{proof}
+\end{remark}
 
 \begin{remark}[Near-spherical divergence of the adequacy gap]
 \label{rem:p10_near_spherical_gap}
@@ -520,7 +539,7 @@ Figure~\ref{fig:forward_inverse_gap} illustrates this divergence numerically.
     $\kappa$ across all eccentricities, while the equivalent-sphere model (red)
     is structurally rank deficient everywhere.  Both models share the same
     forward-error curve, yet their inverse conditioning differs by eight orders
-    of magnitude.  The canonical operating point ($\varepsilon=0.75$, vertical
+    of magnitude.  The canonical operating point ($\varepsilon=0.745$, vertical
     dashed line) sits in a region where $\mathcal{E}_\mathrm{fwd}<10\%$ and
     $\kappa_\mathrm{sphere}/\kappa_\mathrm{oblate}\approx 2\times 10^{8}$.}
   \label{fig:forward_inverse_gap}
