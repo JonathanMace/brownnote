@@ -4,7 +4,7 @@ Can sound make you soil yourself? No — but the reason why leads somewhere unex
 
 The abdomen does have a real low-frequency flexural resonance near 4 Hz. The problem for the "brown note" is not resonance; it is coupling. Airborne sound couples so weakly to that mode that the story becomes less a myth to chase than a useful problem in shell mechanics, vibration, and inverse theory.
 
-**Purely analytical at present.**
+**Purely analytical at present.** A phantom validation protocol has been designed but not yet executed; see [docs/](docs/).
 
 The same shell model that explains why sound cannot shake your insides also explains when you can, and cannot, invert a resonance spectrum to recover the parameters that generated it.
 
@@ -12,7 +12,9 @@ The same shell model that explains why sound cannot shake your insides also expl
 
 At 120 dB SPL, the energy-consistent airborne displacement of the whole abdominal wall is only 0.028 μm. That sits below the 0.5-2.0 μm cellular activation range usually associated with PIEZO mechanotransduction. The resonance is real; the whole-abdomen airborne coupling to it is not.
 
-A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1 resolves the mechanical-vs-airborne asymmetry for whole-abdomen coupling, while Paper 2 shows that localised gas pockets are the notable exception. Paper 7 shows that the same shell mechanics can estimate effective rind stiffness from a watermelon tap tone. That forward problem leads directly to the identifiability questions taken up in Papers 8-10.
+A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1 resolves the mechanical-vs-airborne asymmetry for whole-abdomen coupling, while Paper 2 shows that localised gas pockets are the notable exception.
+
+Paper 7 shows that the same shell mechanics can estimate effective rind stiffness from a watermelon tap tone. That forward problem leads directly to the identifiability questions taken up in Papers 8-10.
 
 ## If You Read Two Papers
 
@@ -46,9 +48,9 @@ Papers 2-6 are supporting analyses, not five unrelated grand claims. They test t
 
 The theoretical spine of the programme is compact enough to state plainly:
 
-1. **Rank deficiency of equivalent-radius models.** Sphere-like equivalent-radius formulations are badly ill-conditioned for spectral inversion (P8, *Inverse Problems*).
-2. **Identifiability lifting by oblate asphericity.** Breaking spherical symmetry in the oblate direction decorrelates the inverse problem and improves conditioning (P8-P9).
-3. **Near-spherical conditioning asymptotics.** As spherical symmetry is restored, conditioning worsens sharply; the apparent finite floor in earlier low-order Ritz calculations was an artefact (P8-P10).
+1. **Rank deficiency of equivalent-radius models.** Sphere-like equivalent-radius formulations are badly ill-conditioned for spectral inversion (P8, targeting a suitable inverse-problems venue).
+2. **Identifiability lifting by oblate asphericity.** Oblate asphericity lifts identifiability, while prolate perturbations do not; the lifting is geometry-selective rather than generic (P8-P9).
+3. **Near-spherical conditioning asymptotics.** As spherical symmetry is restored, conditioning worsens sharply; the apparent finite floor in earlier low-order Ritz calculations was a discretisation artefact, and the correct limit is κ → ∞ as ε → 0 (P9-P10).
 4. **Forward adequacy ≠ inverse adequacy.** A model can predict resonance frequencies well and still fail as a parameter-identification tool; P7 is the motivating example, P8-P10 make the point formal.
 
 P10 currently contains the formal results for the axisymmetric case; extension to non-axisymmetric geometries and experimental validation are the next steps.
@@ -63,9 +65,10 @@ P10 currently contains the formal results for the axisymmetric case; extension t
 | PIEZO cellular activation range | 0.5-2.0 μm | P1 |
 | Transfer-function ratio H_mech/H_air | ≈ 6.5 × 10^6 | P1 |
 | Mechanical displacement ξ_mech at 0.1 m/s² RMS (SDOF upper bound) | 917 μm | P1 |
-| Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10^4 | P1 |
+| Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10^4 (≈ 1.6 × 10^4 with Γ₂ ≈ 0.48) | P1 |
+| Abdominal Sobol total-order sensitivity S_T(E) | 0.86 | P1 |
 | Dimensionless frequency Π₀ (cross-species) | 0.07 | P3 |
-| Watermelon Sobol total-order sensitivity S_T(E) | 0.86 | P7 |
+| Watermelon Sobol total-order sensitivity S_T(E_rind) | 0.54 ± 0.05 | P7 |
 | Condition number κ_sphere | ≈ 1.37 × 10^10 | P8 |
 | Condition number κ_oblate | 69.4 | P8 |
 | Scattering parameter ka | 0.0114 | P1 |
@@ -142,6 +145,5 @@ This work was produced with AI assistance; for methodology and disclosure detail
 ## Licence
 
 [MIT](LICENSE)
-
 
 
