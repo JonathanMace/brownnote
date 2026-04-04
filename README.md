@@ -63,7 +63,7 @@ The theoretical contribution of the programme rests on four formal results:
 - **Analytical, not experimental.** All results derive from shell-theoretic models. A phantom validation protocol exists ([docs/](docs/)) but has not been executed.
 - **Rind stiffness, not ripeness.** Paper 7 recovers effective stiffness from tap-tone data; the link to consumer-relevant ripeness requires cultivar calibration not yet performed.
 - **Papers 1–9 are submission-ready drafts.** Paper 10 is under active revision.
-- **Latest P10 draft:** [draft_2026-04-04_1500.pdf](papers/paper10-capstone/drafts/draft_2026-04-04_1500.pdf)
+- **Latest P10 draft:** [draft_2026-04-04_1505.pdf](papers/paper10-capstone/drafts/draft_2026-04-04_1505.pdf)
 
 ## Getting Started
 
