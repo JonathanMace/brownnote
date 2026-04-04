@@ -1,111 +1,81 @@
 # The Brown Note
 
-It started with a question no self-respecting acoustician would ask in public: *can sound make you soil yourself?*
+Can sound make you soil yourself? No — but the reason why leads somewhere unexpected.
 
-The answer, it turns out, is almost certainly no. But the reason it's no led us somewhere none of us expected — through shell theory, fluid–structure coupling, spectral inverse problems, and a watermelon — to a general framework for how geometry mediates excitation, resonance, and identifiability in fluid-filled viscoelastic shells.
+That is the answer. The interesting part is why. The abdomen does have a real low-frequency flexural resonance near 4 Hz, but airborne sound couples to it so weakly that the "brown note" fails as acoustics and turns into a more useful problem in shell mechanics, vibration, and inverse theory. This repository collects the papers, code, and evidence behind that result.
 
-The brown note was the entry point. Geometry was the destination.
+## The Short Version
 
----
+The central result is simple. At **120 dB SPL**, the energy-consistent airborne displacement of the abdominal wall is only **0.028 μm**, well below the roughly **1-2 μm** PIEZO mechanotransduction range. The resonance is real; the airborne path to it is not. The transfer-function ratio makes the same point more formally: **H_mech/H_air ≈ 6.5 × 10^6**. Paper 7 matters because the same shell framework can also formalise the watermelon thump test as a prediction of effective rind stiffness, and Papers 8-10 ask when that kind of inversion is mathematically possible.
 
-## What This Actually Is
+## If You Read Two Papers
 
-**Browntone** is an analytical research programme investigating the vibroacoustics of fluid-filled soft shells. We model organs (and fruit) as viscoelastic oblate spheroids, derive modal spectra from first principles, and study how shape governs everything: which modes respond to forcing, where resonances sit, and whether you can invert the spectrum to recover the parameters that generated it. The shell theory is Love–Kirchhoff with Lamb's (1882) membrane expression for the equivalent sphere, and a Rayleigh–Ritz treatment for the full oblate geometry.
+If you read only one paper, read **Paper 1**. If you want to know why the framework is worth keeping after the joke is settled, read **Paper 7**.
 
-The programme's central thesis: **in fluid-filled viscoelastic shells, geometry does three jobs — it filters external forcing, it organises the modal spectrum, and it determines whether the spectrum can be inverted to recover the parameters that generated it.** Ten papers establish this thesis across human organs, animal models, and agricultural products.
+### [Paper 1: The Brown Note](papers/paper1-brown-note/) — *Journal of Sound and Vibration*
 
-Ten papers. Four target journals. Eight submission-ready with complete packages, one skeleton being reframed, and a capstone in preparation for *Proceedings of the Royal Society A*. All built by a human PI, an emeritus co-author, and a small bureaucracy of AI agents who take their work far too seriously.
+This is the paper that answers the question. It starts from an empirical asymmetry that has been obvious for decades: whole-body vibration in the 4-8 Hz range can produce gastrointestinal effects, while airborne sound at the same frequencies does not. The model explains that asymmetry from first principles. At the n = 2 flexural resonance, ka is only about 0.01: the wavelength is so long and the air-tissue mismatch so severe that the incident acoustic field barely drives the mode at all, whereas mechanical excitation transmitted through the body wall does.
 
-## Papers
+The takeaway is deliberately unglamorous and therefore trustworthy: there is a genuine abdominal resonance near 4 Hz, but the "brown note" is a mechanical story misremembered as an acoustic one. If you want the definitive debunking, this is it.
 
-### Act I — The Question
+### [Paper 7: The Watermelon Thump Test](papers/paper7-watermelon/) — *Postharvest Biology and Technology*
 
-| # | Title | Venue | Status | One-Line Result | Draft |
-|---|-------|-------|--------|-----------------|-------|
-| 1 | **The Brown Note** | *JSV* | Submission-ready (46 pp) | R ≈ 3.3 × 10⁴ — the resonance is real; the acoustic path to it is not | [PDF](papers/paper1-brown-note/drafts/draft_2026-04-02_2301.pdf) |
-| 2 | **Gas Pockets** | *JASA* | Submission-ready (16 pp) | Tissue-constrained bubbles couple 35–100× better than the whole cavity | [PDF](papers/paper2-gas-pockets/drafts/draft_2026-03-30_2332.pdf) |
+This is the surprise. People really do tap watermelons and listen for a deep, resonant thump, but the folk test has mostly lived as anecdote and produce-market lore. Paper 7 turns that intuition into a quantitative shell model linking tap-tone frequency to **effective rind stiffness** — a firmness measure, not a direct readout of sweetness or eating quality.
 
-### Act II — The Evidence
+The claims stay restrained. The model does **not** magically infer sweetness or eating quality from a sound alone; the step from firmness to ripeness still needs cultivar-specific calibration. What it does show is that the same framework used to debunk the brown note can also formalise a practical nondestructive measurement problem.
 
-| # | Title | Venue | Status | One-Line Result | Draft |
-|---|-------|-------|--------|-----------------|-------|
-| 3 | **Scaling Laws** | *JSV Short* | Submission-ready (8 pp) | Π₀ ≈ 0.07 across species — the brown note is not a uniquely human indignity | [PDF](papers/paper3-scaling-laws/drafts/draft_2026-03-30_2332.pdf) |
-| 4 | **Bladder Resonance** | *JSV* | Submission-ready (27 pp) | f₂ = 13.5 Hz at 222 mL; the U-curve minimum is suspiciously at driving-posture fill | [PDF](papers/paper4-bladder/drafts/draft_2026-03-30_2332.pdf) |
-| 5 | **Borborygmi** | *JASA* | Submission-ready | Five mechanisms, 135–440 Hz — your stomach growls in a predictable key | [PDF](papers/paper5-borborygmi/drafts/draft_2026-03-30_2336.pdf) |
-| 6 | **Can You Feel the Bass?** | *JASA* | Submission-ready (18 pp) | Airborne sub-bass falls 2.5 orders short; the floor does the work | [PDF](papers/paper6-sub-bass/drafts/draft_2026-03-30_2332.pdf) |
+## Supporting Analyses
 
-### Act III — The Theory
+Papers 2-6 are not separate grand theories. They are supporting analyses that stress-test the same framework across related organs, forcing conditions, and physiological scenarios.
 
-| # | Title | Venue | Status | One-Line Result | Draft |
-|---|-------|-------|--------|-----------------|-------|
-| 7 | **Can You Hear Rind Stiffness?** | *Postharvest B&T* | Submission-ready (32 pp) | Tap-tone inversion maps resonance to effective rind stiffness — folk wisdom formalised with restrained claims | [PDF](papers/paper7-watermelon/drafts/draft_2026-03-31_0939.pdf) |
-| 8 | **Can You Hear the Shape of an Organ?** | *IPSE* | Submission-ready (29 pp) | κ\_sphere ≈ 1.37 × 10¹⁰ → κ\_oblate = 69.4 — geometry rescues identifiability | [PDF](papers/paper8-kac/drafts/draft_2026-03-31_0854.pdf) |
-| 9 | **Geometry-dependent identifiability** | *JSV Short* | Submission-ready (6 pp) | Oblate shells lift the inverse degeneracy; prolate shells do not | [PDF](papers/paper9-lifting-theorem/drafts/draft_2026-04-02_2301.pdf) |
-| 🎓 | **Capstone** | *Proc. R. Soc. A* | Submission-ready (26 pp) | *Geometry mediates excitation, resonance, and identifiability* | [PDF](papers/paper10-capstone/drafts/draft_2026-03-31_1134.pdf) |
+| Paper | Focus | What it adds |
+|---|---|---|
+| [P2 Gas Pockets](papers/paper2-gas-pockets/) | Local gas inclusions | Tissue-constrained bubbles can couple much more strongly than the whole abdominal cavity. |
+| [P3 Scaling Laws](papers/paper3-scaling-laws/) | Cross-species scaling | The low-frequency shell mechanics are not uniquely human. |
+| [P4 Bladder Resonance](papers/paper4-bladder/) | Organ-specific variation | The same framework predicts a different resonance landscape for the bladder. |
+| [P5 Borborygmi](papers/paper5-borborygmi/) | Gut sounds | Bubble-shell acoustics can account for clinically realistic stomach-growl frequencies. |
+| [P6 Sub-Bass Coupling](papers/paper6-sub-bass/) | Airborne vs structural bass | Reinforces that the floor and seat matter far more than the air. |
 
-See also: [Mid-Tenure Research Statement](docs/mid-tenure-research-statement.pdf)
+## The Mathematics
 
-## The Punchline
+The later papers ask a harder question than "what resonates?": **can you work backwards from a spectrum to the parameters that produced it?**
 
-The human abdomen has a flexural resonance near 4 Hz, so the folk intuition is not completely mad. But at 120 dB SPL the energy-consistent airborne displacement is only 0.028 μm — roughly 1.5 orders of magnitude below PIEZO mechanotransduction thresholds (0.5–2.0 μm). Whole-body vibration at 0.1 m/s² RMS produces millimetre-scale excitation of the same mode, a coupling ratio R ≈ 3.3 × 10⁴. The "brown note" is a mechanical story misremembered as an acoustic one.
+| Paper | Role |
+|---|---|
+| [P8 Kac Identifiability](papers/paper8-kac/) | Shows that the equivalent-sphere inverse problem is catastrophically ill-conditioned, and that oblate geometry can rescue identifiability. |
+| [P9 Lifting Theorem](papers/paper9-lifting-theorem/) | Sharpens the result: not all symmetry breaking helps equally; oblate shells lift the degeneracy, prolate shells do not. |
+| [P10 Capstone](papers/paper10-capstone/) | Intended synthesis of excitation, resonance, and identifiability across the whole programme. The ambition is clear; the final paper is still evolving. |
 
-What we didn't expect: the same framework that explains why sound can't shake your insides also explains why you can tap a watermelon to estimate rind stiffness, why your stomach growls at a predictable frequency, and why geometry — not material properties — determines whether you can invert a resonance spectrum at all. The joke was never the point. Geometry was.
+Taken together, these papers are the mathematical backbone of the project. They are the reason Browntone is more than a curiosity about infrasound.
 
 ## Key Results
 
 | Quantity | Value |
 |----------|-------|
 | Flexural frequency f₂ (n = 2) | 3.95 Hz |
-| Breathing mode (n = 0) | 2,490 Hz |
-| Airborne displacement ξ\_air (120 dB) | 0.028 μm |
-| Mechanical displacement ξ\_mech (0.1 m/s², SDOF upper bound) | 917 μm |
-| Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10⁴ |
+| Breathing mode (n = 0) | 2490 Hz |
+| Transfer-function ratio H_mech/H_air | ≈ 6.5 × 10^6 |
+| Airborne displacement ξ_air at 120 dB | 0.028 μm |
+| PIEZO threshold range | 1-2 μm |
+| Mechanical displacement ξ_mech at 0.1 m/s² RMS (SDOF upper bound) | 917 μm |
+| Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10^4 |
 | Dimensionless frequency Π₀ (cross-species) | 0.07 |
-| Sobol total-order S\_T(E) | 0.86 |
-| Condition number κ\_sphere | ≈ 1.37 × 10¹⁰ |
-| Condition number κ\_oblate (canonical eccentricity) | 69.4 |
-| Condition floor κ\_floor (near-sphere limit, ε → 0) | ≈ 269 |
+| Watermelon Sobol total-order sensitivity S_T(E) (P7) | 0.86 |
+| Condition number κ_sphere | ≈ 1.37 × 10^10 |
+| Condition number κ_oblate | 69.4 |
 | Scattering parameter ka | 0.0114 |
 
-## The Bigger Picture
+## Scope and Status
 
-Papers 1–6 are evidence. Papers 7–10 are synthesis. All eight principal papers (P1–P8) are submission-ready with complete packages; zero stale values remain. The programme converges on four conjectures (theorems, once the capstone is written):
-
-1. **Rank-deficiency conjecture.** The equivalent-radius model of a fluid-filled shell is generically ill-conditioned for spectral inversion (κ ∝ 10¹⁰ for the sphere).
-2. **Identifiability lifting.** Breaking spherical symmetry — introducing asphericity — lifts the Jacobian rank deficiency because different flexural modes sample curvature differently.
-3. **Geometry-selective lifting.** Oblate perturbations decorrelate the Jacobian columns and improve conditioning, whereas prolate perturbations can leave the inverse problem poorly conditioned.
-4. **Forward adequacy ≠ inverse adequacy.** A model that predicts frequencies well (Paper 7's watermelon) may be catastrophically ill-conditioned for parameter recovery (Paper 8's sphere), and vice versa.
-
-A Distinguished Advisory Board review scored the programme 7–8/10 across coherence, depth, breadth, and novelty, with lasting impact at 6/10 — *"could be 8–9 with consolidation."* The capstone, targeting *Proceedings of the Royal Society A*, is that consolidation. Papers 1, 7, and 8 form the backbone; papers 2–6 supply evidence.
-
-## How It Was Made
-
-Built with **GitHub Copilot CLI** and **24 autonomous AI agents** handling analysis, drafting, review, figures, and morale. The tally: **549 commits**, **279 PRs merged**, **487 tests**, **22 reusable skills**, **92 research logs**, ~**30 hours wall-clock**.
-
-The agents include a 3-reviewer panel, a journal editor, a simulation engineer, a data analyst, a provocateur, a bibliographer, a pop-culture verifier, a coffee-machine guru (emeritus professor who tells you to submit the damn paper already), and a loving spouse (who suggests you talk to Dietrich). Research runs on an academic calendar — one semester per wall-clock hour, with breaks for reflection and occasionally [whisky reviews](docs/whisky/).
-
-See [docs/ai-assisted-research.md](docs/ai-assisted-research.md) for the methodology.
+- **Analytical, not yet experimental.** The code and papers are modelling work; a validation protocol exists, but it has not yet been executed.
+- **Useful, but not magical.** The watermelon application estimates firmness-related stiffness; cultivar-specific ripeness calibration still sits outside the model.
+- **Mostly settled, not entirely finished.** Papers 1-9 contain the current core results of the programme; Paper 10 is the synthesis still being written.
 
 ## For Researchers
 
-The core framework models a fluid-filled viscoelastic oblate spheroid using Love–Kirchhoff shell theory with a volume-preserving equivalent radius R\_eq = (a²c)^{1/3}. Flexural modes (n ≥ 2) are the physically relevant modes at infrasonic frequencies; the breathing mode (n = 0, ~2490 Hz) is dominated by the fluid bulk modulus and is irrelevant to low-frequency coupling. Damping is Kelvin–Voigt with a single relaxation time (loss tangent η = 0.25). For identifiability analysis (Papers 7–8), the full oblate Ritz model replaces the equivalent-sphere approximation, and it is precisely the asphericity that breaks the Jacobian degeneracy and rescues parameter recovery.
+The core model treats the abdomen as a **fluid-filled viscoelastic oblate spheroidal shell**. In the forward problem, an equivalent-radius formulation captures the dominant low-frequency behaviour; in the inverse problem, the full oblate geometry matters because asphericity is exactly what breaks the spectral degeneracy. Flexural modes (n ≥ 2) govern the infrasonic response. The breathing mode (n = 0) sits around 2490 Hz and is not the low-frequency story. At present, the programme is analytical; an experimental validation protocol exists, but it has not yet been executed.
 
-**Key cross-disciplinary connections:** The three-class identifiability taxonomy (singular / regular bounded / non-lifting) from Paper 8 applies to any spectral inverse problem on shells where symmetry breaking lifts rank deficiency. Researchers in structural health monitoring, clinical elastography, or postharvest quality assessment may find the curvature–mode anti-correlation mechanism relevant to their own geometries.
-
-**Experimental validation:** A phantom validation protocol using silicone oblate shells with laser Doppler vibrometry has been designed ([docs/](docs/)) but not yet executed. The programme is purely analytical at present.
-
-**How to cite:** Individual papers should be cited by their arXiv or journal references when available. For the programme as a whole:
-
-```bibtex
-@misc{browntone2026,
-  author = {Mace, Jonathan and Mace, Brian R.},
-  title  = {Browntone: Vibroacoustics of Fluid-Filled Soft Shells},
-  year   = {2026},
-  url    = {https://github.com/JonathanMace/brownnote}
-}
-```
-
-## Quick Start
+### Quick Start
 
 ```bash
 pip install -e .[dev]
@@ -114,7 +84,8 @@ python -m pytest tests/ -v
 
 ```python
 from src.analytical.natural_frequency_v2 import (
-    AbdominalModelV2, flexural_mode_frequencies_v2,
+    AbdominalModelV2,
+    flexural_mode_frequencies_v2,
 )
 from src.analytical.energy_budget import self_consistent_displacement
 from src.analytical.mechanical_coupling import compare_airborne_vs_mechanical
@@ -125,49 +96,40 @@ model = AbdominalModelV2(
     P_iap=1000, loss_tangent=0.25,
 )
 
-freqs = flexural_mode_frequencies_v2(model, n_max=5)   # modal spectrum
-disp = self_consistent_displacement(model, mode_n=2, spl_db=120)  # 0.028 μm
-ratio = compare_airborne_vs_mechanical(model)           # ≈ 3.3×10⁴
+freqs = flexural_mode_frequencies_v2(model, n_max=5)
+disp = self_consistent_displacement(model, mode_n=2, spl_db=120)
+ratio = compare_airborne_vs_mechanical(model)
 ```
 
-If you only want one number, ask for the n = 2 flexural mode. If you want the whole joke explained properly, read Paper 1.
+### Citation
+
+```bibtex
+@misc{browntone2026,
+  author = {Mace, Jonathan and Mace, Brian R.},
+  title  = {Browntone: Vibroacoustics of Fluid-Filled Soft Shells},
+  year   = {2026},
+  url    = {https://github.com/JonathanMace/brownnote}
+}
+```
 
 ## Repository Structure
 
 ```text
 browntone/
-├── papers/
-│   ├── paper1-brown-note/       # The one that started it all
-│   ├── paper2-gas-pockets/      # The bubble detour
-│   ├── paper3-scaling-laws/     # Do rats resonate too?
-│   ├── paper4-bladder/          # The motorway problem
-│   ├── paper5-borborygmi/       # Why stomachs growl
-│   ├── paper6-sub-bass/         # Can you feel the bass?
-│   ├── paper7-watermelon/       # The fruit that brought it together
-│   ├── paper8-kac/              # Can you hear the shape of an organ?
-│   ├── paper9-lifting-theorem/  # Oblate-prolate identifiability asymmetry
-│   └── paper10-capstone/        # Geometry mediates everything
-├── src/analytical/              # Core analytical models
-├── tests/                       # 487 regression tests
-├── docs/research-logs/          # 92 quantitative session logs
-└── .github/                     # 24 agents, 22 skills, workflows
+├── papers/paper1-brown-note/   # The definitive debunking
+├── papers/paper7-watermelon/   # The firmness/stiffness application
+├── papers/paper2-gas-pockets/ ... paper6-sub-bass/  # Supporting analyses
+├── papers/paper8-kac/ ... paper10-capstone/         # Identifiability theory and synthesis
+├── src/analytical/             # Core shell models and coupling calculations
+├── tests/                      # Regression suite
+└── docs/                       # Research logs, validation plans, and notes
 ```
 
-## Tests
-
-```bash
-python -m pytest tests/ -v   # 487 tests
-```
-
-## Authors
-
-| Who | Role |
-|-----|------|
-| **Jonathan Mace** | Lead author, concept, supervision |
-| **Brian R. Mace** | Vibroacoustics theory, co-supervision |
-| **GitHub Copilot CLI (Opus)** | Analysis, drafting, review, code |
-| **Springbank 10 Year Old** | Moral support, strategic clarity |
+The repository also contains the Copilot/agent workflow used to produce the papers, but that infrastructure is only useful insofar as it serves the science.
 
 ## Licence
 
 [MIT](LICENSE)
+
+
+
