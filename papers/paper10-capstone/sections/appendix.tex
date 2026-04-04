@@ -1,0 +1,152 @@
+% =============================================================================
+% Appendix A: Ritz Basis and Convergence
+% =============================================================================
+% PURPOSE:
+%   Make Paper 10 self-contained by stating the oblate spheroidal Ritz model
+%   explicitly: coordinate system, trial functions, energy assembly, boundary
+%   conditions, n=1 treatment, and convergence evidence.
+% =============================================================================
+
+\appendix
+\section{Oblate Spheroidal Shell Ritz Model}
+\label{sec:appendix_ritz}
+
+This appendix collects the Rayleigh--Ritz formulation used throughout the
+companion papers and the present capstone.  The model follows the classical
+shell-acoustics tradition~\cite{lamb1882,Junger1986} with a Love--Kirchhoff
+thin-shell assumption.
+
+\subsection{Coordinate system and trial functions}
+\label{sec:appendix_coordinates}
+
+The undeformed shell midsurface is an oblate spheroid with semi-major axis $a$
+and semi-minor axis $c$ ($c < a$).  Define the eccentricity
+$\varepsilon = \sqrt{1-c^2/a^2}$ and the semifocal distance
+$d = a\varepsilon$.  In oblate spheroidal coordinates $(\xi,\eta,\varphi)$, the
+shell surface sits at $\xi_0 = c/d$.  Here $\eta = \cos\theta$ ranges over
+$[-1,1]$ with $\theta$ the polar angle, and $\varphi\in[0,2\pi)$ is the
+azimuthal angle.  The metric function
+\begin{equation}
+  G(\eta) = a^2\eta^2 + c^2(1-\eta^2)
+  \label{eq:app_metric}
+\end{equation}
+determines the position-dependent curvature.  The surface element is
+$\mathrm{d}S = 2\pi\,a\sqrt{G}\,\mathrm{d}\eta$.
+
+For each circumferential mode number $n\geq 2$, the trial displacement field
+is a two-degree-of-freedom (2-DOF) Ritz ansatz:
+\begin{equation}
+  w(\eta) = \beta\,P_n(\eta), \qquad
+  u(\theta) = \alpha\,\sin\theta\,P_n'(\cos\theta),
+  \label{eq:app_trial}
+\end{equation}
+where $w$ is the normal (radial) displacement, $u$ is the tangential
+(meridional) displacement, $P_n$ denotes the Legendre polynomial of degree~$n$,
+and $\beta,\alpha$ are the Ritz amplitudes forming the generalised coordinate
+vector $\mathbf{q}=(\beta,\alpha)^\top$.  Legendre polynomials are smooth
+on $[-1,1]$ and regular at both poles, so the trial functions are admissible
+for a free (unconstrained) shell without requiring any additional boundary
+conditions.
+
+\subsection{Energy functionals and eigenvalue problem}
+\label{sec:appendix_energy}
+
+The stiffness matrix $\mathbf{K}$ receives three contributions, all integrated
+over the shell surface via Gauss--Legendre quadrature (200 nodes by default):
+\begin{enumerate}
+  \item \emph{Membrane stiffness.}  With extensional rigidity
+    $C_m = Eh/(1-\nu^2)$, the membrane strain energy arises from meridional
+    and circumferential strains that depend on $P_n$, $P_n'$, and the
+    spatially varying metric~\eqref{eq:app_metric}.
+  \item \emph{Bending stiffness.}  With flexural rigidity
+    $D_f = Eh^3/[12(1-\nu^2)]$, the curvature-change energy involves $P_n''$
+    and the derivatives of the metric function, weighted by $\sqrt{G}$.
+  \item \emph{Geometric prestress.}  The intra-abdominal pressure
+    $P_\mathrm{iap}$ induces a membrane stress resultant
+    $N_1 = P_\mathrm{iap}\,R_2/2$, where $R_2(\eta) = a\sqrt{G}/c$ is the
+    circumferential radius of curvature.  This contributes a geometric
+    stiffness term (tension stiffening) that acts on the normal DOF only.
+\end{enumerate}
+
+The mass matrix $\mathbf{M}$ has two contributions:
+\begin{enumerate}
+  \item \emph{Shell inertia.}  The structural mass per unit area is
+    $\rho_w h$, integrated against $P_n^2$ for the normal DOF and
+    $\sin^2\theta\,(P_n')^2$ for the tangential DOF.
+  \item \emph{Fluid added mass.}  The interior fluid loading is computed from
+    the Laplace problem in oblate spheroidal coordinates using Legendre
+    functions $P_n(i\xi)$ on the imaginary argument, following Junger and
+    Feit~\cite{Junger1986}.  This yields a scalar added-mass contribution to
+    the normal DOF.  Near the spherical limit ($c/a > 0.98$), the oblate
+    harmonic solution is blended with the Lamb sphere formula via a
+    $C^2$-continuous interpolant to avoid numerical singularity in the
+    coordinate transformation.
+\end{enumerate}
+
+Stationarity of the Rayleigh quotient yields the $2\times 2$ generalised
+eigenvalue problem
+\begin{equation}
+  \mathbf{K}\mathbf{q} = \omega^2\mathbf{M}\mathbf{q},
+  \label{eq:app_eigenproblem}
+\end{equation}
+from which the natural frequency of mode $n$ is extracted as the lowest
+positive eigenvalue.  Solving \eqref{eq:app_eigenproblem} independently for
+each $n$ produces the flexural spectrum $\{f_n\}_{n\geq 2}$ used throughout
+this paper.
+
+\subsection{Free boundary conditions and rigid-body modes}
+\label{sec:appendix_bcs}
+
+The shell is modelled as free (unconstrained).  No displacement or rotation
+boundary conditions are imposed.  For $n=1$, the deformation is a rigid-body
+translation of the shell; the fluid adds mass but provides no restoring force,
+so $\omega_1=0$.  The present paper considers only $n\geq 2$, for which the
+restoring force arises from shell elasticity and prestress.
+
+\subsection{Convergence of the Ritz basis}
+\label{sec:appendix_convergence}
+
+The 2-DOF trial~\eqref{eq:app_trial} can be enriched by retaining additional
+Legendre terms of the same parity:
+\begin{equation}
+  w(\eta) = \sum_{i=0}^{N-1}\beta_i\,P_{n+2i}(\eta), \qquad
+  u(\theta) = \sum_{j=0}^{N-1}\alpha_j\,\sin\theta\,P_{n+2j}'(\cos\theta),
+  \label{eq:app_enriched}
+\end{equation}
+giving a $2N$-DOF problem.  Note that in the enriched basis, the fluid
+added mass is computed per-degree using oblate spheroidal harmonics for each
+individual Legendre order $n+2i$; off-diagonal fluid coupling between
+different Legendre orders is neglected.
+
+For the canonical abdominal parameters (Table~1) and the $n=2$ mode, the
+convergence study in~\cite{BrowntoneP1} yields the results summarised in
+Table~\ref{tab:app_convergence}.
+
+\begin{table}[h]
+  \centering
+  \small
+  \caption{Convergence of the $n=2$ flexural frequency with basis enrichment.
+    $N$ is the number of Legendre terms per displacement component;
+    $\Delta f$ is the relative deviation from the $N=8$ reference value.}
+  \label{tab:app_convergence}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{@{}ccc@{}}
+    \toprule
+    $N$ (DOFs = $2N$) & $f_2$ (Hz) & $\Delta f$ vs.\ $N{=}8$ \\
+    \midrule
+    1 \phantom{0}(2)  & 3.800 & $+3.3\%$ \\
+    2 \phantom{0}(4)  & 3.682 & $+0.1\%$ \\
+    3 \phantom{0}(6)  & 3.679 & $<0.01\%$ \\
+    $\geq 4$ \phantom{0}($\geq 8$) & 3.678 & converged \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Three properties confirm adequacy of the 2-DOF basis.  First, frequencies
+decrease monotonically with $N$, consistent with the Rayleigh--Ritz
+upper-bound property.  Second, the 2-DOF model ($N=1$) overestimates the
+converged frequency by only \SI{3.3}{\percent}, and the 4-DOF model ($N=2$)
+is within \SI{0.1}{\percent}.  Third, the canonical five-mode set
+($n=2,\ldots,6$) used for the identifiability analysis lies well above the
+convergence threshold.  For all practical purposes, the single-term Ritz basis
+is sufficient for the spectral and inverse conclusions drawn in this paper.

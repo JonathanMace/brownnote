@@ -98,7 +98,8 @@ $\sigma_3>0$ but small, the inverse is formally possible but practically
 fragile: small frequency errors may be amplified into large parameter errors.
 Thus the smallest singular value identifies the least observable parameter
 combination, while $\kappa$ measures how strongly observational errors may be
-amplified in the inferred parameters.
+amplified in the inferred parameters.  In practice, $\widetilde{J}$ is
+evaluated by central finite differences with relative step $\delta=10^{-6}$.
 
 \subsection{Excitation filtering as a geometric statement}
 
@@ -269,9 +270,10 @@ through curvature anisotropy.  Writing the eccentricity as
   \label{eq:p10_eccentricity}
 \end{equation}
 the spherical limit is $\varepsilon=0$, while $\varepsilon>0$ introduces
-distinct meridional and circumferential curvature distributions.  In a Ritz
-formulation, mode $n$ samples those curvature fields through mode-specific
-weighting functions.  Schematically,
+distinct meridional and circumferential curvature distributions.  In the Ritz
+formulation detailed in Appendix~\ref{sec:appendix_ritz}, mode $n$ samples
+those curvature fields through mode-specific weighting functions.
+Schematically,
 \begin{equation}
   f_n(\varepsilon)
   =
