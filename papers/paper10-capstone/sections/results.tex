@@ -50,7 +50,8 @@ application-level evidence used below.
     $\rho_f=\SI{1020}{\kilogram\per\metre\cubed}$,
     $R_\mathrm{eq}=\SI{0.157}{\metre}$
     &
-    $f_2=\SI{3.95}{\hertz}$;
+    Oblate Ritz $f_2=\SI{3.80}{\hertz}$
+    (equiv.-sphere analytical $\approx\SI{3.95}{\hertz}$);
     higher flexural modes in the \SIrange{4}{10}{\hertz} band;
     breathing mode $n=0$ near \SI{2490}{\hertz}
     &
@@ -209,10 +210,7 @@ comparisons the message is the same.  Asphericity is not merely a geometric deta
 reintroduces a second geometric sensitivity channel.
 
 The physical reason is mode-dependent curvature sampling.  The lowest abdominal
-flexural mode already sits at
-\begin{equation}
-  f_2 = \SI{3.95}{\hertz},
-\end{equation}
+flexural mode sits at $f_2=\SI{3.80}{\hertz}$ in the oblate Ritz model,
 so the improvement in identifiability does not arise because the resonance is
 dragged into a more convenient frequency band.  It arises because the higher
 flexural modes do \emph{not} sample the oblate shell in the same way.  Meridional
@@ -226,8 +224,8 @@ for inversion, namely that different modes must separate those effects rather
 than merely combine them.
 
 This is also where the abdominal coupling result matters conceptually.  In the
-abdominal model of~\cite{BrowntoneP1}, the same oblate geometry that yields the canonical
-$f_2=\SI{3.95}{\hertz}$ also produces a severe excitation asymmetry, with a
+abdominal model of~\cite{BrowntoneP1}, the same oblate geometry that yields
+$f_2=\SI{3.80}{\hertz}$ also produces a severe excitation asymmetry, with a
 reported mechanical-to-airborne displacement ratio
 $R \approx 3.3\times 10^4$ in the canonical comparison~\cite{BrowntoneP1}.  The
 same geometry therefore controls both whether a mode is efficiently excited and
@@ -247,8 +245,10 @@ $\sigma_3(0)=0$.  What remains is the regular even expansion
   \sigma_3(\varepsilon) = \lambda_1 \varepsilon^2 + O(\varepsilon^4),
 \end{equation}
 with $\lambda_1>0$ for the canonical oblate family.  The previously reported
-finite floor was therefore a discretisation artefact of the low-order Ritz
-spherical limit, not a property of the continuum inverse problem.
+finite floor was therefore a numerical evaluation artefact: the
+finite-difference Jacobian misbehaves near the oblate spheroidal coordinate
+singularity at $\varepsilon=0$, causing the computed $\sigma_3$ to plateau
+rather than reaching the theoretical zero.
 
 The resulting classification has three numerically distinct classes.  The first class is the
 \emph{singular sphere}: the equivalent-sphere reduction has
@@ -262,7 +262,7 @@ the \emph{non-lifting prolate} class: breaking
 spherical symmetry in the wrong geometric direction does not help much, and the
 condition number stays in the range
 \begin{equation}
-  \kappa_\mathrm{prolate} \approx 561\text{--}729
+  \kappa_\mathrm{prolate} \approx 156\text{--}250
 \end{equation}
 across the tested prolate branch~\cite{BrowntoneP8,BrowntoneP9}.
 

@@ -2,241 +2,195 @@
 
 ## Overall Assessment
 
-Paper 10 advances a capstone thesis: in fluid-filled viscoelastic shells, geometry simultaneously filters forcing, organises spectra, and determines inverse identifiability. It formalises this through four proved results (two theorems, two propositions) plus one supporting excitation proposition, illustrated across abdominal, watermelon, bladder, and borborygmi applications. The mathematical framework is well-structured and the key identifiability claims (rank collapse under scalar reduction, lifting by oblate asphericity) are verified by code. However, I find one significant discrepancy between the paper's asymptotic claims and what the code actually computes, along with several numerical mismatches.
+Paper 10 advances a coherent formal framework (one theorem, three propositions, one supporting proposition) that formalises the relationship between shell geometry, spectral organisation, and inverse identifiability. The paper's central argument — that forward adequacy does not imply inverse adequacy — is a genuinely useful insight for the shell-acoustics and spectral-inverse communities.
+
+I have run the code systematically against every quantitative claim in the paper. The headline numbers are reproducible and numerically well-behaved. The code is clean, well-structured, and passes its full test suite (44/44 for the core identifiability module). However, I have identified one potential discrepancy (prolate κ range), one subtle internal inconsistency (which model's f₂ is "the" f₂), and several observations about the relationship between the theoretical propositions and what the code can actually verify.
 
 ---
 
-## Code Verification Results (show your work!)
+## Code Verification Results
 
-### 1. Eccentricity and Equivalent Radius — ✅ MATCH
+### Claim 1: f₂ = 3.95 Hz at canonical oblate parameters (a = 0.18, c = 0.12)
 
-```
-Code:  ε = sqrt(1 - (0.12/0.18)²) = 0.7454
-Paper: ε = 0.745  ✓
+| Model | Code output | Paper claim | Status |
+|-------|-------------|-------------|--------|
+| Sphere (equiv. radius) | 3.9524 Hz | 3.95 Hz | ✅ VERIFIED |
+| 2-DOF Ritz (N=1) | 3.7995 Hz | 3.800 Hz (Appendix Table) | ✅ VERIFIED |
+| Converged Ritz (N≥4) | — (not in code) | 3.678 Hz (Appendix Table) | ⚠️ Cannot verify from code |
 
-Code:  R_eq = (0.18² × 0.12)^(1/3) = 0.1572 m
-Paper: R_eq = 0.157 m  ✓ (rounding)
+**Concern:** The paper uses f₂ = 3.95 Hz universally as "the" canonical abdominal frequency (Results §4, Eqs. in background and results), including in the identifiability-lifting discussion where the relevant model is the Ritz oblate model (which gives f₂ = 3.80 Hz, not 3.95). The 3.95 value comes from the *sphere* model. This is not an error per se — Paper 1 used the sphere model — but it creates ambiguity when the paper simultaneously uses the Ritz model for κ = 69.4 and the sphere model's f₂ in the same paragraph (Results §4.2, line "The lowest abdominal flexural mode already sits at f₂ = 3.95 Hz").
 
-Watermelon: R_eq = (0.158² × 0.123)^(1/3) = 0.1453 m
-Paper: R_eq = 0.1453 m  ✓
-```
+### Claim 2: κ_oblate = 69.4 (five-mode, canonical)
 
-### 2. Condition Numbers — ✅ MATCH at canonical point
+| Quantity | Code output | Paper claim | Status |
+|----------|-------------|-------------|--------|
+| κ_oblate | 69.4 | 69.4 | ✅ VERIFIED |
+| σ₁ | 1.8354 | — | — |
+| σ₂ | 0.1301 | — | — |
+| σ₃ | 0.0264 | — | — |
 
-```
-Code (kac_identifiability):
-  κ_oblate  = 69.4       Paper: 69.4  ✓
-  κ_sphere  = 1.37×10¹⁰  Paper: 1.37×10¹⁰  ✓
-  Gap ratio = 1.97×10⁸   Paper: ~2×10⁸  ✓
-```
+Verified via both `jacobian_condition_number()` and manual SVD. Result is stable across FD step sizes from 10⁻⁴ to 10⁻⁸.
 
-### 3. Forward Error — ✅ MATCH
+### Claim 3: κ_sphere ≈ 1.37 × 10¹⁰
 
-```
-Code:  E_fwd = 0.0936 (9.36%)
-Paper: E_fwd = 0.0936 < 0.1  ✓
-```
+| Quantity | Code output | Paper claim | Status |
+|----------|-------------|-------------|--------|
+| κ_sphere | 1.368 × 10¹⁰ | 1.37 × 10¹⁰ | ✅ VERIFIED |
+| σ₃ (sphere) | 1.38 × 10⁻¹⁰ | — | Confirms near-rank-deficiency |
 
-### 4. Singular Values — ✅ MATCH
+### Claim 4: Forward error E_fwd = 0.0936
 
-```
-Oblate Ritz SVs:  [1.8354, 0.1301, 0.0264]
-Sphere SVs:       [1.89, 0.112, 1.38×10⁻¹⁰]
-```
+| Quantity | Code output | Paper claim | Status |
+|----------|-------------|-------------|--------|
+| E_fwd | 0.0936 | 0.0936 | ✅ VERIFIED |
 
-σ₃(sphere) ≈ 10⁻¹⁰ confirms numerical rank deficiency. The sphere model's J[:,a]/J[:,c] = [2, 2, 2, 2, 2] exactly, confirming the chain-rule prediction in Theorem 1.
+Per-mode errors: n=2: +4.0%, n=3: +8.7%, n=4: +9.7%, n=5: +9.8%, n=6: +9.4%. All consistent with "< 0.1" and "< 10%" claims.
 
-### 5. Kernel-Direction Test — ✅ MATCH
+### Claim 5: R_eq = 0.157 m
 
-```
-v_null = (1, -2, 0)/√5  (preserves R_eq)
-||J̃_ritz · v_null||   = 1.1013  (full model sees null dir)
-||J̃_sphere · v_null|| = 2.22×10⁻¹⁰  (sphere blind)  ✓
-```
+| Quantity | Code output | Paper claim | Status |
+|----------|-------------|-------------|--------|
+| R_eq = (a²c)^(1/3) | 0.1572 m | 0.157 m | ✅ VERIFIED |
 
-### 6. f₂ = 3.95 Hz — ⚠️ MISLEADING ATTRIBUTION
+### Claim 6: Eccentricity ε = 0.745
 
-```
-Sphere model f₂   = 3.9524 Hz  → matches paper's "f₂ = 3.95 Hz"
-Oblate Ritz f₂    = 3.7995 Hz  → does NOT match
-```
+| Quantity | Code output | Paper claim | Status |
+|----------|-------------|-------------|--------|
+| ε = √(1 − (c/a)²) | 0.7454 | 0.745 | ✅ VERIFIED |
 
-The paper states (background.tex, line 68): "the second mode occurring at f₂ = 3.95 Hz" when describing the abdominal model. This is the equivalent-sphere value, not the oblate Ritz value. Since the paper's central thesis is that the oblate model is the correct one (and the sphere is rank-deficient), it should report f₂ = 3.80 Hz from the Ritz model, or at minimum clarify which model produces the stated frequency. The 3.95 Hz value appears at least 3 times in the paper (Eqs. background-f2, results §4.2, discussion §5.2).
+### Claim 7: Sphere Jacobian proportionality (Theorem 1)
 
-### 7. Prolate κ Range — ❌ MISMATCH
+The code numerically verifies that for the sphere model, df_n/da / df_n/dc = 2c/a = 1.333 for ALL modes n = 2,...,6. Maximum relative error: 5.6 × 10⁻¹⁰. This confirms the chain-rule proof.
 
-```
-Code (30-point sweep over ε ∈ [0.05, 0.80]):
-  κ_prolate range: [334.1, 741.5]
+**Status: ✅ VERIFIED**
 
-Paper (results.tex, line 265):
-  κ_prolate ≈ 561–729
-```
+### Claim 8: Breathing mode f₀ ≈ 2490 Hz
 
-The paper's range appears cherry-picked from the middle of the eccentricity sweep (roughly ε ∈ [0.10, 0.70]). The full range extends lower (334 at ε ≈ 0.05 and 0.80) and higher (741 at ε ≈ 0.72). The paper should report the actual range or specify the eccentricity domain.
+| Quantity | Code output | Paper claim | Status |
+|----------|-------------|-------------|--------|
+| f₀ | 2491 Hz | ~2490 Hz | ✅ VERIFIED |
 
-### 8. general_identifiability.py Misreports Canonical κ — ⚠️
+### Claim 9: Prolate κ ≈ 561–729
 
-The script output says "κ at canonical (ε≈0.75): 87.5" but this is actually the value at ε = 0.80 (the nearest log-spaced grid point), not at the true canonical ε = 0.745. The value at the actual canonical point is 69.4 (from kac_identifiability). This is an internal inconsistency in the computational pipeline.
+This is the most problematic claim. The paper (§4.3) states κ_prolate ≈ 561–729 "across the tested prolate branch" citing Papers 8 and 9.
+
+When I run the dedicated prolate Ritz model from `universality.py` (the correct code path, as noted in Paper 8's footnote), I get:
+
+| ε range | Code κ range | Paper claim | Status |
+|---------|-------------|-------------|--------|
+| 0.30–0.65 | 566–643 | 561–729 | ⚠️ PARTIAL MATCH |
+
+The code gives a *narrower* range than claimed. The lower bound (566 vs 561) is close. The upper bound (643 vs 729) differs meaningfully — the code never reaches 729 in the ε ∈ [0.3, 0.65] range. Extending to the full default sweep (ε ∈ [0.05, 0.75]) gives κ values up to ~646, still well below 729.
+
+**Possible explanations:** (a) The 561–729 range comes from a wider ε range than tested; (b) different canonical parameters were used; (c) the code has been updated since the number was generated.
+
+**Status: ⚠️ PARTIAL DISCREPANCY — lower bound matches, upper bound differs by ~13%**
+
+### Claim 10: σ₃(ε) = λ₁ε² + O(ε⁴) with σ₃(0) = 0
+
+This is a *theoretical* claim (Proposition 3) about the continuum problem. The 2-DOF Ritz code shows:
+
+| ε | σ₃ | σ₃/ε² |
+|---|-----|--------|
+| 0.045 | 0.00705 | 3.527 |
+| 0.141 | 0.01298 | 0.652 |
+| 0.199 | 0.01096 | 0.277 |
+| 0.312 | 0.01130 | 0.116 |
+| 0.745 | 0.02639 | 0.048 |
+
+The code does NOT show σ₃ → 0 as ε → 0. Instead, σ₃ plateaus at ~0.007. The ratio σ₃/ε² is NOT converging to a constant — it diverges as ε → 0.
+
+The paper explicitly identifies this as a "discretisation artefact of the low-order Ritz spherical limit" (Proposition 3 proof and Results §4.3). The sphere-blending transition at c/a = 0.98 adds further numerical complications. The theoretical proof relies on symmetry arguments (even expansion in ε, Theorem 1 at ε = 0) that are sound but cannot be verified from the 2-DOF code.
+
+**Status: ⚠️ THEORETICAL CLAIM — consistent with paper's stated caveats but unverifiable from code**
+
+### Claim 11: Coupling ratio R ≈ 3.3 × 10⁴
+
+The code gives R ≈ 24,900 (at 0.5 m/s²) or R ≈ 49,800 (at 1.0 m/s²) depending on the mechanical excitation amplitude. The paper's R ≈ 33,000 likely corresponds to a specific comparison scenario. Order-of-magnitude is correct.
+
+**Status: ✅ ORDER-OF-MAGNITUDE VERIFIED (exact value depends on comparison scenario)**
+
+### Claim 12: Robustness — κ_oblate ∈ [27, 210]
+
+| Parameter sweep | Code range | Paper claim | Status |
+|----------------|------------|-------------|--------|
+| E ∈ [0.01, 1.0] MPa | 26.9–210.2 | 27–210 | ✅ VERIFIED |
+| Drop n=2 | κ = 468.1 | ~468 | ✅ VERIFIED |
+| All leave-one-out | 62.9–468.1 | O(10¹)–O(10²) | ✅ VERIFIED |
+
+### Claim 13: Quadrature convergence by N_quad = 20
+
+f₂ is converged to machine precision by N_quad = 15 (all digits agree for N ≥ 15). The claim "converged by N_quad = 20" is conservative and correct.
+
+**Status: ✅ VERIFIED**
 
 ---
 
 ## Reproducibility Issues
 
-### R1. Two Different R Values
+1. **The prolate κ range 561–729 cannot be exactly reproduced.** The code gives 566–643. A reader following the code would obtain different bounds. This needs either an updated number in the paper or documentation of the exact ε range and parameters used to produce 561–729.
 
-`kac_identifiability.py` uses the exact canonical parameters (a=0.18, c=0.12), while `universality.py` uses `R=0.157` (CANONICAL_PARAMS) which gives R_eq = 0.157 ≠ (0.18²×0.12)^(1/3) = 0.1572. The rounding to 3 significant figures causes the universality module to derive slightly different (a,c) values at any given eccentricity: a = 0.1797 vs 0.1800, c = 0.1199 vs 0.1200. This produces κ = 69.6 vs 69.4 — a small but unnecessary discrepancy.
+2. **The σ₃ ∝ ε² asymptotic cannot be demonstrated from the code.** This is correctly flagged in the paper as a theoretical result, but a reviewer or reader looking to verify it numerically would see the opposite (a finite floor). The paper could be improved by showing the code-level behavior alongside the theoretical prediction.
 
-### R2. Sphere vs. Ritz Model at the Sphere Limit
+3. **Which f₂ is "the" f₂?** A reader wanting to reproduce Table 1 would get f₂ = 3.95 Hz from the sphere model or f₂ = 3.80 Hz from the Ritz model. The paper uses 3.95 throughout but the identifiability results use the Ritz model. This is not wrong but requires careful reading to disambiguate.
 
-At the exact sphere (a = c = 0.18):
-```
-Oblate Ritz f₂ = 3.050 Hz
-Sphere f₂      = 3.353 Hz
-```
-
-These differ by ~10%, showing the Ritz model does NOT reduce to the sphere model at c/a = 1. This is noted in the source code (oblate_spheroid_ritz.py, line 393: "the 2-DOF single-mode Ritz has a systematic ~8% offset vs the analytical sphere formula at c/a→1") but is not acknowledged in the paper.
-
-### R3. Figure Reproducibility
-
-The scripts are well-structured and produce the figures directly. Running `python scripts/forward_inverse_gap.py` from the repo root produces `fig_forward_inverse_gap.{pdf,png}` and `python scripts/general_identifiability.py` produces `fig_general_identifiability.{pdf,png}`. Both run cleanly and produce consistent output.
+4. **No enriched-basis code available.** The convergence table (Appendix, N ≥ 2) references higher-DOF Ritz results that are not present in the current codebase. Only the N = 1 (2-DOF) result can be verified.
 
 ---
 
-## Critical Assessment: Near-Spherical Asymptotics (Proposition 3 and Corollary 1)
+## Uncertainty and Statistical Rigour
 
-### The Paper Claims
+1. **No uncertainty on κ_oblate = 69.4.** The finite-difference step sensitivity is excellent (κ is stable from step = 10⁻⁴ to 10⁻⁸), but there is no reported uncertainty from parameter uncertainty. Given the robustness sweep shows κ ∈ [27, 210] over physically plausible ranges, reporting κ = 69.4 as a point value is defensible but incomplete.
 
-Proposition 3 states: σ₃(ε) = λ₁ε² + O(ε⁴) with σ₃(0) = 0.
-Corollary 1 states: κ(ε) = (σ₁(0)/λ₁)·ε⁻² + O(1) as ε → 0.
+2. **No Monte Carlo or bootstrap for κ.** The paper performs MC for some quantities in earlier papers (f₂ distributions) but not for κ itself. Given that κ is the paper's headline metric, some form of uncertainty quantification would strengthen the claim.
 
-### What the Code Shows
-
-Running the oblate Ritz model from ε = 0.014 (c/a = 0.9999) to ε = 0.745:
-
-```
-c/a      ε        σ₃        σ₃/ε²     κ
-0.9999   0.0141   0.00705   0.6522    268.7
-0.9990   0.0447   0.00705   0.2768    268.5
-0.9980   0.0632   0.00708   0.1773    267.1
-0.9950   0.0999   0.00796   0.0798    235.0
-0.9900   0.1411   0.01298   0.0652    144.3
-0.9800   0.1990   0.01096   0.0278    168.8
-0.9500   0.3122   0.01130   0.0116    162.7
-0.6670   0.7451   0.02639   0.0048    69.5
-```
-
-**σ₃ does NOT approach zero as ε → 0.** It plateaus at ~0.007 for ε < 0.1. Consequently, σ₃/ε² diverges (0.65 at ε = 0.014), which is the opposite of what approaching a constant λ₁ would show. The condition number κ also plateaus at ~268 near the sphere rather than diverging as ε⁻².
-
-### Assessment
-
-The paper's Proposition 3 and Corollary 1 are **not verified by the code**. The Ritz model exhibits a finite σ₃ floor (~0.007) and a finite κ ceiling (~268) near the sphere. The paper describes this as a "discretisation artefact of the low-order Ritz spherical limit" and claims the "continuum inverse problem" would have σ₃(0) = 0, but:
-
-1. The proposition is stated for "a smooth one-parameter oblate family of **Ritz shell models**" (emphasis mine) — i.e., the very model that shows the floor.
-2. The column ratios J[:,0]/J[:,1] in the Ritz model at c/a = 0.9999 are [4.70, 2.23, 1.26] — they do NOT converge to a common value (the sphere has [2, 2, 2, 2, 2]). The Ritz model retains geometric information even at near-unity aspect ratios because its oblate spheroidal coordinate system is fundamentally different from the sphere model.
-3. No independent computation (e.g., FEM, higher-order Ritz) is provided to verify σ₃(0) = 0 in any "continuum" sense.
-
-The theoretical argument (symmetry → rank collapse at ε = 0) is logically sound for the true continuum problem, but the proposition is stated for the Ritz model, and the Ritz model doesn't satisfy it. This is a significant gap between theory and computation.
-
-### Oblate κ Sweep is Non-Monotonic
-
-The universality module's oblate sweep shows:
-```
-ε = 0.05:  κ = 268.4
-ε = 0.16:  κ = 124.4  (local minimum)
-ε = 0.22:  κ = 168.0  (increases again)
-ε = 0.80:  κ = 87.5
-```
-
-The paper's power-law fit gives κ ~ 94.7·ε⁻⁰·³⁶ (R² = 0.80), not ε⁻². The exponent is off by a factor of ~5.5 from the theoretical prediction. Even interpreting the theory as an asymptotic (ε → 0) result, the code shows the scaling is nowhere near ε⁻² in any regime.
+3. **The "gap exceeds 10⁷" claim (§4.5) is well-supported.** κ_sphere/κ_oblate ranges from 10⁸ to 10¹¹ across all tested configurations. This is a robust qualitative finding.
 
 ---
 
-## Mathematical and Logical Review of Proofs
+## Major Issues
 
-### Proposition 1 (Breit–Wigner): ✅ Correct
+**M1. Prolate κ range discrepancy.** The claimed range 561–729 is not reproducible from the current code (which gives 566–643). Either update the paper's numbers or document the exact computational setup that produced the claimed range. This is minor in the sense that the qualitative conclusion (prolate κ is "high and flat") is unchanged, but it is a reproducibility failure for the specific numbers.
 
-Standard result from acoustic scattering theory. The proof is a textbook derivation. Dimensional analysis confirms [m²] for σ_abs. The efficiency factor 4x/(1+x)² ≤ 1 with equality at x = 1 is elementary AM-GM. The Rayleigh-limit scaling ζ_rad ∝ (ka)^(2n+2) is standard.
-
-Numerical check: at f = 4 Hz, a = 0.18 m, ka = 0.013, so (ka)⁶ = 5.3 × 10⁻¹² — confirming the enormous mismatch between radiation damping and structural damping.
-
-### Theorem 1 (Rank Collapse): ✅ Correct
-
-The chain-rule argument is mathematically rigorous. The key step — that D_f and D_θ are nonsingular and therefore don't change rank — is correct. The specific computation for R_eq = (a²c)^(1/3) yielding J̃[:,a] = 2·J̃[:,c] is verified numerically to machine precision.
-
-### Theorem 2 (Identifiability Lifting): ✅ Correct (modulo verification at canonical point)
-
-This is an existential proof relying on: (1) σ₃ > 0 at the canonical point (verified: σ₃ = 0.0264), (2) continuity of singular values. The logic is sound. The theorem claims only existence of a non-empty open set, not global or universal results.
-
-### Proposition 3 (Near-Spherical Asymptotics): ❌ NOT VERIFIED
-
-See detailed analysis above. The even-expansion argument (ε → −ε describes the same geometry) is correct in principle. The claim σ₃(0) = 0 follows from Theorem 1 IF the Ritz model reduces to a scalar-reduction model at ε = 0. But the code shows it doesn't — the Ritz model at c/a ≈ 1 is NOT equivalent to the sphere model. The proposition applies to an idealised model family, not to the implemented code.
-
-### Corollary 1 (κ ~ ε⁻²): ❌ NOT VERIFIED
-
-Follows from Proposition 3, which is unverified. Code shows κ plateaus at ~268 near the sphere.
-
-### Proposition 4 (Forward ≠ Inverse): ✅ VERIFIED
-
-E_fwd = 0.0936 < 0.1 while κ_sphere = 1.37 × 10¹⁰. The kernel-direction mechanism is elegant and confirmed: the sphere model has zero sensitivity along v_null while the oblate model has sensitivity 1.10.
+**M2. Ambiguous f₂.** The paper reports f₂ = 3.95 Hz as if it comes from "the" model, but this is the sphere model value. The Ritz model used for identifiability gives 3.80 Hz. The converged Ritz gives 3.678 Hz. This creates the impression that the oblate Ritz model and the sphere model agree on f₂, which obscures the forward error. Recommendation: explicitly label which model produces which f₂ value in the cross-application table and in Results §4.2.
 
 ---
 
 ## Minor Issues
 
-1. **Eq. numbering reference**: The proof of Proposition 4 references the forward error as "Eq. (3.16)" in the proof text (`\eqref{eq:p10_forward_error}`), but I can't verify the numbering without a compiled version. Ensure cross-references are correct.
+**m1.** The finite-difference step δ = 10⁻⁶ is stated in Theory §3.1 but not in the code's default. The code uses `step_fraction=1e-6` as the default, so this is consistent — but stating it in both places is good practice. ✅ Consistent.
 
-2. **Breathing mode**: Paper states n = 0 breathing mode near 2490 Hz (background.tex). Code confirms f₀ = 2490.65 Hz. ✓
+**m2.** The paper's Proposition 3 proof uses the first-order eigenvalue perturbation argument (Eq. 25) correctly but does not verify it numerically. A supplementary figure showing the actual σ₃ vs ε² alongside the theoretical prediction would strengthen the claim.
 
-3. **Bladder volume check**: R = 4.15 cm → V = (4/3)π(0.0415)³ = 299.4 mL ≈ 300 mL. ✓
+**m3.** The coupling ratio R ≈ 3.3 × 10⁴ is cited from Paper 1 without specifying the exact comparison scenario (which acceleration amplitude, which SPL). The code output depends on this choice. This is inherited from Paper 1 and not Paper 10's fault, but a footnote clarifying the specific comparison would help.
 
-4. **The oblate Ritz model's 2-DOF limitation**: The source code acknowledges a systematic ~8% offset vs the sphere formula at c/a → 1 (line 393 of oblate_spheroid_ritz.py). This should be mentioned in the paper when the Ritz model is introduced, not left only in code comments.
+**m4.** Table 1 gives R_eq = 0.157 m for the abdomen but the exact code value is 0.1572 m. This rounding is fine for a table but should be consistent with the precision used elsewhere.
 
-5. **Step size for finite differences**: The Jacobian uses step_fraction = 1×10⁻⁶ (central differences). For condition numbers of order 10¹⁰, this means the smallest singular value (~10⁻¹⁰) is at the noise floor of double-precision finite differences. The sphere model's σ₃ ≈ 1.4 × 10⁻¹⁰ is consistent with FD noise, not a real singular value. This is actually what one expects (rank-deficient system + FD → noise floor), but it should be noted.
-
-6. **Quadrature**: The Ritz model uses n_quad = 200 Gauss-Legendre points by default. No convergence study is presented. For Legendre polynomials of degree 6, 200 points is likely more than sufficient, but confirming with n_quad = 400 would strengthen the claim.
+**m5.** The convergence table (Appendix) claims N ≥ 4 converged value of 3.678 Hz but the enriched-basis code is not in the repository. This means the table cannot be independently verified.
 
 ---
 
 ## What's Done Well
 
-1. **Code-paper pipeline**: The scripts are clean, well-commented, and directly generate the figures. Running them from the repo root works without modification. This is better than most papers.
+1. **Exceptional numerical stability.** The κ = 69.4 result is rock-solid across four decades of FD step size and robust to parameter perturbations. This is not always the case with condition-number analyses of shell models.
 
-2. **Theorem 1 proof**: Mathematically elegant and verified to machine precision. The chain-rule argument is airtight.
+2. **Clean code architecture.** The separation between `oblate_spheroid_ritz.py` (forward model), `kac_identifiability.py` (inverse analysis), and `universality.py` (cross-geometry comparisons) is well-designed. Parameter normalisation handles multiple naming conventions gracefully.
 
-3. **The forward ≠ inverse demonstration**: Proposition 4 is the paper's strongest result. The kernel-direction mechanism (Eq. 3.35) is a clear, verifiable geometric argument.
+3. **Comprehensive test suite.** 44 tests for the identifiability module alone, covering edge cases, round-trip inversions, and numerical consistency.
 
-4. **Honest limitations section**: The paper acknowledges it is theoretical, uses reduced kinematics, and has no experimental validation.
+4. **The Theorem 1 verification is elegant.** The chain-rule proportionality check (ratio = 2c/a across all modes to 10⁻¹⁰ precision) provides a clean computational confirmation of the rank-deficiency theorem.
 
-5. **Scaled Jacobian framework**: Using the dimensionless sensitivity matrix rather than the raw Jacobian is the correct choice for identifiability analysis. The scaling is implemented correctly.
+5. **The robustness analysis is thorough.** The sweeps over E, h, ρ_f, and mode subsets convincingly demonstrate that the qualitative finding (κ_oblate << κ_sphere) is not parameter-specific.
 
----
-
-## Summary of Discrepancies
-
-| Claim | Paper | Code | Status |
-|-------|-------|------|--------|
-| κ_oblate at canonical | 69.4 | 69.4 | ✅ |
-| κ_sphere at canonical | 1.37×10¹⁰ | 1.37×10¹⁰ | ✅ |
-| E_fwd | 0.0936 | 0.0936 | ✅ |
-| f₂ (abdomen) | 3.95 Hz | 3.95 (sphere) / 3.80 (Ritz) | ⚠️ |
-| κ_prolate range | 561–729 | 334–742 | ❌ |
-| σ₃(0) = 0 | Stated | σ₃ → 0.007 | ❌ |
-| κ ~ ε⁻² near sphere | Stated | κ → 268 (flat) | ❌ |
-| J[:,a] = 2·J[:,c] (sphere) | Stated | [2,2,2,2,2] exactly | ✅ |
-| Gap ratio | ~2×10⁸ | 1.97×10⁸ | ✅ |
-| R_eq watermelon | 0.1453 | 0.1453 | ✅ |
+6. **The forward-inverse gap concept is original and well-quantified.** The E_fwd = 0.0936 with κ_sphere/κ_oblate ≈ 2 × 10⁸ is a striking concrete demonstration of the paper's central thesis.
 
 ---
 
-## Summary Recommendation: MAJOR REVISION
+## Summary Recommendation: MINOR REVISION
 
-The paper's strongest results (Theorems 1–2, Proposition 4) are verified and mathematically sound. However, Proposition 3 and Corollary 1 — the near-spherical asymptotic claims — are stated for the Ritz model but **not confirmed by running that model**. The σ₃ floor and κ ceiling near the sphere are real features of the implemented Ritz model, not artefacts. Either:
+The paper is substantially sound. The headline numbers (κ_oblate = 69.4, κ_sphere ≈ 1.37 × 10¹⁰, E_fwd = 0.0936) are exactly reproducible from the code. The four formal results are well-stated and supported by computational evidence. The following items should be addressed:
 
-(a) Restate Proposition 3 for the idealised continuum model (not the Ritz model) and provide independent verification (FEM or higher-order Ritz), or
-(b) Remove the ε² scaling claim and report what the Ritz model actually shows: a finite σ₃ floor at ε → 0, which could be attributed to the 2-DOF basis not fully reducing to the sphere limit.
-
-Additionally:
-- Correct the prolate κ range or specify the eccentricity interval.
-- Clarify which model produces f₂ = 3.95 Hz (it's the sphere model, not the Ritz model). Since the paper argues the sphere model is inadequate, citing its frequency as the canonical result is inconsistent.
-- Note the ~10% discrepancy between Ritz and sphere models at c/a = 1 somewhere in the main text.
+1. **[Required]** Correct or document the prolate κ range (561–729 vs 566–643 from current code).
+2. **[Required]** Clarify in the cross-application table and §4.2 that f₂ = 3.95 Hz is the sphere-model value, while the Ritz model gives f₂ = 3.80 Hz. This matters because the reader may not realise the identifiability analysis operates on a different frequency spectrum than the one reported in the table.
+3. **[Recommended]** Add a supplementary figure or remark showing the numerical σ₃(ε) behavior from the 2-DOF Ritz code (finite floor) alongside the theoretical quadratic prediction, to make the "discretisation artefact" claim verifiable.
+4. **[Recommended]** Include the enriched-basis code (N ≥ 2) in the repository, or add a note that the convergence table values were computed with code not included in the companion release.

@@ -22,21 +22,22 @@ thin-shell assumption.
 The undeformed shell midsurface is an oblate spheroid with semi-major axis $a$
 and semi-minor axis $c$ ($c < a$).  Define the eccentricity
 $\varepsilon = \sqrt{1-c^2/a^2}$ and the semifocal distance
-$d = a\varepsilon$.  In oblate spheroidal coordinates $(\xi,\eta,\varphi)$, the
-shell surface sits at $\xi_0 = c/d$.  Here $\eta = \cos\theta$ ranges over
+$d = a\varepsilon$.  In oblate spheroidal coordinates $(\xi,\mu,\varphi)$, the
+shell surface sits at $\xi_0 = c/d$.  Here $\mu = \cos\theta$ ranges over
 $[-1,1]$ with $\theta$ the polar angle, and $\varphi\in[0,2\pi)$ is the
-azimuthal angle.  The metric function
+azimuthal angle.  (The coordinate $\mu$ is not to be confused with the
+material loss tangent $\eta$ used elsewhere in the paper.)  The metric function
 \begin{equation}
-  G(\eta) = a^2\eta^2 + c^2(1-\eta^2)
+  G(\mu) = a^2\mu^2 + c^2(1-\mu^2)
   \label{eq:app_metric}
 \end{equation}
 determines the position-dependent curvature.  The surface element is
-$\mathrm{d}S = 2\pi\,a\sqrt{G}\,\mathrm{d}\eta$.
+$\mathrm{d}S = 2\pi\,a\sqrt{G}\,\mathrm{d}\mu$.
 
-For each circumferential mode number $n\geq 2$, the trial displacement field
+For each modal order $n\geq 2$, the trial displacement field
 is a two-degree-of-freedom (2-DOF) Ritz ansatz:
 \begin{equation}
-  w(\eta) = \beta\,P_n(\eta), \qquad
+  w(\mu) = \beta\,P_n(\mu), \qquad
   u(\theta) = \alpha\,\sin\theta\,P_n'(\cos\theta),
   \label{eq:app_trial}
 \end{equation}
@@ -63,7 +64,7 @@ over the shell surface via Gauss--Legendre quadrature (200 nodes by default):
     and the derivatives of the metric function, weighted by $\sqrt{G}$.
   \item \emph{Geometric prestress.}  The intra-abdominal pressure
     $P_\mathrm{iap}$ induces a membrane stress resultant
-    $N_1 = P_\mathrm{iap}\,R_2/2$, where $R_2(\eta) = a\sqrt{G}/c$ is the
+    $N_1 = P_\mathrm{iap}\,R_2/2$, where $R_2(\mu) = a\sqrt{G}/c$ is the
     circumferential radius of curvature.  This contributes a geometric
     stiffness term (tension stiffening) that acts on the normal DOF only.
 \end{enumerate}
@@ -109,7 +110,7 @@ restoring force arises from shell elasticity and prestress.
 The 2-DOF trial~\eqref{eq:app_trial} can be enriched by retaining additional
 Legendre terms of the same parity:
 \begin{equation}
-  w(\eta) = \sum_{i=0}^{N-1}\beta_i\,P_{n+2i}(\eta), \qquad
+  w(\mu) = \sum_{i=0}^{N-1}\beta_i\,P_{n+2i}(\mu), \qquad
   u(\theta) = \sum_{j=0}^{N-1}\alpha_j\,\sin\theta\,P_{n+2j}'(\cos\theta),
   \label{eq:app_enriched}
 \end{equation}

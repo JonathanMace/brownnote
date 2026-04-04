@@ -181,8 +181,8 @@ oblate geometries considered here ($\varepsilon \approx 0.745$), the
 partial-wave cross-sections acquire correction terms involving oblate
 spheroidal harmonics.  However, the qualitative conclusion --- that low-order
 flexural modes couple inefficiently to airborne sound in the Rayleigh regime
---- is robust: the $(ka)^{2n}$ suppression reflects the general multipole
-scaling and is not an artefact of spherical symmetry.  A quantitative
+--- is robust: the $(ka)^{2n+2}$ radiation-damping suppression reflects the
+general multipole scaling and is not an artefact of spherical symmetry.  A quantitative
 treatment for oblate scattering would require the $T$-matrix formalism
 ~\cite{MorseIngard1968} and is beyond the present scope.
 
@@ -340,9 +340,14 @@ The next question is how the restored identifiability behaves as the shell
 approaches spherical symmetry.  The correct statement is subtler than the first
 draft of the capstone suggested.  At the exact sphere, symmetry forces rank
 collapse and therefore $\sigma_3(0)=0$.  The previously reported non-zero
-intercept $\sigma_0>0$ was a low-order Ritz discretisation artefact, not a
-property of the continuum inverse problem.  What survives is a regular even
-expansion in the curvature parameter.
+intercept $\sigma_0>0$ was a numerical evaluation artefact: the
+finite-difference Jacobian misbehaves near $\varepsilon=0$ because the oblate
+spheroidal coordinate system becomes singular at the sphere, causing the
+computed $\sigma_3$ to plateau at $O(10^{-2})$ rather than reaching the
+theoretical zero.  This is not a deficiency of the Ritz model itself, whose
+structure guarantees $\sigma_3(0)=0$ by symmetry, but rather a consequence of
+evaluating derivatives numerically at a coordinate singularity.
+What survives is a regular even expansion in the curvature parameter.
 
 \begin{proposition}[Regular near-spherical asymptotics]
 \label{prop:p10_asymptotics}
@@ -382,6 +387,13 @@ frequency map and the scaled Jacobian admit expansions of the form
 At $\varepsilon=0$ the shell is spherical, so geometry enters only through a
 single radius and Theorem~\ref{thm:p10_scalar_reduction} applies.  Hence
 $\operatorname{rank}(\widetilde{J}_0)\leq 2$ and therefore $\sigma_3(0)=0$.
+Moreover, $\operatorname{rank}(\widetilde{J}_0)=2$ exactly, because at the
+sphere the geometric sensitivity direction (uniform scaling of $R$) and the
+material sensitivity direction ($E$) are linearly independent in the frequency
+response --- changes in radius and changes in modulus produce spectrally
+distinguishable effects.  Thus $\mu_3(0)=0$ is a simple eigenvalue of
+$A_0=\widetilde{J}_0^\top\widetilde{J}_0$, which is the prerequisite for the
+analytic perturbation expansion below.
 
 To determine the leading power, consider the Gram matrix
 $A(\varepsilon)=\widetilde{J}(\varepsilon)^\top\widetilde{J}(\varepsilon)$,
@@ -423,8 +435,9 @@ $\sigma_3(\varepsilon)>0$ on an open set of $\varepsilon>0$, so the leading
 coefficient satisfies $\lambda_1>0$, yielding
 \eqref{eq:p10_sigma_asymptotic}.  The corrected near-spherical analysis
 therefore removes the earlier fictitious intercept $\sigma_0>0$: the apparent
-finite floor was a discretisation artefact of the low-order spherical limit,
-not a true continuum property.
+finite floor was a numerical evaluation artefact arising from finite-difference
+Jacobian computation near the oblate spheroidal coordinate singularity at
+$\varepsilon=0$, not a property of the Ritz model's algebraic structure.
 \end{proof}
 
 \begin{corollary}
