@@ -1,8 +1,8 @@
 # The Brown Note
 
-Can sound make you soil yourself? No — but the reason why leads somewhere unexpected.
+Can airborne sound make you soil yourself? No — and the mechanical-vs-airborne asymmetry is the interesting part.
 
-The abdomen does have a real low-frequency flexural resonance near 4 Hz. The problem for the "brown note" is not resonance; it is coupling. Airborne sound couples so weakly to that mode that the story becomes less a myth to chase than a useful problem in shell mechanics, vibration, and inverse theory.
+The abdomen does have a real low-frequency flexural resonance near 4 Hz. The problem for the "brown note" is not resonance; it is coupling. The airborne path couples so weakly to that mode that the real story is the asymmetry between airborne forcing and mechanical vibration — and that turns out to be a useful problem in shell mechanics, vibration, and inverse theory.
 
 **Purely analytical at present.** A phantom validation protocol has been designed but not yet executed; see [docs/](docs/).
 
@@ -14,7 +14,7 @@ At 120 dB SPL, the energy-consistent airborne displacement of the whole abdomina
 
 A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1 resolves the mechanical-vs-airborne asymmetry for whole-abdomen coupling, while Paper 2 shows that localised gas pockets are the notable exception.
 
-Paper 7 shows that the same shell mechanics can estimate effective rind stiffness from a watermelon tap tone. That forward problem leads directly to the identifiability questions taken up in Papers 8-10.
+Paper 7 is a restricted scalar inversion that estimates effective rind stiffness from a watermelon tap tone. That forward problem is exactly what motivates the broader identifiability question taken up in Papers 8-10.
 
 ## If You Read Two Papers
 
@@ -49,11 +49,11 @@ Papers 2-6 are supporting analyses, not five unrelated grand claims. They test t
 The theoretical spine of the programme is compact enough to state plainly:
 
 1. **Rank deficiency of equivalent-radius models.** Sphere-like equivalent-radius formulations are badly ill-conditioned for spectral inversion (P8, targeting a suitable inverse-problems venue).
-2. **Identifiability lifting by oblate asphericity.** Oblate asphericity lifts identifiability, while prolate perturbations do not; the lifting is geometry-selective rather than generic (P8-P9).
+2. **Identifiability lifting by oblate asphericity.** Breaking spherical symmetry in the oblate direction lifts identifiability and improves conditioning (P8-P10).
 3. **Near-spherical conditioning asymptotics.** As spherical symmetry is restored, conditioning worsens sharply; the apparent finite floor in earlier low-order Ritz calculations was a discretisation artefact, and the correct limit is κ → ∞ as ε → 0 (P9-P10).
 4. **Forward adequacy ≠ inverse adequacy.** A model can predict resonance frequencies well and still fail as a parameter-identification tool; P7 is the motivating example, P8-P10 make the point formal.
 
-P10 currently contains the formal results for the axisymmetric case; extension to non-axisymmetric geometries and experimental validation are the next steps.
+P9 adds the cross-check that comparable prolate perturbations do not produce the same lifting. P10 currently contains the formal results for the axisymmetric case; extension to non-axisymmetric geometries and experimental validation are the next steps.
 
 ## Key Results
 
@@ -145,5 +145,4 @@ This work was produced with AI assistance; for methodology and disclosure detail
 ## Licence
 
 [MIT](LICENSE)
-
 
