@@ -1,30 +1,28 @@
 # Browntone: Vibroacoustics of Fluid-Filled Soft Shells
 
-This repository contains the analytical framework, source code, and manuscript drafts for a research programme investigating the low-frequency vibroacoustics of fluid-filled viscoelastic shells — with applications ranging from abdominal infrasound coupling to non-destructive produce testing and spectral identifiability theory.
-
-The programme is **purely analytical at present**. A phantom validation protocol has been designed but not yet executed; see [docs/](docs/).
+This repository contains the analytical framework, source code, and manuscript drafts for a research programme on the low-frequency vibroacoustics of fluid-filled viscoelastic shells. Its central claim is that the same shell model can explain both why some resonances are physically real yet negligibly excited by airborne sound, and when resonance spectra can or cannot identify the parameters that produced them. The questions matter in structural acoustics, biomechanics, inverse problems, and non-destructive sensing.
 
 ## Motivation
 
-The human abdomen possesses a real flexural resonance near 4 Hz. The long-standing conjecture — sometimes called the *brown note* — is that sufficiently intense airborne infrasound could exploit this resonance to induce involuntary gastrointestinal effects. We show that the resonance is genuine but the airborne coupling to it is not: at 120 dB SPL the energy-consistent wall displacement is only 0.028 μm, well below the 0.5–2.0 μm range associated with PIEZO-channel mechanotransduction. Whole-body mechanical vibration, by contrast, couples roughly 3.3 × 10⁴ times more effectively (SDOF upper bound; ~1.6 × 10⁴ with modal participation Γ₂ ≈ 0.48).
+The human abdomen possesses a genuine flexural resonance near 4 Hz. A long-standing conjecture, later dubbed the *brown note*, asks whether sufficiently intense airborne infrasound could exploit that resonance to induce involuntary gastrointestinal effects. We show that the resonance is real but the airborne path to it is negligible: at 120 dB SPL the energy-consistent wall displacement is only 0.028 μm, well below the 0.5–2.0 μm range associated with PIEZO-channel mechanotransduction. Under the reference comparison used in Paper 1, whole-body vibration at 0.1 m/s² couples about 3.3 × 10⁴ times more strongly in an SDOF upper bound, or about 1.6 × 10⁴ times more strongly after modal participation correction (Γ₂ ≈ 0.48).
 
-The interesting result is not the debunking itself but the asymmetry it reveals — and the observation that the same oblate-spheroidal shell model that explains *why* sound cannot shake your insides also determines *when* a resonance spectrum can or cannot identify the parameters that produced it.
+That asymmetry is the organising result of the programme. A model that captures the forward resonance physics also shows when inverse recovery is informative, when it is fragile, and when geometric simplification destroys identifiability altogether.
 
 ## Principal Papers
 
 ### [Paper 1 — The Brown Note](papers/paper1-brown-note/)
-*Targeting Journal of Sound and Vibration*
+*Prepared for submission to Journal of Sound and Vibration*
 
-Paper 1 resolves the mechanical-vs-airborne coupling asymmetry from first principles. At the n = 2 flexural resonance, ka ≈ 0.01: the acoustic wavelength dwarfs the body, the impedance mismatch is severe, and the incident field barely drives the mode. Mechanical excitation through the body wall suffers none of these penalties. The conclusion is not that abdominal resonance is fictional; it is that the resonance is real while the airborne path to it is negligible.
+Paper 1 establishes the airborne-versus-mechanical coupling asymmetry from first principles. At the n = 2 flexural resonance, ka ≈ 0.0114: the acoustic wavelength dwarfs the body, impedance mismatch dominates, and the incident field barely drives the mode. Mechanical excitation through the body wall suffers none of these penalties. The resonance is real; the airborne route to it is not a plausible physiological driver.
 
 ### [Paper 7 — Watermelon Rind Stiffness](papers/paper7-watermelon/)
-*Targeting Postharvest Biology and Technology*
+*Prepared for submission to Postharvest Biology and Technology*
 
-Paper 7 applies the same shell framework to a problem with clearer practical value: mapping a watermelon's tap-tone frequency to its effective rind stiffness. The claim is deliberately narrow — inference to eating ripeness requires cultivar-specific calibration not yet demonstrated — but the forward model works well enough to make the inverse question unavoidable: under what conditions does a resonance spectrum actually identify the parameters of interest? That question motivates Papers 8–10.
+Paper 7 applies the same framework to a cleaner inverse problem: mapping a watermelon's tap-tone spectrum to effective rind stiffness. The claim remains deliberately narrow — stiffness, not eating ripeness — but the practical question is real, and the model makes the inverse question unavoidable: under what conditions does a resonance spectrum identify the parameters of interest? That question motivates Papers 8–10.
 
-## Supporting Analyses (Papers 2–6)
+## Supporting
 
-Papers 2–6 are not independent contributions; they probe the same shell framework across complementary organs, forcing conditions, and physiological scenarios.
+Supporting investigations test the same shell framework across complementary organs, forcing conditions, and physiological scenarios.
 
 | Paper | Focus | Contribution |
 |-------|-------|-------------|
@@ -34,18 +32,20 @@ Papers 2–6 are not independent contributions; they probe the same shell framew
 | [P5](papers/paper5-borborygmi/) | Borborygmi | Bubble-shell acoustics reproduce clinical stomach-growl frequencies |
 | [P6](papers/paper6-sub-bass/) | Sub-bass perception | Structural transmission dominates the airborne path at concert levels |
 
-## Identifiability Theory (Papers 8–10)
+## Theory
 
-The theoretical contribution of the programme rests on four formal results:
+The deeper theoretical result is that good forward predictions do not guarantee useful inverse inference. When geometry is reduced too aggressively, resonance spectra lose parameter information; mild oblate asphericity can restore it.
 
-1. **Rank deficiency under scalar geometric reduction.** Equivalent-radius formulations reduce the Jacobian's column space and can render spectral inversion structurally ill-posed ([P8](papers/paper8-kac/), targeting a suitable inverse-problems venue).
-2. **Identifiability lifting by oblate asphericity.** Breaking spherical symmetry in the oblate direction restores local rank and improves conditioning by ten orders of magnitude ([P8](papers/paper8-kac/)–[P10](papers/paper10-capstone/)).
-3. **Near-spherical conditioning asymptotics.** As eccentricity ε → 0, the smallest singular value σ₃ vanishes as λ₁ε² + O(ε⁴); the finite floor reported in earlier Ritz calculations was a discretisation artefact ([P9](papers/paper9-lifting-theorem/)–[P10](papers/paper10-capstone/)).
+1. **Rank deficiency under scalar geometric reduction.** Equivalent-radius formulations collapse the Jacobian's effective column space and can make spectral inversion structurally ill-posed ([P8](papers/paper8-kac/)).
+2. **Identifiability lifting by oblate asphericity.** Breaking spherical symmetry in the oblate direction restores local rank and improves conditioning by approximately eight orders of magnitude in the canonical comparison ([P8](papers/paper8-kac/)–[P10](papers/paper10-capstone/)).
+3. **Near-spherical conditioning asymptotics.** As eccentricity ε → 0, the smallest singular value σ₃ vanishes as λ₁ε² + O(ε⁴); the apparent finite floor in earlier Ritz calculations was a discretisation artefact ([P9](papers/paper9-lifting-theorem/)–[P10](papers/paper10-capstone/)).
 4. **Forward adequacy does not imply inverse adequacy.** A model can predict resonance frequencies to within 10% yet remain catastrophically ill-conditioned for parameter recovery ([P10](papers/paper10-capstone/)).
 
-[Paper 9](papers/paper9-lifting-theorem/) establishes that comparable prolate perturbations do not produce the same lifting — the mechanism is geometry-selective. [Paper 10](papers/paper10-capstone/) contains the formal proofs for the axisymmetric case; extensions to non-axisymmetric geometries and experimental validation are the principal next steps.
+[Paper 9](papers/paper9-lifting-theorem/) shows that comparable prolate perturbations do not produce the same lifting. [Paper 10](papers/paper10-capstone/) gives the formal axisymmetric proofs and frames the remaining questions for non-axisymmetric geometries and experiment.
 
-## Selected Quantitative Results
+## Results
+
+The quantitative picture is simple: the flexural mode lies in the infrasonic band, the breathing mode does not; airborne forcing is vanishingly weak; and geometric fidelity transforms inverse conditioning.
 
 | Quantity | Value | Source |
 |----------|-------|--------|
@@ -62,10 +62,10 @@ The theoretical contribution of the programme rests on four formal results:
 
 - **Analytical, not experimental.** All results derive from shell-theoretic models. A phantom validation protocol exists ([docs/](docs/)) but has not been executed.
 - **Rind stiffness, not ripeness.** Paper 7 recovers effective stiffness from tap-tone data; the link to consumer-relevant ripeness requires cultivar calibration not yet performed.
-- **Papers 1–9 are submission-ready drafts.** Paper 10 is under active revision.
-- **Latest P10 draft:** [draft_2026-04-04_1505.pdf](papers/paper10-capstone/drafts/draft_2026-04-04_1505.pdf)
+- **Programme status.** The repository contains ten manuscript tracks spanning applied vibroacoustics, supporting analyses, and inverse-theory papers.
+- **Current P10 drafts.** [papers/paper10-capstone/drafts/](papers/paper10-capstone/drafts/)
 
-## Getting Started
+## Code
 
 ```bash
 pip install -e .[dev]
@@ -85,6 +85,8 @@ freqs = flexural_mode_frequencies_v2(model, n_max=5)
 disp = self_consistent_displacement(model, mode_n=2, spl_db=120)
 ```
 
+Core analytical modules live in `src/analytical/`; manuscript sources live under `papers/`; `tests/` contains the regression suite; and `docs/` collects research logs, protocols, and methodology notes, including the AI-assistance disclosure.
+
 ## Citation
 
 ```bibtex
@@ -96,23 +98,7 @@ disp = self_consistent_displacement(model, mode_n=2, spl_db=120)
 }
 ```
 
-## Repository Layout
-
-```
-papers/                          src/analytical/
-├── paper1-brown-note/           ├── natural_frequency_v2.py
-├── paper2-gas-pockets/          ├── energy_budget.py
-├── paper3-scaling-laws/         ├── oblate_spheroid_ritz.py
-├── paper4-bladder/              ├── kac_identifiability.py
-├── paper5-borborygmi/           ├── universality.py
-├── paper6-sub-bass/             └── ...
-├── paper7-watermelon/
-├── paper8-kac/                  tests/          487 regression tests
-├── paper9-lifting-theorem/      docs/           Research logs, protocols
-└── paper10-capstone/
-```
-
-This work was produced with AI assistance; see [docs/ai-assisted-research.md](docs/ai-assisted-research.md) for methodology and disclosure.
+This work was produced through an explicitly documented AI-assisted workflow; see [docs/ai-assisted-research.md](docs/ai-assisted-research.md) for the methodology, review process, and disclosure.
 
 ## Licence
 
