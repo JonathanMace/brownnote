@@ -9,7 +9,7 @@
 
 **Affiliation**: Department of Mechanical, Materials and Aerospace Engineering, University of Liverpool, UK
 
-**Justification**: Professor Mottershead is a leading authority on inverse methods in structural dynamics, finite element model updating, and structural identification. His foundational work on sensitivity-based updating and parameter identifiability is directly relevant to our rank-collapse and identifiability-lifting theorems.
+**Justification**: Professor Mottershead is a leading authority on inverse methods in structural dynamics, finite element model updating, and structural identification. His foundational work on sensitivity-based updating and parameter identifiability is directly relevant to our rank-collapse theorem and identifiability-lifting results.
 
 ---
 
@@ -25,7 +25,7 @@
 
 **Affiliation**: Department of Computational and Applied Mathematics, Rice University, USA
 
-**Justification**: Professor de Hoop's research programme in inverse problems, spectral geometry, and microlocal analysis provides the mathematical perspective needed to evaluate our identifiability theorems and the near-spherical asymptotic analysis. His work on geometric inverse problems bridges the gap between pure mathematics and applied mechanics.
+**Justification**: Professor de Hoop's research programme in inverse problems, spectral geometry, and microlocal analysis provides the mathematical perspective needed to evaluate our identifiability results and the near-spherical asymptotic analysis. His work on geometric inverse problems bridges the gap between pure mathematics and applied mechanics.
 
 ---
 

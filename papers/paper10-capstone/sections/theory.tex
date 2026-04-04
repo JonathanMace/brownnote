@@ -271,8 +271,8 @@ because different mode shapes concentrate strain energy in different regions of
 the shell.  Once those coefficients vary with $n$, the $a$- and $c$-columns of
 $\widetilde{J}$ need no longer remain proportional across modes.
 
-\begin{theorem}[Identifiability lifting by oblate asphericity]
-\label{thm:p10_lifting}
+\begin{proposition}[Identifiability lifting by oblate asphericity]
+\label{prop:p10_lifting}
 Consider the oblate Ritz shell model with measured flexural modes
 $\mathcal{M}\supseteq\{2,3,4\}$ and inversion parameters
 $\boldsymbol{\theta}=(a,c,E)$.  Then there exists a non-empty open set
@@ -282,38 +282,39 @@ $U\subset\{\boldsymbol{\theta}\in\Theta:c<a\}$ on which
 \end{equation}
 Thus oblate asphericity lifts the scalar-reduction rank collapse and restores
 local identifiability of $(a,c,E)$.
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
-For a fixed Ritz basis and a fixed measured-mode set, the frequencies
-$f_n(\boldsymbol{\theta})$ are smooth functions of $(a,c,E)$ away from modal
-crossings, so the entries of $\widetilde{J}(\boldsymbol{\theta})$ are smooth as
-well.  At the canonical oblate operating point
+The proof is by numerical construction at the canonical operating point,
+extended by continuity.  For a fixed Ritz basis and a fixed measured-mode set,
+the frequencies $f_n(\boldsymbol{\theta})$ are smooth functions of $(a,c,E)$
+away from modal crossings, so the entries of
+$\widetilde{J}(\boldsymbol{\theta})$ are smooth as well.  At the canonical
+oblate operating point
 \begin{equation}
   \boldsymbol{\theta}_*
   =
   \bigl(\SI{0.18}{\metre},\SI{0.12}{\metre},\SI{0.1}{\mega\pascal}\bigr),
 \end{equation}
-The numerical study in~\cite{BrowntoneP8} reports
-$\kappa(\widetilde{J}(\boldsymbol{\theta}_*))=69.4$ for the
-five-mode inverse using modes $n=2,\ldots,6$~\cite{BrowntoneP8}.  Therefore
-$\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))>0$, so
+the numerical study in~\cite{BrowntoneP8} evaluates the scaled Jacobian by
+central finite differences and reports
+$\kappa(\widetilde{J}(\boldsymbol{\theta}_*))=69.4$ for the five-mode inverse
+using modes $n=2,\ldots,6$.  A finite condition number requires all three
+singular values to be strictly positive; therefore
+$\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))>0$ and
 $\operatorname{rank}(\widetilde{J}(\boldsymbol{\theta}_*))=3$.
 
 Singular values depend continuously on the matrix entries, hence continuously
-on $\boldsymbol{\theta}$.  Since $\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))$
-is strictly positive, there exists $\delta>0$ such that
+on $\boldsymbol{\theta}$.  Since
+$\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))$ is strictly positive, there
+exists $\delta>0$ such that
 $\sigma_3(\widetilde{J}(\boldsymbol{\theta}))>\sigma_3(\widetilde{J}(\boldsymbol{\theta}_*))/2>0$
 whenever $\|\boldsymbol{\theta}-\boldsymbol{\theta}_*\|<\delta$.  Intersecting
 that ball with the oblate set $\{c<a\}$ yields a non-empty open neighbourhood
-$U$ on which $\operatorname{rank}(\widetilde{J})=3$.  The mechanism is the
-mode-dependent curvature sampling represented in
-\eqref{eq:p10_mode_expansion}: different flexural modes weight meridional and
-circumferential curvature differently, so the geometric columns of
-$\widetilde{J}$ separate once the shell is genuinely oblate.
+$U$ on which $\operatorname{rank}(\widetilde{J})=3$.
 \end{proof}
 
-The theorem is existential rather than global.  It does not say that every
+The result is existential rather than global.  It does not say that every
 oblate shell is well conditioned.  It says that oblate asphericity restores the
 \emph{possibility} of independent recovery by breaking the exact proportionality
 imposed by scalar geometric reduction.  Conditioning then becomes a quantitative
@@ -364,17 +365,48 @@ At $\varepsilon=0$ the shell is spherical, so geometry enters only through a
 single radius and Theorem~\ref{thm:p10_scalar_reduction} applies.  Hence
 $\operatorname{rank}(\widetilde{J}_0)\leq 2$ and therefore $\sigma_3(0)=0$.
 
-Equation~\eqref{eq:p10_J_even_expansion} shows that the geometric splitting away
-from the sphere enters first at order $\varepsilon^2$, because curvature
-anisotropy itself is quadratic in $\varepsilon$.  Consequently the smallest
-singular value cannot acquire a constant or odd-power term.  For the canonical
-oblate family, Theorem~\ref{thm:p10_lifting} gives
+To determine the leading power, consider the Gram matrix
+$A(\varepsilon)=\widetilde{J}(\varepsilon)^\top\widetilde{J}(\varepsilon)$,
+whose eigenvalues are $\mu_k=\sigma_k^2$.  The even expansion of
+$\widetilde{J}$ gives
+\begin{equation}
+  A(\varepsilon)
+  =
+  A_0 + \varepsilon^2 A_2 + O(\varepsilon^4),
+  \label{eq:p10_A_even_expansion}
+\end{equation}
+where
+$A_0=\widetilde{J}_0^\top\widetilde{J}_0$ and
+$A_2=\widetilde{J}_0^\top\widetilde{J}_2+\widetilde{J}_2^\top\widetilde{J}_0$.
+Let $\mathbf{v}_0\in\ker(\widetilde{J}_0)$ be the unit null vector
+(guaranteed to exist since $\sigma_3(0)=0$).  The first-order eigenvalue
+perturbation of $\mu_3$ vanishes:
+\begin{equation}
+  \mathbf{v}_0^\top A_2\,\mathbf{v}_0
+  =
+  \mathbf{v}_0^\top\bigl(
+    \widetilde{J}_0^\top\widetilde{J}_2
+    +\widetilde{J}_2^\top\widetilde{J}_0
+  \bigr)\mathbf{v}_0
+  =
+  0,
+  \label{eq:p10_first_order_vanish}
+\end{equation}
+because $\widetilde{J}_0\,\mathbf{v}_0=\mathbf{0}$.  The eigenvalue
+$\mu_3(\varepsilon)$ therefore enters at second order in $\varepsilon^2$,
+i.e.\ at order $\varepsilon^4$.  By the analytic perturbation theory of
+Kato~\cite{Kato1966}, the eigenvalue branches of $A(\varepsilon)$ are
+themselves analytic in the perturbation parameter where they remain simple,
+so $\mu_3(\varepsilon)=\lambda_1^2\varepsilon^4+O(\varepsilon^6)$ and hence
+$\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$.
+
+For the canonical oblate family, Proposition~\ref{prop:p10_lifting} gives
 $\sigma_3(\varepsilon)>0$ on an open set of $\varepsilon>0$, so the leading
-even coefficient is non-zero and positive.  Denoting that coefficient by
-$\lambda_1$ yields \eqref{eq:p10_sigma_asymptotic}.  The corrected
-near-spherical analysis therefore removes the earlier fictitious intercept
-$\sigma_0>0$: the apparent finite floor was a discretisation artefact of the
-low-order spherical limit, not a true continuum property.
+coefficient satisfies $\lambda_1>0$, yielding
+\eqref{eq:p10_sigma_asymptotic}.  The corrected near-spherical analysis
+therefore removes the earlier fictitious intercept $\sigma_0>0$: the apparent
+finite floor was a discretisation artefact of the low-order spherical limit,
+not a true continuum property.
 \end{proof}
 
 \begin{corollary}
@@ -449,7 +481,7 @@ $\operatorname{rank}(\widetilde{J}_\mathrm{sphere})\leq 2$.  The finite-differen
 evaluation reported in~\cite{BrowntoneP8} gives the associated numerical condition number
 $\kappa(\widetilde{J}_\mathrm{sphere})\approx 1.37\times10^{10}$.
 
-On the same parameter domain, Theorem~\ref{thm:p10_lifting} shows that the
+On the same parameter domain, Proposition~\ref{prop:p10_lifting} shows that the
 oblate Ritz model has full rank on an open neighbourhood of the canonical
 point, and~\cite{BrowntoneP8} gives the concrete value
 $\kappa(\widetilde{J}_\mathrm{oblate})=69.4$ for the five-mode inverse
@@ -483,6 +515,7 @@ lives in the image space $\mathbb{R}^m$ whereas the inverse problem concerns
 the preimage structure in~$\Theta$.  A model can therefore reproduce measured
 frequencies well yet be wholly unable to distinguish the parameter
 combinations that produced them.
+\end{proof}
 
 An instructive companion example is provided by the watermelon model
 in~\cite{BrowntoneP7}: there the equivalent-sphere reduction succeeds precisely
@@ -492,7 +525,6 @@ long-standing distinction between residual minimisation and parameter
 observability~\cite{MottersheadFriswell1993,FriswellMottershead1995}.
 Forward adequacy is not false; it is simply insufficient for
 multivariate spectral inversion.
-\end{proof}
 
 \begin{remark}[Near-spherical divergence of the adequacy gap]
 \label{rem:p10_near_spherical_gap}
@@ -520,14 +552,14 @@ Figure~\ref{fig:forward_inverse_gap} illustrates this divergence numerically.
     $\kappa$ across all eccentricities, while the equivalent-sphere model (red)
     is structurally rank deficient everywhere.  Both models share the same
     forward-error curve, yet their inverse conditioning differs by eight orders
-    of magnitude.  The canonical operating point ($\varepsilon=0.75$, vertical
+    of magnitude.  The canonical operating point ($\varepsilon=0.745$, vertical
     dashed line) sits in a region where $\mathcal{E}_\mathrm{fwd}<10\%$ and
     $\kappa_\mathrm{sphere}/\kappa_\mathrm{oblate}\approx 2\times 10^{8}$.}
   \label{fig:forward_inverse_gap}
 \end{figure}
 
 Taken together, Theorem~\ref{thm:p10_scalar_reduction},
-Theorem~\ref{thm:p10_lifting}, Proposition~\ref{prop:p10_asymptotics}, and
+Proposition~\ref{prop:p10_lifting}, Proposition~\ref{prop:p10_asymptotics}, and
 Proposition~\ref{prop:p10_forward_inverse} define the capstone thesis in
 mathematical form.  Scalar geometric reductions collapse one inverse direction;
 oblate curvature can restore it; the restoration vanishes quadratically at the
