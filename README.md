@@ -55,26 +55,26 @@ P10 currently contains the formal results for the axisymmetric case; extension t
 
 ## Key Results
 
-| Quantity | Value |
-|----------|-------|
-| Flexural frequency f₂ (n = 2) | 3.95 Hz |
-| Breathing mode (n = 0) | 2490 Hz |
-| Airborne displacement ξ_air at 120 dB | 0.028 μm |
-| PIEZO cellular activation range | 0.5-2.0 μm |
-| Transfer-function ratio H_mech/H_air | ≈ 6.5 × 10^6 |
-| Mechanical displacement ξ_mech at 0.1 m/s² RMS (SDOF upper bound) | 917 μm |
-| Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10^4 |
-| Dimensionless frequency Π₀ (cross-species) | 0.07 |
-| Watermelon Sobol total-order sensitivity S_T(E) (P7) | 0.86 |
-| Condition number κ_sphere | ≈ 1.37 × 10^10 |
-| Condition number κ_oblate | 69.4 |
-| Scattering parameter ka | 0.0114 |
+| Quantity | Value | Paper |
+|----------|-------|-------|
+| Flexural frequency f₂ (n = 2) | 3.95 Hz | P1 |
+| Breathing mode (n = 0) | 2490 Hz | P1 |
+| Airborne displacement ξ_air at 120 dB | 0.028 μm | P1 |
+| PIEZO cellular activation range | 0.5-2.0 μm | P1 |
+| Transfer-function ratio H_mech/H_air | ≈ 6.5 × 10^6 | P1 |
+| Mechanical displacement ξ_mech at 0.1 m/s² RMS (SDOF upper bound) | 917 μm | P1 |
+| Coupling ratio R (120 dB vs 0.1 m/s², SDOF upper bound) | ≈ 3.3 × 10^4 | P1 |
+| Dimensionless frequency Π₀ (cross-species) | 0.07 | P3 |
+| Watermelon Sobol total-order sensitivity S_T(E) | 0.86 | P7 |
+| Condition number κ_sphere | ≈ 1.37 × 10^10 | P8 |
+| Condition number κ_oblate | 69.4 | P8 |
+| Scattering parameter ka | 0.0114 | P1 |
 
 ## What This Repo Is and Isn't
 
 - **An analytical programme, not an experimental one.** The papers and code are modelling work; an experimental validation protocol exists, but it has not yet been executed.
 - **A rind-stiffness framework, not a ripeness oracle.** Paper 7 maps tap-tone frequency to effective rind stiffness; inference to eating ripeness requires cultivar-specific calibration not yet demonstrated.
-- **A mostly finished arc, not a closed book.** Papers 1-9 contain the current core results. Paper 10 extends them into a still-expanding synthesis.
+- **A mostly finished arc, not a closed book.** Papers 1-9 contain the current core results. Paper 10 is the synthesis still being refined.
 
 ## For Researchers
 
@@ -128,7 +128,7 @@ browntone/
 │   ├── paper4-bladder/          # Supporting analysis
 │   ├── paper5-borborygmi/       # Supporting analysis
 │   ├── paper6-sub-bass/         # Supporting analysis
-│   ├── paper7-watermelon/       # Watermelon thump-test / rind-stiffness bridge
+│   ├── paper7-watermelon/       # The thump-test application
 │   ├── paper8-kac/              # Identifiability theory
 │   ├── paper9-lifting-theorem/  # Oblate-prolate asymmetry
 │   └── paper10-capstone/        # Axisymmetric synthesis, extensions next
@@ -142,3 +142,4 @@ This work was produced with AI assistance; for methodology and disclosure detail
 ## Licence
 
 [MIT](LICENSE)
+
