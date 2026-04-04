@@ -65,7 +65,7 @@ the scaled Jacobian may become rank deficient.  Structural identifiability is
 then lost.  Even when rank is formally restored, the smallest singular value
 may remain small enough that the inverse problem is severely ill-conditioned.
 
-Oblate asphericity can restore identifiability in the present setting, but only
+Oblate asphericity can restore local rank in the present setting, but only
 in the precise local sense established in Section~\ref{sec:theory}.  Theorem
 ~\ref{thm:p10_lifting} does not assert that arbitrary symmetry breaking is
 sufficient.  It shows, more modestly and more usefully, that oblate
@@ -73,8 +73,10 @@ asphericity can lift the rank deficiency on a non-empty open set because
 different flexural modes sample meridional and circumferential curvature
 differently.  Proposition~\ref{prop:p10_asymptotics} then gives the corrected
 near-spherical law $\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$,
-so the exact sphere is singular and the recovered identifiability grows
-regularly as the shell departs from spherical symmetry.
+so the exact sphere is singular and local distinguishability grows regularly as
+the shell departs from spherical symmetry.  At the canonical oblate operating
+point, the inverse is not merely full-rank but moderately conditioned, with
+$\kappa=69.4$ for the five-mode study reported in~\cite{BrowntoneP8}.
 
 The applications considered here provide evidence for that broader claim.  They
 include human abdominal resonance, beginning from an infrasound-coupling
