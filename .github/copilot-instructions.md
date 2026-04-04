@@ -104,7 +104,7 @@ Every computation must use these values unless explicitly varying a parameter.
 - Run the consistency-auditor before every paper compilation.
 
 ### R7. Review Standards
-- 4-reviewer panel (A=domain, B=cynical, C=methodologist, D=structural dynamicist) after every major paper update.
+- 5-reviewer panel (A=domain, B=cynical, C=methodologist, D=structural dynamicist, E=impact) after every major paper update.
 - All agent output must be **structured, quantitative, and actionable** — no vague prose.
 
 ### R8. Writing Standards
@@ -179,6 +179,7 @@ See the `compile-paper` skill for compilation instructions.
 | `lab-meeting` | Holistic audit — docs freshness, strategy, blockers |
 | `research-scout` | Idea generation — find new publishable topics |
 | `provocateur` | Devil's advocate — challenge assumptions and direction |
+| `reviewer-e` | Impact gatekeeper — "why does this matter?", problem reality, venue quality, timeliness |
 | `paper-writer` | Drafting — section writing, style, LaTeX |
 | `simulation-engineer` | Analysis — computational work, FEA, mesh |
 | `data-analyst` | Figures — publication-quality visualization |
@@ -202,7 +203,7 @@ See the `compile-paper` skill for compilation instructions.
 | `research-iteration` | Full DO→REVIEW→LOG→COMPILE→COMMIT cycle |
 | `run-analysis` | Execute analytical pipeline + verify outputs |
 | `generate-figures` | Create publication-quality figures |
-| `critique-results` | Invoke 4-reviewer panel on recent work |
+| `critique-results` | Invoke 5-reviewer panel on recent work |
 | `write-paper` | Drafting guide with JSV conventions |
 | `write-analysis` | Guide for analytical model code in `src/analytical/` |
 | `write-tests` | Guide for pytest tests in `tests/` |
