@@ -15,9 +15,10 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper has argued that the Browntone programme is best understood not as a
-collection of disparate applications, but as a coherent theory of geometry in
-fluid-filled compliant shells.  The central thesis is that geometry does three
+This paper has established a methodological claim with broader force:
+forward adequacy does not imply inverse adequacy in fluid-filled elastic shells,
+because geometry governs not only the spectrum but also the information
+available for inversion.  The central thesis is that geometry does three
 jobs.  It filters how external forcing couples into admissible shell motions; it
 organises the modal spectrum through symmetry, curvature, and fluid loading; and
 it determines whether the spectrum can be inverted to recover the parameters
@@ -55,6 +56,22 @@ class.  A sufficiently consistent picture has therefore emerged to support a
 broader claim: spectral mechanics in fluid-filled compliant enclosures can be
 organised around geometry as an information-bearing structure, rather than
 treated as a collection of isolated frequency calculations.
+
+\paragraph{Broader implications.}
+The practical lesson is immediate.  In structural health monitoring, an
+equivalent-beam reduction should not be trusted for damage detection merely
+because it matches the measured frequencies; one should also test whether the
+reduced sensitivity matrix can still separate damage location from damage
+severity.  In geophysics, radially symmetric reference models remain valuable
+forward baselines, but they should not be mistaken for inverse surrogates for
+lateral structure.  In elastography, patient-specific or organ-specific geometry
+should be retained whenever quantitative stiffness recovery is the goal rather
+than coarse screening.  In metamaterials, effective-medium models should be
+audited for which microstructural parameters remain inferable after
+homogenisation.  Across all four settings, the prescription is the same: before
+using a reduced model for inversion, compute the Jacobian or Fisher information
+for the reduced observables and ask which parameter directions the reduction has
+already collapsed.
 
 That perspective offers a template for future work in biomechanics, biomedical
 sensing, non-destructive testing, and industrial noise, vibration, and harshness.

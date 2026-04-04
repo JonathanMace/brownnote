@@ -19,7 +19,7 @@
 
 The capstone claim of this paper is not simply that geometry matters.  That
 would be a qualitative observation rather than a mechanistic one.  The stronger conclusion is
-that geometry enters the problem of fluid-filled viscoelastic shells in three
+that geometry enters the problem of fluid-filled elastic shells in three
 logically distinct ways, and that confusing those roles obscures both the
 forward physics and the inverse problem.  Geometry filters how forcing is
 projected onto admissible deformation fields; geometry organises the modal
@@ -52,7 +52,7 @@ remain small while the inverse uncertainty becomes enormous.  A model may
 therefore look persuasive in prediction and still be defective in inference.
 
 This distinction is the most important conceptual result to emerge from the
-Browntone sequence.  The existence of a resonance is not enough to establish an
+companion studies.  The existence of a resonance is not enough to establish an
 effective excitation pathway~\cite{BrowntoneP1,BrowntoneP6}.  Nor is the
 existence of a good spectral fit enough to establish a recoverable parameter
 map~\cite{BrowntoneP7,BrowntoneP8}.
@@ -62,6 +62,90 @@ the mode family of interest.  On the inverse side, it selects which parameter
 directions remain distinguishable once those modes are measured.  A reduced
 model that is useful in forward prediction may therefore be unstable for inversion for reasons that
 are not accidental but structural.
+
+
+\subsection{Methodological implication beyond the companion studies}
+
+The mechanism formalised in Theorem~\ref{thm:p10_scalar_reduction} is not a peculiarity of abdominal
+shells.  It states a more general rule: whenever a reduction maps several
+independent geometric or constitutive coordinates to a single effective
+coordinate, forward adequacy can survive while inverse adequacy is lost.  That
+pattern already appears in several mature inverse problems outside the present
+programme.
+
+\paragraph{Structural health monitoring.}
+In vibration-based structural health monitoring, plates, shells, and stiffened
+panels are routinely reduced to equivalent beams or to a few global stiffness
+update parameters so that low-order modal data can be fit economically.  The
+reduction replaces a distributed damage field, its location, and its orientation
+by one effective bending stiffness or by one small parameter block.  The shell
+theorem suggests exactly the failure mode that the model-updating literature
+reports:
+frequencies can be matched while damage localisation remains non-unique, because
+many damage patterns project to the same reduced stiffness.  Mottershead and
+Friswell's survey and the monograph by Friswell and Mottershead both emphasise
+that modal-frequency fits alone do not guarantee unique parameter recovery in
+reduced structural models~\cite{MottersheadFriswell1993,FriswellMottershead1995}.
+Our theorem supplies the structural reason: the reduction has merged distinct
+parameter directions before the inversion starts.
+
+\paragraph{Geophysical inversion.}
+The classical PREM reduction makes the same move at planetary scale.  Dziewonski
+and Anderson's \emph{Preliminary reference Earth model} (\emph{Phys. Earth
+Planet. Inter.}, 1981) replaces a three-dimensional Earth by a radially
+symmetric profile that predicts the centroid frequencies of normal modes
+strikingly well.  But once lateral heterogeneity is collapsed into depth-only
+structure, the model cannot resolve the azimuthal splitting caused by
+continents, slabs, and mantle convection; that loss of information is precisely
+why later splitting and tomographic inversions were needed, as reviewed for
+example by Montagner and Roult in \emph{Normal modes of the Earth} (\emph{J.
+Phys.: Conf. Ser.}, 2003).  The shell theorem has a clear analogue in
+geophysical inversion: radial reduction preserves forward adequacy for averaged
+spectra while destroying lateral identifiability by symmetry.
+
+\paragraph{Medical elastography.}
+Model-based elastography often solves the inverse problem on simplified
+spherical or ellipsoidal domains even when the organ of interest is visibly
+oblate, lobed, or boundary dominated.  Here the reduction replaces several
+independent curvature and boundary descriptors by one idealised shape family.
+The shell theorem suggests degraded conditioning of
+stiffness recovery whenever the omitted geometric degrees of freedom are
+spectrally entangled with material stiffness.  The elastography literature has
+repeatedly observed the practical version of this effect: Doyley's survey
+emphasises the inverse problem's sensitivity to modelling assumptions~\cite{Doyley2012},
+Parker \emph{et al.}\ describe persistent geometry- and boundary-induced bias in
+stiffness imaging~\cite{parker2011imaging}, and Sack's recent review argues that
+anatomically realistic geometry is often essential for quantitative magnetic
+resonance elastography~\cite{Sack2023}.  Our contribution is to reinterpret
+those observations structurally: the problem is not only imperfect meshing, but
+rank loss induced by oversimplified geometry.
+
+\paragraph{Acoustic metamaterials.}
+Homogenisation of acoustic metamaterials offers perhaps the cleanest engineering
+analogue.  A complex unit cell with resonators, channels, and inclusions is
+replaced by effective density, bulk modulus, or a small set of Willis-type
+parameters.  As a forward model, that reduction can be excellent: retrieval and
+homogenisation schemes reproduce reflection, transmission, and band-edge
+behaviour with remarkable accuracy.  As an inverse model, however,
+the shell theorem suggests non-uniqueness whenever several
+microgeometries collapse to the same effective scalar descriptors.  That
+concern is visible in the homogenisation literature itself, for example Yang
+\emph{et al.}'s \emph{Homogenization scheme for acoustic metamaterials}
+(\emph{Phys. Rev. B}, 2014) and Sridhar \emph{et al.}'s \emph{Homogenization of
+locally resonant acoustic metamaterials towards an emergent enriched continuum}
+(\emph{Comput. Mech.}, 2016), where accurate macroscopic response is obtained
+precisely by averaging away unit-cell detail.  The forward success of the
+effective medium is therefore not evidence that the microgeometry remains
+identifiable.
+
+Across these examples, the general inference lesson is the same.
+Theorem~\ref{thm:p10_scalar_reduction} is not a curiosity of the present shell
+analyses; it is a warning about any inverse workflow that validates a reduced
+model only by forward misfit.  If the reduction compresses multiple physically
+distinct coordinates into one effective parameter, then matching the observable
+does not certify that the lost coordinates can still be recovered.  That is the
+sense in which forward adequacy fails inverse adequacy beyond the present
+programme.
 
 \subsection{Why geometry does three jobs}
 
@@ -244,3 +328,4 @@ should be characterised beyond the regimes so far examined.  If the programme
 began with an unconventional motivating question, it now defines a tractable set
 of mathematical problems about
 symmetry, curvature, and information in shell spectra.
+
