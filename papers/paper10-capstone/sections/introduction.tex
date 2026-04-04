@@ -3,7 +3,7 @@
 % =============================================================================
 % PURPOSE:
 %   Frame the paper around a general spectral-inverse principle rather than as a
-%   programme summary.  Emphasise identifiability lineage, distinguish
+%   project summary.  Emphasise identifiability lineage, distinguish
 %   structural from practical identifiability, retain the three roles of
 %   geometry, and position the applications as evidence rather than the point.
 % =============================================================================
@@ -20,121 +20,103 @@ parameter set that best explains the observations
 The central issue is not simply whether a model reproduces the spectrum in the
 forward direction.  It is whether the spectrum contains enough independent
 information to distinguish the geometric and material parameters that generated
-it.
+it.  Following the classical identifiability framework of Bellman and
+{\AA}str{\"o}m~\cite{BellmanAstrom1970}, Rothenberg~\cite{Rothenberg1971}, and
+its computational operationalisation by Raue \emph{et al.}~\cite{Raue2009}, the
+question is one of both rank and conditioning.
 
-The present paper treats that question within the lineage of structural and
-practical identifiability.  In the classical system-identification literature,
-Bellman and {\AA}str{\"o}m formalised structural identifiability as a question
-of whether distinct parameter values can in principle be separated by the model
-output~\cite{BellmanAstrom1970}, while Rothenberg's rank conditions gave a local
-identification criterion in terms of the information carried by the observable
-map~\cite{Rothenberg1971}.  In contemporary sensitivity-matrix approaches,
-including the biomedical inverse-problem literature, the same distinction is
-often phrased operationally: structural identifiability concerns Jacobian rank,
-whereas practical identifiability concerns conditioning and the amplification of
-measurement error through the inverse map~\cite{Raue2009,Doyley2012}.  Here
-structural identifiability refers to local parameter distinguishability encoded
-by Jacobian rank, whereas practical identifiability refers to the conditioning
-of that recovery problem under finite perturbations and finite-precision data.
-The scaled Jacobian framework used in Section~\ref{sec:theory} belongs directly
-to that tradition.
+For fluid-filled viscoelastic shells, geometry enters that question in three
+distinct roles.  It filters how external forcing projects onto admissible
+deformation fields; it organises the modal spectrum through curvature,
+symmetry, and fluid loading; and it determines whether that spectrum supports
+identifiable parameter recovery.  The first role explains why a resonance can
+exist yet remain weakly excitable.  The second explains why different modal
+families respond differently to shape.  The third is the main concern of the
+present paper, because it determines whether spectral data can separate
+geometric and material effects at all.
 
-The analogy with classical spectral geometry is limited but useful.  Kac's 1966
+The analogy with Kac's question is instructive but limited.  Kac's 1966
 formulation remains a canonical statement of the inverse spectral ambition
-~\cite{Kac1966}.  The present problem differs in that the operator is a coupled
-fluid--structure system rather than a scalar Laplacian, but the identifiability
-question --- which geometric features are spectrally distinguishable --- is
-analogous.  Unlike Kac's global spectral-geometry problem, however, the present
-paper concerns local identifiability of a finite-dimensional coupled
-fluid--structure model from modal data.  The Gordon--Webb--Wolpert
-counterexample remains relevant as a reminder that symmetry can hide geometric
-information even when spectral data are exact~\cite{Gordon1992}.
+~\cite{Kac1966}.  The present problem concerns local parametric identifiability
+of a finite-dimensional model, not global spectral uniqueness of a differential
+operator.  The operator is a coupled fluid--structure system rather than a
+scalar Laplacian, but the analogous issue remains which geometric features are
+spectrally distinguishable.  The Gordon--Webb--Wolpert counterexample remains
+relevant as a reminder that symmetry can hide geometric information even when
+spectral data are exact~\cite{Gordon1992}.
 
 We study these issues for fluid-filled viscoelastic shells.  Such shells arise
 in biomechanics, soft-structure acoustics, postharvest sensing, and related
 inverse problems, yet their spectral interpretation is often application-led.
-Our claim is instead mechanistic and general.  In these systems geometry enters
-in three distinct roles.  It filters how external forcing projects onto
-admissible deformation fields; it organises the modal spectrum through
-curvature, symmetry, and fluid loading; and it determines whether that spectrum
-supports identifiable parameter recovery.  The first role is formalised in the
-Breit--Wigner excitation proposition; the second organises the shell spectra
-seen across the companion studies; the third is the main inverse-problem focus
-of the present paper.
+Here structural identifiability refers to local parameter distinguishability
+encoded by Jacobian rank, whereas practical identifiability refers to the
+conditioning of that recovery problem under finite perturbations and
+finite-precision data~\cite{Raue2009,Doyley2012}.  The scaled Jacobian
+framework used in Section~\ref{sec:theory} belongs directly to that tradition.
 
-The excitation role matters because resonance cannot be interpreted apart from
-how a forcing field couples to the relevant modes.  In the long-wavelength
-limit, the Breit--Wigner absorption law shows that even an existing flexural
-mode may be weakly excited if the radiative channel is geometrically
-suppressed.  The spectral-organisation role matters because curvature and fluid
-loading separate low-frequency flexural families from other motions and alter
-how different modes respond to geometric perturbation
-~\cite{Leissa1973,Soedel2004,Junger1986}.  The inverse role matters because a
-model may preserve the dominant frequency scale of the shell while erasing the
-very curvature information required for multi-parameter recovery.
+Within that framework, the most restrictive mechanism is geometric reduction.
+Symmetry-reduced descriptions, especially equivalent-radius reductions, can be
+entirely serviceable as forward surrogates because they preserve the leading
+frequency scale of a non-spherical shell.  Their inverse behaviour is less
+forgiving.  Once two geometric degrees of freedom are compressed into a single
+scalar descriptor, the spectrum may lose an independent curvature channel and
+the scaled Jacobian may become rank deficient.  Structural identifiability is
+then lost.  Even when rank is formally restored, the smallest singular value
+may remain small enough that the inverse problem is severely ill-conditioned.
+
+Oblate asphericity can restore identifiability in the present setting, but only
+in the precise local sense established in Section~\ref{sec:theory}.  Theorem
+~\ref{thm:p10_lifting} does not assert that arbitrary symmetry breaking is
+sufficient.  It shows, more modestly and more usefully, that oblate
+asphericity can lift the rank deficiency on a non-empty open set because
+different flexural modes sample meridional and circumferential curvature
+differently.  Proposition~\ref{prop:p10_asymptotics} then gives the corrected
+near-spherical law $\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$,
+so the exact sphere is singular and the recovered identifiability grows
+regularly as the shell departs from spherical symmetry.
 
 The applications considered here provide evidence for that broader claim.  They
 include human abdominal resonance, beginning from an infrasound-coupling
-question in abdominal biomechanics~\cite{BrowntoneP1,BrowntoneP6}; watermelon
-ripeness assessment, where a reduced forward surrogate can remain useful when
-the inferential target is deliberately narrow~\cite{BrowntoneP7}; and
-organ-shape identifiability, where geometry and material properties must be
-recovered jointly and the inverse problem becomes central~\cite{BrowntoneP8}.
-The formal results are new to this paper; the applications supply cross-domain
-evidence from companion studies, but are not re-derived here.
+question in abdominal biomechanics (including the phenomenon sometimes
+discussed under the ``brown note'' label)~\cite{BrowntoneP1,BrowntoneP6};
+watermelon ripeness assessment, where a reduced forward surrogate can remain
+useful when the inferential target is deliberately narrow~\cite{BrowntoneP7};
+and urinary-bladder resonance, where fill state changes both size and effective
+stiffness and therefore provides a contrasting geometry-sensitive shell
+application~\cite{BrowntoneP4}.  The formal results stated below are new; the
+applications are drawn from companion studies and serve as the evidence base.
 
-Against that background, the paper isolates a specific geometric mechanism.
-Symmetry-reduced descriptions, especially equivalent-radius reductions, can be
-entirely serviceable as forward surrogates because they preserve the leading
-frequency scale of a non-spherical shell.  Their inverse behaviour is more
-restrictive.  Once two geometric degrees of freedom are compressed into a
-single scalar descriptor, the spectrum may lose an independent curvature
-channel and the scaled Jacobian may become rank deficient.  Structural
-identifiability is then lost.  Even when the rank is restored, the smallest
-singular value may remain small enough that the inverse problem is practically
-fragile.  In this sense the gap between rank and conditioning is not a technical
-afterthought; it is part of the geometry of the inverse problem itself.
+The formal development contains four principal formal results and one
+supporting excitation proposition, matching the hierarchy stated in the
+abstract.  The supporting proposition,
+Proposition~\ref{prop:p10_breit_wigner}, recasts the Breit--Wigner excitation
+filter as a geometric statement about modal coupling.  The four principal
+results are these.  Theorem~\ref{thm:p10_scalar_reduction} proves rank collapse
+under scalar geometric reduction and therefore the loss of structural
+identifiability.  Theorem~\ref{thm:p10_lifting} shows that oblate asphericity
+can restore full rank on a non-empty open set.  Proposition
+~\ref{prop:p10_asymptotics} gives the correct near-spherical asymptotics for
+the smallest singular value of the scaled Jacobian.  Lemma
+~\ref{lem:p10_forward_inverse} then demonstrates that small forward spectral
+error does not by itself imply an inverse model suitable for parameter
+recovery.
 
-The geometric remedy is precise rather than universal.  Theorem~\ref{thm:p10_lifting}
-does not assert that arbitrary symmetry breaking restores identifiability.
-It shows, more modestly and more usefully, that oblate asphericity can lift the
-rank deficiency on a non-empty open set because different flexural modes sample
-meridional and circumferential curvature differently.  Proposition~\ref{prop:p10_asymptotics}
-then gives the corrected near-spherical law
-$\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$, so the exact
-sphere is singular and the recovered identifiability grows regularly as the
-shell departs from spherical symmetry.
+The broader significance is not confined to the present shell class.  Whenever
+resonance data are used to infer geometry, stiffness, or both, there is an
+unwarranted inference to avoid: success in the forward fit does not by itself
+establish that the inverse map is informative.  The identifiability lesson is
+that symmetry can preserve the dominant spectral scale while removing the
+independent geometric channels required for parameter recovery.
 
-The formal development therefore contains four principal formal results and one
-supporting proposition, matching the hierarchy stated in the abstract.
-Proposition~\ref{prop:p10_breit_wigner} recasts the Breit--Wigner excitation
-filter as a geometric statement about modal coupling.  Theorem
-~\ref{thm:p10_scalar_reduction} proves rank collapse under scalar geometric
-reduction and therefore the loss of structural identifiability.  Theorem
-~\ref{thm:p10_lifting} shows that oblate asphericity can restore full rank on a
-non-empty open set.  Proposition~\ref{prop:p10_asymptotics} gives the correct
-near-spherical asymptotics for the smallest singular value of the scaled
-Jacobian.  Lemma~\ref{lem:p10_forward_inverse} then demonstrates that a small
-forward spectral error does not by itself imply an inverse model suitable for
-parameter recovery.
-
-This scope is deliberately local and linearised.  We study practical
-identifiability through the singular values and condition number of a scaled
-Jacobian built from modal frequencies, and structural identifiability through
-its rank.  We do not claim global uniqueness for nonlinear inverse problems,
+Our scope is deliberately local and linearised.  We study structural
+identifiability through Jacobian rank and practical identifiability through the
+singular values and condition number of a scaled Jacobian built from modal
+frequencies.  We do not claim global uniqueness for nonlinear inverse problems,
 and we do not suggest that spectral data alone resolve every ambiguity in real
 shells.  The analysis is restricted to linearised shell dynamics with
 homogeneous viscoelastic walls, axisymmetric reference geometries, and a single
-internal fluid phase.  These assumptions are strong enough to expose the
-mechanism of interest without pretending to settle the full experimental
-problem.
-
-Nor does the present paper provide new experiments.  Its contribution is
-analytical and synthetic: to formulate the general inverse-problem principle,
-prove the formal results, and show how prior work across several shell classes
-supports that principle.  Experimental routes are discussed later, particularly
-for modal measurements on shells with controlled asphericity and independently
-known stiffness, but they are not part of the present contribution.
+internal fluid phase; experimental routes are discussed later, but no new
+experiments are presented here.
 
 \begin{figure}[t]
   \centering
@@ -149,10 +131,8 @@ known stiffness, but they are not part of the present contribution.
 
 Section~\ref{sec:background} recalls the companion evidence and the common
 geometric structure required for the present argument.  Section~\ref{sec:theory}
-proves the supporting proposition and the four principal formal results in a
-unified local-identifiability framework.  Section~\ref{sec:results} tests those
-results against the cross-domain record, Section~\ref{sec:discussion}
-interprets the implications for spectral inference on shells, and
-Section~\ref{sec:conclusion} closes with the general lesson that geometry
-governs not only what shell spectra look like, but also what they can reliably
-reveal.
+proves the supporting proposition and the four principal formal results within
+a unified local-identifiability framework.  Sections~\ref{sec:results} and
+\ref{sec:discussion} test and interpret those results across the application
+record, and Section~\ref{sec:conclusion} closes with the general lesson for
+spectral inference on shells.

@@ -78,6 +78,7 @@ P9 adds the cross-check that comparable prolate perturbations do not produce the
 - **An analytical programme, not an experimental one.** The papers and code are modelling work; an experimental validation protocol exists, but it has not yet been executed.
 - **A rind-stiffness framework, not a ripeness oracle.** Paper 7 maps tap-tone frequency to effective rind stiffness; inference to eating ripeness requires cultivar-specific calibration not yet demonstrated.
 - **A mostly finished arc, not a closed book.** Papers 1-9 contain the current core results. Paper 10 is the synthesis still being refined.
+- **Latest Paper 10 draft.** [papers/paper10-capstone/drafts/draft_2026-04-04_1334.pdf](papers/paper10-capstone/drafts/draft_2026-04-04_1334.pdf)
 
 ## For Researchers
 
@@ -145,4 +146,3 @@ This work was produced with AI assistance; for methodology and disclosure detail
 ## Licence
 
 [MIT](LICENSE)
-
