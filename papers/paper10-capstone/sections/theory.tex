@@ -412,8 +412,8 @@ recovery map; locally, $\kappa(\widetilde{J})$ is the appropriate quantity.
 There is no theorem forcing small $\mathcal{E}_\mathrm{fwd}$ to imply moderate
 $\kappa$.  The Browntone sequence instead supplies explicit counterexamples.
 
-\begin{lemma}[Forward adequacy does not imply inverse adequacy]
-\label{lem:p10_forward_inverse}
+\begin{proposition}[Forward adequacy does not imply inverse adequacy]
+\label{prop:p10_forward_inverse}
 There exist parameter domains on which a reduced equivalent-sphere model has
 small forward error while remaining unusable for joint recovery of
 $(a,c,E)$.  In particular, at the canonical abdominal operating point and using
@@ -433,7 +433,9 @@ whereas the oblate Ritz model on the same modal set has
   \qquad \text{and} \qquad
   \kappa(\widetilde{J}_\mathrm{oblate}) = 69.4.
 \end{equation}
-\end{lemma}
+The mechanism is a \emph{structural sensitivity gap} along the kernel of the
+geometric reduction.
+\end{proposition}
 
 \begin{proof}
 At the canonical abdominal point, the equivalent-sphere and oblate Ritz models
@@ -451,18 +453,80 @@ On the same parameter domain, Theorem~\ref{thm:p10_lifting} shows that the
 oblate Ritz model has full rank on an open neighbourhood of the canonical
 point, and~\cite{BrowntoneP8} gives the concrete value
 $\kappa(\widetilde{J}_\mathrm{oblate})=69.4$ for the five-mode inverse
-~\cite{BrowntoneP8}.  The two models are therefore close as forward predictors
-yet radically different as inverse operators.  An instructive companion
-example is provided by the watermelon model in~\cite{BrowntoneP7}: there the
-equivalent-sphere reduction succeeds precisely because geometry is fixed
-independently and the inverse target is effectively one-dimensional.  Forward adequacy is not false; it is simply
-insufficient for multivariate spectral inversion.
+~\cite{BrowntoneP8}.
+
+The structural reason why forward and inverse adequacy decouple is made
+transparent by the kernel of the projection
+$\pi:(a,c,E)\mapsto(R_\mathrm{eq},E)$.  Let
+$\mathbf{v}\in\ker D\pi(\boldsymbol{\theta}_0)$ with $\|\mathbf{v}\|=1$; this
+is the direction that trades $a$ against $c$ while preserving
+$R_\mathrm{eq}=(a^2 c)^{1/3}$.  Then
+\begin{equation}
+  \widetilde{J}_\mathrm{sphere}\,\mathbf{v}
+  =
+  DG(\pi(\boldsymbol{\theta}_0))\;
+  \underbrace{D\pi(\boldsymbol{\theta}_0)\,\mathbf{v}}_{=\,\mathbf{0}}
+  =
+  \mathbf{0},
+  \label{eq:p10_kernel_mechanism}
+\end{equation}
+so the reduced model is \emph{exactly insensitive} to perturbations along
+$\mathbf{v}$.  By contrast, $\operatorname{rank}(\widetilde{J}_\mathrm{oblate})=3$
+guarantees $\widetilde{J}_\mathrm{oblate}\,\mathbf{v}\neq\mathbf{0}$: the
+full model detects parameter changes to which the reduced model is structurally
+blind.
+
+Forward adequacy \eqref{eq:p10_forward_error} constrains the \emph{values} of
+the two frequency vectors to be close; it places no constraint on how their
+\emph{derivatives} compare along the lost direction, because the forward error
+lives in the image space $\mathbb{R}^m$ whereas the inverse problem concerns
+the preimage structure in~$\Theta$.  A model can therefore reproduce measured
+frequencies well yet be wholly unable to distinguish the parameter
+combinations that produced them.
+
+An instructive companion example is provided by the watermelon model
+in~\cite{BrowntoneP7}: there the equivalent-sphere reduction succeeds precisely
+because geometry is fixed independently and the inverse target is effectively
+one-dimensional.  Forward adequacy is not false; it is simply insufficient for
+multivariate spectral inversion.
 \end{proof}
+
+\begin{remark}[Near-spherical divergence of the adequacy gap]
+\label{rem:p10_near_spherical_gap}
+In the near-spherical regime, the coexistence of forward adequacy and inverse
+inadequacy becomes increasingly extreme.  The forward error shrinks as the
+shell approaches spherical symmetry because the equivalent-sphere approximation
+becomes exact at $\varepsilon=0$.  But the condition number diverges by
+Corollary~\ref{cor:p10_kappa_asymptotic}:
+$\kappa(\widetilde{J})\sim(\sigma_1(0)/\lambda_1)\,\varepsilon^{-2}$
+as $\varepsilon\to 0$.  The ratio of inverse difficulty to forward discrepancy
+therefore grows without bound: the sphere limit is simultaneously the most
+forward-adequate and the most inverse-inadequate configuration.
+Figure~\ref{fig:forward_inverse_gap} illustrates this divergence numerically.
+\end{remark}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/fig_forward_inverse_gap.pdf}
+  \caption{The forward-inverse adequacy gap
+    (Proposition~\ref{prop:p10_forward_inverse}).  The forward error
+    $\mathcal{E}_\mathrm{fwd}$ (blue, left axis) quantifies how well the
+    equivalent-sphere model reproduces oblate Ritz frequencies; the condition
+    number $\kappa$ (right axis) quantifies how usable each model is for
+    parameter recovery.  The oblate Ritz model (green) maintains moderate
+    $\kappa$ across all eccentricities, while the equivalent-sphere model (red)
+    is structurally rank deficient everywhere.  Both models share the same
+    forward-error curve, yet their inverse conditioning differs by eight orders
+    of magnitude.  The canonical operating point ($\varepsilon=0.75$, vertical
+    dashed line) sits in a region where $\mathcal{E}_\mathrm{fwd}<10\%$ and
+    $\kappa_\mathrm{sphere}/\kappa_\mathrm{oblate}\approx 2\times 10^{8}$.}
+  \label{fig:forward_inverse_gap}
+\end{figure}
 
 Taken together, Theorem~\ref{thm:p10_scalar_reduction},
 Theorem~\ref{thm:p10_lifting}, Proposition~\ref{prop:p10_asymptotics}, and
-Lemma~\ref{lem:p10_forward_inverse} define the capstone thesis in mathematical
-form.  Scalar geometric reductions collapse one inverse direction; oblate
-curvature can restore it; the restoration vanishes quadratically at the exact
-sphere; and forward success does not justify inverse use.  The results
+Proposition~\ref{prop:p10_forward_inverse} define the capstone thesis in
+mathematical form.  Scalar geometric reductions collapse one inverse direction;
+oblate curvature can restore it; the restoration vanishes quadratically at the
+exact sphere; and forward success does not justify inverse use.  The results
 section tests these formal statements against the cross-paper evidence.
