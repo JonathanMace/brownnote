@@ -333,3 +333,48 @@ That is why the same research programme can contain, without contradiction, a
 successful equivalent-sphere watermelon model and a strong warning against
 equivalent-sphere inversion.  The models answer different questions.  Geometry
 determines which inferences are defensible.
+
+\subsection{Robustness of the identifiability lifting}
+\label{sec:robustness}
+
+A natural concern is whether the lifting result
+$\kappa_\mathrm{oblate}=69.4$ is too local --- dependent on the precise
+canonical parameter values or the choice of measurement modes.
+Figure~\ref{fig:sensitivity} addresses this through four complementary tests.
+Varying the elastic modulus over two orders of magnitude
+($E=\SIrange{0.01}{1.0}{\mega\pascal}$), the shell thickness over a factor of
+four ($h=\SIrange{0.005}{0.020}{\metre}$), and the fluid density from 500 to
+\SI{1500}{\kilogram\per\metre\cubed} leaves
+$\kappa_\mathrm{oblate}$ in the range 27--210 while
+$\kappa_\mathrm{sphere}$ remains $\mathcal{O}(10^{10})$ throughout
+(Fig.~\ref{fig:sensitivity}a).  The gap between the oblate and spherical
+condition numbers --- the signature of the identifiability lifting --- exceeds
+$10^{7}$ for every tested configuration.
+
+The result is equally insensitive to the choice of measured modes.  Whether four,
+five, or seven modes are used, and regardless of which single mode is dropped
+from the canonical set $\{2,\ldots,6\}$,
+$\kappa_\mathrm{oblate}$ remains $\mathcal{O}(10^{1})$--$\mathcal{O}(10^{2})$
+(Fig.~\ref{fig:sensitivity}b).  The largest excursion occurs when
+$n=2$ is excluded ($\kappa\approx 468$), since the fundamental flexural mode
+carries the strongest geometric sensitivity; even so, the system remains
+well-conditioned by any practical standard.
+Sweeping the aspect ratio from $c/a=0.50$ to $0.95$ confirms that the lifting
+persists across the entire oblate domain, with $\kappa$ rising only gently
+toward the sphere (Fig.~\ref{fig:sensitivity}c).  Finally, a quadrature
+convergence test shows that $\kappa$ is numerically converged to machine
+precision by $N_\mathrm{quad}=20$ and is independent of quadrature refinement
+thereafter (Fig.~\ref{fig:sensitivity}d).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\textwidth]{figures/fig_sensitivity.pdf}
+  \caption{Robustness of the identifiability lifting:
+    (a)~$\kappa$ versus elastic modulus for the oblate and equivalent-sphere
+    models (vertical line marks canonical $E=\SI{0.1}{\mega\pascal}$);
+    (b)~$\kappa$ across different mode sets, including leave-one-out subsets;
+    (c)~$\kappa$ versus aspect ratio $c/a$ (vertical line marks canonical
+    $c/a=0.667$);
+    (d)~convergence of $\kappa$ with Gauss--Legendre quadrature order.}
+  \label{fig:sensitivity}
+\end{figure}
