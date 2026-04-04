@@ -10,21 +10,21 @@ The same shell model that explains why sound cannot shake your insides also expl
 
 ## The Short Version
 
-At 120 dB SPL, the energy-consistent airborne displacement of the abdominal wall is only 0.028 μm. That sits below the 0.5-2.0 μm cellular activation range usually associated with PIEZO mechanotransduction. The resonance is real; the airborne coupling to it is not.
+At 120 dB SPL, the energy-consistent airborne displacement of the whole abdominal wall is only 0.028 μm. That sits below the 0.5-2.0 μm cellular activation range usually associated with PIEZO mechanotransduction. The resonance is real; the whole-abdomen airborne coupling to it is not.
 
-A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1 resolves the mechanical-vs-airborne asymmetry. Paper 7 shows why the framework matters after that result: the same shell mechanics can map a watermelon tap tone to effective rind stiffness, which in turn leads directly to the identifiability questions taken up in Papers 8-10.
+A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1 resolves the mechanical-vs-airborne asymmetry for whole-abdomen coupling, while Paper 2 shows that localised gas pockets are the notable exception. Paper 7 shows that the same shell mechanics can estimate effective rind stiffness from a watermelon tap tone. That forward problem leads directly to the identifiability questions taken up in Papers 8-10.
 
 ## If You Read Two Papers
 
 If you read only one paper, read Paper 1. If you want to see why the framework is useful beyond the original question, read Paper 7.
 
-### [Paper 1: The Brown Note](papers/paper1-brown-note/) — *Journal of Sound and Vibration*
+### [Paper 1: The Brown Note](papers/paper1-brown-note/) — targeting *Journal of Sound and Vibration*
 
 This is the paper that answers the question. It starts from a simple empirical asymmetry: whole-body vibration in the 4-8 Hz range can produce gastrointestinal effects, while airborne sound at the same frequencies does not. The model explains that asymmetry from first principles.
 
 At the n = 2 flexural resonance, ka is only about 0.01. The wavelength is enormous compared with the body, the air-tissue mismatch is severe, and the incident acoustic field barely drives the mode at all. Mechanical excitation transmitted through the body wall does not suffer those penalties. The result is not that abdominal resonance is fictional; it is that the resonance is real while the airborne coupling is not.
 
-### [Paper 7: The Watermelon Thump Test](papers/paper7-watermelon/) — *Postharvest Biology and Technology*
+### [Paper 7: The Watermelon Thump Test](papers/paper7-watermelon/) — targeting *Postharvest Biology and Technology*
 
 This is the unexpected bridge paper. People really do tap watermelons and listen for a deep, resonant thump, but the practice has mostly lived as anecdote and market lore. Paper 7 turns that intuition into a quantitative shell model that maps tap-tone frequency to effective rind stiffness.
 
@@ -142,4 +142,6 @@ This work was produced with AI assistance; for methodology and disclosure detail
 ## Licence
 
 [MIT](LICENSE)
+
+
 
