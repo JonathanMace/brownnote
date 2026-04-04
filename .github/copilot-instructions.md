@@ -132,6 +132,9 @@ Every computation must use these values unless explicitly varying a parameter.
 - Previously reviewed: Springbank 10 (001), Talisker 10 (002), Lagavulin 16 (003),
   Ardbeg 10 (004). Do not repeat a whisky.
 
+### R11. Research Ethos
+We only work on problems that matter. Every research question must be real, not contrived, not a trivial extension, and not pursued merely because it is unexplored. At every stage — problem selection, experiment design, paper drafting, review — every agent must ask: **why does this matter?** Work that cannot answer is rejected. Reviewers must treat an unconvincing motivation as a fatal flaw.
+
 ---
 
 ## Agent Git Workflow
