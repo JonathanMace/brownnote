@@ -2,146 +2,133 @@
 % Section 1: Introduction
 % =============================================================================
 % PURPOSE:
-%   Introduce geometry as the unifying thread across the research programme.
-%   Frame the problem: fluid-filled viscoelastic shells appear throughout
-%   biomechanics and postharvest science, yet practitioners treat each
-%   application in isolation, missing the common geometric structure.
-%   State the four-result thesis and outline the paper.
+%   Frame the capstone around a general inverse-problem principle rather than
+%   as a programme summary.  Emphasise the gap between forward adequacy and
+%   inverse adequacy, identify geometry/asphericity as the controlling
+%   mechanism, and position the companion applications as evidence.
 % =============================================================================
 
 \section{Introduction}
 \label{sec:introduction}
 
-Spectral questions recur across mathematics, physics, and engineering.  Given
-an observed set of resonances, what can one infer about the system that
-produced them?  Kac's celebrated formulation --- ``Can one hear the shape of a
-drum?'' --- remains the canonical version of this problem~\cite{Kac1966}.  Its
-enduring influence lies not in the narrow case of planar drums, but in the
-larger programme it inaugurated: to understand which features of a physical
-system are encoded in spectral data, which are hidden by symmetry, and which
-are unrecoverable without additional information.  The classical counterexample
-of isospectral but non-congruent domains~\cite{Gordon1992} did not end that
-programme.  It sharpened the question.  Inverse vibration theory, model updating, and
-elastographic parameter recovery all ask variations of the same question:
-when does a resonance spectrum carry enough independent information to support
-reliable inference about geometry, material properties, or both~\cite{Gladwell2004,Gladwell2005,MottersheadFriswell1993,FriswellMottershead1995,Doyley2012}?
+Spectral inverse problems arise whenever one seeks to infer physical
+parameters from observed resonances.  Structural dynamics, elastographic
+parameter recovery, and non-destructive testing all use the same basic logic:
+one posits a forward model, matches its predicted frequencies to measured
+ones, and then estimates the parameters that minimise the residual mismatch
+~\cite{Gladwell2004,Gladwell2005,MottersheadFriswell1993,FriswellMottershead1995,Doyley2012}.
+For simple geometries this approach can be highly effective.  Yet its success
+also invites a dangerous inference.  A forward model that reproduces the
+spectrum accurately need not define a well-posed inverse map.  Forward
+adequacy does not guarantee inverse adequacy.
 
-In this paper we ask that question for fluid-filled viscoelastic shells.  This
-class of systems appears in apparently disparate settings: the human abdomen
-and bladder in biomechanics, gas-pocket and sub-bass coupling in physiological
-acoustics, and fruit-ripeness assessment in postharvest sensing
-~\cite{BrowntoneP1,BrowntoneP2,BrowntoneP4,BrowntoneP6,BrowntoneP7}.  Yet
-these applications are linked by one structural fact.  The shell geometry does
-not merely set a boundary condition for a forward calculation.  It mediates the
-entire problem.  Geometry filters how external forcing couples into admissible
-deformation fields; it organises the modal spectrum through curvature,
-symmetry, and fluid loading; and it determines whether the resulting spectrum
-can be inverted to recover the parameters that generated it.  Our central
-thesis is therefore simple: \emph{in fluid-filled viscoelastic shells, geometry
-does three jobs --- it filters forcing, organises spectra, and determines
-invertibility.}
+That distinction is central to classical spectral theory.  Kac's question ---
+``Can one hear the shape of a drum?'' --- remains influential precisely because
+it asks what spectral data do and do not determine~\cite{Kac1966}.  The later
+construction of isospectral but non-congruent domains did not make inverse
+spectral analysis irrelevant; it made the role of symmetry impossible to
+ignore~\cite{Gordon1992}.  The present setting is not the Laplacian drum problem itself, but a coupled fluid--structure spectral inverse problem in which the same symmetry question reappears in practical form.  The relevant question is often not
+whether uniqueness holds globally, but whether the measured spectrum contains
+enough locally independent information to separate geometry from material
+properties at the operating point of interest.
 
-The first of these roles emerges on the excitation side.  A fluid-filled
-oblate shell can possess a genuine low-frequency flexural resonance near
-\SI{4}{\hertz}, yet airborne infrasound couples to that mode only weakly
-because the long-wavelength forcing field is itself filtered by
-geometry~\cite{BrowntoneP1}.  The same shell, driven mechanically through
-whole-body vibration, responds far more strongly because that pathway is not
-subject to the same spatial-harmonic suppression.  Analyses of sub-\SI{20}{\hertz}
-excitation reach the same conclusion: structure-borne pathways dominate
-airborne ones in this regime~\cite{BrowntoneP6}.  The point is broader than the
-original brown-note motivation.  Resonance cannot be interpreted in isolation
-from how forcing projects onto the mode shapes permitted by the geometry.
+In this paper we study that question for fluid-filled viscoelastic shells.
+These systems appear in biomechanics, soft-structure acoustics, and
+agricultural sensing, but the present claim is not application-specific.
+Our concern is a general mechanism.  A symmetry-reduced shell model may predict
+low-order modal frequencies to within a few per cent and therefore appear
+entirely satisfactory as a forward description.  The same model may,
+nevertheless, be rank deficient for parameter recovery because the reduction
+collapses distinct geometric directions into a single scalar surrogate.  In
+that case the spectrum still tracks resonance frequencies well, but no longer
+separates the curvature and material effects that generated them.  The model is
+forward adequate and inverse inadequate.
 
-The second role is spectral organisation.  Fluid-filled shells do not possess a
-featureless ladder of frequencies.  Curvature, aspect ratio, internal loading,
-and wall compliance sort the admissible motions into qualitatively distinct
-families and shift their ordering in application-specific ways
-~\cite{Leissa1973,Soedel2004,Junger1986}.  In the abdominal model, this
-distinguishes low-frequency flexural modes from the much higher breathing mode
-dominated by the compressibility of the entrained fluid~\cite{BrowntoneP1}.  In
-the bladder, changing fill volume alters both size and effective stiffness,
-producing a non-trivial resonance trajectory rather than simple monotonic
-scaling~\cite{BrowntoneP4}.  In borborygmi, constrained gas pockets introduce a
-different but related spectral mechanism, in which shell confinement selects the
-audible range of bubble oscillations~\cite{BrowntoneP5}.  In watermelon
-tap-tone analysis, the measurable spectral shifts used informally by growers are
-again organised by geometry and shell mechanics rather than by material changes
-alone~\cite{BrowntoneP7}.  Across domains, geometry is the underlying organiser of
-what the spectrum is allowed to look like.
+The mechanism is geometric before it is statistical.  Equivalent-radius or
+otherwise symmetry-compressed descriptions are attractive because they preserve
+the dominant frequency scale of the shell while simplifying the parameter
+space.  What they do not preserve is the full set of curvature channels by
+which different flexural modes probe the structure.  When those channels are
+collapsed, independent parameter directions become spectrally aligned and the
+scaled Jacobian loses rank.  Small forward error may therefore coexist with
+catastrophic conditioning of the inverse map.  This is not merely a numerical
+inconvenience.  It is a structural consequence of symmetry reduction in a
+spectral inverse problem.
 
-The third role is inverse.  A forward model may predict frequencies accurately
-enough for classification, explanation, or design, yet still fail as an
-inversion model because the spectrum does not separate the parameters cleanly.
-That distinction emerged most clearly in the fruit and organ inverse problems
-studied in~\cite{BrowntoneP7,BrowntoneP8}.  Equivalent-radius reductions can reproduce leading-order
-resonance trends with useful accuracy, which explains their practical appeal.  But
-by collapsing shape information into a single scalar radius they confound
-geometric and material effects, and the inverse map becomes nearly singular or
-formally rank deficient~\cite{BrowntoneP7,BrowntoneP8}.  Recovering
-invertibility requires more than a good forward fit.  It requires modal data in
-which different modes sample curvature differently.  That requirement is
-geometric before it is statistical.
+The cure is also geometric.  Breaking spherical symmetry in the oblate direction restores mode-specific curvature sampling on a non-singular neighbourhood of the sphere.  Distinct flexural modes then respond
+differently to changes in the shell geometry, so the singular value that
+vanishes in the spherical limit is lifted once the shell becomes aspherical.
+We show this analytically for oblate perturbations of the sphere and numerically
+across several fluid-filled shell classes.  The resulting picture is that
+asphericity is not a nuisance correction to an otherwise ideal spherical model;
+in the present setting, oblate asphericity can restore local practical identifiability.
 
-The capstone develops this programme around four formal results --- two
-theorems, one proposition, and one lemma --- each of which captures one aspect
-of the geometry--spectrum--inversion relation.  The first theorem shows that
-equivalent-radius models of non-spherical fluid-filled shells generically
-collapse independent geometric information and therefore produce ill-posed
-spectral inversion problems.  The second theorem shows that oblate asphericity
-can restore invertibility because distinct modes respond differently to
-distinct curvature channels.  The proposition establishes the corrected
-near-spherical asymptotics: the exact sphere is singular, and the restored
-identifiability grows regularly as $\sigma_3(\varepsilon)=\lambda_1
-\varepsilon^2+O(\varepsilon^4)$.  The lemma constructs a counterexample showing that a model may be
-adequate for predicting resonant frequencies while remaining inadequate for
-parameter recovery.  Taken together, these formal results recast several
-apparently separate Browntone results as instances of one general statement
-about how geometry governs both excitation and inference.
+The broader thesis may be stated in a compact way.  In fluid-filled viscoelastic shells, geometry enters in three logically distinct roles.  It filters
+how forcing projects onto admissible deformation fields; it organises the modal
+spectrum through curvature, symmetry, and fluid loading; and it determines
+whether that spectrum can be inverted to recover the parameters that produced
+it.  The present paper emphasises the third role, because it is the least portable lesson from the companion studies and the one with the widest inverse-problem significance.  The other two roles remain essential context: a spectrum
+cannot be interpreted without understanding either how modes are excited or how
+the shell geometry sorts them into distinct families~\cite{Leissa1973,Soedel2004,Junger1986}.
 
-The evidence for that statement accumulated in three stages.  The initial
-abdominal and gas-pocket analyses identified the coupling disparity between
-airborne and mechanical excitation and established that alternative resonant
-substructures can couple far more efficiently than the whole cavity
-~\cite{BrowntoneP1,BrowntoneP2}.  A second group of studies broadened the
-evidence base: scaling laws indicated that the dimensionless resonance
-structure persists across body sizes; bladder resonance revealed
-geometry--stiffening competition in another organ; borborygmi provided an
-audible constrained-bubble counterpart; and sub-bass coupling extended the
-excitation analysis to lower frequencies and alternative pathways
-~\cite{BrowntoneP3,BrowntoneP4,BrowntoneP5,BrowntoneP6}.  The inverse studies
-then supplied the theoretical turn.  Shell-resonance inversion can succeed when
-the geometry leaves enough spectral structure to exploit, whereas asphericity
-can lift inverse degeneracy and near-spherical models can remain useful in
-forward prediction while unstable in inversion~\cite{BrowntoneP7,BrowntoneP8}.  The present paper treats those
-results not as a sequence of case studies, but as evidence for a single
-geometry-mediated theory of excitation, resonance, and identifiability.
+We test these ideas using three contrasting applications drawn from the
+companion studies.  The first is human abdominal resonance, where a
+bona fide low-frequency flexural mode exists but excitation filtering strongly
+suppresses airborne coupling relative to mechanical forcing~\cite{BrowntoneP1,BrowntoneP6}.
+The second is watermelon tap-tone assessment, where an equivalent-sphere model
+can remain useful because the inferential target is deliberately narrow and
+independent geometric information is available~\cite{BrowntoneP7}.  The third
+is organ-shape identifiability, where geometry and material parameters must be
+recovered together and the inverse problem is therefore central rather than
+incidental~\cite{BrowntoneP8}.  These applications are not the contribution of
+the paper.  They are the evidence base against which the general principle is
+tested.
 
-Of the three geometric roles, excitation filtering and inverse identifiability
-are formalised as propositions and theorems; spectral organisation is supported
-by cross-application synthesis rather than by a comparably general formal
-result.
+The formal development in Section~\ref{sec:theory} makes five statements, four
+of them principal.  First, Proposition~\ref{prop:p10_breit_wigner}
+recasts the Breit--Wigner excitation filter as a geometric statement about how
+external forcing projects onto shell modes.  Secondly,
+Theorem~\ref{thm:p10_scalar_reduction} shows that scalar geometric reductions,
+including equivalent-radius models, generically collapse the Jacobian rank of
+the inverse problem.  Thirdly,
+Theorem~\ref{thm:p10_lifting} shows that oblate asphericity lifts
+that degeneracy because different flexural modes sample curvature differently.
+Fourthly, Lemma~\ref{lem:p10_forward_inverse} shows that forward adequacy
+and inverse adequacy are different questions: a reduced model may match modal
+frequencies within engineering tolerance while remaining unusable for parameter
+recovery.  A supporting proposition,
+Proposition~\ref{prop:p10_asymptotics}, supplies the corrected
+near-spherical asymptotics
+$\sigma_3(\varepsilon)=\lambda_1\varepsilon^2+O(\varepsilon^4)$,
+which clarifies how identifiability is restored as the sphere is perturbed.
 
-Our aim is therefore synthetic rather than merely archival.  We do not repeat
-the detailed derivations of the companion papers.  Instead, we extract the
-shared mathematical structure, prove four formal results in a common language,
-and show how the examples together support a general picture of fluid-filled
-shells as systems in which symmetry and curvature govern both what can be
-excited and what can be inferred.  The intended scope is wider than the original
-applications.  The same logic should matter wherever one seeks to infer
-geometry or material properties from resonance data in soft shell-like
-structures, whether in biomechanics, non-destructive evaluation, or allied
-inverse problems.
+Taken together, these results move the argument beyond a summary of prior case studies.  They isolate a transferable principle for spectral
+inference on shells: symmetry can preserve forward predictivity while destroying
+inverse recoverability, and asphericity can restore the missing information.
+That principle is relevant wherever resonance data are used to infer geometry,
+stiffness, or both in shell-like systems.  The abdominal, watermelon, and organ
+examples matter here because they stress different parts of the mechanism while
+sharing the same geometric core.
 
-The formal results concern the information structure of spectral inverse
-problems in shell mechanics --- a class of problems broader than any single
-application.  The companion papers provide diverse evidence for a general
-framework; the present paper distils that evidence into transferable
-mathematical statements.  The scope and generality of that claim motivate the
-choice of venue: a capstone that synthesises cross-application formal results
-about symmetry, curvature, and identifiability in fluid-filled shells belongs
-naturally in a journal whose remit encompasses the mathematical sciences at
-large.
+Our scope is deliberately limited.  We study local practical identifiability in
+the linearised sense, using the singular values and condition number of a
+scaled Jacobian built from modal frequencies.  We do not claim global
+uniqueness for nonlinear inverse problems, and we do not suggest that spectral
+data alone resolve every ambiguity in realistic shells.  The analysis is also
+restricted to linearised shell dynamics with homogeneous viscoelastic walls,
+axisymmetric reference geometries, and a single internal fluid phase.  These
+assumptions are sufficient to expose the governing mechanism without claiming
+a level of realism that the present theory does not support.
+
+Nor do we provide new experimental validation in this paper.  The paper is
+analytical and synthetic in intent.  Its task is to extract the general
+information-theoretic lesson from a set of companion studies and to show how
+that lesson can be expressed in formal spectral terms.  We nevertheless identify
+specific experimental pathways --- for example, controlled modal measurements on
+shells with known asphericity and tunable stiffness --- that could test the
+predicted lifting of the smallest singular value.  The absence of such
+experiments limits the present scope, but it does not weaken the central claim
+about the mathematical structure of the inverse problem.
 
 \begin{figure}[t]
   \centering
@@ -154,17 +141,16 @@ large.
   \label{fig:three_jobs}
 \end{figure}
 
-The paper is organised as follows.  Section~\ref{sec:background} summarises the
-programme-level evidence from the companion studies and identifies the common geometric
-structure that links them.  Section~\ref{sec:theory} states and proves the
-four formal results, together with a supporting proposition for excitation
-filtering, and relates them to the underlying shell and inverse problem
-theory.  Section~\ref{sec:results} gathers the principal cross-paper results
-into a unified comparative account, emphasising where excitation, spectral
-organisation, and identifiability align or diverge.  Section
-\ref{sec:discussion} considers the broader implications for spectral inference
-in fluid-filled shells and for the use of reduced models in inverse settings.
-Section~\ref{sec:conclusion} closes with the capstone claim: geometry is not a
-secondary detail of these systems, but the mechanism that mediates their
-forcing, their resonances, and the possibility of hearing the parameters that
-made them.
+The paper is organised as follows.  Section~\ref{sec:background} distils the
+companion studies into the common geometric structure required for the present
+argument.  Section~\ref{sec:theory} states and proves the formal results on
+excitation filtering, rank collapse, asphericity-driven lifting, corrected
+near-spherical asymptotics, and the forward--inverse adequacy gap.
+Section~\ref{sec:results} assembles the principal numerical evidence across the
+application classes.  Section~\ref{sec:discussion} interprets the results for
+spectral inference on fluid-filled shells and emphasises the broader warning
+against using forward success as a proxy for inverse reliability.
+Section~\ref{sec:conclusion} closes with the central claim: in spectral inverse
+problems on shells, geometry is not merely part of the model description; it is
+the mechanism that decides what can be excited, what can be predicted, and what
+can be inferred.
