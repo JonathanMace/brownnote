@@ -43,7 +43,10 @@ $\rho_w=\SI{1100}{\kilogram\per\metre\cubed}$,
 $\rho_f=\SI{1020}{\kilogram\per\metre\cubed}$,
 $K_f=\SI{2.2}{\giga\pascal}$,
 $P_\mathrm{iap}=\SI{1000}{\pascal}$, and $\eta=0.25$
-~\cite{BrowntoneP1,BrowntoneP8}.  We restrict attention to the flexural modes
+~\cite{BrowntoneP1,BrowntoneP8}.  The shell is modelled as free
+(unconstrained); the resulting modal classification --- $n=1$ rigid-body
+translation, $n\geq 2$ flexural modes, $n=0$ breathing mode --- relies on that
+boundary condition.  We restrict attention to the flexural modes
 $n \geq 2$, since the breathing mode $n=0$ is fluid-compressibility dominated
 and lies in the kilohertz range for the canonical abdomen rather than the
 single-digit-hertz range of interest~\cite{BrowntoneP1}.  That distinction is
@@ -181,8 +184,8 @@ oblate geometries considered here ($\varepsilon \approx 0.745$), the
 partial-wave cross-sections acquire correction terms involving oblate
 spheroidal harmonics.  However, the qualitative conclusion --- that low-order
 flexural modes couple inefficiently to airborne sound in the Rayleigh regime
---- is robust: the $(ka)^{2n}$ suppression reflects the general multipole
-scaling and is not an artefact of spherical symmetry.  A quantitative
+--- is robust: the $(ka)^{2n+2}$ radiation-damping suppression reflects the
+general multipole scaling and is not an artefact of spherical symmetry.  A quantitative
 treatment for oblate scattering would require the $T$-matrix formalism
 ~\cite{MorseIngard1968} and is beyond the present scope.
 
@@ -340,9 +343,14 @@ The next question is how the restored identifiability behaves as the shell
 approaches spherical symmetry.  The correct statement is subtler than the first
 draft of the capstone suggested.  At the exact sphere, symmetry forces rank
 collapse and therefore $\sigma_3(0)=0$.  The previously reported non-zero
-intercept $\sigma_0>0$ was a low-order Ritz discretisation artefact, not a
-property of the continuum inverse problem.  What survives is a regular even
-expansion in the curvature parameter.
+intercept $\sigma_0>0$ was a numerical evaluation artefact: the
+finite-difference Jacobian misbehaves near $\varepsilon=0$ because the oblate
+spheroidal coordinate system becomes singular at the sphere, causing the
+computed $\sigma_3$ to plateau at $O(10^{-2})$ rather than reaching the
+theoretical zero.  This is not a deficiency of the Ritz model itself, whose
+structure guarantees $\sigma_3(0)=0$ by symmetry, but rather a consequence of
+evaluating derivatives numerically at a coordinate singularity.
+What survives is a regular even expansion in the curvature parameter.
 
 \begin{proposition}[Regular near-spherical asymptotics]
 \label{prop:p10_asymptotics}
@@ -382,6 +390,18 @@ frequency map and the scaled Jacobian admit expansions of the form
 At $\varepsilon=0$ the shell is spherical, so geometry enters only through a
 single radius and Theorem~\ref{thm:p10_scalar_reduction} applies.  Hence
 $\operatorname{rank}(\widetilde{J}_0)\leq 2$ and therefore $\sigma_3(0)=0$.
+Moreover, $\operatorname{rank}(\widetilde{J}_0)=2$ exactly.  To see this, note
+that for any Lamb-type spherical shell the flexural frequency scales as
+$f_n \propto \sqrt{E}\,g_n(R/h,\nu,\ldots)$, so the scaled geometric sensitivity
+$(\partial f_n/\partial R)(R/f_n)$ depends on $n$ through $g_n$ and the
+material sensitivity $(\partial f_n/\partial E)(E/f_n)=1/2$ is mode-independent.
+Two columns with different mode dependences are linearly independent,
+confirming $\operatorname{rank}(\widetilde{J}_0)=2$.  (Numerically, the
+finite-difference sphere-model Jacobian has $\widetilde{J}[:,a]/\widetilde{J}[:,c]=2.0$
+to $10^{-9}$ precision, while the $R$-to-$E$ column ratio varies from $-3.0$ to
+$-6.5$ across modes $n=2,\ldots,6$.)  Thus $\mu_3(0)=0$ is a simple eigenvalue of
+$A_0=\widetilde{J}_0^\top\widetilde{J}_0$, which is the prerequisite for the
+analytic perturbation expansion below.
 
 To determine the leading power, consider the Gram matrix
 $A(\varepsilon)=\widetilde{J}(\varepsilon)^\top\widetilde{J}(\varepsilon)$,
@@ -423,9 +443,31 @@ $\sigma_3(\varepsilon)>0$ on an open set of $\varepsilon>0$, so the leading
 coefficient satisfies $\lambda_1>0$, yielding
 \eqref{eq:p10_sigma_asymptotic}.  The corrected near-spherical analysis
 therefore removes the earlier fictitious intercept $\sigma_0>0$: the apparent
-finite floor was a discretisation artefact of the low-order spherical limit,
-not a true continuum property.
+finite floor was a numerical evaluation artefact arising from finite-difference
+Jacobian computation near the oblate spheroidal coordinate singularity at
+$\varepsilon=0$, not a property of the Ritz model's algebraic structure.
 \end{proof}
+
+\begin{remark}[Independence from the near-spherical blend]
+\label{rem:blend_independence}
+Proposition~\ref{prop:p10_asymptotics} invokes Kato's analytic perturbation
+theory, which requires the map $\varepsilon\mapsto\widetilde{J}(\varepsilon)$
+to be real-analytic near $\varepsilon=0$.  The oblate Ritz energy functionals
+are analytic in $a$ and~$c$ away from the coordinate singularity at $a=c$
+(Appendix~\ref{sec:appendix_energy}), so this condition holds for the ideal
+model family.  The code, however, introduces a $C^2$-continuous blend between
+the oblate spheroidal fluid solution and the Lamb sphere formula for $c/a>0.98$.
+This blend makes the numerical implementation $C^2$ but not analytic in the
+transition region.  The key point is that the \emph{conclusions} of
+Proposition~\ref{prop:p10_asymptotics} do not depend on the blend: the even
+symmetry $\varepsilon\mapsto -\varepsilon$ and the rank-$2$ property of
+$\widetilde{J}_0$ are structural features of the underlying analytic family.
+The blend affects the numerically computed values of $\sigma_3$ in the
+transition region (contributing to the plateau at $\sigma_3\approx 0.008$
+visible in Figure~\ref{fig:condition_landscape}), but it does not alter
+the algebraic structure that forces $\sigma_3(0)=0$ and
+$\sigma_3\sim\varepsilon^2$.
+\end{remark}
 
 \begin{corollary}
 \label{cor:p10_kappa_asymptotic}
@@ -490,7 +532,9 @@ geometric reduction.
 \begin{proof}
 At the canonical abdominal point, the equivalent-sphere and oblate Ritz models
 produce closely matched low-order spectra: the relative forward misfit for modes
-$n=2,\ldots,6$ is $\mathcal{E}_\mathrm{fwd}=0.0936<0.1$.  Thus the reduced
+$n=2,\ldots,6$ is $\mathcal{E}_\mathrm{fwd}=0.0936<0.1$ (computed at the
+canonical parameters of Table~\ref{tab:cross_application_evidence} via scaled-Jacobian
+singular-value decomposition).  Thus the reduced
 model is forward-adequate in the ordinary engineering sense of reproducing the
 dominant frequencies to within \SI{10}{\percent}.  By
 Theorem~\ref{thm:p10_scalar_reduction}, however, the equivalent-sphere inverse

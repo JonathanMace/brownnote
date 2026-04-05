@@ -22,21 +22,23 @@ thin-shell assumption.
 The undeformed shell midsurface is an oblate spheroid with semi-major axis $a$
 and semi-minor axis $c$ ($c < a$).  Define the eccentricity
 $\varepsilon = \sqrt{1-c^2/a^2}$ and the semifocal distance
-$d = a\varepsilon$.  In oblate spheroidal coordinates $(\xi,\eta,\varphi)$, the
-shell surface sits at $\xi_0 = c/d$.  Here $\eta = \cos\theta$ ranges over
+$d = a\varepsilon$.  In oblate spheroidal coordinates $(\xi,\mu,\varphi)$, the
+shell surface sits at $\xi_0 = c/d$.  Here $\mu = \cos\theta$ ranges over
 $[-1,1]$ with $\theta$ the polar angle, and $\varphi\in[0,2\pi)$ is the
-azimuthal angle.  The metric function
+azimuthal angle.  (We write $\mu$ rather than the traditional $\eta$ for this
+coordinate in order to avoid conflict with the material loss tangent~$\eta$
+used elsewhere in the paper.)  The metric function
 \begin{equation}
-  G(\eta) = a^2\eta^2 + c^2(1-\eta^2)
+  G(\mu) = a^2\mu^2 + c^2(1-\mu^2)
   \label{eq:app_metric}
 \end{equation}
 determines the position-dependent curvature.  The surface element is
-$\mathrm{d}S = 2\pi\,a\sqrt{G}\,\mathrm{d}\eta$.
+$\mathrm{d}S = 2\pi\,a\sqrt{G}\,\mathrm{d}\mu$.
 
-For each circumferential mode number $n\geq 2$, the trial displacement field
+For each modal order $n\geq 2$, the trial displacement field
 is a two-degree-of-freedom (2-DOF) Ritz ansatz:
 \begin{equation}
-  w(\eta) = \beta\,P_n(\eta), \qquad
+  w(\mu) = \beta\,P_n(\mu), \qquad
   u(\theta) = \alpha\,\sin\theta\,P_n'(\cos\theta),
   \label{eq:app_trial}
 \end{equation}
@@ -63,7 +65,7 @@ over the shell surface via Gauss--Legendre quadrature (200 nodes by default):
     and the derivatives of the metric function, weighted by $\sqrt{G}$.
   \item \emph{Geometric prestress.}  The intra-abdominal pressure
     $P_\mathrm{iap}$ induces a membrane stress resultant
-    $N_1 = P_\mathrm{iap}\,R_2/2$, where $R_2(\eta) = a\sqrt{G}/c$ is the
+    $N_1 = P_\mathrm{iap}\,R_2/2$, where $R_2(\mu) = a\sqrt{G}/c$ is the
     circumferential radius of curvature.  This contributes a geometric
     stiffness term (tension stiffening) that acts on the normal DOF only.
 \end{enumerate}
@@ -109,7 +111,7 @@ restoring force arises from shell elasticity and prestress.
 The 2-DOF trial~\eqref{eq:app_trial} can be enriched by retaining additional
 Legendre terms of the same parity:
 \begin{equation}
-  w(\eta) = \sum_{i=0}^{N-1}\beta_i\,P_{n+2i}(\eta), \qquad
+  w(\mu) = \sum_{i=0}^{N-1}\beta_i\,P_{n+2i}(\mu), \qquad
   u(\theta) = \sum_{j=0}^{N-1}\alpha_j\,\sin\theta\,P_{n+2j}'(\cos\theta),
   \label{eq:app_enriched}
 \end{equation}
@@ -148,5 +150,12 @@ upper-bound property.  Second, the 2-DOF model ($N=1$) overestimates the
 converged frequency by only \SI{3.3}{\percent}, and the 4-DOF model ($N=2$)
 is within \SI{0.1}{\percent}.  Third, the canonical five-mode set
 ($n=2,\ldots,6$) used for the identifiability analysis lies well above the
-convergence threshold.  For all practical purposes, the single-term Ritz basis
-is sufficient for the spectral and inverse conclusions drawn in this paper.
+convergence threshold.
+
+To verify that the inverse-problem quantities inherit this convergence, we
+computed the condition number $\kappa$ using mode sets of increasing size:
+$\kappa = 73.0$ (3 modes), $66.7$ (4), $69.4$ (5), $74.4$ (6), $80.5$ (7).
+The third singular value $\sigma_3$ likewise stabilises:
+$\sigma_3 = 0.019$ (3 modes), $0.024$ (4), $0.026$ (5), $0.027$ (6), $0.028$ (7).
+For five or more modes, $\sigma_3$ varies by less than $6\%$, confirming that
+the identifiability conclusions are not an artefact of the restricted basis.
