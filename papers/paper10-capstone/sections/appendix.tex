@@ -152,10 +152,26 @@ is within \SI{0.1}{\percent}.  Third, the canonical five-mode set
 ($n=2,\ldots,6$) used for the identifiability analysis lies well above the
 convergence threshold.
 
-To verify that the inverse-problem quantities inherit this convergence, we
-computed the condition number $\kappa$ using mode sets of increasing size:
+To verify that the inverse-problem quantities are stable with respect to the
+number of observed modes, we computed the condition number $\kappa$ for
+mode sets of increasing size:
 $\kappa = 73.0$ (3 modes), $66.7$ (4), $69.4$ (5), $74.4$ (6), $80.5$ (7).
 The third singular value $\sigma_3$ likewise stabilises:
 $\sigma_3 = 0.019$ (3 modes), $0.024$ (4), $0.026$ (5), $0.027$ (6), $0.028$ (7).
-For five or more modes, $\sigma_3$ varies by less than $6\%$, confirming that
-the identifiability conclusions are not an artefact of the restricted basis.
+For five or more modes, $\sigma_3$ varies by less than $6\%$.
+
+\medskip\noindent
+\textbf{Basis enrichment.}
+Table~\ref{tab:app_convergence} demonstrates that the single-term Ritz basis
+overestimates the converged $n=2$ frequency by only \SI{3.3}{\percent}.
+The structural properties of the identifiability analysis --- rank collapse at
+the sphere, even symmetry in $\varepsilon$, and the consequent
+$\sigma_3\sim\varepsilon^2$ scaling --- are algebraic features of the model
+family that hold irrespective of basis order $N$, since they follow from
+symmetry and spectral perturbation theory rather than from particular
+numerical values.  The specific numerical value $\kappa=69.4$ may shift
+modestly with basis enrichment, but the four-orders-of-magnitude gap between
+$\kappa_\mathrm{oblate}\approx 70$ and
+$\kappa_\mathrm{sphere}\approx 10^{10}$ ensures that the identifiability
+lifting conclusion is robust against the \SI{3.3}{\percent} frequency bias
+inherent in the single-term basis.
