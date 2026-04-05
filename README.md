@@ -16,21 +16,23 @@ A second way to say the same thing is that H_mech/H_air ≈ 6.5 × 10^6. Paper 1
 
 Paper 7 is a restricted scalar inversion that estimates effective rind stiffness from a watermelon tap tone. That forward problem is exactly what motivates the broader identifiability question taken up in Papers 8-10.
 
+Taken together, the programme makes one broader claim. A resonance model can be good enough to explain a physical effect, and still be the wrong model for parameter recovery. Papers 8-10 formalise that point for fluid-filled shells: geometry does not merely shift frequencies; it determines which parameters the spectrum can distinguish at all.
+
 ## If You Read Two Papers
 
-If you read only one paper, read Paper 1. If you want to see why the framework is useful beyond the original question, read Paper 7.
+If you read only one paper, read Paper 1. If you read two, read Papers 1 and 10. Paper 7 is the bridge application that makes the inverse question hard to ignore.
 
 ### [Paper 1: The Brown Note](papers/paper1-brown-note/) — targeting *Journal of Sound and Vibration*
 
-This is the paper that answers the question. It starts from a simple empirical asymmetry: whole-body vibration in the 4-8 Hz range can produce gastrointestinal effects, while airborne sound at the same frequencies does not. The model explains that asymmetry from first principles.
+Paper 1 answers the motivating question. It starts from a simple empirical asymmetry: whole-body vibration in the 4-8 Hz range can produce gastrointestinal effects, while airborne sound at the same frequencies does not. The model explains that asymmetry from first principles.
 
 At the n = 2 flexural resonance, ka is only about 0.01. The wavelength is enormous compared with the body, the air-tissue mismatch is severe, and the incident acoustic field barely drives the mode at all. Mechanical excitation transmitted through the body wall does not suffer those penalties. The result is not that abdominal resonance is fictional; it is that the resonance is real while the airborne coupling is not.
 
 ### [Paper 7: The Watermelon Thump Test](papers/paper7-watermelon/) — targeting *Postharvest Biology and Technology*
 
-This is the unexpected bridge paper. People really do tap watermelons and listen for a deep, resonant thump, but the practice has mostly lived as anecdote and market lore. Paper 7 turns that intuition into a quantitative shell model that maps tap-tone frequency to effective rind stiffness.
+Paper 7 is the bridge paper. People really do tap watermelons and listen for a deep, resonant thump, but the practice has mostly lived as anecdote and market lore. Paper 7 turns that intuition into a quantitative shell model that maps tap-tone frequency to effective rind stiffness.
 
-That is a narrower claim than "ripeness prediction". Inference to eating ripeness requires cultivar-specific calibration not yet demonstrated. What Paper 7 contributes is a forward model that works well enough to make the inverse question unavoidable: when does a resonance spectrum actually identify the parameters you care about?
+That is a narrower claim than full ripeness prediction. Inference to eating ripeness requires cultivar-specific calibration not yet demonstrated. What Paper 7 contributes is a forward model that works well enough to make the inverse question unavoidable: when does a resonance spectrum actually identify the parameters you care about?
 
 ## Supporting Analyses
 
@@ -53,7 +55,9 @@ The theoretical spine of the programme is compact enough to state plainly:
 3. **Near-spherical conditioning asymptotics.** As spherical symmetry is restored, conditioning worsens sharply; the apparent finite floor in earlier low-order Ritz calculations was a discretisation artefact, and the correct limit is κ → ∞ as ε → 0 (P9-P10).
 4. **Forward adequacy ≠ inverse adequacy.** A model can predict resonance frequencies well and still fail as a parameter-identification tool; P7 is the motivating example, P8-P10 make the point formal.
 
-P9 adds the cross-check that comparable prolate perturbations do not produce the same lifting. P10 currently contains the formal results for the axisymmetric case; extension to non-axisymmetric geometries and experimental validation are the next steps.
+P9 adds the cross-check that comparable prolate perturbations do not produce the same lifting. P10 is the capstone for the present axisymmetric programme: it consolidates the formal proofs, adds a sensitivity study, includes a Ritz appendix to rule out low-order numerical artefacts, and closes with a transferability discussion that carries the argument beyond the immediate applications.
+
+The practical lesson reaches further than this repo's title suggests. Whenever resonance data are used to infer stiffness, geometry, or internal state, forward fit is not enough. Organ mechanics, elastography, agricultural acoustics, and structural health monitoring all face the same question: does the spectrum preserve the information needed for inversion, or has the model already collapsed it?
 
 ## Key Results
 
@@ -76,8 +80,8 @@ P9 adds the cross-check that comparable prolate perturbations do not produce the
 ## What This Repo Is and Isn't
 
 - **An analytical programme, not an experimental one.** The papers and code are modelling work; an experimental validation protocol exists, but it has not yet been executed.
-- **A rind-stiffness framework, not a ripeness oracle.** Paper 7 maps tap-tone frequency to effective rind stiffness; inference to eating ripeness requires cultivar-specific calibration not yet demonstrated.
-- **A mostly finished arc, not a closed book.** Papers 1-9 contain the current core results. Paper 10 is the synthesis still being refined.
+- **A rind-stiffness framework, not a ripeness predictor.** Paper 7 maps tap-tone frequency to effective rind stiffness; inference to eating ripeness requires cultivar-specific calibration not yet demonstrated.
+- **A completed analytical arc, not a universal theory.** Papers 1-10 establish the present axisymmetric analytical case. Non-axisymmetric geometries and experimental validation remain open.
 - **Latest Paper 10 draft.** [papers/paper10-capstone/drafts/draft_2026-04-04_1712.pdf](papers/paper10-capstone/drafts/draft_2026-04-04_1712.pdf)
 
 ## For Researchers
@@ -135,7 +139,7 @@ browntone/
 │   ├── paper7-watermelon/       # The thump-test application
 │   ├── paper8-kac/              # Identifiability theory
 │   ├── paper9-lifting-theorem/  # Oblate-prolate asymmetry
-│   └── paper10-capstone/        # Axisymmetric synthesis, extensions next
+│   └── paper10-capstone/        # Capstone inverse theory, proofs, and transferability
 ├── src/analytical/              # Core shell models and coupling calculations
 ├── tests/                       # Regression suite
 └── docs/                        # Research logs, validation plans, and notes
@@ -146,5 +150,4 @@ This work was produced with AI assistance; for methodology and disclosure detail
 ## Licence
 
 [MIT](LICENSE)
-
 
